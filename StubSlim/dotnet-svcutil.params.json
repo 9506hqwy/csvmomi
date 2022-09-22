@@ -1,0 +1,25 @@
+{
+  "providerId": "Microsoft.Tools.ServiceModel.Svcutil",
+  "version": "2.0.3",
+  "options": {
+    "inputs": [
+      "../StubGen/wsdl/vim25/core-types.xsd",
+      "../StubGen/wsdl/vim25/query-messagetypes.xsd",
+      "../StubGen/wsdl/vim25/query-types.xsd",
+      "../StubGen/wsdl/vim25/reflect-messagetypes.xsd",
+      "../StubGen/wsdl/vim25/reflect-types.xsd",
+      "../StubGen/wsdl/vim25/vim-messagetypes.xsd",
+      "../StubGen/wsdl/vim25/vim-types.xsd",
+      "../StubGen/wsdl/vim25/vim.wsdl",
+      "../StubGen/wsdl/vim25/vimService.wsdl"
+    ],
+    "namespaceMappings": [
+      "*, VimService"
+    ],
+    "outputFile": "VimService.cs",
+    "serializerMode": "XmlSerializer",
+    "targetFramework": "netstandard2.0",
+    "typeReuseMode": "All",
+    "wrapped": true
+  }
+}

@@ -348,3 +348,10 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# Source WSDL/XSD.
+StubGen/wsdl/vim25/**/*.wsdl
+StubGen/wsdl/vim25/**/*.xsd
+
+# Intermediate File
+StubSlim/VimService.cs
