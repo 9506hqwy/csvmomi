@@ -132,6 +132,11 @@
                 RevocationMode = X509RevocationMode.NoCheck,
             };
 
+            return await Session.Get(inner);
+        }
+
+        public static async System.Threading.Tasks.Task<Session> Get(VimPortTypeClient inner)
+        {
             var client = new Client(inner);
 
             var mor = new ManagedObjectReference
