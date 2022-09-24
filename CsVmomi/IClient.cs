@@ -743,6 +743,8 @@
 
         System.Threading.Tasks.Task<ManagedObjectReference> HostVStorageObjectRevert_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId);
 
+        System.Threading.Tasks.Task HttpNfcLeaseAbort(ManagedObjectReference self, LocalizedMethodFault fault);
+
         System.Threading.Tasks.Task HttpNfcLeaseComplete(ManagedObjectReference self);
 
         System.Threading.Tasks.Task<HttpNfcLeaseManifestEntry[]> HttpNfcLeaseGetManifest(ManagedObjectReference self);
@@ -1026,6 +1028,10 @@
         System.Threading.Tasks.Task<ProfileExpressionMetadata[]> QueryExpressionMetadata(ManagedObjectReference self, string[] expressionName, ManagedObjectReference profile);
 
         System.Threading.Tasks.Task<ExtensionManagerIpAllocationUsage[]> QueryExtensionIpAllocationUsage(ManagedObjectReference self, string[] extensionKeys);
+
+        System.Threading.Tasks.Task<LocalizedMethodFault[]> QueryFaultToleranceCompatibility(ManagedObjectReference self);
+
+        System.Threading.Tasks.Task<LocalizedMethodFault[]> QueryFaultToleranceCompatibilityEx(ManagedObjectReference self, bool forLegacyFt, bool forLegacyFtSpecified);
 
         System.Threading.Tasks.Task<ManagedObjectReference[]> QueryFilterEntities(ManagedObjectReference self, string filterId);
 
@@ -1565,6 +1571,8 @@
 
         System.Threading.Tasks.Task SetTaskDescription(ManagedObjectReference self, LocalizableMessage description);
 
+        System.Threading.Tasks.Task SetTaskState(ManagedObjectReference self, TaskInfoState state, object result, LocalizedMethodFault fault);
+
         System.Threading.Tasks.Task SetVirtualDiskUuid(ManagedObjectReference self, string name, ManagedObjectReference datacenter, string uuid);
 
         System.Threading.Tasks.Task SetVStorageObjectControlFlags(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string[] controlFlags);
@@ -1838,6 +1846,8 @@
         System.Threading.Tasks.Task<ManagedObjectReference> ValidateHostProfileComposition_Task(ManagedObjectReference self, ManagedObjectReference source, ManagedObjectReference[] targets, HostApplyProfile toBeMerged, HostApplyProfile toReplaceWith, HostApplyProfile toBeDeleted, HostApplyProfile enableStatusToBeCopied, bool errorOnly, bool errorOnlySpecified);
 
         System.Threading.Tasks.Task<Event[]> ValidateMigration(ManagedObjectReference self, ManagedObjectReference[] vm, VirtualMachinePowerState state, string[] testType, ManagedObjectReference pool, ManagedObjectReference host);
+
+        System.Threading.Tasks.Task<LocalizedMethodFault> ValidateStoragePodConfig(ManagedObjectReference self, ManagedObjectReference pod, StorageDrsConfigSpec spec);
 
         System.Threading.Tasks.Task<ManagedObjectReference> VCenterUpdateVStorageObjectMetadataEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, KeyValue[] metadata, string[] deleteKeys);
 

@@ -4887,6 +4887,11 @@
             return await this.GetProperty<int>("transferProgress");
         }
 
+        public async System.Threading.Tasks.Task HttpNfcLeaseAbort(LocalizedMethodFault fault)
+        {
+            await this.Session.Client.HttpNfcLeaseAbort(this.Reference, fault);
+        }
+
         public async System.Threading.Tasks.Task HttpNfcLeaseComplete()
         {
             await this.Session.Client.HttpNfcLeaseComplete(this.Reference);
@@ -6476,6 +6481,11 @@
             var res = await this.Session.Client.RefreshStorageDrsRecommendationsForPod_Task(this.Reference, pod?.Reference);
             return ManagedObject.Create<Task>(res, this.Session);
         }
+
+        public async System.Threading.Tasks.Task<LocalizedMethodFault> ValidateStoragePodConfig(StoragePod pod, StorageDrsConfigSpec spec)
+        {
+            return await this.Session.Client.ValidateStoragePodConfig(this.Reference, pod?.Reference, spec);
+        }
     }
 
     public partial class Task : ExtensibleManagedObject
@@ -6500,6 +6510,11 @@
         public async System.Threading.Tasks.Task SetTaskDescription(LocalizableMessage description)
         {
             await this.Session.Client.SetTaskDescription(this.Reference, description);
+        }
+
+        public async System.Threading.Tasks.Task SetTaskState(TaskInfoState state, object result, LocalizedMethodFault fault)
+        {
+            await this.Session.Client.SetTaskState(this.Reference, state, result, fault);
         }
 
         public async System.Threading.Tasks.Task UpdateProgress(int percentDone)
@@ -7371,6 +7386,16 @@
         public async System.Threading.Tasks.Task<VirtualMachineConnection[]> QueryConnections()
         {
             return await this.Session.Client.QueryConnections(this.Reference);
+        }
+
+        public async System.Threading.Tasks.Task<LocalizedMethodFault[]> QueryFaultToleranceCompatibility()
+        {
+            return await this.Session.Client.QueryFaultToleranceCompatibility(this.Reference);
+        }
+
+        public async System.Threading.Tasks.Task<LocalizedMethodFault[]> QueryFaultToleranceCompatibilityEx(bool? forLegacyFt)
+        {
+            return await this.Session.Client.QueryFaultToleranceCompatibilityEx(this.Reference, forLegacyFt ?? default(bool), forLegacyFt.HasValue);
         }
 
         public async System.Threading.Tasks.Task<string[]> QueryUnownedFiles()

@@ -4845,6 +4845,17 @@
             return res.HostVStorageObjectRevert_TaskResponse.returnval;
         }
 
+        public async System.Threading.Tasks.Task HttpNfcLeaseAbort(ManagedObjectReference self, LocalizedMethodFault fault)
+        {
+            var req = new HttpNfcLeaseAbortRequestType
+            {
+                _this = self,
+                fault = fault,
+            };
+
+            await this.inner.HttpNfcLeaseAbortAsync(req);
+        }
+
         public async System.Threading.Tasks.Task HttpNfcLeaseComplete(ManagedObjectReference self)
         {
             var req = new HttpNfcLeaseCompleteRequestType
@@ -6755,6 +6766,32 @@
             var res = await this.inner.QueryExtensionIpAllocationUsageAsync(req);
 
             return res.QueryExtensionIpAllocationUsageResponse1;
+        }
+
+        public async System.Threading.Tasks.Task<LocalizedMethodFault[]> QueryFaultToleranceCompatibility(ManagedObjectReference self)
+        {
+            var req = new QueryFaultToleranceCompatibilityRequestType
+            {
+                _this = self,
+            };
+
+            var res = await this.inner.QueryFaultToleranceCompatibilityAsync(req);
+
+            return res.QueryFaultToleranceCompatibilityResponse1;
+        }
+
+        public async System.Threading.Tasks.Task<LocalizedMethodFault[]> QueryFaultToleranceCompatibilityEx(ManagedObjectReference self, bool forLegacyFt, bool forLegacyFtSpecified)
+        {
+            var req = new QueryFaultToleranceCompatibilityExRequestType
+            {
+                _this = self,
+                forLegacyFt = forLegacyFt,
+                forLegacyFtSpecified = forLegacyFtSpecified,
+            };
+
+            var res = await this.inner.QueryFaultToleranceCompatibilityExAsync(req);
+
+            return res.QueryFaultToleranceCompatibilityExResponse1;
         }
 
         public async System.Threading.Tasks.Task<ManagedObjectReference[]> QueryFilterEntities(ManagedObjectReference self, string filterId)
@@ -10119,6 +10156,19 @@
             await this.inner.SetTaskDescriptionAsync(req);
         }
 
+        public async System.Threading.Tasks.Task SetTaskState(ManagedObjectReference self, TaskInfoState state, object result, LocalizedMethodFault fault)
+        {
+            var req = new SetTaskStateRequestType
+            {
+                _this = self,
+                state = state,
+                result = result,
+                fault = fault,
+            };
+
+            await this.inner.SetTaskStateAsync(req);
+        }
+
         public async System.Threading.Tasks.Task SetVirtualDiskUuid(ManagedObjectReference self, string name, ManagedObjectReference datacenter, string uuid)
         {
             var req = new SetVirtualDiskUuidRequestType
@@ -11787,6 +11837,20 @@
             var res = await this.inner.ValidateMigrationAsync(req);
 
             return res.ValidateMigrationResponse1;
+        }
+
+        public async System.Threading.Tasks.Task<LocalizedMethodFault> ValidateStoragePodConfig(ManagedObjectReference self, ManagedObjectReference pod, StorageDrsConfigSpec spec)
+        {
+            var req = new ValidateStoragePodConfigRequestType
+            {
+                _this = self,
+                pod = pod,
+                spec = spec,
+            };
+
+            var res = await this.inner.ValidateStoragePodConfigAsync(req);
+
+            return res.ValidateStoragePodConfigResponse.returnval;
         }
 
         public async System.Threading.Tasks.Task<ManagedObjectReference> VCenterUpdateVStorageObjectMetadataEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, KeyValue[] metadata, string[] deleteKeys)

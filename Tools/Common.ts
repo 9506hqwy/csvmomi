@@ -3,14 +3,25 @@ import { DOMParser } from "https://deno.land/x/deno_dom/deno-dom-wasm.ts";
 
 // constant
 
-export const excludeManagedObjectMethod = [
-  // becuse type is different (MethodFault/LocalizedMethodFault).
-  "abort",
-  "queryFaultToleranceCompatibility",
-  "queryFaultToleranceCompatibilityEx",
-  "setState",
-  "validateStoragePodConfig",
-];
+export const excludeManagedObjectMethod = [];
+
+export const fixTypes = {
+  "abort": {
+    "MethodFault": "LocalizedMethodFault",
+  },
+  "queryFaultToleranceCompatibility": {
+    "MethodFault[]": "LocalizedMethodFault[]",
+  },
+  "queryFaultToleranceCompatibilityEx": {
+    "MethodFault[]": "LocalizedMethodFault[]",
+  },
+  "setState": {
+    "MethodFault": "LocalizedMethodFault",
+  },
+  "validateStoragePodConfig": {
+    "MethodFault": "LocalizedMethodFault",
+  },
+};
 
 export const simpleTypes = [
   "SimpleCommandEncoding",
@@ -164,7 +175,7 @@ export function findMethodArgument(
 
     const arg = new ManagedObjectMethodParameter();
     arg.name = nameElem.querySelector("strong").innerText.trim();
-    arg.ty = findPropertyType(parameter, 2);
+    arg.ty = findPropertyType(reference.id, parameter, 2);
     arg.mandatory =
       Array.from(nameElem.querySelectorAll("span")).findIndex((s) =>
         s.getAttribute("title") == "Need not be set"
@@ -198,7 +209,7 @@ export function findMethodReturnTy(
   }
 
   const table = p.nextElementSibling;
-  const ty = findPropertyType(table, 1);
+  const ty = findPropertyType(reference.id, table, 1);
   if (ty.local == "None") {
     return null;
   }
@@ -223,6 +234,7 @@ export function findPropertyName(property: HTMLTableRowElement): null | string {
 }
 
 export function findPropertyType(
+  methodId: string,
   property: HTMLTableRowElement,
   index: number,
 ): TypeDeclare {
@@ -244,6 +256,14 @@ export function findPropertyType(
   } else {
     decl.local = anchors[1].innerText.trim();
     decl.remote = anchors[0].innerText.trim();
+  }
+
+  if (methodId in fixTypes && decl.local in fixTypes[methodId]) {
+    decl.local = fixTypes[methodId][decl.local];
+  }
+
+  if (methodId in fixTypes && decl.remote in fixTypes[methodId]) {
+    decl.remote = fixTypes[methodId][decl.remote];
   }
 
   return decl;
@@ -367,7 +387,7 @@ function convertManagedObject(
 
     const prop = new ManagedObjectProperty();
     prop.name = propName;
-    prop.ty = findPropertyType(property, 2);
+    prop.ty = findPropertyType(name, property, 2);
 
     mo.properties.push(prop);
   }
