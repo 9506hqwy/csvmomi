@@ -13,7 +13,7 @@
         public void Initialize()
         {
             this.session = Session.Get(new Uri("https://192.168.0.1/sdk")).Result;
-            this.session.SessionManager.Login("root", "password", null).Wait();
+            this.session.SessionManager.Login("root", "password").Wait();
         }
 
         [TestCleanup]

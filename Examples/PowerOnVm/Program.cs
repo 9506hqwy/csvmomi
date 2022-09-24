@@ -33,7 +33,7 @@
             }
 
             var session = await Session.Get(url);
-            await session.SessionManager.Login(args[1], args[2], null);
+            await session.SessionManager.Login(args[1], args[2]);
             try
             {
                 var vm = await PowerOnVm.FindVm(session, args[3]);

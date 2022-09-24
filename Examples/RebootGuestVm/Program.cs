@@ -24,7 +24,7 @@ async System.Threading.Tasks.Task Work(string[] args)
     }
 
     var session = await Session.Get(url);
-    await session.SessionManager.Login(args[1], args[2], null);
+    await session.SessionManager.Login(args[1], args[2]);
     try
     {
         var vm = await FindVm(session, args[3]);
