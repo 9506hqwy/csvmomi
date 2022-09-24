@@ -137,8 +137,11 @@
 
         public static async System.Threading.Tasks.Task<Session> Get(VimPortTypeClient inner)
         {
-            var client = new Client(inner);
+            return await Session.Get(new Client(inner));
+        }
 
+        public static async System.Threading.Tasks.Task<Session> Get(IClient client)
+        {
             var mor = new ManagedObjectReference
             {
                 type = "ServiceInstance",
