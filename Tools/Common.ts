@@ -4,9 +4,6 @@ import { DOMParser } from "https://deno.land/x/deno_dom/deno-dom-wasm.ts";
 // constant
 
 export const excludeManagedObjectMethod = [
-  // because HTML format is strange.
-  "batchAddHostsToCluster",
-  "updateLockdownExceptions",
   // becuse type is different (MethodFault/LocalizedMethodFault).
   "abort",
   "queryFaultToleranceCompatibility",
@@ -139,8 +136,14 @@ export function findMethodArgument(
   const sec = document.querySelector<HTMLAnchorElement>(`a#${reference.id}`);
 
   let p = sec;
-  while ((p = p.nextElementSibling) && p.innerText.trim() != "Parameters") {
-    // SKIP
+  const KEYWORD = "Parameters";
+  while ((p = p.nextElementSibling) && p.innerText.trim() != KEYWORD) {
+    for (const child of p.querySelectorAll("p.table-title")) {
+      if (child.innerText.trim() == KEYWORD) {
+        p = child.previousElementSibling;
+        break;
+      }
+    }
   }
 
   if (!p) {
@@ -180,8 +183,14 @@ export function findMethodReturnTy(
   const sec = document.querySelector<HTMLAnchorElement>(`a#${reference.id}`);
 
   let p = sec;
-  while ((p = p.nextElementSibling) && p.innerText.trim() != "Return Value") {
-    // SKIP
+  const KEYWORD = "Return Value";
+  while ((p = p.nextElementSibling) && p.innerText.trim() != KEYWORD) {
+    for (const child of p.querySelectorAll("p.table-title")) {
+      if (child.innerText.trim() == KEYWORD) {
+        p = child.previousElementSibling;
+        break;
+      }
+    }
   }
 
   if (!p) {

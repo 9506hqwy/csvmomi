@@ -676,6 +676,23 @@
             return res.BackupFirmwareConfigurationResponse.returnval;
         }
 
+        public async System.Threading.Tasks.Task<ManagedObjectReference> BatchAddHostsToCluster_Task(ManagedObjectReference self, ManagedObjectReference cluster, FolderNewHostSpec[] newHosts, ManagedObjectReference[] existingHosts, ComputeResourceConfigSpec compResSpec, string desiredState)
+        {
+            var req = new BatchAddHostsToClusterRequestType
+            {
+                _this = self,
+                cluster = cluster,
+                newHosts = newHosts,
+                existingHosts = existingHosts,
+                compResSpec = compResSpec,
+                desiredState = desiredState,
+            };
+
+            var res = await this.inner.BatchAddHostsToCluster_TaskAsync(req);
+
+            return res.BatchAddHostsToCluster_TaskResponse.returnval;
+        }
+
         public async System.Threading.Tasks.Task<ManagedObjectReference> BatchAddStandaloneHosts_Task(ManagedObjectReference self, FolderNewHostSpec[] newHosts, ComputeResourceConfigSpec compResSpec, bool addConnected)
         {
             var req = new BatchAddStandaloneHostsRequestType
@@ -11183,6 +11200,17 @@
             };
 
             await this.inner.UpdateLocalSwapDatastoreAsync(req);
+        }
+
+        public async System.Threading.Tasks.Task UpdateLockdownExceptions(ManagedObjectReference self, string[] users)
+        {
+            var req = new UpdateLockdownExceptionsRequestType
+            {
+                _this = self,
+                users = users,
+            };
+
+            await this.inner.UpdateLockdownExceptionsAsync(req);
         }
 
         public async System.Threading.Tasks.Task UpdateModuleOptionString(ManagedObjectReference self, string name, string options)

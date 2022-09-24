@@ -107,6 +107,8 @@
 
         System.Threading.Tasks.Task<string> BackupFirmwareConfiguration(ManagedObjectReference self);
 
+        System.Threading.Tasks.Task<ManagedObjectReference> BatchAddHostsToCluster_Task(ManagedObjectReference self, ManagedObjectReference cluster, FolderNewHostSpec[] newHosts, ManagedObjectReference[] existingHosts, ComputeResourceConfigSpec compResSpec, string desiredState);
+
         System.Threading.Tasks.Task<ManagedObjectReference> BatchAddStandaloneHosts_Task(ManagedObjectReference self, FolderNewHostSpec[] newHosts, ComputeResourceConfigSpec compResSpec, bool addConnected);
 
         System.Threading.Tasks.Task<DatacenterBasicConnectInfo[]> BatchQueryConnectInfo(ManagedObjectReference self, HostConnectSpec[] hostSpecs);
@@ -1742,6 +1744,8 @@
         System.Threading.Tasks.Task UpdateLinkedChildren(ManagedObjectReference self, VirtualAppLinkInfo[] addChangeSet, ManagedObjectReference[] removeSet);
 
         System.Threading.Tasks.Task UpdateLocalSwapDatastore(ManagedObjectReference self, ManagedObjectReference datastore);
+
+        System.Threading.Tasks.Task UpdateLockdownExceptions(ManagedObjectReference self, string[] users);
 
         System.Threading.Tasks.Task UpdateModuleOptionString(ManagedObjectReference self, string name, string options);
 

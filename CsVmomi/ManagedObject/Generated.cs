@@ -1751,6 +1751,12 @@
             return ManagedObject.Create<Task>(res, this.Session);
         }
 
+        public async System.Threading.Tasks.Task<Task> BatchAddHostsToCluster_Task(ClusterComputeResource cluster, FolderNewHostSpec[] newHosts, HostSystem[] existingHosts, ComputeResourceConfigSpec compResSpec, string desiredState)
+        {
+            var res = await this.Session.Client.BatchAddHostsToCluster_Task(this.Reference, cluster?.Reference, newHosts, existingHosts?.Select(m => m.Reference).ToArray(), compResSpec, desiredState);
+            return ManagedObject.Create<Task>(res, this.Session);
+        }
+
         public async System.Threading.Tasks.Task<Task> BatchAddStandaloneHosts_Task(FolderNewHostSpec[] newHosts, ComputeResourceConfigSpec compResSpec, bool addConnected)
         {
             var res = await this.Session.Client.BatchAddStandaloneHosts_Task(this.Reference, newHosts, compResSpec, addConnected);
@@ -2243,6 +2249,11 @@
         public async System.Threading.Tasks.Task<HostAccessControlEntry[]> RetrieveHostAccessControlEntries()
         {
             return await this.Session.Client.RetrieveHostAccessControlEntries(this.Reference);
+        }
+
+        public async System.Threading.Tasks.Task UpdateLockdownExceptions(string[] users)
+        {
+            await this.Session.Client.UpdateLockdownExceptions(this.Reference, users);
         }
 
         public async System.Threading.Tasks.Task UpdateSystemUsers(string[] users)
