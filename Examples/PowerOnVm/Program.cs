@@ -39,7 +39,12 @@
             {
                 var vm = await PowerOnVm.FindVm(session, args[3]);
                 var task = await vm.PowerOnVM_Task(null);
-                await PowerOnVm.WaitForTask(task);
+                var state = await task.WaitForCompleted(TimeSpan.FromSeconds(300));
+                if (state == TaskInfoState.error)
+                {
+                    var error = await task.GetProperty<LocalizedMethodFault>("info.error");
+                    throw new Exception(error.localizedMessage);
+                }
 
                 await Console.Out.WriteLineAsync("Success.");
             }
@@ -69,25 +74,6 @@
             }
 
             throw new Exception($"Not found virtual machine `{vmname}`.");
-        }
-
-        private static async System.Threading.Tasks.Task WaitForTask(Task task)
-        {
-            while (true)
-            {
-                var (state, error) = await task.GetProperty<TaskInfoState, LocalizedMethodFault>("info.state", "info.error");
-
-                if (state == TaskInfoState.error)
-                {
-                    throw new Exception(error.localizedMessage);
-                }
-                else if (state == TaskInfoState.success)
-                {
-                    break;
-                }
-
-                await System.Threading.Tasks.Task.Delay(3000);
-            }
         }
     }
 }
