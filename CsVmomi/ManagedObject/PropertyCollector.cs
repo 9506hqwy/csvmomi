@@ -56,14 +56,13 @@
             return contents.First();
         }
 
-        public async Task<ObjectContent> RetrieveProperties(
+        public async Task<ObjectContent[]> RetrieveProperties(
             ObjectSpec objectSet,
             PropertySpec propSet,
             bool reportMissingObjectsInResults)
         {
             var specSet = this.CreatePropertyFilterSpec(objectSet, propSet, reportMissingObjectsInResults);
-            var contents = await this.RetrieveProperties(specSet);
-            return contents.First();
+            return await this.RetrieveProperties(specSet);
         }
 
         public async Task<ObjectContent[]> RetrieveProperties(PropertyFilterSpec specSet)
