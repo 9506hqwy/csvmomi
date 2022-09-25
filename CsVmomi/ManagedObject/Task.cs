@@ -18,7 +18,9 @@
                 var options = new WaitOptions
                 {
                     maxObjectUpdates = 1,
+                    maxObjectUpdatesSpecified = true,
                     maxWaitSeconds = 60,
+                    maxWaitSecondsSpecified = true,
                 };
 
                 var deadline = DateTime.UtcNow.Add(timeout);
