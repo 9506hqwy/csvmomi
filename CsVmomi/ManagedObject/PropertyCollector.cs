@@ -70,6 +70,21 @@
             return await this.RetrieveProperties(new[] { specSet });
         }
 
+        public async Task<RetrieveResult> RetrievePropertiesEx(
+            ObjectSpec objectSet,
+            PropertySpec propSet,
+            bool reportMissingObjectsInResults,
+            RetrieveOptions options)
+        {
+            var specSet = this.CreatePropertyFilterSpec(objectSet, propSet, reportMissingObjectsInResults);
+            return await this.RetrievePropertiesEx(specSet, options);
+        }
+
+        public async Task<RetrieveResult> RetrievePropertiesEx(PropertyFilterSpec specSet, RetrieveOptions options)
+        {
+            return await this.RetrievePropertiesEx(new[] { specSet }, options);
+        }
+
         private PropertyFilterSpec CreatePropertyFilterSpec(
             ManagedObject obj,
             string pathSet)

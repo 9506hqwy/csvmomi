@@ -37,36 +37,23 @@
             await session.SessionManager.Login(args[1], args[2]);
             try
             {
-                var view = await session.ViewManager.CreateContainerView(
-                       session.RootFolder,
-                       new[] { "vim.VirtualMachine" },
-                       true);
-
-                var objs = await view.GetPropertyView();
-                var vms = objs.Cast<VirtualMachine>().ToArray();
-
-                foreach (var vm in vms)
+                await foreach (var vm in session.RootFolder.EnumerateManagedObject<VirtualMachine>())
                 {
-                    await ListAllVm.PrintVm(vm);
+                    var (name, summary) = await vm.GetProperty<string, VirtualMachineSummary>("name", "summary");
+
+                    await Console.Out.WriteLineAsync(String.Format("Name          : {0}", name));
+                    await Console.Out.WriteLineAsync(String.Format("Template      : {0}", summary.config.template));
+                    await Console.Out.WriteLineAsync(String.Format("Path          : {0}", summary.config.vmPathName));
+                    await Console.Out.WriteLineAsync(String.Format("Guest         : {0}", summary.config.guestFullName));
+                    await Console.Out.WriteLineAsync(String.Format("Instance UUID : {0}", summary.config.instanceUuid));
+                    await Console.Out.WriteLineAsync(String.Format("BIOS UUID     : {0}", summary.config.uuid));
+                    await Console.Out.WriteLineAsync();
                 }
             }
             finally
             {
                 await session.SessionManager.Logout();
             }
-        }
-
-        private static async System.Threading.Tasks.Task PrintVm(VirtualMachine vm)
-        {
-            var (name, summary) = await vm.GetProperty<string, VirtualMachineSummary>("name", "summary");
-
-            await Console.Out.WriteLineAsync(String.Format("Name          : {0}", name));
-            await Console.Out.WriteLineAsync(String.Format("Template      : {0}", summary.config.template));
-            await Console.Out.WriteLineAsync(String.Format("Path          : {0}", summary.config.vmPathName));
-            await Console.Out.WriteLineAsync(String.Format("Guest         : {0}", summary.config.guestFullName));
-            await Console.Out.WriteLineAsync(String.Format("Instance UUID : {0}", summary.config.instanceUuid));
-            await Console.Out.WriteLineAsync(String.Format("BIOS UUID     : {0}", summary.config.uuid));
-            await Console.Out.WriteLineAsync();
         }
     }
 }

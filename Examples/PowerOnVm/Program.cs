@@ -56,15 +56,7 @@
 
         private static async System.Threading.Tasks.Task<VirtualMachine> FindVm(Session session, string vmname)
         {
-            var view = await session.ViewManager.CreateContainerView(
-                   session.RootFolder,
-                   new[] { "vim.VirtualMachine" },
-                   true);
-
-            var objs = await view.GetPropertyView();
-            var vms = objs.Cast<VirtualMachine>().ToArray();
-
-            foreach (var vm in vms)
+            await foreach (var vm in session.RootFolder.EnumerateManagedObject<VirtualMachine>())
             {
                 var name = await vm.GetPropertyName();
                 if (name.ToLowerInvariant() == vmname.ToLowerInvariant())
