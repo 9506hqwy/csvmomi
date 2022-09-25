@@ -12,9 +12,7 @@
         {
             var content = await this.RetrieveProperties(obj, false, new[] { pathSet }, false);
 
-            var prop = content.propSet.FirstOrDefault(p => p.name == pathSet);
-
-            return (T)prop.val;
+            return content.GetPropertyValue<T>(pathSet);
         }
 
         public async Task<ObjectContent> RetrieveProperties(

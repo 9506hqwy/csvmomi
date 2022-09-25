@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using CsVmomi;
+    using VimService;
 
     internal class PowerOnVm
     {
@@ -72,23 +73,20 @@
 
         private static async System.Threading.Tasks.Task WaitForTask(Task task)
         {
-            var info = await task.GetPropertyInfo();
             while (true)
             {
-                if (info.state == VimService.TaskInfoState.error ||
-                    info.state == VimService.TaskInfoState.success)
+                var (state, error) = await task.GetProperty<TaskInfoState, LocalizedMethodFault>("info.state", "info.error");
+
+                if (state == TaskInfoState.error)
+                {
+                    throw new Exception(error.localizedMessage);
+                }
+                else if (state == TaskInfoState.success)
                 {
                     break;
                 }
 
                 await System.Threading.Tasks.Task.Delay(3000);
-
-                info = await task.GetPropertyInfo();
-            }
-
-            if (info.state == VimService.TaskInfoState.error)
-            {
-                throw new Exception(info.error.localizedMessage);
             }
         }
     }

@@ -47,7 +47,7 @@
 
                 foreach (var vm in vms)
                 {
-                    await ListAllVm.PrintVm(session, vm);
+                    await ListAllVm.PrintVm(vm);
                 }
             }
             finally
@@ -56,13 +56,9 @@
             }
         }
 
-        private static async System.Threading.Tasks.Task PrintVm(Session session, VirtualMachine vm)
+        private static async System.Threading.Tasks.Task PrintVm(VirtualMachine vm)
         {
-            var pathSet = new[] { "name", "summary" };
-            var content = await session.PropertyCollector.RetrieveProperties(vm, false, pathSet, false);
-
-            var name = content.propSet.First(p => p.name == "name").val as string;
-            var summary = content.propSet.First(p => p.name == "summary").val as VirtualMachineSummary;
+            var (name, summary) = await vm.GetProperty<string, VirtualMachineSummary>("name", "summary");
 
             await Console.Out.WriteLineAsync(String.Format("Name          : {0}", name));
             await Console.Out.WriteLineAsync(String.Format("Template      : {0}", summary.config.template));
