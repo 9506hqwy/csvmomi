@@ -22,17 +22,15 @@ function writeManagedObjectMethod(method: ManagedObjectMethod) {
   if (method.returnTy == null) {
     // START
     methodDeclare = `
-        public async System.Threading.Tasks.Task ${methodName}(${
-      params.join(", ")
-    })
+    public async System.Threading.Tasks.Task ${methodName}(${params.join(", ")})
+    {
+        var req = new ${reqType}RequestType
         {
-            var req = new ${reqType}RequestType
-            {
-                ${constructors.join("\n                ")}
-            };
+            ${constructors.join("\n            ")}
+        };
 
-            await this.inner.${method.name}Async(req);
-        }`;
+        await this.inner.${method.name}Async(req);
+    }`;
     // END
   } else {
     // START
@@ -41,19 +39,19 @@ function writeManagedObjectMethod(method: ManagedObjectMethod) {
       : `${method.name}Response.returnval`;
 
     methodDeclare = `
-        public async System.Threading.Tasks.Task<${
+    public async System.Threading.Tasks.Task<${
       convertType(method.returnTy.remote)
     }> ${methodName}(${params.join(", ")})
+    {
+        var req = new ${reqType}RequestType
         {
-            var req = new ${reqType}RequestType
-            {
-                ${constructors.join("\n                ")}
-            };
+            ${constructors.join("\n            ")}
+        };
 
-            var res = await this.inner.${method.name}Async(req);
+        var res = await this.inner.${method.name}Async(req);
 
-            return res.${returnAcc};
-        }`;
+        return res.${returnAcc};
+    }`;
     // END
   }
 
@@ -107,18 +105,18 @@ function writeManagedObjectMethodConstructor(
 const methods = await getManagedMethodRefs1(directory);
 const cls = await getCls(directory, methods);
 
-console.log(`namespace CsVmomi
+console.log(`namespace CsVmomi;
+
+using VimService;
+
+public class Client : IClient
 {
-    using VimService;
+    private readonly VimPortTypeClient inner;
 
-    public class Client : IClient
+    internal Client(VimPortTypeClient inner)
     {
-        private readonly VimPortTypeClient inner;
-
-        internal Client(VimPortTypeClient inner)
-        {
-            this.inner = inner;
-        }`);
+        this.inner = inner;
+    }`);
 for (const ref of methods) {
   if (excludeManagedObjectMethod.includes(ref.id)) {
     continue;
@@ -128,5 +126,4 @@ for (const ref of methods) {
   writeManagedObjectMethod(method);
 }
 console.log(`
-    }
 }`);

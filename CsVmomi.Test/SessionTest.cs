@@ -1,50 +1,49 @@
-﻿namespace CsVmomi.Test
+﻿namespace CsVmomi.Test;
+
+using CsVmomi;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+[TestClass]
+public class SessionTest
 {
-    using CsVmomi;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    private Session session;
 
-    [TestClass]
-    public class SessionTest
+    [TestInitialize]
+    public void Initialize()
     {
-        private Session session;
+        this.session = Session.Get(new Uri("https://192.168.0.1/sdk")).Result;
+        this.session.SessionManager.Login("root", "password").Wait();
+    }
 
-        [TestInitialize]
-        public void Initialize()
+    [TestCleanup]
+    public void Cleanup()
+    {
+        if (this.session != null)
         {
-            this.session = Session.Get(new Uri("https://192.168.0.1/sdk")).Result;
-            this.session.SessionManager.Login("root", "password").Wait();
+            this.session.SessionManager.Logout().Wait();
         }
+    }
 
-        [TestCleanup]
-        public void Cleanup()
-        {
-            if (this.session != null)
-            {
-                this.session.SessionManager.Logout().Wait();
-            }
-        }
+    [TestMethod]
+    public void PropertyCollector()
+    {
+        var mo = this.session.PropertyCollector;
+        Assert.IsNotNull(mo);
 
-        [TestMethod]
-        public void PropertyCollector()
-        {
-            var mo = this.session.PropertyCollector;
-            Assert.IsNotNull(mo);
+        var filter = mo.GetPropertyFilter().Result;
+        Assert.IsNotNull(filter);
+    }
 
-            var filter = mo.GetPropertyFilter().Result;
-            Assert.IsNotNull(filter);
-        }
+    [TestMethod]
+    public void RootFolder()
+    {
+        var root = this.session.RootFolder;
+        Assert.IsNotNull(root);
 
-        [TestMethod]
-        public void RootFolder()
-        {
-            var root = this.session.RootFolder;
-            Assert.IsNotNull(root);
+        var rootName = root.GetPropertyName().Result;
+        Assert.AreEqual("root", rootName);
 
-            var rootName = root.GetPropertyName().Result;
-            Assert.AreEqual("root", rootName);
-
-            var children = root.GetPropertyChildEntity().Result;
-            Assert.IsNotNull(children);
-        }
+        var children = root.GetPropertyChildEntity().Result;
+        Assert.IsNotNull(children);
     }
 }

@@ -29,11 +29,11 @@ function writeManagedObject(obj: ManagedObject) {
       // START
       propDeclare += `
 
-        public async System.Threading.Tasks.Task<${ty}> GetProperty${methodSuffix}()
-        {
-            var ${propName} = await this.GetProperty<ManagedObjectReference>("${propName}");
-            return ManagedObject.Create<${returnTy}>(${propName}, this.Session);
-        }`;
+    public async System.Threading.Tasks.Task<${ty}> GetProperty${methodSuffix}()
+    {
+        var ${propName} = await this.GetProperty<ManagedObjectReference>("${propName}");
+        return ManagedObject.Create<${returnTy}>(${propName}, this.Session);
+    }`;
       // END
     } else if (
       property.ty.remote == "ManagedObjectReference[]"
@@ -46,22 +46,22 @@ function writeManagedObject(obj: ManagedObject) {
       // START
       propDeclare += `
 
-        public async System.Threading.Tasks.Task<${ty}> GetProperty${methodSuffix}()
-        {
-            var ${propName} = await this.GetProperty<ManagedObjectReference[]>("${propName}");
-            return ${propName}
-                .Select(r => ManagedObject.Create<${unitReturnTy}>(r, this.Session))
-                .ToArray();
-        }`;
+    public async System.Threading.Tasks.Task<${ty}> GetProperty${methodSuffix}()
+    {
+        var ${propName} = await this.GetProperty<ManagedObjectReference[]>("${propName}");
+        return ${propName}
+            .Select(r => ManagedObject.Create<${unitReturnTy}>(r, this.Session))
+            .ToArray();
+    }`;
       // END
     } else {
       // START
       propDeclare += `
 
-        public async System.Threading.Tasks.Task<${returnTy}> GetProperty${methodSuffix}()
-        {
-            return await this.GetProperty<${returnTy}>("${propName}");
-        }`;
+    public async System.Threading.Tasks.Task<${returnTy}> GetProperty${methodSuffix}()
+    {
+        return await this.GetProperty<${returnTy}>("${propName}");
+    }`;
       // END
     }
   }
@@ -76,12 +76,10 @@ function writeManagedObject(obj: ManagedObject) {
       // START
       methodDeclare += `
 
-        public async System.Threading.Tasks.Task ${methodName}(${
-        params.join(", ")
-      })
-        {
-            await this.Session.Client.${methodName}(${args.join(", ")});
-        }`;
+    public async System.Threading.Tasks.Task ${methodName}(${params.join(", ")})
+    {
+        await this.Session.Client.${methodName}(${args.join(", ")});
+    }`;
       // END
     } else {
       if (method.returnTy.remote == "ManagedObjectReference") {
@@ -92,15 +90,13 @@ function writeManagedObject(obj: ManagedObject) {
         // START
         methodDeclare += `
 
-        public async System.Threading.Tasks.Task<${localTy}> ${methodName}(${
+    public async System.Threading.Tasks.Task<${localTy}> ${methodName}(${
           params.join(", ")
         })
-        {
-            var res = await this.Session.Client.${methodName}(${
-          args.join(", ")
-        });
-            return ManagedObject.Create<${localTy}>(res, this.Session);
-        }`;
+    {
+        var res = await this.Session.Client.${methodName}(${args.join(", ")});
+        return ManagedObject.Create<${localTy}>(res, this.Session);
+    }`;
         // END
       } else if (method.returnTy.remote == "ManagedObjectReference[]") {
         let localTy = convertType(method.returnTy.local);
@@ -111,15 +107,13 @@ function writeManagedObject(obj: ManagedObject) {
         // START
         methodDeclare += `
 
-        public async System.Threading.Tasks.Task<${localTy}> ${methodName}(${
+    public async System.Threading.Tasks.Task<${localTy}> ${methodName}(${
           params.join(", ")
         })
-        {
-            var res = await this.Session.Client.${methodName}(${
-          args.join(", ")
-        });
-            return res?.Select(r => ManagedObject.Create<${unitReturnTy}>(r, this.Session)).ToArray();
-        }`;
+    {
+        var res = await this.Session.Client.${methodName}(${args.join(", ")});
+        return res?.Select(r => ManagedObject.Create<${unitReturnTy}>(r, this.Session)).ToArray();
+    }`;
         // END
       } else if (method.returnTy.local != method.returnTy.remote) {
         throw `Not supported type, ${method.returnTy.remote}`;
@@ -127,12 +121,12 @@ function writeManagedObject(obj: ManagedObject) {
         // START
         methodDeclare += `
 
-        public async System.Threading.Tasks.Task<${
+    public async System.Threading.Tasks.Task<${
           convertType(method.returnTy.remote)
         }> ${methodName}(${params.join(", ")})
-        {
-            return await this.Session.Client.${methodName}(${args.join(", ")});
-        }`;
+    {
+        return await this.Session.Client.${methodName}(${args.join(", ")});
+    }`;
         // END
       }
     }
@@ -140,15 +134,15 @@ function writeManagedObject(obj: ManagedObject) {
 
   // START
   const classDeclare = `
-    public partial class ${className} : ${baseTy}
+public partial class ${className} : ${baseTy}
+{
+    protected ${className}(
+        ManagedObjectReference reference,
+        Session session)
+        : base(reference, session)
     {
-        protected ${className}(
-            ManagedObjectReference reference,
-            Session session)
-            : base(reference, session)
-        {
-        }${propDeclare}${methodDeclare}
-    }`;
+    }${propDeclare}${methodDeclare}
+}`;
   // END
 
   console.log(classDeclare);
@@ -218,14 +212,13 @@ function writeManagedObjectMethodParameter(
 const methods = await getManagedMethodRefs2(directory);
 const objs = await getManagedObjects(directory, methods);
 
-console.log(`namespace CsVmomi
-{
+console.log(`namespace CsVmomi;
+
 #pragma warning disable SA1402 // File may only contain a single type
 
-    using VimService;`);
+using VimService;`);
 for (const obj of objs) {
   writeManagedObject(obj);
 }
 console.log(`
-#pragma warning restore SA1402 // File may only contain a single type
-}`);
+#pragma warning restore SA1402 // File may only contain a single type`);

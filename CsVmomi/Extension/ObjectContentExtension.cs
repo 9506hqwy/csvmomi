@@ -1,12 +1,11 @@
-﻿namespace CsVmomi
-{
-    using VimService;
+﻿namespace CsVmomi;
 
-    internal static class ObjectContentExtension
+using VimService;
+
+internal static class ObjectContentExtension
+{
+    internal static T GetPropertyValue<T>(this ObjectContent self, string pathSet)
     {
-        internal static T GetPropertyValue<T>(this ObjectContent self, string pathSet)
-        {
-            return (T)self.propSet.FirstOrDefault(p => p.name == pathSet)?.val ?? default(T);
-        }
+        return (T)self.propSet.FirstOrDefault(p => p.name == pathSet)?.val ?? default(T);
     }
 }

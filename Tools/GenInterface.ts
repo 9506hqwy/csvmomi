@@ -18,12 +18,12 @@ function writeManagedObjectMethod(method: ManagedObjectMethod) {
   if (method.returnTy == null) {
     // START
     methodDeclare = `
-        System.Threading.Tasks.Task ${methodName}(${params.join(", ")});`;
+    System.Threading.Tasks.Task ${methodName}(${params.join(", ")});`;
     // END
   } else {
     // START
     methodDeclare = `
-        System.Threading.Tasks.Task<${
+    System.Threading.Tasks.Task<${
       convertType(method.returnTy.remote)
     }> ${methodName}(${params.join(", ")});`;
     // END
@@ -58,12 +58,12 @@ function writeManagedObjectMethodParameter(
 const methods = await getManagedMethodRefs1(directory);
 const cls = await getCls(directory, methods);
 
-console.log(`namespace CsVmomi
-{
-    using VimService;
+console.log(`namespace CsVmomi;
 
-    public interface IClient
-    {`);
+using VimService;
+
+public interface IClient
+{`);
 for (const ref of methods) {
   if (excludeManagedObjectMethod.includes(ref.id)) {
     continue;
@@ -73,5 +73,4 @@ for (const ref of methods) {
   writeManagedObjectMethod(method);
 }
 console.log(`
-    }
 }`);
