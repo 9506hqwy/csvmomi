@@ -8,7 +8,7 @@ public partial class Task : ExtensibleManagedObject
         try
         {
             // Task.info.state のみ対象とする。
-            await collector.CreateFilter(this, "info.state", false);
+            await collector!.CreateFilter(this, "info.state", false);
 
             var version = string.Empty;
             var options = new WaitOptions
@@ -43,7 +43,7 @@ public partial class Task : ExtensibleManagedObject
         }
         finally
         {
-            await collector.DestroyPropertyCollector();
+            await collector!.DestroyPropertyCollector();
         }
 
         throw new TimeoutException();

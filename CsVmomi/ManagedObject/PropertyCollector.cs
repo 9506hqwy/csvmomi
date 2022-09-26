@@ -2,7 +2,7 @@
 
 public partial class PropertyCollector : ManagedObject
 {
-    public async Task<PropertyFilter> CreateFilter(
+    public async Task<PropertyFilter?> CreateFilter(
         ManagedObject obj,
         string pathSet,
         bool partialUpdates)
@@ -11,10 +11,10 @@ public partial class PropertyCollector : ManagedObject
         return await this.CreateFilter(specSet, partialUpdates);
     }
 
-    public async Task<PropertyFilter> CreateFilter(
+    public async Task<PropertyFilter?> CreateFilter(
         ManagedObject obj,
         bool all,
-        string[] pathSet,
+        string[]? pathSet,
         bool reportMissingObjectsInResults,
         bool partialUpdates)
     {
@@ -22,7 +22,7 @@ public partial class PropertyCollector : ManagedObject
         return await this.CreateFilter(specSet, partialUpdates);
     }
 
-    public async Task<PropertyFilter> CreateFilter(
+    public async Task<PropertyFilter?> CreateFilter(
         ObjectSpec objectSet,
         PropertySpec propSet,
         bool reportMissingObjectsInResults,
@@ -32,7 +32,7 @@ public partial class PropertyCollector : ManagedObject
         return await this.CreateFilter(specSet, partialUpdates);
     }
 
-    public async Task<T> RetrieveProperties<T>(
+    public async Task<T?> RetrieveProperties<T>(
         ManagedObject obj,
         string pathSet)
     {
@@ -44,7 +44,7 @@ public partial class PropertyCollector : ManagedObject
     public async Task<ObjectContent> RetrieveProperties(
         ManagedObject obj,
         bool all,
-        string[] pathSet,
+        string[]? pathSet,
         bool reportMissingObjectsInResults)
     {
         var specSet = this.CreatePropertyFilterSpec(obj, all, pathSet, reportMissingObjectsInResults);
@@ -52,7 +52,7 @@ public partial class PropertyCollector : ManagedObject
         return contents.First();
     }
 
-    public async Task<ObjectContent[]> RetrieveProperties(
+    public async Task<ObjectContent[]?> RetrieveProperties(
         ObjectSpec objectSet,
         PropertySpec propSet,
         bool reportMissingObjectsInResults)
@@ -61,12 +61,12 @@ public partial class PropertyCollector : ManagedObject
         return await this.RetrieveProperties(specSet);
     }
 
-    public async Task<ObjectContent[]> RetrieveProperties(PropertyFilterSpec specSet)
+    public async Task<ObjectContent[]?> RetrieveProperties(PropertyFilterSpec specSet)
     {
         return await this.RetrieveProperties(new[] { specSet });
     }
 
-    public async Task<RetrieveResult> RetrievePropertiesEx(
+    public async Task<RetrieveResult?> RetrievePropertiesEx(
         ObjectSpec objectSet,
         PropertySpec propSet,
         bool reportMissingObjectsInResults,
@@ -76,7 +76,7 @@ public partial class PropertyCollector : ManagedObject
         return await this.RetrievePropertiesEx(specSet, options);
     }
 
-    public async Task<RetrieveResult> RetrievePropertiesEx(PropertyFilterSpec specSet, RetrieveOptions options)
+    public async Task<RetrieveResult?> RetrievePropertiesEx(PropertyFilterSpec specSet, RetrieveOptions options)
     {
         return await this.RetrievePropertiesEx(new[] { specSet }, options);
     }
@@ -91,7 +91,7 @@ public partial class PropertyCollector : ManagedObject
     private PropertyFilterSpec CreatePropertyFilterSpec(
         ManagedObject obj,
         bool all,
-        string[] pathSet,
+        string[]? pathSet,
         bool reportMissingObjectsInResults)
     {
         var objectSet = new ObjectSpec

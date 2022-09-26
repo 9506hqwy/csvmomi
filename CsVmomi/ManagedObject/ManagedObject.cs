@@ -26,8 +26,8 @@ public abstract class ManagedObject
 
     protected Session Session { get; }
 
-    public static T Create<T>(
-        ManagedObjectReference reference,
+    public static T? Create<T>(
+        ManagedObjectReference? reference,
         Session session)
         where T : ManagedObject
     {
@@ -50,12 +50,12 @@ public abstract class ManagedObject
         throw new NotSupportedException();
     }
 
-    public async Task<T> GetProperty<T>(string pathSet)
+    public async Task<T?> GetProperty<T>(string pathSet)
     {
         return await this.Session.PropertyCollector.RetrieveProperties<T>(this, pathSet);
     }
 
-    public async Task<Tuple<T1, T2>> GetProperty<T1, T2>(
+    public async Task<Tuple<T1?, T2?>> GetProperty<T1, T2>(
         string pathSet1,
         string pathSet2)
     {
@@ -66,7 +66,7 @@ public abstract class ManagedObject
         return Tuple.Create(obj1, obj2);
     }
 
-    public async Task<Tuple<T1, T2, T3>> GetProperty<T1, T2, T3>(
+    public async Task<Tuple<T1?, T2?, T3?>> GetProperty<T1, T2, T3>(
         string pathSet1,
         string pathSet2,
         string pathSet3)
@@ -79,7 +79,7 @@ public abstract class ManagedObject
         return Tuple.Create(obj1, obj2, obj3);
     }
 
-    public async Task<Tuple<T1, T2, T3, T4>> GetProperty<T1, T2, T3, T4>(
+    public async Task<Tuple<T1?, T2?, T3?, T4?>> GetProperty<T1, T2, T3, T4>(
         string pathSet1,
         string pathSet2,
         string pathSet3,
@@ -94,7 +94,7 @@ public abstract class ManagedObject
         return Tuple.Create(obj1, obj2, obj3, obj4);
     }
 
-    public async Task<Tuple<T1, T2, T3, T4, T5>> GetProperty<T1, T2, T3, T4, T5>(
+    public async Task<Tuple<T1?, T2?, T3?, T4?, T5?>> GetProperty<T1, T2, T3, T4, T5>(
         string pathSet1,
         string pathSet2,
         string pathSet3,
@@ -111,7 +111,7 @@ public abstract class ManagedObject
         return Tuple.Create(obj1, obj2, obj3, obj4, obj5);
     }
 
-    public async Task<Tuple<T1, T2, T3, T4, T5, T6>> GetProperty<T1, T2, T3, T4, T5, T6>(
+    public async Task<Tuple<T1?, T2?, T3?, T4?, T5?, T6?>> GetProperty<T1, T2, T3, T4, T5, T6>(
         string pathSet1,
         string pathSet2,
         string pathSet3,
@@ -130,7 +130,7 @@ public abstract class ManagedObject
         return Tuple.Create(obj1, obj2, obj3, obj4, obj5, obj6);
     }
 
-    public async Task<Tuple<T1, T2, T3, T4, T5, T6, T7>> GetProperty<T1, T2, T3, T4, T5, T6, T7>(
+    public async Task<Tuple<T1?, T2?, T3?, T4?, T5?, T6?, T7?>> GetProperty<T1, T2, T3, T4, T5, T6, T7>(
         string pathSet1,
         string pathSet2,
         string pathSet3,

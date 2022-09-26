@@ -32,7 +32,7 @@ internal class PowerOnVm
         }
 
         var session = await Session.Get(url);
-        await session.SessionManager.Login(args[1], args[2]);
+        await session.SessionManager!.Login(args[1], args[2]);
         try
         {
             var vm = await session.RootFolder.FindByName<VirtualMachine>(args[3]);
@@ -42,18 +42,18 @@ internal class PowerOnVm
             }
 
             var task = await vm.PowerOnVM_Task(null);
-            var state = await task.WaitForCompleted(TimeSpan.FromSeconds(300));
+            var state = await task!.WaitForCompleted(TimeSpan.FromSeconds(300));
             if (state == TaskInfoState.error)
             {
                 var error = await task.GetProperty<LocalizedMethodFault>("info.error");
-                throw new Exception(error.localizedMessage);
+                throw new Exception(error!.localizedMessage);
             }
 
             await Console.Out.WriteLineAsync("Success.");
         }
         finally
         {
-            await session.SessionManager.Logout();
+            await session.SessionManager!.Logout();
         }
     }
 }

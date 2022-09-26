@@ -25,7 +25,7 @@ async System.Threading.Tasks.Task Work(string[] args)
     }
 
     var session = await Session.Get(url);
-    await session.SessionManager.Login(args[1], args[2]);
+    await session.SessionManager!.Login(args[1], args[2]);
     try
     {
         await foreach (var host in session.RootFolder.Enumerate<HostSystem>())
@@ -35,7 +35,7 @@ async System.Threading.Tasks.Task Work(string[] args)
                     "name", "summary.hardware", "summary.runtime.powerState");
 
             await Console.Out.WriteLineAsync(string.Format("Name        : {0}", name));
-            await Console.Out.WriteLineAsync(string.Format("Vendor      : {0}", hardware.vendor));
+            await Console.Out.WriteLineAsync(string.Format("Vendor      : {0}", hardware!.vendor));
             await Console.Out.WriteLineAsync(string.Format("Model       : {0}", hardware.model));
             await Console.Out.WriteLineAsync(string.Format("CPU Model   : {0}", hardware.cpuModel));
             await Console.Out.WriteLineAsync(string.Format("UUID        : {0}", hardware.uuid));
@@ -44,6 +44,6 @@ async System.Threading.Tasks.Task Work(string[] args)
     }
     finally
     {
-        await session.SessionManager.Logout();
+        await session.SessionManager!.Logout();
     }
 }

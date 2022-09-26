@@ -8,13 +8,13 @@ public partial class ManagedEntity : ExtensibleManagedObject
         return this.Enumerate<T>(null, null);
     }
 
-    public async System.Threading.Tasks.Task<T> FindByName<T>(string name)
+    public async System.Threading.Tasks.Task<T?> FindByName<T>(string name)
         where T : ManagedEntity
     {
         const string NAME = "name";
 
         Func<ObjectContent, bool> isMatch =
-            o => o.GetPropertyValue<string>(NAME).ToLowerInvariant() == name.ToLowerInvariant();
+            o => o.GetPropertyValue<string>(NAME)!.ToLowerInvariant() == name.ToLowerInvariant();
 
         await foreach (var entity in this.Enumerate<T>(new[] { NAME }, isMatch))
         {
@@ -24,14 +24,14 @@ public partial class ManagedEntity : ExtensibleManagedObject
         return null;
     }
 
-    private async IAsyncEnumerable<T> Enumerate<T>(string[] pathSet, Func<ObjectContent, bool> condition)
+    private async IAsyncEnumerable<T> Enumerate<T>(string[]? pathSet, Func<ObjectContent, bool>? condition)
         where T : ManagedObject
     {
-        var view = await this.Session.ViewManager.CreateContainerView(
+        var view = await this.Session.ViewManager!.CreateContainerView(
             this,
             new[] { $"vim.{typeof(T).Name}" },
             true);
-        string token = null;
+        string? token = null;
         try
         {
             var viewSpec = new TraversalSpec
@@ -41,7 +41,7 @@ public partial class ManagedEntity : ExtensibleManagedObject
                 selectSet = null,
                 skip = false,
                 skipSpecified = true,
-                type = view.Reference.type,
+                type = view!.Reference.type,
             };
 
             var objectSet = new ObjectSpec
@@ -67,24 +67,24 @@ public partial class ManagedEntity : ExtensibleManagedObject
             };
 
             var result = await this.Session.PropertyCollector.RetrievePropertiesEx(objectSet, propSet, false, options);
-            token = result.token;
+            token = result!.token;
             foreach (var obj in result.objects)
             {
                 if (condition == null || condition(obj))
                 {
-                    yield return ManagedObject.Create<T>(obj.obj, this.Session);
+                    yield return ManagedObject.Create<T>(obj.obj, this.Session)!;
                 }
             }
 
             while (token != null)
             {
                 result = await this.Session.PropertyCollector.ContinueRetrievePropertiesEx(token);
-                token = result.token;
+                token = result!.token;
                 foreach (var obj in result.objects)
                 {
                     if (condition == null || condition(obj))
                     {
-                        yield return ManagedObject.Create<T>(obj.obj, this.Session);
+                        yield return ManagedObject.Create<T>(obj.obj, this.Session)!;
                     }
                 }
             }
@@ -96,7 +96,7 @@ public partial class ManagedEntity : ExtensibleManagedObject
                 await this.Session.PropertyCollector.CancelRetrievePropertiesEx(token);
             }
 
-            await view.DestroyView();
+            await view!.DestroyView();
         }
     }
 }

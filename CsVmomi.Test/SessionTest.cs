@@ -3,13 +3,13 @@
 [TestClass]
 public class SessionTest
 {
-    private Session session;
+    private Session session = null!;
 
     [TestInitialize]
     public void Initialize()
     {
         this.session = Session.Get(new Uri("https://192.168.0.1/sdk")).Result;
-        this.session.SessionManager.Login("root", "password").Wait();
+        this.session.SessionManager!.Login("root", "password").Wait();
     }
 
     [TestCleanup]
@@ -17,7 +17,7 @@ public class SessionTest
     {
         if (this.session != null)
         {
-            this.session.SessionManager.Logout().Wait();
+            this.session.SessionManager!.Logout().Wait();
         }
     }
 

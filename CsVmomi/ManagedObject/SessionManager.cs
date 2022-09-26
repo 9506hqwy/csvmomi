@@ -4,7 +4,7 @@ using System.Globalization;
 
 public partial class SessionManager : ManagedObject
 {
-    public async System.Threading.Tasks.Task<UserSession> Login(string userName, string password)
+    public async System.Threading.Tasks.Task<UserSession?> Login(string userName, string password)
     {
         var supported = await this.GetPropertySupportedLocaleList();
         var locale = supported.FirstOrDefault(this.IsCurrentLocaleName);

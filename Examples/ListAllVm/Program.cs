@@ -32,7 +32,7 @@ internal class ListAllVm
         }
 
         var session = await Session.Get(url);
-        await session.SessionManager.Login(args[1], args[2]);
+        await session.SessionManager!.Login(args[1], args[2]);
         try
         {
             await foreach (var vm in session.RootFolder.Enumerate<VirtualMachine>())
@@ -40,7 +40,7 @@ internal class ListAllVm
                 var (name, summary) = await vm.GetProperty<string, VirtualMachineSummary>("name", "summary");
 
                 await Console.Out.WriteLineAsync(String.Format("Name          : {0}", name));
-                await Console.Out.WriteLineAsync(String.Format("Template      : {0}", summary.config.template));
+                await Console.Out.WriteLineAsync(String.Format("Template      : {0}", summary!.config.template));
                 await Console.Out.WriteLineAsync(String.Format("Path          : {0}", summary.config.vmPathName));
                 await Console.Out.WriteLineAsync(String.Format("Guest         : {0}", summary.config.guestFullName));
                 await Console.Out.WriteLineAsync(String.Format("Instance UUID : {0}", summary.config.instanceUuid));
@@ -50,7 +50,7 @@ internal class ListAllVm
         }
         finally
         {
-            await session.SessionManager.Logout();
+            await session.SessionManager!.Logout();
         }
     }
 }

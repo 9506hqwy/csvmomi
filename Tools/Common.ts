@@ -31,6 +31,7 @@ export const csStructureTypes = [
   "bool",
   "DateTime",
   "int",
+  "long",
   // VimService enum.
   "VirtualMachineMovePriority",
   "VirtualMachinePowerState",

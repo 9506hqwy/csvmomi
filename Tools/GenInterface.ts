@@ -21,11 +21,16 @@ function writeManagedObjectMethod(method: ManagedObjectMethod) {
     System.Threading.Tasks.Task ${methodName}(${params.join(", ")});`;
     // END
   } else {
+    let returnTy = convertType(method.returnTy.remote);
+    if (!csStructureTypes.includes(returnTy)) {
+      returnTy += "?";
+    }
+
     // START
     methodDeclare = `
-    System.Threading.Tasks.Task<${
-      convertType(method.returnTy.remote)
-    }> ${methodName}(${params.join(", ")});`;
+    System.Threading.Tasks.Task<${returnTy}> ${methodName}(${
+      params.join(", ")
+    });`;
     // END
   }
 
@@ -39,12 +44,17 @@ function writeManagedObjectMethodParameter(
   for (const param of method.parameters) {
     const ty = convertType(param.ty.remote);
 
+    let paramTy = ty;
+    if (!param.mandatory && !csStructureTypes.includes(paramTy)) {
+      paramTy += "?";
+    }
+
     let paramName = param.name;
     if (paramName == "_this") {
       paramName = "self";
     }
 
-    params.push(`${ty} ${paramName}`);
+    params.push(`${paramTy} ${paramName}`);
 
     if (!param.mandatory) {
       if (csStructureTypes.includes(ty)) {

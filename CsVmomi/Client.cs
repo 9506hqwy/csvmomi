@@ -19,7 +19,7 @@ public class Client : IClient
         await this.inner.AbandonHciWorkflowAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<string[]> AbdicateDomOwnership(ManagedObjectReference self, string[] uuids)
+    public async System.Threading.Tasks.Task<string[]?> AbdicateDomOwnership(ManagedObjectReference self, string[] uuids)
     {
         var req = new AbdicateDomOwnershipRequestType
         {
@@ -32,7 +32,7 @@ public class Client : IClient
         return res.AbdicateDomOwnershipResponse1;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> AbortCustomization_Task(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> AbortCustomization_Task(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth)
     {
         var req = new AbortCustomizationRequestType
         {
@@ -58,7 +58,7 @@ public class Client : IClient
         await this.inner.AcknowledgeAlarmAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<HostServiceTicket> AcquireCimServicesTicket(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<HostServiceTicket?> AcquireCimServicesTicket(ManagedObjectReference self)
     {
         var req = new AcquireCimServicesTicketRequestType
         {
@@ -70,7 +70,7 @@ public class Client : IClient
         return res.AcquireCimServicesTicketResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string> AcquireCloneTicket(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<string?> AcquireCloneTicket(ManagedObjectReference self)
     {
         var req = new AcquireCloneTicketRequestType
         {
@@ -82,7 +82,7 @@ public class Client : IClient
         return res.AcquireCloneTicketResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<GuestAuthentication> AcquireCredentialsInGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication requestedAuth, long sessionID)
+    public async System.Threading.Tasks.Task<GuestAuthentication?> AcquireCredentialsInGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication requestedAuth, long sessionID, bool sessionIDSpecified)
     {
         var req = new AcquireCredentialsInGuestRequestType
         {
@@ -90,6 +90,7 @@ public class Client : IClient
             vm = vm,
             requestedAuth = requestedAuth,
             sessionID = sessionID,
+            sessionIDSpecified = sessionIDSpecified,
         };
 
         var res = await this.inner.AcquireCredentialsInGuestAsync(req);
@@ -97,7 +98,7 @@ public class Client : IClient
         return res.AcquireCredentialsInGuestResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<SessionManagerGenericServiceTicket> AcquireGenericServiceTicket(ManagedObjectReference self, SessionManagerServiceRequestSpec spec)
+    public async System.Threading.Tasks.Task<SessionManagerGenericServiceTicket?> AcquireGenericServiceTicket(ManagedObjectReference self, SessionManagerServiceRequestSpec spec)
     {
         var req = new AcquireGenericServiceTicketRequestType
         {
@@ -110,7 +111,7 @@ public class Client : IClient
         return res.AcquireGenericServiceTicketResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<SessionManagerLocalTicket> AcquireLocalTicket(ManagedObjectReference self, string userName)
+    public async System.Threading.Tasks.Task<SessionManagerLocalTicket?> AcquireLocalTicket(ManagedObjectReference self, string userName)
     {
         var req = new AcquireLocalTicketRequestType
         {
@@ -123,7 +124,7 @@ public class Client : IClient
         return res.AcquireLocalTicketResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<VirtualMachineMksTicket> AcquireMksTicket(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<VirtualMachineMksTicket?> AcquireMksTicket(ManagedObjectReference self)
     {
         var req = new AcquireMksTicketRequestType
         {
@@ -135,7 +136,7 @@ public class Client : IClient
         return res.AcquireMksTicketResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<VirtualMachineTicket> AcquireTicket(ManagedObjectReference self, string ticketType)
+    public async System.Threading.Tasks.Task<VirtualMachineTicket?> AcquireTicket(ManagedObjectReference self, string ticketType)
     {
         var req = new AcquireTicketRequestType
         {
@@ -148,7 +149,7 @@ public class Client : IClient
         return res.AcquireTicketResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<int> AddAuthorizationRole(ManagedObjectReference self, string name, string[] privIds)
+    public async System.Threading.Tasks.Task<int> AddAuthorizationRole(ManagedObjectReference self, string name, string[]? privIds)
     {
         var req = new AddAuthorizationRoleRequestType
         {
@@ -162,7 +163,7 @@ public class Client : IClient
         return res.AddAuthorizationRoleResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<CustomFieldDef> AddCustomFieldDef(ManagedObjectReference self, string name, string moType, PrivilegePolicyDef fieldDefPolicy, PrivilegePolicyDef fieldPolicy)
+    public async System.Threading.Tasks.Task<CustomFieldDef?> AddCustomFieldDef(ManagedObjectReference self, string name, string? moType, PrivilegePolicyDef? fieldDefPolicy, PrivilegePolicyDef? fieldPolicy)
     {
         var req = new AddCustomFieldDefRequestType
         {
@@ -178,7 +179,7 @@ public class Client : IClient
         return res.AddCustomFieldDefResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> AddDisks_Task(ManagedObjectReference self, HostScsiDisk[] disk)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> AddDisks_Task(ManagedObjectReference self, HostScsiDisk[] disk)
     {
         var req = new AddDisksRequestType
         {
@@ -191,7 +192,7 @@ public class Client : IClient
         return res.AddDisks_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> AddDVPortgroup_Task(ManagedObjectReference self, DVPortgroupConfigSpec[] spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> AddDVPortgroup_Task(ManagedObjectReference self, DVPortgroupConfigSpec[] spec)
     {
         var req = new AddDVPortgroupRequestType
         {
@@ -204,7 +205,7 @@ public class Client : IClient
         return res.AddDVPortgroup_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string> AddFilter(ManagedObjectReference self, string providerId, string filterName, string[] infoIds)
+    public async System.Threading.Tasks.Task<string?> AddFilter(ManagedObjectReference self, string providerId, string filterName, string[]? infoIds)
     {
         var req = new AddFilterRequestType
         {
@@ -219,7 +220,7 @@ public class Client : IClient
         return res.AddFilterResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task AddFilterEntities(ManagedObjectReference self, string filterId, ManagedObjectReference[] entities)
+    public async System.Threading.Tasks.Task AddFilterEntities(ManagedObjectReference self, string filterId, ManagedObjectReference[]? entities)
     {
         var req = new AddFilterEntitiesRequestType
         {
@@ -247,7 +248,7 @@ public class Client : IClient
         await this.inner.AddGuestAliasAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> AddHost_Task(ManagedObjectReference self, HostConnectSpec spec, bool asConnected, ManagedObjectReference resourcePool, string license)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> AddHost_Task(ManagedObjectReference self, HostConnectSpec spec, bool asConnected, ManagedObjectReference? resourcePool, string? license)
     {
         var req = new AddHostRequestType
         {
@@ -298,7 +299,7 @@ public class Client : IClient
         await this.inner.AddKeyAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<CryptoKeyResult[]> AddKeys(ManagedObjectReference self, CryptoKeyPlain[] keys)
+    public async System.Threading.Tasks.Task<CryptoKeyResult[]?> AddKeys(ManagedObjectReference self, CryptoKeyPlain[]? keys)
     {
         var req = new AddKeysRequestType
         {
@@ -311,7 +312,7 @@ public class Client : IClient
         return res.AddKeysResponse1;
     }
 
-    public async System.Threading.Tasks.Task<LicenseManagerLicenseInfo> AddLicense(ManagedObjectReference self, string licenseKey, KeyValue[] labels)
+    public async System.Threading.Tasks.Task<LicenseManagerLicenseInfo?> AddLicense(ManagedObjectReference self, string licenseKey, KeyValue[]? labels)
     {
         var req = new AddLicenseRequestType
         {
@@ -325,7 +326,7 @@ public class Client : IClient
         return res.AddLicenseResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task AddMonitoredEntities(ManagedObjectReference self, string providerId, ManagedObjectReference[] entities)
+    public async System.Threading.Tasks.Task AddMonitoredEntities(ManagedObjectReference self, string providerId, ManagedObjectReference[]? entities)
     {
         var req = new AddMonitoredEntitiesRequestType
         {
@@ -359,7 +360,7 @@ public class Client : IClient
         await this.inner.AddPortGroupAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<string> AddServiceConsoleVirtualNic(ManagedObjectReference self, string portgroup, HostVirtualNicSpec nic)
+    public async System.Threading.Tasks.Task<string?> AddServiceConsoleVirtualNic(ManagedObjectReference self, string portgroup, HostVirtualNicSpec nic)
     {
         var req = new AddServiceConsoleVirtualNicRequestType
         {
@@ -373,7 +374,7 @@ public class Client : IClient
         return res.AddServiceConsoleVirtualNicResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> AddStandaloneHost_Task(ManagedObjectReference self, HostConnectSpec spec, ComputeResourceConfigSpec compResSpec, bool addConnected, string license)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> AddStandaloneHost_Task(ManagedObjectReference self, HostConnectSpec spec, ComputeResourceConfigSpec? compResSpec, bool addConnected, string? license)
     {
         var req = new AddStandaloneHostRequestType
         {
@@ -389,7 +390,7 @@ public class Client : IClient
         return res.AddStandaloneHost_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string> AddVirtualNic(ManagedObjectReference self, string portgroup, HostVirtualNicSpec nic)
+    public async System.Threading.Tasks.Task<string?> AddVirtualNic(ManagedObjectReference self, string portgroup, HostVirtualNicSpec nic)
     {
         var req = new AddVirtualNicRequestType
         {
@@ -403,7 +404,7 @@ public class Client : IClient
         return res.AddVirtualNicResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task AddVirtualSwitch(ManagedObjectReference self, string vswitchName, HostVirtualSwitchSpec spec)
+    public async System.Threading.Tasks.Task AddVirtualSwitch(ManagedObjectReference self, string vswitchName, HostVirtualSwitchSpec? spec)
     {
         var req = new AddVirtualSwitchRequestType
         {
@@ -415,7 +416,7 @@ public class Client : IClient
         await this.inner.AddVirtualSwitchAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<string> AllocateIpv4Address(ManagedObjectReference self, ManagedObjectReference dc, int poolId, string allocationId)
+    public async System.Threading.Tasks.Task<string?> AllocateIpv4Address(ManagedObjectReference self, ManagedObjectReference dc, int poolId, string allocationId)
     {
         var req = new AllocateIpv4AddressRequestType
         {
@@ -430,7 +431,7 @@ public class Client : IClient
         return res.AllocateIpv4AddressResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string> AllocateIpv6Address(ManagedObjectReference self, ManagedObjectReference dc, int poolId, string allocationId)
+    public async System.Threading.Tasks.Task<string?> AllocateIpv6Address(ManagedObjectReference self, ManagedObjectReference dc, int poolId, string allocationId)
     {
         var req = new AllocateIpv6AddressRequestType
         {
@@ -457,7 +458,7 @@ public class Client : IClient
         await this.inner.AnswerVMAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ApplyEntitiesConfig_Task(ManagedObjectReference self, ApplyHostProfileConfigurationSpec[] applyConfigSpecs)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ApplyEntitiesConfig_Task(ManagedObjectReference self, ApplyHostProfileConfigurationSpec[]? applyConfigSpecs)
     {
         var req = new ApplyEntitiesConfigRequestType
         {
@@ -470,7 +471,7 @@ public class Client : IClient
         return res.ApplyEntitiesConfig_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ApplyEvcModeVM_Task(ManagedObjectReference self, HostFeatureMask[] mask, bool completeMasks, bool completeMasksSpecified)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ApplyEvcModeVM_Task(ManagedObjectReference self, HostFeatureMask[]? mask, bool completeMasks, bool completeMasksSpecified)
     {
         var req = new ApplyEvcModeVMRequestType
         {
@@ -485,7 +486,7 @@ public class Client : IClient
         return res.ApplyEvcModeVM_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ApplyHostConfig_Task(ManagedObjectReference self, ManagedObjectReference host, HostConfigSpec configSpec, ProfileDeferredPolicyOptionParameter[] userInput)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ApplyHostConfig_Task(ManagedObjectReference self, ManagedObjectReference host, HostConfigSpec configSpec, ProfileDeferredPolicyOptionParameter[]? userInput)
     {
         var req = new ApplyHostConfigRequestType
         {
@@ -511,7 +512,7 @@ public class Client : IClient
         await this.inner.ApplyRecommendationAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ApplyStorageDrsRecommendation_Task(ManagedObjectReference self, string[] key)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ApplyStorageDrsRecommendation_Task(ManagedObjectReference self, string[] key)
     {
         var req = new ApplyStorageDrsRecommendationRequestType
         {
@@ -524,7 +525,7 @@ public class Client : IClient
         return res.ApplyStorageDrsRecommendation_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ApplyStorageDrsRecommendationToPod_Task(ManagedObjectReference self, ManagedObjectReference pod, string key)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ApplyStorageDrsRecommendationToPod_Task(ManagedObjectReference self, ManagedObjectReference pod, string key)
     {
         var req = new ApplyStorageDrsRecommendationToPodRequestType
         {
@@ -574,7 +575,7 @@ public class Client : IClient
         await this.inner.AssociateProfileAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> AttachDisk_Task(ManagedObjectReference self, ID diskId, ManagedObjectReference datastore, int controllerKey, bool controllerKeySpecified, int unitNumber, bool unitNumberSpecified)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> AttachDisk_Task(ManagedObjectReference self, ID diskId, ManagedObjectReference datastore, int controllerKey, bool controllerKeySpecified, int unitNumber, bool unitNumberSpecified)
     {
         var req = new AttachDiskRequestType
         {
@@ -603,7 +604,7 @@ public class Client : IClient
         await this.inner.AttachScsiLunAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> AttachScsiLunEx_Task(ManagedObjectReference self, string[] lunUuid)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> AttachScsiLunEx_Task(ManagedObjectReference self, string[] lunUuid)
     {
         var req = new AttachScsiLunExRequestType
         {
@@ -661,7 +662,7 @@ public class Client : IClient
         await this.inner.AutoStartPowerOnAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<string> BackupFirmwareConfiguration(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<string?> BackupFirmwareConfiguration(ManagedObjectReference self)
     {
         var req = new BackupFirmwareConfigurationRequestType
         {
@@ -673,7 +674,7 @@ public class Client : IClient
         return res.BackupFirmwareConfigurationResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> BatchAddHostsToCluster_Task(ManagedObjectReference self, ManagedObjectReference cluster, FolderNewHostSpec[] newHosts, ManagedObjectReference[] existingHosts, ComputeResourceConfigSpec compResSpec, string desiredState)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> BatchAddHostsToCluster_Task(ManagedObjectReference self, ManagedObjectReference cluster, FolderNewHostSpec[]? newHosts, ManagedObjectReference[]? existingHosts, ComputeResourceConfigSpec? compResSpec, string? desiredState)
     {
         var req = new BatchAddHostsToClusterRequestType
         {
@@ -690,7 +691,7 @@ public class Client : IClient
         return res.BatchAddHostsToCluster_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> BatchAddStandaloneHosts_Task(ManagedObjectReference self, FolderNewHostSpec[] newHosts, ComputeResourceConfigSpec compResSpec, bool addConnected)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> BatchAddStandaloneHosts_Task(ManagedObjectReference self, FolderNewHostSpec[]? newHosts, ComputeResourceConfigSpec? compResSpec, bool addConnected)
     {
         var req = new BatchAddStandaloneHostsRequestType
         {
@@ -705,7 +706,7 @@ public class Client : IClient
         return res.BatchAddStandaloneHosts_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<DatacenterBasicConnectInfo[]> BatchQueryConnectInfo(ManagedObjectReference self, HostConnectSpec[] hostSpecs)
+    public async System.Threading.Tasks.Task<DatacenterBasicConnectInfo[]?> BatchQueryConnectInfo(ManagedObjectReference self, HostConnectSpec[]? hostSpecs)
     {
         var req = new BatchQueryConnectInfoRequestType
         {
@@ -730,7 +731,7 @@ public class Client : IClient
         await this.inner.BindVnicAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<DiagnosticManagerLogHeader> BrowseDiagnosticLog(ManagedObjectReference self, ManagedObjectReference host, string key, int start, bool startSpecified, int lines, bool linesSpecified)
+    public async System.Threading.Tasks.Task<DiagnosticManagerLogHeader?> BrowseDiagnosticLog(ManagedObjectReference self, ManagedObjectReference? host, string key, int start, bool startSpecified, int lines, bool linesSpecified)
     {
         var req = new BrowseDiagnosticLogRequestType
         {
@@ -801,7 +802,7 @@ public class Client : IClient
         await this.inner.CancelWaitForUpdatesAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<VsanPolicySatisfiability[]> CanProvisionObjects(ManagedObjectReference self, VsanNewPolicyBatch[] npbs, bool ignoreSatisfiability, bool ignoreSatisfiabilitySpecified)
+    public async System.Threading.Tasks.Task<VsanPolicySatisfiability[]?> CanProvisionObjects(ManagedObjectReference self, VsanNewPolicyBatch[] npbs, bool ignoreSatisfiability, bool ignoreSatisfiabilitySpecified)
     {
         var req = new CanProvisionObjectsRequestType
         {
@@ -816,7 +817,7 @@ public class Client : IClient
         return res.CanProvisionObjectsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CertMgrRefreshCACertificatesAndCRLs_Task(ManagedObjectReference self, ManagedObjectReference[] host)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CertMgrRefreshCACertificatesAndCRLs_Task(ManagedObjectReference self, ManagedObjectReference[] host)
     {
         var req = new CertMgrRefreshCACertificatesAndCRLsRequestType
         {
@@ -829,7 +830,7 @@ public class Client : IClient
         return res.CertMgrRefreshCACertificatesAndCRLs_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CertMgrRefreshCertificates_Task(ManagedObjectReference self, ManagedObjectReference[] host)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CertMgrRefreshCertificates_Task(ManagedObjectReference self, ManagedObjectReference[] host)
     {
         var req = new CertMgrRefreshCertificatesRequestType
         {
@@ -842,7 +843,7 @@ public class Client : IClient
         return res.CertMgrRefreshCertificates_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CertMgrRevokeCertificates_Task(ManagedObjectReference self, ManagedObjectReference[] host)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CertMgrRevokeCertificates_Task(ManagedObjectReference self, ManagedObjectReference[] host)
     {
         var req = new CertMgrRevokeCertificatesRequestType
         {
@@ -882,7 +883,7 @@ public class Client : IClient
         await this.inner.ChangeFileAttributesInGuestAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ChangeKey_Task(ManagedObjectReference self, CryptoKeyPlain newKey)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ChangeKey_Task(ManagedObjectReference self, CryptoKeyPlain newKey)
     {
         var req = new ChangeKeyRequestType
         {
@@ -917,7 +918,7 @@ public class Client : IClient
         await this.inner.ChangeNFSUserPasswordAsync(req);
     }
 
-    public async System.Threading.Tasks.Task ChangeOwner(ManagedObjectReference self, string name, ManagedObjectReference datacenter, string owner)
+    public async System.Threading.Tasks.Task ChangeOwner(ManagedObjectReference self, string name, ManagedObjectReference? datacenter, string owner)
     {
         var req = new ChangeOwnerRequestType
         {
@@ -943,7 +944,7 @@ public class Client : IClient
         await this.inner.ChangePasswordAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CheckAddHostEvc_Task(ManagedObjectReference self, HostConnectSpec cnxSpec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CheckAddHostEvc_Task(ManagedObjectReference self, HostConnectSpec cnxSpec)
     {
         var req = new CheckAddHostEvcRequestType
         {
@@ -956,7 +957,7 @@ public class Client : IClient
         return res.CheckAddHostEvc_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CheckAnswerFileStatus_Task(ManagedObjectReference self, ManagedObjectReference[] host)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CheckAnswerFileStatus_Task(ManagedObjectReference self, ManagedObjectReference[] host)
     {
         var req = new CheckAnswerFileStatusRequestType
         {
@@ -969,7 +970,7 @@ public class Client : IClient
         return res.CheckAnswerFileStatus_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CheckClone_Task(ManagedObjectReference self, ManagedObjectReference vm, ManagedObjectReference folder, string name, VirtualMachineCloneSpec spec, string[] testType)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CheckClone_Task(ManagedObjectReference self, ManagedObjectReference vm, ManagedObjectReference folder, string name, VirtualMachineCloneSpec spec, string[]? testType)
     {
         var req = new CheckCloneRequestType
         {
@@ -986,7 +987,7 @@ public class Client : IClient
         return res.CheckClone_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CheckCompatibility_Task(ManagedObjectReference self, ManagedObjectReference vm, ManagedObjectReference host, ManagedObjectReference pool, string[] testType)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CheckCompatibility_Task(ManagedObjectReference self, ManagedObjectReference vm, ManagedObjectReference? host, ManagedObjectReference? pool, string[]? testType)
     {
         var req = new CheckCompatibilityRequestType
         {
@@ -1002,7 +1003,7 @@ public class Client : IClient
         return res.CheckCompatibility_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CheckCompliance_Task(ManagedObjectReference self, ManagedObjectReference[] profile, ManagedObjectReference[] entity)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CheckCompliance_Task(ManagedObjectReference self, ManagedObjectReference[]? profile, ManagedObjectReference[]? entity)
     {
         var req = new CheckComplianceRequestType
         {
@@ -1016,7 +1017,7 @@ public class Client : IClient
         return res.CheckCompliance_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CheckConfigureEvcMode_Task(ManagedObjectReference self, string evcModeKey, string evcGraphicsModeKey)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CheckConfigureEvcMode_Task(ManagedObjectReference self, string evcModeKey, string? evcGraphicsModeKey)
     {
         var req = new CheckConfigureEvcModeRequestType
         {
@@ -1052,7 +1053,7 @@ public class Client : IClient
         await this.inner.CheckCustomizationSpecAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<UpdateSet> CheckForUpdates(ManagedObjectReference self, string version)
+    public async System.Threading.Tasks.Task<UpdateSet?> CheckForUpdates(ManagedObjectReference self, string? version)
     {
         var req = new CheckForUpdatesRequestType
         {
@@ -1065,7 +1066,7 @@ public class Client : IClient
         return res.CheckForUpdatesResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CheckHostPatch_Task(ManagedObjectReference self, string[] metaUrls, string[] bundleUrls, HostPatchManagerPatchManagerOperationSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CheckHostPatch_Task(ManagedObjectReference self, string[]? metaUrls, string[]? bundleUrls, HostPatchManagerPatchManagerOperationSpec? spec)
     {
         var req = new CheckHostPatchRequestType
         {
@@ -1080,7 +1081,7 @@ public class Client : IClient
         return res.CheckHostPatch_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CheckInstantClone_Task(ManagedObjectReference self, ManagedObjectReference vm, VirtualMachineInstantCloneSpec spec, string[] testType)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CheckInstantClone_Task(ManagedObjectReference self, ManagedObjectReference vm, VirtualMachineInstantCloneSpec spec, string[]? testType)
     {
         var req = new CheckInstantCloneRequestType
         {
@@ -1095,7 +1096,7 @@ public class Client : IClient
         return res.CheckInstantClone_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<bool> CheckLicenseFeature(ManagedObjectReference self, ManagedObjectReference host, string featureKey)
+    public async System.Threading.Tasks.Task<bool> CheckLicenseFeature(ManagedObjectReference self, ManagedObjectReference? host, string featureKey)
     {
         var req = new CheckLicenseFeatureRequestType
         {
@@ -1109,7 +1110,7 @@ public class Client : IClient
         return res.CheckLicenseFeatureResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CheckMigrate_Task(ManagedObjectReference self, ManagedObjectReference vm, ManagedObjectReference host, ManagedObjectReference pool, VirtualMachinePowerState state, bool stateSpecified, string[] testType)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CheckMigrate_Task(ManagedObjectReference self, ManagedObjectReference vm, ManagedObjectReference? host, ManagedObjectReference? pool, VirtualMachinePowerState state, bool stateSpecified, string[]? testType)
     {
         var req = new CheckMigrateRequestType
         {
@@ -1127,7 +1128,7 @@ public class Client : IClient
         return res.CheckMigrate_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CheckPowerOn_Task(ManagedObjectReference self, ManagedObjectReference vm, ManagedObjectReference host, ManagedObjectReference pool, string[] testType)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CheckPowerOn_Task(ManagedObjectReference self, ManagedObjectReference vm, ManagedObjectReference? host, ManagedObjectReference? pool, string[]? testType)
     {
         var req = new CheckPowerOnRequestType
         {
@@ -1143,7 +1144,7 @@ public class Client : IClient
         return res.CheckPowerOn_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CheckProfileCompliance_Task(ManagedObjectReference self, ManagedObjectReference[] entity)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CheckProfileCompliance_Task(ManagedObjectReference self, ManagedObjectReference[]? entity)
     {
         var req = new CheckProfileComplianceRequestType
         {
@@ -1156,7 +1157,7 @@ public class Client : IClient
         return res.CheckProfileCompliance_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CheckRelocate_Task(ManagedObjectReference self, ManagedObjectReference vm, VirtualMachineRelocateSpec spec, string[] testType)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CheckRelocate_Task(ManagedObjectReference self, ManagedObjectReference vm, VirtualMachineRelocateSpec spec, string[]? testType)
     {
         var req = new CheckRelocateRequestType
         {
@@ -1171,7 +1172,7 @@ public class Client : IClient
         return res.CheckRelocate_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CheckVmConfig_Task(ManagedObjectReference self, VirtualMachineConfigSpec spec, ManagedObjectReference vm, ManagedObjectReference host, ManagedObjectReference pool, string[] testType)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CheckVmConfig_Task(ManagedObjectReference self, VirtualMachineConfigSpec spec, ManagedObjectReference? vm, ManagedObjectReference? host, ManagedObjectReference? pool, string[]? testType)
     {
         var req = new CheckVmConfigRequestType
         {
@@ -1188,7 +1189,7 @@ public class Client : IClient
         return res.CheckVmConfig_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task ClearComplianceStatus(ManagedObjectReference self, ManagedObjectReference[] profile, ManagedObjectReference[] entity)
+    public async System.Threading.Tasks.Task ClearComplianceStatus(ManagedObjectReference self, ManagedObjectReference[]? profile, ManagedObjectReference[]? entity)
     {
         var req = new ClearComplianceStatusRequestType
         {
@@ -1231,7 +1232,7 @@ public class Client : IClient
         await this.inner.ClearTriggeredAlarmsAsync(req);
     }
 
-    public async System.Threading.Tasks.Task ClearVStorageObjectControlFlags(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string[] controlFlags)
+    public async System.Threading.Tasks.Task ClearVStorageObjectControlFlags(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string[]? controlFlags)
     {
         var req = new ClearVStorageObjectControlFlagsRequestType
         {
@@ -1244,7 +1245,7 @@ public class Client : IClient
         await this.inner.ClearVStorageObjectControlFlagsAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<UserSession> CloneSession(ManagedObjectReference self, string cloneTicket)
+    public async System.Threading.Tasks.Task<UserSession?> CloneSession(ManagedObjectReference self, string cloneTicket)
     {
         var req = new CloneSessionRequestType
         {
@@ -1257,7 +1258,7 @@ public class Client : IClient
         return res.CloneSessionResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CloneVApp_Task(ManagedObjectReference self, string name, ManagedObjectReference target, VAppCloneSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CloneVApp_Task(ManagedObjectReference self, string name, ManagedObjectReference target, VAppCloneSpec spec)
     {
         var req = new CloneVAppRequestType
         {
@@ -1272,7 +1273,7 @@ public class Client : IClient
         return res.CloneVApp_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CloneVM_Task(ManagedObjectReference self, ManagedObjectReference folder, string name, VirtualMachineCloneSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CloneVM_Task(ManagedObjectReference self, ManagedObjectReference folder, string name, VirtualMachineCloneSpec spec)
     {
         var req = new CloneVMRequestType
         {
@@ -1287,7 +1288,7 @@ public class Client : IClient
         return res.CloneVM_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CloneVStorageObject_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, VslmCloneSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CloneVStorageObject_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, VslmCloneSpec spec)
     {
         var req = new CloneVStorageObjectRequestType
         {
@@ -1302,7 +1303,7 @@ public class Client : IClient
         return res.CloneVStorageObject_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference[]> CloseInventoryViewFolder(ManagedObjectReference self, ManagedObjectReference[] entity)
+    public async System.Threading.Tasks.Task<ManagedObjectReference[]?> CloseInventoryViewFolder(ManagedObjectReference self, ManagedObjectReference[] entity)
     {
         var req = new CloseInventoryViewFolderRequestType
         {
@@ -1315,7 +1316,7 @@ public class Client : IClient
         return res.CloseInventoryViewFolderResponse1;
     }
 
-    public async System.Threading.Tasks.Task<ClusterEnterMaintenanceResult> ClusterEnterMaintenanceMode(ManagedObjectReference self, ManagedObjectReference[] host, OptionValue[] option)
+    public async System.Threading.Tasks.Task<ClusterEnterMaintenanceResult?> ClusterEnterMaintenanceMode(ManagedObjectReference self, ManagedObjectReference[] host, OptionValue[]? option)
     {
         var req = new ClusterEnterMaintenanceModeRequestType
         {
@@ -1329,7 +1330,7 @@ public class Client : IClient
         return res.ClusterEnterMaintenanceModeResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CompositeHostProfile_Task(ManagedObjectReference self, ManagedObjectReference source, ManagedObjectReference[] targets, HostApplyProfile toBeMerged, HostApplyProfile toBeReplacedWith, HostApplyProfile toBeDeleted, HostApplyProfile enableStatusToBeCopied)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CompositeHostProfile_Task(ManagedObjectReference self, ManagedObjectReference source, ManagedObjectReference[]? targets, HostApplyProfile? toBeMerged, HostApplyProfile? toBeReplacedWith, HostApplyProfile? toBeDeleted, HostApplyProfile? enableStatusToBeCopied)
     {
         var req = new CompositeHostProfileRequestType
         {
@@ -1347,7 +1348,7 @@ public class Client : IClient
         return res.CompositeHostProfile_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<HostDiskPartitionInfo> ComputeDiskPartitionInfo(ManagedObjectReference self, string devicePath, HostDiskPartitionLayout layout, string partitionFormat)
+    public async System.Threading.Tasks.Task<HostDiskPartitionInfo?> ComputeDiskPartitionInfo(ManagedObjectReference self, string devicePath, HostDiskPartitionLayout layout, string? partitionFormat)
     {
         var req = new ComputeDiskPartitionInfoRequestType
         {
@@ -1362,7 +1363,7 @@ public class Client : IClient
         return res.ComputeDiskPartitionInfoResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<HostDiskPartitionInfo> ComputeDiskPartitionInfoForResize(ManagedObjectReference self, HostScsiDiskPartition partition, HostDiskPartitionBlockRange blockRange, string partitionFormat)
+    public async System.Threading.Tasks.Task<HostDiskPartitionInfo?> ComputeDiskPartitionInfoForResize(ManagedObjectReference self, HostScsiDiskPartition partition, HostDiskPartitionBlockRange blockRange, string? partitionFormat)
     {
         var req = new ComputeDiskPartitionInfoForResizeRequestType
         {
@@ -1377,7 +1378,7 @@ public class Client : IClient
         return res.ComputeDiskPartitionInfoForResizeResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task ConfigureCryptoKey(ManagedObjectReference self, CryptoKeyId keyId)
+    public async System.Threading.Tasks.Task ConfigureCryptoKey(ManagedObjectReference self, CryptoKeyId? keyId)
     {
         var req = new ConfigureCryptoKeyRequestType
         {
@@ -1388,7 +1389,7 @@ public class Client : IClient
         await this.inner.ConfigureCryptoKeyAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ConfigureDatastoreIORM_Task(ManagedObjectReference self, ManagedObjectReference datastore, StorageIORMConfigSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ConfigureDatastoreIORM_Task(ManagedObjectReference self, ManagedObjectReference datastore, StorageIORMConfigSpec spec)
     {
         var req = new ConfigureDatastoreIORMRequestType
         {
@@ -1402,7 +1403,7 @@ public class Client : IClient
         return res.ConfigureDatastoreIORM_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task ConfigureDatastorePrincipal(ManagedObjectReference self, string userName, string password)
+    public async System.Threading.Tasks.Task ConfigureDatastorePrincipal(ManagedObjectReference self, string userName, string? password)
     {
         var req = new ConfigureDatastorePrincipalRequestType
         {
@@ -1414,7 +1415,7 @@ public class Client : IClient
         await this.inner.ConfigureDatastorePrincipalAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ConfigureEvcMode_Task(ManagedObjectReference self, string evcModeKey, string evcGraphicsModeKey)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ConfigureEvcMode_Task(ManagedObjectReference self, string evcModeKey, string? evcGraphicsModeKey)
     {
         var req = new ConfigureEvcModeRequestType
         {
@@ -1428,7 +1429,7 @@ public class Client : IClient
         return res.ConfigureEvcMode_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ConfigureHCI_Task(ManagedObjectReference self, ClusterComputeResourceHCIConfigSpec clusterSpec, ClusterComputeResourceHostConfigurationInput[] hostInputs)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ConfigureHCI_Task(ManagedObjectReference self, ClusterComputeResourceHCIConfigSpec clusterSpec, ClusterComputeResourceHostConfigurationInput[]? hostInputs)
     {
         var req = new ConfigureHCIRequestType
         {
@@ -1442,7 +1443,7 @@ public class Client : IClient
         return res.ConfigureHCI_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ConfigureHostCache_Task(ManagedObjectReference self, HostCacheConfigurationSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ConfigureHostCache_Task(ManagedObjectReference self, HostCacheConfigurationSpec spec)
     {
         var req = new ConfigureHostCacheRequestType
         {
@@ -1455,7 +1456,7 @@ public class Client : IClient
         return res.ConfigureHostCache_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task ConfigureLicenseSource(ManagedObjectReference self, ManagedObjectReference host, LicenseSource licenseSource)
+    public async System.Threading.Tasks.Task ConfigureLicenseSource(ManagedObjectReference self, ManagedObjectReference? host, LicenseSource licenseSource)
     {
         var req = new ConfigureLicenseSourceRequestType
         {
@@ -1478,7 +1479,7 @@ public class Client : IClient
         await this.inner.ConfigurePowerPolicyAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ConfigureStorageDrsForPod_Task(ManagedObjectReference self, ManagedObjectReference pod, StorageDrsConfigSpec spec, bool modify)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ConfigureStorageDrsForPod_Task(ManagedObjectReference self, ManagedObjectReference pod, StorageDrsConfigSpec spec, bool modify)
     {
         var req = new ConfigureStorageDrsForPodRequestType
         {
@@ -1493,7 +1494,7 @@ public class Client : IClient
         return res.ConfigureStorageDrsForPod_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ConfigureVcha_Task(ManagedObjectReference self, VchaClusterConfigSpec configSpec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ConfigureVcha_Task(ManagedObjectReference self, VchaClusterConfigSpec configSpec)
     {
         var req = new configureVchaRequestType
         {
@@ -1506,7 +1507,7 @@ public class Client : IClient
         return res.configureVcha_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ConfigureVFlashResourceEx_Task(ManagedObjectReference self, string[] devicePath)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ConfigureVFlashResourceEx_Task(ManagedObjectReference self, string[]? devicePath)
     {
         var req = new ConfigureVFlashResourceExRequestType
         {
@@ -1530,7 +1531,7 @@ public class Client : IClient
         await this.inner.ConnectNvmeControllerAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ConnectNvmeControllerEx_Task(ManagedObjectReference self, HostNvmeConnectSpec[] connectSpec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ConnectNvmeControllerEx_Task(ManagedObjectReference self, HostNvmeConnectSpec[]? connectSpec)
     {
         var req = new ConnectNvmeControllerExRequestType
         {
@@ -1543,7 +1544,7 @@ public class Client : IClient
         return res.ConnectNvmeControllerEx_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ConsolidateVMDisks_Task(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ConsolidateVMDisks_Task(ManagedObjectReference self)
     {
         var req = new ConsolidateVMDisksRequestType
         {
@@ -1555,7 +1556,7 @@ public class Client : IClient
         return res.ConsolidateVMDisks_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<RetrieveResult> ContinueRetrievePropertiesEx(ManagedObjectReference self, string token)
+    public async System.Threading.Tasks.Task<RetrieveResult?> ContinueRetrievePropertiesEx(ManagedObjectReference self, string token)
     {
         var req = new ContinueRetrievePropertiesExRequestType
         {
@@ -1568,7 +1569,7 @@ public class Client : IClient
         return res.ContinueRetrievePropertiesExResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string> ConvertNamespacePathToUuidPath(ManagedObjectReference self, ManagedObjectReference datacenter, string namespaceUrl)
+    public async System.Threading.Tasks.Task<string?> ConvertNamespacePathToUuidPath(ManagedObjectReference self, ManagedObjectReference? datacenter, string namespaceUrl)
     {
         var req = new ConvertNamespacePathToUuidPathRequestType
         {
@@ -1582,7 +1583,7 @@ public class Client : IClient
         return res.ConvertNamespacePathToUuidPathResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CopyDatastoreFile_Task(ManagedObjectReference self, string sourceName, ManagedObjectReference sourceDatacenter, string destinationName, ManagedObjectReference destinationDatacenter, bool force, bool forceSpecified)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CopyDatastoreFile_Task(ManagedObjectReference self, string sourceName, ManagedObjectReference? sourceDatacenter, string destinationName, ManagedObjectReference? destinationDatacenter, bool force, bool forceSpecified)
     {
         var req = new CopyDatastoreFileRequestType
         {
@@ -1600,7 +1601,7 @@ public class Client : IClient
         return res.CopyDatastoreFile_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CopyVirtualDisk_Task(ManagedObjectReference self, string sourceName, ManagedObjectReference sourceDatacenter, string destName, ManagedObjectReference destDatacenter, VirtualDiskSpec destSpec, bool force, bool forceSpecified)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CopyVirtualDisk_Task(ManagedObjectReference self, string sourceName, ManagedObjectReference? sourceDatacenter, string destName, ManagedObjectReference? destDatacenter, VirtualDiskSpec? destSpec, bool force, bool forceSpecified)
     {
         var req = new CopyVirtualDiskRequestType
         {
@@ -1619,7 +1620,7 @@ public class Client : IClient
         return res.CopyVirtualDisk_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateAlarm(ManagedObjectReference self, ManagedObjectReference entity, AlarmSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateAlarm(ManagedObjectReference self, ManagedObjectReference entity, AlarmSpec spec)
     {
         var req = new CreateAlarmRequestType
         {
@@ -1633,7 +1634,7 @@ public class Client : IClient
         return res.CreateAlarmResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateChildVM_Task(ManagedObjectReference self, VirtualMachineConfigSpec config, ManagedObjectReference host)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateChildVM_Task(ManagedObjectReference self, VirtualMachineConfigSpec config, ManagedObjectReference? host)
     {
         var req = new CreateChildVMRequestType
         {
@@ -1647,7 +1648,7 @@ public class Client : IClient
         return res.CreateChildVM_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateCluster(ManagedObjectReference self, string name, ClusterConfigSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateCluster(ManagedObjectReference self, string name, ClusterConfigSpec spec)
     {
         var req = new CreateClusterRequestType
         {
@@ -1661,7 +1662,7 @@ public class Client : IClient
         return res.CreateClusterResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateClusterEx(ManagedObjectReference self, string name, ClusterConfigSpecEx spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateClusterEx(ManagedObjectReference self, string name, ClusterConfigSpecEx spec)
     {
         var req = new CreateClusterExRequestType
         {
@@ -1675,7 +1676,7 @@ public class Client : IClient
         return res.CreateClusterExResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateCollectorForEvents(ManagedObjectReference self, EventFilterSpec filter)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateCollectorForEvents(ManagedObjectReference self, EventFilterSpec filter)
     {
         var req = new CreateCollectorForEventsRequestType
         {
@@ -1688,7 +1689,7 @@ public class Client : IClient
         return res.CreateCollectorForEventsResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateCollectorForTasks(ManagedObjectReference self, TaskFilterSpec filter)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateCollectorForTasks(ManagedObjectReference self, TaskFilterSpec filter)
     {
         var req = new CreateCollectorForTasksRequestType
         {
@@ -1701,7 +1702,7 @@ public class Client : IClient
         return res.CreateCollectorForTasksResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateContainerView(ManagedObjectReference self, ManagedObjectReference container, string[] type, bool recursive)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateContainerView(ManagedObjectReference self, ManagedObjectReference container, string[]? type, bool recursive)
     {
         var req = new CreateContainerViewRequestType
         {
@@ -1727,7 +1728,7 @@ public class Client : IClient
         await this.inner.CreateCustomizationSpecAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateDatacenter(ManagedObjectReference self, string name)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateDatacenter(ManagedObjectReference self, string name)
     {
         var req = new CreateDatacenterRequestType
         {
@@ -1740,7 +1741,7 @@ public class Client : IClient
         return res.CreateDatacenterResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ApplyProfile> CreateDefaultProfile(ManagedObjectReference self, string profileType, string profileTypeName, ManagedObjectReference profile)
+    public async System.Threading.Tasks.Task<ApplyProfile?> CreateDefaultProfile(ManagedObjectReference self, string profileType, string? profileTypeName, ManagedObjectReference? profile)
     {
         var req = new CreateDefaultProfileRequestType
         {
@@ -1755,7 +1756,7 @@ public class Client : IClient
         return res.CreateDefaultProfileResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<OvfCreateDescriptorResult> CreateDescriptor(ManagedObjectReference self, ManagedObjectReference obj, OvfCreateDescriptorParams cdp)
+    public async System.Threading.Tasks.Task<OvfCreateDescriptorResult?> CreateDescriptor(ManagedObjectReference self, ManagedObjectReference obj, OvfCreateDescriptorParams cdp)
     {
         var req = new CreateDescriptorRequestType
         {
@@ -1780,7 +1781,7 @@ public class Client : IClient
         await this.inner.CreateDiagnosticPartitionAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<string> CreateDirectory(ManagedObjectReference self, ManagedObjectReference datastore, string displayName, string policy, long size)
+    public async System.Threading.Tasks.Task<string?> CreateDirectory(ManagedObjectReference self, ManagedObjectReference datastore, string? displayName, string? policy, long size, bool sizeSpecified)
     {
         var req = new CreateDirectoryRequestType
         {
@@ -1789,6 +1790,7 @@ public class Client : IClient
             displayName = displayName,
             policy = policy,
             size = size,
+            sizeSpecified = sizeSpecified,
         };
 
         var res = await this.inner.CreateDirectoryAsync(req);
@@ -1796,7 +1798,7 @@ public class Client : IClient
         return res.CreateDirectoryResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateDisk_Task(ManagedObjectReference self, VslmCreateSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateDisk_Task(ManagedObjectReference self, VslmCreateSpec spec)
     {
         var req = new CreateDiskRequestType
         {
@@ -1809,7 +1811,7 @@ public class Client : IClient
         return res.CreateDisk_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateDiskFromSnapshot_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId, string name, VirtualMachineProfileSpec[] profile, CryptoSpec crypto, string path)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateDiskFromSnapshot_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId, string name, VirtualMachineProfileSpec[]? profile, CryptoSpec? crypto, string? path)
     {
         var req = new CreateDiskFromSnapshotRequestType
         {
@@ -1828,7 +1830,7 @@ public class Client : IClient
         return res.CreateDiskFromSnapshot_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateDVPortgroup_Task(ManagedObjectReference self, DVPortgroupConfigSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateDVPortgroup_Task(ManagedObjectReference self, DVPortgroupConfigSpec spec)
     {
         var req = new CreateDVPortgroupRequestType
         {
@@ -1841,7 +1843,7 @@ public class Client : IClient
         return res.CreateDVPortgroup_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateDVS_Task(ManagedObjectReference self, DVSCreateSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateDVS_Task(ManagedObjectReference self, DVSCreateSpec spec)
     {
         var req = new CreateDVSRequestType
         {
@@ -1854,7 +1856,7 @@ public class Client : IClient
         return res.CreateDVS_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateFilter(ManagedObjectReference self, PropertyFilterSpec spec, bool partialUpdates)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateFilter(ManagedObjectReference self, PropertyFilterSpec spec, bool partialUpdates)
     {
         var req = new CreateFilterRequestType
         {
@@ -1868,7 +1870,7 @@ public class Client : IClient
         return res.CreateFilterResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateFolder(ManagedObjectReference self, string name)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateFolder(ManagedObjectReference self, string name)
     {
         var req = new CreateFolderRequestType
         {
@@ -1892,7 +1894,7 @@ public class Client : IClient
         await this.inner.CreateGroupAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<OvfCreateImportSpecResult> CreateImportSpec(ManagedObjectReference self, string ovfDescriptor, ManagedObjectReference resourcePool, ManagedObjectReference datastore, OvfCreateImportSpecParams cisp)
+    public async System.Threading.Tasks.Task<OvfCreateImportSpecResult?> CreateImportSpec(ManagedObjectReference self, string ovfDescriptor, ManagedObjectReference resourcePool, ManagedObjectReference datastore, OvfCreateImportSpecParams cisp)
     {
         var req = new CreateImportSpecRequestType
         {
@@ -1908,7 +1910,7 @@ public class Client : IClient
         return res.CreateImportSpecResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateInventoryView(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateInventoryView(ManagedObjectReference self)
     {
         var req = new CreateInventoryViewRequestType
         {
@@ -1934,7 +1936,7 @@ public class Client : IClient
         return res.CreateIpPoolResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateListView(ManagedObjectReference self, ManagedObjectReference[] obj)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateListView(ManagedObjectReference self, ManagedObjectReference[]? obj)
     {
         var req = new CreateListViewRequestType
         {
@@ -1947,7 +1949,7 @@ public class Client : IClient
         return res.CreateListViewResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateListViewFromView(ManagedObjectReference self, ManagedObjectReference view)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateListViewFromView(ManagedObjectReference self, ManagedObjectReference view)
     {
         var req = new CreateListViewFromViewRequestType
         {
@@ -1960,7 +1962,7 @@ public class Client : IClient
         return res.CreateListViewFromViewResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateLocalDatastore(ManagedObjectReference self, string name, string path)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateLocalDatastore(ManagedObjectReference self, string name, string path)
     {
         var req = new CreateLocalDatastoreRequestType
         {
@@ -1974,7 +1976,7 @@ public class Client : IClient
         return res.CreateLocalDatastoreResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateNasDatastore(ManagedObjectReference self, HostNasVolumeSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateNasDatastore(ManagedObjectReference self, HostNasVolumeSpec spec)
     {
         var req = new CreateNasDatastoreRequestType
         {
@@ -1987,7 +1989,7 @@ public class Client : IClient
         return res.CreateNasDatastoreResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateNvdimmNamespace_Task(ManagedObjectReference self, NvdimmNamespaceCreateSpec createSpec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateNvdimmNamespace_Task(ManagedObjectReference self, NvdimmNamespaceCreateSpec createSpec)
     {
         var req = new CreateNvdimmNamespaceRequestType
         {
@@ -2000,7 +2002,7 @@ public class Client : IClient
         return res.CreateNvdimmNamespace_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateNvdimmPMemNamespace_Task(ManagedObjectReference self, NvdimmPMemNamespaceCreateSpec createSpec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateNvdimmPMemNamespace_Task(ManagedObjectReference self, NvdimmPMemNamespaceCreateSpec createSpec)
     {
         var req = new CreateNvdimmPMemNamespaceRequestType
         {
@@ -2024,7 +2026,7 @@ public class Client : IClient
         await this.inner.CreateNvmeOverRdmaAdapterAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateObjectScheduledTask(ManagedObjectReference self, ManagedObjectReference obj, ScheduledTaskSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateObjectScheduledTask(ManagedObjectReference self, ManagedObjectReference obj, ScheduledTaskSpec spec)
     {
         var req = new CreateObjectScheduledTaskRequestType
         {
@@ -2038,7 +2040,7 @@ public class Client : IClient
         return res.CreateObjectScheduledTaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreatePassiveNode_Task(ManagedObjectReference self, PassiveNodeDeploymentSpec passiveDeploymentSpec, SourceNodeSpec sourceVcSpec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreatePassiveNode_Task(ManagedObjectReference self, PassiveNodeDeploymentSpec passiveDeploymentSpec, SourceNodeSpec sourceVcSpec)
     {
         var req = new createPassiveNodeRequestType
         {
@@ -2063,7 +2065,7 @@ public class Client : IClient
         await this.inner.CreatePerfIntervalAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateProfile(ManagedObjectReference self, ProfileCreateSpec createSpec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateProfile(ManagedObjectReference self, ProfileCreateSpec createSpec)
     {
         var req = new CreateProfileRequestType
         {
@@ -2076,7 +2078,7 @@ public class Client : IClient
         return res.CreateProfileResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreatePropertyCollector(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreatePropertyCollector(ManagedObjectReference self)
     {
         var req = new CreatePropertyCollectorRequestType
         {
@@ -2088,7 +2090,7 @@ public class Client : IClient
         return res.CreatePropertyCollectorResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task CreateRegistryKeyInGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, GuestRegKeyNameSpec keyName, bool isVolatile, string classType)
+    public async System.Threading.Tasks.Task CreateRegistryKeyInGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, GuestRegKeyNameSpec keyName, bool isVolatile, string? classType)
     {
         var req = new CreateRegistryKeyInGuestRequestType
         {
@@ -2103,7 +2105,7 @@ public class Client : IClient
         await this.inner.CreateRegistryKeyInGuestAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateResourcePool(ManagedObjectReference self, string name, ResourceConfigSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateResourcePool(ManagedObjectReference self, string name, ResourceConfigSpec spec)
     {
         var req = new CreateResourcePoolRequestType
         {
@@ -2117,7 +2119,7 @@ public class Client : IClient
         return res.CreateResourcePoolResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateScheduledTask(ManagedObjectReference self, ManagedObjectReference entity, ScheduledTaskSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateScheduledTask(ManagedObjectReference self, ManagedObjectReference entity, ScheduledTaskSpec spec)
     {
         var req = new CreateScheduledTaskRequestType
         {
@@ -2131,7 +2133,7 @@ public class Client : IClient
         return res.CreateScheduledTaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateScreenshot_Task(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateScreenshot_Task(ManagedObjectReference self)
     {
         var req = new CreateScreenshotRequestType
         {
@@ -2143,7 +2145,7 @@ public class Client : IClient
         return res.CreateScreenshot_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateSecondaryVM_Task(ManagedObjectReference self, ManagedObjectReference host)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateSecondaryVM_Task(ManagedObjectReference self, ManagedObjectReference? host)
     {
         var req = new CreateSecondaryVMRequestType
         {
@@ -2156,7 +2158,7 @@ public class Client : IClient
         return res.CreateSecondaryVM_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateSecondaryVMEx_Task(ManagedObjectReference self, ManagedObjectReference host, FaultToleranceConfigSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateSecondaryVMEx_Task(ManagedObjectReference self, ManagedObjectReference? host, FaultToleranceConfigSpec? spec)
     {
         var req = new CreateSecondaryVMExRequestType
         {
@@ -2170,7 +2172,7 @@ public class Client : IClient
         return res.CreateSecondaryVMEx_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateSnapshot_Task(ManagedObjectReference self, string name, string description, bool memory, bool quiesce)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateSnapshot_Task(ManagedObjectReference self, string name, string? description, bool memory, bool quiesce)
     {
         var req = new CreateSnapshotRequestType
         {
@@ -2186,7 +2188,7 @@ public class Client : IClient
         return res.CreateSnapshot_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateSnapshotEx_Task(ManagedObjectReference self, string name, string description, bool memory, VirtualMachineGuestQuiesceSpec quiesceSpec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateSnapshotEx_Task(ManagedObjectReference self, string name, string? description, bool memory, VirtualMachineGuestQuiesceSpec? quiesceSpec)
     {
         var req = new CreateSnapshotExRequestType
         {
@@ -2213,7 +2215,7 @@ public class Client : IClient
         await this.inner.CreateSoftwareAdapterAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateStoragePod(ManagedObjectReference self, string name)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateStoragePod(ManagedObjectReference self, string name)
     {
         var req = new CreateStoragePodRequestType
         {
@@ -2226,7 +2228,7 @@ public class Client : IClient
         return res.CreateStoragePodResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<TaskInfo> CreateTask(ManagedObjectReference self, ManagedObjectReference obj, string taskTypeId, string initiatedBy, bool cancelable, string parentTaskKey, string activationId)
+    public async System.Threading.Tasks.Task<TaskInfo?> CreateTask(ManagedObjectReference self, ManagedObjectReference obj, string taskTypeId, string? initiatedBy, bool cancelable, string? parentTaskKey, string? activationId)
     {
         var req = new CreateTaskRequestType
         {
@@ -2244,7 +2246,7 @@ public class Client : IClient
         return res.CreateTaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string> CreateTemporaryDirectoryInGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, string prefix, string suffix, string directoryPath)
+    public async System.Threading.Tasks.Task<string?> CreateTemporaryDirectoryInGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, string prefix, string suffix, string? directoryPath)
     {
         var req = new CreateTemporaryDirectoryInGuestRequestType
         {
@@ -2261,7 +2263,7 @@ public class Client : IClient
         return res.CreateTemporaryDirectoryInGuestResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string> CreateTemporaryFileInGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, string prefix, string suffix, string directoryPath)
+    public async System.Threading.Tasks.Task<string?> CreateTemporaryFileInGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, string prefix, string suffix, string? directoryPath)
     {
         var req = new CreateTemporaryFileInGuestRequestType
         {
@@ -2289,7 +2291,7 @@ public class Client : IClient
         await this.inner.CreateUserAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateVApp(ManagedObjectReference self, string name, ResourceConfigSpec resSpec, VAppConfigSpec configSpec, ManagedObjectReference vmFolder)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateVApp(ManagedObjectReference self, string name, ResourceConfigSpec resSpec, VAppConfigSpec configSpec, ManagedObjectReference? vmFolder)
     {
         var req = new CreateVAppRequestType
         {
@@ -2305,7 +2307,7 @@ public class Client : IClient
         return res.CreateVAppResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateVirtualDisk_Task(ManagedObjectReference self, string name, ManagedObjectReference datacenter, VirtualDiskSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateVirtualDisk_Task(ManagedObjectReference self, string name, ManagedObjectReference? datacenter, VirtualDiskSpec spec)
     {
         var req = new CreateVirtualDiskRequestType
         {
@@ -2320,7 +2322,7 @@ public class Client : IClient
         return res.CreateVirtualDisk_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateVM_Task(ManagedObjectReference self, VirtualMachineConfigSpec config, ManagedObjectReference pool, ManagedObjectReference host)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateVM_Task(ManagedObjectReference self, VirtualMachineConfigSpec config, ManagedObjectReference pool, ManagedObjectReference? host)
     {
         var req = new CreateVMRequestType
         {
@@ -2335,7 +2337,7 @@ public class Client : IClient
         return res.CreateVM_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateVmfsDatastore(ManagedObjectReference self, VmfsDatastoreCreateSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateVmfsDatastore(ManagedObjectReference self, VmfsDatastoreCreateSpec spec)
     {
         var req = new CreateVmfsDatastoreRequestType
         {
@@ -2348,7 +2350,7 @@ public class Client : IClient
         return res.CreateVmfsDatastoreResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateVvolDatastore(ManagedObjectReference self, HostDatastoreSystemVvolDatastoreSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateVvolDatastore(ManagedObjectReference self, HostDatastoreSystemVvolDatastoreSpec spec)
     {
         var req = new CreateVvolDatastoreRequestType
         {
@@ -2361,7 +2363,7 @@ public class Client : IClient
         return res.CreateVvolDatastoreResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CreateWitnessNode_Task(ManagedObjectReference self, NodeDeploymentSpec witnessDeploymentSpec, SourceNodeSpec sourceVcSpec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateWitnessNode_Task(ManagedObjectReference self, NodeDeploymentSpec witnessDeploymentSpec, SourceNodeSpec sourceVcSpec)
     {
         var req = new createWitnessNodeRequestType
         {
@@ -2406,7 +2408,7 @@ public class Client : IClient
         await this.inner.CryptoManagerHostPrepareAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CryptoUnlock_Task(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CryptoUnlock_Task(ManagedObjectReference self)
     {
         var req = new CryptoUnlockRequestType
         {
@@ -2430,7 +2432,7 @@ public class Client : IClient
         return res.CurrentTimeResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string> CustomizationSpecItemToXml(ManagedObjectReference self, CustomizationSpecItem item)
+    public async System.Threading.Tasks.Task<string?> CustomizationSpecItemToXml(ManagedObjectReference self, CustomizationSpecItem item)
     {
         var req = new CustomizationSpecItemToXmlRequestType
         {
@@ -2443,7 +2445,7 @@ public class Client : IClient
         return res.CustomizationSpecItemToXmlResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CustomizeGuest_Task(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, CustomizationSpec spec, OptionValue[] configParams)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CustomizeGuest_Task(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, CustomizationSpec spec, OptionValue[]? configParams)
     {
         var req = new CustomizeGuestRequestType
         {
@@ -2459,7 +2461,7 @@ public class Client : IClient
         return res.CustomizeGuest_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CustomizeVM_Task(ManagedObjectReference self, CustomizationSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CustomizeVM_Task(ManagedObjectReference self, CustomizationSpec spec)
     {
         var req = new CustomizeVMRequestType
         {
@@ -2472,7 +2474,7 @@ public class Client : IClient
         return res.CustomizeVM_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<StoragePlacementResult> DatastoreEnterMaintenanceMode(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<StoragePlacementResult?> DatastoreEnterMaintenanceMode(ManagedObjectReference self)
     {
         var req = new DatastoreEnterMaintenanceModeRequestType
         {
@@ -2484,7 +2486,7 @@ public class Client : IClient
         return res.DatastoreEnterMaintenanceModeResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> DatastoreExitMaintenanceMode_Task(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> DatastoreExitMaintenanceMode_Task(ManagedObjectReference self)
     {
         var req = new DatastoreExitMaintenanceModeRequestType
         {
@@ -2496,7 +2498,7 @@ public class Client : IClient
         return res.DatastoreExitMaintenanceMode_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<LicenseManagerLicenseInfo> DecodeLicense(ManagedObjectReference self, string licenseKey)
+    public async System.Threading.Tasks.Task<LicenseManagerLicenseInfo?> DecodeLicense(ManagedObjectReference self, string licenseKey)
     {
         var req = new DecodeLicenseRequestType
         {
@@ -2519,7 +2521,7 @@ public class Client : IClient
         await this.inner.DefragmentAllDisksAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> DefragmentVirtualDisk_Task(ManagedObjectReference self, string name, ManagedObjectReference datacenter)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> DefragmentVirtualDisk_Task(ManagedObjectReference self, string name, ManagedObjectReference? datacenter)
     {
         var req = new DefragmentVirtualDiskRequestType
         {
@@ -2544,7 +2546,7 @@ public class Client : IClient
         await this.inner.DeleteCustomizationSpecAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> DeleteDatastoreFile_Task(ManagedObjectReference self, string name, ManagedObjectReference datacenter)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> DeleteDatastoreFile_Task(ManagedObjectReference self, string name, ManagedObjectReference? datacenter)
     {
         var req = new DeleteDatastoreFileRequestType
         {
@@ -2558,7 +2560,7 @@ public class Client : IClient
         return res.DeleteDatastoreFile_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task DeleteDirectory(ManagedObjectReference self, ManagedObjectReference datacenter, string datastorePath)
+    public async System.Threading.Tasks.Task DeleteDirectory(ManagedObjectReference self, ManagedObjectReference? datacenter, string datastorePath)
     {
         var req = new DeleteDirectoryRequestType
         {
@@ -2631,7 +2633,7 @@ public class Client : IClient
         await this.inner.DeleteHostSubSpecificationAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> DeleteNvdimmBlockNamespaces_Task(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> DeleteNvdimmBlockNamespaces_Task(ManagedObjectReference self)
     {
         var req = new DeleteNvdimmBlockNamespacesRequestType
         {
@@ -2643,7 +2645,7 @@ public class Client : IClient
         return res.DeleteNvdimmBlockNamespaces_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> DeleteNvdimmNamespace_Task(ManagedObjectReference self, NvdimmNamespaceDeleteSpec deleteSpec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> DeleteNvdimmNamespace_Task(ManagedObjectReference self, NvdimmNamespaceDeleteSpec deleteSpec)
     {
         var req = new DeleteNvdimmNamespaceRequestType
         {
@@ -2694,7 +2696,7 @@ public class Client : IClient
         await this.inner.DeleteScsiLunStateAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> DeleteSnapshot_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> DeleteSnapshot_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId)
     {
         var req = new DeleteSnapshotRequestType
         {
@@ -2720,7 +2722,7 @@ public class Client : IClient
         await this.inner.DeleteVffsVolumeStateAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> DeleteVirtualDisk_Task(ManagedObjectReference self, string name, ManagedObjectReference datacenter)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> DeleteVirtualDisk_Task(ManagedObjectReference self, string name, ManagedObjectReference? datacenter)
     {
         var req = new DeleteVirtualDiskRequestType
         {
@@ -2745,7 +2747,7 @@ public class Client : IClient
         await this.inner.DeleteVmfsVolumeStateAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<HostVsanInternalSystemDeleteVsanObjectsResult[]> DeleteVsanObjects(ManagedObjectReference self, string[] uuids, bool force, bool forceSpecified)
+    public async System.Threading.Tasks.Task<HostVsanInternalSystemDeleteVsanObjectsResult[]?> DeleteVsanObjects(ManagedObjectReference self, string[] uuids, bool force, bool forceSpecified)
     {
         var req = new DeleteVsanObjectsRequestType
         {
@@ -2760,7 +2762,7 @@ public class Client : IClient
         return res.DeleteVsanObjectsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> DeleteVStorageObject_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> DeleteVStorageObject_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
     {
         var req = new DeleteVStorageObjectRequestType
         {
@@ -2774,7 +2776,7 @@ public class Client : IClient
         return res.DeleteVStorageObject_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> DeleteVStorageObjectEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> DeleteVStorageObjectEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
     {
         var req = new DeleteVStorageObjectExRequestType
         {
@@ -2788,7 +2790,7 @@ public class Client : IClient
         return res.DeleteVStorageObjectEx_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> DeployVcha_Task(ManagedObjectReference self, VchaClusterDeploymentSpec deploymentSpec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> DeployVcha_Task(ManagedObjectReference self, VchaClusterDeploymentSpec deploymentSpec)
     {
         var req = new deployVchaRequestType
         {
@@ -2823,7 +2825,7 @@ public class Client : IClient
         await this.inner.DeselectVnicForNicTypeAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> Destroy_Task(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> Destroy_Task(ManagedObjectReference self)
     {
         var req = new DestroyRequestType
         {
@@ -2918,7 +2920,7 @@ public class Client : IClient
         await this.inner.DestroyPropertyFilterAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> DestroyVcha_Task(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> DestroyVcha_Task(ManagedObjectReference self)
     {
         var req = new destroyVchaRequestType
         {
@@ -2951,7 +2953,7 @@ public class Client : IClient
         await this.inner.DestroyViewAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> DetachDisk_Task(ManagedObjectReference self, ID diskId)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> DetachDisk_Task(ManagedObjectReference self, ID diskId)
     {
         var req = new DetachDiskRequestType
         {
@@ -2975,7 +2977,7 @@ public class Client : IClient
         await this.inner.DetachScsiLunAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> DetachScsiLunEx_Task(ManagedObjectReference self, string[] lunUuid)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> DetachScsiLunEx_Task(ManagedObjectReference self, string[] lunUuid)
     {
         var req = new DetachScsiLunExRequestType
         {
@@ -3024,7 +3026,7 @@ public class Client : IClient
         await this.inner.DisableClusteredVmdkSupportAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> DisableEvcMode_Task(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> DisableEvcMode_Task(ManagedObjectReference self)
     {
         var req = new DisableEvcModeRequestType
         {
@@ -3036,7 +3038,7 @@ public class Client : IClient
         return res.DisableEvcMode_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<bool> DisableFeature(ManagedObjectReference self, ManagedObjectReference host, string featureKey)
+    public async System.Threading.Tasks.Task<bool> DisableFeature(ManagedObjectReference self, ManagedObjectReference? host, string featureKey)
     {
         var req = new DisableFeatureRequestType
         {
@@ -3082,7 +3084,7 @@ public class Client : IClient
         await this.inner.DisableRulesetAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> DisableSecondaryVM_Task(ManagedObjectReference self, ManagedObjectReference vm)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> DisableSecondaryVM_Task(ManagedObjectReference self, ManagedObjectReference vm)
     {
         var req = new DisableSecondaryVMRequestType
         {
@@ -3105,7 +3107,7 @@ public class Client : IClient
         await this.inner.DisableSmartCardAuthenticationAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> DisconnectHost_Task(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> DisconnectHost_Task(ManagedObjectReference self)
     {
         var req = new DisconnectHostRequestType
         {
@@ -3128,7 +3130,7 @@ public class Client : IClient
         await this.inner.DisconnectNvmeControllerAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> DisconnectNvmeControllerEx_Task(ManagedObjectReference self, HostNvmeDisconnectSpec[] disconnectSpec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> DisconnectNvmeControllerEx_Task(ManagedObjectReference self, HostNvmeDisconnectSpec[]? disconnectSpec)
     {
         var req = new DisconnectNvmeControllerExRequestType
         {
@@ -3152,7 +3154,7 @@ public class Client : IClient
         await this.inner.DiscoverFcoeHbasAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<HostNvmeDiscoveryLog> DiscoverNvmeControllers(ManagedObjectReference self, HostNvmeDiscoverSpec discoverSpec)
+    public async System.Threading.Tasks.Task<HostNvmeDiscoveryLog?> DiscoverNvmeControllers(ManagedObjectReference self, HostNvmeDiscoverSpec discoverSpec)
     {
         var req = new DiscoverNvmeControllersRequestType
         {
@@ -3165,7 +3167,7 @@ public class Client : IClient
         return res.DiscoverNvmeControllersResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task DissociateProfile(ManagedObjectReference self, ManagedObjectReference[] entity)
+    public async System.Threading.Tasks.Task DissociateProfile(ManagedObjectReference self, ManagedObjectReference[]? entity)
     {
         var req = new DissociateProfileRequestType
         {
@@ -3189,7 +3191,7 @@ public class Client : IClient
         return res.DoesCustomizationSpecExistResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<byte[]> DownloadDescriptionTree(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<byte[]?> DownloadDescriptionTree(ManagedObjectReference self)
     {
         var req = new DownloadDescriptionTreeRequestType
         {
@@ -3201,7 +3203,7 @@ public class Client : IClient
         return res.DownloadDescriptionTreeResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<bool> DropConnections(ManagedObjectReference self, VirtualMachineConnection[] listOfConnections)
+    public async System.Threading.Tasks.Task<bool> DropConnections(ManagedObjectReference self, VirtualMachineConnection[]? listOfConnections)
     {
         var req = new DropConnectionsRequestType
         {
@@ -3226,7 +3228,7 @@ public class Client : IClient
         await this.inner.DuplicateCustomizationSpecAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> DVPortgroupRollback_Task(ManagedObjectReference self, EntityBackupConfig entityBackup)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> DVPortgroupRollback_Task(ManagedObjectReference self, EntityBackupConfig? entityBackup)
     {
         var req = new DVPortgroupRollbackRequestType
         {
@@ -3239,7 +3241,7 @@ public class Client : IClient
         return res.DVPortgroupRollback_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> DVSManagerExportEntity_Task(ManagedObjectReference self, SelectionSet[] selectionSet)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> DVSManagerExportEntity_Task(ManagedObjectReference self, SelectionSet[] selectionSet)
     {
         var req = new DVSManagerExportEntityRequestType
         {
@@ -3252,7 +3254,7 @@ public class Client : IClient
         return res.DVSManagerExportEntity_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> DVSManagerImportEntity_Task(ManagedObjectReference self, EntityBackupConfig[] entityBackup, string importType)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> DVSManagerImportEntity_Task(ManagedObjectReference self, EntityBackupConfig[] entityBackup, string importType)
     {
         var req = new DVSManagerImportEntityRequestType
         {
@@ -3266,7 +3268,7 @@ public class Client : IClient
         return res.DVSManagerImportEntity_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> DVSManagerLookupDvPortGroup(ManagedObjectReference self, string switchUuid, string portgroupKey)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> DVSManagerLookupDvPortGroup(ManagedObjectReference self, string switchUuid, string portgroupKey)
     {
         var req = new DVSManagerLookupDvPortGroupRequestType
         {
@@ -3280,7 +3282,7 @@ public class Client : IClient
         return res.DVSManagerLookupDvPortGroupResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> DvsReconfigureVmVnicNetworkResourcePool_Task(ManagedObjectReference self, DvsVmVnicResourcePoolConfigSpec[] configSpec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> DvsReconfigureVmVnicNetworkResourcePool_Task(ManagedObjectReference self, DvsVmVnicResourcePoolConfigSpec[] configSpec)
     {
         var req = new DvsReconfigureVmVnicNetworkResourcePoolRequestType
         {
@@ -3293,7 +3295,7 @@ public class Client : IClient
         return res.DvsReconfigureVmVnicNetworkResourcePool_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> DVSRollback_Task(ManagedObjectReference self, EntityBackupConfig entityBackup)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> DVSRollback_Task(ManagedObjectReference self, EntityBackupConfig? entityBackup)
     {
         var req = new DVSRollbackRequestType
         {
@@ -3306,7 +3308,7 @@ public class Client : IClient
         return res.DVSRollback_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> EagerZeroVirtualDisk_Task(ManagedObjectReference self, string name, ManagedObjectReference datacenter)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> EagerZeroVirtualDisk_Task(ManagedObjectReference self, string name, ManagedObjectReference? datacenter)
     {
         var req = new EagerZeroVirtualDiskRequestType
         {
@@ -3366,7 +3368,7 @@ public class Client : IClient
         await this.inner.EnableCryptoAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<bool> EnableFeature(ManagedObjectReference self, ManagedObjectReference host, string featureKey)
+    public async System.Threading.Tasks.Task<bool> EnableFeature(ManagedObjectReference self, ManagedObjectReference? host, string featureKey)
     {
         var req = new EnableFeatureRequestType
         {
@@ -3423,7 +3425,7 @@ public class Client : IClient
         await this.inner.EnableRulesetAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> EnableSecondaryVM_Task(ManagedObjectReference self, ManagedObjectReference vm, ManagedObjectReference host)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> EnableSecondaryVM_Task(ManagedObjectReference self, ManagedObjectReference vm, ManagedObjectReference? host)
     {
         var req = new EnableSecondaryVMRequestType
         {
@@ -3457,7 +3459,7 @@ public class Client : IClient
         await this.inner.EnterLockdownModeAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> EnterMaintenanceMode_Task(ManagedObjectReference self, int timeout, bool evacuatePoweredOffVms, bool evacuatePoweredOffVmsSpecified, HostMaintenanceSpec maintenanceSpec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> EnterMaintenanceMode_Task(ManagedObjectReference self, int timeout, bool evacuatePoweredOffVms, bool evacuatePoweredOffVmsSpecified, HostMaintenanceSpec? maintenanceSpec)
     {
         var req = new EnterMaintenanceModeRequestType
         {
@@ -3473,7 +3475,7 @@ public class Client : IClient
         return res.EnterMaintenanceMode_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<DatabaseSizeEstimate> EstimateDatabaseSize(ManagedObjectReference self, DatabaseSizeParam dbSizeParam)
+    public async System.Threading.Tasks.Task<DatabaseSizeEstimate?> EstimateDatabaseSize(ManagedObjectReference self, DatabaseSizeParam dbSizeParam)
     {
         var req = new EstimateDatabaseSizeRequestType
         {
@@ -3486,7 +3488,7 @@ public class Client : IClient
         return res.EstimateDatabaseSizeResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> EstimateStorageForConsolidateSnapshots_Task(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> EstimateStorageForConsolidateSnapshots_Task(ManagedObjectReference self)
     {
         var req = new EstimateStorageForConsolidateSnapshotsRequestType
         {
@@ -3509,7 +3511,7 @@ public class Client : IClient
         await this.inner.EsxAgentHostManagerUpdateConfigAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> EvacuateVsanNode_Task(ManagedObjectReference self, HostMaintenanceSpec maintenanceSpec, int timeout)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> EvacuateVsanNode_Task(ManagedObjectReference self, HostMaintenanceSpec maintenanceSpec, int timeout)
     {
         var req = new EvacuateVsanNodeRequestType
         {
@@ -3523,7 +3525,7 @@ public class Client : IClient
         return res.EvacuateVsanNode_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> EvcManager(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> EvcManager(ManagedObjectReference self)
     {
         var req = new EvcManagerRequestType
         {
@@ -3535,7 +3537,7 @@ public class Client : IClient
         return res.EvcManagerResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ProfileExecuteResult> ExecuteHostProfile(ManagedObjectReference self, ManagedObjectReference host, ProfileDeferredPolicyOptionParameter[] deferredParam)
+    public async System.Threading.Tasks.Task<ProfileExecuteResult?> ExecuteHostProfile(ManagedObjectReference self, ManagedObjectReference host, ProfileDeferredPolicyOptionParameter[]? deferredParam)
     {
         var req = new ExecuteHostProfileRequestType
         {
@@ -3549,7 +3551,7 @@ public class Client : IClient
         return res.ExecuteHostProfileResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string> ExecuteSimpleCommand(ManagedObjectReference self, string[] arguments)
+    public async System.Threading.Tasks.Task<string?> ExecuteSimpleCommand(ManagedObjectReference self, string[]? arguments)
     {
         var req = new ExecuteSimpleCommandRequestType
         {
@@ -3572,7 +3574,7 @@ public class Client : IClient
         await this.inner.ExitLockdownModeAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ExitMaintenanceMode_Task(ManagedObjectReference self, int timeout)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ExitMaintenanceMode_Task(ManagedObjectReference self, int timeout)
     {
         var req = new ExitMaintenanceModeRequestType
         {
@@ -3585,7 +3587,7 @@ public class Client : IClient
         return res.ExitMaintenanceMode_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ExpandVmfsDatastore(ManagedObjectReference self, ManagedObjectReference datastore, VmfsDatastoreExpandSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ExpandVmfsDatastore(ManagedObjectReference self, ManagedObjectReference datastore, VmfsDatastoreExpandSpec spec)
     {
         var req = new ExpandVmfsDatastoreRequestType
         {
@@ -3611,7 +3613,7 @@ public class Client : IClient
         await this.inner.ExpandVmfsExtentAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ExportAnswerFile_Task(ManagedObjectReference self, ManagedObjectReference host)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ExportAnswerFile_Task(ManagedObjectReference self, ManagedObjectReference host)
     {
         var req = new ExportAnswerFileRequestType
         {
@@ -3624,7 +3626,7 @@ public class Client : IClient
         return res.ExportAnswerFile_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string> ExportProfile(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<string?> ExportProfile(ManagedObjectReference self)
     {
         var req = new ExportProfileRequestType
         {
@@ -3636,7 +3638,7 @@ public class Client : IClient
         return res.ExportProfileResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ExportSnapshot(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ExportSnapshot(ManagedObjectReference self)
     {
         var req = new ExportSnapshotRequestType
         {
@@ -3648,7 +3650,7 @@ public class Client : IClient
         return res.ExportSnapshotResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ExportVApp(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ExportVApp(ManagedObjectReference self)
     {
         var req = new ExportVAppRequestType
         {
@@ -3660,7 +3662,7 @@ public class Client : IClient
         return res.ExportVAppResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ExportVm(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ExportVm(ManagedObjectReference self)
     {
         var req = new ExportVmRequestType
         {
@@ -3672,7 +3674,7 @@ public class Client : IClient
         return res.ExportVmResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ExtendDisk_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, long newCapacityInMB)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ExtendDisk_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, long newCapacityInMB)
     {
         var req = new ExtendDiskRequestType
         {
@@ -3687,7 +3689,7 @@ public class Client : IClient
         return res.ExtendDisk_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ExtendHCI_Task(ManagedObjectReference self, ClusterComputeResourceHostConfigurationInput[] hostInputs, SDDCBase vSanConfigSpec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ExtendHCI_Task(ManagedObjectReference self, ClusterComputeResourceHostConfigurationInput[]? hostInputs, SDDCBase? vSanConfigSpec)
     {
         var req = new ExtendHCIRequestType
         {
@@ -3701,7 +3703,7 @@ public class Client : IClient
         return res.ExtendHCI_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task ExtendVffs(ManagedObjectReference self, string vffsPath, string devicePath, HostDiskPartitionSpec spec)
+    public async System.Threading.Tasks.Task ExtendVffs(ManagedObjectReference self, string vffsPath, string devicePath, HostDiskPartitionSpec? spec)
     {
         var req = new ExtendVffsRequestType
         {
@@ -3714,7 +3716,7 @@ public class Client : IClient
         await this.inner.ExtendVffsAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ExtendVirtualDisk_Task(ManagedObjectReference self, string name, ManagedObjectReference datacenter, long newCapacityKb, bool eagerZero, bool eagerZeroSpecified)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ExtendVirtualDisk_Task(ManagedObjectReference self, string name, ManagedObjectReference? datacenter, long newCapacityKb, bool eagerZero, bool eagerZeroSpecified)
     {
         var req = new ExtendVirtualDiskRequestType
         {
@@ -3731,7 +3733,7 @@ public class Client : IClient
         return res.ExtendVirtualDisk_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ExtendVmfsDatastore(ManagedObjectReference self, ManagedObjectReference datastore, VmfsDatastoreExtendSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ExtendVmfsDatastore(ManagedObjectReference self, ManagedObjectReference datastore, VmfsDatastoreExtendSpec spec)
     {
         var req = new ExtendVmfsDatastoreRequestType
         {
@@ -3745,7 +3747,7 @@ public class Client : IClient
         return res.ExtendVmfsDatastoreResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string> ExtractOvfEnvironment(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<string?> ExtractOvfEnvironment(ManagedObjectReference self)
     {
         var req = new ExtractOvfEnvironmentRequestType
         {
@@ -3757,7 +3759,7 @@ public class Client : IClient
         return res.ExtractOvfEnvironmentResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<DiagnosticManagerAuditRecordResult> FetchAuditRecords(ManagedObjectReference self, string token)
+    public async System.Threading.Tasks.Task<DiagnosticManagerAuditRecordResult?> FetchAuditRecords(ManagedObjectReference self, string? token)
     {
         var req = new FetchAuditRecordsRequestType
         {
@@ -3770,7 +3772,7 @@ public class Client : IClient
         return res.FetchAuditRecordsResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string[]> FetchDVPortKeys(ManagedObjectReference self, DistributedVirtualSwitchPortCriteria criteria)
+    public async System.Threading.Tasks.Task<string[]?> FetchDVPortKeys(ManagedObjectReference self, DistributedVirtualSwitchPortCriteria? criteria)
     {
         var req = new FetchDVPortKeysRequestType
         {
@@ -3783,7 +3785,7 @@ public class Client : IClient
         return res.FetchDVPortKeysResponse1;
     }
 
-    public async System.Threading.Tasks.Task<DistributedVirtualPort[]> FetchDVPorts(ManagedObjectReference self, DistributedVirtualSwitchPortCriteria criteria)
+    public async System.Threading.Tasks.Task<DistributedVirtualPort[]?> FetchDVPorts(ManagedObjectReference self, DistributedVirtualSwitchPortCriteria? criteria)
     {
         var req = new FetchDVPortsRequestType
         {
@@ -3796,7 +3798,7 @@ public class Client : IClient
         return res.FetchDVPortsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<SoftwarePackage[]> FetchSoftwarePackages(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<SoftwarePackage[]?> FetchSoftwarePackages(ManagedObjectReference self)
     {
         var req = new fetchSoftwarePackagesRequestType
         {
@@ -3808,7 +3810,7 @@ public class Client : IClient
         return res.fetchSoftwarePackagesResponse1;
     }
 
-    public async System.Threading.Tasks.Task<SystemEventInfo[]> FetchSystemEventLog(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<SystemEventInfo[]?> FetchSystemEventLog(ManagedObjectReference self)
     {
         var req = new FetchSystemEventLogRequestType
         {
@@ -3820,7 +3822,7 @@ public class Client : IClient
         return res.FetchSystemEventLogResponse1;
     }
 
-    public async System.Threading.Tasks.Task<UserPrivilegeResult[]> FetchUserPrivilegeOnEntities(ManagedObjectReference self, ManagedObjectReference[] entities, string userName)
+    public async System.Threading.Tasks.Task<UserPrivilegeResult[]?> FetchUserPrivilegeOnEntities(ManagedObjectReference self, ManagedObjectReference[] entities, string userName)
     {
         var req = new FetchUserPrivilegeOnEntitiesRequestType
         {
@@ -3834,7 +3836,7 @@ public class Client : IClient
         return res.FetchUserPrivilegeOnEntitiesResponse1;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference[]> FindAllByDnsName(ManagedObjectReference self, ManagedObjectReference datacenter, string dnsName, bool vmSearch)
+    public async System.Threading.Tasks.Task<ManagedObjectReference[]?> FindAllByDnsName(ManagedObjectReference self, ManagedObjectReference? datacenter, string dnsName, bool vmSearch)
     {
         var req = new FindAllByDnsNameRequestType
         {
@@ -3849,7 +3851,7 @@ public class Client : IClient
         return res.FindAllByDnsNameResponse1;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference[]> FindAllByIp(ManagedObjectReference self, ManagedObjectReference datacenter, string ip, bool vmSearch)
+    public async System.Threading.Tasks.Task<ManagedObjectReference[]?> FindAllByIp(ManagedObjectReference self, ManagedObjectReference? datacenter, string ip, bool vmSearch)
     {
         var req = new FindAllByIpRequestType
         {
@@ -3864,7 +3866,7 @@ public class Client : IClient
         return res.FindAllByIpResponse1;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference[]> FindAllByUuid(ManagedObjectReference self, ManagedObjectReference datacenter, string uuid, bool vmSearch, bool instanceUuid, bool instanceUuidSpecified)
+    public async System.Threading.Tasks.Task<ManagedObjectReference[]?> FindAllByUuid(ManagedObjectReference self, ManagedObjectReference? datacenter, string uuid, bool vmSearch, bool instanceUuid, bool instanceUuidSpecified)
     {
         var req = new FindAllByUuidRequestType
         {
@@ -3881,7 +3883,7 @@ public class Client : IClient
         return res.FindAllByUuidResponse1;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference[]> FindAssociatedProfile(ManagedObjectReference self, ManagedObjectReference entity)
+    public async System.Threading.Tasks.Task<ManagedObjectReference[]?> FindAssociatedProfile(ManagedObjectReference self, ManagedObjectReference entity)
     {
         var req = new FindAssociatedProfileRequestType
         {
@@ -3894,7 +3896,7 @@ public class Client : IClient
         return res.FindAssociatedProfileResponse1;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> FindByDatastorePath(ManagedObjectReference self, ManagedObjectReference datacenter, string path)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> FindByDatastorePath(ManagedObjectReference self, ManagedObjectReference datacenter, string path)
     {
         var req = new FindByDatastorePathRequestType
         {
@@ -3908,7 +3910,7 @@ public class Client : IClient
         return res.FindByDatastorePathResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> FindByDnsName(ManagedObjectReference self, ManagedObjectReference datacenter, string dnsName, bool vmSearch)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> FindByDnsName(ManagedObjectReference self, ManagedObjectReference? datacenter, string dnsName, bool vmSearch)
     {
         var req = new FindByDnsNameRequestType
         {
@@ -3923,7 +3925,7 @@ public class Client : IClient
         return res.FindByDnsNameResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> FindByInventoryPath(ManagedObjectReference self, string inventoryPath)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> FindByInventoryPath(ManagedObjectReference self, string inventoryPath)
     {
         var req = new FindByInventoryPathRequestType
         {
@@ -3936,7 +3938,7 @@ public class Client : IClient
         return res.FindByInventoryPathResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> FindByIp(ManagedObjectReference self, ManagedObjectReference datacenter, string ip, bool vmSearch)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> FindByIp(ManagedObjectReference self, ManagedObjectReference? datacenter, string ip, bool vmSearch)
     {
         var req = new FindByIpRequestType
         {
@@ -3951,7 +3953,7 @@ public class Client : IClient
         return res.FindByIpResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> FindByUuid(ManagedObjectReference self, ManagedObjectReference datacenter, string uuid, bool vmSearch, bool instanceUuid, bool instanceUuidSpecified)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> FindByUuid(ManagedObjectReference self, ManagedObjectReference? datacenter, string uuid, bool vmSearch, bool instanceUuid, bool instanceUuidSpecified)
     {
         var req = new FindByUuidRequestType
         {
@@ -3968,7 +3970,7 @@ public class Client : IClient
         return res.FindByUuidResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> FindChild(ManagedObjectReference self, ManagedObjectReference entity, string name)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> FindChild(ManagedObjectReference self, ManagedObjectReference entity, string name)
     {
         var req = new FindChildRequestType
         {
@@ -3982,7 +3984,7 @@ public class Client : IClient
         return res.FindChildResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<Extension> FindExtension(ManagedObjectReference self, string extensionKey)
+    public async System.Threading.Tasks.Task<Extension?> FindExtension(ManagedObjectReference self, string extensionKey)
     {
         var req = new FindExtensionRequestType
         {
@@ -3995,7 +3997,7 @@ public class Client : IClient
         return res.FindExtensionResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ClusterRuleInfo[]> FindRulesForVm(ManagedObjectReference self, ManagedObjectReference vm)
+    public async System.Threading.Tasks.Task<ClusterRuleInfo[]?> FindRulesForVm(ManagedObjectReference self, ManagedObjectReference vm)
     {
         var req = new FindRulesForVmRequestType
         {
@@ -4008,7 +4010,7 @@ public class Client : IClient
         return res.FindRulesForVmResponse1;
     }
 
-    public async System.Threading.Tasks.Task<HostVffsVolume> FormatVffs(ManagedObjectReference self, HostVffsSpec createSpec)
+    public async System.Threading.Tasks.Task<HostVffsVolume?> FormatVffs(ManagedObjectReference self, HostVffsSpec createSpec)
     {
         var req = new FormatVffsRequestType
         {
@@ -4021,7 +4023,7 @@ public class Client : IClient
         return res.FormatVffsResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<HostVmfsVolume> FormatVmfs(ManagedObjectReference self, HostVmfsSpec createSpec)
+    public async System.Threading.Tasks.Task<HostVmfsVolume?> FormatVmfs(ManagedObjectReference self, HostVmfsSpec createSpec)
     {
         var req = new FormatVmfsRequestType
         {
@@ -4034,7 +4036,7 @@ public class Client : IClient
         return res.FormatVmfsResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string> GenerateCertificateSigningRequest(ManagedObjectReference self, bool useIpAddressAsCommonName)
+    public async System.Threading.Tasks.Task<string?> GenerateCertificateSigningRequest(ManagedObjectReference self, bool useIpAddressAsCommonName)
     {
         var req = new GenerateCertificateSigningRequestRequestType
         {
@@ -4047,7 +4049,7 @@ public class Client : IClient
         return res.GenerateCertificateSigningRequestResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string> GenerateCertificateSigningRequestByDn(ManagedObjectReference self, string distinguishedName)
+    public async System.Threading.Tasks.Task<string?> GenerateCertificateSigningRequestByDn(ManagedObjectReference self, string distinguishedName)
     {
         var req = new GenerateCertificateSigningRequestByDnRequestType
         {
@@ -4060,7 +4062,7 @@ public class Client : IClient
         return res.GenerateCertificateSigningRequestByDnResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string> GenerateClientCsr(ManagedObjectReference self, KeyProviderId cluster)
+    public async System.Threading.Tasks.Task<string?> GenerateClientCsr(ManagedObjectReference self, KeyProviderId cluster)
     {
         var req = new GenerateClientCsrRequestType
         {
@@ -4073,7 +4075,7 @@ public class Client : IClient
         return res.GenerateClientCsrResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<HostProfileManagerConfigTaskList> GenerateConfigTaskList(ManagedObjectReference self, HostConfigSpec configSpec, ManagedObjectReference host)
+    public async System.Threading.Tasks.Task<HostProfileManagerConfigTaskList?> GenerateConfigTaskList(ManagedObjectReference self, HostConfigSpec configSpec, ManagedObjectReference host)
     {
         var req = new GenerateConfigTaskListRequestType
         {
@@ -4087,7 +4089,7 @@ public class Client : IClient
         return res.GenerateConfigTaskListResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> GenerateHostConfigTaskSpec_Task(ManagedObjectReference self, StructuredCustomizations[] hostsInfo)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> GenerateHostConfigTaskSpec_Task(ManagedObjectReference self, StructuredCustomizations[]? hostsInfo)
     {
         var req = new GenerateHostConfigTaskSpecRequestType
         {
@@ -4100,7 +4102,7 @@ public class Client : IClient
         return res.GenerateHostConfigTaskSpec_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> GenerateHostProfileTaskList_Task(ManagedObjectReference self, HostConfigSpec configSpec, ManagedObjectReference host)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> GenerateHostProfileTaskList_Task(ManagedObjectReference self, HostConfigSpec configSpec, ManagedObjectReference host)
     {
         var req = new GenerateHostProfileTaskListRequestType
         {
@@ -4114,7 +4116,7 @@ public class Client : IClient
         return res.GenerateHostProfileTaskList_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<CryptoKeyResult> GenerateKey(ManagedObjectReference self, KeyProviderId keyProvider)
+    public async System.Threading.Tasks.Task<CryptoKeyResult?> GenerateKey(ManagedObjectReference self, KeyProviderId? keyProvider)
     {
         var req = new GenerateKeyRequestType
         {
@@ -4127,7 +4129,7 @@ public class Client : IClient
         return res.GenerateKeyResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> GenerateLogBundles_Task(ManagedObjectReference self, bool includeDefault, ManagedObjectReference[] host)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> GenerateLogBundles_Task(ManagedObjectReference self, bool includeDefault, ManagedObjectReference[]? host)
     {
         var req = new GenerateLogBundlesRequestType
         {
@@ -4141,7 +4143,7 @@ public class Client : IClient
         return res.GenerateLogBundles_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string> GenerateSelfSignedClientCert(ManagedObjectReference self, KeyProviderId cluster)
+    public async System.Threading.Tasks.Task<string?> GenerateSelfSignedClientCert(ManagedObjectReference self, KeyProviderId cluster)
     {
         var req = new GenerateSelfSignedClientCertRequestType
         {
@@ -4154,7 +4156,7 @@ public class Client : IClient
         return res.GenerateSelfSignedClientCertResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference[]> GetAlarm(ManagedObjectReference self, ManagedObjectReference entity)
+    public async System.Threading.Tasks.Task<ManagedObjectReference[]?> GetAlarm(ManagedObjectReference self, ManagedObjectReference? entity)
     {
         var req = new GetAlarmRequestType
         {
@@ -4167,7 +4169,7 @@ public class Client : IClient
         return res.GetAlarmResponse1;
     }
 
-    public async System.Threading.Tasks.Task<AlarmState[]> GetAlarmState(ManagedObjectReference self, ManagedObjectReference entity)
+    public async System.Threading.Tasks.Task<AlarmState[]?> GetAlarmState(ManagedObjectReference self, ManagedObjectReference entity)
     {
         var req = new GetAlarmStateRequestType
         {
@@ -4180,7 +4182,7 @@ public class Client : IClient
         return res.GetAlarmStateResponse1;
     }
 
-    public async System.Threading.Tasks.Task<string> GetClusterMode(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<string?> GetClusterMode(ManagedObjectReference self)
     {
         var req = new getClusterModeRequestType
         {
@@ -4192,7 +4194,7 @@ public class Client : IClient
         return res.getClusterModeResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<CustomizationSpecItem> GetCustomizationSpec(ManagedObjectReference self, string name)
+    public async System.Threading.Tasks.Task<CustomizationSpecItem?> GetCustomizationSpec(ManagedObjectReference self, string name)
     {
         var req = new GetCustomizationSpecRequestType
         {
@@ -4205,7 +4207,7 @@ public class Client : IClient
         return res.GetCustomizationSpecResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<KeyProviderId> GetDefaultKmsCluster(ManagedObjectReference self, ManagedObjectReference entity, bool defaultsToParent, bool defaultsToParentSpecified)
+    public async System.Threading.Tasks.Task<KeyProviderId?> GetDefaultKmsCluster(ManagedObjectReference self, ManagedObjectReference? entity, bool defaultsToParent, bool defaultsToParentSpecified)
     {
         var req = new GetDefaultKmsClusterRequestType
         {
@@ -4220,7 +4222,7 @@ public class Client : IClient
         return res.GetDefaultKmsClusterResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string> GetPublicKey(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<string?> GetPublicKey(ManagedObjectReference self)
     {
         var req = new GetPublicKeyRequestType
         {
@@ -4232,7 +4234,7 @@ public class Client : IClient
         return res.GetPublicKeyResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ClusterResourceUsageSummary> GetResourceUsage(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ClusterResourceUsageSummary?> GetResourceUsage(ManagedObjectReference self)
     {
         var req = new GetResourceUsageRequestType
         {
@@ -4244,7 +4246,7 @@ public class Client : IClient
         return res.GetResourceUsageResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<SiteInfo> GetSiteInfo(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<SiteInfo?> GetSiteInfo(ManagedObjectReference self)
     {
         var req = new GetSiteInfoRequestType
         {
@@ -4256,7 +4258,7 @@ public class Client : IClient
         return res.GetSiteInfoResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference[]> GetSystemVMsRestrictedDatastores(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference[]?> GetSystemVMsRestrictedDatastores(ManagedObjectReference self)
     {
         var req = new GetSystemVMsRestrictedDatastoresRequestType
         {
@@ -4268,7 +4270,7 @@ public class Client : IClient
         return res.GetSystemVMsRestrictedDatastoresResponse1;
     }
 
-    public async System.Threading.Tasks.Task<VchaClusterHealth> GetVchaClusterHealth(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<VchaClusterHealth?> GetVchaClusterHealth(ManagedObjectReference self)
     {
         var req = new GetVchaClusterHealthRequestType
         {
@@ -4280,7 +4282,7 @@ public class Client : IClient
         return res.GetVchaClusterHealthResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<VchaClusterConfigInfo> GetVchaConfig(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<VchaClusterConfigInfo?> GetVchaConfig(ManagedObjectReference self)
     {
         var req = new getVchaConfigRequestType
         {
@@ -4292,7 +4294,7 @@ public class Client : IClient
         return res.getVchaConfigResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string> GetVsanObjExtAttrs(ManagedObjectReference self, string[] uuids)
+    public async System.Threading.Tasks.Task<string?> GetVsanObjExtAttrs(ManagedObjectReference self, string[] uuids)
     {
         var req = new GetVsanObjExtAttrsRequestType
         {
@@ -4319,7 +4321,7 @@ public class Client : IClient
         return res.HasMonitoredEntityResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<EntityPrivilege[]> HasPrivilegeOnEntities(ManagedObjectReference self, ManagedObjectReference[] entity, string sessionId, string[] privId)
+    public async System.Threading.Tasks.Task<EntityPrivilege[]?> HasPrivilegeOnEntities(ManagedObjectReference self, ManagedObjectReference[] entity, string sessionId, string[]? privId)
     {
         var req = new HasPrivilegeOnEntitiesRequestType
         {
@@ -4334,7 +4336,7 @@ public class Client : IClient
         return res.HasPrivilegeOnEntitiesResponse1;
     }
 
-    public async System.Threading.Tasks.Task<bool[]> HasPrivilegeOnEntity(ManagedObjectReference self, ManagedObjectReference entity, string sessionId, string[] privId)
+    public async System.Threading.Tasks.Task<bool[]?> HasPrivilegeOnEntity(ManagedObjectReference self, ManagedObjectReference entity, string sessionId, string[]? privId)
     {
         var req = new HasPrivilegeOnEntityRequestType
         {
@@ -4362,7 +4364,7 @@ public class Client : IClient
         return res.HasProviderResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<EntityPrivilege[]> HasUserPrivilegeOnEntities(ManagedObjectReference self, ManagedObjectReference[] entities, string userName, string[] privId)
+    public async System.Threading.Tasks.Task<EntityPrivilege[]?> HasUserPrivilegeOnEntities(ManagedObjectReference self, ManagedObjectReference[] entities, string userName, string[]? privId)
     {
         var req = new HasUserPrivilegeOnEntitiesRequestType
         {
@@ -4377,7 +4379,7 @@ public class Client : IClient
         return res.HasUserPrivilegeOnEntitiesResponse1;
     }
 
-    public async System.Threading.Tasks.Task HostClearVStorageObjectControlFlags(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string[] controlFlags)
+    public async System.Threading.Tasks.Task HostClearVStorageObjectControlFlags(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string[]? controlFlags)
     {
         var req = new HostClearVStorageObjectControlFlagsRequestType
         {
@@ -4390,7 +4392,7 @@ public class Client : IClient
         await this.inner.HostClearVStorageObjectControlFlagsAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> HostCloneVStorageObject_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, VslmCloneSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> HostCloneVStorageObject_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, VslmCloneSpec spec)
     {
         var req = new HostCloneVStorageObjectRequestType
         {
@@ -4427,7 +4429,7 @@ public class Client : IClient
         await this.inner.HostConfigVFlashCacheAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> HostCreateDisk_Task(ManagedObjectReference self, VslmCreateSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> HostCreateDisk_Task(ManagedObjectReference self, VslmCreateSpec spec)
     {
         var req = new HostCreateDiskRequestType
         {
@@ -4440,7 +4442,7 @@ public class Client : IClient
         return res.HostCreateDisk_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> HostDeleteVStorageObject_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> HostDeleteVStorageObject_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
     {
         var req = new HostDeleteVStorageObjectRequestType
         {
@@ -4454,7 +4456,7 @@ public class Client : IClient
         return res.HostDeleteVStorageObject_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> HostDeleteVStorageObjectEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> HostDeleteVStorageObjectEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
     {
         var req = new HostDeleteVStorageObjectExRequestType
         {
@@ -4468,7 +4470,7 @@ public class Client : IClient
         return res.HostDeleteVStorageObjectEx_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> HostExtendDisk_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, long newCapacityInMB)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> HostExtendDisk_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, long newCapacityInMB)
     {
         var req = new HostExtendDiskRequestType
         {
@@ -4483,7 +4485,7 @@ public class Client : IClient
         return res.HostExtendDisk_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<VirtualDiskVFlashCacheConfigInfo> HostGetVFlashModuleDefaultConfig(ManagedObjectReference self, string vFlashModule)
+    public async System.Threading.Tasks.Task<VirtualDiskVFlashCacheConfigInfo?> HostGetVFlashModuleDefaultConfig(ManagedObjectReference self, string vFlashModule)
     {
         var req = new HostGetVFlashModuleDefaultConfigRequestType
         {
@@ -4496,7 +4498,7 @@ public class Client : IClient
         return res.HostGetVFlashModuleDefaultConfigResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string> HostImageConfigGetAcceptance(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<string?> HostImageConfigGetAcceptance(ManagedObjectReference self)
     {
         var req = new HostImageConfigGetAcceptanceRequestType
         {
@@ -4508,7 +4510,7 @@ public class Client : IClient
         return res.HostImageConfigGetAcceptanceResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<HostImageProfileSummary> HostImageConfigGetProfile(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<HostImageProfileSummary?> HostImageConfigGetProfile(ManagedObjectReference self)
     {
         var req = new HostImageConfigGetProfileRequestType
         {
@@ -4520,7 +4522,7 @@ public class Client : IClient
         return res.HostImageConfigGetProfileResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> HostInflateDisk_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> HostInflateDisk_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
     {
         var req = new HostInflateDiskRequestType
         {
@@ -4534,7 +4536,7 @@ public class Client : IClient
         return res.HostInflateDisk_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ID[]> HostListVStorageObject(ManagedObjectReference self, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task<ID[]?> HostListVStorageObject(ManagedObjectReference self, ManagedObjectReference datastore)
     {
         var req = new HostListVStorageObjectRequestType
         {
@@ -4557,7 +4559,7 @@ public class Client : IClient
         await this.inner.HostProfileResetValidationStateAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> HostReconcileDatastoreInventory_Task(ManagedObjectReference self, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> HostReconcileDatastoreInventory_Task(ManagedObjectReference self, ManagedObjectReference datastore)
     {
         var req = new HostReconcileDatastoreInventoryRequestType
         {
@@ -4570,7 +4572,7 @@ public class Client : IClient
         return res.HostReconcileDatastoreInventory_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<VStorageObject> HostRegisterDisk(ManagedObjectReference self, string path, string name)
+    public async System.Threading.Tasks.Task<VStorageObject?> HostRegisterDisk(ManagedObjectReference self, string path, string? name)
     {
         var req = new HostRegisterDiskRequestType
         {
@@ -4584,7 +4586,7 @@ public class Client : IClient
         return res.HostRegisterDiskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> HostRelocateVStorageObject_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, VslmRelocateSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> HostRelocateVStorageObject_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, VslmRelocateSpec spec)
     {
         var req = new HostRelocateVStorageObjectRequestType
         {
@@ -4622,7 +4624,7 @@ public class Client : IClient
         await this.inner.HostRenameVStorageObjectAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<vslmInfrastructureObjectPolicy[]> HostRetrieveVStorageInfrastructureObjectPolicy(ManagedObjectReference self, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task<vslmInfrastructureObjectPolicy[]?> HostRetrieveVStorageInfrastructureObjectPolicy(ManagedObjectReference self, ManagedObjectReference datastore)
     {
         var req = new HostRetrieveVStorageInfrastructureObjectPolicyRequestType
         {
@@ -4635,7 +4637,7 @@ public class Client : IClient
         return res.HostRetrieveVStorageInfrastructureObjectPolicyResponse1;
     }
 
-    public async System.Threading.Tasks.Task<VStorageObject> HostRetrieveVStorageObject(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task<VStorageObject?> HostRetrieveVStorageObject(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
     {
         var req = new HostRetrieveVStorageObjectRequestType
         {
@@ -4649,7 +4651,7 @@ public class Client : IClient
         return res.HostRetrieveVStorageObjectResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<KeyValue[]> HostRetrieveVStorageObjectMetadata(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId, string prefix)
+    public async System.Threading.Tasks.Task<KeyValue[]?> HostRetrieveVStorageObjectMetadata(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID? snapshotId, string? prefix)
     {
         var req = new HostRetrieveVStorageObjectMetadataRequestType
         {
@@ -4665,7 +4667,7 @@ public class Client : IClient
         return res.HostRetrieveVStorageObjectMetadataResponse1;
     }
 
-    public async System.Threading.Tasks.Task<string> HostRetrieveVStorageObjectMetadataValue(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId, string key)
+    public async System.Threading.Tasks.Task<string?> HostRetrieveVStorageObjectMetadataValue(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID? snapshotId, string key)
     {
         var req = new HostRetrieveVStorageObjectMetadataValueRequestType
         {
@@ -4681,7 +4683,7 @@ public class Client : IClient
         return res.HostRetrieveVStorageObjectMetadataValueResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<VStorageObjectStateInfo> HostRetrieveVStorageObjectState(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task<VStorageObjectStateInfo?> HostRetrieveVStorageObjectState(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
     {
         var req = new HostRetrieveVStorageObjectStateRequestType
         {
@@ -4706,7 +4708,7 @@ public class Client : IClient
         await this.inner.HostScheduleReconcileDatastoreInventoryAsync(req);
     }
 
-    public async System.Threading.Tasks.Task HostSetVStorageObjectControlFlags(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string[] controlFlags)
+    public async System.Threading.Tasks.Task HostSetVStorageObjectControlFlags(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string[]? controlFlags)
     {
         var req = new HostSetVStorageObjectControlFlagsRequestType
         {
@@ -4719,7 +4721,7 @@ public class Client : IClient
         await this.inner.HostSetVStorageObjectControlFlagsAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference[]> HostSpecGetUpdatedHosts(ManagedObjectReference self, string startChangeID, string endChangeID)
+    public async System.Threading.Tasks.Task<ManagedObjectReference[]?> HostSpecGetUpdatedHosts(ManagedObjectReference self, string? startChangeID, string? endChangeID)
     {
         var req = new HostSpecGetUpdatedHostsRequestType
         {
@@ -4733,7 +4735,7 @@ public class Client : IClient
         return res.HostSpecGetUpdatedHostsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> HostUpdateVStorageObjectMetadata_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, KeyValue[] metadata, string[] deleteKeys)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> HostUpdateVStorageObjectMetadata_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, KeyValue[]? metadata, string[]? deleteKeys)
     {
         var req = new HostUpdateVStorageObjectMetadataRequestType
         {
@@ -4749,7 +4751,7 @@ public class Client : IClient
         return res.HostUpdateVStorageObjectMetadata_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> HostUpdateVStorageObjectMetadataEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, KeyValue[] metadata, string[] deleteKeys)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> HostUpdateVStorageObjectMetadataEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, KeyValue[]? metadata, string[]? deleteKeys)
     {
         var req = new HostUpdateVStorageObjectMetadataExRequestType
         {
@@ -4765,7 +4767,7 @@ public class Client : IClient
         return res.HostUpdateVStorageObjectMetadataEx_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> HostVStorageObjectCreateDiskFromSnapshot_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId, string name, VirtualMachineProfileSpec[] profile, CryptoSpec crypto, string path)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> HostVStorageObjectCreateDiskFromSnapshot_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId, string name, VirtualMachineProfileSpec[]? profile, CryptoSpec? crypto, string? path)
     {
         var req = new HostVStorageObjectCreateDiskFromSnapshotRequestType
         {
@@ -4784,7 +4786,7 @@ public class Client : IClient
         return res.HostVStorageObjectCreateDiskFromSnapshot_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> HostVStorageObjectCreateSnapshot_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string description)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> HostVStorageObjectCreateSnapshot_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string description)
     {
         var req = new HostVStorageObjectCreateSnapshotRequestType
         {
@@ -4799,7 +4801,7 @@ public class Client : IClient
         return res.HostVStorageObjectCreateSnapshot_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> HostVStorageObjectDeleteSnapshot_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> HostVStorageObjectDeleteSnapshot_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId)
     {
         var req = new HostVStorageObjectDeleteSnapshotRequestType
         {
@@ -4814,7 +4816,7 @@ public class Client : IClient
         return res.HostVStorageObjectDeleteSnapshot_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<VStorageObjectSnapshotInfo> HostVStorageObjectRetrieveSnapshotInfo(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task<VStorageObjectSnapshotInfo?> HostVStorageObjectRetrieveSnapshotInfo(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
     {
         var req = new HostVStorageObjectRetrieveSnapshotInfoRequestType
         {
@@ -4828,7 +4830,7 @@ public class Client : IClient
         return res.HostVStorageObjectRetrieveSnapshotInfoResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> HostVStorageObjectRevert_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> HostVStorageObjectRevert_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId)
     {
         var req = new HostVStorageObjectRevertRequestType
         {
@@ -4843,7 +4845,7 @@ public class Client : IClient
         return res.HostVStorageObjectRevert_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task HttpNfcLeaseAbort(ManagedObjectReference self, LocalizedMethodFault fault)
+    public async System.Threading.Tasks.Task HttpNfcLeaseAbort(ManagedObjectReference self, LocalizedMethodFault? fault)
     {
         var req = new HttpNfcLeaseAbortRequestType
         {
@@ -4864,7 +4866,7 @@ public class Client : IClient
         await this.inner.HttpNfcLeaseCompleteAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<HttpNfcLeaseManifestEntry[]> HttpNfcLeaseGetManifest(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<HttpNfcLeaseManifestEntry[]?> HttpNfcLeaseGetManifest(ManagedObjectReference self)
     {
         var req = new HttpNfcLeaseGetManifestRequestType
         {
@@ -4876,7 +4878,7 @@ public class Client : IClient
         return res.HttpNfcLeaseGetManifestResponse1;
     }
 
-    public async System.Threading.Tasks.Task<HttpNfcLeaseProbeResult[]> HttpNfcLeaseProbeUrls(ManagedObjectReference self, HttpNfcLeaseSourceFile[] files, int timeout, bool timeoutSpecified)
+    public async System.Threading.Tasks.Task<HttpNfcLeaseProbeResult[]?> HttpNfcLeaseProbeUrls(ManagedObjectReference self, HttpNfcLeaseSourceFile[]? files, int timeout, bool timeoutSpecified)
     {
         var req = new HttpNfcLeaseProbeUrlsRequestType
         {
@@ -4902,7 +4904,7 @@ public class Client : IClient
         await this.inner.HttpNfcLeaseProgressAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> HttpNfcLeasePullFromUrls_Task(ManagedObjectReference self, HttpNfcLeaseSourceFile[] files)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> HttpNfcLeasePullFromUrls_Task(ManagedObjectReference self, HttpNfcLeaseSourceFile[]? files)
     {
         var req = new HttpNfcLeasePullFromUrlsRequestType
         {
@@ -4915,7 +4917,7 @@ public class Client : IClient
         return res.HttpNfcLeasePullFromUrls_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task HttpNfcLeaseSetManifestChecksumType(ManagedObjectReference self, KeyValue[] deviceUrlsToChecksumTypes)
+    public async System.Threading.Tasks.Task HttpNfcLeaseSetManifestChecksumType(ManagedObjectReference self, KeyValue[]? deviceUrlsToChecksumTypes)
     {
         var req = new HttpNfcLeaseSetManifestChecksumTypeRequestType
         {
@@ -4926,7 +4928,7 @@ public class Client : IClient
         await this.inner.HttpNfcLeaseSetManifestChecksumTypeAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<UserSession> ImpersonateUser(ManagedObjectReference self, string userName, string locale)
+    public async System.Threading.Tasks.Task<UserSession?> ImpersonateUser(ManagedObjectReference self, string userName, string? locale)
     {
         var req = new ImpersonateUserRequestType
         {
@@ -4940,7 +4942,7 @@ public class Client : IClient
         return res.ImpersonateUserResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ImportCertificateForCAM_Task(ManagedObjectReference self, string certPath, string camServer)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ImportCertificateForCAM_Task(ManagedObjectReference self, string certPath, string camServer)
     {
         var req = new ImportCertificateForCAMRequestType
         {
@@ -4954,7 +4956,7 @@ public class Client : IClient
         return res.ImportCertificateForCAM_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task ImportUnmanagedSnapshot(ManagedObjectReference self, string vdisk, ManagedObjectReference datacenter, string vvolId)
+    public async System.Threading.Tasks.Task ImportUnmanagedSnapshot(ManagedObjectReference self, string vdisk, ManagedObjectReference? datacenter, string vvolId)
     {
         var req = new ImportUnmanagedSnapshotRequestType
         {
@@ -4967,7 +4969,7 @@ public class Client : IClient
         await this.inner.ImportUnmanagedSnapshotAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ImportVApp(ManagedObjectReference self, ImportSpec spec, ManagedObjectReference folder, ManagedObjectReference host)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ImportVApp(ManagedObjectReference self, ImportSpec spec, ManagedObjectReference? folder, ManagedObjectReference? host)
     {
         var req = new ImportVAppRequestType
         {
@@ -4982,7 +4984,7 @@ public class Client : IClient
         return res.ImportVAppResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> InflateDisk_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> InflateDisk_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
     {
         var req = new InflateDiskRequestType
         {
@@ -4996,7 +4998,7 @@ public class Client : IClient
         return res.InflateDisk_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> InflateVirtualDisk_Task(ManagedObjectReference self, string name, ManagedObjectReference datacenter)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> InflateVirtualDisk_Task(ManagedObjectReference self, string name, ManagedObjectReference? datacenter)
     {
         var req = new InflateVirtualDiskRequestType
         {
@@ -5010,7 +5012,7 @@ public class Client : IClient
         return res.InflateVirtualDisk_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> InitializeDisks_Task(ManagedObjectReference self, VsanHostDiskMapping[] mapping)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> InitializeDisks_Task(ManagedObjectReference self, VsanHostDiskMapping[] mapping)
     {
         var req = new InitializeDisksRequestType
         {
@@ -5023,7 +5025,7 @@ public class Client : IClient
         return res.InitializeDisks_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> InitiateFailover_Task(ManagedObjectReference self, bool planned)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> InitiateFailover_Task(ManagedObjectReference self, bool planned)
     {
         var req = new initiateFailoverRequestType
         {
@@ -5036,7 +5038,7 @@ public class Client : IClient
         return res.initiateFailover_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<FileTransferInformation> InitiateFileTransferFromGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, string guestFilePath)
+    public async System.Threading.Tasks.Task<FileTransferInformation?> InitiateFileTransferFromGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, string guestFilePath)
     {
         var req = new InitiateFileTransferFromGuestRequestType
         {
@@ -5051,7 +5053,7 @@ public class Client : IClient
         return res.InitiateFileTransferFromGuestResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string> InitiateFileTransferToGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, string guestFilePath, GuestFileAttributes fileAttributes, long fileSize, bool overwrite)
+    public async System.Threading.Tasks.Task<string?> InitiateFileTransferToGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, string guestFilePath, GuestFileAttributes fileAttributes, long fileSize, bool overwrite)
     {
         var req = new InitiateFileTransferToGuestRequestType
         {
@@ -5081,7 +5083,7 @@ public class Client : IClient
         return res.installDateResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> InstallHostPatch_Task(ManagedObjectReference self, HostPatchManagerLocator repository, string updateID, bool force, bool forceSpecified)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> InstallHostPatch_Task(ManagedObjectReference self, HostPatchManagerLocator repository, string updateID, bool force, bool forceSpecified)
     {
         var req = new InstallHostPatchRequestType
         {
@@ -5097,7 +5099,7 @@ public class Client : IClient
         return res.InstallHostPatch_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> InstallHostPatchV2_Task(ManagedObjectReference self, string[] metaUrls, string[] bundleUrls, string[] vibUrls, HostPatchManagerPatchManagerOperationSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> InstallHostPatchV2_Task(ManagedObjectReference self, string[]? metaUrls, string[]? bundleUrls, string[]? vibUrls, HostPatchManagerPatchManagerOperationSpec? spec)
     {
         var req = new InstallHostPatchV2RequestType
         {
@@ -5113,7 +5115,7 @@ public class Client : IClient
         return res.InstallHostPatchV2_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> InstallIoFilter_Task(ManagedObjectReference self, string vibUrl, ManagedObjectReference compRes)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> InstallIoFilter_Task(ManagedObjectReference self, string vibUrl, ManagedObjectReference compRes)
     {
         var req = new InstallIoFilterRequestType
         {
@@ -5149,7 +5151,7 @@ public class Client : IClient
         await this.inner.InstallSmartCardTrustAnchorAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> InstantClone_Task(ManagedObjectReference self, VirtualMachineInstantCloneSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> InstantClone_Task(ManagedObjectReference self, VirtualMachineInstantCloneSpec spec)
     {
         var req = new InstantCloneRequestType
         {
@@ -5162,7 +5164,7 @@ public class Client : IClient
         return res.InstantClone_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<bool> IsKmsClusterActive(ManagedObjectReference self, KeyProviderId cluster)
+    public async System.Threading.Tasks.Task<bool> IsKmsClusterActive(ManagedObjectReference self, KeyProviderId? cluster)
     {
         var req = new IsKmsClusterActiveRequestType
         {
@@ -5187,7 +5189,7 @@ public class Client : IClient
         return res.IsSharedGraphicsActiveResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> JoinDomain_Task(ManagedObjectReference self, string domainName, string userName, string password)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> JoinDomain_Task(ManagedObjectReference self, string domainName, string userName, string password)
     {
         var req = new JoinDomainRequestType
         {
@@ -5202,7 +5204,7 @@ public class Client : IClient
         return res.JoinDomain_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> JoinDomainWithCAM_Task(ManagedObjectReference self, string domainName, string camServer)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> JoinDomainWithCAM_Task(ManagedObjectReference self, string domainName, string camServer)
     {
         var req = new JoinDomainWithCAMRequestType
         {
@@ -5216,7 +5218,7 @@ public class Client : IClient
         return res.JoinDomainWithCAM_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> LeaveCurrentDomain_Task(ManagedObjectReference self, bool force)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> LeaveCurrentDomain_Task(ManagedObjectReference self, bool force)
     {
         var req = new LeaveCurrentDomainRequestType
         {
@@ -5229,7 +5231,7 @@ public class Client : IClient
         return res.LeaveCurrentDomain_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string[]> ListCACertificateRevocationLists(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<string[]?> ListCACertificateRevocationLists(ManagedObjectReference self)
     {
         var req = new ListCACertificateRevocationListsRequestType
         {
@@ -5241,7 +5243,7 @@ public class Client : IClient
         return res.ListCACertificateRevocationListsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<string[]> ListCACertificates(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<string[]?> ListCACertificates(ManagedObjectReference self)
     {
         var req = new ListCACertificatesRequestType
         {
@@ -5253,7 +5255,7 @@ public class Client : IClient
         return res.ListCACertificatesResponse1;
     }
 
-    public async System.Threading.Tasks.Task<GuestListFileInfo> ListFilesInGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, string filePath, int index, bool indexSpecified, int maxResults, bool maxResultsSpecified, string matchPattern)
+    public async System.Threading.Tasks.Task<GuestListFileInfo?> ListFilesInGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, string filePath, int index, bool indexSpecified, int maxResults, bool maxResultsSpecified, string? matchPattern)
     {
         var req = new ListFilesInGuestRequestType
         {
@@ -5273,7 +5275,7 @@ public class Client : IClient
         return res.ListFilesInGuestResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<GuestAliases[]> ListGuestAliases(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, string username)
+    public async System.Threading.Tasks.Task<GuestAliases[]?> ListGuestAliases(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, string username)
     {
         var req = new ListGuestAliasesRequestType
         {
@@ -5288,7 +5290,7 @@ public class Client : IClient
         return res.ListGuestAliasesResponse1;
     }
 
-    public async System.Threading.Tasks.Task<GuestMappedAliases[]> ListGuestMappedAliases(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth)
+    public async System.Threading.Tasks.Task<GuestMappedAliases[]?> ListGuestMappedAliases(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth)
     {
         var req = new ListGuestMappedAliasesRequestType
         {
@@ -5302,7 +5304,7 @@ public class Client : IClient
         return res.ListGuestMappedAliasesResponse1;
     }
 
-    public async System.Threading.Tasks.Task<CryptoKeyId[]> ListKeys(ManagedObjectReference self, int limit, bool limitSpecified)
+    public async System.Threading.Tasks.Task<CryptoKeyId[]?> ListKeys(ManagedObjectReference self, int limit, bool limitSpecified)
     {
         var req = new ListKeysRequestType
         {
@@ -5316,7 +5318,7 @@ public class Client : IClient
         return res.ListKeysResponse1;
     }
 
-    public async System.Threading.Tasks.Task<KmipClusterInfo[]> ListKmipServers(ManagedObjectReference self, int limit, bool limitSpecified)
+    public async System.Threading.Tasks.Task<KmipClusterInfo[]?> ListKmipServers(ManagedObjectReference self, int limit, bool limitSpecified)
     {
         var req = new ListKmipServersRequestType
         {
@@ -5330,7 +5332,7 @@ public class Client : IClient
         return res.ListKmipServersResponse1;
     }
 
-    public async System.Threading.Tasks.Task<KmipClusterInfo[]> ListKmsClusters(ManagedObjectReference self, bool includeKmsServers, bool includeKmsServersSpecified, int managementTypeFilter, bool managementTypeFilterSpecified, int statusFilter, bool statusFilterSpecified)
+    public async System.Threading.Tasks.Task<KmipClusterInfo[]?> ListKmsClusters(ManagedObjectReference self, bool includeKmsServers, bool includeKmsServersSpecified, int managementTypeFilter, bool managementTypeFilterSpecified, int statusFilter, bool statusFilterSpecified)
     {
         var req = new ListKmsClustersRequestType
         {
@@ -5348,7 +5350,7 @@ public class Client : IClient
         return res.ListKmsClustersResponse1;
     }
 
-    public async System.Threading.Tasks.Task<GuestProcessInfo[]> ListProcessesInGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, long[] pids)
+    public async System.Threading.Tasks.Task<GuestProcessInfo[]?> ListProcessesInGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, long[]? pids)
     {
         var req = new ListProcessesInGuestRequestType
         {
@@ -5363,7 +5365,7 @@ public class Client : IClient
         return res.ListProcessesInGuestResponse1;
     }
 
-    public async System.Threading.Tasks.Task<GuestRegKeyRecordSpec[]> ListRegistryKeysInGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, GuestRegKeyNameSpec keyName, bool recursive, string matchPattern)
+    public async System.Threading.Tasks.Task<GuestRegKeyRecordSpec[]?> ListRegistryKeysInGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, GuestRegKeyNameSpec keyName, bool recursive, string? matchPattern)
     {
         var req = new ListRegistryKeysInGuestRequestType
         {
@@ -5380,7 +5382,7 @@ public class Client : IClient
         return res.ListRegistryKeysInGuestResponse1;
     }
 
-    public async System.Threading.Tasks.Task<GuestRegValueSpec[]> ListRegistryValuesInGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, GuestRegKeyNameSpec keyName, bool expandStrings, string matchPattern)
+    public async System.Threading.Tasks.Task<GuestRegValueSpec[]?> ListRegistryValuesInGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, GuestRegKeyNameSpec keyName, bool expandStrings, string? matchPattern)
     {
         var req = new ListRegistryValuesInGuestRequestType
         {
@@ -5397,7 +5399,7 @@ public class Client : IClient
         return res.ListRegistryValuesInGuestResponse1;
     }
 
-    public async System.Threading.Tasks.Task<string[]> ListSmartCardTrustAnchors(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<string[]?> ListSmartCardTrustAnchors(ManagedObjectReference self)
     {
         var req = new ListSmartCardTrustAnchorsRequestType
         {
@@ -5409,7 +5411,7 @@ public class Client : IClient
         return res.ListSmartCardTrustAnchorsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<VslmTagEntry[]> ListTagsAttachedToVStorageObject(ManagedObjectReference self, ID id)
+    public async System.Threading.Tasks.Task<VslmTagEntry[]?> ListTagsAttachedToVStorageObject(ManagedObjectReference self, ID id)
     {
         var req = new ListTagsAttachedToVStorageObjectRequestType
         {
@@ -5422,7 +5424,7 @@ public class Client : IClient
         return res.ListTagsAttachedToVStorageObjectResponse1;
     }
 
-    public async System.Threading.Tasks.Task<ID[]> ListVStorageObject(ManagedObjectReference self, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task<ID[]?> ListVStorageObject(ManagedObjectReference self, ManagedObjectReference datastore)
     {
         var req = new ListVStorageObjectRequestType
         {
@@ -5435,7 +5437,7 @@ public class Client : IClient
         return res.ListVStorageObjectResponse1;
     }
 
-    public async System.Threading.Tasks.Task<ID[]> ListVStorageObjectsAttachedToTag(ManagedObjectReference self, string category, string tag)
+    public async System.Threading.Tasks.Task<ID[]?> ListVStorageObjectsAttachedToTag(ManagedObjectReference self, string category, string tag)
     {
         var req = new ListVStorageObjectsAttachedToTagRequestType
         {
@@ -5449,7 +5451,7 @@ public class Client : IClient
         return res.ListVStorageObjectsAttachedToTagResponse1;
     }
 
-    public async System.Threading.Tasks.Task<UserSession> Login(ManagedObjectReference self, string userName, string password, string locale)
+    public async System.Threading.Tasks.Task<UserSession?> Login(ManagedObjectReference self, string userName, string password, string? locale)
     {
         var req = new LoginRequestType
         {
@@ -5464,7 +5466,7 @@ public class Client : IClient
         return res.LoginResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<UserSession> LoginBySSPI(ManagedObjectReference self, string base64Token, string locale)
+    public async System.Threading.Tasks.Task<UserSession?> LoginBySSPI(ManagedObjectReference self, string base64Token, string? locale)
     {
         var req = new LoginBySSPIRequestType
         {
@@ -5478,7 +5480,7 @@ public class Client : IClient
         return res.LoginBySSPIResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<UserSession> LoginByToken(ManagedObjectReference self, string locale)
+    public async System.Threading.Tasks.Task<UserSession?> LoginByToken(ManagedObjectReference self, string? locale)
     {
         var req = new LoginByTokenRequestType
         {
@@ -5491,7 +5493,7 @@ public class Client : IClient
         return res.LoginByTokenResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<UserSession> LoginExtensionByCertificate(ManagedObjectReference self, string extensionKey, string locale)
+    public async System.Threading.Tasks.Task<UserSession?> LoginExtensionByCertificate(ManagedObjectReference self, string extensionKey, string? locale)
     {
         var req = new LoginExtensionByCertificateRequestType
         {
@@ -5505,7 +5507,7 @@ public class Client : IClient
         return res.LoginExtensionByCertificateResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<UserSession> LoginExtensionBySubjectName(ManagedObjectReference self, string extensionKey, string locale)
+    public async System.Threading.Tasks.Task<UserSession?> LoginExtensionBySubjectName(ManagedObjectReference self, string extensionKey, string? locale)
     {
         var req = new LoginExtensionBySubjectNameRequestType
         {
@@ -5541,7 +5543,7 @@ public class Client : IClient
         await this.inner.LogUserEventAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> LookupDvPortGroup(ManagedObjectReference self, string portgroupKey)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> LookupDvPortGroup(ManagedObjectReference self, string portgroupKey)
     {
         var req = new LookupDvPortGroupRequestType
         {
@@ -5568,7 +5570,7 @@ public class Client : IClient
         return res.LookupVmOverheadMemoryResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task MakeDirectory(ManagedObjectReference self, string name, ManagedObjectReference datacenter, bool createParentDirectories, bool createParentDirectoriesSpecified)
+    public async System.Threading.Tasks.Task MakeDirectory(ManagedObjectReference self, string name, ManagedObjectReference? datacenter, bool createParentDirectories, bool createParentDirectoriesSpecified)
     {
         var req = new MakeDirectoryRequestType
         {
@@ -5596,7 +5598,7 @@ public class Client : IClient
         await this.inner.MakeDirectoryInGuestAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> MakePrimaryVM_Task(ManagedObjectReference self, ManagedObjectReference vm)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> MakePrimaryVM_Task(ManagedObjectReference self, ManagedObjectReference vm)
     {
         var req = new MakePrimaryVMRequestType
         {
@@ -5609,7 +5611,7 @@ public class Client : IClient
         return res.MakePrimaryVM_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> MarkAsLocal_Task(ManagedObjectReference self, string scsiDiskUuid)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> MarkAsLocal_Task(ManagedObjectReference self, string scsiDiskUuid)
     {
         var req = new MarkAsLocalRequestType
         {
@@ -5622,7 +5624,7 @@ public class Client : IClient
         return res.MarkAsLocal_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> MarkAsNonLocal_Task(ManagedObjectReference self, string scsiDiskUuid)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> MarkAsNonLocal_Task(ManagedObjectReference self, string scsiDiskUuid)
     {
         var req = new MarkAsNonLocalRequestType
         {
@@ -5635,7 +5637,7 @@ public class Client : IClient
         return res.MarkAsNonLocal_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> MarkAsNonSsd_Task(ManagedObjectReference self, string scsiDiskUuid)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> MarkAsNonSsd_Task(ManagedObjectReference self, string scsiDiskUuid)
     {
         var req = new MarkAsNonSsdRequestType
         {
@@ -5648,7 +5650,7 @@ public class Client : IClient
         return res.MarkAsNonSsd_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> MarkAsSsd_Task(ManagedObjectReference self, string scsiDiskUuid)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> MarkAsSsd_Task(ManagedObjectReference self, string scsiDiskUuid)
     {
         var req = new MarkAsSsdRequestType
         {
@@ -5671,7 +5673,7 @@ public class Client : IClient
         await this.inner.MarkAsTemplateAsync(req);
     }
 
-    public async System.Threading.Tasks.Task MarkAsVirtualMachine(ManagedObjectReference self, ManagedObjectReference pool, ManagedObjectReference host)
+    public async System.Threading.Tasks.Task MarkAsVirtualMachine(ManagedObjectReference self, ManagedObjectReference pool, ManagedObjectReference? host)
     {
         var req = new MarkAsVirtualMachineRequestType
         {
@@ -5718,7 +5720,7 @@ public class Client : IClient
         await this.inner.MarkPerenniallyReservedAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> MarkPerenniallyReservedEx_Task(ManagedObjectReference self, string[] lunUuid, bool state)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> MarkPerenniallyReservedEx_Task(ManagedObjectReference self, string[]? lunUuid, bool state)
     {
         var req = new MarkPerenniallyReservedExRequestType
         {
@@ -5732,7 +5734,7 @@ public class Client : IClient
         return res.MarkPerenniallyReservedEx_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task MarkServiceProviderEntities(ManagedObjectReference self, ManagedObjectReference[] entity)
+    public async System.Threading.Tasks.Task MarkServiceProviderEntities(ManagedObjectReference self, ManagedObjectReference[]? entity)
     {
         var req = new MarkServiceProviderEntitiesRequestType
         {
@@ -5743,7 +5745,7 @@ public class Client : IClient
         await this.inner.MarkServiceProviderEntitiesAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> MergeDvs_Task(ManagedObjectReference self, ManagedObjectReference dvs)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> MergeDvs_Task(ManagedObjectReference self, ManagedObjectReference dvs)
     {
         var req = new MergeDvsRequestType
         {
@@ -5768,7 +5770,7 @@ public class Client : IClient
         await this.inner.MergePermissionsAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> MigrateVM_Task(ManagedObjectReference self, ManagedObjectReference pool, ManagedObjectReference host, VirtualMachineMovePriority priority, VirtualMachinePowerState state, bool stateSpecified)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> MigrateVM_Task(ManagedObjectReference self, ManagedObjectReference? pool, ManagedObjectReference? host, VirtualMachineMovePriority priority, VirtualMachinePowerState state, bool stateSpecified)
     {
         var req = new MigrateVMRequestType
         {
@@ -5785,7 +5787,7 @@ public class Client : IClient
         return res.MigrateVM_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference[]> ModifyListView(ManagedObjectReference self, ManagedObjectReference[] add, ManagedObjectReference[] remove)
+    public async System.Threading.Tasks.Task<ManagedObjectReference[]?> ModifyListView(ManagedObjectReference self, ManagedObjectReference[]? add, ManagedObjectReference[]? remove)
     {
         var req = new ModifyListViewRequestType
         {
@@ -5831,7 +5833,7 @@ public class Client : IClient
         await this.inner.MountVmfsVolumeAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> MountVmfsVolumeEx_Task(ManagedObjectReference self, string[] vmfsUuid)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> MountVmfsVolumeEx_Task(ManagedObjectReference self, string[] vmfsUuid)
     {
         var req = new MountVmfsVolumeExRequestType
         {
@@ -5844,7 +5846,7 @@ public class Client : IClient
         return res.MountVmfsVolumeEx_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> MoveDatastoreFile_Task(ManagedObjectReference self, string sourceName, ManagedObjectReference sourceDatacenter, string destinationName, ManagedObjectReference destinationDatacenter, bool force, bool forceSpecified)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> MoveDatastoreFile_Task(ManagedObjectReference self, string sourceName, ManagedObjectReference? sourceDatacenter, string destinationName, ManagedObjectReference? destinationDatacenter, bool force, bool forceSpecified)
     {
         var req = new MoveDatastoreFileRequestType
         {
@@ -5876,7 +5878,7 @@ public class Client : IClient
         await this.inner.MoveDirectoryInGuestAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> MoveDVPort_Task(ManagedObjectReference self, string[] portKey, string destinationPortgroupKey)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> MoveDVPort_Task(ManagedObjectReference self, string[] portKey, string? destinationPortgroupKey)
     {
         var req = new MoveDVPortRequestType
         {
@@ -5905,7 +5907,7 @@ public class Client : IClient
         await this.inner.MoveFileInGuestAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> MoveHostInto_Task(ManagedObjectReference self, ManagedObjectReference host, ManagedObjectReference resourcePool)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> MoveHostInto_Task(ManagedObjectReference self, ManagedObjectReference host, ManagedObjectReference? resourcePool)
     {
         var req = new MoveHostIntoRequestType
         {
@@ -5919,7 +5921,7 @@ public class Client : IClient
         return res.MoveHostInto_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> MoveInto_Task(ManagedObjectReference self, ManagedObjectReference[] host)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> MoveInto_Task(ManagedObjectReference self, ManagedObjectReference[] host)
     {
         var req = new MoveIntoRequestType
         {
@@ -5932,7 +5934,7 @@ public class Client : IClient
         return res.MoveInto_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> MoveIntoFolder_Task(ManagedObjectReference self, ManagedObjectReference[] list)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> MoveIntoFolder_Task(ManagedObjectReference self, ManagedObjectReference[] list)
     {
         var req = new MoveIntoFolderRequestType
         {
@@ -5956,7 +5958,7 @@ public class Client : IClient
         await this.inner.MoveIntoResourcePoolAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> MoveVirtualDisk_Task(ManagedObjectReference self, string sourceName, ManagedObjectReference sourceDatacenter, string destName, ManagedObjectReference destDatacenter, bool force, bool forceSpecified, VirtualMachineProfileSpec[] profile)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> MoveVirtualDisk_Task(ManagedObjectReference self, string sourceName, ManagedObjectReference? sourceDatacenter, string destName, ManagedObjectReference? destDatacenter, bool force, bool forceSpecified, VirtualMachineProfileSpec[]? profile)
     {
         var req = new MoveVirtualDiskRequestType
         {
@@ -5975,7 +5977,7 @@ public class Client : IClient
         return res.MoveVirtualDisk_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference[]> OpenInventoryViewFolder(ManagedObjectReference self, ManagedObjectReference[] entity)
+    public async System.Threading.Tasks.Task<ManagedObjectReference[]?> OpenInventoryViewFolder(ManagedObjectReference self, ManagedObjectReference[] entity)
     {
         var req = new OpenInventoryViewFolderRequestType
         {
@@ -5999,7 +6001,7 @@ public class Client : IClient
         await this.inner.OverwriteCustomizationSpecAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<OvfParseDescriptorResult> ParseDescriptor(ManagedObjectReference self, string ovfDescriptor, OvfParseDescriptorParams pdp)
+    public async System.Threading.Tasks.Task<OvfParseDescriptorResult?> ParseDescriptor(ManagedObjectReference self, string ovfDescriptor, OvfParseDescriptorParams pdp)
     {
         var req = new ParseDescriptorRequestType
         {
@@ -6013,7 +6015,7 @@ public class Client : IClient
         return res.ParseDescriptorResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> PerformDvsProductSpecOperation_Task(ManagedObjectReference self, string operation, DistributedVirtualSwitchProductSpec productSpec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> PerformDvsProductSpecOperation_Task(ManagedObjectReference self, string operation, DistributedVirtualSwitchProductSpec? productSpec)
     {
         var req = new PerformDvsProductSpecOperationRequestType
         {
@@ -6027,7 +6029,7 @@ public class Client : IClient
         return res.PerformDvsProductSpecOperation_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> PerformVsanUpgrade_Task(ManagedObjectReference self, ManagedObjectReference cluster, bool performObjectUpgrade, bool performObjectUpgradeSpecified, bool downgradeFormat, bool downgradeFormatSpecified, bool allowReducedRedundancy, bool allowReducedRedundancySpecified, ManagedObjectReference[] excludeHosts)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> PerformVsanUpgrade_Task(ManagedObjectReference self, ManagedObjectReference cluster, bool performObjectUpgrade, bool performObjectUpgradeSpecified, bool downgradeFormat, bool downgradeFormatSpecified, bool allowReducedRedundancy, bool allowReducedRedundancySpecified, ManagedObjectReference[]? excludeHosts)
     {
         var req = new PerformVsanUpgradeRequestType
         {
@@ -6047,7 +6049,7 @@ public class Client : IClient
         return res.PerformVsanUpgrade_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<VsanUpgradeSystemPreflightCheckResult> PerformVsanUpgradePreflightCheck(ManagedObjectReference self, ManagedObjectReference cluster, bool downgradeFormat, bool downgradeFormatSpecified)
+    public async System.Threading.Tasks.Task<VsanUpgradeSystemPreflightCheckResult?> PerformVsanUpgradePreflightCheck(ManagedObjectReference self, ManagedObjectReference cluster, bool downgradeFormat, bool downgradeFormatSpecified)
     {
         var req = new PerformVsanUpgradePreflightCheckRequestType
         {
@@ -6062,7 +6064,7 @@ public class Client : IClient
         return res.PerformVsanUpgradePreflightCheckResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<PlacementResult> PlaceVm(ManagedObjectReference self, PlacementSpec placementSpec)
+    public async System.Threading.Tasks.Task<PlacementResult?> PlaceVm(ManagedObjectReference self, PlacementSpec placementSpec)
     {
         var req = new PlaceVmRequestType
         {
@@ -6075,7 +6077,7 @@ public class Client : IClient
         return res.PlaceVmResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task PostEvent(ManagedObjectReference self, Event eventToPost, TaskInfo taskInfo)
+    public async System.Threading.Tasks.Task PostEvent(ManagedObjectReference self, Event eventToPost, TaskInfo? taskInfo)
     {
         var req = new PostEventRequestType
         {
@@ -6087,7 +6089,7 @@ public class Client : IClient
         await this.inner.PostEventAsync(req);
     }
 
-    public async System.Threading.Tasks.Task PostHealthUpdates(ManagedObjectReference self, string providerId, HealthUpdate[] updates)
+    public async System.Threading.Tasks.Task PostHealthUpdates(ManagedObjectReference self, string providerId, HealthUpdate[]? updates)
     {
         var req = new PostHealthUpdatesRequestType
         {
@@ -6099,7 +6101,7 @@ public class Client : IClient
         await this.inner.PostHealthUpdatesAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> PowerDownHostToStandBy_Task(ManagedObjectReference self, int timeoutSec, bool evacuatePoweredOffVms, bool evacuatePoweredOffVmsSpecified)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> PowerDownHostToStandBy_Task(ManagedObjectReference self, int timeoutSec, bool evacuatePoweredOffVms, bool evacuatePoweredOffVmsSpecified)
     {
         var req = new PowerDownHostToStandByRequestType
         {
@@ -6114,7 +6116,7 @@ public class Client : IClient
         return res.PowerDownHostToStandBy_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> PowerOffVApp_Task(ManagedObjectReference self, bool force)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> PowerOffVApp_Task(ManagedObjectReference self, bool force)
     {
         var req = new PowerOffVAppRequestType
         {
@@ -6127,7 +6129,7 @@ public class Client : IClient
         return res.PowerOffVApp_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> PowerOffVM_Task(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> PowerOffVM_Task(ManagedObjectReference self)
     {
         var req = new PowerOffVMRequestType
         {
@@ -6139,7 +6141,7 @@ public class Client : IClient
         return res.PowerOffVM_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> PowerOnMultiVM_Task(ManagedObjectReference self, ManagedObjectReference[] vm, OptionValue[] option)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> PowerOnMultiVM_Task(ManagedObjectReference self, ManagedObjectReference[] vm, OptionValue[]? option)
     {
         var req = new PowerOnMultiVMRequestType
         {
@@ -6153,7 +6155,7 @@ public class Client : IClient
         return res.PowerOnMultiVM_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> PowerOnVApp_Task(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> PowerOnVApp_Task(ManagedObjectReference self)
     {
         var req = new PowerOnVAppRequestType
         {
@@ -6165,7 +6167,7 @@ public class Client : IClient
         return res.PowerOnVApp_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> PowerOnVM_Task(ManagedObjectReference self, ManagedObjectReference host)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> PowerOnVM_Task(ManagedObjectReference self, ManagedObjectReference? host)
     {
         var req = new PowerOnVMRequestType
         {
@@ -6178,7 +6180,7 @@ public class Client : IClient
         return res.PowerOnVM_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> PowerUpHostFromStandBy_Task(ManagedObjectReference self, int timeoutSec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> PowerUpHostFromStandBy_Task(ManagedObjectReference self, int timeoutSec)
     {
         var req = new PowerUpHostFromStandByRequestType
         {
@@ -6201,7 +6203,7 @@ public class Client : IClient
         await this.inner.PrepareCryptoAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> PrepareVcha_Task(ManagedObjectReference self, VchaClusterNetworkSpec networkSpec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> PrepareVcha_Task(ManagedObjectReference self, VchaClusterNetworkSpec networkSpec)
     {
         var req = new prepareVchaRequestType
         {
@@ -6214,7 +6216,7 @@ public class Client : IClient
         return res.prepareVcha_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> PromoteDisks_Task(ManagedObjectReference self, bool unlink, VirtualDisk[] disks)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> PromoteDisks_Task(ManagedObjectReference self, bool unlink, VirtualDisk[]? disks)
     {
         var req = new PromoteDisksRequestType
         {
@@ -6241,7 +6243,7 @@ public class Client : IClient
         return res.PutUsbScanCodesResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<AnswerFileStatusResult[]> QueryAnswerFileStatus(ManagedObjectReference self, ManagedObjectReference[] host)
+    public async System.Threading.Tasks.Task<AnswerFileStatusResult[]?> QueryAnswerFileStatus(ManagedObjectReference self, ManagedObjectReference[] host)
     {
         var req = new QueryAnswerFileStatusRequestType
         {
@@ -6254,7 +6256,7 @@ public class Client : IClient
         return res.QueryAnswerFileStatusResponse1;
     }
 
-    public async System.Threading.Tasks.Task<LicenseAssignmentManagerLicenseAssignment[]> QueryAssignedLicenses(ManagedObjectReference self, string entityId)
+    public async System.Threading.Tasks.Task<LicenseAssignmentManagerLicenseAssignment[]?> QueryAssignedLicenses(ManagedObjectReference self, string? entityId)
     {
         var req = new QueryAssignedLicensesRequestType
         {
@@ -6267,7 +6269,7 @@ public class Client : IClient
         return res.QueryAssignedLicensesResponse1;
     }
 
-    public async System.Threading.Tasks.Task<HostScsiDisk[]> QueryAvailableDisksForVmfs(ManagedObjectReference self, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task<HostScsiDisk[]?> QueryAvailableDisksForVmfs(ManagedObjectReference self, ManagedObjectReference? datastore)
     {
         var req = new QueryAvailableDisksForVmfsRequestType
         {
@@ -6280,7 +6282,7 @@ public class Client : IClient
         return res.QueryAvailableDisksForVmfsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<DistributedVirtualSwitchProductSpec[]> QueryAvailableDvsSpec(ManagedObjectReference self, bool recommended, bool recommendedSpecified)
+    public async System.Threading.Tasks.Task<DistributedVirtualSwitchProductSpec[]?> QueryAvailableDvsSpec(ManagedObjectReference self, bool recommended, bool recommendedSpecified)
     {
         var req = new QueryAvailableDvsSpecRequestType
         {
@@ -6294,7 +6296,7 @@ public class Client : IClient
         return res.QueryAvailableDvsSpecResponse1;
     }
 
-    public async System.Threading.Tasks.Task<HostDiagnosticPartition[]> QueryAvailablePartition(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<HostDiagnosticPartition[]?> QueryAvailablePartition(ManagedObjectReference self)
     {
         var req = new QueryAvailablePartitionRequestType
         {
@@ -6306,7 +6308,7 @@ public class Client : IClient
         return res.QueryAvailablePartitionResponse1;
     }
 
-    public async System.Threading.Tasks.Task<PerfMetricId[]> QueryAvailablePerfMetric(ManagedObjectReference self, ManagedObjectReference entity, DateTime beginTime, bool beginTimeSpecified, DateTime endTime, bool endTimeSpecified, int intervalId, bool intervalIdSpecified)
+    public async System.Threading.Tasks.Task<PerfMetricId[]?> QueryAvailablePerfMetric(ManagedObjectReference self, ManagedObjectReference entity, DateTime beginTime, bool beginTimeSpecified, DateTime endTime, bool endTimeSpecified, int intervalId, bool intervalIdSpecified)
     {
         var req = new QueryAvailablePerfMetricRequestType
         {
@@ -6325,7 +6327,7 @@ public class Client : IClient
         return res.QueryAvailablePerfMetricResponse1;
     }
 
-    public async System.Threading.Tasks.Task<HostScsiDisk[]> QueryAvailableSsds(ManagedObjectReference self, string vffsPath)
+    public async System.Threading.Tasks.Task<HostScsiDisk[]?> QueryAvailableSsds(ManagedObjectReference self, string? vffsPath)
     {
         var req = new QueryAvailableSsdsRequestType
         {
@@ -6338,7 +6340,7 @@ public class Client : IClient
         return res.QueryAvailableSsdsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<HostDateTimeSystemTimeZone[]> QueryAvailableTimeZones(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<HostDateTimeSystemTimeZone[]?> QueryAvailableTimeZones(ManagedObjectReference self)
     {
         var req = new QueryAvailableTimeZonesRequestType
         {
@@ -6350,7 +6352,7 @@ public class Client : IClient
         return res.QueryAvailableTimeZonesResponse1;
     }
 
-    public async System.Threading.Tasks.Task<HostBootDeviceInfo> QueryBootDevices(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<HostBootDeviceInfo?> QueryBootDevices(ManagedObjectReference self)
     {
         var req = new QueryBootDevicesRequestType
         {
@@ -6362,7 +6364,7 @@ public class Client : IClient
         return res.QueryBootDevicesResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<IscsiPortInfo[]> QueryBoundVnics(ManagedObjectReference self, string iScsiHbaName)
+    public async System.Threading.Tasks.Task<IscsiPortInfo[]?> QueryBoundVnics(ManagedObjectReference self, string iScsiHbaName)
     {
         var req = new QueryBoundVnicsRequestType
         {
@@ -6375,7 +6377,7 @@ public class Client : IClient
         return res.QueryBoundVnicsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<IscsiPortInfo[]> QueryCandidateNics(ManagedObjectReference self, string iScsiHbaName)
+    public async System.Threading.Tasks.Task<IscsiPortInfo[]?> QueryCandidateNics(ManagedObjectReference self, string iScsiHbaName)
     {
         var req = new QueryCandidateNicsRequestType
         {
@@ -6388,7 +6390,7 @@ public class Client : IClient
         return res.QueryCandidateNicsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<DiskChangeInfo> QueryChangedDiskAreas(ManagedObjectReference self, ManagedObjectReference snapshot, int deviceKey, long startOffset, string changeId)
+    public async System.Threading.Tasks.Task<DiskChangeInfo?> QueryChangedDiskAreas(ManagedObjectReference self, ManagedObjectReference? snapshot, int deviceKey, long startOffset, string changeId)
     {
         var req = new QueryChangedDiskAreasRequestType
         {
@@ -6404,7 +6406,7 @@ public class Client : IClient
         return res.QueryChangedDiskAreasResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string> QueryCmmds(ManagedObjectReference self, HostVsanInternalSystemCmmdsQuery[] queries)
+    public async System.Threading.Tasks.Task<string?> QueryCmmds(ManagedObjectReference self, HostVsanInternalSystemCmmdsQuery[] queries)
     {
         var req = new QueryCmmdsRequestType
         {
@@ -6417,7 +6419,7 @@ public class Client : IClient
         return res.QueryCmmdsResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference[]> QueryCompatibleHostForExistingDvs(ManagedObjectReference self, ManagedObjectReference container, bool recursive, ManagedObjectReference dvs)
+    public async System.Threading.Tasks.Task<ManagedObjectReference[]?> QueryCompatibleHostForExistingDvs(ManagedObjectReference self, ManagedObjectReference container, bool recursive, ManagedObjectReference dvs)
     {
         var req = new QueryCompatibleHostForExistingDvsRequestType
         {
@@ -6432,7 +6434,7 @@ public class Client : IClient
         return res.QueryCompatibleHostForExistingDvsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference[]> QueryCompatibleHostForNewDvs(ManagedObjectReference self, ManagedObjectReference container, bool recursive, DistributedVirtualSwitchProductSpec switchProductSpec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference[]?> QueryCompatibleHostForNewDvs(ManagedObjectReference self, ManagedObjectReference container, bool recursive, DistributedVirtualSwitchProductSpec? switchProductSpec)
     {
         var req = new QueryCompatibleHostForNewDvsRequestType
         {
@@ -6447,7 +6449,7 @@ public class Client : IClient
         return res.QueryCompatibleHostForNewDvsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<ComplianceResult[]> QueryComplianceStatus(ManagedObjectReference self, ManagedObjectReference[] profile, ManagedObjectReference[] entity)
+    public async System.Threading.Tasks.Task<ComplianceResult[]?> QueryComplianceStatus(ManagedObjectReference self, ManagedObjectReference[]? profile, ManagedObjectReference[]? entity)
     {
         var req = new QueryComplianceStatusRequestType
         {
@@ -6461,7 +6463,7 @@ public class Client : IClient
         return res.QueryComplianceStatusResponse1;
     }
 
-    public async System.Threading.Tasks.Task<VirtualMachineConfigOption> QueryConfigOption(ManagedObjectReference self, string key, ManagedObjectReference host)
+    public async System.Threading.Tasks.Task<VirtualMachineConfigOption?> QueryConfigOption(ManagedObjectReference self, string? key, ManagedObjectReference? host)
     {
         var req = new QueryConfigOptionRequestType
         {
@@ -6475,7 +6477,7 @@ public class Client : IClient
         return res.QueryConfigOptionResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<VirtualMachineConfigOptionDescriptor[]> QueryConfigOptionDescriptor(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<VirtualMachineConfigOptionDescriptor[]?> QueryConfigOptionDescriptor(ManagedObjectReference self)
     {
         var req = new QueryConfigOptionDescriptorRequestType
         {
@@ -6487,7 +6489,7 @@ public class Client : IClient
         return res.QueryConfigOptionDescriptorResponse1;
     }
 
-    public async System.Threading.Tasks.Task<VirtualMachineConfigOption> QueryConfigOptionEx(ManagedObjectReference self, EnvironmentBrowserConfigOptionQuerySpec spec)
+    public async System.Threading.Tasks.Task<VirtualMachineConfigOption?> QueryConfigOptionEx(ManagedObjectReference self, EnvironmentBrowserConfigOptionQuerySpec? spec)
     {
         var req = new QueryConfigOptionExRequestType
         {
@@ -6500,7 +6502,7 @@ public class Client : IClient
         return res.QueryConfigOptionExResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ConfigTarget> QueryConfigTarget(ManagedObjectReference self, ManagedObjectReference host)
+    public async System.Threading.Tasks.Task<ConfigTarget?> QueryConfigTarget(ManagedObjectReference self, ManagedObjectReference? host)
     {
         var req = new QueryConfigTargetRequestType
         {
@@ -6513,7 +6515,7 @@ public class Client : IClient
         return res.QueryConfigTargetResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string> QueryConfiguredModuleOptionString(ManagedObjectReference self, string name)
+    public async System.Threading.Tasks.Task<string?> QueryConfiguredModuleOptionString(ManagedObjectReference self, string name)
     {
         var req = new QueryConfiguredModuleOptionStringRequestType
         {
@@ -6526,7 +6528,7 @@ public class Client : IClient
         return res.QueryConfiguredModuleOptionStringResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<HostConnectInfo> QueryConnectionInfo(ManagedObjectReference self, string hostname, int port, string username, string password, string sslThumbprint)
+    public async System.Threading.Tasks.Task<HostConnectInfo?> QueryConnectionInfo(ManagedObjectReference self, string hostname, int port, string username, string password, string? sslThumbprint)
     {
         var req = new QueryConnectionInfoRequestType
         {
@@ -6543,7 +6545,7 @@ public class Client : IClient
         return res.QueryConnectionInfoResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<HostConnectInfo> QueryConnectionInfoViaSpec(ManagedObjectReference self, HostConnectSpec spec)
+    public async System.Threading.Tasks.Task<HostConnectInfo?> QueryConnectionInfoViaSpec(ManagedObjectReference self, HostConnectSpec spec)
     {
         var req = new QueryConnectionInfoViaSpecRequestType
         {
@@ -6556,7 +6558,7 @@ public class Client : IClient
         return res.QueryConnectionInfoViaSpecResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<VirtualMachineConnection[]> QueryConnections(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<VirtualMachineConnection[]?> QueryConnections(ManagedObjectReference self)
     {
         var req = new QueryConnectionsRequestType
         {
@@ -6568,7 +6570,7 @@ public class Client : IClient
         return res.QueryConnectionsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<CryptoManagerKmipCryptoKeyStatus[]> QueryCryptoKeyStatus(ManagedObjectReference self, CryptoKeyId[] keyIds, int checkKeyBitMap)
+    public async System.Threading.Tasks.Task<CryptoManagerKmipCryptoKeyStatus[]?> QueryCryptoKeyStatus(ManagedObjectReference self, CryptoKeyId[]? keyIds, int checkKeyBitMap)
     {
         var req = new QueryCryptoKeyStatusRequestType
         {
@@ -6582,7 +6584,7 @@ public class Client : IClient
         return res.QueryCryptoKeyStatusResponse1;
     }
 
-    public async System.Threading.Tasks.Task<VirtualMachineConfigOptionDescriptor[]> QueryDatacenterConfigOptionDescriptor(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<VirtualMachineConfigOptionDescriptor[]?> QueryDatacenterConfigOptionDescriptor(ManagedObjectReference self)
     {
         var req = new queryDatacenterConfigOptionDescriptorRequestType
         {
@@ -6594,7 +6596,7 @@ public class Client : IClient
         return res.queryDatacenterConfigOptionDescriptorResponse1;
     }
 
-    public async System.Threading.Tasks.Task<StoragePerformanceSummary[]> QueryDatastorePerformanceSummary(ManagedObjectReference self, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task<StoragePerformanceSummary[]?> QueryDatastorePerformanceSummary(ManagedObjectReference self, ManagedObjectReference datastore)
     {
         var req = new QueryDatastorePerformanceSummaryRequestType
         {
@@ -6619,7 +6621,7 @@ public class Client : IClient
         return res.QueryDateTimeResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<DiagnosticManagerLogDescriptor[]> QueryDescriptions(ManagedObjectReference self, ManagedObjectReference host)
+    public async System.Threading.Tasks.Task<DiagnosticManagerLogDescriptor[]?> QueryDescriptions(ManagedObjectReference self, ManagedObjectReference? host)
     {
         var req = new QueryDescriptionsRequestType
         {
@@ -6632,7 +6634,7 @@ public class Client : IClient
         return res.QueryDescriptionsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<VsanHostDiskResult[]> QueryDisksForVsan(ManagedObjectReference self, string[] canonicalName)
+    public async System.Threading.Tasks.Task<VsanHostDiskResult[]?> QueryDisksForVsan(ManagedObjectReference self, string[]? canonicalName)
     {
         var req = new QueryDisksForVsanRequestType
         {
@@ -6645,7 +6647,7 @@ public class Client : IClient
         return res.QueryDisksForVsanResponse1;
     }
 
-    public async System.Threading.Tasks.Task<VirtualDiskId[]> QueryDisksUsingFilter(ManagedObjectReference self, string filterId, ManagedObjectReference compRes)
+    public async System.Threading.Tasks.Task<VirtualDiskId[]?> QueryDisksUsingFilter(ManagedObjectReference self, string filterId, ManagedObjectReference compRes)
     {
         var req = new QueryDisksUsingFilterRequestType
         {
@@ -6659,7 +6661,7 @@ public class Client : IClient
         return res.QueryDisksUsingFilterResponse1;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> QueryDvsByUuid(ManagedObjectReference self, string uuid)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> QueryDvsByUuid(ManagedObjectReference self, string uuid)
     {
         var req = new QueryDvsByUuidRequestType
         {
@@ -6672,7 +6674,7 @@ public class Client : IClient
         return res.QueryDvsByUuidResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<DistributedVirtualSwitchManagerCompatibilityResult[]> QueryDvsCheckCompatibility(ManagedObjectReference self, DistributedVirtualSwitchManagerHostContainer hostContainer, DistributedVirtualSwitchManagerDvsProductSpec dvsProductSpec, DistributedVirtualSwitchManagerHostDvsFilterSpec[] hostFilterSpec)
+    public async System.Threading.Tasks.Task<DistributedVirtualSwitchManagerCompatibilityResult[]?> QueryDvsCheckCompatibility(ManagedObjectReference self, DistributedVirtualSwitchManagerHostContainer hostContainer, DistributedVirtualSwitchManagerDvsProductSpec? dvsProductSpec, DistributedVirtualSwitchManagerHostDvsFilterSpec[]? hostFilterSpec)
     {
         var req = new QueryDvsCheckCompatibilityRequestType
         {
@@ -6687,7 +6689,7 @@ public class Client : IClient
         return res.QueryDvsCheckCompatibilityResponse1;
     }
 
-    public async System.Threading.Tasks.Task<DistributedVirtualSwitchHostProductSpec[]> QueryDvsCompatibleHostSpec(ManagedObjectReference self, DistributedVirtualSwitchProductSpec switchProductSpec)
+    public async System.Threading.Tasks.Task<DistributedVirtualSwitchHostProductSpec[]?> QueryDvsCompatibleHostSpec(ManagedObjectReference self, DistributedVirtualSwitchProductSpec? switchProductSpec)
     {
         var req = new QueryDvsCompatibleHostSpecRequestType
         {
@@ -6700,7 +6702,7 @@ public class Client : IClient
         return res.QueryDvsCompatibleHostSpecResponse1;
     }
 
-    public async System.Threading.Tasks.Task<DVSManagerDvsConfigTarget> QueryDvsConfigTarget(ManagedObjectReference self, ManagedObjectReference host, ManagedObjectReference dvs)
+    public async System.Threading.Tasks.Task<DVSManagerDvsConfigTarget?> QueryDvsConfigTarget(ManagedObjectReference self, ManagedObjectReference? host, ManagedObjectReference? dvs)
     {
         var req = new QueryDvsConfigTargetRequestType
         {
@@ -6714,7 +6716,7 @@ public class Client : IClient
         return res.QueryDvsConfigTargetResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<DVSFeatureCapability> QueryDvsFeatureCapability(ManagedObjectReference self, DistributedVirtualSwitchProductSpec switchProductSpec)
+    public async System.Threading.Tasks.Task<DVSFeatureCapability?> QueryDvsFeatureCapability(ManagedObjectReference self, DistributedVirtualSwitchProductSpec? switchProductSpec)
     {
         var req = new QueryDvsFeatureCapabilityRequestType
         {
@@ -6727,7 +6729,7 @@ public class Client : IClient
         return res.QueryDvsFeatureCapabilityResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<Event[]> QueryEvents(ManagedObjectReference self, EventFilterSpec filter)
+    public async System.Threading.Tasks.Task<Event[]?> QueryEvents(ManagedObjectReference self, EventFilterSpec filter)
     {
         var req = new QueryEventsRequestType
         {
@@ -6740,7 +6742,7 @@ public class Client : IClient
         return res.QueryEventsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<ProfileExpressionMetadata[]> QueryExpressionMetadata(ManagedObjectReference self, string[] expressionName, ManagedObjectReference profile)
+    public async System.Threading.Tasks.Task<ProfileExpressionMetadata[]?> QueryExpressionMetadata(ManagedObjectReference self, string[]? expressionName, ManagedObjectReference? profile)
     {
         var req = new QueryExpressionMetadataRequestType
         {
@@ -6754,7 +6756,7 @@ public class Client : IClient
         return res.QueryExpressionMetadataResponse1;
     }
 
-    public async System.Threading.Tasks.Task<ExtensionManagerIpAllocationUsage[]> QueryExtensionIpAllocationUsage(ManagedObjectReference self, string[] extensionKeys)
+    public async System.Threading.Tasks.Task<ExtensionManagerIpAllocationUsage[]?> QueryExtensionIpAllocationUsage(ManagedObjectReference self, string[]? extensionKeys)
     {
         var req = new QueryExtensionIpAllocationUsageRequestType
         {
@@ -6767,7 +6769,7 @@ public class Client : IClient
         return res.QueryExtensionIpAllocationUsageResponse1;
     }
 
-    public async System.Threading.Tasks.Task<LocalizedMethodFault[]> QueryFaultToleranceCompatibility(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<LocalizedMethodFault[]?> QueryFaultToleranceCompatibility(ManagedObjectReference self)
     {
         var req = new QueryFaultToleranceCompatibilityRequestType
         {
@@ -6779,7 +6781,7 @@ public class Client : IClient
         return res.QueryFaultToleranceCompatibilityResponse1;
     }
 
-    public async System.Threading.Tasks.Task<LocalizedMethodFault[]> QueryFaultToleranceCompatibilityEx(ManagedObjectReference self, bool forLegacyFt, bool forLegacyFtSpecified)
+    public async System.Threading.Tasks.Task<LocalizedMethodFault[]?> QueryFaultToleranceCompatibilityEx(ManagedObjectReference self, bool forLegacyFt, bool forLegacyFtSpecified)
     {
         var req = new QueryFaultToleranceCompatibilityExRequestType
         {
@@ -6793,7 +6795,7 @@ public class Client : IClient
         return res.QueryFaultToleranceCompatibilityExResponse1;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference[]> QueryFilterEntities(ManagedObjectReference self, string filterId)
+    public async System.Threading.Tasks.Task<ManagedObjectReference[]?> QueryFilterEntities(ManagedObjectReference self, string filterId)
     {
         var req = new QueryFilterEntitiesRequestType
         {
@@ -6806,7 +6808,7 @@ public class Client : IClient
         return res.QueryFilterEntitiesResponse1;
     }
 
-    public async System.Threading.Tasks.Task<string[]> QueryFilterInfoIds(ManagedObjectReference self, string filterId)
+    public async System.Threading.Tasks.Task<string[]?> QueryFilterInfoIds(ManagedObjectReference self, string filterId)
     {
         var req = new QueryFilterInfoIdsRequestType
         {
@@ -6819,7 +6821,7 @@ public class Client : IClient
         return res.QueryFilterInfoIdsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<string[]> QueryFilterList(ManagedObjectReference self, string providerId)
+    public async System.Threading.Tasks.Task<string[]?> QueryFilterList(ManagedObjectReference self, string providerId)
     {
         var req = new QueryFilterListRequestType
         {
@@ -6832,7 +6834,7 @@ public class Client : IClient
         return res.QueryFilterListResponse1;
     }
 
-    public async System.Threading.Tasks.Task<string> QueryFilterName(ManagedObjectReference self, string filterId)
+    public async System.Threading.Tasks.Task<string?> QueryFilterName(ManagedObjectReference self, string filterId)
     {
         var req = new QueryFilterNameRequestType
         {
@@ -6845,7 +6847,7 @@ public class Client : IClient
         return res.QueryFilterNameResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string> QueryFirmwareConfigUploadURL(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<string?> QueryFirmwareConfigUploadURL(ManagedObjectReference self)
     {
         var req = new QueryFirmwareConfigUploadURLRequestType
         {
@@ -6857,7 +6859,7 @@ public class Client : IClient
         return res.QueryFirmwareConfigUploadURLResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<HealthUpdateInfo[]> QueryHealthUpdateInfos(ManagedObjectReference self, string providerId)
+    public async System.Threading.Tasks.Task<HealthUpdateInfo[]?> QueryHealthUpdateInfos(ManagedObjectReference self, string providerId)
     {
         var req = new QueryHealthUpdateInfosRequestType
         {
@@ -6870,7 +6872,7 @@ public class Client : IClient
         return res.QueryHealthUpdateInfosResponse1;
     }
 
-    public async System.Threading.Tasks.Task<HealthUpdate[]> QueryHealthUpdates(ManagedObjectReference self, string providerId)
+    public async System.Threading.Tasks.Task<HealthUpdate[]?> QueryHealthUpdates(ManagedObjectReference self, string providerId)
     {
         var req = new QueryHealthUpdatesRequestType
         {
@@ -6883,7 +6885,7 @@ public class Client : IClient
         return res.QueryHealthUpdatesResponse1;
     }
 
-    public async System.Threading.Tasks.Task<HostConnectInfo> QueryHostConnectionInfo(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<HostConnectInfo?> QueryHostConnectionInfo(ManagedObjectReference self)
     {
         var req = new QueryHostConnectionInfoRequestType
         {
@@ -6895,7 +6897,7 @@ public class Client : IClient
         return res.QueryHostConnectionInfoResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> QueryHostPatch_Task(ManagedObjectReference self, HostPatchManagerPatchManagerOperationSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> QueryHostPatch_Task(ManagedObjectReference self, HostPatchManagerPatchManagerOperationSpec? spec)
     {
         var req = new QueryHostPatchRequestType
         {
@@ -6908,7 +6910,7 @@ public class Client : IClient
         return res.QueryHostPatch_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ProfileMetadata[]> QueryHostProfileMetadata(ManagedObjectReference self, string[] profileName, ManagedObjectReference profile)
+    public async System.Threading.Tasks.Task<ProfileMetadata[]?> QueryHostProfileMetadata(ManagedObjectReference self, string[]? profileName, ManagedObjectReference? profile)
     {
         var req = new QueryHostProfileMetadataRequestType
         {
@@ -6922,7 +6924,7 @@ public class Client : IClient
         return res.QueryHostProfileMetadataResponse1;
     }
 
-    public async System.Threading.Tasks.Task<VsanHostClusterStatus> QueryHostStatus(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<VsanHostClusterStatus?> QueryHostStatus(ManagedObjectReference self)
     {
         var req = new QueryHostStatusRequestType
         {
@@ -6934,7 +6936,7 @@ public class Client : IClient
         return res.QueryHostStatusResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference[]> QueryHostsWithAttachedLun(ManagedObjectReference self, string lunUuid)
+    public async System.Threading.Tasks.Task<ManagedObjectReference[]?> QueryHostsWithAttachedLun(ManagedObjectReference self, string lunUuid)
     {
         var req = new QueryHostsWithAttachedLunRequestType
         {
@@ -6947,7 +6949,7 @@ public class Client : IClient
         return res.QueryHostsWithAttachedLunResponse1;
     }
 
-    public async System.Threading.Tasks.Task<ClusterIoFilterInfo[]> QueryIoFilterInfo(ManagedObjectReference self, ManagedObjectReference compRes)
+    public async System.Threading.Tasks.Task<ClusterIoFilterInfo[]?> QueryIoFilterInfo(ManagedObjectReference self, ManagedObjectReference compRes)
     {
         var req = new QueryIoFilterInfoRequestType
         {
@@ -6960,7 +6962,7 @@ public class Client : IClient
         return res.QueryIoFilterInfoResponse1;
     }
 
-    public async System.Threading.Tasks.Task<IoFilterQueryIssueResult> QueryIoFilterIssues(ManagedObjectReference self, string filterId, ManagedObjectReference compRes)
+    public async System.Threading.Tasks.Task<IoFilterQueryIssueResult?> QueryIoFilterIssues(ManagedObjectReference self, string filterId, ManagedObjectReference compRes)
     {
         var req = new QueryIoFilterIssuesRequestType
         {
@@ -6974,7 +6976,7 @@ public class Client : IClient
         return res.QueryIoFilterIssuesResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<StorageIORMConfigOption> QueryIORMConfigOption(ManagedObjectReference self, ManagedObjectReference host)
+    public async System.Threading.Tasks.Task<StorageIORMConfigOption?> QueryIORMConfigOption(ManagedObjectReference self, ManagedObjectReference host)
     {
         var req = new QueryIORMConfigOptionRequestType
         {
@@ -6987,7 +6989,7 @@ public class Client : IClient
         return res.QueryIORMConfigOptionResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<IpPoolManagerIpAllocation[]> QueryIPAllocations(ManagedObjectReference self, ManagedObjectReference dc, int poolId, string extensionKey)
+    public async System.Threading.Tasks.Task<IpPoolManagerIpAllocation[]?> QueryIPAllocations(ManagedObjectReference self, ManagedObjectReference dc, int poolId, string extensionKey)
     {
         var req = new QueryIPAllocationsRequestType
         {
@@ -7002,7 +7004,7 @@ public class Client : IClient
         return res.QueryIPAllocationsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<IpPool[]> QueryIpPools(ManagedObjectReference self, ManagedObjectReference dc)
+    public async System.Threading.Tasks.Task<IpPool[]?> QueryIpPools(ManagedObjectReference self, ManagedObjectReference dc)
     {
         var req = new QueryIpPoolsRequestType
         {
@@ -7015,7 +7017,7 @@ public class Client : IClient
         return res.QueryIpPoolsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<LicenseAvailabilityInfo[]> QueryLicenseSourceAvailability(ManagedObjectReference self, ManagedObjectReference host)
+    public async System.Threading.Tasks.Task<LicenseAvailabilityInfo[]?> QueryLicenseSourceAvailability(ManagedObjectReference self, ManagedObjectReference? host)
     {
         var req = new QueryLicenseSourceAvailabilityRequestType
         {
@@ -7028,7 +7030,7 @@ public class Client : IClient
         return res.QueryLicenseSourceAvailabilityResponse1;
     }
 
-    public async System.Threading.Tasks.Task<LicenseUsageInfo> QueryLicenseUsage(ManagedObjectReference self, ManagedObjectReference host)
+    public async System.Threading.Tasks.Task<LicenseUsageInfo?> QueryLicenseUsage(ManagedObjectReference self, ManagedObjectReference? host)
     {
         var req = new QueryLicenseUsageRequestType
         {
@@ -7041,7 +7043,7 @@ public class Client : IClient
         return res.QueryLicenseUsageResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string[]> QueryLockdownExceptions(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<string[]?> QueryLockdownExceptions(ManagedObjectReference self)
     {
         var req = new QueryLockdownExceptionsRequestType
         {
@@ -7053,7 +7055,7 @@ public class Client : IClient
         return res.QueryLockdownExceptionsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference[]> QueryManagedBy(ManagedObjectReference self, string extensionKey)
+    public async System.Threading.Tasks.Task<ManagedObjectReference[]?> QueryManagedBy(ManagedObjectReference self, string extensionKey)
     {
         var req = new QueryManagedByRequestType
         {
@@ -7095,7 +7097,7 @@ public class Client : IClient
         return res.QueryMemoryOverheadExResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<IscsiMigrationDependency> QueryMigrationDependencies(ManagedObjectReference self, string[] pnicDevice)
+    public async System.Threading.Tasks.Task<IscsiMigrationDependency?> QueryMigrationDependencies(ManagedObjectReference self, string[] pnicDevice)
     {
         var req = new QueryMigrationDependenciesRequestType
         {
@@ -7108,7 +7110,7 @@ public class Client : IClient
         return res.QueryMigrationDependenciesResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<KernelModuleInfo[]> QueryModules(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<KernelModuleInfo[]?> QueryModules(ManagedObjectReference self)
     {
         var req = new QueryModulesRequestType
         {
@@ -7120,7 +7122,7 @@ public class Client : IClient
         return res.QueryModulesResponse1;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference[]> QueryMonitoredEntities(ManagedObjectReference self, string providerId)
+    public async System.Threading.Tasks.Task<ManagedObjectReference[]?> QueryMonitoredEntities(ManagedObjectReference self, string providerId)
     {
         var req = new QueryMonitoredEntitiesRequestType
         {
@@ -7133,7 +7135,7 @@ public class Client : IClient
         return res.QueryMonitoredEntitiesResponse1;
     }
 
-    public async System.Threading.Tasks.Task<VirtualNicManagerNetConfig> QueryNetConfig(ManagedObjectReference self, string nicType)
+    public async System.Threading.Tasks.Task<VirtualNicManagerNetConfig?> QueryNetConfig(ManagedObjectReference self, string nicType)
     {
         var req = new QueryNetConfigRequestType
         {
@@ -7146,7 +7148,7 @@ public class Client : IClient
         return res.QueryNetConfigResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<PhysicalNicHintInfo[]> QueryNetworkHint(ManagedObjectReference self, string[] device)
+    public async System.Threading.Tasks.Task<PhysicalNicHintInfo[]?> QueryNetworkHint(ManagedObjectReference self, string[]? device)
     {
         var req = new QueryNetworkHintRequestType
         {
@@ -7159,7 +7161,7 @@ public class Client : IClient
         return res.QueryNetworkHintResponse1;
     }
 
-    public async System.Threading.Tasks.Task<HostNasVolumeUserInfo> QueryNFSUser(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<HostNasVolumeUserInfo?> QueryNFSUser(ManagedObjectReference self)
     {
         var req = new QueryNFSUserRequestType
         {
@@ -7171,7 +7173,7 @@ public class Client : IClient
         return res.QueryNFSUserResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string> QueryObjectsOnPhysicalVsanDisk(ManagedObjectReference self, string[] disks)
+    public async System.Threading.Tasks.Task<string?> QueryObjectsOnPhysicalVsanDisk(ManagedObjectReference self, string[] disks)
     {
         var req = new QueryObjectsOnPhysicalVsanDiskRequestType
         {
@@ -7184,7 +7186,7 @@ public class Client : IClient
         return res.QueryObjectsOnPhysicalVsanDiskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<OptionValue[]> QueryOptions(ManagedObjectReference self, string name)
+    public async System.Threading.Tasks.Task<OptionValue[]?> QueryOptions(ManagedObjectReference self, string? name)
     {
         var req = new QueryOptionsRequestType
         {
@@ -7197,7 +7199,7 @@ public class Client : IClient
         return res.QueryOptionsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<HostDiagnosticPartitionCreateDescription> QueryPartitionCreateDesc(ManagedObjectReference self, string diskUuid, string diagnosticType)
+    public async System.Threading.Tasks.Task<HostDiagnosticPartitionCreateDescription?> QueryPartitionCreateDesc(ManagedObjectReference self, string diskUuid, string diagnosticType)
     {
         var req = new QueryPartitionCreateDescRequestType
         {
@@ -7211,7 +7213,7 @@ public class Client : IClient
         return res.QueryPartitionCreateDescResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<HostDiagnosticPartitionCreateOption[]> QueryPartitionCreateOptions(ManagedObjectReference self, string storageType, string diagnosticType)
+    public async System.Threading.Tasks.Task<HostDiagnosticPartitionCreateOption[]?> QueryPartitionCreateOptions(ManagedObjectReference self, string storageType, string diagnosticType)
     {
         var req = new QueryPartitionCreateOptionsRequestType
         {
@@ -7225,7 +7227,7 @@ public class Client : IClient
         return res.QueryPartitionCreateOptionsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<HostPathSelectionPolicyOption[]> QueryPathSelectionPolicyOptions(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<HostPathSelectionPolicyOption[]?> QueryPathSelectionPolicyOptions(ManagedObjectReference self)
     {
         var req = new QueryPathSelectionPolicyOptionsRequestType
         {
@@ -7237,7 +7239,7 @@ public class Client : IClient
         return res.QueryPathSelectionPolicyOptionsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<PerfEntityMetricBase[]> QueryPerf(ManagedObjectReference self, PerfQuerySpec[] querySpec)
+    public async System.Threading.Tasks.Task<PerfEntityMetricBase[]?> QueryPerf(ManagedObjectReference self, PerfQuerySpec[] querySpec)
     {
         var req = new QueryPerfRequestType
         {
@@ -7250,7 +7252,7 @@ public class Client : IClient
         return res.QueryPerfResponse1;
     }
 
-    public async System.Threading.Tasks.Task<PerfCompositeMetric> QueryPerfComposite(ManagedObjectReference self, PerfQuerySpec querySpec)
+    public async System.Threading.Tasks.Task<PerfCompositeMetric?> QueryPerfComposite(ManagedObjectReference self, PerfQuerySpec querySpec)
     {
         var req = new QueryPerfCompositeRequestType
         {
@@ -7263,7 +7265,7 @@ public class Client : IClient
         return res.QueryPerfCompositeResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<PerfCounterInfo[]> QueryPerfCounter(ManagedObjectReference self, int[] counterId)
+    public async System.Threading.Tasks.Task<PerfCounterInfo[]?> QueryPerfCounter(ManagedObjectReference self, int[] counterId)
     {
         var req = new QueryPerfCounterRequestType
         {
@@ -7276,7 +7278,7 @@ public class Client : IClient
         return res.QueryPerfCounterResponse1;
     }
 
-    public async System.Threading.Tasks.Task<PerfCounterInfo[]> QueryPerfCounterByLevel(ManagedObjectReference self, int level)
+    public async System.Threading.Tasks.Task<PerfCounterInfo[]?> QueryPerfCounterByLevel(ManagedObjectReference self, int level)
     {
         var req = new QueryPerfCounterByLevelRequestType
         {
@@ -7289,7 +7291,7 @@ public class Client : IClient
         return res.QueryPerfCounterByLevelResponse1;
     }
 
-    public async System.Threading.Tasks.Task<PerfProviderSummary> QueryPerfProviderSummary(ManagedObjectReference self, ManagedObjectReference entity)
+    public async System.Threading.Tasks.Task<PerfProviderSummary?> QueryPerfProviderSummary(ManagedObjectReference self, ManagedObjectReference entity)
     {
         var req = new QueryPerfProviderSummaryRequestType
         {
@@ -7302,7 +7304,7 @@ public class Client : IClient
         return res.QueryPerfProviderSummaryResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string> QueryPhysicalVsanDisks(ManagedObjectReference self, string[] props)
+    public async System.Threading.Tasks.Task<string?> QueryPhysicalVsanDisks(ManagedObjectReference self, string[]? props)
     {
         var req = new QueryPhysicalVsanDisksRequestType
         {
@@ -7315,7 +7317,7 @@ public class Client : IClient
         return res.QueryPhysicalVsanDisksResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<IscsiStatus> QueryPnicStatus(ManagedObjectReference self, string pnicDevice)
+    public async System.Threading.Tasks.Task<IscsiStatus?> QueryPnicStatus(ManagedObjectReference self, string pnicDevice)
     {
         var req = new QueryPnicStatusRequestType
         {
@@ -7328,7 +7330,7 @@ public class Client : IClient
         return res.QueryPnicStatusResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ProfilePolicyMetadata[]> QueryPolicyMetadata(ManagedObjectReference self, string[] policyName, ManagedObjectReference profile)
+    public async System.Threading.Tasks.Task<ProfilePolicyMetadata[]?> QueryPolicyMetadata(ManagedObjectReference self, string[]? policyName, ManagedObjectReference? profile)
     {
         var req = new QueryPolicyMetadataRequestType
         {
@@ -7342,7 +7344,7 @@ public class Client : IClient
         return res.QueryPolicyMetadataResponse1;
     }
 
-    public async System.Threading.Tasks.Task<string> QueryProductLockerLocation(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<string?> QueryProductLockerLocation(ManagedObjectReference self)
     {
         var req = new QueryProductLockerLocationRequestType
         {
@@ -7354,7 +7356,7 @@ public class Client : IClient
         return res.QueryProductLockerLocationResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ProfileProfileStructure> QueryProfileStructure(ManagedObjectReference self, ManagedObjectReference profile)
+    public async System.Threading.Tasks.Task<ProfileProfileStructure?> QueryProfileStructure(ManagedObjectReference self, ManagedObjectReference? profile)
     {
         var req = new QueryProfileStructureRequestType
         {
@@ -7367,7 +7369,7 @@ public class Client : IClient
         return res.QueryProfileStructureResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string[]> QueryProviderList(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<string[]?> QueryProviderList(ManagedObjectReference self)
     {
         var req = new QueryProviderListRequestType
         {
@@ -7379,7 +7381,7 @@ public class Client : IClient
         return res.QueryProviderListResponse1;
     }
 
-    public async System.Threading.Tasks.Task<string> QueryProviderName(ManagedObjectReference self, string id)
+    public async System.Threading.Tasks.Task<string?> QueryProviderName(ManagedObjectReference self, string id)
     {
         var req = new QueryProviderNameRequestType
         {
@@ -7392,7 +7394,7 @@ public class Client : IClient
         return res.QueryProviderNameResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ResourceConfigOption> QueryResourceConfigOption(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ResourceConfigOption?> QueryResourceConfigOption(ManagedObjectReference self)
     {
         var req = new QueryResourceConfigOptionRequestType
         {
@@ -7404,7 +7406,7 @@ public class Client : IClient
         return res.QueryResourceConfigOptionResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ServiceManagerServiceInfo[]> QueryServiceList(ManagedObjectReference self, string serviceName, string[] location)
+    public async System.Threading.Tasks.Task<ServiceManagerServiceInfo[]?> QueryServiceList(ManagedObjectReference self, string? serviceName, string[]? location)
     {
         var req = new QueryServiceListRequestType
         {
@@ -7418,7 +7420,7 @@ public class Client : IClient
         return res.QueryServiceListResponse1;
     }
 
-    public async System.Threading.Tasks.Task<HostStorageArrayTypePolicyOption[]> QueryStorageArrayTypePolicyOptions(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<HostStorageArrayTypePolicyOption[]?> QueryStorageArrayTypePolicyOptions(ManagedObjectReference self)
     {
         var req = new QueryStorageArrayTypePolicyOptionsRequestType
         {
@@ -7430,7 +7432,7 @@ public class Client : IClient
         return res.QueryStorageArrayTypePolicyOptionsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<LicenseFeatureInfo[]> QuerySupportedFeatures(ManagedObjectReference self, ManagedObjectReference host)
+    public async System.Threading.Tasks.Task<LicenseFeatureInfo[]?> QuerySupportedFeatures(ManagedObjectReference self, ManagedObjectReference? host)
     {
         var req = new QuerySupportedFeaturesRequestType
         {
@@ -7443,7 +7445,7 @@ public class Client : IClient
         return res.QuerySupportedFeaturesResponse1;
     }
 
-    public async System.Threading.Tasks.Task<string> QuerySyncingVsanObjects(ManagedObjectReference self, string[] uuids)
+    public async System.Threading.Tasks.Task<string?> QuerySyncingVsanObjects(ManagedObjectReference self, string[]? uuids)
     {
         var req = new QuerySyncingVsanObjectsRequestType
         {
@@ -7456,7 +7458,7 @@ public class Client : IClient
         return res.QuerySyncingVsanObjectsResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string[]> QuerySystemUsers(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<string[]?> QuerySystemUsers(ManagedObjectReference self)
     {
         var req = new QuerySystemUsersRequestType
         {
@@ -7468,7 +7470,7 @@ public class Client : IClient
         return res.QuerySystemUsersResponse1;
     }
 
-    public async System.Threading.Tasks.Task<HostCapability> QueryTargetCapabilities(ManagedObjectReference self, ManagedObjectReference host)
+    public async System.Threading.Tasks.Task<HostCapability?> QueryTargetCapabilities(ManagedObjectReference self, ManagedObjectReference? host)
     {
         var req = new QueryTargetCapabilitiesRequestType
         {
@@ -7481,7 +7483,7 @@ public class Client : IClient
         return res.QueryTargetCapabilitiesResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<HostTpmAttestationReport> QueryTpmAttestationReport(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<HostTpmAttestationReport?> QueryTpmAttestationReport(ManagedObjectReference self)
     {
         var req = new QueryTpmAttestationReportRequestType
         {
@@ -7493,7 +7495,7 @@ public class Client : IClient
         return res.QueryTpmAttestationReportResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference[]> QueryUnmonitoredHosts(ManagedObjectReference self, string providerId, ManagedObjectReference cluster)
+    public async System.Threading.Tasks.Task<ManagedObjectReference[]?> QueryUnmonitoredHosts(ManagedObjectReference self, string providerId, ManagedObjectReference cluster)
     {
         var req = new QueryUnmonitoredHostsRequestType
         {
@@ -7507,7 +7509,7 @@ public class Client : IClient
         return res.QueryUnmonitoredHostsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<string[]> QueryUnownedFiles(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<string[]?> QueryUnownedFiles(ManagedObjectReference self)
     {
         var req = new QueryUnownedFilesRequestType
         {
@@ -7519,7 +7521,7 @@ public class Client : IClient
         return res.QueryUnownedFilesResponse1;
     }
 
-    public async System.Threading.Tasks.Task<HostUnresolvedVmfsVolume[]> QueryUnresolvedVmfsVolume(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<HostUnresolvedVmfsVolume[]?> QueryUnresolvedVmfsVolume(ManagedObjectReference self)
     {
         var req = new QueryUnresolvedVmfsVolumeRequestType
         {
@@ -7531,7 +7533,7 @@ public class Client : IClient
         return res.QueryUnresolvedVmfsVolumeResponse1;
     }
 
-    public async System.Threading.Tasks.Task<HostUnresolvedVmfsVolume[]> QueryUnresolvedVmfsVolumes(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<HostUnresolvedVmfsVolume[]?> QueryUnresolvedVmfsVolumes(ManagedObjectReference self)
     {
         var req = new QueryUnresolvedVmfsVolumesRequestType
         {
@@ -7543,7 +7545,7 @@ public class Client : IClient
         return res.QueryUnresolvedVmfsVolumesResponse1;
     }
 
-    public async System.Threading.Tasks.Task<int[]> QueryUsedVlanIdInDvs(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<int[]?> QueryUsedVlanIdInDvs(ManagedObjectReference self)
     {
         var req = new QueryUsedVlanIdInDvsRequestType
         {
@@ -7555,7 +7557,7 @@ public class Client : IClient
         return res.QueryUsedVlanIdInDvsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<int> QueryVirtualDiskFragmentation(ManagedObjectReference self, string name, ManagedObjectReference datacenter)
+    public async System.Threading.Tasks.Task<int> QueryVirtualDiskFragmentation(ManagedObjectReference self, string name, ManagedObjectReference? datacenter)
     {
         var req = new QueryVirtualDiskFragmentationRequestType
         {
@@ -7569,7 +7571,7 @@ public class Client : IClient
         return res.QueryVirtualDiskFragmentationResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<HostDiskDimensionsChs> QueryVirtualDiskGeometry(ManagedObjectReference self, string name, ManagedObjectReference datacenter)
+    public async System.Threading.Tasks.Task<HostDiskDimensionsChs?> QueryVirtualDiskGeometry(ManagedObjectReference self, string name, ManagedObjectReference? datacenter)
     {
         var req = new QueryVirtualDiskGeometryRequestType
         {
@@ -7583,7 +7585,7 @@ public class Client : IClient
         return res.QueryVirtualDiskGeometryResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string> QueryVirtualDiskUuid(ManagedObjectReference self, string name, ManagedObjectReference datacenter)
+    public async System.Threading.Tasks.Task<string?> QueryVirtualDiskUuid(ManagedObjectReference self, string name, ManagedObjectReference? datacenter)
     {
         var req = new QueryVirtualDiskUuidRequestType
         {
@@ -7597,7 +7599,7 @@ public class Client : IClient
         return res.QueryVirtualDiskUuidResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<VmfsConfigOption[]> QueryVmfsConfigOption(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<VmfsConfigOption[]?> QueryVmfsConfigOption(ManagedObjectReference self)
     {
         var req = new QueryVmfsConfigOptionRequestType
         {
@@ -7609,7 +7611,7 @@ public class Client : IClient
         return res.QueryVmfsConfigOptionResponse1;
     }
 
-    public async System.Threading.Tasks.Task<VmfsDatastoreOption[]> QueryVmfsDatastoreCreateOptions(ManagedObjectReference self, string devicePath, int vmfsMajorVersion, bool vmfsMajorVersionSpecified)
+    public async System.Threading.Tasks.Task<VmfsDatastoreOption[]?> QueryVmfsDatastoreCreateOptions(ManagedObjectReference self, string devicePath, int vmfsMajorVersion, bool vmfsMajorVersionSpecified)
     {
         var req = new QueryVmfsDatastoreCreateOptionsRequestType
         {
@@ -7624,7 +7626,7 @@ public class Client : IClient
         return res.QueryVmfsDatastoreCreateOptionsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<VmfsDatastoreOption[]> QueryVmfsDatastoreExpandOptions(ManagedObjectReference self, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task<VmfsDatastoreOption[]?> QueryVmfsDatastoreExpandOptions(ManagedObjectReference self, ManagedObjectReference datastore)
     {
         var req = new QueryVmfsDatastoreExpandOptionsRequestType
         {
@@ -7637,7 +7639,7 @@ public class Client : IClient
         return res.QueryVmfsDatastoreExpandOptionsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<VmfsDatastoreOption[]> QueryVmfsDatastoreExtendOptions(ManagedObjectReference self, ManagedObjectReference datastore, string devicePath, bool suppressExpandCandidates, bool suppressExpandCandidatesSpecified)
+    public async System.Threading.Tasks.Task<VmfsDatastoreOption[]?> QueryVmfsDatastoreExtendOptions(ManagedObjectReference self, ManagedObjectReference datastore, string devicePath, bool suppressExpandCandidates, bool suppressExpandCandidatesSpecified)
     {
         var req = new QueryVmfsDatastoreExtendOptionsRequestType
         {
@@ -7653,7 +7655,7 @@ public class Client : IClient
         return res.QueryVmfsDatastoreExtendOptionsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<HostVMotionCompatibility[]> QueryVMotionCompatibility(ManagedObjectReference self, ManagedObjectReference vm, ManagedObjectReference[] host, string[] compatibility)
+    public async System.Threading.Tasks.Task<HostVMotionCompatibility[]?> QueryVMotionCompatibility(ManagedObjectReference self, ManagedObjectReference vm, ManagedObjectReference[] host, string[]? compatibility)
     {
         var req = new QueryVMotionCompatibilityRequestType
         {
@@ -7668,7 +7670,7 @@ public class Client : IClient
         return res.QueryVMotionCompatibilityResponse1;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> QueryVMotionCompatibilityEx_Task(ManagedObjectReference self, ManagedObjectReference[] vm, ManagedObjectReference[] host)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> QueryVMotionCompatibilityEx_Task(ManagedObjectReference self, ManagedObjectReference[] vm, ManagedObjectReference[] host)
     {
         var req = new QueryVMotionCompatibilityExRequestType
         {
@@ -7682,7 +7684,7 @@ public class Client : IClient
         return res.QueryVMotionCompatibilityEx_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<IscsiStatus> QueryVnicStatus(ManagedObjectReference self, string vnicDevice)
+    public async System.Threading.Tasks.Task<IscsiStatus?> QueryVnicStatus(ManagedObjectReference self, string vnicDevice)
     {
         var req = new QueryVnicStatusRequestType
         {
@@ -7695,7 +7697,7 @@ public class Client : IClient
         return res.QueryVnicStatusResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string> QueryVsanObjects(ManagedObjectReference self, string[] uuids)
+    public async System.Threading.Tasks.Task<string?> QueryVsanObjects(ManagedObjectReference self, string[]? uuids)
     {
         var req = new QueryVsanObjectsRequestType
         {
@@ -7708,7 +7710,7 @@ public class Client : IClient
         return res.QueryVsanObjectsResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string[]> QueryVsanObjectUuidsByFilter(ManagedObjectReference self, string[] uuids, int limit, bool limitSpecified, int version, bool versionSpecified)
+    public async System.Threading.Tasks.Task<string[]?> QueryVsanObjectUuidsByFilter(ManagedObjectReference self, string[]? uuids, int limit, bool limitSpecified, int version, bool versionSpecified)
     {
         var req = new QueryVsanObjectUuidsByFilterRequestType
         {
@@ -7725,7 +7727,7 @@ public class Client : IClient
         return res.QueryVsanObjectUuidsByFilterResponse1;
     }
 
-    public async System.Threading.Tasks.Task<string> QueryVsanStatistics(ManagedObjectReference self, string[] labels)
+    public async System.Threading.Tasks.Task<string?> QueryVsanStatistics(ManagedObjectReference self, string[] labels)
     {
         var req = new QueryVsanStatisticsRequestType
         {
@@ -7738,7 +7740,7 @@ public class Client : IClient
         return res.QueryVsanStatisticsResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<VsanUpgradeSystemUpgradeStatus> QueryVsanUpgradeStatus(ManagedObjectReference self, ManagedObjectReference cluster)
+    public async System.Threading.Tasks.Task<VsanUpgradeSystemUpgradeStatus?> QueryVsanUpgradeStatus(ManagedObjectReference self, ManagedObjectReference cluster)
     {
         var req = new QueryVsanUpgradeStatusRequestType
         {
@@ -7751,7 +7753,7 @@ public class Client : IClient
         return res.QueryVsanUpgradeStatusResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string[]> ReadEnvironmentVariableInGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, string[] names)
+    public async System.Threading.Tasks.Task<string[]?> ReadEnvironmentVariableInGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, string[]? names)
     {
         var req = new ReadEnvironmentVariableInGuestRequestType
         {
@@ -7766,7 +7768,7 @@ public class Client : IClient
         return res.ReadEnvironmentVariableInGuestResponse1;
     }
 
-    public async System.Threading.Tasks.Task<Event[]> ReadNextEvents(ManagedObjectReference self, int maxCount)
+    public async System.Threading.Tasks.Task<Event[]?> ReadNextEvents(ManagedObjectReference self, int maxCount)
     {
         var req = new ReadNextEventsRequestType
         {
@@ -7779,7 +7781,7 @@ public class Client : IClient
         return res.ReadNextEventsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<TaskInfo[]> ReadNextTasks(ManagedObjectReference self, int maxCount)
+    public async System.Threading.Tasks.Task<TaskInfo[]?> ReadNextTasks(ManagedObjectReference self, int maxCount)
     {
         var req = new ReadNextTasksRequestType
         {
@@ -7792,7 +7794,7 @@ public class Client : IClient
         return res.ReadNextTasksResponse1;
     }
 
-    public async System.Threading.Tasks.Task<Event[]> ReadPreviousEvents(ManagedObjectReference self, int maxCount)
+    public async System.Threading.Tasks.Task<Event[]?> ReadPreviousEvents(ManagedObjectReference self, int maxCount)
     {
         var req = new ReadPreviousEventsRequestType
         {
@@ -7805,7 +7807,7 @@ public class Client : IClient
         return res.ReadPreviousEventsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<TaskInfo[]> ReadPreviousTasks(ManagedObjectReference self, int maxCount)
+    public async System.Threading.Tasks.Task<TaskInfo[]?> ReadPreviousTasks(ManagedObjectReference self, int maxCount)
     {
         var req = new ReadPreviousTasksRequestType
         {
@@ -7828,7 +7830,7 @@ public class Client : IClient
         await this.inner.RebootGuestAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> RebootHost_Task(ManagedObjectReference self, bool force)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> RebootHost_Task(ManagedObjectReference self, bool force)
     {
         var req = new RebootHostRequestType
         {
@@ -7841,7 +7843,7 @@ public class Client : IClient
         return res.RebootHost_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<StoragePlacementResult> RecommendDatastores(ManagedObjectReference self, StoragePlacementSpec storageSpec)
+    public async System.Threading.Tasks.Task<StoragePlacementResult?> RecommendDatastores(ManagedObjectReference self, StoragePlacementSpec storageSpec)
     {
         var req = new RecommendDatastoresRequestType
         {
@@ -7854,7 +7856,7 @@ public class Client : IClient
         return res.RecommendDatastoresResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ClusterHostRecommendation[]> RecommendHostsForVm(ManagedObjectReference self, ManagedObjectReference vm, ManagedObjectReference pool)
+    public async System.Threading.Tasks.Task<ClusterHostRecommendation[]?> RecommendHostsForVm(ManagedObjectReference self, ManagedObjectReference vm, ManagedObjectReference? pool)
     {
         var req = new RecommendHostsForVmRequestType
         {
@@ -7868,7 +7870,7 @@ public class Client : IClient
         return res.RecommendHostsForVmResponse1;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> RecommissionVsanNode_Task(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> RecommissionVsanNode_Task(ManagedObjectReference self)
     {
         var req = new RecommissionVsanNodeRequestType
         {
@@ -7880,7 +7882,7 @@ public class Client : IClient
         return res.RecommissionVsanNode_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ReconcileDatastoreInventory_Task(ManagedObjectReference self, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ReconcileDatastoreInventory_Task(ManagedObjectReference self, ManagedObjectReference datastore)
     {
         var req = new ReconcileDatastoreInventoryRequestType
         {
@@ -7893,7 +7895,7 @@ public class Client : IClient
         return res.ReconcileDatastoreInventory_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<VsanPolicySatisfiability[]> ReconfigurationSatisfiable(ManagedObjectReference self, VsanPolicyChangeBatch[] pcbs, bool ignoreSatisfiability, bool ignoreSatisfiabilitySpecified)
+    public async System.Threading.Tasks.Task<VsanPolicySatisfiability[]?> ReconfigurationSatisfiable(ManagedObjectReference self, VsanPolicyChangeBatch[] pcbs, bool ignoreSatisfiability, bool ignoreSatisfiabilitySpecified)
     {
         var req = new ReconfigurationSatisfiableRequestType
         {
@@ -7930,7 +7932,7 @@ public class Client : IClient
         await this.inner.ReconfigureAutostartAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ReconfigureCluster_Task(ManagedObjectReference self, ClusterConfigSpec spec, bool modify)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ReconfigureCluster_Task(ManagedObjectReference self, ClusterConfigSpec spec, bool modify)
     {
         var req = new ReconfigureClusterRequestType
         {
@@ -7944,7 +7946,7 @@ public class Client : IClient
         return res.ReconfigureCluster_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ReconfigureComputeResource_Task(ManagedObjectReference self, ComputeResourceConfigSpec spec, bool modify)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ReconfigureComputeResource_Task(ManagedObjectReference self, ComputeResourceConfigSpec spec, bool modify)
     {
         var req = new ReconfigureComputeResourceRequestType
         {
@@ -7958,7 +7960,7 @@ public class Client : IClient
         return res.ReconfigureComputeResource_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ReconfigureDatacenter_Task(ManagedObjectReference self, DatacenterConfigSpec spec, bool modify)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ReconfigureDatacenter_Task(ManagedObjectReference self, DatacenterConfigSpec spec, bool modify)
     {
         var req = new ReconfigureDatacenterRequestType
         {
@@ -7984,7 +7986,7 @@ public class Client : IClient
         await this.inner.ReconfigureDomObjectAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ReconfigureDVPort_Task(ManagedObjectReference self, DVPortConfigSpec[] port)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ReconfigureDVPort_Task(ManagedObjectReference self, DVPortConfigSpec[] port)
     {
         var req = new ReconfigureDVPortRequestType
         {
@@ -7997,7 +7999,7 @@ public class Client : IClient
         return res.ReconfigureDVPort_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ReconfigureDVPortgroup_Task(ManagedObjectReference self, DVPortgroupConfigSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ReconfigureDVPortgroup_Task(ManagedObjectReference self, DVPortgroupConfigSpec spec)
     {
         var req = new ReconfigureDVPortgroupRequestType
         {
@@ -8010,7 +8012,7 @@ public class Client : IClient
         return res.ReconfigureDVPortgroup_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ReconfigureDvs_Task(ManagedObjectReference self, DVSConfigSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ReconfigureDvs_Task(ManagedObjectReference self, DVSConfigSpec spec)
     {
         var req = new ReconfigureDvsRequestType
         {
@@ -8023,7 +8025,7 @@ public class Client : IClient
         return res.ReconfigureDvs_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ReconfigureHostForDAS_Task(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ReconfigureHostForDAS_Task(ManagedObjectReference self)
     {
         var req = new ReconfigureHostForDASRequestType
         {
@@ -8079,7 +8081,7 @@ public class Client : IClient
         await this.inner.ReconfigureVirtualMachineReservationAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ReconfigVM_Task(ManagedObjectReference self, VirtualMachineConfigSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ReconfigVM_Task(ManagedObjectReference self, VirtualMachineConfigSpec spec)
     {
         var req = new ReconfigVMRequestType
         {
@@ -8092,7 +8094,7 @@ public class Client : IClient
         return res.ReconfigVM_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ReconnectHost_Task(ManagedObjectReference self, HostConnectSpec cnxSpec, HostSystemReconnectSpec reconnectSpec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ReconnectHost_Task(ManagedObjectReference self, HostConnectSpec? cnxSpec, HostSystemReconnectSpec? reconnectSpec)
     {
         var req = new ReconnectHostRequestType
         {
@@ -8106,7 +8108,7 @@ public class Client : IClient
         return res.ReconnectHost_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> RectifyDvsHost_Task(ManagedObjectReference self, ManagedObjectReference[] hosts)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> RectifyDvsHost_Task(ManagedObjectReference self, ManagedObjectReference[]? hosts)
     {
         var req = new RectifyDvsHostRequestType
         {
@@ -8119,7 +8121,7 @@ public class Client : IClient
         return res.RectifyDvsHost_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> RectifyDvsOnHost_Task(ManagedObjectReference self, ManagedObjectReference[] hosts)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> RectifyDvsOnHost_Task(ManagedObjectReference self, ManagedObjectReference[] hosts)
     {
         var req = new RectifyDvsOnHostRequestType
         {
@@ -8172,7 +8174,7 @@ public class Client : IClient
         await this.inner.RefreshDateTimeSystemAsync(req);
     }
 
-    public async System.Threading.Tasks.Task RefreshDVPortState(ManagedObjectReference self, string[] portKeys)
+    public async System.Threading.Tasks.Task RefreshDVPortState(ManagedObjectReference self, string[]? portKeys)
     {
         var req = new RefreshDVPortStateRequestType
         {
@@ -8264,7 +8266,7 @@ public class Client : IClient
         await this.inner.RefreshStorageDrsRecommendationAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> RefreshStorageDrsRecommendationsForPod_Task(ManagedObjectReference self, ManagedObjectReference pod)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> RefreshStorageDrsRecommendationsForPod_Task(ManagedObjectReference self, ManagedObjectReference pod)
     {
         var req = new RefreshStorageDrsRecommendationsForPodRequestType
         {
@@ -8297,7 +8299,7 @@ public class Client : IClient
         await this.inner.RefreshStorageSystemAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> RegisterChildVM_Task(ManagedObjectReference self, string path, string name, ManagedObjectReference host)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> RegisterChildVM_Task(ManagedObjectReference self, string path, string? name, ManagedObjectReference? host)
     {
         var req = new RegisterChildVMRequestType
         {
@@ -8312,7 +8314,7 @@ public class Client : IClient
         return res.RegisterChildVM_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<VStorageObject> RegisterDisk(ManagedObjectReference self, string path, string name)
+    public async System.Threading.Tasks.Task<VStorageObject?> RegisterDisk(ManagedObjectReference self, string path, string? name)
     {
         var req = new RegisterDiskRequestType
         {
@@ -8337,7 +8339,7 @@ public class Client : IClient
         await this.inner.RegisterExtensionAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<string> RegisterHealthUpdateProvider(ManagedObjectReference self, string name, HealthUpdateInfo[] healthUpdateInfo)
+    public async System.Threading.Tasks.Task<string?> RegisterHealthUpdateProvider(ManagedObjectReference self, string name, HealthUpdateInfo[]? healthUpdateInfo)
     {
         var req = new RegisterHealthUpdateProviderRequestType
         {
@@ -8362,7 +8364,7 @@ public class Client : IClient
         await this.inner.RegisterKmipServerAsync(req);
     }
 
-    public async System.Threading.Tasks.Task RegisterKmsCluster(ManagedObjectReference self, KeyProviderId clusterId, string managementType)
+    public async System.Threading.Tasks.Task RegisterKmsCluster(ManagedObjectReference self, KeyProviderId clusterId, string? managementType)
     {
         var req = new RegisterKmsClusterRequestType
         {
@@ -8374,7 +8376,7 @@ public class Client : IClient
         await this.inner.RegisterKmsClusterAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> RegisterVM_Task(ManagedObjectReference self, string path, string name, bool asTemplate, ManagedObjectReference pool, ManagedObjectReference host)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> RegisterVM_Task(ManagedObjectReference self, string path, string? name, bool asTemplate, ManagedObjectReference? pool, ManagedObjectReference? host)
     {
         var req = new RegisterVMRequestType
         {
@@ -8416,7 +8418,7 @@ public class Client : IClient
         await this.inner.ReleaseIpAllocationAsync(req);
     }
 
-    public async System.Threading.Tasks.Task ReleaseManagedSnapshot(ManagedObjectReference self, string vdisk, ManagedObjectReference datacenter)
+    public async System.Threading.Tasks.Task ReleaseManagedSnapshot(ManagedObjectReference self, string vdisk, ManagedObjectReference? datacenter)
     {
         var req = new ReleaseManagedSnapshotRequestType
         {
@@ -8438,7 +8440,7 @@ public class Client : IClient
         await this.inner.ReloadAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ReloadVirtualMachineFromPath_Task(ManagedObjectReference self, string configurationPath)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ReloadVirtualMachineFromPath_Task(ManagedObjectReference self, string configurationPath)
     {
         var req = new reloadVirtualMachineFromPathRequestType
         {
@@ -8451,7 +8453,7 @@ public class Client : IClient
         return res.reloadVirtualMachineFromPath_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> RelocateVM_Task(ManagedObjectReference self, VirtualMachineRelocateSpec spec, VirtualMachineMovePriority priority, bool prioritySpecified)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> RelocateVM_Task(ManagedObjectReference self, VirtualMachineRelocateSpec spec, VirtualMachineMovePriority priority, bool prioritySpecified)
     {
         var req = new RelocateVMRequestType
         {
@@ -8466,7 +8468,7 @@ public class Client : IClient
         return res.RelocateVM_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> RelocateVStorageObject_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, VslmRelocateSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> RelocateVStorageObject_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, VslmRelocateSpec spec)
     {
         var req = new RelocateVStorageObjectRequestType
         {
@@ -8491,7 +8493,7 @@ public class Client : IClient
         await this.inner.RemoveAlarmAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> RemoveAllSnapshots_Task(ManagedObjectReference self, bool consolidate, bool consolidateSpecified)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> RemoveAllSnapshots_Task(ManagedObjectReference self, bool consolidate, bool consolidateSpecified)
     {
         var req = new RemoveAllSnapshotsRequestType
         {
@@ -8550,7 +8552,7 @@ public class Client : IClient
         await this.inner.RemoveDatastoreAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> RemoveDatastoreEx_Task(ManagedObjectReference self, ManagedObjectReference[] datastore)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> RemoveDatastoreEx_Task(ManagedObjectReference self, ManagedObjectReference[] datastore)
     {
         var req = new RemoveDatastoreExRequestType
         {
@@ -8563,7 +8565,7 @@ public class Client : IClient
         return res.RemoveDatastoreEx_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> RemoveDisk_Task(ManagedObjectReference self, HostScsiDisk[] disk, HostMaintenanceSpec maintenanceSpec, int timeout, bool timeoutSpecified)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> RemoveDisk_Task(ManagedObjectReference self, HostScsiDisk[] disk, HostMaintenanceSpec? maintenanceSpec, int timeout, bool timeoutSpecified)
     {
         var req = new RemoveDiskRequestType
         {
@@ -8579,7 +8581,7 @@ public class Client : IClient
         return res.RemoveDisk_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> RemoveDiskMapping_Task(ManagedObjectReference self, VsanHostDiskMapping[] mapping, HostMaintenanceSpec maintenanceSpec, int timeout, bool timeoutSpecified)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> RemoveDiskMapping_Task(ManagedObjectReference self, VsanHostDiskMapping[] mapping, HostMaintenanceSpec? maintenanceSpec, int timeout, bool timeoutSpecified)
     {
         var req = new RemoveDiskMappingRequestType
         {
@@ -8619,7 +8621,7 @@ public class Client : IClient
         await this.inner.RemoveFilterAsync(req);
     }
 
-    public async System.Threading.Tasks.Task RemoveFilterEntities(ManagedObjectReference self, string filterId, ManagedObjectReference[] entities)
+    public async System.Threading.Tasks.Task RemoveFilterEntities(ManagedObjectReference self, string filterId, ManagedObjectReference[]? entities)
     {
         var req = new RemoveFilterEntitiesRequestType
         {
@@ -8709,7 +8711,7 @@ public class Client : IClient
         await this.inner.RemoveKeyAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<CryptoKeyResult[]> RemoveKeys(ManagedObjectReference self, CryptoKeyId[] keys, bool force)
+    public async System.Threading.Tasks.Task<CryptoKeyResult[]?> RemoveKeys(ManagedObjectReference self, CryptoKeyId[]? keys, bool force)
     {
         var req = new RemoveKeysRequestType
         {
@@ -8758,7 +8760,7 @@ public class Client : IClient
         await this.inner.RemoveLicenseLabelAsync(req);
     }
 
-    public async System.Threading.Tasks.Task RemoveMonitoredEntities(ManagedObjectReference self, string providerId, ManagedObjectReference[] entities)
+    public async System.Threading.Tasks.Task RemoveMonitoredEntities(ManagedObjectReference self, string providerId, ManagedObjectReference[]? entities)
     {
         var req = new RemoveMonitoredEntitiesRequestType
         {
@@ -8859,7 +8861,7 @@ public class Client : IClient
         await this.inner.RemoveSmartCardTrustAnchorByFingerprintAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> RemoveSnapshot_Task(ManagedObjectReference self, bool removeChildren, bool consolidate, bool consolidateSpecified)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> RemoveSnapshot_Task(ManagedObjectReference self, bool removeChildren, bool consolidate, bool consolidateSpecified)
     {
         var req = new RemoveSnapshotRequestType
         {
@@ -8918,7 +8920,7 @@ public class Client : IClient
         await this.inner.RemoveVirtualSwitchAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> Rename_Task(ManagedObjectReference self, string newName)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> Rename_Task(ManagedObjectReference self, string newName)
     {
         var req = new RenameRequestType
         {
@@ -8966,7 +8968,7 @@ public class Client : IClient
         await this.inner.RenameDatastoreAsync(req);
     }
 
-    public async System.Threading.Tasks.Task RenameSnapshot(ManagedObjectReference self, string name, string description)
+    public async System.Threading.Tasks.Task RenameSnapshot(ManagedObjectReference self, string? name, string? description)
     {
         var req = new RenameSnapshotRequestType
         {
@@ -8991,7 +8993,7 @@ public class Client : IClient
         await this.inner.RenameVStorageObjectAsync(req);
     }
 
-    public async System.Threading.Tasks.Task ReplaceCACertificatesAndCRLs(ManagedObjectReference self, string[] caCert, string[] caCrl)
+    public async System.Threading.Tasks.Task ReplaceCACertificatesAndCRLs(ManagedObjectReference self, string[] caCert, string[]? caCrl)
     {
         var req = new ReplaceCACertificatesAndCRLsRequestType
         {
@@ -9003,7 +9005,7 @@ public class Client : IClient
         await this.inner.ReplaceCACertificatesAndCRLsAsync(req);
     }
 
-    public async System.Threading.Tasks.Task ReplaceSmartCardTrustAnchors(ManagedObjectReference self, string[] certs)
+    public async System.Threading.Tasks.Task ReplaceSmartCardTrustAnchors(ManagedObjectReference self, string[]? certs)
     {
         var req = new ReplaceSmartCardTrustAnchorsRequestType
         {
@@ -9076,7 +9078,7 @@ public class Client : IClient
         await this.inner.ResetCounterLevelMappingAsync(req);
     }
 
-    public async System.Threading.Tasks.Task ResetEntityPermissions(ManagedObjectReference self, ManagedObjectReference entity, Permission[] permission)
+    public async System.Threading.Tasks.Task ResetEntityPermissions(ManagedObjectReference self, ManagedObjectReference entity, Permission[]? permission)
     {
         var req = new ResetEntityPermissionsRequestType
         {
@@ -9108,7 +9110,7 @@ public class Client : IClient
         await this.inner.ResetGuestInformationAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference[]> ResetListView(ManagedObjectReference self, ManagedObjectReference[] obj)
+    public async System.Threading.Tasks.Task<ManagedObjectReference[]?> ResetListView(ManagedObjectReference self, ManagedObjectReference[]? obj)
     {
         var req = new ResetListViewRequestType
         {
@@ -9142,7 +9144,7 @@ public class Client : IClient
         await this.inner.ResetSystemHealthInfoAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ResetVM_Task(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ResetVM_Task(ManagedObjectReference self)
     {
         var req = new ResetVMRequestType
         {
@@ -9154,7 +9156,7 @@ public class Client : IClient
         return res.ResetVM_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ResignatureUnresolvedVmfsVolume_Task(ManagedObjectReference self, HostUnresolvedVmfsResignatureSpec resolutionSpec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ResignatureUnresolvedVmfsVolume_Task(ManagedObjectReference self, HostUnresolvedVmfsResignatureSpec resolutionSpec)
     {
         var req = new ResignatureUnresolvedVmfsVolumeRequestType
         {
@@ -9167,7 +9169,7 @@ public class Client : IClient
         return res.ResignatureUnresolvedVmfsVolume_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ResolveInstallationErrorsOnCluster_Task(ManagedObjectReference self, string filterId, ManagedObjectReference cluster)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ResolveInstallationErrorsOnCluster_Task(ManagedObjectReference self, string filterId, ManagedObjectReference cluster)
     {
         var req = new ResolveInstallationErrorsOnClusterRequestType
         {
@@ -9181,7 +9183,7 @@ public class Client : IClient
         return res.ResolveInstallationErrorsOnCluster_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ResolveInstallationErrorsOnHost_Task(ManagedObjectReference self, string filterId, ManagedObjectReference host)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ResolveInstallationErrorsOnHost_Task(ManagedObjectReference self, string filterId, ManagedObjectReference host)
     {
         var req = new ResolveInstallationErrorsOnHostRequestType
         {
@@ -9195,7 +9197,7 @@ public class Client : IClient
         return res.ResolveInstallationErrorsOnHost_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<HostUnresolvedVmfsResolutionResult[]> ResolveMultipleUnresolvedVmfsVolumes(ManagedObjectReference self, HostUnresolvedVmfsResolutionSpec[] resolutionSpec)
+    public async System.Threading.Tasks.Task<HostUnresolvedVmfsResolutionResult[]?> ResolveMultipleUnresolvedVmfsVolumes(ManagedObjectReference self, HostUnresolvedVmfsResolutionSpec[] resolutionSpec)
     {
         var req = new ResolveMultipleUnresolvedVmfsVolumesRequestType
         {
@@ -9208,7 +9210,7 @@ public class Client : IClient
         return res.ResolveMultipleUnresolvedVmfsVolumesResponse1;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ResolveMultipleUnresolvedVmfsVolumesEx_Task(ManagedObjectReference self, HostUnresolvedVmfsResolutionSpec[] resolutionSpec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ResolveMultipleUnresolvedVmfsVolumesEx_Task(ManagedObjectReference self, HostUnresolvedVmfsResolutionSpec[] resolutionSpec)
     {
         var req = new ResolveMultipleUnresolvedVmfsVolumesExRequestType
         {
@@ -9254,7 +9256,7 @@ public class Client : IClient
         await this.inner.RestoreFirmwareConfigurationAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<Permission[]> RetrieveAllPermissions(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<Permission[]?> RetrieveAllPermissions(ManagedObjectReference self)
     {
         var req = new RetrieveAllPermissionsRequestType
         {
@@ -9266,7 +9268,7 @@ public class Client : IClient
         return res.RetrieveAllPermissionsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<AnswerFile> RetrieveAnswerFile(ManagedObjectReference self, ManagedObjectReference host)
+    public async System.Threading.Tasks.Task<AnswerFile?> RetrieveAnswerFile(ManagedObjectReference self, ManagedObjectReference host)
     {
         var req = new RetrieveAnswerFileRequestType
         {
@@ -9279,7 +9281,7 @@ public class Client : IClient
         return res.RetrieveAnswerFileResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<AnswerFile> RetrieveAnswerFileForProfile(ManagedObjectReference self, ManagedObjectReference host, HostApplyProfile applyProfile)
+    public async System.Threading.Tasks.Task<AnswerFile?> RetrieveAnswerFileForProfile(ManagedObjectReference self, ManagedObjectReference host, HostApplyProfile applyProfile)
     {
         var req = new RetrieveAnswerFileForProfileRequestType
         {
@@ -9293,7 +9295,7 @@ public class Client : IClient
         return res.RetrieveAnswerFileForProfileResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<EventArgDesc[]> RetrieveArgumentDescription(ManagedObjectReference self, string eventTypeId)
+    public async System.Threading.Tasks.Task<EventArgDesc[]?> RetrieveArgumentDescription(ManagedObjectReference self, string eventTypeId)
     {
         var req = new RetrieveArgumentDescriptionRequestType
         {
@@ -9306,7 +9308,7 @@ public class Client : IClient
         return res.RetrieveArgumentDescriptionResponse1;
     }
 
-    public async System.Threading.Tasks.Task<string> RetrieveClientCert(ManagedObjectReference self, KeyProviderId cluster)
+    public async System.Threading.Tasks.Task<string?> RetrieveClientCert(ManagedObjectReference self, KeyProviderId cluster)
     {
         var req = new RetrieveClientCertRequestType
         {
@@ -9319,7 +9321,7 @@ public class Client : IClient
         return res.RetrieveClientCertResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string> RetrieveClientCsr(ManagedObjectReference self, KeyProviderId cluster)
+    public async System.Threading.Tasks.Task<string?> RetrieveClientCsr(ManagedObjectReference self, KeyProviderId cluster)
     {
         var req = new RetrieveClientCsrRequestType
         {
@@ -9332,7 +9334,7 @@ public class Client : IClient
         return res.RetrieveClientCsrResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ClusterDasAdvancedRuntimeInfo> RetrieveDasAdvancedRuntimeInfo(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ClusterDasAdvancedRuntimeInfo?> RetrieveDasAdvancedRuntimeInfo(ManagedObjectReference self)
     {
         var req = new RetrieveDasAdvancedRuntimeInfoRequestType
         {
@@ -9344,7 +9346,7 @@ public class Client : IClient
         return res.RetrieveDasAdvancedRuntimeInfoResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ProfileDescription> RetrieveDescription(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ProfileDescription?> RetrieveDescription(ManagedObjectReference self)
     {
         var req = new RetrieveDescriptionRequestType
         {
@@ -9356,7 +9358,7 @@ public class Client : IClient
         return res.RetrieveDescriptionResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<HostDiskPartitionInfo[]> RetrieveDiskPartitionInfo(ManagedObjectReference self, string[] devicePath)
+    public async System.Threading.Tasks.Task<HostDiskPartitionInfo[]?> RetrieveDiskPartitionInfo(ManagedObjectReference self, string[] devicePath)
     {
         var req = new RetrieveDiskPartitionInfoRequestType
         {
@@ -9369,7 +9371,7 @@ public class Client : IClient
         return res.RetrieveDiskPartitionInfoResponse1;
     }
 
-    public async System.Threading.Tasks.Task<VirtualMachineDynamicPassthroughInfo[]> RetrieveDynamicPassthroughInfo(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<VirtualMachineDynamicPassthroughInfo[]?> RetrieveDynamicPassthroughInfo(ManagedObjectReference self)
     {
         var req = new RetrieveDynamicPassthroughInfoRequestType
         {
@@ -9381,7 +9383,7 @@ public class Client : IClient
         return res.RetrieveDynamicPassthroughInfoResponse1;
     }
 
-    public async System.Threading.Tasks.Task<Permission[]> RetrieveEntityPermissions(ManagedObjectReference self, ManagedObjectReference entity, bool inherited)
+    public async System.Threading.Tasks.Task<Permission[]?> RetrieveEntityPermissions(ManagedObjectReference self, ManagedObjectReference entity, bool inherited)
     {
         var req = new RetrieveEntityPermissionsRequestType
         {
@@ -9395,7 +9397,7 @@ public class Client : IClient
         return res.RetrieveEntityPermissionsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference[]> RetrieveEntityScheduledTask(ManagedObjectReference self, ManagedObjectReference entity)
+    public async System.Threading.Tasks.Task<ManagedObjectReference[]?> RetrieveEntityScheduledTask(ManagedObjectReference self, ManagedObjectReference? entity)
     {
         var req = new RetrieveEntityScheduledTaskRequestType
         {
@@ -9432,7 +9434,7 @@ public class Client : IClient
         return res.RetrieveHardwareUptimeResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<HostAccessControlEntry[]> RetrieveHostAccessControlEntries(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<HostAccessControlEntry[]?> RetrieveHostAccessControlEntries(ManagedObjectReference self)
     {
         var req = new RetrieveHostAccessControlEntriesRequestType
         {
@@ -9444,7 +9446,7 @@ public class Client : IClient
         return res.RetrieveHostAccessControlEntriesResponse1;
     }
 
-    public async System.Threading.Tasks.Task<StructuredCustomizations[]> RetrieveHostCustomizations(ManagedObjectReference self, ManagedObjectReference[] hosts)
+    public async System.Threading.Tasks.Task<StructuredCustomizations[]?> RetrieveHostCustomizations(ManagedObjectReference self, ManagedObjectReference[]? hosts)
     {
         var req = new RetrieveHostCustomizationsRequestType
         {
@@ -9457,7 +9459,7 @@ public class Client : IClient
         return res.RetrieveHostCustomizationsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<StructuredCustomizations[]> RetrieveHostCustomizationsForProfile(ManagedObjectReference self, ManagedObjectReference[] hosts, HostApplyProfile applyProfile)
+    public async System.Threading.Tasks.Task<StructuredCustomizations[]?> RetrieveHostCustomizationsForProfile(ManagedObjectReference self, ManagedObjectReference[]? hosts, HostApplyProfile applyProfile)
     {
         var req = new RetrieveHostCustomizationsForProfileRequestType
         {
@@ -9471,7 +9473,7 @@ public class Client : IClient
         return res.RetrieveHostCustomizationsForProfileResponse1;
     }
 
-    public async System.Threading.Tasks.Task<HostSpecification> RetrieveHostSpecification(ManagedObjectReference self, ManagedObjectReference host, bool fromHost)
+    public async System.Threading.Tasks.Task<HostSpecification?> RetrieveHostSpecification(ManagedObjectReference self, ManagedObjectReference host, bool fromHost)
     {
         var req = new RetrieveHostSpecificationRequestType
         {
@@ -9485,7 +9487,7 @@ public class Client : IClient
         return res.RetrieveHostSpecificationResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<CryptoManagerKmipServerCertInfo> RetrieveKmipServerCert(ManagedObjectReference self, KeyProviderId keyProvider, KmipServerInfo server)
+    public async System.Threading.Tasks.Task<CryptoManagerKmipServerCertInfo?> RetrieveKmipServerCert(ManagedObjectReference self, KeyProviderId keyProvider, KmipServerInfo server)
     {
         var req = new RetrieveKmipServerCertRequestType
         {
@@ -9499,7 +9501,7 @@ public class Client : IClient
         return res.RetrieveKmipServerCertResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> RetrieveKmipServersStatus_Task(ManagedObjectReference self, KmipClusterInfo[] clusters)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> RetrieveKmipServersStatus_Task(ManagedObjectReference self, KmipClusterInfo[]? clusters)
     {
         var req = new RetrieveKmipServersStatusRequestType
         {
@@ -9512,7 +9514,7 @@ public class Client : IClient
         return res.RetrieveKmipServersStatus_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference[]> RetrieveObjectScheduledTask(ManagedObjectReference self, ManagedObjectReference obj)
+    public async System.Threading.Tasks.Task<ManagedObjectReference[]?> RetrieveObjectScheduledTask(ManagedObjectReference self, ManagedObjectReference? obj)
     {
         var req = new RetrieveObjectScheduledTaskRequestType
         {
@@ -9525,7 +9527,7 @@ public class Client : IClient
         return res.RetrieveObjectScheduledTaskResponse1;
     }
 
-    public async System.Threading.Tasks.Task<ProductComponentInfo[]> RetrieveProductComponents(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ProductComponentInfo[]?> RetrieveProductComponents(ManagedObjectReference self)
     {
         var req = new RetrieveProductComponentsRequestType
         {
@@ -9537,7 +9539,7 @@ public class Client : IClient
         return res.RetrieveProductComponentsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<ObjectContent[]> RetrieveProperties(ManagedObjectReference self, PropertyFilterSpec[] specSet)
+    public async System.Threading.Tasks.Task<ObjectContent[]?> RetrieveProperties(ManagedObjectReference self, PropertyFilterSpec[] specSet)
     {
         var req = new RetrievePropertiesRequestType
         {
@@ -9550,7 +9552,7 @@ public class Client : IClient
         return res.RetrievePropertiesResponse1;
     }
 
-    public async System.Threading.Tasks.Task<RetrieveResult> RetrievePropertiesEx(ManagedObjectReference self, PropertyFilterSpec[] specSet, RetrieveOptions options)
+    public async System.Threading.Tasks.Task<RetrieveResult?> RetrievePropertiesEx(ManagedObjectReference self, PropertyFilterSpec[] specSet, RetrieveOptions options)
     {
         var req = new RetrievePropertiesExRequestType
         {
@@ -9564,7 +9566,7 @@ public class Client : IClient
         return res.RetrievePropertiesExResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<Permission[]> RetrieveRolePermissions(ManagedObjectReference self, int roleId)
+    public async System.Threading.Tasks.Task<Permission[]?> RetrieveRolePermissions(ManagedObjectReference self, int roleId)
     {
         var req = new RetrieveRolePermissionsRequestType
         {
@@ -9577,7 +9579,7 @@ public class Client : IClient
         return res.RetrieveRolePermissionsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<string> RetrieveSelfSignedClientCert(ManagedObjectReference self, KeyProviderId cluster)
+    public async System.Threading.Tasks.Task<string?> RetrieveSelfSignedClientCert(ManagedObjectReference self, KeyProviderId cluster)
     {
         var req = new RetrieveSelfSignedClientCertRequestType
         {
@@ -9590,7 +9592,7 @@ public class Client : IClient
         return res.RetrieveSelfSignedClientCertResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ServiceContent> RetrieveServiceContent(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ServiceContent?> RetrieveServiceContent(ManagedObjectReference self)
     {
         var req = new RetrieveServiceContentRequestType
         {
@@ -9602,7 +9604,7 @@ public class Client : IClient
         return res.RetrieveServiceContentResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference[]> RetrieveServiceProviderEntities(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference[]?> RetrieveServiceProviderEntities(ManagedObjectReference self)
     {
         var req = new RetrieveServiceProviderEntitiesRequestType
         {
@@ -9614,7 +9616,7 @@ public class Client : IClient
         return res.RetrieveServiceProviderEntitiesResponse1;
     }
 
-    public async System.Threading.Tasks.Task<VStorageObjectSnapshotDetails> RetrieveSnapshotDetails(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId)
+    public async System.Threading.Tasks.Task<VStorageObjectSnapshotDetails?> RetrieveSnapshotDetails(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId)
     {
         var req = new RetrieveSnapshotDetailsRequestType
         {
@@ -9629,7 +9631,7 @@ public class Client : IClient
         return res.RetrieveSnapshotDetailsResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<VStorageObjectSnapshotInfo> RetrieveSnapshotInfo(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task<VStorageObjectSnapshotInfo?> RetrieveSnapshotInfo(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
     {
         var req = new RetrieveSnapshotInfoRequestType
         {
@@ -9643,7 +9645,7 @@ public class Client : IClient
         return res.RetrieveSnapshotInfoResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<UserSearchResult[]> RetrieveUserGroups(ManagedObjectReference self, string domain, string searchStr, string belongsToGroup, string belongsToUser, bool exactMatch, bool findUsers, bool findGroups)
+    public async System.Threading.Tasks.Task<UserSearchResult[]?> RetrieveUserGroups(ManagedObjectReference self, string? domain, string searchStr, string? belongsToGroup, string? belongsToUser, bool exactMatch, bool findUsers, bool findGroups)
     {
         var req = new RetrieveUserGroupsRequestType
         {
@@ -9662,7 +9664,7 @@ public class Client : IClient
         return res.RetrieveUserGroupsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<VirtualMachineVgpuDeviceInfo[]> RetrieveVgpuDeviceInfo(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<VirtualMachineVgpuDeviceInfo[]?> RetrieveVgpuDeviceInfo(ManagedObjectReference self)
     {
         var req = new RetrieveVgpuDeviceInfoRequestType
         {
@@ -9674,7 +9676,7 @@ public class Client : IClient
         return res.RetrieveVgpuDeviceInfoResponse1;
     }
 
-    public async System.Threading.Tasks.Task<VirtualMachineVgpuProfileInfo[]> RetrieveVgpuProfileInfo(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<VirtualMachineVgpuProfileInfo[]?> RetrieveVgpuProfileInfo(ManagedObjectReference self)
     {
         var req = new RetrieveVgpuProfileInfoRequestType
         {
@@ -9686,7 +9688,7 @@ public class Client : IClient
         return res.RetrieveVgpuProfileInfoResponse1;
     }
 
-    public async System.Threading.Tasks.Task<vslmInfrastructureObjectPolicy[]> RetrieveVStorageInfrastructureObjectPolicy(ManagedObjectReference self, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task<vslmInfrastructureObjectPolicy[]?> RetrieveVStorageInfrastructureObjectPolicy(ManagedObjectReference self, ManagedObjectReference datastore)
     {
         var req = new RetrieveVStorageInfrastructureObjectPolicyRequestType
         {
@@ -9699,7 +9701,7 @@ public class Client : IClient
         return res.RetrieveVStorageInfrastructureObjectPolicyResponse1;
     }
 
-    public async System.Threading.Tasks.Task<VStorageObject> RetrieveVStorageObject(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task<VStorageObject?> RetrieveVStorageObject(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
     {
         var req = new RetrieveVStorageObjectRequestType
         {
@@ -9713,7 +9715,7 @@ public class Client : IClient
         return res.RetrieveVStorageObjectResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<VStorageObjectAssociations[]> RetrieveVStorageObjectAssociations(ManagedObjectReference self, RetrieveVStorageObjSpec[] ids)
+    public async System.Threading.Tasks.Task<VStorageObjectAssociations[]?> RetrieveVStorageObjectAssociations(ManagedObjectReference self, RetrieveVStorageObjSpec[]? ids)
     {
         var req = new RetrieveVStorageObjectAssociationsRequestType
         {
@@ -9726,7 +9728,7 @@ public class Client : IClient
         return res.RetrieveVStorageObjectAssociationsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<VStorageObjectStateInfo> RetrieveVStorageObjectState(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task<VStorageObjectStateInfo?> RetrieveVStorageObjectState(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
     {
         var req = new RetrieveVStorageObjectStateRequestType
         {
@@ -9740,7 +9742,7 @@ public class Client : IClient
         return res.RetrieveVStorageObjectStateResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> RevertToCurrentSnapshot_Task(ManagedObjectReference self, ManagedObjectReference host, bool suppressPowerOn, bool suppressPowerOnSpecified)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> RevertToCurrentSnapshot_Task(ManagedObjectReference self, ManagedObjectReference? host, bool suppressPowerOn, bool suppressPowerOnSpecified)
     {
         var req = new RevertToCurrentSnapshotRequestType
         {
@@ -9755,7 +9757,7 @@ public class Client : IClient
         return res.RevertToCurrentSnapshot_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> RevertToSnapshot_Task(ManagedObjectReference self, ManagedObjectReference host, bool suppressPowerOn, bool suppressPowerOnSpecified)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> RevertToSnapshot_Task(ManagedObjectReference self, ManagedObjectReference? host, bool suppressPowerOn, bool suppressPowerOnSpecified)
     {
         var req = new RevertToSnapshotRequestType
         {
@@ -9770,7 +9772,7 @@ public class Client : IClient
         return res.RevertToSnapshot_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> RevertVStorageObject_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> RevertVStorageObject_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId)
     {
         var req = new RevertVStorageObjectRequestType
         {
@@ -9805,7 +9807,7 @@ public class Client : IClient
         await this.inner.RunScheduledTaskAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<HostVsanInternalSystemVsanPhysicalDiskDiagnosticsResult[]> RunVsanPhysicalDiskDiagnostics(ManagedObjectReference self, string[] disks)
+    public async System.Threading.Tasks.Task<HostVsanInternalSystemVsanPhysicalDiskDiagnosticsResult[]?> RunVsanPhysicalDiskDiagnostics(ManagedObjectReference self, string[]? disks)
     {
         var req = new RunVsanPhysicalDiskDiagnosticsRequestType
         {
@@ -9818,7 +9820,7 @@ public class Client : IClient
         return res.RunVsanPhysicalDiskDiagnosticsResponse1;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ScanHostPatch_Task(ManagedObjectReference self, HostPatchManagerLocator repository, string[] updateID)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ScanHostPatch_Task(ManagedObjectReference self, HostPatchManagerLocator repository, string[]? updateID)
     {
         var req = new ScanHostPatchRequestType
         {
@@ -9832,7 +9834,7 @@ public class Client : IClient
         return res.ScanHostPatch_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ScanHostPatchV2_Task(ManagedObjectReference self, string[] metaUrls, string[] bundleUrls, HostPatchManagerPatchManagerOperationSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ScanHostPatchV2_Task(ManagedObjectReference self, string[]? metaUrls, string[]? bundleUrls, HostPatchManagerPatchManagerOperationSpec? spec)
     {
         var req = new ScanHostPatchV2RequestType
         {
@@ -9858,7 +9860,7 @@ public class Client : IClient
         await this.inner.ScheduleReconcileDatastoreInventoryAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> SearchDatastore_Task(ManagedObjectReference self, string datastorePath, HostDatastoreBrowserSearchSpec searchSpec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> SearchDatastore_Task(ManagedObjectReference self, string datastorePath, HostDatastoreBrowserSearchSpec? searchSpec)
     {
         var req = new SearchDatastoreRequestType
         {
@@ -9872,7 +9874,7 @@ public class Client : IClient
         return res.SearchDatastore_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> SearchDatastoreSubFolders_Task(ManagedObjectReference self, string datastorePath, HostDatastoreBrowserSearchSpec searchSpec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> SearchDatastoreSubFolders_Task(ManagedObjectReference self, string datastorePath, HostDatastoreBrowserSearchSpec? searchSpec)
     {
         var req = new SearchDatastoreSubFoldersRequestType
         {
@@ -9886,7 +9888,7 @@ public class Client : IClient
         return res.SearchDatastoreSubFolders_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task SelectActivePartition(ManagedObjectReference self, HostScsiDiskPartition partition)
+    public async System.Threading.Tasks.Task SelectActivePartition(ManagedObjectReference self, HostScsiDiskPartition? partition)
     {
         var req = new SelectActivePartitionRequestType
         {
@@ -9954,7 +9956,7 @@ public class Client : IClient
         return res.SessionIsActiveResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> SetClusterMode_Task(ManagedObjectReference self, string mode)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> SetClusterMode_Task(ManagedObjectReference self, string mode)
     {
         var req = new setClusterModeRequestType
         {
@@ -10001,7 +10003,7 @@ public class Client : IClient
         await this.inner.setCustomValueAsync(req);
     }
 
-    public async System.Threading.Tasks.Task SetDefaultKmsCluster(ManagedObjectReference self, ManagedObjectReference entity, KeyProviderId clusterId)
+    public async System.Threading.Tasks.Task SetDefaultKmsCluster(ManagedObjectReference self, ManagedObjectReference? entity, KeyProviderId? clusterId)
     {
         var req = new SetDefaultKmsClusterRequestType
         {
@@ -10024,7 +10026,7 @@ public class Client : IClient
         await this.inner.SetDisplayTopologyAsync(req);
     }
 
-    public async System.Threading.Tasks.Task SetEntityPermissions(ManagedObjectReference self, ManagedObjectReference entity, Permission[] permission)
+    public async System.Threading.Tasks.Task SetEntityPermissions(ManagedObjectReference self, ManagedObjectReference entity, Permission[]? permission)
     {
         var req = new SetEntityPermissionsRequestType
         {
@@ -10036,7 +10038,7 @@ public class Client : IClient
         await this.inner.SetEntityPermissionsAsync(req);
     }
 
-    public async System.Threading.Tasks.Task SetExtensionCertificate(ManagedObjectReference self, string extensionKey, string certificatePem)
+    public async System.Threading.Tasks.Task SetExtensionCertificate(ManagedObjectReference self, string extensionKey, string? certificatePem)
     {
         var req = new SetExtensionCertificateRequestType
         {
@@ -10061,7 +10063,7 @@ public class Client : IClient
         await this.inner.SetFieldAsync(req);
     }
 
-    public async System.Threading.Tasks.Task SetLicenseEdition(ManagedObjectReference self, ManagedObjectReference host, string featureKey)
+    public async System.Threading.Tasks.Task SetLicenseEdition(ManagedObjectReference self, ManagedObjectReference? host, string? featureKey)
     {
         var req = new SetLicenseEditionRequestType
         {
@@ -10156,7 +10158,7 @@ public class Client : IClient
         await this.inner.SetTaskDescriptionAsync(req);
     }
 
-    public async System.Threading.Tasks.Task SetTaskState(ManagedObjectReference self, TaskInfoState state, object result, LocalizedMethodFault fault)
+    public async System.Threading.Tasks.Task SetTaskState(ManagedObjectReference self, TaskInfoState state, object? result, LocalizedMethodFault? fault)
     {
         var req = new SetTaskStateRequestType
         {
@@ -10169,7 +10171,7 @@ public class Client : IClient
         await this.inner.SetTaskStateAsync(req);
     }
 
-    public async System.Threading.Tasks.Task SetVirtualDiskUuid(ManagedObjectReference self, string name, ManagedObjectReference datacenter, string uuid)
+    public async System.Threading.Tasks.Task SetVirtualDiskUuid(ManagedObjectReference self, string name, ManagedObjectReference? datacenter, string uuid)
     {
         var req = new SetVirtualDiskUuidRequestType
         {
@@ -10182,7 +10184,7 @@ public class Client : IClient
         await this.inner.SetVirtualDiskUuidAsync(req);
     }
 
-    public async System.Threading.Tasks.Task SetVStorageObjectControlFlags(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string[] controlFlags)
+    public async System.Threading.Tasks.Task SetVStorageObjectControlFlags(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string[]? controlFlags)
     {
         var req = new SetVStorageObjectControlFlagsRequestType
         {
@@ -10195,7 +10197,7 @@ public class Client : IClient
         await this.inner.SetVStorageObjectControlFlagsAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ShrinkVirtualDisk_Task(ManagedObjectReference self, string name, ManagedObjectReference datacenter, bool copy, bool copySpecified)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ShrinkVirtualDisk_Task(ManagedObjectReference self, string name, ManagedObjectReference? datacenter, bool copy, bool copySpecified)
     {
         var req = new ShrinkVirtualDiskRequestType
         {
@@ -10221,7 +10223,7 @@ public class Client : IClient
         await this.inner.ShutdownGuestAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ShutdownHost_Task(ManagedObjectReference self, bool force)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ShutdownHost_Task(ManagedObjectReference self, bool force)
     {
         var req = new ShutdownHostRequestType
         {
@@ -10234,7 +10236,7 @@ public class Client : IClient
         return res.ShutdownHost_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> StageHostPatch_Task(ManagedObjectReference self, string[] metaUrls, string[] bundleUrls, string[] vibUrls, HostPatchManagerPatchManagerOperationSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> StageHostPatch_Task(ManagedObjectReference self, string[]? metaUrls, string[]? bundleUrls, string[]? vibUrls, HostPatchManagerPatchManagerOperationSpec? spec)
     {
         var req = new StageHostPatchRequestType
         {
@@ -10250,7 +10252,7 @@ public class Client : IClient
         return res.StageHostPatch_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> StampAllRulesWithUuid_Task(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> StampAllRulesWithUuid_Task(ManagedObjectReference self)
     {
         var req = new StampAllRulesWithUuidRequestType
         {
@@ -10272,7 +10274,7 @@ public class Client : IClient
         await this.inner.StandbyGuestAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> StartGuestNetwork_Task(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> StartGuestNetwork_Task(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth)
     {
         var req = new StartGuestNetworkRequestType
         {
@@ -10301,7 +10303,7 @@ public class Client : IClient
         return res.StartProgramInGuestResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> StartRecording_Task(ManagedObjectReference self, string name, string description)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> StartRecording_Task(ManagedObjectReference self, string name, string? description)
     {
         var req = new StartRecordingRequestType
         {
@@ -10315,7 +10317,7 @@ public class Client : IClient
         return res.StartRecording_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> StartReplaying_Task(ManagedObjectReference self, ManagedObjectReference replaySnapshot)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> StartReplaying_Task(ManagedObjectReference self, ManagedObjectReference replaySnapshot)
     {
         var req = new StartReplayingRequestType
         {
@@ -10339,7 +10341,7 @@ public class Client : IClient
         await this.inner.StartServiceAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> StopRecording_Task(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> StopRecording_Task(ManagedObjectReference self)
     {
         var req = new StopRecordingRequestType
         {
@@ -10351,7 +10353,7 @@ public class Client : IClient
         return res.StopRecording_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> StopReplaying_Task(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> StopReplaying_Task(ManagedObjectReference self)
     {
         var req = new StopReplayingRequestType
         {
@@ -10374,7 +10376,7 @@ public class Client : IClient
         await this.inner.StopServiceAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> SuspendVApp_Task(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> SuspendVApp_Task(ManagedObjectReference self)
     {
         var req = new SuspendVAppRequestType
         {
@@ -10386,7 +10388,7 @@ public class Client : IClient
         return res.SuspendVApp_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> SuspendVM_Task(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> SuspendVM_Task(ManagedObjectReference self)
     {
         var req = new SuspendVMRequestType
         {
@@ -10398,7 +10400,7 @@ public class Client : IClient
         return res.SuspendVM_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> TerminateFaultTolerantVM_Task(ManagedObjectReference self, ManagedObjectReference vm)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> TerminateFaultTolerantVM_Task(ManagedObjectReference self, ManagedObjectReference? vm)
     {
         var req = new TerminateFaultTolerantVMRequestType
         {
@@ -10445,7 +10447,7 @@ public class Client : IClient
         await this.inner.TerminateVMAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<HostDateTimeSystemServiceTestResult> TestTimeService(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<HostDateTimeSystemServiceTestResult?> TestTimeService(ManagedObjectReference self)
     {
         var req = new TestTimeServiceRequestType
         {
@@ -10457,7 +10459,7 @@ public class Client : IClient
         return res.TestTimeServiceResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> TurnDiskLocatorLedOff_Task(ManagedObjectReference self, string[] scsiDiskUuids)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> TurnDiskLocatorLedOff_Task(ManagedObjectReference self, string[] scsiDiskUuids)
     {
         var req = new TurnDiskLocatorLedOffRequestType
         {
@@ -10470,7 +10472,7 @@ public class Client : IClient
         return res.TurnDiskLocatorLedOff_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> TurnDiskLocatorLedOn_Task(ManagedObjectReference self, string[] scsiDiskUuids)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> TurnDiskLocatorLedOn_Task(ManagedObjectReference self, string[] scsiDiskUuids)
     {
         var req = new TurnDiskLocatorLedOnRequestType
         {
@@ -10483,7 +10485,7 @@ public class Client : IClient
         return res.TurnDiskLocatorLedOn_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> TurnOffFaultToleranceForVM_Task(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> TurnOffFaultToleranceForVM_Task(ManagedObjectReference self)
     {
         var req = new TurnOffFaultToleranceForVMRequestType
         {
@@ -10520,7 +10522,7 @@ public class Client : IClient
         await this.inner.UnbindVnicAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> UninstallHostPatch_Task(ManagedObjectReference self, string[] bulletinIds, HostPatchManagerPatchManagerOperationSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> UninstallHostPatch_Task(ManagedObjectReference self, string[]? bulletinIds, HostPatchManagerPatchManagerOperationSpec? spec)
     {
         var req = new UninstallHostPatchRequestType
         {
@@ -10534,7 +10536,7 @@ public class Client : IClient
         return res.UninstallHostPatch_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> UninstallIoFilter_Task(ManagedObjectReference self, string filterId, ManagedObjectReference compRes)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> UninstallIoFilter_Task(ManagedObjectReference self, string filterId, ManagedObjectReference compRes)
     {
         var req = new UninstallIoFilterRequestType
         {
@@ -10559,7 +10561,7 @@ public class Client : IClient
         await this.inner.UninstallServiceAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> UnmapVmfsVolumeEx_Task(ManagedObjectReference self, string[] vmfsUuid)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> UnmapVmfsVolumeEx_Task(ManagedObjectReference self, string[] vmfsUuid)
     {
         var req = new UnmapVmfsVolumeExRequestType
         {
@@ -10572,7 +10574,7 @@ public class Client : IClient
         return res.UnmapVmfsVolumeEx_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task UnmarkServiceProviderEntities(ManagedObjectReference self, ManagedObjectReference[] entity)
+    public async System.Threading.Tasks.Task UnmarkServiceProviderEntities(ManagedObjectReference self, ManagedObjectReference[]? entity)
     {
         var req = new UnmarkServiceProviderEntitiesRequestType
         {
@@ -10583,7 +10585,7 @@ public class Client : IClient
         await this.inner.UnmarkServiceProviderEntitiesAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> UnmountDiskMapping_Task(ManagedObjectReference self, VsanHostDiskMapping[] mapping)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> UnmountDiskMapping_Task(ManagedObjectReference self, VsanHostDiskMapping[] mapping)
     {
         var req = new UnmountDiskMappingRequestType
         {
@@ -10639,7 +10641,7 @@ public class Client : IClient
         await this.inner.UnmountVmfsVolumeAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> UnmountVmfsVolumeEx_Task(ManagedObjectReference self, string[] vmfsUuid)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> UnmountVmfsVolumeEx_Task(ManagedObjectReference self, string[] vmfsUuid)
     {
         var req = new UnmountVmfsVolumeExRequestType
         {
@@ -10652,7 +10654,7 @@ public class Client : IClient
         return res.UnmountVmfsVolumeEx_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> UnregisterAndDestroy_Task(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> UnregisterAndDestroy_Task(ManagedObjectReference self)
     {
         var req = new UnregisterAndDestroyRequestType
         {
@@ -10697,7 +10699,7 @@ public class Client : IClient
         await this.inner.UnregisterKmsClusterAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> UnregisterVApp_Task(ManagedObjectReference self)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> UnregisterVApp_Task(ManagedObjectReference self)
     {
         var req = new unregisterVAppRequestType
         {
@@ -10719,7 +10721,7 @@ public class Client : IClient
         await this.inner.UnregisterVMAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> UpdateAnswerFile_Task(ManagedObjectReference self, ManagedObjectReference host, AnswerFileCreateSpec configSpec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> UpdateAnswerFile_Task(ManagedObjectReference self, ManagedObjectReference host, AnswerFileCreateSpec configSpec)
     {
         var req = new UpdateAnswerFileRequestType
         {
@@ -10744,7 +10746,7 @@ public class Client : IClient
         await this.inner.UpdateAssignableHardwareConfigAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<LicenseManagerLicenseInfo> UpdateAssignedLicense(ManagedObjectReference self, string entity, string licenseKey, string entityDisplayName)
+    public async System.Threading.Tasks.Task<LicenseManagerLicenseInfo?> UpdateAssignedLicense(ManagedObjectReference self, string entity, string licenseKey, string? entityDisplayName)
     {
         var req = new UpdateAssignedLicenseRequestType
         {
@@ -10759,7 +10761,7 @@ public class Client : IClient
         return res.UpdateAssignedLicenseResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task UpdateAuthorizationRole(ManagedObjectReference self, int roleId, string newName, string[] privIds)
+    public async System.Threading.Tasks.Task UpdateAuthorizationRole(ManagedObjectReference self, int roleId, string newName, string[]? privIds)
     {
         var req = new UpdateAuthorizationRoleRequestType
         {
@@ -10805,7 +10807,7 @@ public class Client : IClient
         await this.inner.UpdateClusterProfileAsync(req);
     }
 
-    public async System.Threading.Tasks.Task UpdateConfig(ManagedObjectReference self, string name, ResourceConfigSpec config)
+    public async System.Threading.Tasks.Task UpdateConfig(ManagedObjectReference self, string? name, ResourceConfigSpec? config)
     {
         var req = new UpdateConfigRequestType
         {
@@ -10906,7 +10908,7 @@ public class Client : IClient
         await this.inner.UpdateDvsCapabilityAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> UpdateDVSHealthCheckConfig_Task(ManagedObjectReference self, DVSHealthCheckConfig[] healthCheckConfig)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> UpdateDVSHealthCheckConfig_Task(ManagedObjectReference self, DVSHealthCheckConfig[] healthCheckConfig)
     {
         var req = new UpdateDVSHealthCheckConfigRequestType
         {
@@ -10919,7 +10921,7 @@ public class Client : IClient
         return res.UpdateDVSHealthCheckConfig_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> UpdateDVSLacpGroupConfig_Task(ManagedObjectReference self, VMwareDvsLacpGroupSpec[] lacpGroupSpec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> UpdateDVSLacpGroupConfig_Task(ManagedObjectReference self, VMwareDvsLacpGroupSpec[] lacpGroupSpec)
     {
         var req = new UpdateDVSLacpGroupConfigRequestType
         {
@@ -10965,7 +10967,7 @@ public class Client : IClient
         await this.inner.UpdateGraphicsConfigAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> UpdateHostCustomizations_Task(ManagedObjectReference self, HostProfileManagerHostToConfigSpecMap[] hostToConfigSpecMap)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> UpdateHostCustomizations_Task(ManagedObjectReference self, HostProfileManagerHostToConfigSpecMap[]? hostToConfigSpecMap)
     {
         var req = new UpdateHostCustomizationsRequestType
         {
@@ -11036,7 +11038,7 @@ public class Client : IClient
         await this.inner.UpdateHppMultipathLunPolicyAsync(req);
     }
 
-    public async System.Threading.Tasks.Task UpdateInternetScsiAdvancedOptions(ManagedObjectReference self, string iScsiHbaDevice, HostInternetScsiHbaTargetSet targetSet, HostInternetScsiHbaParamValue[] options)
+    public async System.Threading.Tasks.Task UpdateInternetScsiAdvancedOptions(ManagedObjectReference self, string iScsiHbaDevice, HostInternetScsiHbaTargetSet? targetSet, HostInternetScsiHbaParamValue[] options)
     {
         var req = new UpdateInternetScsiAdvancedOptionsRequestType
         {
@@ -11061,7 +11063,7 @@ public class Client : IClient
         await this.inner.UpdateInternetScsiAliasAsync(req);
     }
 
-    public async System.Threading.Tasks.Task UpdateInternetScsiAuthenticationProperties(ManagedObjectReference self, string iScsiHbaDevice, HostInternetScsiHbaAuthenticationProperties authenticationProperties, HostInternetScsiHbaTargetSet targetSet)
+    public async System.Threading.Tasks.Task UpdateInternetScsiAuthenticationProperties(ManagedObjectReference self, string iScsiHbaDevice, HostInternetScsiHbaAuthenticationProperties authenticationProperties, HostInternetScsiHbaTargetSet? targetSet)
     {
         var req = new UpdateInternetScsiAuthenticationPropertiesRequestType
         {
@@ -11074,7 +11076,7 @@ public class Client : IClient
         await this.inner.UpdateInternetScsiAuthenticationPropertiesAsync(req);
     }
 
-    public async System.Threading.Tasks.Task UpdateInternetScsiDigestProperties(ManagedObjectReference self, string iScsiHbaDevice, HostInternetScsiHbaTargetSet targetSet, HostInternetScsiHbaDigestProperties digestProperties)
+    public async System.Threading.Tasks.Task UpdateInternetScsiDigestProperties(ManagedObjectReference self, string iScsiHbaDevice, HostInternetScsiHbaTargetSet? targetSet, HostInternetScsiHbaDigestProperties digestProperties)
     {
         var req = new UpdateInternetScsiDigestPropertiesRequestType
         {
@@ -11202,7 +11204,7 @@ public class Client : IClient
         await this.inner.UpdateKmsSignedCsrClientCertAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<LicenseManagerLicenseInfo> UpdateLicense(ManagedObjectReference self, string licenseKey, KeyValue[] labels)
+    public async System.Threading.Tasks.Task<LicenseManagerLicenseInfo?> UpdateLicense(ManagedObjectReference self, string licenseKey, KeyValue[]? labels)
     {
         var req = new UpdateLicenseRequestType
         {
@@ -11229,7 +11231,7 @@ public class Client : IClient
         await this.inner.UpdateLicenseLabelAsync(req);
     }
 
-    public async System.Threading.Tasks.Task UpdateLinkedChildren(ManagedObjectReference self, VirtualAppLinkInfo[] addChangeSet, ManagedObjectReference[] removeSet)
+    public async System.Threading.Tasks.Task UpdateLinkedChildren(ManagedObjectReference self, VirtualAppLinkInfo[]? addChangeSet, ManagedObjectReference[]? removeSet)
     {
         var req = new UpdateLinkedChildrenRequestType
         {
@@ -11241,7 +11243,7 @@ public class Client : IClient
         await this.inner.UpdateLinkedChildrenAsync(req);
     }
 
-    public async System.Threading.Tasks.Task UpdateLocalSwapDatastore(ManagedObjectReference self, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task UpdateLocalSwapDatastore(ManagedObjectReference self, ManagedObjectReference? datastore)
     {
         var req = new UpdateLocalSwapDatastoreRequestType
         {
@@ -11252,7 +11254,7 @@ public class Client : IClient
         await this.inner.UpdateLocalSwapDatastoreAsync(req);
     }
 
-    public async System.Threading.Tasks.Task UpdateLockdownExceptions(ManagedObjectReference self, string[] users)
+    public async System.Threading.Tasks.Task UpdateLockdownExceptions(ManagedObjectReference self, string[]? users)
     {
         var req = new UpdateLockdownExceptionsRequestType
         {
@@ -11275,7 +11277,7 @@ public class Client : IClient
         await this.inner.UpdateModuleOptionStringAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<HostNetworkConfigResult> UpdateNetworkConfig(ManagedObjectReference self, HostNetworkConfig config, string changeMode)
+    public async System.Threading.Tasks.Task<HostNetworkConfigResult?> UpdateNetworkConfig(ManagedObjectReference self, HostNetworkConfig config, string changeMode)
     {
         var req = new UpdateNetworkConfigRequestType
         {
@@ -11333,7 +11335,7 @@ public class Client : IClient
         await this.inner.UpdatePerfIntervalAsync(req);
     }
 
-    public async System.Threading.Tasks.Task UpdatePhysicalNicLinkSpeed(ManagedObjectReference self, string device, PhysicalNicLinkInfo linkSpeed)
+    public async System.Threading.Tasks.Task UpdatePhysicalNicLinkSpeed(ManagedObjectReference self, string device, PhysicalNicLinkInfo? linkSpeed)
     {
         var req = new UpdatePhysicalNicLinkSpeedRequestType
         {
@@ -11357,7 +11359,7 @@ public class Client : IClient
         await this.inner.UpdatePortGroupAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> UpdateProductLockerLocation_Task(ManagedObjectReference self, string path)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> UpdateProductLockerLocation_Task(ManagedObjectReference self, string path)
     {
         var req = new UpdateProductLockerLocationRequestType
         {
@@ -11381,7 +11383,7 @@ public class Client : IClient
         await this.inner.UpdateProgressAsync(req);
     }
 
-    public async System.Threading.Tasks.Task UpdateReferenceHost(ManagedObjectReference self, ManagedObjectReference host)
+    public async System.Threading.Tasks.Task UpdateReferenceHost(ManagedObjectReference self, ManagedObjectReference? host)
     {
         var req = new UpdateReferenceHostRequestType
         {
@@ -11496,7 +11498,7 @@ public class Client : IClient
         await this.inner.UpdateSystemSwapConfigurationAsync(req);
     }
 
-    public async System.Threading.Tasks.Task UpdateSystemUsers(ManagedObjectReference self, string[] users)
+    public async System.Threading.Tasks.Task UpdateSystemUsers(ManagedObjectReference self, string[]? users)
     {
         var req = new UpdateSystemUsersRequestType
         {
@@ -11529,7 +11531,7 @@ public class Client : IClient
         await this.inner.UpdateVAppConfigAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> UpdateVirtualMachineFiles_Task(ManagedObjectReference self, DatastoreMountPathDatastorePair[] mountPathDatastoreMapping)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> UpdateVirtualMachineFiles_Task(ManagedObjectReference self, DatastoreMountPathDatastorePair[] mountPathDatastoreMapping)
     {
         var req = new UpdateVirtualMachineFilesRequestType
         {
@@ -11590,7 +11592,7 @@ public class Client : IClient
         await this.inner.UpdateVmfsUnmapPriorityAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> UpdateVsan_Task(ManagedObjectReference self, VsanHostConfigInfo config)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> UpdateVsan_Task(ManagedObjectReference self, VsanHostConfigInfo config)
     {
         var req = new UpdateVsanRequestType
         {
@@ -11603,7 +11605,7 @@ public class Client : IClient
         return res.UpdateVsan_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> UpdateVStorageInfrastructureObjectPolicy_Task(ManagedObjectReference self, vslmInfrastructureObjectPolicySpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> UpdateVStorageInfrastructureObjectPolicy_Task(ManagedObjectReference self, vslmInfrastructureObjectPolicySpec spec)
     {
         var req = new UpdateVStorageInfrastructureObjectPolicyRequestType
         {
@@ -11616,7 +11618,7 @@ public class Client : IClient
         return res.UpdateVStorageInfrastructureObjectPolicy_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> UpdateVStorageObjectCrypto_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, VirtualMachineProfileSpec[] profile, DiskCryptoSpec disksCrypto)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> UpdateVStorageObjectCrypto_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, VirtualMachineProfileSpec[]? profile, DiskCryptoSpec? disksCrypto)
     {
         var req = new UpdateVStorageObjectCryptoRequestType
         {
@@ -11632,7 +11634,7 @@ public class Client : IClient
         return res.UpdateVStorageObjectCrypto_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> UpdateVStorageObjectPolicy_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, VirtualMachineProfileSpec[] profile)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> UpdateVStorageObjectPolicy_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, VirtualMachineProfileSpec[]? profile)
     {
         var req = new UpdateVStorageObjectPolicyRequestType
         {
@@ -11647,7 +11649,7 @@ public class Client : IClient
         return res.UpdateVStorageObjectPolicy_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> UpdateVVolVirtualMachineFiles_Task(ManagedObjectReference self, DatastoreVVolContainerFailoverPair[] failoverPair)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> UpdateVVolVirtualMachineFiles_Task(ManagedObjectReference self, DatastoreVVolContainerFailoverPair[]? failoverPair)
     {
         var req = new UpdateVVolVirtualMachineFilesRequestType
         {
@@ -11660,7 +11662,7 @@ public class Client : IClient
         return res.UpdateVVolVirtualMachineFiles_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> UpgradeIoFilter_Task(ManagedObjectReference self, string filterId, ManagedObjectReference compRes, string vibUrl)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> UpgradeIoFilter_Task(ManagedObjectReference self, string filterId, ManagedObjectReference compRes, string vibUrl)
     {
         var req = new UpgradeIoFilterRequestType
         {
@@ -11675,7 +11677,7 @@ public class Client : IClient
         return res.UpgradeIoFilter_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> UpgradeTools_Task(ManagedObjectReference self, string installerOptions)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> UpgradeTools_Task(ManagedObjectReference self, string? installerOptions)
     {
         var req = new UpgradeToolsRequestType
         {
@@ -11688,7 +11690,7 @@ public class Client : IClient
         return res.UpgradeTools_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> UpgradeVM_Task(ManagedObjectReference self, string version)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> UpgradeVM_Task(ManagedObjectReference self, string? version)
     {
         var req = new UpgradeVMRequestType
         {
@@ -11722,7 +11724,7 @@ public class Client : IClient
         await this.inner.UpgradeVmLayoutAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<HostVsanInternalSystemVsanObjectOperationResult[]> UpgradeVsanObjects(ManagedObjectReference self, string[] uuids, int newVersion)
+    public async System.Threading.Tasks.Task<HostVsanInternalSystemVsanObjectOperationResult[]?> UpgradeVsanObjects(ManagedObjectReference self, string[] uuids, int newVersion)
     {
         var req = new UpgradeVsanObjectsRequestType
         {
@@ -11773,7 +11775,7 @@ public class Client : IClient
         await this.inner.ValidateCredentialsInGuestAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ClusterComputeResourceValidationResultBase[]> ValidateHCIConfiguration(ManagedObjectReference self, ClusterComputeResourceHCIConfigSpec hciConfigSpec, ManagedObjectReference[] hosts)
+    public async System.Threading.Tasks.Task<ClusterComputeResourceValidationResultBase[]?> ValidateHCIConfiguration(ManagedObjectReference self, ClusterComputeResourceHCIConfigSpec? hciConfigSpec, ManagedObjectReference[]? hosts)
     {
         var req = new ValidateHCIConfigurationRequestType
         {
@@ -11787,7 +11789,7 @@ public class Client : IClient
         return res.ValidateHCIConfigurationResponse1;
     }
 
-    public async System.Threading.Tasks.Task<OvfValidateHostResult> ValidateHost(ManagedObjectReference self, string ovfDescriptor, ManagedObjectReference host, OvfValidateHostParams vhp)
+    public async System.Threading.Tasks.Task<OvfValidateHostResult?> ValidateHost(ManagedObjectReference self, string ovfDescriptor, ManagedObjectReference host, OvfValidateHostParams vhp)
     {
         var req = new ValidateHostRequestType
         {
@@ -11802,7 +11804,7 @@ public class Client : IClient
         return res.ValidateHostResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ValidateHostProfileComposition_Task(ManagedObjectReference self, ManagedObjectReference source, ManagedObjectReference[] targets, HostApplyProfile toBeMerged, HostApplyProfile toReplaceWith, HostApplyProfile toBeDeleted, HostApplyProfile enableStatusToBeCopied, bool errorOnly, bool errorOnlySpecified)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ValidateHostProfileComposition_Task(ManagedObjectReference self, ManagedObjectReference source, ManagedObjectReference[]? targets, HostApplyProfile? toBeMerged, HostApplyProfile? toReplaceWith, HostApplyProfile? toBeDeleted, HostApplyProfile? enableStatusToBeCopied, bool errorOnly, bool errorOnlySpecified)
     {
         var req = new ValidateHostProfileCompositionRequestType
         {
@@ -11822,7 +11824,7 @@ public class Client : IClient
         return res.ValidateHostProfileComposition_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<Event[]> ValidateMigration(ManagedObjectReference self, ManagedObjectReference[] vm, VirtualMachinePowerState state, bool stateSpecified, string[] testType, ManagedObjectReference pool, ManagedObjectReference host)
+    public async System.Threading.Tasks.Task<Event[]?> ValidateMigration(ManagedObjectReference self, ManagedObjectReference[] vm, VirtualMachinePowerState state, bool stateSpecified, string[]? testType, ManagedObjectReference? pool, ManagedObjectReference? host)
     {
         var req = new ValidateMigrationRequestType
         {
@@ -11840,7 +11842,7 @@ public class Client : IClient
         return res.ValidateMigrationResponse1;
     }
 
-    public async System.Threading.Tasks.Task<LocalizedMethodFault> ValidateStoragePodConfig(ManagedObjectReference self, ManagedObjectReference pod, StorageDrsConfigSpec spec)
+    public async System.Threading.Tasks.Task<LocalizedMethodFault?> ValidateStoragePodConfig(ManagedObjectReference self, ManagedObjectReference pod, StorageDrsConfigSpec spec)
     {
         var req = new ValidateStoragePodConfigRequestType
         {
@@ -11854,7 +11856,7 @@ public class Client : IClient
         return res.ValidateStoragePodConfigResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> VCenterUpdateVStorageObjectMetadataEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, KeyValue[] metadata, string[] deleteKeys)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> VCenterUpdateVStorageObjectMetadataEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, KeyValue[]? metadata, string[]? deleteKeys)
     {
         var req = new VCenterUpdateVStorageObjectMetadataExRequestType
         {
@@ -11870,7 +11872,7 @@ public class Client : IClient
         return res.VCenterUpdateVStorageObjectMetadataEx_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> VStorageObjectCreateSnapshot_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string description)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> VStorageObjectCreateSnapshot_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string description)
     {
         var req = new VStorageObjectCreateSnapshotRequestType
         {
@@ -11885,7 +11887,7 @@ public class Client : IClient
         return res.VStorageObjectCreateSnapshot_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<DiskChangeInfo> VstorageObjectVCenterQueryChangedDiskAreas(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId, long startOffset, string changeId)
+    public async System.Threading.Tasks.Task<DiskChangeInfo?> VstorageObjectVCenterQueryChangedDiskAreas(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId, long startOffset, string changeId)
     {
         var req = new VstorageObjectVCenterQueryChangedDiskAreasRequestType
         {
@@ -11902,7 +11904,7 @@ public class Client : IClient
         return res.VstorageObjectVCenterQueryChangedDiskAreasResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<UpdateSet> WaitForUpdates(ManagedObjectReference self, string version)
+    public async System.Threading.Tasks.Task<UpdateSet?> WaitForUpdates(ManagedObjectReference self, string? version)
     {
         var req = new WaitForUpdatesRequestType
         {
@@ -11915,7 +11917,7 @@ public class Client : IClient
         return res.WaitForUpdatesResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<UpdateSet> WaitForUpdatesEx(ManagedObjectReference self, string version, WaitOptions options)
+    public async System.Threading.Tasks.Task<UpdateSet?> WaitForUpdatesEx(ManagedObjectReference self, string? version, WaitOptions? options)
     {
         var req = new WaitForUpdatesExRequestType
         {
@@ -11929,7 +11931,7 @@ public class Client : IClient
         return res.WaitForUpdatesExResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<CustomizationSpecItem> XmlToCustomizationSpecItem(ManagedObjectReference self, string specItemXml)
+    public async System.Threading.Tasks.Task<CustomizationSpecItem?> XmlToCustomizationSpecItem(ManagedObjectReference self, string specItemXml)
     {
         var req = new XmlToCustomizationSpecItemRequestType
         {
@@ -11942,7 +11944,7 @@ public class Client : IClient
         return res.XmlToCustomizationSpecItemResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> ZeroFillVirtualDisk_Task(ManagedObjectReference self, string name, ManagedObjectReference datacenter)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ZeroFillVirtualDisk_Task(ManagedObjectReference self, string name, ManagedObjectReference? datacenter)
     {
         var req = new ZeroFillVirtualDiskRequestType
         {

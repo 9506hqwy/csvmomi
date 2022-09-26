@@ -16,6 +16,8 @@ indent_size = 4
 dotnet_diagnostic.CS1591.severity = silent
 
 # StyleCop rule
+dotnet_diagnostic.SA1009.severity = silent # for nullable
+dotnet_diagnostic.SA1011.severity = silent # for nullable
 dotnet_diagnostic.SA1600.severity = silent
 dotnet_diagnostic.SA1601.severity = silent
 dotnet_diagnostic.SA1633.severity = silent

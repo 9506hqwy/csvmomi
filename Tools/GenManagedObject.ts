@@ -26,6 +26,7 @@ function writeManagedObject(obj: ManagedObject) {
       if (ty == "ManagedObjectReference") {
         ty = "ManagedObject";
       }
+      ty += "?";
       // START
       propDeclare += `
 
@@ -43,22 +44,28 @@ function writeManagedObject(obj: ManagedObject) {
         ty = "ManagedObject[]";
       }
       const unitReturnTy = ty.slice(0, -2);
+      ty += "?";
       // START
       propDeclare += `
 
     public async System.Threading.Tasks.Task<${ty}> GetProperty${methodSuffix}()
     {
         var ${propName} = await this.GetProperty<ManagedObjectReference[]>("${propName}");
-        return ${propName}
-            .Select(r => ManagedObject.Create<${unitReturnTy}>(r, this.Session))
+        return ${propName}?
+            .Select(r => ManagedObject.Create<${unitReturnTy}>(r, this.Session)!)
             .ToArray();
     }`;
       // END
     } else {
+      let ty = returnTy;
+      if (!csStructureTypes.includes(returnTy)) {
+        ty += "?";
+      }
+
       // START
       propDeclare += `
 
-    public async System.Threading.Tasks.Task<${returnTy}> GetProperty${methodSuffix}()
+    public async System.Threading.Tasks.Task<${ty}> GetProperty${methodSuffix}()
     {
         return await this.GetProperty<${returnTy}>("${propName}");
     }`;
@@ -87,10 +94,16 @@ function writeManagedObject(obj: ManagedObject) {
         if (localTy == "ManagedObjectReference") {
           localTy = "ManagedObject";
         }
+
+        let returnTy = localTy;
+        if (!csStructureTypes.includes(returnTy)) {
+          returnTy += "?";
+        }
+
         // START
         methodDeclare += `
 
-    public async System.Threading.Tasks.Task<${localTy}> ${methodName}(${
+    public async System.Threading.Tasks.Task<${returnTy}> ${methodName}(${
           params.join(", ")
         })
     {
@@ -104,26 +117,37 @@ function writeManagedObject(obj: ManagedObject) {
           localTy = "ManagedObject[]";
         }
         const unitReturnTy = localTy.slice(0, -2);
+
+        let returnTy = localTy;
+        if (!csStructureTypes.includes(returnTy)) {
+          returnTy += "?";
+        }
+
         // START
         methodDeclare += `
 
-    public async System.Threading.Tasks.Task<${localTy}> ${methodName}(${
+    public async System.Threading.Tasks.Task<${returnTy}> ${methodName}(${
           params.join(", ")
         })
     {
         var res = await this.Session.Client.${methodName}(${args.join(", ")});
-        return res?.Select(r => ManagedObject.Create<${unitReturnTy}>(r, this.Session)).ToArray();
+        return res?.Select(r => ManagedObject.Create<${unitReturnTy}>(r, this.Session)!).ToArray();
     }`;
         // END
       } else if (method.returnTy.local != method.returnTy.remote) {
         throw `Not supported type, ${method.returnTy.remote}`;
       } else {
+        let returnTy = convertType(method.returnTy.remote);
+        if (!csStructureTypes.includes(returnTy)) {
+          returnTy += "?";
+        }
+
         // START
         methodDeclare += `
 
-    public async System.Threading.Tasks.Task<${
-          convertType(method.returnTy.remote)
-        }> ${methodName}(${params.join(", ")})
+    public async System.Threading.Tasks.Task<${returnTy}> ${methodName}(${
+          params.join(", ")
+        })
     {
         return await this.Session.Client.${methodName}(${args.join(", ")});
     }`;
@@ -165,16 +189,20 @@ function writeManagedObjectMethodArgument(
       args.push(`${argName}.HasValue`);
     } else if (param.ty.local != param.ty.remote) {
       if (param.ty.remote == "ManagedObjectReference") {
-        args.push(`${argName}?.Reference`);
+        const q = param.mandatory ? "" : "?";
+        args.push(`${argName}${q}.Reference`);
       } else if (param.ty.remote == "ManagedObjectReference[]") {
-        args.push(`${argName}?.Select(m => m.Reference).ToArray()`);
+        const q = param.mandatory ? "" : "?";
+        args.push(`${argName}${q}.Select(m => m.Reference).ToArray()`);
       } else {
         throw `Not supported type, ${param.ty.remote}`;
       }
     } else if (param.ty.local == "ManagedObjectReference") {
-      args.push(`${argName}?.Reference`);
+      const q = param.mandatory ? "" : "?";
+      args.push(`${argName}${q}.Reference`);
     } else if (param.ty.local == "ManagedObjectReference[]") {
-      args.push(`${argName}?.Select(m => m.Reference).ToArray()`);
+      const q = param.mandatory ? "" : "?";
+      args.push(`${argName}${q}.Select(m => m.Reference).ToArray()`);
     } else {
       args.push(argName);
     }
@@ -192,16 +220,15 @@ function writeManagedObjectMethodParameter(
     }
 
     let ty = convertType(param.ty.local);
-    if (!param.mandatory) {
-      if (csStructureTypes.includes(ty)) {
-        ty += "?";
-      }
-    }
 
     if (param.ty.local == "ManagedObjectReference") {
       ty = "ManagedObject";
     } else if (param.ty.local == "ManagedObjectReference[]") {
       ty = "ManagedObject[]";
+    }
+
+    if (!param.mandatory) {
+      ty += "?";
     }
 
     params.push(`${ty} ${param.name}`);

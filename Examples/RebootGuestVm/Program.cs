@@ -24,7 +24,7 @@ async System.Threading.Tasks.Task Work(string[] args)
     }
 
     var session = await Session.Get(url);
-    await session.SessionManager.Login(args[1], args[2]);
+    await session.SessionManager!.Login(args[1], args[2]);
     try
     {
         var vm = await session.RootFolder.FindByName<VirtualMachine>(args[3]);
@@ -39,6 +39,6 @@ async System.Threading.Tasks.Task Work(string[] args)
     }
     finally
     {
-        await session.SessionManager.Logout();
+        await session.SessionManager!.Logout();
     }
 }
