@@ -6197,9 +6197,9 @@ public partial class ServiceInstance : ManagedObject
         return await this.Session.Client.RetrieveServiceContent(this.Reference);
     }
 
-    public async System.Threading.Tasks.Task<Event[]> ValidateMigration(VirtualMachine[] vm, VirtualMachinePowerState state, string[] testType, ResourcePool pool, HostSystem host)
+    public async System.Threading.Tasks.Task<Event[]> ValidateMigration(VirtualMachine[] vm, VirtualMachinePowerState? state, string[] testType, ResourcePool pool, HostSystem host)
     {
-        return await this.Session.Client.ValidateMigration(this.Reference, vm?.Select(m => m.Reference).ToArray(), state, testType, pool?.Reference, host?.Reference);
+        return await this.Session.Client.ValidateMigration(this.Reference, vm?.Select(m => m.Reference).ToArray(), state ?? default, state.HasValue, testType, pool?.Reference, host?.Reference);
     }
 }
 
@@ -7340,9 +7340,9 @@ public partial class VirtualMachine : ManagedEntity
         await this.Session.Client.MarkAsVirtualMachine(this.Reference, pool?.Reference, host?.Reference);
     }
 
-    public async System.Threading.Tasks.Task<Task> MigrateVM_Task(ResourcePool pool, HostSystem host, VirtualMachineMovePriority priority, VirtualMachinePowerState state)
+    public async System.Threading.Tasks.Task<Task> MigrateVM_Task(ResourcePool pool, HostSystem host, VirtualMachineMovePriority priority, VirtualMachinePowerState? state)
     {
-        var res = await this.Session.Client.MigrateVM_Task(this.Reference, pool?.Reference, host?.Reference, priority, state);
+        var res = await this.Session.Client.MigrateVM_Task(this.Reference, pool?.Reference, host?.Reference, priority, state ?? default, state.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
@@ -7421,9 +7421,9 @@ public partial class VirtualMachine : ManagedEntity
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
-    public async System.Threading.Tasks.Task<Task> RelocateVM_Task(VirtualMachineRelocateSpec spec, VirtualMachineMovePriority priority)
+    public async System.Threading.Tasks.Task<Task> RelocateVM_Task(VirtualMachineRelocateSpec spec, VirtualMachineMovePriority? priority)
     {
-        var res = await this.Session.Client.RelocateVM_Task(this.Reference, spec, priority);
+        var res = await this.Session.Client.RelocateVM_Task(this.Reference, spec, priority ?? default, priority.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
@@ -7622,9 +7622,9 @@ public partial class VirtualMachineProvisioningChecker : ManagedObject
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
-    public async System.Threading.Tasks.Task<Task> CheckMigrate_Task(VirtualMachine vm, HostSystem host, ResourcePool pool, VirtualMachinePowerState state, string[] testType)
+    public async System.Threading.Tasks.Task<Task> CheckMigrate_Task(VirtualMachine vm, HostSystem host, ResourcePool pool, VirtualMachinePowerState? state, string[] testType)
     {
-        var res = await this.Session.Client.CheckMigrate_Task(this.Reference, vm?.Reference, host?.Reference, pool?.Reference, state, testType);
+        var res = await this.Session.Client.CheckMigrate_Task(this.Reference, vm?.Reference, host?.Reference, pool?.Reference, state ?? default, state.HasValue, testType);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 

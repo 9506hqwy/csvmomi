@@ -170,7 +170,7 @@ public interface IClient
 
     System.Threading.Tasks.Task<bool> CheckLicenseFeature(ManagedObjectReference self, ManagedObjectReference host, string featureKey);
 
-    System.Threading.Tasks.Task<ManagedObjectReference> CheckMigrate_Task(ManagedObjectReference self, ManagedObjectReference vm, ManagedObjectReference host, ManagedObjectReference pool, VirtualMachinePowerState state, string[] testType);
+    System.Threading.Tasks.Task<ManagedObjectReference> CheckMigrate_Task(ManagedObjectReference self, ManagedObjectReference vm, ManagedObjectReference host, ManagedObjectReference pool, VirtualMachinePowerState state, bool stateSpecified, string[] testType);
 
     System.Threading.Tasks.Task<ManagedObjectReference> CheckPowerOn_Task(ManagedObjectReference self, ManagedObjectReference vm, ManagedObjectReference host, ManagedObjectReference pool, string[] testType);
 
@@ -878,7 +878,7 @@ public interface IClient
 
     System.Threading.Tasks.Task MergePermissions(ManagedObjectReference self, int srcRoleId, int dstRoleId);
 
-    System.Threading.Tasks.Task<ManagedObjectReference> MigrateVM_Task(ManagedObjectReference self, ManagedObjectReference pool, ManagedObjectReference host, VirtualMachineMovePriority priority, VirtualMachinePowerState state);
+    System.Threading.Tasks.Task<ManagedObjectReference> MigrateVM_Task(ManagedObjectReference self, ManagedObjectReference pool, ManagedObjectReference host, VirtualMachineMovePriority priority, VirtualMachinePowerState state, bool stateSpecified);
 
     System.Threading.Tasks.Task<ManagedObjectReference[]> ModifyListView(ManagedObjectReference self, ManagedObjectReference[] add, ManagedObjectReference[] remove);
 
@@ -1292,7 +1292,7 @@ public interface IClient
 
     System.Threading.Tasks.Task<ManagedObjectReference> ReloadVirtualMachineFromPath_Task(ManagedObjectReference self, string configurationPath);
 
-    System.Threading.Tasks.Task<ManagedObjectReference> RelocateVM_Task(ManagedObjectReference self, VirtualMachineRelocateSpec spec, VirtualMachineMovePriority priority);
+    System.Threading.Tasks.Task<ManagedObjectReference> RelocateVM_Task(ManagedObjectReference self, VirtualMachineRelocateSpec spec, VirtualMachineMovePriority priority, bool prioritySpecified);
 
     System.Threading.Tasks.Task<ManagedObjectReference> RelocateVStorageObject_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, VslmRelocateSpec spec);
 
@@ -1842,7 +1842,7 @@ public interface IClient
 
     System.Threading.Tasks.Task<ManagedObjectReference> ValidateHostProfileComposition_Task(ManagedObjectReference self, ManagedObjectReference source, ManagedObjectReference[] targets, HostApplyProfile toBeMerged, HostApplyProfile toReplaceWith, HostApplyProfile toBeDeleted, HostApplyProfile enableStatusToBeCopied, bool errorOnly, bool errorOnlySpecified);
 
-    System.Threading.Tasks.Task<Event[]> ValidateMigration(ManagedObjectReference self, ManagedObjectReference[] vm, VirtualMachinePowerState state, string[] testType, ManagedObjectReference pool, ManagedObjectReference host);
+    System.Threading.Tasks.Task<Event[]> ValidateMigration(ManagedObjectReference self, ManagedObjectReference[] vm, VirtualMachinePowerState state, bool stateSpecified, string[] testType, ManagedObjectReference pool, ManagedObjectReference host);
 
     System.Threading.Tasks.Task<LocalizedMethodFault> ValidateStoragePodConfig(ManagedObjectReference self, ManagedObjectReference pod, StorageDrsConfigSpec spec);
 

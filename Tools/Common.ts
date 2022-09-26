@@ -31,6 +31,9 @@ export const csStructureTypes = [
   "bool",
   "DateTime",
   "int",
+  // VimService enum.
+  "VirtualMachineMovePriority",
+  "VirtualMachinePowerState",
 ];
 
 const parser = new DOMParser();

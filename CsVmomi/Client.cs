@@ -1109,7 +1109,7 @@ public class Client : IClient
         return res.CheckLicenseFeatureResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> CheckMigrate_Task(ManagedObjectReference self, ManagedObjectReference vm, ManagedObjectReference host, ManagedObjectReference pool, VirtualMachinePowerState state, string[] testType)
+    public async System.Threading.Tasks.Task<ManagedObjectReference> CheckMigrate_Task(ManagedObjectReference self, ManagedObjectReference vm, ManagedObjectReference host, ManagedObjectReference pool, VirtualMachinePowerState state, bool stateSpecified, string[] testType)
     {
         var req = new CheckMigrateRequestType
         {
@@ -1118,6 +1118,7 @@ public class Client : IClient
             host = host,
             pool = pool,
             state = state,
+            stateSpecified = stateSpecified,
             testType = testType,
         };
 
@@ -5767,7 +5768,7 @@ public class Client : IClient
         await this.inner.MergePermissionsAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> MigrateVM_Task(ManagedObjectReference self, ManagedObjectReference pool, ManagedObjectReference host, VirtualMachineMovePriority priority, VirtualMachinePowerState state)
+    public async System.Threading.Tasks.Task<ManagedObjectReference> MigrateVM_Task(ManagedObjectReference self, ManagedObjectReference pool, ManagedObjectReference host, VirtualMachineMovePriority priority, VirtualMachinePowerState state, bool stateSpecified)
     {
         var req = new MigrateVMRequestType
         {
@@ -5776,6 +5777,7 @@ public class Client : IClient
             host = host,
             priority = priority,
             state = state,
+            stateSpecified = stateSpecified,
         };
 
         var res = await this.inner.MigrateVM_TaskAsync(req);
@@ -8449,13 +8451,14 @@ public class Client : IClient
         return res.reloadVirtualMachineFromPath_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference> RelocateVM_Task(ManagedObjectReference self, VirtualMachineRelocateSpec spec, VirtualMachineMovePriority priority)
+    public async System.Threading.Tasks.Task<ManagedObjectReference> RelocateVM_Task(ManagedObjectReference self, VirtualMachineRelocateSpec spec, VirtualMachineMovePriority priority, bool prioritySpecified)
     {
         var req = new RelocateVMRequestType
         {
             _this = self,
             spec = spec,
             priority = priority,
+            prioritySpecified = prioritySpecified,
         };
 
         var res = await this.inner.RelocateVM_TaskAsync(req);
@@ -11819,13 +11822,14 @@ public class Client : IClient
         return res.ValidateHostProfileComposition_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<Event[]> ValidateMigration(ManagedObjectReference self, ManagedObjectReference[] vm, VirtualMachinePowerState state, string[] testType, ManagedObjectReference pool, ManagedObjectReference host)
+    public async System.Threading.Tasks.Task<Event[]> ValidateMigration(ManagedObjectReference self, ManagedObjectReference[] vm, VirtualMachinePowerState state, bool stateSpecified, string[] testType, ManagedObjectReference pool, ManagedObjectReference host)
     {
         var req = new ValidateMigrationRequestType
         {
             _this = self,
             vm = vm,
             state = state,
+            stateSpecified = stateSpecified,
             testType = testType,
             pool = pool,
             host = host,
