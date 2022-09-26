@@ -11,9 +11,10 @@ public partial class Alarm : ExtensibleManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<AlarmInfo?> GetPropertyInfo()
+    public async System.Threading.Tasks.Task<AlarmInfo> GetPropertyInfo()
     {
-        return await this.GetProperty<AlarmInfo>("info");
+        var obj = await this.GetProperty<AlarmInfo>("info");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task ReconfigureAlarm(AlarmSpec spec)
@@ -38,12 +39,14 @@ public partial class AlarmManager : ManagedObject
 
     public async System.Threading.Tasks.Task<AlarmExpression[]?> GetPropertyDefaultExpression()
     {
-        return await this.GetProperty<AlarmExpression[]>("defaultExpression");
+        var obj = await this.GetProperty<AlarmExpression[]>("defaultExpression");
+        return obj;
     }
 
-    public async System.Threading.Tasks.Task<AlarmDescription?> GetPropertyDescription()
+    public async System.Threading.Tasks.Task<AlarmDescription> GetPropertyDescription()
     {
-        return await this.GetProperty<AlarmDescription>("description");
+        var obj = await this.GetProperty<AlarmDescription>("description");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task AcknowledgeAlarm(Alarm alarm, ManagedEntity entity)
@@ -103,19 +106,22 @@ public partial class AuthorizationManager : ManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<AuthorizationDescription?> GetPropertyDescription()
+    public async System.Threading.Tasks.Task<AuthorizationDescription> GetPropertyDescription()
     {
-        return await this.GetProperty<AuthorizationDescription>("description");
+        var obj = await this.GetProperty<AuthorizationDescription>("description");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<AuthorizationPrivilege[]?> GetPropertyPrivilegeList()
     {
-        return await this.GetProperty<AuthorizationPrivilege[]>("privilegeList");
+        var obj = await this.GetProperty<AuthorizationPrivilege[]>("privilegeList");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<AuthorizationRole[]?> GetPropertyRoleList()
     {
-        return await this.GetProperty<AuthorizationRole[]>("roleList");
+        var obj = await this.GetProperty<AuthorizationRole[]>("roleList");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<int> AddAuthorizationRole(string name, string[]? privIds)
@@ -228,42 +234,50 @@ public partial class ClusterComputeResource : ComputeResource
 
     public async System.Threading.Tasks.Task<ClusterActionHistory[]?> GetPropertyActionHistory()
     {
-        return await this.GetProperty<ClusterActionHistory[]>("actionHistory");
+        var obj = await this.GetProperty<ClusterActionHistory[]>("actionHistory");
+        return obj;
     }
 
-    public async System.Threading.Tasks.Task<ClusterConfigInfo?> GetPropertyConfiguration()
+    public async System.Threading.Tasks.Task<ClusterConfigInfo> GetPropertyConfiguration()
     {
-        return await this.GetProperty<ClusterConfigInfo>("configuration");
+        var obj = await this.GetProperty<ClusterConfigInfo>("configuration");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<ClusterDrsFaults[]?> GetPropertyDrsFault()
     {
-        return await this.GetProperty<ClusterDrsFaults[]>("drsFault");
+        var obj = await this.GetProperty<ClusterDrsFaults[]>("drsFault");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<ClusterDrsRecommendation[]?> GetPropertyDrsRecommendation()
     {
-        return await this.GetProperty<ClusterDrsRecommendation[]>("drsRecommendation");
+        var obj = await this.GetProperty<ClusterDrsRecommendation[]>("drsRecommendation");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<ClusterComputeResourceHCIConfigInfo?> GetPropertyHciConfig()
     {
-        return await this.GetProperty<ClusterComputeResourceHCIConfigInfo>("hciConfig");
+        var obj = await this.GetProperty<ClusterComputeResourceHCIConfigInfo>("hciConfig");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<ClusterDrsMigration[]?> GetPropertyMigrationHistory()
     {
-        return await this.GetProperty<ClusterDrsMigration[]>("migrationHistory");
+        var obj = await this.GetProperty<ClusterDrsMigration[]>("migrationHistory");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<ClusterRecommendation[]?> GetPropertyRecommendation()
     {
-        return await this.GetProperty<ClusterRecommendation[]>("recommendation");
+        var obj = await this.GetProperty<ClusterRecommendation[]>("recommendation");
+        return obj;
     }
 
-    public async System.Threading.Tasks.Task<ClusterComputeResourceSummary?> GetPropertySummaryEx()
+    public async System.Threading.Tasks.Task<ClusterComputeResourceSummary> GetPropertySummaryEx()
     {
-        return await this.GetProperty<ClusterComputeResourceSummary>("summaryEx");
+        var obj = await this.GetProperty<ClusterComputeResourceSummary>("summaryEx");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task AbandonHciWorkflow()
@@ -390,15 +404,16 @@ public partial class ClusterEVCManager : ExtensibleManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<ClusterEVCManagerEVCState?> GetPropertyEvcState()
+    public async System.Threading.Tasks.Task<ClusterEVCManagerEVCState> GetPropertyEvcState()
     {
-        return await this.GetProperty<ClusterEVCManagerEVCState>("evcState");
+        var obj = await this.GetProperty<ClusterEVCManagerEVCState>("evcState");
+        return obj!;
     }
 
-    public async System.Threading.Tasks.Task<ClusterComputeResource?> GetPropertyManagedCluster()
+    public async System.Threading.Tasks.Task<ClusterComputeResource> GetPropertyManagedCluster()
     {
         var managedCluster = await this.GetProperty<ManagedObjectReference>("managedCluster");
-        return ManagedObject.Create<ClusterComputeResource>(managedCluster, this.Session);
+        return ManagedObject.Create<ClusterComputeResource>(managedCluster, this.Session)!;
     }
 
     public async System.Threading.Tasks.Task<Task?> CheckAddHostEvc_Task(HostConnectSpec cnxSpec)
@@ -460,9 +475,10 @@ public partial class ComputeResource : ManagedEntity
     {
     }
 
-    public async System.Threading.Tasks.Task<ComputeResourceConfigInfo?> GetPropertyConfigurationEx()
+    public async System.Threading.Tasks.Task<ComputeResourceConfigInfo> GetPropertyConfigurationEx()
     {
-        return await this.GetProperty<ComputeResourceConfigInfo>("configurationEx");
+        var obj = await this.GetProperty<ComputeResourceConfigInfo>("configurationEx");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<Datastore[]?> GetPropertyDatastore()
@@ -489,7 +505,8 @@ public partial class ComputeResource : ManagedEntity
 
     public async System.Threading.Tasks.Task<bool> GetPropertyLifecycleManaged()
     {
-        return await this.GetProperty<bool>("lifecycleManaged");
+        var obj = await this.GetProperty<bool>("lifecycleManaged");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<Network[]?> GetPropertyNetwork()
@@ -506,9 +523,10 @@ public partial class ComputeResource : ManagedEntity
         return ManagedObject.Create<ResourcePool>(resourcePool, this.Session);
     }
 
-    public async System.Threading.Tasks.Task<ComputeResourceSummary?> GetPropertySummary()
+    public async System.Threading.Tasks.Task<ComputeResourceSummary> GetPropertySummary()
     {
-        return await this.GetProperty<ComputeResourceSummary>("summary");
+        var obj = await this.GetProperty<ComputeResourceSummary>("summary");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<Task?> ReconfigureComputeResource_Task(ComputeResourceConfigSpec spec, bool modify)
@@ -527,20 +545,22 @@ public partial class ContainerView : ManagedObjectView
     {
     }
 
-    public async System.Threading.Tasks.Task<ManagedEntity?> GetPropertyContainer()
+    public async System.Threading.Tasks.Task<ManagedEntity> GetPropertyContainer()
     {
         var container = await this.GetProperty<ManagedObjectReference>("container");
-        return ManagedObject.Create<ManagedEntity>(container, this.Session);
+        return ManagedObject.Create<ManagedEntity>(container, this.Session)!;
     }
 
     public async System.Threading.Tasks.Task<bool> GetPropertyRecursive()
     {
-        return await this.GetProperty<bool>("recursive");
+        var obj = await this.GetProperty<bool>("recursive");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<string[]?> GetPropertyType()
     {
-        return await this.GetProperty<string[]>("type");
+        var obj = await this.GetProperty<string[]>("type");
+        return obj;
     }
 }
 
@@ -555,7 +575,8 @@ public partial class CryptoManager : ManagedObject
 
     public async System.Threading.Tasks.Task<bool> GetPropertyEnabled()
     {
-        return await this.GetProperty<bool>("enabled");
+        var obj = await this.GetProperty<bool>("enabled");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task AddKey(CryptoKeyPlain key)
@@ -636,7 +657,8 @@ public partial class CryptoManagerKmip : CryptoManager
 
     public async System.Threading.Tasks.Task<KmipClusterInfo[]?> GetPropertyKmipServers()
     {
-        return await this.GetProperty<KmipClusterInfo[]>("kmipServers");
+        var obj = await this.GetProperty<KmipClusterInfo[]>("kmipServers");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<string?> GenerateClientCsr(KeyProviderId cluster)
@@ -772,7 +794,8 @@ public partial class CustomFieldsManager : ManagedObject
 
     public async System.Threading.Tasks.Task<CustomFieldDef[]?> GetPropertyField()
     {
-        return await this.GetProperty<CustomFieldDef[]>("field");
+        var obj = await this.GetProperty<CustomFieldDef[]>("field");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<CustomFieldDef?> AddCustomFieldDef(string name, string? moType, PrivilegePolicyDef? fieldDefPolicy, PrivilegePolicyDef? fieldPolicy)
@@ -807,12 +830,14 @@ public partial class CustomizationSpecManager : ManagedObject
 
     public async System.Threading.Tasks.Task<byte[]?> GetPropertyEncryptionKey()
     {
-        return await this.GetProperty<byte[]>("encryptionKey");
+        var obj = await this.GetProperty<byte[]>("encryptionKey");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<CustomizationSpecInfo[]?> GetPropertyInfo()
     {
-        return await this.GetProperty<CustomizationSpecInfo[]>("info");
+        var obj = await this.GetProperty<CustomizationSpecInfo[]>("info");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task CheckCustomizationResources(string guestOs)
@@ -875,9 +900,10 @@ public partial class Datacenter : ManagedEntity
     {
     }
 
-    public async System.Threading.Tasks.Task<DatacenterConfigInfo?> GetPropertyConfiguration()
+    public async System.Threading.Tasks.Task<DatacenterConfigInfo> GetPropertyConfiguration()
     {
-        return await this.GetProperty<DatacenterConfigInfo>("configuration");
+        var obj = await this.GetProperty<DatacenterConfigInfo>("configuration");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<Datastore[]?> GetPropertyDatastore()
@@ -888,16 +914,16 @@ public partial class Datacenter : ManagedEntity
             .ToArray();
     }
 
-    public async System.Threading.Tasks.Task<Folder?> GetPropertyDatastoreFolder()
+    public async System.Threading.Tasks.Task<Folder> GetPropertyDatastoreFolder()
     {
         var datastoreFolder = await this.GetProperty<ManagedObjectReference>("datastoreFolder");
-        return ManagedObject.Create<Folder>(datastoreFolder, this.Session);
+        return ManagedObject.Create<Folder>(datastoreFolder, this.Session)!;
     }
 
-    public async System.Threading.Tasks.Task<Folder?> GetPropertyHostFolder()
+    public async System.Threading.Tasks.Task<Folder> GetPropertyHostFolder()
     {
         var hostFolder = await this.GetProperty<ManagedObjectReference>("hostFolder");
-        return ManagedObject.Create<Folder>(hostFolder, this.Session);
+        return ManagedObject.Create<Folder>(hostFolder, this.Session)!;
     }
 
     public async System.Threading.Tasks.Task<Network[]?> GetPropertyNetwork()
@@ -908,16 +934,16 @@ public partial class Datacenter : ManagedEntity
             .ToArray();
     }
 
-    public async System.Threading.Tasks.Task<Folder?> GetPropertyNetworkFolder()
+    public async System.Threading.Tasks.Task<Folder> GetPropertyNetworkFolder()
     {
         var networkFolder = await this.GetProperty<ManagedObjectReference>("networkFolder");
-        return ManagedObject.Create<Folder>(networkFolder, this.Session);
+        return ManagedObject.Create<Folder>(networkFolder, this.Session)!;
     }
 
-    public async System.Threading.Tasks.Task<Folder?> GetPropertyVmFolder()
+    public async System.Threading.Tasks.Task<Folder> GetPropertyVmFolder()
     {
         var vmFolder = await this.GetProperty<ManagedObjectReference>("vmFolder");
-        return ManagedObject.Create<Folder>(vmFolder, this.Session);
+        return ManagedObject.Create<Folder>(vmFolder, this.Session)!;
     }
 
     public async System.Threading.Tasks.Task<DatacenterBasicConnectInfo[]?> BatchQueryConnectInfo(HostConnectSpec[]? hostSpecs)
@@ -962,35 +988,40 @@ public partial class Datastore : ManagedEntity
     {
     }
 
-    public async System.Threading.Tasks.Task<HostDatastoreBrowser?> GetPropertyBrowser()
+    public async System.Threading.Tasks.Task<HostDatastoreBrowser> GetPropertyBrowser()
     {
         var browser = await this.GetProperty<ManagedObjectReference>("browser");
-        return ManagedObject.Create<HostDatastoreBrowser>(browser, this.Session);
+        return ManagedObject.Create<HostDatastoreBrowser>(browser, this.Session)!;
     }
 
-    public async System.Threading.Tasks.Task<DatastoreCapability?> GetPropertyCapability()
+    public async System.Threading.Tasks.Task<DatastoreCapability> GetPropertyCapability()
     {
-        return await this.GetProperty<DatastoreCapability>("capability");
+        var obj = await this.GetProperty<DatastoreCapability>("capability");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<DatastoreHostMount[]?> GetPropertyHost()
     {
-        return await this.GetProperty<DatastoreHostMount[]>("host");
+        var obj = await this.GetProperty<DatastoreHostMount[]>("host");
+        return obj;
     }
 
-    public async System.Threading.Tasks.Task<DatastoreInfo?> GetPropertyInfo()
+    public async System.Threading.Tasks.Task<DatastoreInfo> GetPropertyInfo()
     {
-        return await this.GetProperty<DatastoreInfo>("info");
+        var obj = await this.GetProperty<DatastoreInfo>("info");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<StorageIORMInfo?> GetPropertyIormConfiguration()
     {
-        return await this.GetProperty<StorageIORMInfo>("iormConfiguration");
+        var obj = await this.GetProperty<StorageIORMInfo>("iormConfiguration");
+        return obj;
     }
 
-    public async System.Threading.Tasks.Task<DatastoreSummary?> GetPropertySummary()
+    public async System.Threading.Tasks.Task<DatastoreSummary> GetPropertySummary()
     {
-        return await this.GetProperty<DatastoreSummary>("summary");
+        var obj = await this.GetProperty<DatastoreSummary>("summary");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<VirtualMachine[]?> GetPropertyVm()
@@ -1110,19 +1141,22 @@ public partial class DistributedVirtualPortgroup : Network
     {
     }
 
-    public async System.Threading.Tasks.Task<DVPortgroupConfigInfo?> GetPropertyConfig()
+    public async System.Threading.Tasks.Task<DVPortgroupConfigInfo> GetPropertyConfig()
     {
-        return await this.GetProperty<DVPortgroupConfigInfo>("config");
+        var obj = await this.GetProperty<DVPortgroupConfigInfo>("config");
+        return obj!;
     }
 
-    public async System.Threading.Tasks.Task<string?> GetPropertyKey()
+    public async System.Threading.Tasks.Task<string> GetPropertyKey()
     {
-        return await this.GetProperty<string>("key");
+        var obj = await this.GetProperty<string>("key");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<string[]?> GetPropertyPortKeys()
     {
-        return await this.GetProperty<string[]>("portKeys");
+        var obj = await this.GetProperty<string[]>("portKeys");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<Task?> DVPortgroupRollback_Task(EntityBackupConfig? entityBackup)
@@ -1147,19 +1181,22 @@ public partial class DistributedVirtualSwitch : ManagedEntity
     {
     }
 
-    public async System.Threading.Tasks.Task<DVSCapability?> GetPropertyCapability()
+    public async System.Threading.Tasks.Task<DVSCapability> GetPropertyCapability()
     {
-        return await this.GetProperty<DVSCapability>("capability");
+        var obj = await this.GetProperty<DVSCapability>("capability");
+        return obj!;
     }
 
-    public async System.Threading.Tasks.Task<DVSConfigInfo?> GetPropertyConfig()
+    public async System.Threading.Tasks.Task<DVSConfigInfo> GetPropertyConfig()
     {
-        return await this.GetProperty<DVSConfigInfo>("config");
+        var obj = await this.GetProperty<DVSConfigInfo>("config");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<DVSNetworkResourcePool[]?> GetPropertyNetworkResourcePool()
     {
-        return await this.GetProperty<DVSNetworkResourcePool[]>("networkResourcePool");
+        var obj = await this.GetProperty<DVSNetworkResourcePool[]>("networkResourcePool");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<DistributedVirtualPortgroup[]?> GetPropertyPortgroup()
@@ -1172,17 +1209,20 @@ public partial class DistributedVirtualSwitch : ManagedEntity
 
     public async System.Threading.Tasks.Task<DVSRuntimeInfo?> GetPropertyRuntime()
     {
-        return await this.GetProperty<DVSRuntimeInfo>("runtime");
+        var obj = await this.GetProperty<DVSRuntimeInfo>("runtime");
+        return obj;
     }
 
-    public async System.Threading.Tasks.Task<DVSSummary?> GetPropertySummary()
+    public async System.Threading.Tasks.Task<DVSSummary> GetPropertySummary()
     {
-        return await this.GetProperty<DVSSummary>("summary");
+        var obj = await this.GetProperty<DVSSummary>("summary");
+        return obj!;
     }
 
-    public async System.Threading.Tasks.Task<string?> GetPropertyUuid()
+    public async System.Threading.Tasks.Task<string> GetPropertyUuid()
     {
-        return await this.GetProperty<string>("uuid");
+        var obj = await this.GetProperty<string>("uuid");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<Task?> AddDVPortgroup_Task(DVPortgroupConfigSpec[] spec)
@@ -1432,7 +1472,8 @@ public partial class EventHistoryCollector : HistoryCollector
 
     public async System.Threading.Tasks.Task<Event[]?> GetPropertyLatestPage()
     {
-        return await this.GetProperty<Event[]>("latestPage");
+        var obj = await this.GetProperty<Event[]>("latestPage");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<Event[]?> ReadNextEvents(int maxCount)
@@ -1455,19 +1496,22 @@ public partial class EventManager : ManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<EventDescription?> GetPropertyDescription()
+    public async System.Threading.Tasks.Task<EventDescription> GetPropertyDescription()
     {
-        return await this.GetProperty<EventDescription>("description");
+        var obj = await this.GetProperty<EventDescription>("description");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<Event?> GetPropertyLatestEvent()
     {
-        return await this.GetProperty<Event>("latestEvent");
+        var obj = await this.GetProperty<Event>("latestEvent");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<int> GetPropertyMaxCollector()
     {
-        return await this.GetProperty<int>("maxCollector");
+        var obj = await this.GetProperty<int>("maxCollector");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<EventHistoryCollector?> CreateCollectorForEvents(EventFilterSpec filter)
@@ -1508,12 +1552,14 @@ public partial class ExtensibleManagedObject : ManagedObject
 
     public async System.Threading.Tasks.Task<CustomFieldDef[]?> GetPropertyAvailableField()
     {
-        return await this.GetProperty<CustomFieldDef[]>("availableField");
+        var obj = await this.GetProperty<CustomFieldDef[]>("availableField");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<CustomFieldValue[]?> GetPropertyValue()
     {
-        return await this.GetProperty<CustomFieldValue[]>("value");
+        var obj = await this.GetProperty<CustomFieldValue[]>("value");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task SetCustomValue(string key, string value)
@@ -1533,7 +1579,8 @@ public partial class ExtensionManager : ManagedObject
 
     public async System.Threading.Tasks.Task<Extension[]?> GetPropertyExtensionList()
     {
-        return await this.GetProperty<Extension[]>("extensionList");
+        var obj = await this.GetProperty<Extension[]>("extensionList");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<Extension?> FindExtension(string extensionKey)
@@ -1594,7 +1641,8 @@ public partial class FailoverClusterConfigurator : ManagedObject
 
     public async System.Threading.Tasks.Task<string[]?> GetPropertyDisabledConfigureMethod()
     {
-        return await this.GetProperty<string[]>("disabledConfigureMethod");
+        var obj = await this.GetProperty<string[]>("disabledConfigureMethod");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<Task?> ConfigureVcha_Task(VchaClusterConfigSpec configSpec)
@@ -1650,7 +1698,8 @@ public partial class FailoverClusterManager : ManagedObject
 
     public async System.Threading.Tasks.Task<string[]?> GetPropertyDisabledClusterMethod()
     {
-        return await this.GetProperty<string[]>("disabledClusterMethod");
+        var obj = await this.GetProperty<string[]>("disabledClusterMethod");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<string?> GetClusterMode()
@@ -1733,12 +1782,14 @@ public partial class Folder : ManagedEntity
 
     public async System.Threading.Tasks.Task<string[]?> GetPropertyChildType()
     {
-        return await this.GetProperty<string[]>("childType");
+        var obj = await this.GetProperty<string[]>("childType");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<string?> GetPropertyNamespace()
     {
-        return await this.GetProperty<string>("namespace");
+        var obj = await this.GetProperty<string>("namespace");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<Task?> AddStandaloneHost_Task(HostConnectSpec spec, ComputeResourceConfigSpec? compResSpec, bool addConnected, string? license)
@@ -2182,9 +2233,10 @@ public partial class HistoryCollector : ManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<object?> GetPropertyFilter()
+    public async System.Threading.Tasks.Task<object> GetPropertyFilter()
     {
-        return await this.GetProperty<object>("filter");
+        var obj = await this.GetProperty<object>("filter");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task DestroyCollector()
@@ -2217,9 +2269,10 @@ public partial class HostAccessManager : ManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<HostLockdownMode?> GetPropertyLockdownMode()
+    public async System.Threading.Tasks.Task<HostLockdownMode> GetPropertyLockdownMode()
     {
-        return await this.GetProperty<HostLockdownMode>("lockdownMode");
+        var obj = await this.GetProperty<HostLockdownMode>("lockdownMode");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task ChangeAccessMode(string principal, bool isGroup, HostAccessMode accessMode)
@@ -2338,12 +2391,14 @@ public partial class HostAssignableHardwareManager : ManagedObject
 
     public async System.Threading.Tasks.Task<HostAssignableHardwareBinding[]?> GetPropertyBinding()
     {
-        return await this.GetProperty<HostAssignableHardwareBinding[]>("binding");
+        var obj = await this.GetProperty<HostAssignableHardwareBinding[]>("binding");
+        return obj;
     }
 
-    public async System.Threading.Tasks.Task<HostAssignableHardwareConfig?> GetPropertyConfig()
+    public async System.Threading.Tasks.Task<HostAssignableHardwareConfig> GetPropertyConfig()
     {
-        return await this.GetProperty<HostAssignableHardwareConfig>("config");
+        var obj = await this.GetProperty<HostAssignableHardwareConfig>("config");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<byte[]?> DownloadDescriptionTree()
@@ -2371,15 +2426,16 @@ public partial class HostAuthenticationManager : ManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<HostAuthenticationManagerInfo?> GetPropertyInfo()
+    public async System.Threading.Tasks.Task<HostAuthenticationManagerInfo> GetPropertyInfo()
     {
-        return await this.GetProperty<HostAuthenticationManagerInfo>("info");
+        var obj = await this.GetProperty<HostAuthenticationManagerInfo>("info");
+        return obj!;
     }
 
-    public async System.Threading.Tasks.Task<HostAuthenticationStore[]?> GetPropertySupportedStore()
+    public async System.Threading.Tasks.Task<HostAuthenticationStore[]> GetPropertySupportedStore()
     {
         var supportedStore = await this.GetProperty<ManagedObjectReference[]>("supportedStore");
-        return supportedStore?
+        return supportedStore!
             .Select(r => ManagedObject.Create<HostAuthenticationStore>(r, this.Session)!)
             .ToArray();
     }
@@ -2394,9 +2450,10 @@ public partial class HostAuthenticationStore : ManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<HostAuthenticationStoreInfo?> GetPropertyInfo()
+    public async System.Threading.Tasks.Task<HostAuthenticationStoreInfo> GetPropertyInfo()
     {
-        return await this.GetProperty<HostAuthenticationStoreInfo>("info");
+        var obj = await this.GetProperty<HostAuthenticationStoreInfo>("info");
+        return obj!;
     }
 }
 
@@ -2409,9 +2466,10 @@ public partial class HostAutoStartManager : ManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<HostAutoStartManagerConfig?> GetPropertyConfig()
+    public async System.Threading.Tasks.Task<HostAutoStartManagerConfig> GetPropertyConfig()
     {
-        return await this.GetProperty<HostAutoStartManagerConfig>("config");
+        var obj = await this.GetProperty<HostAutoStartManagerConfig>("config");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task AutoStartPowerOff()
@@ -2461,7 +2519,8 @@ public partial class HostCacheConfigurationManager : ManagedObject
 
     public async System.Threading.Tasks.Task<HostCacheConfigurationInfo[]?> GetPropertyCacheConfigurationInfo()
     {
-        return await this.GetProperty<HostCacheConfigurationInfo[]>("cacheConfigurationInfo");
+        var obj = await this.GetProperty<HostCacheConfigurationInfo[]>("cacheConfigurationInfo");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<Task?> ConfigureHostCache_Task(HostCacheConfigurationSpec spec)
@@ -2480,9 +2539,10 @@ public partial class HostCertificateManager : ManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<HostCertificateManagerCertificateInfo?> GetPropertyCertificateInfo()
+    public async System.Threading.Tasks.Task<HostCertificateManagerCertificateInfo> GetPropertyCertificateInfo()
     {
-        return await this.GetProperty<HostCertificateManagerCertificateInfo>("certificateInfo");
+        var obj = await this.GetProperty<HostCertificateManagerCertificateInfo>("certificateInfo");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<string?> GenerateCertificateSigningRequest(bool useIpAddressAsCommonName)
@@ -2527,7 +2587,8 @@ public partial class HostCpuSchedulerSystem : ExtensibleManagedObject
 
     public async System.Threading.Tasks.Task<HostHyperThreadScheduleInfo?> GetPropertyHyperthreadInfo()
     {
-        return await this.GetProperty<HostHyperThreadScheduleInfo>("hyperthreadInfo");
+        var obj = await this.GetProperty<HostHyperThreadScheduleInfo>("hyperthreadInfo");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task DisableHyperThreading()
@@ -2560,7 +2621,8 @@ public partial class HostDatastoreBrowser : ManagedObject
 
     public async System.Threading.Tasks.Task<FileQuery[]?> GetPropertySupportedType()
     {
-        return await this.GetProperty<FileQuery[]>("supportedType");
+        var obj = await this.GetProperty<FileQuery[]>("supportedType");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task DeleteFile(string datastorePath)
@@ -2590,9 +2652,10 @@ public partial class HostDatastoreSystem : ManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<HostDatastoreSystemCapabilities?> GetPropertyCapabilities()
+    public async System.Threading.Tasks.Task<HostDatastoreSystemCapabilities> GetPropertyCapabilities()
     {
-        return await this.GetProperty<HostDatastoreSystemCapabilities>("capabilities");
+        var obj = await this.GetProperty<HostDatastoreSystemCapabilities>("capabilities");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<Datastore[]?> GetPropertyDatastore()
@@ -2711,9 +2774,10 @@ public partial class HostDateTimeSystem : ManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<HostDateTimeInfo?> GetPropertyDateTimeInfo()
+    public async System.Threading.Tasks.Task<HostDateTimeInfo> GetPropertyDateTimeInfo()
     {
-        return await this.GetProperty<HostDateTimeInfo>("dateTimeInfo");
+        var obj = await this.GetProperty<HostDateTimeInfo>("dateTimeInfo");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<HostDateTimeSystemTimeZone[]?> QueryAvailableTimeZones()
@@ -2758,7 +2822,8 @@ public partial class HostDiagnosticSystem : ManagedObject
 
     public async System.Threading.Tasks.Task<HostDiagnosticPartition?> GetPropertyActivePartition()
     {
-        return await this.GetProperty<HostDiagnosticPartition>("activePartition");
+        var obj = await this.GetProperty<HostDiagnosticPartition>("activePartition");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task CreateDiagnosticPartition(HostDiagnosticPartitionCreateSpec spec)
@@ -2806,9 +2871,10 @@ public partial class HostEsxAgentHostManager : ManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<HostEsxAgentHostManagerConfigInfo?> GetPropertyConfigInfo()
+    public async System.Threading.Tasks.Task<HostEsxAgentHostManagerConfigInfo> GetPropertyConfigInfo()
     {
-        return await this.GetProperty<HostEsxAgentHostManagerConfigInfo>("configInfo");
+        var obj = await this.GetProperty<HostEsxAgentHostManagerConfigInfo>("configInfo");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task EsxAgentHostManagerUpdateConfig(HostEsxAgentHostManagerConfigInfo configInfo)
@@ -2828,7 +2894,8 @@ public partial class HostFirewallSystem : ExtensibleManagedObject
 
     public async System.Threading.Tasks.Task<HostFirewallInfo?> GetPropertyFirewallInfo()
     {
-        return await this.GetProperty<HostFirewallInfo>("firewallInfo");
+        var obj = await this.GetProperty<HostFirewallInfo>("firewallInfo");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task DisableRuleset(string id)
@@ -2898,22 +2965,26 @@ public partial class HostGraphicsManager : ExtensibleManagedObject
 
     public async System.Threading.Tasks.Task<HostGraphicsConfig?> GetPropertyGraphicsConfig()
     {
-        return await this.GetProperty<HostGraphicsConfig>("graphicsConfig");
+        var obj = await this.GetProperty<HostGraphicsConfig>("graphicsConfig");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<HostGraphicsInfo[]?> GetPropertyGraphicsInfo()
     {
-        return await this.GetProperty<HostGraphicsInfo[]>("graphicsInfo");
+        var obj = await this.GetProperty<HostGraphicsInfo[]>("graphicsInfo");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<HostSharedGpuCapabilities[]?> GetPropertySharedGpuCapabilities()
     {
-        return await this.GetProperty<HostSharedGpuCapabilities[]>("sharedGpuCapabilities");
+        var obj = await this.GetProperty<HostSharedGpuCapabilities[]>("sharedGpuCapabilities");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<string[]?> GetPropertySharedPassthruGpuTypes()
     {
-        return await this.GetProperty<string[]>("sharedPassthruGpuTypes");
+        var obj = await this.GetProperty<string[]>("sharedPassthruGpuTypes");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<bool> IsSharedGraphicsActive()
@@ -2951,9 +3022,10 @@ public partial class HostHealthStatusSystem : ManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<HealthSystemRuntime?> GetPropertyRuntime()
+    public async System.Threading.Tasks.Task<HealthSystemRuntime> GetPropertyRuntime()
     {
-        return await this.GetProperty<HealthSystemRuntime>("runtime");
+        var obj = await this.GetProperty<HealthSystemRuntime>("runtime");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task ClearSystemEventLog()
@@ -3108,12 +3180,14 @@ public partial class HostMemorySystem : ExtensibleManagedObject
 
     public async System.Threading.Tasks.Task<ServiceConsoleReservationInfo?> GetPropertyConsoleReservationInfo()
     {
-        return await this.GetProperty<ServiceConsoleReservationInfo>("consoleReservationInfo");
+        var obj = await this.GetProperty<ServiceConsoleReservationInfo>("consoleReservationInfo");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<VirtualMachineMemoryReservationInfo?> GetPropertyVirtualMachineReservationInfo()
     {
-        return await this.GetProperty<VirtualMachineMemoryReservationInfo>("virtualMachineReservationInfo");
+        var obj = await this.GetProperty<VirtualMachineMemoryReservationInfo>("virtualMachineReservationInfo");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task ReconfigureServiceConsoleReservation(long cfgBytes)
@@ -3138,37 +3212,44 @@ public partial class HostNetworkSystem : ExtensibleManagedObject
 
     public async System.Threading.Tasks.Task<HostNetCapabilities?> GetPropertyCapabilities()
     {
-        return await this.GetProperty<HostNetCapabilities>("capabilities");
+        var obj = await this.GetProperty<HostNetCapabilities>("capabilities");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<HostIpRouteConfig?> GetPropertyConsoleIpRouteConfig()
     {
-        return await this.GetProperty<HostIpRouteConfig>("consoleIpRouteConfig");
+        var obj = await this.GetProperty<HostIpRouteConfig>("consoleIpRouteConfig");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<HostDnsConfig?> GetPropertyDnsConfig()
     {
-        return await this.GetProperty<HostDnsConfig>("dnsConfig");
+        var obj = await this.GetProperty<HostDnsConfig>("dnsConfig");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<HostIpRouteConfig?> GetPropertyIpRouteConfig()
     {
-        return await this.GetProperty<HostIpRouteConfig>("ipRouteConfig");
+        var obj = await this.GetProperty<HostIpRouteConfig>("ipRouteConfig");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<HostNetworkConfig?> GetPropertyNetworkConfig()
     {
-        return await this.GetProperty<HostNetworkConfig>("networkConfig");
+        var obj = await this.GetProperty<HostNetworkConfig>("networkConfig");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<HostNetworkInfo?> GetPropertyNetworkInfo()
     {
-        return await this.GetProperty<HostNetworkInfo>("networkInfo");
+        var obj = await this.GetProperty<HostNetworkInfo>("networkInfo");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<HostNetOffloadCapabilities?> GetPropertyOffloadCapabilities()
     {
-        return await this.GetProperty<HostNetOffloadCapabilities>("offloadCapabilities");
+        var obj = await this.GetProperty<HostNetOffloadCapabilities>("offloadCapabilities");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task AddPortGroup(HostPortGroupSpec portgrp)
@@ -3286,9 +3367,10 @@ public partial class HostNvdimmSystem : ManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<NvdimmSystemInfo?> GetPropertyNvdimmSystemInfo()
+    public async System.Threading.Tasks.Task<NvdimmSystemInfo> GetPropertyNvdimmSystemInfo()
     {
-        return await this.GetProperty<NvdimmSystemInfo>("nvdimmSystemInfo");
+        var obj = await this.GetProperty<NvdimmSystemInfo>("nvdimmSystemInfo");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<Task?> CreateNvdimmNamespace_Task(NvdimmNamespaceCreateSpec createSpec)
@@ -3383,14 +3465,16 @@ public partial class HostPciPassthruSystem : ExtensibleManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<HostPciPassthruInfo[]?> GetPropertyPciPassthruInfo()
+    public async System.Threading.Tasks.Task<HostPciPassthruInfo[]> GetPropertyPciPassthruInfo()
     {
-        return await this.GetProperty<HostPciPassthruInfo[]>("pciPassthruInfo");
+        var obj = await this.GetProperty<HostPciPassthruInfo[]>("pciPassthruInfo");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<HostSriovDevicePoolInfo[]?> GetPropertySriovDevicePoolInfo()
     {
-        return await this.GetProperty<HostSriovDevicePoolInfo[]>("sriovDevicePoolInfo");
+        var obj = await this.GetProperty<HostSriovDevicePoolInfo[]>("sriovDevicePoolInfo");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task Refresh()
@@ -3413,14 +3497,16 @@ public partial class HostPowerSystem : ManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<PowerSystemCapability?> GetPropertyCapability()
+    public async System.Threading.Tasks.Task<PowerSystemCapability> GetPropertyCapability()
     {
-        return await this.GetProperty<PowerSystemCapability>("capability");
+        var obj = await this.GetProperty<PowerSystemCapability>("capability");
+        return obj!;
     }
 
-    public async System.Threading.Tasks.Task<PowerSystemInfo?> GetPropertyInfo()
+    public async System.Threading.Tasks.Task<PowerSystemInfo> GetPropertyInfo()
     {
-        return await this.GetProperty<PowerSystemInfo>("info");
+        var obj = await this.GetProperty<PowerSystemInfo>("info");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task ConfigurePowerPolicy(int key)
@@ -3446,17 +3532,20 @@ public partial class HostProfile : Profile
 
     public async System.Threading.Tasks.Task<HostProfileValidationFailureInfo?> GetPropertyValidationFailureInfo()
     {
-        return await this.GetProperty<HostProfileValidationFailureInfo>("validationFailureInfo");
+        var obj = await this.GetProperty<HostProfileValidationFailureInfo>("validationFailureInfo");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<string?> GetPropertyValidationState()
     {
-        return await this.GetProperty<string>("validationState");
+        var obj = await this.GetProperty<string>("validationState");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<DateTime> GetPropertyValidationStateUpdateTime()
     {
-        return await this.GetProperty<DateTime>("validationStateUpdateTime");
+        var obj = await this.GetProperty<DateTime>("validationStateUpdateTime");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<ProfileExecuteResult?> ExecuteHostProfile(HostSystem host, ProfileDeferredPolicyOptionParameter[]? deferredParam)
@@ -3604,9 +3693,10 @@ public partial class HostServiceSystem : ExtensibleManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<HostServiceInfo?> GetPropertyServiceInfo()
+    public async System.Threading.Tasks.Task<HostServiceInfo> GetPropertyServiceInfo()
     {
-        return await this.GetProperty<HostServiceInfo>("serviceInfo");
+        var obj = await this.GetProperty<HostServiceInfo>("serviceInfo");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task RefreshServices()
@@ -3649,14 +3739,16 @@ public partial class HostSnmpSystem : ManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<HostSnmpConfigSpec?> GetPropertyConfiguration()
+    public async System.Threading.Tasks.Task<HostSnmpConfigSpec> GetPropertyConfiguration()
     {
-        return await this.GetProperty<HostSnmpConfigSpec>("configuration");
+        var obj = await this.GetProperty<HostSnmpConfigSpec>("configuration");
+        return obj!;
     }
 
-    public async System.Threading.Tasks.Task<HostSnmpSystemAgentLimits?> GetPropertyLimits()
+    public async System.Threading.Tasks.Task<HostSnmpSystemAgentLimits> GetPropertyLimits()
     {
-        return await this.GetProperty<HostSnmpSystemAgentLimits>("limits");
+        var obj = await this.GetProperty<HostSnmpSystemAgentLimits>("limits");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task ReconfigureSnmpAgent(HostSnmpConfigSpec spec)
@@ -3720,24 +3812,28 @@ public partial class HostStorageSystem : ExtensibleManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<HostFileSystemVolumeInfo?> GetPropertyFileSystemVolumeInfo()
+    public async System.Threading.Tasks.Task<HostFileSystemVolumeInfo> GetPropertyFileSystemVolumeInfo()
     {
-        return await this.GetProperty<HostFileSystemVolumeInfo>("fileSystemVolumeInfo");
+        var obj = await this.GetProperty<HostFileSystemVolumeInfo>("fileSystemVolumeInfo");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<HostMultipathStateInfo?> GetPropertyMultipathStateInfo()
     {
-        return await this.GetProperty<HostMultipathStateInfo>("multipathStateInfo");
+        var obj = await this.GetProperty<HostMultipathStateInfo>("multipathStateInfo");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<HostStorageDeviceInfo?> GetPropertyStorageDeviceInfo()
     {
-        return await this.GetProperty<HostStorageDeviceInfo>("storageDeviceInfo");
+        var obj = await this.GetProperty<HostStorageDeviceInfo>("storageDeviceInfo");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<string[]?> GetPropertySystemFile()
     {
-        return await this.GetProperty<string[]>("systemFile");
+        var obj = await this.GetProperty<string[]>("systemFile");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task AddInternetScsiSendTargets(string iScsiHbaDevice, HostInternetScsiHbaSendTarget[] targets)
@@ -4172,37 +4268,44 @@ public partial class HostSystem : ManagedEntity
 
     public async System.Threading.Tasks.Task<AnswerFileStatusResult?> GetPropertyAnswerFileValidationResult()
     {
-        return await this.GetProperty<AnswerFileStatusResult>("answerFileValidationResult");
+        var obj = await this.GetProperty<AnswerFileStatusResult>("answerFileValidationResult");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<AnswerFileStatusResult?> GetPropertyAnswerFileValidationState()
     {
-        return await this.GetProperty<AnswerFileStatusResult>("answerFileValidationState");
+        var obj = await this.GetProperty<AnswerFileStatusResult>("answerFileValidationState");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<HostCapability?> GetPropertyCapability()
     {
-        return await this.GetProperty<HostCapability>("capability");
+        var obj = await this.GetProperty<HostCapability>("capability");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<ComplianceResult?> GetPropertyComplianceCheckResult()
     {
-        return await this.GetProperty<ComplianceResult>("complianceCheckResult");
+        var obj = await this.GetProperty<ComplianceResult>("complianceCheckResult");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<HostSystemComplianceCheckState?> GetPropertyComplianceCheckState()
     {
-        return await this.GetProperty<HostSystemComplianceCheckState>("complianceCheckState");
+        var obj = await this.GetProperty<HostSystemComplianceCheckState>("complianceCheckState");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<HostConfigInfo?> GetPropertyConfig()
     {
-        return await this.GetProperty<HostConfigInfo>("config");
+        var obj = await this.GetProperty<HostConfigInfo>("config");
+        return obj;
     }
 
-    public async System.Threading.Tasks.Task<HostConfigManager?> GetPropertyConfigManager()
+    public async System.Threading.Tasks.Task<HostConfigManager> GetPropertyConfigManager()
     {
-        return await this.GetProperty<HostConfigManager>("configManager");
+        var obj = await this.GetProperty<HostConfigManager>("configManager");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<Datastore[]?> GetPropertyDatastore()
@@ -4213,20 +4316,22 @@ public partial class HostSystem : ManagedEntity
             .ToArray();
     }
 
-    public async System.Threading.Tasks.Task<HostDatastoreBrowser?> GetPropertyDatastoreBrowser()
+    public async System.Threading.Tasks.Task<HostDatastoreBrowser> GetPropertyDatastoreBrowser()
     {
         var datastoreBrowser = await this.GetProperty<ManagedObjectReference>("datastoreBrowser");
-        return ManagedObject.Create<HostDatastoreBrowser>(datastoreBrowser, this.Session);
+        return ManagedObject.Create<HostDatastoreBrowser>(datastoreBrowser, this.Session)!;
     }
 
     public async System.Threading.Tasks.Task<HostHardwareInfo?> GetPropertyHardware()
     {
-        return await this.GetProperty<HostHardwareInfo>("hardware");
+        var obj = await this.GetProperty<HostHardwareInfo>("hardware");
+        return obj;
     }
 
-    public async System.Threading.Tasks.Task<HostLicensableResourceInfo?> GetPropertyLicensableResource()
+    public async System.Threading.Tasks.Task<HostLicensableResourceInfo> GetPropertyLicensableResource()
     {
-        return await this.GetProperty<HostLicensableResourceInfo>("licensableResource");
+        var obj = await this.GetProperty<HostLicensableResourceInfo>("licensableResource");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<Network[]?> GetPropertyNetwork()
@@ -4239,32 +4344,38 @@ public partial class HostSystem : ManagedEntity
 
     public async System.Threading.Tasks.Task<ApplyHostProfileConfigurationSpec?> GetPropertyPrecheckRemediationResult()
     {
-        return await this.GetProperty<ApplyHostProfileConfigurationSpec>("precheckRemediationResult");
+        var obj = await this.GetProperty<ApplyHostProfileConfigurationSpec>("precheckRemediationResult");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<ApplyHostProfileConfigurationResult?> GetPropertyRemediationResult()
     {
-        return await this.GetProperty<ApplyHostProfileConfigurationResult>("remediationResult");
+        var obj = await this.GetProperty<ApplyHostProfileConfigurationResult>("remediationResult");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<HostSystemRemediationState?> GetPropertyRemediationState()
     {
-        return await this.GetProperty<HostSystemRemediationState>("remediationState");
+        var obj = await this.GetProperty<HostSystemRemediationState>("remediationState");
+        return obj;
     }
 
-    public async System.Threading.Tasks.Task<HostRuntimeInfo?> GetPropertyRuntime()
+    public async System.Threading.Tasks.Task<HostRuntimeInfo> GetPropertyRuntime()
     {
-        return await this.GetProperty<HostRuntimeInfo>("runtime");
+        var obj = await this.GetProperty<HostRuntimeInfo>("runtime");
+        return obj!;
     }
 
-    public async System.Threading.Tasks.Task<HostListSummary?> GetPropertySummary()
+    public async System.Threading.Tasks.Task<HostListSummary> GetPropertySummary()
     {
-        return await this.GetProperty<HostListSummary>("summary");
+        var obj = await this.GetProperty<HostListSummary>("summary");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<HostSystemResourceInfo?> GetPropertySystemResources()
     {
-        return await this.GetProperty<HostSystemResourceInfo>("systemResources");
+        var obj = await this.GetProperty<HostSystemResourceInfo>("systemResources");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<VirtualMachine[]?> GetPropertyVm()
@@ -4432,7 +4543,8 @@ public partial class HostVFlashManager : ManagedObject
 
     public async System.Threading.Tasks.Task<HostVFlashManagerVFlashConfigInfo?> GetPropertyVFlashConfigInfo()
     {
-        return await this.GetProperty<HostVFlashManagerVFlashConfigInfo>("vFlashConfigInfo");
+        var obj = await this.GetProperty<HostVFlashManagerVFlashConfigInfo>("vFlashConfigInfo");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<Task?> ConfigureVFlashResourceEx_Task(string[]? devicePath)
@@ -4471,9 +4583,10 @@ public partial class HostVirtualNicManager : ExtensibleManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<HostVirtualNicManagerInfo?> GetPropertyInfo()
+    public async System.Threading.Tasks.Task<HostVirtualNicManagerInfo> GetPropertyInfo()
     {
-        return await this.GetProperty<HostVirtualNicManagerInfo>("info");
+        var obj = await this.GetProperty<HostVirtualNicManagerInfo>("info");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task DeselectVnicForNicType(string nicType, string device)
@@ -4503,12 +4616,14 @@ public partial class HostVMotionSystem : ExtensibleManagedObject
 
     public async System.Threading.Tasks.Task<HostIpConfig?> GetPropertyIpConfig()
     {
-        return await this.GetProperty<HostIpConfig>("ipConfig");
+        var obj = await this.GetProperty<HostIpConfig>("ipConfig");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<HostVMotionNetConfig?> GetPropertyNetConfig()
     {
-        return await this.GetProperty<HostVMotionNetConfig>("netConfig");
+        var obj = await this.GetProperty<HostVMotionNetConfig>("netConfig");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task DeselectVnic()
@@ -4621,9 +4736,10 @@ public partial class HostVsanSystem : ManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<VsanHostConfigInfo?> GetPropertyConfig()
+    public async System.Threading.Tasks.Task<VsanHostConfigInfo> GetPropertyConfig()
     {
-        return await this.GetProperty<VsanHostConfigInfo>("config");
+        var obj = await this.GetProperty<VsanHostConfigInfo>("config");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<Task?> AddDisks_Task(HostScsiDisk[] disk)
@@ -4848,39 +4964,46 @@ public partial class HttpNfcLease : ManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<HttpNfcLeaseCapabilities?> GetPropertyCapabilities()
+    public async System.Threading.Tasks.Task<HttpNfcLeaseCapabilities> GetPropertyCapabilities()
     {
-        return await this.GetProperty<HttpNfcLeaseCapabilities>("capabilities");
+        var obj = await this.GetProperty<HttpNfcLeaseCapabilities>("capabilities");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<LocalizedMethodFault?> GetPropertyError()
     {
-        return await this.GetProperty<LocalizedMethodFault>("error");
+        var obj = await this.GetProperty<LocalizedMethodFault>("error");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<HttpNfcLeaseInfo?> GetPropertyInfo()
     {
-        return await this.GetProperty<HttpNfcLeaseInfo>("info");
+        var obj = await this.GetProperty<HttpNfcLeaseInfo>("info");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<int> GetPropertyInitializeProgress()
     {
-        return await this.GetProperty<int>("initializeProgress");
+        var obj = await this.GetProperty<int>("initializeProgress");
+        return obj!;
     }
 
-    public async System.Threading.Tasks.Task<string?> GetPropertyMode()
+    public async System.Threading.Tasks.Task<string> GetPropertyMode()
     {
-        return await this.GetProperty<string>("mode");
+        var obj = await this.GetProperty<string>("mode");
+        return obj!;
     }
 
-    public async System.Threading.Tasks.Task<HttpNfcLeaseState?> GetPropertyState()
+    public async System.Threading.Tasks.Task<HttpNfcLeaseState> GetPropertyState()
     {
-        return await this.GetProperty<HttpNfcLeaseState>("state");
+        var obj = await this.GetProperty<HttpNfcLeaseState>("state");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<int> GetPropertyTransferProgress()
     {
-        return await this.GetProperty<int>("transferProgress");
+        var obj = await this.GetProperty<int>("transferProgress");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task HttpNfcLeaseAbort(LocalizedMethodFault? fault)
@@ -5128,17 +5251,20 @@ public partial class LicenseManager : ManagedObject
 
     public async System.Threading.Tasks.Task<LicenseDiagnostics?> GetPropertyDiagnostics()
     {
-        return await this.GetProperty<LicenseDiagnostics>("diagnostics");
+        var obj = await this.GetProperty<LicenseDiagnostics>("diagnostics");
+        return obj;
     }
 
-    public async System.Threading.Tasks.Task<LicenseManagerEvaluationInfo?> GetPropertyEvaluation()
+    public async System.Threading.Tasks.Task<LicenseManagerEvaluationInfo> GetPropertyEvaluation()
     {
-        return await this.GetProperty<LicenseManagerEvaluationInfo>("evaluation");
+        var obj = await this.GetProperty<LicenseManagerEvaluationInfo>("evaluation");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<LicenseFeatureInfo[]?> GetPropertyFeatureInfo()
     {
-        return await this.GetProperty<LicenseFeatureInfo[]>("featureInfo");
+        var obj = await this.GetProperty<LicenseFeatureInfo[]>("featureInfo");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<LicenseAssignmentManager?> GetPropertyLicenseAssignmentManager()
@@ -5147,24 +5273,28 @@ public partial class LicenseManager : ManagedObject
         return ManagedObject.Create<LicenseAssignmentManager>(licenseAssignmentManager, this.Session);
     }
 
-    public async System.Threading.Tasks.Task<string?> GetPropertyLicensedEdition()
+    public async System.Threading.Tasks.Task<string> GetPropertyLicensedEdition()
     {
-        return await this.GetProperty<string>("licensedEdition");
+        var obj = await this.GetProperty<string>("licensedEdition");
+        return obj!;
     }
 
-    public async System.Threading.Tasks.Task<LicenseManagerLicenseInfo[]?> GetPropertyLicenses()
+    public async System.Threading.Tasks.Task<LicenseManagerLicenseInfo[]> GetPropertyLicenses()
     {
-        return await this.GetProperty<LicenseManagerLicenseInfo[]>("licenses");
+        var obj = await this.GetProperty<LicenseManagerLicenseInfo[]>("licenses");
+        return obj!;
     }
 
-    public async System.Threading.Tasks.Task<LicenseSource?> GetPropertySource()
+    public async System.Threading.Tasks.Task<LicenseSource> GetPropertySource()
     {
-        return await this.GetProperty<LicenseSource>("source");
+        var obj = await this.GetProperty<LicenseSource>("source");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<bool> GetPropertySourceAvailable()
     {
-        return await this.GetProperty<bool>("sourceAvailable");
+        var obj = await this.GetProperty<bool>("sourceAvailable");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<LicenseManagerLicenseInfo?> AddLicense(string licenseKey, KeyValue[]? labels)
@@ -5276,7 +5406,8 @@ public partial class LocalizationManager : ManagedObject
 
     public async System.Threading.Tasks.Task<LocalizationManagerMessageCatalog[]?> GetPropertyCatalog()
     {
-        return await this.GetProperty<LocalizationManagerMessageCatalog[]>("catalog");
+        var obj = await this.GetProperty<LocalizationManagerMessageCatalog[]>("catalog");
+        return obj;
     }
 }
 
@@ -5291,47 +5422,56 @@ public partial class ManagedEntity : ExtensibleManagedObject
 
     public async System.Threading.Tasks.Task<bool> GetPropertyAlarmActionsEnabled()
     {
-        return await this.GetProperty<bool>("alarmActionsEnabled");
+        var obj = await this.GetProperty<bool>("alarmActionsEnabled");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<Event[]?> GetPropertyConfigIssue()
     {
-        return await this.GetProperty<Event[]>("configIssue");
+        var obj = await this.GetProperty<Event[]>("configIssue");
+        return obj;
     }
 
-    public async System.Threading.Tasks.Task<ManagedEntityStatus?> GetPropertyConfigStatus()
+    public async System.Threading.Tasks.Task<ManagedEntityStatus> GetPropertyConfigStatus()
     {
-        return await this.GetProperty<ManagedEntityStatus>("configStatus");
+        var obj = await this.GetProperty<ManagedEntityStatus>("configStatus");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<CustomFieldValue[]?> GetPropertyCustomValue()
     {
-        return await this.GetProperty<CustomFieldValue[]>("customValue");
+        var obj = await this.GetProperty<CustomFieldValue[]>("customValue");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<AlarmState[]?> GetPropertyDeclaredAlarmState()
     {
-        return await this.GetProperty<AlarmState[]>("declaredAlarmState");
+        var obj = await this.GetProperty<AlarmState[]>("declaredAlarmState");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<string[]?> GetPropertyDisabledMethod()
     {
-        return await this.GetProperty<string[]>("disabledMethod");
+        var obj = await this.GetProperty<string[]>("disabledMethod");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<int[]?> GetPropertyEffectiveRole()
     {
-        return await this.GetProperty<int[]>("effectiveRole");
+        var obj = await this.GetProperty<int[]>("effectiveRole");
+        return obj;
     }
 
-    public async System.Threading.Tasks.Task<string?> GetPropertyName()
+    public async System.Threading.Tasks.Task<string> GetPropertyName()
     {
-        return await this.GetProperty<string>("name");
+        var obj = await this.GetProperty<string>("name");
+        return obj!;
     }
 
-    public async System.Threading.Tasks.Task<ManagedEntityStatus?> GetPropertyOverallStatus()
+    public async System.Threading.Tasks.Task<ManagedEntityStatus> GetPropertyOverallStatus()
     {
-        return await this.GetProperty<ManagedEntityStatus>("overallStatus");
+        var obj = await this.GetProperty<ManagedEntityStatus>("overallStatus");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<ManagedEntity?> GetPropertyParent()
@@ -5342,7 +5482,8 @@ public partial class ManagedEntity : ExtensibleManagedObject
 
     public async System.Threading.Tasks.Task<Permission[]?> GetPropertyPermission()
     {
-        return await this.GetProperty<Permission[]>("permission");
+        var obj = await this.GetProperty<Permission[]>("permission");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<Task[]?> GetPropertyRecentTask()
@@ -5355,12 +5496,14 @@ public partial class ManagedEntity : ExtensibleManagedObject
 
     public async System.Threading.Tasks.Task<Tag[]?> GetPropertyTag()
     {
-        return await this.GetProperty<Tag[]>("tag");
+        var obj = await this.GetProperty<Tag[]>("tag");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<AlarmState[]?> GetPropertyTriggeredAlarmState()
     {
-        return await this.GetProperty<AlarmState[]>("triggeredAlarmState");
+        var obj = await this.GetProperty<AlarmState[]>("triggeredAlarmState");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<Task?> Destroy_Task()
@@ -5426,14 +5569,16 @@ public partial class Network : ManagedEntity
             .ToArray();
     }
 
-    public new async System.Threading.Tasks.Task<string?> GetPropertyName()
+    public new async System.Threading.Tasks.Task<string> GetPropertyName()
     {
-        return await this.GetProperty<string>("name");
+        var obj = await this.GetProperty<string>("name");
+        return obj!;
     }
 
-    public async System.Threading.Tasks.Task<NetworkSummary?> GetPropertySummary()
+    public async System.Threading.Tasks.Task<NetworkSummary> GetPropertySummary()
     {
-        return await this.GetProperty<NetworkSummary>("summary");
+        var obj = await this.GetProperty<NetworkSummary>("summary");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<VirtualMachine[]?> GetPropertyVm()
@@ -5461,12 +5606,14 @@ public partial class OpaqueNetwork : Network
 
     public async System.Threading.Tasks.Task<OpaqueNetworkCapability?> GetPropertyCapability()
     {
-        return await this.GetProperty<OpaqueNetworkCapability>("capability");
+        var obj = await this.GetProperty<OpaqueNetworkCapability>("capability");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<OptionValue[]?> GetPropertyExtraConfig()
     {
-        return await this.GetProperty<OptionValue[]>("extraConfig");
+        var obj = await this.GetProperty<OptionValue[]>("extraConfig");
+        return obj;
     }
 }
 
@@ -5481,12 +5628,14 @@ public partial class OptionManager : ManagedObject
 
     public async System.Threading.Tasks.Task<OptionValue[]?> GetPropertySetting()
     {
-        return await this.GetProperty<OptionValue[]>("setting");
+        var obj = await this.GetProperty<OptionValue[]>("setting");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<OptionDef[]?> GetPropertySupportedOption()
     {
-        return await this.GetProperty<OptionDef[]>("supportedOption");
+        var obj = await this.GetProperty<OptionDef[]>("supportedOption");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<OptionValue[]?> QueryOptions(string? name)
@@ -5526,12 +5675,14 @@ public partial class OvfManager : ManagedObject
 
     public async System.Threading.Tasks.Task<OvfOptionInfo[]?> GetPropertyOvfExportOption()
     {
-        return await this.GetProperty<OvfOptionInfo[]>("ovfExportOption");
+        var obj = await this.GetProperty<OvfOptionInfo[]>("ovfExportOption");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<OvfOptionInfo[]?> GetPropertyOvfImportOption()
     {
-        return await this.GetProperty<OvfOptionInfo[]>("ovfImportOption");
+        var obj = await this.GetProperty<OvfOptionInfo[]>("ovfImportOption");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<OvfCreateDescriptorResult?> CreateDescriptor(ManagedEntity obj, OvfCreateDescriptorParams cdp)
@@ -5564,19 +5715,22 @@ public partial class PerformanceManager : ManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<PerformanceDescription?> GetPropertyDescription()
+    public async System.Threading.Tasks.Task<PerformanceDescription> GetPropertyDescription()
     {
-        return await this.GetProperty<PerformanceDescription>("description");
+        var obj = await this.GetProperty<PerformanceDescription>("description");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<PerfInterval[]?> GetPropertyHistoricalInterval()
     {
-        return await this.GetProperty<PerfInterval[]>("historicalInterval");
+        var obj = await this.GetProperty<PerfInterval[]>("historicalInterval");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<PerfCounterInfo[]?> GetPropertyPerfCounter()
     {
-        return await this.GetProperty<PerfCounterInfo[]>("perfCounter");
+        var obj = await this.GetProperty<PerfCounterInfo[]>("perfCounter");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task CreatePerfInterval(PerfInterval intervalId)
@@ -5644,24 +5798,28 @@ public partial class Profile : ManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<string?> GetPropertyComplianceStatus()
+    public async System.Threading.Tasks.Task<string> GetPropertyComplianceStatus()
     {
-        return await this.GetProperty<string>("complianceStatus");
+        var obj = await this.GetProperty<string>("complianceStatus");
+        return obj!;
     }
 
-    public async System.Threading.Tasks.Task<ProfileConfigInfo?> GetPropertyConfig()
+    public async System.Threading.Tasks.Task<ProfileConfigInfo> GetPropertyConfig()
     {
-        return await this.GetProperty<ProfileConfigInfo>("config");
+        var obj = await this.GetProperty<ProfileConfigInfo>("config");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<DateTime> GetPropertyCreatedTime()
     {
-        return await this.GetProperty<DateTime>("createdTime");
+        var obj = await this.GetProperty<DateTime>("createdTime");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<ProfileDescription?> GetPropertyDescription()
     {
-        return await this.GetProperty<ProfileDescription>("description");
+        var obj = await this.GetProperty<ProfileDescription>("description");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<ManagedEntity[]?> GetPropertyEntity()
@@ -5674,12 +5832,14 @@ public partial class Profile : ManagedObject
 
     public async System.Threading.Tasks.Task<DateTime> GetPropertyModifiedTime()
     {
-        return await this.GetProperty<DateTime>("modifiedTime");
+        var obj = await this.GetProperty<DateTime>("modifiedTime");
+        return obj!;
     }
 
-    public async System.Threading.Tasks.Task<string?> GetPropertyName()
+    public async System.Threading.Tasks.Task<string> GetPropertyName()
     {
-        return await this.GetProperty<string>("name");
+        var obj = await this.GetProperty<string>("name");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task AssociateProfile(ManagedEntity[] entity)
@@ -5866,12 +6026,14 @@ public partial class PropertyFilter : ManagedObject
 
     public async System.Threading.Tasks.Task<bool> GetPropertyPartialUpdates()
     {
-        return await this.GetProperty<bool>("partialUpdates");
+        var obj = await this.GetProperty<bool>("partialUpdates");
+        return obj!;
     }
 
-    public async System.Threading.Tasks.Task<PropertyFilterSpec?> GetPropertySpec()
+    public async System.Threading.Tasks.Task<PropertyFilterSpec> GetPropertySpec()
     {
-        return await this.GetProperty<PropertyFilterSpec>("spec");
+        var obj = await this.GetProperty<PropertyFilterSpec>("spec");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task DestroyPropertyFilter()
@@ -5906,23 +6068,26 @@ public partial class ResourcePool : ManagedEntity
 
     public async System.Threading.Tasks.Task<ResourceConfigSpec[]?> GetPropertyChildConfiguration()
     {
-        return await this.GetProperty<ResourceConfigSpec[]>("childConfiguration");
+        var obj = await this.GetProperty<ResourceConfigSpec[]>("childConfiguration");
+        return obj;
     }
 
-    public async System.Threading.Tasks.Task<ResourceConfigSpec?> GetPropertyConfig()
+    public async System.Threading.Tasks.Task<ResourceConfigSpec> GetPropertyConfig()
     {
-        return await this.GetProperty<ResourceConfigSpec>("config");
+        var obj = await this.GetProperty<ResourceConfigSpec>("config");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<string?> GetPropertyNamespace()
     {
-        return await this.GetProperty<string>("namespace");
+        var obj = await this.GetProperty<string>("namespace");
+        return obj;
     }
 
-    public async System.Threading.Tasks.Task<ComputeResource?> GetPropertyOwner()
+    public async System.Threading.Tasks.Task<ComputeResource> GetPropertyOwner()
     {
         var owner = await this.GetProperty<ManagedObjectReference>("owner");
-        return ManagedObject.Create<ComputeResource>(owner, this.Session);
+        return ManagedObject.Create<ComputeResource>(owner, this.Session)!;
     }
 
     public async System.Threading.Tasks.Task<ResourcePool[]?> GetPropertyResourcePool()
@@ -5933,14 +6098,16 @@ public partial class ResourcePool : ManagedEntity
             .ToArray();
     }
 
-    public async System.Threading.Tasks.Task<ResourcePoolRuntimeInfo?> GetPropertyRuntime()
+    public async System.Threading.Tasks.Task<ResourcePoolRuntimeInfo> GetPropertyRuntime()
     {
-        return await this.GetProperty<ResourcePoolRuntimeInfo>("runtime");
+        var obj = await this.GetProperty<ResourcePoolRuntimeInfo>("runtime");
+        return obj!;
     }
 
-    public async System.Threading.Tasks.Task<ResourcePoolSummary?> GetPropertySummary()
+    public async System.Threading.Tasks.Task<ResourcePoolSummary> GetPropertySummary()
     {
-        return await this.GetProperty<ResourcePoolSummary>("summary");
+        var obj = await this.GetProperty<ResourcePoolSummary>("summary");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<VirtualMachine[]?> GetPropertyVm()
@@ -6021,9 +6188,10 @@ public partial class ScheduledTask : ExtensibleManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<ScheduledTaskInfo?> GetPropertyInfo()
+    public async System.Threading.Tasks.Task<ScheduledTaskInfo> GetPropertyInfo()
     {
-        return await this.GetProperty<ScheduledTaskInfo>("info");
+        var obj = await this.GetProperty<ScheduledTaskInfo>("info");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task ReconfigureScheduledTask(ScheduledTaskSpec spec)
@@ -6051,9 +6219,10 @@ public partial class ScheduledTaskManager : ManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<ScheduledTaskDescription?> GetPropertyDescription()
+    public async System.Threading.Tasks.Task<ScheduledTaskDescription> GetPropertyDescription()
     {
-        return await this.GetProperty<ScheduledTaskDescription>("description");
+        var obj = await this.GetProperty<ScheduledTaskDescription>("description");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<ScheduledTask[]?> GetPropertyScheduledTask()
@@ -6162,19 +6331,22 @@ public partial class ServiceInstance : ManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<Capability?> GetPropertyCapability()
+    public async System.Threading.Tasks.Task<Capability> GetPropertyCapability()
     {
-        return await this.GetProperty<Capability>("capability");
+        var obj = await this.GetProperty<Capability>("capability");
+        return obj!;
     }
 
-    public async System.Threading.Tasks.Task<ServiceContent?> GetPropertyContent()
+    public async System.Threading.Tasks.Task<ServiceContent> GetPropertyContent()
     {
-        return await this.GetProperty<ServiceContent>("content");
+        var obj = await this.GetProperty<ServiceContent>("content");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<DateTime> GetPropertyServerClock()
     {
-        return await this.GetProperty<DateTime>("serverClock");
+        var obj = await this.GetProperty<DateTime>("serverClock");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<DateTime> CurrentTime()
@@ -6214,7 +6386,8 @@ public partial class ServiceManager : ManagedObject
 
     public async System.Threading.Tasks.Task<ServiceManagerServiceInfo[]?> GetPropertyService()
     {
-        return await this.GetProperty<ServiceManagerServiceInfo[]>("service");
+        var obj = await this.GetProperty<ServiceManagerServiceInfo[]>("service");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<ServiceManagerServiceInfo[]?> QueryServiceList(string? serviceName, string[]? location)
@@ -6234,32 +6407,38 @@ public partial class SessionManager : ManagedObject
 
     public async System.Threading.Tasks.Task<UserSession?> GetPropertyCurrentSession()
     {
-        return await this.GetProperty<UserSession>("currentSession");
+        var obj = await this.GetProperty<UserSession>("currentSession");
+        return obj;
     }
 
-    public async System.Threading.Tasks.Task<string?> GetPropertyDefaultLocale()
+    public async System.Threading.Tasks.Task<string> GetPropertyDefaultLocale()
     {
-        return await this.GetProperty<string>("defaultLocale");
+        var obj = await this.GetProperty<string>("defaultLocale");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<string?> GetPropertyMessage()
     {
-        return await this.GetProperty<string>("message");
+        var obj = await this.GetProperty<string>("message");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<string[]?> GetPropertyMessageLocaleList()
     {
-        return await this.GetProperty<string[]>("messageLocaleList");
+        var obj = await this.GetProperty<string[]>("messageLocaleList");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<UserSession[]?> GetPropertySessionList()
     {
-        return await this.GetProperty<UserSession[]>("sessionList");
+        var obj = await this.GetProperty<UserSession[]>("sessionList");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<string[]?> GetPropertySupportedLocaleList()
     {
-        return await this.GetProperty<string[]>("supportedLocaleList");
+        var obj = await this.GetProperty<string[]>("supportedLocaleList");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<string?> AcquireCloneTicket()
@@ -6347,14 +6526,16 @@ public partial class SimpleCommand : ManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<string?> GetPropertyEncodingType()
+    public async System.Threading.Tasks.Task<string> GetPropertyEncodingType()
     {
-        return await this.GetProperty<string>("encodingType");
+        var obj = await this.GetProperty<string>("encodingType");
+        return obj!;
     }
 
-    public async System.Threading.Tasks.Task<ServiceManagerServiceInfo?> GetPropertyEntity()
+    public async System.Threading.Tasks.Task<ServiceManagerServiceInfo> GetPropertyEntity()
     {
-        return await this.GetProperty<ServiceManagerServiceInfo>("entity");
+        var obj = await this.GetProperty<ServiceManagerServiceInfo>("entity");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<string?> ExecuteSimpleCommand(string[]? arguments)
@@ -6389,12 +6570,14 @@ public partial class StoragePod : Folder
 
     public async System.Threading.Tasks.Task<PodStorageDrsEntry?> GetPropertyPodStorageDrsEntry()
     {
-        return await this.GetProperty<PodStorageDrsEntry>("podStorageDrsEntry");
+        var obj = await this.GetProperty<PodStorageDrsEntry>("podStorageDrsEntry");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<StoragePodSummary?> GetPropertySummary()
     {
-        return await this.GetProperty<StoragePodSummary>("summary");
+        var obj = await this.GetProperty<StoragePodSummary>("summary");
+        return obj;
     }
 }
 
@@ -6493,9 +6676,10 @@ public partial class Task : ExtensibleManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<TaskInfo?> GetPropertyInfo()
+    public async System.Threading.Tasks.Task<TaskInfo> GetPropertyInfo()
     {
-        return await this.GetProperty<TaskInfo>("info");
+        var obj = await this.GetProperty<TaskInfo>("info");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task CancelTask()
@@ -6530,7 +6714,8 @@ public partial class TaskHistoryCollector : HistoryCollector
 
     public async System.Threading.Tasks.Task<TaskInfo[]?> GetPropertyLatestPage()
     {
-        return await this.GetProperty<TaskInfo[]>("latestPage");
+        var obj = await this.GetProperty<TaskInfo[]>("latestPage");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<TaskInfo[]?> ReadNextTasks(int maxCount)
@@ -6553,14 +6738,16 @@ public partial class TaskManager : ManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<TaskDescription?> GetPropertyDescription()
+    public async System.Threading.Tasks.Task<TaskDescription> GetPropertyDescription()
     {
-        return await this.GetProperty<TaskDescription>("description");
+        var obj = await this.GetProperty<TaskDescription>("description");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<int> GetPropertyMaxCollector()
     {
-        return await this.GetProperty<int>("maxCollector");
+        var obj = await this.GetProperty<int>("maxCollector");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<Task[]?> GetPropertyRecentTask()
@@ -6620,7 +6807,8 @@ public partial class UserDirectory : ManagedObject
 
     public async System.Threading.Tasks.Task<string[]?> GetPropertyDomainList()
     {
-        return await this.GetProperty<string[]>("domainList");
+        var obj = await this.GetProperty<string[]>("domainList");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<UserSearchResult[]?> RetrieveUserGroups(string? domain, string searchStr, string? belongsToGroup, string? belongsToUser, bool exactMatch, bool findUsers, bool findGroups)
@@ -6888,7 +7076,8 @@ public partial class VirtualApp : ResourcePool
 
     public async System.Threading.Tasks.Task<VirtualAppLinkInfo[]?> GetPropertyChildLink()
     {
-        return await this.GetProperty<VirtualAppLinkInfo[]>("childLink");
+        var obj = await this.GetProperty<VirtualAppLinkInfo[]>("childLink");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<Datastore[]?> GetPropertyDatastore()
@@ -6921,7 +7110,8 @@ public partial class VirtualApp : ResourcePool
 
     public async System.Threading.Tasks.Task<VAppConfigInfo?> GetPropertyVAppConfig()
     {
-        return await this.GetProperty<VAppConfigInfo>("vAppConfig");
+        var obj = await this.GetProperty<VAppConfigInfo>("vAppConfig");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<Task?> CloneVApp_Task(string name, ResourcePool target, VAppCloneSpec spec)
@@ -7090,14 +7280,16 @@ public partial class VirtualMachine : ManagedEntity
     {
     }
 
-    public async System.Threading.Tasks.Task<VirtualMachineCapability?> GetPropertyCapability()
+    public async System.Threading.Tasks.Task<VirtualMachineCapability> GetPropertyCapability()
     {
-        return await this.GetProperty<VirtualMachineCapability>("capability");
+        var obj = await this.GetProperty<VirtualMachineCapability>("capability");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<VirtualMachineConfigInfo?> GetPropertyConfig()
     {
-        return await this.GetProperty<VirtualMachineConfigInfo>("config");
+        var obj = await this.GetProperty<VirtualMachineConfigInfo>("config");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<Datastore[]?> GetPropertyDatastore()
@@ -7108,30 +7300,34 @@ public partial class VirtualMachine : ManagedEntity
             .ToArray();
     }
 
-    public async System.Threading.Tasks.Task<EnvironmentBrowser?> GetPropertyEnvironmentBrowser()
+    public async System.Threading.Tasks.Task<EnvironmentBrowser> GetPropertyEnvironmentBrowser()
     {
         var environmentBrowser = await this.GetProperty<ManagedObjectReference>("environmentBrowser");
-        return ManagedObject.Create<EnvironmentBrowser>(environmentBrowser, this.Session);
+        return ManagedObject.Create<EnvironmentBrowser>(environmentBrowser, this.Session)!;
     }
 
     public async System.Threading.Tasks.Task<GuestInfo?> GetPropertyGuest()
     {
-        return await this.GetProperty<GuestInfo>("guest");
+        var obj = await this.GetProperty<GuestInfo>("guest");
+        return obj;
     }
 
-    public async System.Threading.Tasks.Task<ManagedEntityStatus?> GetPropertyGuestHeartbeatStatus()
+    public async System.Threading.Tasks.Task<ManagedEntityStatus> GetPropertyGuestHeartbeatStatus()
     {
-        return await this.GetProperty<ManagedEntityStatus>("guestHeartbeatStatus");
+        var obj = await this.GetProperty<ManagedEntityStatus>("guestHeartbeatStatus");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<VirtualMachineFileLayout?> GetPropertyLayout()
     {
-        return await this.GetProperty<VirtualMachineFileLayout>("layout");
+        var obj = await this.GetProperty<VirtualMachineFileLayout>("layout");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<VirtualMachineFileLayoutEx?> GetPropertyLayoutEx()
     {
-        return await this.GetProperty<VirtualMachineFileLayoutEx>("layoutEx");
+        var obj = await this.GetProperty<VirtualMachineFileLayoutEx>("layoutEx");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<Network[]?> GetPropertyNetwork()
@@ -7150,7 +7346,8 @@ public partial class VirtualMachine : ManagedEntity
 
     public async System.Threading.Tasks.Task<ResourceConfigSpec?> GetPropertyResourceConfig()
     {
-        return await this.GetProperty<ResourceConfigSpec>("resourceConfig");
+        var obj = await this.GetProperty<ResourceConfigSpec>("resourceConfig");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<ResourcePool?> GetPropertyResourcePool()
@@ -7167,24 +7364,28 @@ public partial class VirtualMachine : ManagedEntity
             .ToArray();
     }
 
-    public async System.Threading.Tasks.Task<VirtualMachineRuntimeInfo?> GetPropertyRuntime()
+    public async System.Threading.Tasks.Task<VirtualMachineRuntimeInfo> GetPropertyRuntime()
     {
-        return await this.GetProperty<VirtualMachineRuntimeInfo>("runtime");
+        var obj = await this.GetProperty<VirtualMachineRuntimeInfo>("runtime");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<VirtualMachineSnapshotInfo?> GetPropertySnapshot()
     {
-        return await this.GetProperty<VirtualMachineSnapshotInfo>("snapshot");
+        var obj = await this.GetProperty<VirtualMachineSnapshotInfo>("snapshot");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<VirtualMachineStorageInfo?> GetPropertyStorage()
     {
-        return await this.GetProperty<VirtualMachineStorageInfo>("storage");
+        var obj = await this.GetProperty<VirtualMachineStorageInfo>("storage");
+        return obj;
     }
 
-    public async System.Threading.Tasks.Task<VirtualMachineSummary?> GetPropertySummary()
+    public async System.Threading.Tasks.Task<VirtualMachineSummary> GetPropertySummary()
     {
-        return await this.GetProperty<VirtualMachineSummary>("summary");
+        var obj = await this.GetProperty<VirtualMachineSummary>("summary");
+        return obj!;
     }
 
     public async System.Threading.Tasks.Task<VirtualMachineMksTicket?> AcquireMksTicket()
@@ -7658,15 +7859,16 @@ public partial class VirtualMachineSnapshot : ExtensibleManagedObject
             .ToArray();
     }
 
-    public async System.Threading.Tasks.Task<VirtualMachineConfigInfo?> GetPropertyConfig()
+    public async System.Threading.Tasks.Task<VirtualMachineConfigInfo> GetPropertyConfig()
     {
-        return await this.GetProperty<VirtualMachineConfigInfo>("config");
+        var obj = await this.GetProperty<VirtualMachineConfigInfo>("config");
+        return obj!;
     }
 
-    public async System.Threading.Tasks.Task<VirtualMachine?> GetPropertyVm()
+    public async System.Threading.Tasks.Task<VirtualMachine> GetPropertyVm()
     {
         var vm = await this.GetProperty<ManagedObjectReference>("vm");
-        return ManagedObject.Create<VirtualMachine>(vm, this.Session);
+        return ManagedObject.Create<VirtualMachine>(vm, this.Session)!;
     }
 
     public async System.Threading.Tasks.Task<HttpNfcLease?> ExportSnapshot()

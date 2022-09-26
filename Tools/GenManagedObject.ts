@@ -26,14 +26,17 @@ function writeManagedObject(obj: ManagedObject) {
       if (ty == "ManagedObjectReference") {
         ty = "ManagedObject";
       }
-      ty += "?";
+      if (!property.mandatory) {
+        ty += "?";
+      }
+      const q = property.mandatory ? "!" : "";
       // START
       propDeclare += `
 
     public async System.Threading.Tasks.Task<${ty}> GetProperty${methodSuffix}()
     {
         var ${propName} = await this.GetProperty<ManagedObjectReference>("${propName}");
-        return ManagedObject.Create<${returnTy}>(${propName}, this.Session);
+        return ManagedObject.Create<${returnTy}>(${propName}, this.Session)${q};
     }`;
       // END
     } else if (
@@ -44,30 +47,35 @@ function writeManagedObject(obj: ManagedObject) {
         ty = "ManagedObject[]";
       }
       const unitReturnTy = ty.slice(0, -2);
-      ty += "?";
+      if (!property.mandatory) {
+        ty += "?";
+      }
+      const q = property.mandatory ? "!" : "?";
       // START
       propDeclare += `
 
     public async System.Threading.Tasks.Task<${ty}> GetProperty${methodSuffix}()
     {
         var ${propName} = await this.GetProperty<ManagedObjectReference[]>("${propName}");
-        return ${propName}?
+        return ${propName}${q}
             .Select(r => ManagedObject.Create<${unitReturnTy}>(r, this.Session)!)
             .ToArray();
     }`;
       // END
     } else {
       let ty = returnTy;
-      if (!csStructureTypes.includes(returnTy)) {
+      if (!property.mandatory && !csStructureTypes.includes(returnTy)) {
         ty += "?";
       }
+      const q = property.mandatory ? "!" : "";
 
       // START
       propDeclare += `
 
     public async System.Threading.Tasks.Task<${ty}> GetProperty${methodSuffix}()
     {
-        return await this.GetProperty<${returnTy}>("${propName}");
+        var obj = await this.GetProperty<${returnTy}>("${propName}");
+        return obj${q};
     }`;
       // END
     }

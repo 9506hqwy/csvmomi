@@ -66,7 +66,7 @@ export class ManagedObjectMethod {
 export class ManagedObjectMethodParameter {
   name: null | string;
   ty: null | TypeDeclare;
-  mandatory: bool;
+  mandatory: boolean;
 }
 
 export class ManagedObjectMethodRef {
@@ -78,6 +78,7 @@ export class ManagedObjectMethodRef {
 export class ManagedObjectProperty {
   name: null | string;
   ty: null | TypeDeclare;
+  mandatory: boolean;
 }
 
 export class TypeDeclare {
@@ -221,20 +222,32 @@ export function findMethodReturnTy(
   return ty;
 }
 
-export function findPropertyName(property: HTMLTableRowElement): null | string {
-  const propNameElem = property.querySelector<HTMLAnchorElement>(
-    "td:nth-child(1) a",
+export function findPropertyName(
+  property: HTMLTableRowElement,
+): null | [string, boolean] {
+  const propNameElem = property.querySelector<HTMLTableCellElement>(
+    "td:nth-child(1)",
   );
   if (propNameElem == null) {
     return null;
   }
 
-  const propName = propNameElem.getAttribute("id");
+  const nameElem = propNameElem.querySelector<HTMLAnchorElement>("a");
+  if (nameElem == null) {
+    return null;
+  }
+
+  const propName = nameElem.getAttribute("id");
   if (propName == null) {
     return null;
   }
 
-  return propName.trim();
+  const mandatory =
+    Array.from(propNameElem.querySelectorAll("span")).findIndex((s) =>
+      s.getAttribute("title") == "May not be present"
+    ) < 0;
+
+  return [propName.trim(), mandatory];
 }
 
 export function findPropertyType(
@@ -390,8 +403,9 @@ function convertManagedObject(
     }
 
     const prop = new ManagedObjectProperty();
-    prop.name = propName;
+    prop.name = propName[0];
     prop.ty = findPropertyType(name, property, 2);
+    prop.mandatory = propName[1];
 
     mo.properties.push(prop);
   }
