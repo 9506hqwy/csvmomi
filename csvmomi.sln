@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ListAllVm", "Examples\ListA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VimService", "VimService\VimService.csproj", "{EC7307A6-7D68-4120-B2DD-BD25169FFE6B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListAllHost", "Examples\ListAllHost\ListAllHost.csproj", "{FC54EBBB-86FE-4111-95B1-A6EAC485CE18}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{EC7307A6-7D68-4120-B2DD-BD25169FFE6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC7307A6-7D68-4120-B2DD-BD25169FFE6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC7307A6-7D68-4120-B2DD-BD25169FFE6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC54EBBB-86FE-4111-95B1-A6EAC485CE18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC54EBBB-86FE-4111-95B1-A6EAC485CE18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC54EBBB-86FE-4111-95B1-A6EAC485CE18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC54EBBB-86FE-4111-95B1-A6EAC485CE18}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{4C694D89-9BE1-431D-9DB7-8724C2AD2043} = {2CF3AF78-2C5A-4257-934D-CF47DD762308}
 		{8B1791A3-1CCD-4265-A800-87CE95E6F953} = {2CF3AF78-2C5A-4257-934D-CF47DD762308}
 		{399C86BC-9787-4130-A7C1-4C0BF99B06D2} = {2CF3AF78-2C5A-4257-934D-CF47DD762308}
+		{FC54EBBB-86FE-4111-95B1-A6EAC485CE18} = {2CF3AF78-2C5A-4257-934D-CF47DD762308}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {74753721-7958-4B1E-84B4-FA309E1F30AB}
