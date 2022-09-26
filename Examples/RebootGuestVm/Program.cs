@@ -27,7 +27,12 @@ async System.Threading.Tasks.Task Work(string[] args)
     await session.SessionManager.Login(args[1], args[2]);
     try
     {
-        var vm = await FindVm(session, args[3]);
+        var vm = await session.RootFolder.FindByName<VirtualMachine>(args[3]);
+        if (vm == null)
+        {
+            throw new Exception($"Not found virtual machine `{args[3]}`.");
+        }
+
         await vm.RebootGuest();
 
         await Console.Out.WriteLineAsync("Success.");
@@ -36,18 +41,4 @@ async System.Threading.Tasks.Task Work(string[] args)
     {
         await session.SessionManager.Logout();
     }
-}
-
-async Task<VirtualMachine> FindVm(Session session, string vmname)
-{
-    await foreach (var vm in session.RootFolder.Enumerate<VirtualMachine>())
-    {
-        var name = await vm.GetPropertyName();
-        if (name.ToLowerInvariant() == vmname.ToLowerInvariant())
-        {
-            return vm;
-        }
-    }
-
-    throw new Exception($"Not found virtual machine `{vmname}`.");
 }

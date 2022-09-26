@@ -2,7 +2,29 @@
 
 public partial class ManagedEntity : ExtensibleManagedObject
 {
-    public async IAsyncEnumerable<T> Enumerate<T>()
+    public IAsyncEnumerable<T> Enumerate<T>()
+        where T : ManagedObject
+    {
+        return this.Enumerate<T>(null, null);
+    }
+
+    public async System.Threading.Tasks.Task<T> FindByName<T>(string name)
+        where T : ManagedEntity
+    {
+        const string NAME = "name";
+
+        Func<ObjectContent, bool> isMatch =
+            o => o.GetPropertyValue<string>(NAME).ToLowerInvariant() == name.ToLowerInvariant();
+
+        await foreach (var entity in this.Enumerate<T>(new[] { NAME }, isMatch))
+        {
+            return entity;
+        }
+
+        return null;
+    }
+
+    private async IAsyncEnumerable<T> Enumerate<T>(string[] pathSet, Func<ObjectContent, bool> condition)
         where T : ManagedObject
     {
         var view = await this.Session.ViewManager.CreateContainerView(
@@ -34,7 +56,7 @@ public partial class ManagedEntity : ExtensibleManagedObject
             {
                 all = false,
                 allSpecified = true,
-                pathSet = null,
+                pathSet = pathSet,
                 type = typeof(T).Name,
             };
 
@@ -48,7 +70,10 @@ public partial class ManagedEntity : ExtensibleManagedObject
             token = result.token;
             foreach (var obj in result.objects)
             {
-                yield return ManagedObject.Create<T>(obj.obj, this.Session);
+                if (condition == null || condition(obj))
+                {
+                    yield return ManagedObject.Create<T>(obj.obj, this.Session);
+                }
             }
 
             while (token != null)
@@ -57,7 +82,10 @@ public partial class ManagedEntity : ExtensibleManagedObject
                 token = result.token;
                 foreach (var obj in result.objects)
                 {
-                    yield return ManagedObject.Create<T>(obj.obj, this.Session);
+                    if (condition == null || condition(obj))
+                    {
+                        yield return ManagedObject.Create<T>(obj.obj, this.Session);
+                    }
                 }
             }
         }

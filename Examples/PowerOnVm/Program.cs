@@ -35,7 +35,12 @@ internal class PowerOnVm
         await session.SessionManager.Login(args[1], args[2]);
         try
         {
-            var vm = await PowerOnVm.FindVm(session, args[3]);
+            var vm = await session.RootFolder.FindByName<VirtualMachine>(args[3]);
+            if (vm == null)
+            {
+                throw new Exception($"Not found virtual machine `{args[3]}`.");
+            }
+
             var task = await vm.PowerOnVM_Task(null);
             var state = await task.WaitForCompleted(TimeSpan.FromSeconds(300));
             if (state == TaskInfoState.error)
@@ -50,19 +55,5 @@ internal class PowerOnVm
         {
             await session.SessionManager.Logout();
         }
-    }
-
-    private static async System.Threading.Tasks.Task<VirtualMachine> FindVm(Session session, string vmname)
-    {
-        await foreach (var vm in session.RootFolder.Enumerate<VirtualMachine>())
-        {
-            var name = await vm.GetPropertyName();
-            if (name.ToLowerInvariant() == vmname.ToLowerInvariant())
-            {
-                return vm;
-            }
-        }
-
-        throw new Exception($"Not found virtual machine `{vmname}`.");
     }
 }
