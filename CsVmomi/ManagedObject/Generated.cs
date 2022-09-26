@@ -570,7 +570,7 @@ public partial class CryptoManager : ManagedObject
 
     public async System.Threading.Tasks.Task<CryptoKeyId[]> ListKeys(int? limit)
     {
-        return await this.Session.Client.ListKeys(this.Reference, limit ?? default(int), limit.HasValue);
+        return await this.Session.Client.ListKeys(this.Reference, limit ?? default, limit.HasValue);
     }
 
     public async System.Threading.Tasks.Task RemoveKey(CryptoKeyId key, bool force)
@@ -656,7 +656,7 @@ public partial class CryptoManagerKmip : CryptoManager
 
     public async System.Threading.Tasks.Task<KeyProviderId> GetDefaultKmsCluster(ManagedEntity entity, bool? defaultsToParent)
     {
-        return await this.Session.Client.GetDefaultKmsCluster(this.Reference, entity?.Reference, defaultsToParent ?? default(bool), defaultsToParent.HasValue);
+        return await this.Session.Client.GetDefaultKmsCluster(this.Reference, entity?.Reference, defaultsToParent ?? default, defaultsToParent.HasValue);
     }
 
     public async System.Threading.Tasks.Task<bool> IsKmsClusterActive(KeyProviderId cluster)
@@ -666,12 +666,12 @@ public partial class CryptoManagerKmip : CryptoManager
 
     public async System.Threading.Tasks.Task<KmipClusterInfo[]> ListKmipServers(int? limit)
     {
-        return await this.Session.Client.ListKmipServers(this.Reference, limit ?? default(int), limit.HasValue);
+        return await this.Session.Client.ListKmipServers(this.Reference, limit ?? default, limit.HasValue);
     }
 
     public async System.Threading.Tasks.Task<KmipClusterInfo[]> ListKmsClusters(bool? includeKmsServers, int? managementTypeFilter, int? statusFilter)
     {
-        return await this.Session.Client.ListKmsClusters(this.Reference, includeKmsServers ?? default(bool), includeKmsServers.HasValue, managementTypeFilter ?? default(int), managementTypeFilter.HasValue, statusFilter ?? default(int), statusFilter.HasValue);
+        return await this.Session.Client.ListKmsClusters(this.Reference, includeKmsServers ?? default, includeKmsServers.HasValue, managementTypeFilter ?? default, managementTypeFilter.HasValue, statusFilter ?? default, statusFilter.HasValue);
     }
 
     public async System.Threading.Tasks.Task MarkDefault(KeyProviderId clusterId)
@@ -1081,7 +1081,7 @@ public partial class DiagnosticManager : ManagedObject
 
     public async System.Threading.Tasks.Task<DiagnosticManagerLogHeader> BrowseDiagnosticLog(HostSystem host, string key, int? start, int? lines)
     {
-        return await this.Session.Client.BrowseDiagnosticLog(this.Reference, host?.Reference, key, start ?? default(int), start.HasValue, lines ?? default(int), lines.HasValue);
+        return await this.Session.Client.BrowseDiagnosticLog(this.Reference, host?.Reference, key, start ?? default, start.HasValue, lines ?? default, lines.HasValue);
     }
 
     public async System.Threading.Tasks.Task<DiagnosticManagerAuditRecordResult> FetchAuditRecords(string token)
@@ -1332,7 +1332,7 @@ public partial class DistributedVirtualSwitchManager : ManagedObject
 
     public async System.Threading.Tasks.Task<DistributedVirtualSwitchProductSpec[]> QueryAvailableDvsSpec(bool? recommended)
     {
-        return await this.Session.Client.QueryAvailableDvsSpec(this.Reference, recommended ?? default(bool), recommended.HasValue);
+        return await this.Session.Client.QueryAvailableDvsSpec(this.Reference, recommended ?? default, recommended.HasValue);
     }
 
     public async System.Threading.Tasks.Task<HostSystem[]> QueryCompatibleHostForExistingDvs(ManagedEntity container, bool recursive, DistributedVirtualSwitch dvs)
@@ -1692,7 +1692,7 @@ public partial class FileManager : ManagedObject
 
     public async System.Threading.Tasks.Task<Task> CopyDatastoreFile_Task(string sourceName, Datacenter sourceDatacenter, string destinationName, Datacenter destinationDatacenter, bool? force)
     {
-        var res = await this.Session.Client.CopyDatastoreFile_Task(this.Reference, sourceName, sourceDatacenter?.Reference, destinationName, destinationDatacenter?.Reference, force ?? default(bool), force.HasValue);
+        var res = await this.Session.Client.CopyDatastoreFile_Task(this.Reference, sourceName, sourceDatacenter?.Reference, destinationName, destinationDatacenter?.Reference, force ?? default, force.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
@@ -1704,12 +1704,12 @@ public partial class FileManager : ManagedObject
 
     public async System.Threading.Tasks.Task MakeDirectory(string name, Datacenter datacenter, bool? createParentDirectories)
     {
-        await this.Session.Client.MakeDirectory(this.Reference, name, datacenter?.Reference, createParentDirectories ?? default(bool), createParentDirectories.HasValue);
+        await this.Session.Client.MakeDirectory(this.Reference, name, datacenter?.Reference, createParentDirectories ?? default, createParentDirectories.HasValue);
     }
 
     public async System.Threading.Tasks.Task<Task> MoveDatastoreFile_Task(string sourceName, Datacenter sourceDatacenter, string destinationName, Datacenter destinationDatacenter, bool? force)
     {
-        var res = await this.Session.Client.MoveDatastoreFile_Task(this.Reference, sourceName, sourceDatacenter?.Reference, destinationName, destinationDatacenter?.Reference, force ?? default(bool), force.HasValue);
+        var res = await this.Session.Client.MoveDatastoreFile_Task(this.Reference, sourceName, sourceDatacenter?.Reference, destinationName, destinationDatacenter?.Reference, force ?? default, force.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -1926,7 +1926,7 @@ public partial class GuestFileManager : ManagedObject
 
     public async System.Threading.Tasks.Task<GuestListFileInfo> ListFilesInGuest(VirtualMachine vm, GuestAuthentication auth, string filePath, int? index, int? maxResults, string matchPattern)
     {
-        return await this.Session.Client.ListFilesInGuest(this.Reference, vm?.Reference, auth, filePath, index ?? default(int), index.HasValue, maxResults ?? default(int), maxResults.HasValue, matchPattern);
+        return await this.Session.Client.ListFilesInGuest(this.Reference, vm?.Reference, auth, filePath, index ?? default, index.HasValue, maxResults ?? default, maxResults.HasValue, matchPattern);
     }
 
     public async System.Threading.Tasks.Task MakeDirectoryInGuest(VirtualMachine vm, GuestAuthentication auth, string directoryPath, bool createParentDirectories)
@@ -2666,7 +2666,7 @@ public partial class HostDatastoreSystem : ManagedObject
 
     public async System.Threading.Tasks.Task<VmfsDatastoreOption[]> QueryVmfsDatastoreCreateOptions(string devicePath, int? vmfsMajorVersion)
     {
-        return await this.Session.Client.QueryVmfsDatastoreCreateOptions(this.Reference, devicePath, vmfsMajorVersion ?? default(int), vmfsMajorVersion.HasValue);
+        return await this.Session.Client.QueryVmfsDatastoreCreateOptions(this.Reference, devicePath, vmfsMajorVersion ?? default, vmfsMajorVersion.HasValue);
     }
 
     public async System.Threading.Tasks.Task<VmfsDatastoreOption[]> QueryVmfsDatastoreExpandOptions(Datastore datastore)
@@ -2676,7 +2676,7 @@ public partial class HostDatastoreSystem : ManagedObject
 
     public async System.Threading.Tasks.Task<VmfsDatastoreOption[]> QueryVmfsDatastoreExtendOptions(Datastore datastore, string devicePath, bool? suppressExpandCandidates)
     {
-        return await this.Session.Client.QueryVmfsDatastoreExtendOptions(this.Reference, datastore?.Reference, devicePath, suppressExpandCandidates ?? default(bool), suppressExpandCandidates.HasValue);
+        return await this.Session.Client.QueryVmfsDatastoreExtendOptions(this.Reference, datastore?.Reference, devicePath, suppressExpandCandidates ?? default, suppressExpandCandidates.HasValue);
     }
 
     public async System.Threading.Tasks.Task RemoveDatastore(Datastore datastore)
@@ -3333,7 +3333,7 @@ public partial class HostPatchManager : ManagedObject
 
     public async System.Threading.Tasks.Task<Task> InstallHostPatch_Task(HostPatchManagerLocator repository, string updateID, bool? force)
     {
-        var res = await this.Session.Client.InstallHostPatch_Task(this.Reference, repository, updateID, force ?? default(bool), force.HasValue);
+        var res = await this.Session.Client.InstallHostPatch_Task(this.Reference, repository, updateID, force ?? default, force.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
@@ -3590,7 +3590,7 @@ public partial class HostProfileManager : ProfileManager
 
     public async System.Threading.Tasks.Task<Task> ValidateHostProfileComposition_Task(Profile source, Profile[] targets, HostApplyProfile toBeMerged, HostApplyProfile toReplaceWith, HostApplyProfile toBeDeleted, HostApplyProfile enableStatusToBeCopied, bool? errorOnly)
     {
-        var res = await this.Session.Client.ValidateHostProfileComposition_Task(this.Reference, source?.Reference, targets?.Select(m => m.Reference).ToArray(), toBeMerged, toReplaceWith, toBeDeleted, enableStatusToBeCopied, errorOnly ?? default(bool), errorOnly.HasValue);
+        var res = await this.Session.Client.ValidateHostProfileComposition_Task(this.Reference, source?.Reference, targets?.Select(m => m.Reference).ToArray(), toBeMerged, toReplaceWith, toBeDeleted, enableStatusToBeCopied, errorOnly ?? default, errorOnly.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -3982,7 +3982,7 @@ public partial class HostStorageSystem : ExtensibleManagedObject
 
     public async System.Threading.Tasks.Task RemoveInternetScsiSendTargets(string iScsiHbaDevice, HostInternetScsiHbaSendTarget[] targets, bool? force)
     {
-        await this.Session.Client.RemoveInternetScsiSendTargets(this.Reference, iScsiHbaDevice, targets, force ?? default(bool), force.HasValue);
+        await this.Session.Client.RemoveInternetScsiSendTargets(this.Reference, iScsiHbaDevice, targets, force ?? default, force.HasValue);
     }
 
     public async System.Threading.Tasks.Task RemoveInternetScsiStaticTargets(string iScsiHbaDevice, HostInternetScsiHbaStaticTarget[] targets)
@@ -4303,7 +4303,7 @@ public partial class HostSystem : ManagedEntity
 
     public async System.Threading.Tasks.Task<Task> EnterMaintenanceMode_Task(int timeout, bool? evacuatePoweredOffVms, HostMaintenanceSpec maintenanceSpec)
     {
-        var res = await this.Session.Client.EnterMaintenanceMode_Task(this.Reference, timeout, evacuatePoweredOffVms ?? default(bool), evacuatePoweredOffVms.HasValue, maintenanceSpec);
+        var res = await this.Session.Client.EnterMaintenanceMode_Task(this.Reference, timeout, evacuatePoweredOffVms ?? default, evacuatePoweredOffVms.HasValue, maintenanceSpec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
@@ -4320,7 +4320,7 @@ public partial class HostSystem : ManagedEntity
 
     public async System.Threading.Tasks.Task<Task> PowerDownHostToStandBy_Task(int timeoutSec, bool? evacuatePoweredOffVms)
     {
-        var res = await this.Session.Client.PowerDownHostToStandBy_Task(this.Reference, timeoutSec, evacuatePoweredOffVms ?? default(bool), evacuatePoweredOffVms.HasValue);
+        var res = await this.Session.Client.PowerDownHostToStandBy_Task(this.Reference, timeoutSec, evacuatePoweredOffVms ?? default, evacuatePoweredOffVms.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
@@ -4342,7 +4342,7 @@ public partial class HostSystem : ManagedEntity
 
     public async System.Threading.Tasks.Task<long> QueryMemoryOverhead(long memorySize, int? videoRamSize, int numVcpus)
     {
-        return await this.Session.Client.QueryMemoryOverhead(this.Reference, memorySize, videoRamSize ?? default(int), videoRamSize.HasValue, numVcpus);
+        return await this.Session.Client.QueryMemoryOverhead(this.Reference, memorySize, videoRamSize ?? default, videoRamSize.HasValue, numVcpus);
     }
 
     public async System.Threading.Tasks.Task<long> QueryMemoryOverheadEx(VirtualMachineConfigInfo vmConfigInfo)
@@ -4543,12 +4543,12 @@ public partial class HostVsanInternalSystem : ManagedObject
 
     public async System.Threading.Tasks.Task<VsanPolicySatisfiability[]> CanProvisionObjects(VsanNewPolicyBatch[] npbs, bool? ignoreSatisfiability)
     {
-        return await this.Session.Client.CanProvisionObjects(this.Reference, npbs, ignoreSatisfiability ?? default(bool), ignoreSatisfiability.HasValue);
+        return await this.Session.Client.CanProvisionObjects(this.Reference, npbs, ignoreSatisfiability ?? default, ignoreSatisfiability.HasValue);
     }
 
     public async System.Threading.Tasks.Task<HostVsanInternalSystemDeleteVsanObjectsResult[]> DeleteVsanObjects(string[] uuids, bool? force)
     {
-        return await this.Session.Client.DeleteVsanObjects(this.Reference, uuids, force ?? default(bool), force.HasValue);
+        return await this.Session.Client.DeleteVsanObjects(this.Reference, uuids, force ?? default, force.HasValue);
     }
 
     public async System.Threading.Tasks.Task<string> GetVsanObjExtAttrs(string[] uuids)
@@ -4583,7 +4583,7 @@ public partial class HostVsanInternalSystem : ManagedObject
 
     public async System.Threading.Tasks.Task<string[]> QueryVsanObjectUuidsByFilter(string[] uuids, int? limit, int? version)
     {
-        return await this.Session.Client.QueryVsanObjectUuidsByFilter(this.Reference, uuids, limit ?? default(int), limit.HasValue, version ?? default(int), version.HasValue);
+        return await this.Session.Client.QueryVsanObjectUuidsByFilter(this.Reference, uuids, limit ?? default, limit.HasValue, version ?? default, version.HasValue);
     }
 
     public async System.Threading.Tasks.Task<string> QueryVsanStatistics(string[] labels)
@@ -4593,7 +4593,7 @@ public partial class HostVsanInternalSystem : ManagedObject
 
     public async System.Threading.Tasks.Task<VsanPolicySatisfiability[]> ReconfigurationSatisfiable(VsanPolicyChangeBatch[] pcbs, bool? ignoreSatisfiability)
     {
-        return await this.Session.Client.ReconfigurationSatisfiable(this.Reference, pcbs, ignoreSatisfiability ?? default(bool), ignoreSatisfiability.HasValue);
+        return await this.Session.Client.ReconfigurationSatisfiable(this.Reference, pcbs, ignoreSatisfiability ?? default, ignoreSatisfiability.HasValue);
     }
 
     public async System.Threading.Tasks.Task ReconfigureDomObject(string uuid, string policy)
@@ -4662,13 +4662,13 @@ public partial class HostVsanSystem : ManagedObject
 
     public async System.Threading.Tasks.Task<Task> RemoveDisk_Task(HostScsiDisk[] disk, HostMaintenanceSpec maintenanceSpec, int? timeout)
     {
-        var res = await this.Session.Client.RemoveDisk_Task(this.Reference, disk, maintenanceSpec, timeout ?? default(int), timeout.HasValue);
+        var res = await this.Session.Client.RemoveDisk_Task(this.Reference, disk, maintenanceSpec, timeout ?? default, timeout.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task> RemoveDiskMapping_Task(VsanHostDiskMapping[] mapping, HostMaintenanceSpec maintenanceSpec, int? timeout)
     {
-        var res = await this.Session.Client.RemoveDiskMapping_Task(this.Reference, mapping, maintenanceSpec, timeout ?? default(int), timeout.HasValue);
+        var res = await this.Session.Client.RemoveDiskMapping_Task(this.Reference, mapping, maintenanceSpec, timeout ?? default, timeout.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
@@ -4900,7 +4900,7 @@ public partial class HttpNfcLease : ManagedObject
 
     public async System.Threading.Tasks.Task<HttpNfcLeaseProbeResult[]> HttpNfcLeaseProbeUrls(HttpNfcLeaseSourceFile[] files, int? timeout)
     {
-        return await this.Session.Client.HttpNfcLeaseProbeUrls(this.Reference, files, timeout ?? default(int), timeout.HasValue);
+        return await this.Session.Client.HttpNfcLeaseProbeUrls(this.Reference, files, timeout ?? default, timeout.HasValue);
     }
 
     public async System.Threading.Tasks.Task HttpNfcLeaseProgress(int percent)
@@ -5586,7 +5586,7 @@ public partial class PerformanceManager : ManagedObject
 
     public async System.Threading.Tasks.Task<PerfMetricId[]> QueryAvailablePerfMetric(ManagedObject entity, DateTime? beginTime, DateTime? endTime, int? intervalId)
     {
-        return await this.Session.Client.QueryAvailablePerfMetric(this.Reference, entity?.Reference, beginTime ?? default(DateTime), beginTime.HasValue, endTime ?? default(DateTime), endTime.HasValue, intervalId ?? default(int), intervalId.HasValue);
+        return await this.Session.Client.QueryAvailablePerfMetric(this.Reference, entity?.Reference, beginTime ?? default, beginTime.HasValue, endTime ?? default, endTime.HasValue, intervalId ?? default, intervalId.HasValue);
     }
 
     public async System.Threading.Tasks.Task<PerfEntityMetricBase[]> QueryPerf(PerfQuerySpec[] querySpec)
@@ -6112,7 +6112,7 @@ public partial class SearchIndex : ManagedObject
 
     public async System.Threading.Tasks.Task<ManagedEntity[]> FindAllByUuid(Datacenter datacenter, string uuid, bool vmSearch, bool? instanceUuid)
     {
-        var res = await this.Session.Client.FindAllByUuid(this.Reference, datacenter?.Reference, uuid, vmSearch, instanceUuid ?? default(bool), instanceUuid.HasValue);
+        var res = await this.Session.Client.FindAllByUuid(this.Reference, datacenter?.Reference, uuid, vmSearch, instanceUuid ?? default, instanceUuid.HasValue);
         return res?.Select(r => ManagedObject.Create<ManagedEntity>(r, this.Session)).ToArray();
     }
 
@@ -6142,7 +6142,7 @@ public partial class SearchIndex : ManagedObject
 
     public async System.Threading.Tasks.Task<ManagedEntity> FindByUuid(Datacenter datacenter, string uuid, bool vmSearch, bool? instanceUuid)
     {
-        var res = await this.Session.Client.FindByUuid(this.Reference, datacenter?.Reference, uuid, vmSearch, instanceUuid ?? default(bool), instanceUuid.HasValue);
+        var res = await this.Session.Client.FindByUuid(this.Reference, datacenter?.Reference, uuid, vmSearch, instanceUuid ?? default, instanceUuid.HasValue);
         return ManagedObject.Create<ManagedEntity>(res, this.Session);
     }
 
@@ -6982,7 +6982,7 @@ public partial class VirtualDiskManager : ManagedObject
 
     public async System.Threading.Tasks.Task<Task> CopyVirtualDisk_Task(string sourceName, Datacenter sourceDatacenter, string destName, Datacenter destDatacenter, VirtualDiskSpec destSpec, bool? force)
     {
-        var res = await this.Session.Client.CopyVirtualDisk_Task(this.Reference, sourceName, sourceDatacenter?.Reference, destName, destDatacenter?.Reference, destSpec, force ?? default(bool), force.HasValue);
+        var res = await this.Session.Client.CopyVirtualDisk_Task(this.Reference, sourceName, sourceDatacenter?.Reference, destName, destDatacenter?.Reference, destSpec, force ?? default, force.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
@@ -7012,7 +7012,7 @@ public partial class VirtualDiskManager : ManagedObject
 
     public async System.Threading.Tasks.Task<Task> ExtendVirtualDisk_Task(string name, Datacenter datacenter, long newCapacityKb, bool? eagerZero)
     {
-        var res = await this.Session.Client.ExtendVirtualDisk_Task(this.Reference, name, datacenter?.Reference, newCapacityKb, eagerZero ?? default(bool), eagerZero.HasValue);
+        var res = await this.Session.Client.ExtendVirtualDisk_Task(this.Reference, name, datacenter?.Reference, newCapacityKb, eagerZero ?? default, eagerZero.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
@@ -7029,7 +7029,7 @@ public partial class VirtualDiskManager : ManagedObject
 
     public async System.Threading.Tasks.Task<Task> MoveVirtualDisk_Task(string sourceName, Datacenter sourceDatacenter, string destName, Datacenter destDatacenter, bool? force, VirtualMachineProfileSpec[] profile)
     {
-        var res = await this.Session.Client.MoveVirtualDisk_Task(this.Reference, sourceName, sourceDatacenter?.Reference, destName, destDatacenter?.Reference, force ?? default(bool), force.HasValue, profile);
+        var res = await this.Session.Client.MoveVirtualDisk_Task(this.Reference, sourceName, sourceDatacenter?.Reference, destName, destDatacenter?.Reference, force ?? default, force.HasValue, profile);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
@@ -7060,7 +7060,7 @@ public partial class VirtualDiskManager : ManagedObject
 
     public async System.Threading.Tasks.Task<Task> ShrinkVirtualDisk_Task(string name, Datacenter datacenter, bool? copy)
     {
-        var res = await this.Session.Client.ShrinkVirtualDisk_Task(this.Reference, name, datacenter?.Reference, copy ?? default(bool), copy.HasValue);
+        var res = await this.Session.Client.ShrinkVirtualDisk_Task(this.Reference, name, datacenter?.Reference, copy ?? default, copy.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
@@ -7204,13 +7204,13 @@ public partial class VirtualMachine : ManagedEntity
 
     public async System.Threading.Tasks.Task<Task> ApplyEvcModeVM_Task(HostFeatureMask[] mask, bool? completeMasks)
     {
-        var res = await this.Session.Client.ApplyEvcModeVM_Task(this.Reference, mask, completeMasks ?? default(bool), completeMasks.HasValue);
+        var res = await this.Session.Client.ApplyEvcModeVM_Task(this.Reference, mask, completeMasks ?? default, completeMasks.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task> AttachDisk_Task(ID diskId, Datastore datastore, int? controllerKey, int? unitNumber)
     {
-        var res = await this.Session.Client.AttachDisk_Task(this.Reference, diskId, datastore?.Reference, controllerKey ?? default(int), controllerKey.HasValue, unitNumber ?? default(int), unitNumber.HasValue);
+        var res = await this.Session.Client.AttachDisk_Task(this.Reference, diskId, datastore?.Reference, controllerKey ?? default, controllerKey.HasValue, unitNumber ?? default, unitNumber.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
@@ -7391,7 +7391,7 @@ public partial class VirtualMachine : ManagedEntity
 
     public async System.Threading.Tasks.Task<LocalizedMethodFault[]> QueryFaultToleranceCompatibilityEx(bool? forLegacyFt)
     {
-        return await this.Session.Client.QueryFaultToleranceCompatibilityEx(this.Reference, forLegacyFt ?? default(bool), forLegacyFt.HasValue);
+        return await this.Session.Client.QueryFaultToleranceCompatibilityEx(this.Reference, forLegacyFt ?? default, forLegacyFt.HasValue);
     }
 
     public async System.Threading.Tasks.Task<string[]> QueryUnownedFiles()
@@ -7429,7 +7429,7 @@ public partial class VirtualMachine : ManagedEntity
 
     public async System.Threading.Tasks.Task<Task> RemoveAllSnapshots_Task(bool? consolidate)
     {
-        var res = await this.Session.Client.RemoveAllSnapshots_Task(this.Reference, consolidate ?? default(bool), consolidate.HasValue);
+        var res = await this.Session.Client.RemoveAllSnapshots_Task(this.Reference, consolidate ?? default, consolidate.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
@@ -7446,7 +7446,7 @@ public partial class VirtualMachine : ManagedEntity
 
     public async System.Threading.Tasks.Task<Task> RevertToCurrentSnapshot_Task(HostSystem host, bool? suppressPowerOn)
     {
-        var res = await this.Session.Client.RevertToCurrentSnapshot_Task(this.Reference, host?.Reference, suppressPowerOn ?? default(bool), suppressPowerOn.HasValue);
+        var res = await this.Session.Client.RevertToCurrentSnapshot_Task(this.Reference, host?.Reference, suppressPowerOn ?? default, suppressPowerOn.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
@@ -7677,7 +7677,7 @@ public partial class VirtualMachineSnapshot : ExtensibleManagedObject
 
     public async System.Threading.Tasks.Task<Task> RemoveSnapshot_Task(bool removeChildren, bool? consolidate)
     {
-        var res = await this.Session.Client.RemoveSnapshot_Task(this.Reference, removeChildren, consolidate ?? default(bool), consolidate.HasValue);
+        var res = await this.Session.Client.RemoveSnapshot_Task(this.Reference, removeChildren, consolidate ?? default, consolidate.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
@@ -7688,7 +7688,7 @@ public partial class VirtualMachineSnapshot : ExtensibleManagedObject
 
     public async System.Threading.Tasks.Task<Task> RevertToSnapshot_Task(HostSystem host, bool? suppressPowerOn)
     {
-        var res = await this.Session.Client.RevertToSnapshot_Task(this.Reference, host?.Reference, suppressPowerOn ?? default(bool), suppressPowerOn.HasValue);
+        var res = await this.Session.Client.RevertToSnapshot_Task(this.Reference, host?.Reference, suppressPowerOn ?? default, suppressPowerOn.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -7720,13 +7720,13 @@ public partial class VsanUpgradeSystem : ManagedObject
 
     public async System.Threading.Tasks.Task<Task> PerformVsanUpgrade_Task(ClusterComputeResource cluster, bool? performObjectUpgrade, bool? downgradeFormat, bool? allowReducedRedundancy, HostSystem[] excludeHosts)
     {
-        var res = await this.Session.Client.PerformVsanUpgrade_Task(this.Reference, cluster?.Reference, performObjectUpgrade ?? default(bool), performObjectUpgrade.HasValue, downgradeFormat ?? default(bool), downgradeFormat.HasValue, allowReducedRedundancy ?? default(bool), allowReducedRedundancy.HasValue, excludeHosts?.Select(m => m.Reference).ToArray());
+        var res = await this.Session.Client.PerformVsanUpgrade_Task(this.Reference, cluster?.Reference, performObjectUpgrade ?? default, performObjectUpgrade.HasValue, downgradeFormat ?? default, downgradeFormat.HasValue, allowReducedRedundancy ?? default, allowReducedRedundancy.HasValue, excludeHosts?.Select(m => m.Reference).ToArray());
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<VsanUpgradeSystemPreflightCheckResult> PerformVsanUpgradePreflightCheck(ClusterComputeResource cluster, bool? downgradeFormat)
     {
-        return await this.Session.Client.PerformVsanUpgradePreflightCheck(this.Reference, cluster?.Reference, downgradeFormat ?? default(bool), downgradeFormat.HasValue);
+        return await this.Session.Client.PerformVsanUpgradePreflightCheck(this.Reference, cluster?.Reference, downgradeFormat ?? default, downgradeFormat.HasValue);
     }
 
     public async System.Threading.Tasks.Task<VsanUpgradeSystemUpgradeStatus> QueryVsanUpgradeStatus(ClusterComputeResource cluster)

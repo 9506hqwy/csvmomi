@@ -161,7 +161,7 @@ function writeManagedObjectMethodArgument(
 
     let ty = convertType(param.ty.local);
     if (!param.mandatory && csStructureTypes.includes(ty)) {
-      args.push(`${argName} ?? default(${ty})`);
+      args.push(`${argName} ?? default`);
       args.push(`${argName}.HasValue`);
     } else if (param.ty.local != param.ty.remote) {
       if (param.ty.remote == "ManagedObjectReference") {
