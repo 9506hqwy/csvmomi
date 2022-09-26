@@ -1,8 +1,5 @@
 ﻿namespace CsVmomi.Test;
 
-using CsVmomi;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 [TestClass]
 public class SessionTest
 {

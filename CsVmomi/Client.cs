@@ -1,7 +1,5 @@
 ﻿namespace CsVmomi;
 
-using VimService;
-
 public class Client : IClient
 {
     private readonly VimPortTypeClient inner;

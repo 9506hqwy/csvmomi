@@ -1,7 +1,6 @@
 ﻿namespace CsVmomi;
 
 using System.Reflection;
-using VimService;
 
 public abstract class ManagedObject
 {

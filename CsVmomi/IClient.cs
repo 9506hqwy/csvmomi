@@ -1,7 +1,5 @@
 ﻿namespace CsVmomi;
 
-using VimService;
-
 public interface IClient
 {
     System.Threading.Tasks.Task AbandonHciWorkflow(ManagedObjectReference self);

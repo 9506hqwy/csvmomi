@@ -1,7 +1,5 @@
 ﻿namespace CsVmomi;
 
-using VimService;
-
 public partial class Task : ExtensibleManagedObject
 {
     public async System.Threading.Tasks.Task<TaskInfoState> WaitForCompleted(TimeSpan timeout)

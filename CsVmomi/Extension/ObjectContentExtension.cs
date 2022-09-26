@@ -1,7 +1,5 @@
 ﻿namespace CsVmomi;
 
-using VimService;
-
 internal static class ObjectContentExtension
 {
     internal static T GetPropertyValue<T>(this ObjectContent self, string pathSet)

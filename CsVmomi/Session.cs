@@ -4,7 +4,6 @@ using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel;
 using System.ServiceModel.Security;
 using System.Text;
-using VimService;
 
 public class Session
 {

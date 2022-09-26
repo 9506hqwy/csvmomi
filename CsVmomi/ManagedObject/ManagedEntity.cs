@@ -1,7 +1,5 @@
 ﻿namespace CsVmomi;
 
-using VimService;
-
 public partial class ManagedEntity : ExtensibleManagedObject
 {
     public async IAsyncEnumerable<T> EnumerateManagedObject<T>()

@@ -1,7 +1,5 @@
 ﻿namespace CsVmomi;
 
-using VimService;
-
 public partial class PropertyCollector : ManagedObject
 {
     public async Task<PropertyFilter> CreateFilter(

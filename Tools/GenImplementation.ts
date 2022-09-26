@@ -107,8 +107,6 @@ const cls = await getCls(directory, methods);
 
 console.log(`namespace CsVmomi;
 
-using VimService;
-
 public class Client : IClient
 {
     private readonly VimPortTypeClient inner;
