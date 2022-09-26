@@ -40,7 +40,7 @@ async System.Threading.Tasks.Task Work(string[] args)
 
 async Task<VirtualMachine> FindVm(Session session, string vmname)
 {
-    await foreach (var vm in session.RootFolder.EnumerateManagedObject<VirtualMachine>())
+    await foreach (var vm in session.RootFolder.Enumerate<VirtualMachine>())
     {
         var name = await vm.GetPropertyName();
         if (name.ToLowerInvariant() == vmname.ToLowerInvariant())

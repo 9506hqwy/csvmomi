@@ -54,7 +54,7 @@ internal class PowerOnVm
 
     private static async System.Threading.Tasks.Task<VirtualMachine> FindVm(Session session, string vmname)
     {
-        await foreach (var vm in session.RootFolder.EnumerateManagedObject<VirtualMachine>())
+        await foreach (var vm in session.RootFolder.Enumerate<VirtualMachine>())
         {
             var name = await vm.GetPropertyName();
             if (name.ToLowerInvariant() == vmname.ToLowerInvariant())

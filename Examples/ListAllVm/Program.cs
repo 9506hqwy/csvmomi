@@ -35,7 +35,7 @@ internal class ListAllVm
         await session.SessionManager.Login(args[1], args[2]);
         try
         {
-            await foreach (var vm in session.RootFolder.EnumerateManagedObject<VirtualMachine>())
+            await foreach (var vm in session.RootFolder.Enumerate<VirtualMachine>())
             {
                 var (name, summary) = await vm.GetProperty<string, VirtualMachineSummary>("name", "summary");
 

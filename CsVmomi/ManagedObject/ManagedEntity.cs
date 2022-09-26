@@ -2,7 +2,7 @@
 
 public partial class ManagedEntity : ExtensibleManagedObject
 {
-    public async IAsyncEnumerable<T> EnumerateManagedObject<T>()
+    public async IAsyncEnumerable<T> Enumerate<T>()
         where T : ManagedObject
     {
         var view = await this.Session.ViewManager.CreateContainerView(
