@@ -1,6 +1,5 @@
 ﻿namespace CsVmomi
 {
-    using System.Linq;
     using VimService;
 
     internal static class ObjectContentExtension

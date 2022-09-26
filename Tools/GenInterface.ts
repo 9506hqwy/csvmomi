@@ -60,7 +60,6 @@ const cls = await getCls(directory, methods);
 
 console.log(`namespace CsVmomi
 {
-    using System;
     using VimService;
 
     public interface IClient

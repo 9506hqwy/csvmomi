@@ -1,6 +1,5 @@
 ﻿namespace CsVmomi
 {
-    using System;
     using VimService;
 
     public class Client : IClient

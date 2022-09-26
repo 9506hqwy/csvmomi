@@ -1,7 +1,5 @@
 ﻿namespace CsVmomi
 {
-    using System;
-    using System.Threading.Tasks;
     using VimService;
 
     public partial class Task : ExtensibleManagedObject

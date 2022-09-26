@@ -1,7 +1,5 @@
 ﻿namespace CsVmomi
 {
-    using System.Linq;
-    using System.Threading.Tasks;
     using VimService;
 
     public partial class PropertyCollector : ManagedObject

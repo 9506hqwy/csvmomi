@@ -1,8 +1,6 @@
 ﻿namespace CsVmomi
 {
     using System.Globalization;
-    using System.Linq;
-    using System.Threading.Tasks;
     using VimService;
 
     public partial class SessionManager : ManagedObject

@@ -1,6 +1,5 @@
 ﻿namespace CsVmomi.Test
 {
-    using System;
     using CsVmomi;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

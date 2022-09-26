@@ -1,7 +1,5 @@
 ﻿namespace Examples
 {
-    using System;
-    using System.Linq;
     using CsVmomi;
     using VimService;
 

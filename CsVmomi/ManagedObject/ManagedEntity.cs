@@ -1,7 +1,5 @@
 ﻿namespace CsVmomi
 {
-    using System.Collections.Generic;
-    using System.Linq;
     using VimService;
 
     public partial class ManagedEntity : ExtensibleManagedObject

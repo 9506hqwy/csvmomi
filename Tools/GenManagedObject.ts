@@ -222,8 +222,6 @@ console.log(`namespace CsVmomi
 {
 #pragma warning disable SA1402 // File may only contain a single type
 
-    using System;
-    using System.Linq;
     using VimService;`);
 for (const obj of objs) {
   writeManagedObject(obj);
