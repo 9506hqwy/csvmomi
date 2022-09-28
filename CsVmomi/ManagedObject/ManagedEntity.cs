@@ -67,7 +67,12 @@ public partial class ManagedEntity : ExtensibleManagedObject
             };
 
             var result = await this.Session.PropertyCollector.RetrievePropertiesEx(objectSet, propSet, false, options);
-            token = result!.token;
+            if (result == null)
+            {
+                yield break;
+            }
+
+            token = result.token;
             foreach (var obj in result.objects)
             {
                 if (condition == null || condition(obj))
