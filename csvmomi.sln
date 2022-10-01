@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShutdownHost", "Examples\Sh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StubCheck", "StubCheck\StubCheck.csproj", "{1696457D-AACB-460F-8F30-058BAF5AF9BF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateVm", "Examples\CreateVm\CreateVm.csproj", "{D6A2F3FC-AAC0-4751-83C5-286C490CBD23}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,10 @@ Global
 		{1696457D-AACB-460F-8F30-058BAF5AF9BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1696457D-AACB-460F-8F30-058BAF5AF9BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1696457D-AACB-460F-8F30-058BAF5AF9BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6A2F3FC-AAC0-4751-83C5-286C490CBD23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6A2F3FC-AAC0-4751-83C5-286C490CBD23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6A2F3FC-AAC0-4751-83C5-286C490CBD23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6A2F3FC-AAC0-4751-83C5-286C490CBD23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +81,7 @@ Global
 		{399C86BC-9787-4130-A7C1-4C0BF99B06D2} = {2CF3AF78-2C5A-4257-934D-CF47DD762308}
 		{FC54EBBB-86FE-4111-95B1-A6EAC485CE18} = {2CF3AF78-2C5A-4257-934D-CF47DD762308}
 		{C6F43B83-A348-4F3F-B703-3F17651465A1} = {2CF3AF78-2C5A-4257-934D-CF47DD762308}
+		{D6A2F3FC-AAC0-4751-83C5-286C490CBD23} = {2CF3AF78-2C5A-4257-934D-CF47DD762308}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {74753721-7958-4B1E-84B4-FA309E1F30AB}
