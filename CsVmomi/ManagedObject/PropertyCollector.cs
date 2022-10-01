@@ -81,6 +81,69 @@ public partial class PropertyCollector : ManagedObject
         return await this.RetrievePropertiesEx(new[] { specSet }, options);
     }
 
+    internal IAsyncEnumerable<T> Enumerate<T>(
+        ObjectSpec objectSet,
+        PropertySpec propSet,
+        bool reportMissingObjectsInResults,
+        RetrieveOptions options,
+        Func<ObjectContent, bool>? condition = null)
+        where T : ManagedObject
+    {
+        var specSet = this.CreatePropertyFilterSpec(objectSet, propSet, reportMissingObjectsInResults);
+        return this.Enumerate<T>(specSet, options, condition);
+    }
+
+    internal IAsyncEnumerable<T> Enumerate<T>(
+        PropertyFilterSpec specSet, RetrieveOptions options, Func<ObjectContent, bool>? condition = null)
+        where T : ManagedObject
+    {
+        return this.Enumerate<T>(new[] { specSet }, options, condition);
+    }
+
+    internal async IAsyncEnumerable<T> Enumerate<T>(
+        PropertyFilterSpec[] specSet, RetrieveOptions options, Func<ObjectContent, bool>? condition = null)
+        where T : ManagedObject
+    {
+        string? token = null;
+        try
+        {
+            var result = await this.Session.PropertyCollector.RetrievePropertiesEx(specSet, options);
+            if (result == null)
+            {
+                yield break;
+            }
+
+            token = result.token;
+            foreach (var obj in result.objects)
+            {
+                if (condition == null || condition(obj))
+                {
+                    yield return ManagedObject.Create<T>(obj.obj, this.Session)!;
+                }
+            }
+
+            while (token != null)
+            {
+                result = await this.Session.PropertyCollector.ContinueRetrievePropertiesEx(token);
+                token = result!.token;
+                foreach (var obj in result.objects)
+                {
+                    if (condition == null || condition(obj))
+                    {
+                        yield return ManagedObject.Create<T>(obj.obj, this.Session)!;
+                    }
+                }
+            }
+        }
+        finally
+        {
+            if (token != null)
+            {
+                await this.Session.PropertyCollector.CancelRetrievePropertiesEx(token);
+            }
+        }
+    }
+
     private PropertyFilterSpec CreatePropertyFilterSpec(
         ManagedObject obj,
         string pathSet)
