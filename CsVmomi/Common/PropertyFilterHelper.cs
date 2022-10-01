@@ -15,84 +15,84 @@ internal class PropertyFilterHelper
         return new ObjectSpec
         {
             obj = source.Reference,
-            selectSet = this.CreateFrom(source),
+            selectSet = this.TraverseLower(source),
             skip = true,
             skipSpecified = true,
         };
     }
 
-    private SelectionSpec[] CreateFrom<T>(T source)
+    internal ObjectSpec TraverseParent<T>(T source)
         where T : ManagedEntity
     {
-        return source switch
+        return new ObjectSpec
         {
-            ComputeResource _ => this.CreateComputeResource(),
-            Datacenter _ => this.CreateDatacenter(),
-            Datastore _ => this.CreateDatastore(),
-            DistributedVirtualSwitch _ => this.CreateDistributedVirtualSwitch(),
-            Folder _ => this.CreateFolder(),
-            HostSystem _ => this.CreateHostSystem(),
-            Network _ => this.CreateNetwork(),
-            ResourcePool _ => this.CreateResourcePool(),
-            _ => throw new NotSupportedException(),
+            obj = source.Reference,
+            selectSet = this.TraverseUpper(source),
+            skip = true,
+            skipSpecified = true,
         };
     }
 
-    private SelectionSpec[] CreateComputeResource()
+    private SelectionSpec[] CreateComputeResourceLower()
     {
         var datastore = this.InitSpec(typeof(ComputeResource), "datastore");
-        this.SetSelectSet(datastore, this.CreateDatastore);
+        this.SetSelectSet(datastore, this.CreateDatastoreLower);
 
         var host = this.InitSpec(typeof(ComputeResource), "host");
-        this.SetSelectSet(host, this.CreateHostSystem);
+        this.SetSelectSet(host, this.CreateHostSystemLower);
 
         var network = this.InitSpec(typeof(ComputeResource), "network");
-        this.SetSelectSet(network, this.CreateNetwork);
+        this.SetSelectSet(network, this.CreateNetworkLower);
 
         var resourcePool = this.InitSpec(typeof(ComputeResource), "resourcePool");
-        this.SetSelectSet(resourcePool, this.CreateResourcePool);
+        this.SetSelectSet(resourcePool, this.CreateResourcePoolLower);
 
         return new[] { datastore, host, network, resourcePool };
     }
 
-    private SelectionSpec[] CreateDatacenter()
+    private SelectionSpec[] CreateDatacenterLower()
     {
         var datastoreFolder = this.InitSpec(typeof(Datacenter), "datastoreFolder");
-        this.SetSelectSet(datastoreFolder, this.CreateFolder);
+        this.SetSelectSet(datastoreFolder, this.CreateFolderLower);
 
         var hostFolder = this.InitSpec(typeof(Datacenter), "hostFolder");
-        this.SetSelectSet(hostFolder, this.CreateFolder);
+        this.SetSelectSet(hostFolder, this.CreateFolderLower);
 
         var networkFolder = this.InitSpec(typeof(Datacenter), "networkFolder");
-        this.SetSelectSet(networkFolder, this.CreateFolder);
+        this.SetSelectSet(networkFolder, this.CreateFolderLower);
 
         var vmFolder = this.InitSpec(typeof(Datacenter), "vmFolder");
-        this.SetSelectSet(vmFolder, this.CreateFolder);
+        this.SetSelectSet(vmFolder, this.CreateFolderLower);
 
         return new[] { datastoreFolder, hostFolder, networkFolder, vmFolder };
     }
 
-    private SelectionSpec[] CreateDatastore()
+    private SelectionSpec[] CreateDatastoreLower()
     {
         return new[] { this.InitSpec(typeof(Datastore), "vm") };
     }
 
-    private SelectionSpec[] CreateDistributedVirtualSwitch()
+    private SelectionSpec[] CreateDatastoreUpper()
+    {
+        return new[] { this.InitSpec(typeof(Datastore), "host") };
+    }
+
+    private SelectionSpec[] CreateDistributedVirtualSwitchLower()
     {
         var portgroup = this.InitSpec(typeof(DistributedVirtualSwitch), "portgroup");
-        this.SetSelectSet(portgroup, this.CreateNetwork);
+        this.SetSelectSet(portgroup, this.CreateNetworkLower);
 
         return new[] { portgroup };
     }
 
-    private SelectionSpec[] CreateFolder()
+    private SelectionSpec[] CreateFolderLower()
     {
-        var selectSet = () => this.CreateFolder()
-            .Concat(this.CreateComputeResource())
-            .Concat(this.CreateDatacenter())
-            .Concat(this.CreateDatastore())
-            .Concat(this.CreateDistributedVirtualSwitch())
-            .Concat(this.CreateNetwork())
+        var selectSet = () => this.CreateFolderLower()
+            .Concat(this.CreateComputeResourceLower())
+            .Concat(this.CreateDatacenterLower())
+            .Concat(this.CreateDatastoreLower())
+            .Concat(this.CreateDistributedVirtualSwitchLower())
+            .Concat(this.CreateNetworkLower())
             .ToArray();
 
         var folder = this.InitSpec(typeof(Folder), "childEntity");
@@ -101,32 +101,66 @@ internal class PropertyFilterHelper
         return new[] { folder };
     }
 
-    private SelectionSpec[] CreateHostSystem()
+    private SelectionSpec[] CreateHostSystemLower()
     {
         var datastore = this.InitSpec(typeof(HostSystem), "datastore");
-        this.SetSelectSet(datastore, this.CreateDatastore);
+        this.SetSelectSet(datastore, this.CreateDatastoreLower);
 
         var network = this.InitSpec(typeof(HostSystem), "network");
-        this.SetSelectSet(network, this.CreateNetwork);
+        this.SetSelectSet(network, this.CreateNetworkLower);
 
         var vm = this.InitSpec(typeof(HostSystem), "vm");
 
         return new[] { datastore, network, vm };
     }
 
-    private SelectionSpec[] CreateNetwork()
+    private SelectionSpec[] CreateManagedEntityUpper()
+    {
+        var parent = this.InitSpec(typeof(ManagedEntity), "parent");
+        this.SetSelectSet(parent, this.CreateManagedEntityUpper);
+
+        return new[] { parent };
+    }
+
+    private SelectionSpec[] CreateNetworkLower()
     {
         return new[] { this.InitSpec(typeof(Network), "vm") };
     }
 
-    private SelectionSpec[] CreateResourcePool()
+    private SelectionSpec[] CreateNetworkUpper()
+    {
+        var host = this.InitSpec(typeof(Network), "host");
+
+        var sw = this.InitSpec(typeof(DistributedVirtualPortgroup), "config.distributedVirtualSwitch");
+
+        return new[] { host, sw };
+    }
+
+    private SelectionSpec[] CreateResourcePoolLower()
     {
         var resourcePool = this.InitSpec(typeof(ResourcePool), "resourcePool");
-        this.SetSelectSet(resourcePool, this.CreateResourcePool);
+        this.SetSelectSet(resourcePool, this.CreateResourcePoolLower);
 
         var vm = this.InitSpec(typeof(ResourcePool), "vm");
 
         return new[] { resourcePool, vm };
+    }
+
+    private SelectionSpec[] CreateVirtualMachineUpper()
+    {
+        var datastore = this.InitSpec(typeof(VirtualMachine), "datastore");
+        this.SetSelectSet(datastore, this.CreateDatastoreUpper);
+
+        var network = this.InitSpec(typeof(VirtualMachine), "network");
+        this.SetSelectSet(datastore, this.CreateNetworkUpper);
+
+        var parentVApp = this.InitSpec(typeof(VirtualMachine), "parentVApp");
+
+        var resourcePool = this.InitSpec(typeof(VirtualMachine), "resourcePool");
+
+        var host = this.InitSpec(typeof(VirtualMachine), "runtime.host");
+
+        return new[] { datastore, network, parentVApp, resourcePool, host };
     }
 
     private SelectionSpec InitSelection(string name)
@@ -158,6 +192,43 @@ internal class PropertyFilterHelper
         };
         this.cache.Add(spec.name, spec);
         return spec;
+    }
+
+    private SelectionSpec[] TraverseLower<T>(T source)
+        where T : ManagedEntity
+    {
+        return source switch
+        {
+            ComputeResource _ => this.CreateComputeResourceLower(),
+            Datacenter _ => this.CreateDatacenterLower(),
+            Datastore _ => this.CreateDatastoreLower(),
+            DistributedVirtualSwitch _ => this.CreateDistributedVirtualSwitchLower(),
+            Folder _ => this.CreateFolderLower(),
+            HostSystem _ => this.CreateHostSystemLower(),
+            Network _ => this.CreateNetworkLower(),
+            ResourcePool _ => this.CreateResourcePoolLower(),
+            _ => throw new NotSupportedException(),
+        };
+    }
+
+    private SelectionSpec[] TraverseUpper<T>(T source)
+        where T : ManagedEntity
+    {
+        var entity = this.CreateManagedEntityUpper();
+
+        return source switch
+        {
+            ComputeResource _ => entity,
+            Datacenter _ => entity,
+            Datastore _ => entity.Concat(this.CreateDatastoreUpper()).ToArray(),
+            DistributedVirtualSwitch _ => entity,
+            Folder _ => entity,
+            HostSystem _ => entity,
+            Network _ => entity.Concat(this.CreateNetworkUpper()).ToArray(),
+            ResourcePool _ => entity,
+            VirtualMachine _ => entity.Concat(this.CreateVirtualMachineUpper()).ToArray(),
+            _ => throw new NotSupportedException(),
+        };
     }
 
     private void SetSelectSet(SelectionSpec spec, Func<SelectionSpec[]> selectSet)
