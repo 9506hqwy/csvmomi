@@ -34,14 +34,13 @@ async System.Threading.Tasks.Task Work(string[] args)
             throw new Exception($"Not found virtual machine `{args[3]}`.");
         }
 
-        HostSystem host = null!;
-        await foreach (var h in vm.EnumerateUpper<HostSystem>())
-        {
-            host = h;
-            break;
-        }
+        var host = await vm.FindFirstUpper<HostSystem>();
 
-        var network = await FindNetwork(host, args.Length > 4 ? args[4] : null);
+        var network = args.Length switch
+        {
+            int n when n < 5 => await host!.FindFirst<Network>(),
+            _ => await host!.FindByName<Network>(args[4]),
+        };
         if (network == null)
         {
             throw new Exception($"Not found network.");
@@ -70,19 +69,13 @@ async System.Threading.Tasks.Task Work(string[] args)
         switch (network)
         {
             case DistributedVirtualPortgroup dvp:
-                DistributedVirtualSwitch dvs = null!;
-                await foreach (var s in dvp.EnumerateUpper<DistributedVirtualSwitch>())
-                {
-                    dvs = s;
-                    break;
-                }
-
+                var dvs = await dvp.FindFirstUpper<DistributedVirtualSwitch>();
                 nic.backing = new VirtualEthernetCardDistributedVirtualPortBackingInfo
                 {
                     port = new DistributedVirtualSwitchPortConnection
                     {
                         portgroupKey = await dvp.GetPropertyKey(),
-                        switchUuid = await dvs.GetPropertyUuid(),
+                        switchUuid = await dvs!.GetPropertyUuid(),
                     },
                 };
                 break;
@@ -131,23 +124,4 @@ async System.Threading.Tasks.Task Work(string[] args)
     {
         await session.SessionManager!.Logout();
     }
-}
-
-async System.Threading.Tasks.Task<Network?> FindNetwork(HostSystem host, string? name)
-{
-    await foreach (var network in host.Enumerate<Network>())
-    {
-        if (name == null)
-        {
-            return network;
-        }
-
-        var n = await network.GetPropertyName();
-        if (name == n)
-        {
-            return network;
-        }
-    }
-
-    return null;
 }

@@ -30,6 +30,28 @@ public partial class ManagedEntity : ExtensibleManagedObject
         return null;
     }
 
+    public async System.Threading.Tasks.Task<T?> FindFirst<T>()
+        where T : ManagedEntity
+    {
+        await foreach (var entity in this.Enumerate<T>())
+        {
+            return entity;
+        }
+
+        return null;
+    }
+
+    public async System.Threading.Tasks.Task<T?> FindFirstUpper<T>()
+        where T : ManagedEntity
+    {
+        await foreach (var entity in this.EnumerateUpper<T>())
+        {
+            return entity;
+        }
+
+        return null;
+    }
+
     private IAsyncEnumerable<T> Enumerate<T>(string[]? pathSet, Func<ObjectContent, bool>? condition)
         where T : ManagedEntity
     {

@@ -50,7 +50,11 @@ async System.Threading.Tasks.Task Work(string[] args)
             throw new Exception($"Not found Guest OS `{args[5]}`.");
         }
 
-        var datastore = await FindtDatastore(host, (args.Length > 6) ? args[6] : null);
+        var datastore = args.Length switch
+        {
+            int n when n < 7 => await host.FindFirst<Datastore>(),
+            _ => await host.FindByName<Datastore>(args[6]),
+        };
         if (datastore == null)
         {
             throw new Exception($"Not found datastore.");
@@ -114,7 +118,7 @@ async System.Threading.Tasks.Task CreateVm(
         virtualSMCPresentSpecified = true,
     };
 
-    var datacenter = await FindDatacenter(host);
+    var datacenter = await host.FindFirstUpper<Datacenter>();
     var vmFolder = await datacenter!.GetPropertyVmFolder();
 
     var task = await vmFolder.CreateVM_Task(spec, pool, host);
@@ -164,33 +168,4 @@ VirtualDeviceConfigSpec CreateController(string controllerType, int key)
         operation = VirtualDeviceConfigSpecOperation.add,
         operationSpecified = true,
     };
-}
-
-async System.Threading.Tasks.Task<Datacenter?> FindDatacenter(HostSystem host)
-{
-    await foreach (var datacenter in host.EnumerateUpper<Datacenter>())
-    {
-        return datacenter;
-    }
-
-    return null;
-}
-
-async System.Threading.Tasks.Task<Datastore?> FindtDatastore(HostSystem host, string? name)
-{
-    await foreach (var datastore in host.Enumerate<Datastore>())
-    {
-        if (name == null)
-        {
-            return datastore;
-        }
-
-        var n = await datastore.GetPropertyName();
-        if (name == n)
-        {
-            return datastore;
-        }
-    }
-
-    return null;
 }
