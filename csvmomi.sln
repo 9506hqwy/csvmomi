@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MountIso", "Examples\MountI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddVmNic", "Examples\AddVmNic\AddVmNic.csproj", "{5D7EE7E8-C7D1-4AED-ABAA-F9314BA699CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddVmDisk", "Examples\AddVmDisk\AddVmDisk.csproj", "{805A77D1-5C71-4AA2-8B6A-E0167DE0D8A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -89,6 +91,10 @@ Global
 		{5D7EE7E8-C7D1-4AED-ABAA-F9314BA699CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D7EE7E8-C7D1-4AED-ABAA-F9314BA699CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D7EE7E8-C7D1-4AED-ABAA-F9314BA699CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{805A77D1-5C71-4AA2-8B6A-E0167DE0D8A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{805A77D1-5C71-4AA2-8B6A-E0167DE0D8A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{805A77D1-5C71-4AA2-8B6A-E0167DE0D8A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{805A77D1-5C71-4AA2-8B6A-E0167DE0D8A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -103,6 +109,7 @@ Global
 		{7CD0F74D-EAB6-4E7B-8D4C-409F63635A22} = {2CF3AF78-2C5A-4257-934D-CF47DD762308}
 		{1C5FE6BE-611B-4359-8A34-F4398E561523} = {2CF3AF78-2C5A-4257-934D-CF47DD762308}
 		{5D7EE7E8-C7D1-4AED-ABAA-F9314BA699CA} = {2CF3AF78-2C5A-4257-934D-CF47DD762308}
+		{805A77D1-5C71-4AA2-8B6A-E0167DE0D8A1} = {2CF3AF78-2C5A-4257-934D-CF47DD762308}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {74753721-7958-4B1E-84B4-FA309E1F30AB}
