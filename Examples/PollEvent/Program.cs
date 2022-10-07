@@ -55,56 +55,40 @@ async System.Threading.Tasks.Task Work(string[] args)
             maxCount = 1000,
             maxCountSpecified = true,
         };
-        var collector = await session.EventManager!.CreateCollectorForEvents(filter);
+        await using var collector = await session.EventManager!.CreateCollectorForEvents(filter);
+        await collector!.ResetCollector();
 
-        try
+        await using var prop = await session.PropertyCollector.CreatePropertyCollector();
+        await prop!.CreateFilter(session.EventManager, "latestEvent", false);
+
+        var version = string.Empty;
+        var options = new WaitOptions
         {
-            await collector!.ResetCollector();
+            maxObjectUpdates = 1,
+            maxObjectUpdatesSpecified = true,
+            maxWaitSeconds = 60,
+            maxWaitSecondsSpecified = true,
+        };
 
-            var prop = await session.PropertyCollector.CreatePropertyCollector();
-            try
+        while (true)
+        {
+            // イベント検出スレッド
+            var updateSet = await prop.WaitForUpdatesEx(version, options);
+            if (updateSet == null)
             {
-                await prop!.CreateFilter(session.EventManager, "latestEvent", false);
-
-                var version = string.Empty;
-                var options = new WaitOptions
-                {
-                    maxObjectUpdates = 1,
-                    maxObjectUpdatesSpecified = true,
-                    maxWaitSeconds = 60,
-                    maxWaitSecondsSpecified = true,
-                };
-
-                while (true)
-                {
-                    // イベント検出スレッド
-                    var updateSet = await prop.WaitForUpdatesEx(version, options);
-                    if (updateSet == null)
-                    {
-                        continue;
-                    }
-
-                    version = updateSet.version;
-
-                    var evts = await collector.ReadNextEvents(filter.maxCount);
-
-                    lock (events)
-                    {
-                        Array.ForEach(evts!, events.Enqueue);
-                        Monitor.Pulse(events);
-                    }
-                }
+                continue;
             }
-            finally
+
+            version = updateSet.version;
+
+            var evts = await collector.ReadNextEvents(filter.maxCount);
+
+            lock (events)
             {
-                await prop!.DestroyPropertyCollector();
+                Array.ForEach(evts!, events.Enqueue);
+                Monitor.Pulse(events);
             }
         }
-        finally
-        {
-            await collector!.DestroyCollector();
-        }
-
     }
     finally
     {

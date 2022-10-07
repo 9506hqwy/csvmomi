@@ -1,7 +1,9 @@
 ﻿namespace CsVmomi;
 
-public partial class PropertyCollector : ManagedObject
+public partial class PropertyCollector : ManagedObject, IAsyncDisposable, IDisposable
 {
+    private bool disposed = false;
+
     public async Task<PropertyFilter?> CreateFilter(
         ManagedObject obj,
         string pathSet,
@@ -30,6 +32,19 @@ public partial class PropertyCollector : ManagedObject
     {
         var specSet = this.CreatePropertyFilterSpec(objectSet, propSet, reportMissingObjectsInResults);
         return await this.CreateFilter(specSet, partialUpdates);
+    }
+
+    public void Dispose()
+    {
+        this.Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await this.DisposeAsyncCore();
+        this.Dispose(false);
+        GC.SuppressFinalize(this);
     }
 
     public async Task<T?> RetrieveProperties<T>(
@@ -141,6 +156,24 @@ public partial class PropertyCollector : ManagedObject
             {
                 await this.Session.PropertyCollector.CancelRetrievePropertiesEx(token);
             }
+        }
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (disposing && !this.disposed)
+        {
+            this.DestroyPropertyCollector().Wait();
+            this.disposed = true;
+        }
+    }
+
+    protected async virtual ValueTask DisposeAsyncCore()
+    {
+        if (!this.disposed)
+        {
+            await this.DestroyPropertyCollector();
+            this.disposed = true;
         }
     }
 
