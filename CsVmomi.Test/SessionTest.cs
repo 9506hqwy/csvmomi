@@ -22,25 +22,8 @@ public class SessionTest
     }
 
     [TestMethod]
-    public void PropertyCollector()
+    public void SoapSessionId()
     {
-        var mo = this.session.PropertyCollector;
-        Assert.IsNotNull(mo);
-
-        var filter = mo.GetPropertyFilter().Result;
-        Assert.IsNotNull(filter);
-    }
-
-    [TestMethod]
-    public void RootFolder()
-    {
-        var root = this.session.RootFolder;
-        Assert.IsNotNull(root);
-
-        var rootName = root.GetPropertyName().Result;
-        Assert.AreEqual("root", rootName);
-
-        var children = root.GetPropertyChildEntity().Result;
-        Assert.IsNotNull(children);
+        Assert.IsNotNull(this.session.SoapSessionId);
     }
 }

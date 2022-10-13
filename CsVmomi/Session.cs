@@ -7,6 +7,8 @@ using System.Text;
 
 public class Session
 {
+    private const string SessionCookieName = "vmware_soap_session";
+
     private readonly ServiceContent serviceContent;
 
     private Session(IVimClient client, ServiceContent serviceContent)
@@ -14,6 +16,8 @@ public class Session
         this.VimClient = client;
         this.serviceContent = serviceContent;
     }
+
+    public string? SoapSessionId => this.VimClient.GetCookie(Session.SessionCookieName)?.Trim('"');
 
     public AboutInfo About => this.serviceContent.about;
 
