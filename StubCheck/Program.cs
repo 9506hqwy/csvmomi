@@ -17,7 +17,7 @@ void Work(string[] args)
         .Where(o => o.DeclaringType == typeof(VimPortTypeClient))
         .Where(o => !o.IsVirtual)
         .ToArray();
-    var clientMethod = typeof(Client).GetMethods();
+    var clientMethod = typeof(VimClient).GetMethods();
 
     foreach (var operation in operations)
     {

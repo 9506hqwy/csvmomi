@@ -1,10 +1,10 @@
 ﻿namespace CsVmomi;
 
-public class Client : IClient
+public class VimClient : IVimClient
 {
     private readonly VimPortTypeClient inner;
 
-    internal Client(VimPortTypeClient inner)
+    internal VimClient(VimPortTypeClient inner)
     {
         this.inner = inner;
     }

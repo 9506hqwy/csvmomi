@@ -1,6 +1,6 @@
 ﻿namespace CsVmomi;
 
-public interface IClient
+public interface IVimClient
 {
     System.Threading.Tasks.Task AbandonHciWorkflow(ManagedObjectReference self);
 

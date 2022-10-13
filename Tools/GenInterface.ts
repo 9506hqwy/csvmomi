@@ -70,7 +70,7 @@ const cls = await getCls(directory, methods);
 
 console.log(`namespace CsVmomi;
 
-public interface IClient
+public interface IVimClient
 {`);
 for (const ref of methods) {
   if (excludeManagedObjectMethod.includes(ref.id)) {

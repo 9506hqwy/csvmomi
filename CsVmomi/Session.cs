@@ -9,7 +9,7 @@ public class Session
 {
     private readonly ServiceContent serviceContent;
 
-    private Session(IClient client, ServiceContent serviceContent)
+    private Session(IVimClient client, ServiceContent serviceContent)
     {
         this.Client = client;
         this.serviceContent = serviceContent;
@@ -115,7 +115,7 @@ public class Session
 
     public VStorageObjectManagerBase? VStorageObjectManager => ManagedObject.Create<VStorageObjectManagerBase>(this.serviceContent.vStorageObjectManager, this);
 
-    internal IClient Client { get; }
+    internal IVimClient Client { get; }
 
     public static async System.Threading.Tasks.Task<Session> Get(Uri url)
     {
@@ -135,10 +135,10 @@ public class Session
 
     public static async System.Threading.Tasks.Task<Session> Get(VimPortTypeClient inner)
     {
-        return await Session.Get(new Client(inner));
+        return await Session.Get(new VimClient(inner));
     }
 
-    public static async System.Threading.Tasks.Task<Session> Get(IClient client)
+    public static async System.Threading.Tasks.Task<Session> Get(IVimClient client)
     {
         var mor = new ManagedObjectReference
         {
