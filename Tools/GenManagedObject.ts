@@ -93,7 +93,7 @@ function writeManagedObject(obj: ManagedObject) {
 
     public async System.Threading.Tasks.Task ${methodName}(${params.join(", ")})
     {
-        await this.Session.Client.${methodName}(${args.join(", ")});
+        await this.Session.VimClient.${methodName}(${args.join(", ")});
     }`;
       // END
     } else {
@@ -115,7 +115,7 @@ function writeManagedObject(obj: ManagedObject) {
           params.join(", ")
         })
     {
-        var res = await this.Session.Client.${methodName}(${args.join(", ")});
+        var res = await this.Session.VimClient.${methodName}(${args.join(", ")});
         return ManagedObject.Create<${localTy}>(res, this.Session);
     }`;
         // END
@@ -138,7 +138,7 @@ function writeManagedObject(obj: ManagedObject) {
           params.join(", ")
         })
     {
-        var res = await this.Session.Client.${methodName}(${args.join(", ")});
+        var res = await this.Session.VimClient.${methodName}(${args.join(", ")});
         return res?.Select(r => ManagedObject.Create<${unitReturnTy}>(r, this.Session)!).ToArray();
     }`;
         // END
@@ -157,7 +157,7 @@ function writeManagedObject(obj: ManagedObject) {
           params.join(", ")
         })
     {
-        return await this.Session.Client.${methodName}(${args.join(", ")});
+        return await this.Session.VimClient.${methodName}(${args.join(", ")});
     }`;
         // END
       }

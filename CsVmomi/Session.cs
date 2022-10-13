@@ -11,7 +11,7 @@ public class Session
 
     private Session(IVimClient client, ServiceContent serviceContent)
     {
-        this.Client = client;
+        this.VimClient = client;
         this.serviceContent = serviceContent;
     }
 
@@ -115,7 +115,7 @@ public class Session
 
     public VStorageObjectManagerBase? VStorageObjectManager => ManagedObject.Create<VStorageObjectManagerBase>(this.serviceContent.vStorageObjectManager, this);
 
-    internal IVimClient Client { get; }
+    internal IVimClient VimClient { get; }
 
     public static async System.Threading.Tasks.Task<Session> Get(Uri url)
     {
