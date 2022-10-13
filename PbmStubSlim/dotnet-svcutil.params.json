@@ -1,0 +1,24 @@
+{
+  "providerId": "Microsoft.Tools.ServiceModel.Svcutil",
+  "version": "2.0.3",
+  "options": {
+    "inputs": [
+      "../PbmStubGen/wsdl/core-types.xsd",
+      "../PbmStubGen/wsdl/pbm-messagetypes.xsd",
+      "../PbmStubGen/wsdl/pbm-types.xsd",
+      "../PbmStubGen/wsdl/pbm.wsdl",
+      "../PbmStubGen/wsdl/pbmService.wsdl",
+      "../PbmStubGen/wsdl/query-types.xsd",
+      "../PbmStubGen/wsdl/reflect-types.xsd",
+      "../PbmStubGen/wsdl/vim-types.xsd"
+    ],
+    "namespaceMappings": [
+      "*, PbmService"
+    ],
+    "outputFile": "PbmService.cs",
+    "serializerMode": "XmlSerializer",
+    "targetFramework": "netstandard2.0",
+    "typeReuseMode": "All",
+    "wrapped": true
+  }
+}

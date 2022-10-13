@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddVmDisk", "Examples\AddVm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PollEvent", "Examples\PollEvent\PollEvent.csproj", "{FC8A3801-7567-4A05-986B-43D3350B18F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PbmService", "PbmService\PbmService.csproj", "{1157F0C6-07E3-4884-AE5A-8640FB2C7AB0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,6 +103,10 @@ Global
 		{FC8A3801-7567-4A05-986B-43D3350B18F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC8A3801-7567-4A05-986B-43D3350B18F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC8A3801-7567-4A05-986B-43D3350B18F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1157F0C6-07E3-4884-AE5A-8640FB2C7AB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1157F0C6-07E3-4884-AE5A-8640FB2C7AB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1157F0C6-07E3-4884-AE5A-8640FB2C7AB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1157F0C6-07E3-4884-AE5A-8640FB2C7AB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

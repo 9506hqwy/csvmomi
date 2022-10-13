@@ -1,17 +1,24 @@
 # CsVmomi
 
-This library is vSphere Web Services API C# bindings for .NET Standard 2.0.
+This library is vSphere Management API C# bindings for .NET Standard 2.0.
 
-This repository includes two packages.
+This repository includes some packages.
+
+- [PbmService](./PbmService)
+
+  This package is VMware Storage Policy API C# bindings.
+  This package is stub that generated from WSDL by using [dotnet-svcuti](https://www.nuget.org/packages/dotnet-svcutil).
+  and pre-generated XML serializer by using [dotnet-svcutil.xmlserializer](https://www.nuget.org/packages/dotnet-svcutil.xmlserializer).
 
 - [VimService](./VimService)
 
+  This package is vSphere Web Services API C# bindings.
   This package is stub that generated from WSDL by using [dotnet-svcuti](https://www.nuget.org/packages/dotnet-svcutil).
   and pre-generated XML serializer by using [dotnet-svcutil.xmlserializer](https://www.nuget.org/packages/dotnet-svcutil.xmlserializer).
 
 - [CsVmomi](./CsVmomi)
 
-  This package is ManagedObject implementation class built on [VimService](./VimService), and is added some utility functions.
+  This package is ManagedObject implementation class built on C# bindings, and is added some utility functions.
   ManagedObject class is generated from Reference Guide.
 
 ## Examples
