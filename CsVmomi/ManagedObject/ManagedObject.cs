@@ -18,9 +18,29 @@ public abstract class ManagedObject
         ManagedObjectReference reference,
         Session session)
     {
+        this.PbmReference = new PbmService.ManagedObjectReference
+        {
+            type = reference.type,
+            Value = reference.Value,
+        };
         this.VimReference = reference;
         this.Session = session;
     }
+
+    protected ManagedObject(
+        PbmService.ManagedObjectReference reference,
+        Session session)
+    {
+        this.PbmReference = reference;
+        this.VimReference = new ManagedObjectReference
+        {
+            type = reference.type,
+            Value = reference.Value,
+        };
+        this.Session = session;
+    }
+
+    public PbmService.ManagedObjectReference PbmReference { get; }
 
     public ManagedObjectReference VimReference { get; }
 
@@ -28,6 +48,30 @@ public abstract class ManagedObject
 
     public static T? Create<T>(
         ManagedObjectReference? reference,
+        Session session)
+        where T : ManagedObject
+    {
+        if (reference == null)
+        {
+            return null;
+        }
+
+        if (ManagedObject.ManagedObjectTypes.TryGetValue(reference.type, out Type type) &&
+            typeof(T).IsAssignableFrom(type))
+        {
+            return (T)Activator.CreateInstance(
+                type,
+                BindingFlags.Instance | BindingFlags.NonPublic,
+                null,
+                new object[] { reference, session },
+                null);
+        }
+
+        throw new NotSupportedException();
+    }
+
+    public static T? Create<T>(
+        PbmService.ManagedObjectReference? reference,
         Session session)
         where T : ManagedObject
     {

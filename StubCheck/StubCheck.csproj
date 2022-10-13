@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CsVmomi\CsVmomi.csproj" />
+    <ProjectReference Include="..\PbmService\PbmService.csproj" />
     <ProjectReference Include="..\VimService\VimService.csproj" />
   </ItemGroup>
 

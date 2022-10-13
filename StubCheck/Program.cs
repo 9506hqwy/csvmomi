@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using CsVmomi;
+using PbmService;
 using VimService;
 
 try
@@ -13,11 +14,17 @@ catch (Exception e)
 
 void Work(string[] args)
 {
-    var operations = typeof(VimPortTypeClient).GetMethods()
-        .Where(o => o.DeclaringType == typeof(VimPortTypeClient))
+    CheckType(typeof(VimPortTypeClient), typeof(VimClient));
+    CheckType(typeof(PbmPortTypeClient), typeof(PbmClient));
+}
+
+void CheckType(Type a, Type b)
+{
+    var operations = a.GetMethods()
+        .Where(o => o.DeclaringType == a)
         .Where(o => !o.IsVirtual)
         .ToArray();
-    var clientMethod = typeof(VimClient).GetMethods();
+    var clientMethod = b.GetMethods();
 
     foreach (var operation in operations)
     {

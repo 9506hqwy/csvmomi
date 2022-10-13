@@ -26,4 +26,17 @@ public class SessionTest
     {
         Assert.IsNotNull(this.session.SoapSessionId);
     }
+
+    [TestMethod]
+    public void PbmServiceContent()
+    {
+        this.session.SetPbmClient().Wait();
+        Assert.IsNotNull(this.session.PbmAboutInfo);
+        Assert.IsNotNull(this.session.PbmCapabilityMetadataManager);
+        Assert.IsNotNull(this.session.PbmComplianceManager);
+        Assert.IsNotNull(this.session.PbmPlacementSolver);
+        Assert.IsNotNull(this.session.PbmProfileManager);
+        Assert.IsNotNull(this.session.PbmReplicationManager);
+        Assert.IsNotNull(this.session.PbmSessionManager);
+    }
 }

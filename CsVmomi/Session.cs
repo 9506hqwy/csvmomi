@@ -11,6 +11,8 @@ public class Session
 
     private readonly ServiceContent vimServiceContent;
 
+    private PbmService.PbmServiceInstanceContent? pbmServiceContent;
+
     private Session(IVimClient client, ServiceContent serviceContent)
     {
         this.VimClient = client;
@@ -119,6 +121,22 @@ public class Session
 
     public VStorageObjectManagerBase? VStorageObjectManager => ManagedObject.Create<VStorageObjectManagerBase>(this.vimServiceContent.vStorageObjectManager, this);
 
+    public PbmService.PbmAboutInfo? PbmAboutInfo => this.pbmServiceContent?.aboutInfo;
+
+    public PbmCapabilityMetadataManager? PbmCapabilityMetadataManager => ManagedObject.Create<PbmCapabilityMetadataManager>(this.pbmServiceContent?.capabilityMetadataManager, this);
+
+    public PbmComplianceManager? PbmComplianceManager => ManagedObject.Create<PbmComplianceManager>(this.pbmServiceContent?.complianceManager, this);
+
+    public PbmPlacementSolver? PbmPlacementSolver => ManagedObject.Create<PbmPlacementSolver>(this.pbmServiceContent?.placementSolver, this);
+
+    public PbmProfileProfileManager? PbmProfileManager => ManagedObject.Create<PbmProfileProfileManager>(this.pbmServiceContent?.profileManager, this);
+
+    public PbmReplicationManager? PbmReplicationManager => ManagedObject.Create<PbmReplicationManager>(this.pbmServiceContent?.replicationManager, this);
+
+    public PbmSessionManager? PbmSessionManager => ManagedObject.Create<PbmSessionManager>(this.pbmServiceContent?.sessionManager, this);
+
+    internal IPbmClient? PbmClient { get; set; }
+
     internal IVimClient VimClient { get; }
 
     public static async System.Threading.Tasks.Task<Session> Get(Uri url)
@@ -152,6 +170,43 @@ public class Session
         var serviceContent = await client.RetrieveServiceContent(mor);
 
         return new Session(client, serviceContent!);
+    }
+
+    public System.Threading.Tasks.Task SetPbmClient()
+    {
+        var builder = new UriBuilder(this.VimClient.Uri);
+        builder.Path = "pbm";
+
+        var binding = Session.GetBinding();
+
+        var endpoint = new EndpointAddress(builder.Uri);
+
+        var inner = new PbmService.PbmPortTypeClient(binding, endpoint);
+        inner.ChannelFactory.Credentials.ServiceCertificate.SslCertificateAuthentication = new X509ServiceCertificateAuthentication
+        {
+            CertificateValidationMode = X509CertificateValidationMode.None,
+            RevocationMode = X509RevocationMode.NoCheck,
+        };
+        inner.Endpoint.EndpointBehaviors.Add(new SessionCookieBehavior(this.SoapSessionId));
+
+        return this.SetPbmClient(inner);
+    }
+
+    public System.Threading.Tasks.Task SetPbmClient(PbmService.PbmPortTypeClient inner)
+    {
+        return this.SetPbmClient(new PbmClient(inner));
+    }
+
+    public async System.Threading.Tasks.Task SetPbmClient(IPbmClient client)
+    {
+        this.PbmClient = client;
+
+        var mor = new PbmService.ManagedObjectReference
+        {
+            type = "PbmServiceInstance",
+            Value = "ServiceInstance",
+        };
+        this.pbmServiceContent = await client.PbmRetrieveServiceContent(mor);
     }
 
     private static BasicHttpBinding GetBinding()
