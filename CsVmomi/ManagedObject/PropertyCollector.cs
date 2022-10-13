@@ -192,7 +192,7 @@ public partial class PropertyCollector : ManagedObject, IAsyncDisposable, IDispo
     {
         var objectSet = new ObjectSpec
         {
-            obj = obj.Reference,
+            obj = obj.VimReference,
             selectSet = null,
             skip = false,
             skipSpecified = true,
@@ -203,7 +203,7 @@ public partial class PropertyCollector : ManagedObject, IAsyncDisposable, IDispo
             all = all,
             allSpecified = true,
             pathSet = pathSet,
-            type = obj.Reference.type,
+            type = obj.VimReference.type,
         };
 
         return this.CreatePropertyFilterSpec(objectSet, propSet, reportMissingObjectsInResults);

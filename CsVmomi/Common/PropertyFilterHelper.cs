@@ -14,7 +14,7 @@ internal class PropertyFilterHelper
     {
         return new ObjectSpec
         {
-            obj = source.Reference,
+            obj = source.VimReference,
             selectSet = this.TraverseLower(source),
             skip = true,
             skipSpecified = true,
@@ -26,7 +26,7 @@ internal class PropertyFilterHelper
     {
         return new ObjectSpec
         {
-            obj = source.Reference,
+            obj = source.VimReference,
             selectSet = this.TraverseUpper(source),
             skip = true,
             skipSpecified = true,

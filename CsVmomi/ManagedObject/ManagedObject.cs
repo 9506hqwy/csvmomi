@@ -18,11 +18,11 @@ public abstract class ManagedObject
         ManagedObjectReference reference,
         Session session)
     {
-        this.Reference = reference;
+        this.VimReference = reference;
         this.Session = session;
     }
 
-    public ManagedObjectReference Reference { get; }
+    public ManagedObjectReference VimReference { get; }
 
     protected Session Session { get; }
 

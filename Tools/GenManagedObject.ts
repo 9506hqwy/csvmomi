@@ -183,7 +183,7 @@ public partial class ${className} : ${baseTy}
 function writeManagedObjectMethodArgument(
   method: ManagedObjectMethod,
 ): string[] {
-  const args = ["this.Reference"];
+  const args = ["this.VimReference"];
   for (const param of method.parameters) {
     if (param.name == "_this") {
       continue;
@@ -198,19 +198,19 @@ function writeManagedObjectMethodArgument(
     } else if (param.ty.local != param.ty.remote) {
       if (param.ty.remote == "ManagedObjectReference") {
         const q = param.mandatory ? "" : "?";
-        args.push(`${argName}${q}.Reference`);
+        args.push(`${argName}${q}.VimReference`);
       } else if (param.ty.remote == "ManagedObjectReference[]") {
         const q = param.mandatory ? "" : "?";
-        args.push(`${argName}${q}.Select(m => m.Reference).ToArray()`);
+        args.push(`${argName}${q}.Select(m => m.VimReference).ToArray()`);
       } else {
         throw `Not supported type, ${param.ty.remote}`;
       }
     } else if (param.ty.local == "ManagedObjectReference") {
       const q = param.mandatory ? "" : "?";
-      args.push(`${argName}${q}.Reference`);
+      args.push(`${argName}${q}.VimReference`);
     } else if (param.ty.local == "ManagedObjectReference[]") {
       const q = param.mandatory ? "" : "?";
-      args.push(`${argName}${q}.Select(m => m.Reference).ToArray()`);
+      args.push(`${argName}${q}.Select(m => m.VimReference).ToArray()`);
     } else {
       args.push(argName);
     }

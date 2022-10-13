@@ -19,12 +19,12 @@ public partial class Alarm : ExtensibleManagedObject
 
     public async System.Threading.Tasks.Task ReconfigureAlarm(AlarmSpec spec)
     {
-        await this.Session.Client.ReconfigureAlarm(this.Reference, spec);
+        await this.Session.Client.ReconfigureAlarm(this.VimReference, spec);
     }
 
     public async System.Threading.Tasks.Task RemoveAlarm()
     {
-        await this.Session.Client.RemoveAlarm(this.Reference);
+        await this.Session.Client.RemoveAlarm(this.VimReference);
     }
 }
 
@@ -51,49 +51,49 @@ public partial class AlarmManager : ManagedObject
 
     public async System.Threading.Tasks.Task AcknowledgeAlarm(Alarm alarm, ManagedEntity entity)
     {
-        await this.Session.Client.AcknowledgeAlarm(this.Reference, alarm.Reference, entity.Reference);
+        await this.Session.Client.AcknowledgeAlarm(this.VimReference, alarm.VimReference, entity.VimReference);
     }
 
     public async System.Threading.Tasks.Task<bool> AreAlarmActionsEnabled(ManagedEntity entity)
     {
-        return await this.Session.Client.AreAlarmActionsEnabled(this.Reference, entity.Reference);
+        return await this.Session.Client.AreAlarmActionsEnabled(this.VimReference, entity.VimReference);
     }
 
     public async System.Threading.Tasks.Task ClearTriggeredAlarms(AlarmFilterSpec filter)
     {
-        await this.Session.Client.ClearTriggeredAlarms(this.Reference, filter);
+        await this.Session.Client.ClearTriggeredAlarms(this.VimReference, filter);
     }
 
     public async System.Threading.Tasks.Task<Alarm?> CreateAlarm(ManagedEntity entity, AlarmSpec spec)
     {
-        var res = await this.Session.Client.CreateAlarm(this.Reference, entity.Reference, spec);
+        var res = await this.Session.Client.CreateAlarm(this.VimReference, entity.VimReference, spec);
         return ManagedObject.Create<Alarm>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task DisableAlarm(Alarm alarm, ManagedEntity entity)
     {
-        await this.Session.Client.DisableAlarm(this.Reference, alarm.Reference, entity.Reference);
+        await this.Session.Client.DisableAlarm(this.VimReference, alarm.VimReference, entity.VimReference);
     }
 
     public async System.Threading.Tasks.Task EnableAlarm(Alarm alarm, ManagedEntity entity)
     {
-        await this.Session.Client.EnableAlarm(this.Reference, alarm.Reference, entity.Reference);
+        await this.Session.Client.EnableAlarm(this.VimReference, alarm.VimReference, entity.VimReference);
     }
 
     public async System.Threading.Tasks.Task EnableAlarmActions(ManagedEntity entity, bool enabled)
     {
-        await this.Session.Client.EnableAlarmActions(this.Reference, entity.Reference, enabled);
+        await this.Session.Client.EnableAlarmActions(this.VimReference, entity.VimReference, enabled);
     }
 
     public async System.Threading.Tasks.Task<Alarm[]?> GetAlarm(ManagedEntity? entity)
     {
-        var res = await this.Session.Client.GetAlarm(this.Reference, entity?.Reference);
+        var res = await this.Session.Client.GetAlarm(this.VimReference, entity?.VimReference);
         return res?.Select(r => ManagedObject.Create<Alarm>(r, this.Session)!).ToArray();
     }
 
     public async System.Threading.Tasks.Task<AlarmState[]?> GetAlarmState(ManagedEntity entity)
     {
-        return await this.Session.Client.GetAlarmState(this.Reference, entity.Reference);
+        return await this.Session.Client.GetAlarmState(this.VimReference, entity.VimReference);
     }
 }
 
@@ -126,72 +126,72 @@ public partial class AuthorizationManager : ManagedObject
 
     public async System.Threading.Tasks.Task<int> AddAuthorizationRole(string name, string[]? privIds)
     {
-        return await this.Session.Client.AddAuthorizationRole(this.Reference, name, privIds);
+        return await this.Session.Client.AddAuthorizationRole(this.VimReference, name, privIds);
     }
 
     public async System.Threading.Tasks.Task<UserPrivilegeResult[]?> FetchUserPrivilegeOnEntities(ManagedEntity[] entities, string userName)
     {
-        return await this.Session.Client.FetchUserPrivilegeOnEntities(this.Reference, entities.Select(m => m.Reference).ToArray(), userName);
+        return await this.Session.Client.FetchUserPrivilegeOnEntities(this.VimReference, entities.Select(m => m.VimReference).ToArray(), userName);
     }
 
     public async System.Threading.Tasks.Task<EntityPrivilege[]?> HasPrivilegeOnEntities(ManagedEntity[] entity, string sessionId, string[]? privId)
     {
-        return await this.Session.Client.HasPrivilegeOnEntities(this.Reference, entity.Select(m => m.Reference).ToArray(), sessionId, privId);
+        return await this.Session.Client.HasPrivilegeOnEntities(this.VimReference, entity.Select(m => m.VimReference).ToArray(), sessionId, privId);
     }
 
     public async System.Threading.Tasks.Task<bool[]?> HasPrivilegeOnEntity(ManagedEntity entity, string sessionId, string[]? privId)
     {
-        return await this.Session.Client.HasPrivilegeOnEntity(this.Reference, entity.Reference, sessionId, privId);
+        return await this.Session.Client.HasPrivilegeOnEntity(this.VimReference, entity.VimReference, sessionId, privId);
     }
 
     public async System.Threading.Tasks.Task<EntityPrivilege[]?> HasUserPrivilegeOnEntities(ManagedObject[] entities, string userName, string[]? privId)
     {
-        return await this.Session.Client.HasUserPrivilegeOnEntities(this.Reference, entities.Select(m => m.Reference).ToArray(), userName, privId);
+        return await this.Session.Client.HasUserPrivilegeOnEntities(this.VimReference, entities.Select(m => m.VimReference).ToArray(), userName, privId);
     }
 
     public async System.Threading.Tasks.Task MergePermissions(int srcRoleId, int dstRoleId)
     {
-        await this.Session.Client.MergePermissions(this.Reference, srcRoleId, dstRoleId);
+        await this.Session.Client.MergePermissions(this.VimReference, srcRoleId, dstRoleId);
     }
 
     public async System.Threading.Tasks.Task RemoveAuthorizationRole(int roleId, bool failIfUsed)
     {
-        await this.Session.Client.RemoveAuthorizationRole(this.Reference, roleId, failIfUsed);
+        await this.Session.Client.RemoveAuthorizationRole(this.VimReference, roleId, failIfUsed);
     }
 
     public async System.Threading.Tasks.Task RemoveEntityPermission(ManagedEntity entity, string user, bool isGroup)
     {
-        await this.Session.Client.RemoveEntityPermission(this.Reference, entity.Reference, user, isGroup);
+        await this.Session.Client.RemoveEntityPermission(this.VimReference, entity.VimReference, user, isGroup);
     }
 
     public async System.Threading.Tasks.Task ResetEntityPermissions(ManagedEntity entity, Permission[]? permission)
     {
-        await this.Session.Client.ResetEntityPermissions(this.Reference, entity.Reference, permission);
+        await this.Session.Client.ResetEntityPermissions(this.VimReference, entity.VimReference, permission);
     }
 
     public async System.Threading.Tasks.Task<Permission[]?> RetrieveAllPermissions()
     {
-        return await this.Session.Client.RetrieveAllPermissions(this.Reference);
+        return await this.Session.Client.RetrieveAllPermissions(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Permission[]?> RetrieveEntityPermissions(ManagedEntity entity, bool inherited)
     {
-        return await this.Session.Client.RetrieveEntityPermissions(this.Reference, entity.Reference, inherited);
+        return await this.Session.Client.RetrieveEntityPermissions(this.VimReference, entity.VimReference, inherited);
     }
 
     public async System.Threading.Tasks.Task<Permission[]?> RetrieveRolePermissions(int roleId)
     {
-        return await this.Session.Client.RetrieveRolePermissions(this.Reference, roleId);
+        return await this.Session.Client.RetrieveRolePermissions(this.VimReference, roleId);
     }
 
     public async System.Threading.Tasks.Task SetEntityPermissions(ManagedEntity entity, Permission[]? permission)
     {
-        await this.Session.Client.SetEntityPermissions(this.Reference, entity.Reference, permission);
+        await this.Session.Client.SetEntityPermissions(this.VimReference, entity.VimReference, permission);
     }
 
     public async System.Threading.Tasks.Task UpdateAuthorizationRole(int roleId, string newName, string[]? privIds)
     {
-        await this.Session.Client.UpdateAuthorizationRole(this.Reference, roleId, newName, privIds);
+        await this.Session.Client.UpdateAuthorizationRole(this.VimReference, roleId, newName, privIds);
     }
 }
 
@@ -206,19 +206,19 @@ public partial class CertificateManager : ManagedObject
 
     public async System.Threading.Tasks.Task<Task?> CertMgrRefreshCACertificatesAndCRLs_Task(HostSystem[] host)
     {
-        var res = await this.Session.Client.CertMgrRefreshCACertificatesAndCRLs_Task(this.Reference, host.Select(m => m.Reference).ToArray());
+        var res = await this.Session.Client.CertMgrRefreshCACertificatesAndCRLs_Task(this.VimReference, host.Select(m => m.VimReference).ToArray());
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> CertMgrRefreshCertificates_Task(HostSystem[] host)
     {
-        var res = await this.Session.Client.CertMgrRefreshCertificates_Task(this.Reference, host.Select(m => m.Reference).ToArray());
+        var res = await this.Session.Client.CertMgrRefreshCertificates_Task(this.VimReference, host.Select(m => m.VimReference).ToArray());
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> CertMgrRevokeCertificates_Task(HostSystem[] host)
     {
-        var res = await this.Session.Client.CertMgrRevokeCertificates_Task(this.Reference, host.Select(m => m.Reference).ToArray());
+        var res = await this.Session.Client.CertMgrRevokeCertificates_Task(this.VimReference, host.Select(m => m.VimReference).ToArray());
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -282,116 +282,116 @@ public partial class ClusterComputeResource : ComputeResource
 
     public async System.Threading.Tasks.Task AbandonHciWorkflow()
     {
-        await this.Session.Client.AbandonHciWorkflow(this.Reference);
+        await this.Session.Client.AbandonHciWorkflow(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> AddHost_Task(HostConnectSpec spec, bool asConnected, ResourcePool? resourcePool, string? license)
     {
-        var res = await this.Session.Client.AddHost_Task(this.Reference, spec, asConnected, resourcePool?.Reference, license);
+        var res = await this.Session.Client.AddHost_Task(this.VimReference, spec, asConnected, resourcePool?.VimReference, license);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task ApplyRecommendation(string key)
     {
-        await this.Session.Client.ApplyRecommendation(this.Reference, key);
+        await this.Session.Client.ApplyRecommendation(this.VimReference, key);
     }
 
     public async System.Threading.Tasks.Task CancelRecommendation(string key)
     {
-        await this.Session.Client.CancelRecommendation(this.Reference, key);
+        await this.Session.Client.CancelRecommendation(this.VimReference, key);
     }
 
     public async System.Threading.Tasks.Task<ClusterEnterMaintenanceResult?> ClusterEnterMaintenanceMode(HostSystem[] host, OptionValue[]? option)
     {
-        return await this.Session.Client.ClusterEnterMaintenanceMode(this.Reference, host.Select(m => m.Reference).ToArray(), option);
+        return await this.Session.Client.ClusterEnterMaintenanceMode(this.VimReference, host.Select(m => m.VimReference).ToArray(), option);
     }
 
     public async System.Threading.Tasks.Task<Task?> ConfigureHCI_Task(ClusterComputeResourceHCIConfigSpec clusterSpec, ClusterComputeResourceHostConfigurationInput[]? hostInputs)
     {
-        var res = await this.Session.Client.ConfigureHCI_Task(this.Reference, clusterSpec, hostInputs);
+        var res = await this.Session.Client.ConfigureHCI_Task(this.VimReference, clusterSpec, hostInputs);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<ClusterEVCManager?> EvcManager()
     {
-        var res = await this.Session.Client.EvcManager(this.Reference);
+        var res = await this.Session.Client.EvcManager(this.VimReference);
         return ManagedObject.Create<ClusterEVCManager>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> ExtendHCI_Task(ClusterComputeResourceHostConfigurationInput[]? hostInputs, SDDCBase? vSanConfigSpec)
     {
-        var res = await this.Session.Client.ExtendHCI_Task(this.Reference, hostInputs, vSanConfigSpec);
+        var res = await this.Session.Client.ExtendHCI_Task(this.VimReference, hostInputs, vSanConfigSpec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<ClusterRuleInfo[]?> FindRulesForVm(VirtualMachine vm)
     {
-        return await this.Session.Client.FindRulesForVm(this.Reference, vm.Reference);
+        return await this.Session.Client.FindRulesForVm(this.VimReference, vm.VimReference);
     }
 
     public async System.Threading.Tasks.Task<ClusterResourceUsageSummary?> GetResourceUsage()
     {
-        return await this.Session.Client.GetResourceUsage(this.Reference);
+        return await this.Session.Client.GetResourceUsage(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Datastore[]?> GetSystemVMsRestrictedDatastores()
     {
-        var res = await this.Session.Client.GetSystemVMsRestrictedDatastores(this.Reference);
+        var res = await this.Session.Client.GetSystemVMsRestrictedDatastores(this.VimReference);
         return res?.Select(r => ManagedObject.Create<Datastore>(r, this.Session)!).ToArray();
     }
 
     public async System.Threading.Tasks.Task<Task?> MoveHostInto_Task(HostSystem host, ResourcePool? resourcePool)
     {
-        var res = await this.Session.Client.MoveHostInto_Task(this.Reference, host.Reference, resourcePool?.Reference);
+        var res = await this.Session.Client.MoveHostInto_Task(this.VimReference, host.VimReference, resourcePool?.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> MoveInto_Task(HostSystem[] host)
     {
-        var res = await this.Session.Client.MoveInto_Task(this.Reference, host.Select(m => m.Reference).ToArray());
+        var res = await this.Session.Client.MoveInto_Task(this.VimReference, host.Select(m => m.VimReference).ToArray());
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<PlacementResult?> PlaceVm(PlacementSpec placementSpec)
     {
-        return await this.Session.Client.PlaceVm(this.Reference, placementSpec);
+        return await this.Session.Client.PlaceVm(this.VimReference, placementSpec);
     }
 
     public async System.Threading.Tasks.Task<ClusterHostRecommendation[]?> RecommendHostsForVm(VirtualMachine vm, ResourcePool? pool)
     {
-        return await this.Session.Client.RecommendHostsForVm(this.Reference, vm.Reference, pool?.Reference);
+        return await this.Session.Client.RecommendHostsForVm(this.VimReference, vm.VimReference, pool?.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> ReconfigureCluster_Task(ClusterConfigSpec spec, bool modify)
     {
-        var res = await this.Session.Client.ReconfigureCluster_Task(this.Reference, spec, modify);
+        var res = await this.Session.Client.ReconfigureCluster_Task(this.VimReference, spec, modify);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task RefreshRecommendation()
     {
-        await this.Session.Client.RefreshRecommendation(this.Reference);
+        await this.Session.Client.RefreshRecommendation(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<ClusterDasAdvancedRuntimeInfo?> RetrieveDasAdvancedRuntimeInfo()
     {
-        return await this.Session.Client.RetrieveDasAdvancedRuntimeInfo(this.Reference);
+        return await this.Session.Client.RetrieveDasAdvancedRuntimeInfo(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task SetCryptoMode(string cryptoMode)
     {
-        await this.Session.Client.SetCryptoMode(this.Reference, cryptoMode);
+        await this.Session.Client.SetCryptoMode(this.VimReference, cryptoMode);
     }
 
     public async System.Threading.Tasks.Task<Task?> StampAllRulesWithUuid_Task()
     {
-        var res = await this.Session.Client.StampAllRulesWithUuid_Task(this.Reference);
+        var res = await this.Session.Client.StampAllRulesWithUuid_Task(this.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<ClusterComputeResourceValidationResultBase[]?> ValidateHCIConfiguration(ClusterComputeResourceHCIConfigSpec? hciConfigSpec, HostSystem[]? hosts)
     {
-        return await this.Session.Client.ValidateHCIConfiguration(this.Reference, hciConfigSpec, hosts?.Select(m => m.Reference).ToArray());
+        return await this.Session.Client.ValidateHCIConfiguration(this.VimReference, hciConfigSpec, hosts?.Select(m => m.VimReference).ToArray());
     }
 }
 
@@ -418,25 +418,25 @@ public partial class ClusterEVCManager : ExtensibleManagedObject
 
     public async System.Threading.Tasks.Task<Task?> CheckAddHostEvc_Task(HostConnectSpec cnxSpec)
     {
-        var res = await this.Session.Client.CheckAddHostEvc_Task(this.Reference, cnxSpec);
+        var res = await this.Session.Client.CheckAddHostEvc_Task(this.VimReference, cnxSpec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> CheckConfigureEvcMode_Task(string evcModeKey, string? evcGraphicsModeKey)
     {
-        var res = await this.Session.Client.CheckConfigureEvcMode_Task(this.Reference, evcModeKey, evcGraphicsModeKey);
+        var res = await this.Session.Client.CheckConfigureEvcMode_Task(this.VimReference, evcModeKey, evcGraphicsModeKey);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> ConfigureEvcMode_Task(string evcModeKey, string? evcGraphicsModeKey)
     {
-        var res = await this.Session.Client.ConfigureEvcMode_Task(this.Reference, evcModeKey, evcGraphicsModeKey);
+        var res = await this.Session.Client.ConfigureEvcMode_Task(this.VimReference, evcModeKey, evcGraphicsModeKey);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> DisableEvcMode_Task()
     {
-        var res = await this.Session.Client.DisableEvcMode_Task(this.Reference);
+        var res = await this.Session.Client.DisableEvcMode_Task(this.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -452,7 +452,7 @@ public partial class ClusterProfile : Profile
 
     public async System.Threading.Tasks.Task UpdateClusterProfile(ClusterProfileConfigSpec config)
     {
-        await this.Session.Client.UpdateClusterProfile(this.Reference, config);
+        await this.Session.Client.UpdateClusterProfile(this.VimReference, config);
     }
 }
 
@@ -531,7 +531,7 @@ public partial class ComputeResource : ManagedEntity
 
     public async System.Threading.Tasks.Task<Task?> ReconfigureComputeResource_Task(ComputeResourceConfigSpec spec, bool modify)
     {
-        var res = await this.Session.Client.ReconfigureComputeResource_Task(this.Reference, spec, modify);
+        var res = await this.Session.Client.ReconfigureComputeResource_Task(this.VimReference, spec, modify);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -581,27 +581,27 @@ public partial class CryptoManager : ManagedObject
 
     public async System.Threading.Tasks.Task AddKey(CryptoKeyPlain key)
     {
-        await this.Session.Client.AddKey(this.Reference, key);
+        await this.Session.Client.AddKey(this.VimReference, key);
     }
 
     public async System.Threading.Tasks.Task<CryptoKeyResult[]?> AddKeys(CryptoKeyPlain[]? keys)
     {
-        return await this.Session.Client.AddKeys(this.Reference, keys);
+        return await this.Session.Client.AddKeys(this.VimReference, keys);
     }
 
     public async System.Threading.Tasks.Task<CryptoKeyId[]?> ListKeys(int? limit)
     {
-        return await this.Session.Client.ListKeys(this.Reference, limit ?? default, limit.HasValue);
+        return await this.Session.Client.ListKeys(this.VimReference, limit ?? default, limit.HasValue);
     }
 
     public async System.Threading.Tasks.Task RemoveKey(CryptoKeyId key, bool force)
     {
-        await this.Session.Client.RemoveKey(this.Reference, key, force);
+        await this.Session.Client.RemoveKey(this.VimReference, key, force);
     }
 
     public async System.Threading.Tasks.Task<CryptoKeyResult[]?> RemoveKeys(CryptoKeyId[]? keys, bool force)
     {
-        return await this.Session.Client.RemoveKeys(this.Reference, keys, force);
+        return await this.Session.Client.RemoveKeys(this.VimReference, keys, force);
     }
 }
 
@@ -616,23 +616,23 @@ public partial class CryptoManagerHost : CryptoManager
 
     public async System.Threading.Tasks.Task<Task?> ChangeKey_Task(CryptoKeyPlain newKey)
     {
-        var res = await this.Session.Client.ChangeKey_Task(this.Reference, newKey);
+        var res = await this.Session.Client.ChangeKey_Task(this.VimReference, newKey);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task CryptoManagerHostDisable()
     {
-        await this.Session.Client.CryptoManagerHostDisable(this.Reference);
+        await this.Session.Client.CryptoManagerHostDisable(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task CryptoManagerHostEnable(CryptoKeyPlain initialKey)
     {
-        await this.Session.Client.CryptoManagerHostEnable(this.Reference, initialKey);
+        await this.Session.Client.CryptoManagerHostEnable(this.VimReference, initialKey);
     }
 
     public async System.Threading.Tasks.Task CryptoManagerHostPrepare()
     {
-        await this.Session.Client.CryptoManagerHostPrepare(this.Reference);
+        await this.Session.Client.CryptoManagerHostPrepare(this.VimReference);
     }
 }
 
@@ -663,123 +663,123 @@ public partial class CryptoManagerKmip : CryptoManager
 
     public async System.Threading.Tasks.Task<string?> GenerateClientCsr(KeyProviderId cluster)
     {
-        return await this.Session.Client.GenerateClientCsr(this.Reference, cluster);
+        return await this.Session.Client.GenerateClientCsr(this.VimReference, cluster);
     }
 
     public async System.Threading.Tasks.Task<CryptoKeyResult?> GenerateKey(KeyProviderId? keyProvider)
     {
-        return await this.Session.Client.GenerateKey(this.Reference, keyProvider);
+        return await this.Session.Client.GenerateKey(this.VimReference, keyProvider);
     }
 
     public async System.Threading.Tasks.Task<string?> GenerateSelfSignedClientCert(KeyProviderId cluster)
     {
-        return await this.Session.Client.GenerateSelfSignedClientCert(this.Reference, cluster);
+        return await this.Session.Client.GenerateSelfSignedClientCert(this.VimReference, cluster);
     }
 
     public async System.Threading.Tasks.Task<KeyProviderId?> GetDefaultKmsCluster(ManagedEntity? entity, bool? defaultsToParent)
     {
-        return await this.Session.Client.GetDefaultKmsCluster(this.Reference, entity?.Reference, defaultsToParent ?? default, defaultsToParent.HasValue);
+        return await this.Session.Client.GetDefaultKmsCluster(this.VimReference, entity?.VimReference, defaultsToParent ?? default, defaultsToParent.HasValue);
     }
 
     public async System.Threading.Tasks.Task<bool> IsKmsClusterActive(KeyProviderId? cluster)
     {
-        return await this.Session.Client.IsKmsClusterActive(this.Reference, cluster);
+        return await this.Session.Client.IsKmsClusterActive(this.VimReference, cluster);
     }
 
     public async System.Threading.Tasks.Task<KmipClusterInfo[]?> ListKmipServers(int? limit)
     {
-        return await this.Session.Client.ListKmipServers(this.Reference, limit ?? default, limit.HasValue);
+        return await this.Session.Client.ListKmipServers(this.VimReference, limit ?? default, limit.HasValue);
     }
 
     public async System.Threading.Tasks.Task<KmipClusterInfo[]?> ListKmsClusters(bool? includeKmsServers, int? managementTypeFilter, int? statusFilter)
     {
-        return await this.Session.Client.ListKmsClusters(this.Reference, includeKmsServers ?? default, includeKmsServers.HasValue, managementTypeFilter ?? default, managementTypeFilter.HasValue, statusFilter ?? default, statusFilter.HasValue);
+        return await this.Session.Client.ListKmsClusters(this.VimReference, includeKmsServers ?? default, includeKmsServers.HasValue, managementTypeFilter ?? default, managementTypeFilter.HasValue, statusFilter ?? default, statusFilter.HasValue);
     }
 
     public async System.Threading.Tasks.Task MarkDefault(KeyProviderId clusterId)
     {
-        await this.Session.Client.MarkDefault(this.Reference, clusterId);
+        await this.Session.Client.MarkDefault(this.VimReference, clusterId);
     }
 
     public async System.Threading.Tasks.Task<CryptoManagerKmipCryptoKeyStatus[]?> QueryCryptoKeyStatus(CryptoKeyId[]? keyIds, int checkKeyBitMap)
     {
-        return await this.Session.Client.QueryCryptoKeyStatus(this.Reference, keyIds, checkKeyBitMap);
+        return await this.Session.Client.QueryCryptoKeyStatus(this.VimReference, keyIds, checkKeyBitMap);
     }
 
     public async System.Threading.Tasks.Task RegisterKmipServer(KmipServerSpec server)
     {
-        await this.Session.Client.RegisterKmipServer(this.Reference, server);
+        await this.Session.Client.RegisterKmipServer(this.VimReference, server);
     }
 
     public async System.Threading.Tasks.Task RegisterKmsCluster(KeyProviderId clusterId, string? managementType)
     {
-        await this.Session.Client.RegisterKmsCluster(this.Reference, clusterId, managementType);
+        await this.Session.Client.RegisterKmsCluster(this.VimReference, clusterId, managementType);
     }
 
     public async System.Threading.Tasks.Task RemoveKmipServer(KeyProviderId clusterId, string serverName)
     {
-        await this.Session.Client.RemoveKmipServer(this.Reference, clusterId, serverName);
+        await this.Session.Client.RemoveKmipServer(this.VimReference, clusterId, serverName);
     }
 
     public async System.Threading.Tasks.Task<string?> RetrieveClientCert(KeyProviderId cluster)
     {
-        return await this.Session.Client.RetrieveClientCert(this.Reference, cluster);
+        return await this.Session.Client.RetrieveClientCert(this.VimReference, cluster);
     }
 
     public async System.Threading.Tasks.Task<string?> RetrieveClientCsr(KeyProviderId cluster)
     {
-        return await this.Session.Client.RetrieveClientCsr(this.Reference, cluster);
+        return await this.Session.Client.RetrieveClientCsr(this.VimReference, cluster);
     }
 
     public async System.Threading.Tasks.Task<CryptoManagerKmipServerCertInfo?> RetrieveKmipServerCert(KeyProviderId keyProvider, KmipServerInfo server)
     {
-        return await this.Session.Client.RetrieveKmipServerCert(this.Reference, keyProvider, server);
+        return await this.Session.Client.RetrieveKmipServerCert(this.VimReference, keyProvider, server);
     }
 
     public async System.Threading.Tasks.Task<Task?> RetrieveKmipServersStatus_Task(KmipClusterInfo[]? clusters)
     {
-        var res = await this.Session.Client.RetrieveKmipServersStatus_Task(this.Reference, clusters);
+        var res = await this.Session.Client.RetrieveKmipServersStatus_Task(this.VimReference, clusters);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<string?> RetrieveSelfSignedClientCert(KeyProviderId cluster)
     {
-        return await this.Session.Client.RetrieveSelfSignedClientCert(this.Reference, cluster);
+        return await this.Session.Client.RetrieveSelfSignedClientCert(this.VimReference, cluster);
     }
 
     public async System.Threading.Tasks.Task SetDefaultKmsCluster(ManagedEntity? entity, KeyProviderId? clusterId)
     {
-        await this.Session.Client.SetDefaultKmsCluster(this.Reference, entity?.Reference, clusterId);
+        await this.Session.Client.SetDefaultKmsCluster(this.VimReference, entity?.VimReference, clusterId);
     }
 
     public async System.Threading.Tasks.Task UnregisterKmsCluster(KeyProviderId clusterId)
     {
-        await this.Session.Client.UnregisterKmsCluster(this.Reference, clusterId);
+        await this.Session.Client.UnregisterKmsCluster(this.VimReference, clusterId);
     }
 
     public async System.Threading.Tasks.Task UpdateKmipServer(KmipServerSpec server)
     {
-        await this.Session.Client.UpdateKmipServer(this.Reference, server);
+        await this.Session.Client.UpdateKmipServer(this.VimReference, server);
     }
 
     public async System.Threading.Tasks.Task UpdateKmsSignedCsrClientCert(KeyProviderId cluster, string certificate)
     {
-        await this.Session.Client.UpdateKmsSignedCsrClientCert(this.Reference, cluster, certificate);
+        await this.Session.Client.UpdateKmsSignedCsrClientCert(this.VimReference, cluster, certificate);
     }
 
     public async System.Threading.Tasks.Task UpdateSelfSignedClientCert(KeyProviderId cluster, string certificate)
     {
-        await this.Session.Client.UpdateSelfSignedClientCert(this.Reference, cluster, certificate);
+        await this.Session.Client.UpdateSelfSignedClientCert(this.VimReference, cluster, certificate);
     }
 
     public async System.Threading.Tasks.Task UploadClientCert(KeyProviderId cluster, string certificate, string privateKey)
     {
-        await this.Session.Client.UploadClientCert(this.Reference, cluster, certificate, privateKey);
+        await this.Session.Client.UploadClientCert(this.VimReference, cluster, certificate, privateKey);
     }
 
     public async System.Threading.Tasks.Task UploadKmipServerCert(KeyProviderId cluster, string certificate)
     {
-        await this.Session.Client.UploadKmipServerCert(this.Reference, cluster, certificate);
+        await this.Session.Client.UploadKmipServerCert(this.VimReference, cluster, certificate);
     }
 }
 
@@ -800,22 +800,22 @@ public partial class CustomFieldsManager : ManagedObject
 
     public async System.Threading.Tasks.Task<CustomFieldDef?> AddCustomFieldDef(string name, string? moType, PrivilegePolicyDef? fieldDefPolicy, PrivilegePolicyDef? fieldPolicy)
     {
-        return await this.Session.Client.AddCustomFieldDef(this.Reference, name, moType, fieldDefPolicy, fieldPolicy);
+        return await this.Session.Client.AddCustomFieldDef(this.VimReference, name, moType, fieldDefPolicy, fieldPolicy);
     }
 
     public async System.Threading.Tasks.Task RemoveCustomFieldDef(int key)
     {
-        await this.Session.Client.RemoveCustomFieldDef(this.Reference, key);
+        await this.Session.Client.RemoveCustomFieldDef(this.VimReference, key);
     }
 
     public async System.Threading.Tasks.Task RenameCustomFieldDef(int key, string name)
     {
-        await this.Session.Client.RenameCustomFieldDef(this.Reference, key, name);
+        await this.Session.Client.RenameCustomFieldDef(this.VimReference, key, name);
     }
 
     public async System.Threading.Tasks.Task SetField(ManagedEntity entity, int key, string value)
     {
-        await this.Session.Client.SetField(this.Reference, entity.Reference, key, value);
+        await this.Session.Client.SetField(this.VimReference, entity.VimReference, key, value);
     }
 }
 
@@ -842,52 +842,52 @@ public partial class CustomizationSpecManager : ManagedObject
 
     public async System.Threading.Tasks.Task CheckCustomizationResources(string guestOs)
     {
-        await this.Session.Client.CheckCustomizationResources(this.Reference, guestOs);
+        await this.Session.Client.CheckCustomizationResources(this.VimReference, guestOs);
     }
 
     public async System.Threading.Tasks.Task CreateCustomizationSpec(CustomizationSpecItem item)
     {
-        await this.Session.Client.CreateCustomizationSpec(this.Reference, item);
+        await this.Session.Client.CreateCustomizationSpec(this.VimReference, item);
     }
 
     public async System.Threading.Tasks.Task<string?> CustomizationSpecItemToXml(CustomizationSpecItem item)
     {
-        return await this.Session.Client.CustomizationSpecItemToXml(this.Reference, item);
+        return await this.Session.Client.CustomizationSpecItemToXml(this.VimReference, item);
     }
 
     public async System.Threading.Tasks.Task DeleteCustomizationSpec(string name)
     {
-        await this.Session.Client.DeleteCustomizationSpec(this.Reference, name);
+        await this.Session.Client.DeleteCustomizationSpec(this.VimReference, name);
     }
 
     public async System.Threading.Tasks.Task<bool> DoesCustomizationSpecExist(string name)
     {
-        return await this.Session.Client.DoesCustomizationSpecExist(this.Reference, name);
+        return await this.Session.Client.DoesCustomizationSpecExist(this.VimReference, name);
     }
 
     public async System.Threading.Tasks.Task DuplicateCustomizationSpec(string name, string newName)
     {
-        await this.Session.Client.DuplicateCustomizationSpec(this.Reference, name, newName);
+        await this.Session.Client.DuplicateCustomizationSpec(this.VimReference, name, newName);
     }
 
     public async System.Threading.Tasks.Task<CustomizationSpecItem?> GetCustomizationSpec(string name)
     {
-        return await this.Session.Client.GetCustomizationSpec(this.Reference, name);
+        return await this.Session.Client.GetCustomizationSpec(this.VimReference, name);
     }
 
     public async System.Threading.Tasks.Task OverwriteCustomizationSpec(CustomizationSpecItem item)
     {
-        await this.Session.Client.OverwriteCustomizationSpec(this.Reference, item);
+        await this.Session.Client.OverwriteCustomizationSpec(this.VimReference, item);
     }
 
     public async System.Threading.Tasks.Task RenameCustomizationSpec(string name, string newName)
     {
-        await this.Session.Client.RenameCustomizationSpec(this.Reference, name, newName);
+        await this.Session.Client.RenameCustomizationSpec(this.VimReference, name, newName);
     }
 
     public async System.Threading.Tasks.Task<CustomizationSpecItem?> XmlToCustomizationSpecItem(string specItemXml)
     {
-        return await this.Session.Client.XmlToCustomizationSpecItem(this.Reference, specItemXml);
+        return await this.Session.Client.XmlToCustomizationSpecItem(this.VimReference, specItemXml);
     }
 }
 
@@ -948,33 +948,33 @@ public partial class Datacenter : ManagedEntity
 
     public async System.Threading.Tasks.Task<DatacenterBasicConnectInfo[]?> BatchQueryConnectInfo(HostConnectSpec[]? hostSpecs)
     {
-        return await this.Session.Client.BatchQueryConnectInfo(this.Reference, hostSpecs);
+        return await this.Session.Client.BatchQueryConnectInfo(this.VimReference, hostSpecs);
     }
 
     public async System.Threading.Tasks.Task<Task?> PowerOnMultiVM_Task(VirtualMachine[] vm, OptionValue[]? option)
     {
-        var res = await this.Session.Client.PowerOnMultiVM_Task(this.Reference, vm.Select(m => m.Reference).ToArray(), option);
+        var res = await this.Session.Client.PowerOnMultiVM_Task(this.VimReference, vm.Select(m => m.VimReference).ToArray(), option);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<HostConnectInfo?> QueryConnectionInfo(string hostname, int port, string username, string password, string? sslThumbprint)
     {
-        return await this.Session.Client.QueryConnectionInfo(this.Reference, hostname, port, username, password, sslThumbprint);
+        return await this.Session.Client.QueryConnectionInfo(this.VimReference, hostname, port, username, password, sslThumbprint);
     }
 
     public async System.Threading.Tasks.Task<HostConnectInfo?> QueryConnectionInfoViaSpec(HostConnectSpec spec)
     {
-        return await this.Session.Client.QueryConnectionInfoViaSpec(this.Reference, spec);
+        return await this.Session.Client.QueryConnectionInfoViaSpec(this.VimReference, spec);
     }
 
     public async System.Threading.Tasks.Task<VirtualMachineConfigOptionDescriptor[]?> QueryDatacenterConfigOptionDescriptor()
     {
-        return await this.Session.Client.QueryDatacenterConfigOptionDescriptor(this.Reference);
+        return await this.Session.Client.QueryDatacenterConfigOptionDescriptor(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> ReconfigureDatacenter_Task(DatacenterConfigSpec spec, bool modify)
     {
-        var res = await this.Session.Client.ReconfigureDatacenter_Task(this.Reference, spec, modify);
+        var res = await this.Session.Client.ReconfigureDatacenter_Task(this.VimReference, spec, modify);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -1034,44 +1034,44 @@ public partial class Datastore : ManagedEntity
 
     public async System.Threading.Tasks.Task<StoragePlacementResult?> DatastoreEnterMaintenanceMode()
     {
-        return await this.Session.Client.DatastoreEnterMaintenanceMode(this.Reference);
+        return await this.Session.Client.DatastoreEnterMaintenanceMode(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> DatastoreExitMaintenanceMode_Task()
     {
-        var res = await this.Session.Client.DatastoreExitMaintenanceMode_Task(this.Reference);
+        var res = await this.Session.Client.DatastoreExitMaintenanceMode_Task(this.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task DestroyDatastore()
     {
-        await this.Session.Client.DestroyDatastore(this.Reference);
+        await this.Session.Client.DestroyDatastore(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task RefreshDatastore()
     {
-        await this.Session.Client.RefreshDatastore(this.Reference);
+        await this.Session.Client.RefreshDatastore(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task RefreshDatastoreStorageInfo()
     {
-        await this.Session.Client.RefreshDatastoreStorageInfo(this.Reference);
+        await this.Session.Client.RefreshDatastoreStorageInfo(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task RenameDatastore(string newName)
     {
-        await this.Session.Client.RenameDatastore(this.Reference, newName);
+        await this.Session.Client.RenameDatastore(this.VimReference, newName);
     }
 
     public async System.Threading.Tasks.Task<Task?> UpdateVirtualMachineFiles_Task(DatastoreMountPathDatastorePair[] mountPathDatastoreMapping)
     {
-        var res = await this.Session.Client.UpdateVirtualMachineFiles_Task(this.Reference, mountPathDatastoreMapping);
+        var res = await this.Session.Client.UpdateVirtualMachineFiles_Task(this.VimReference, mountPathDatastoreMapping);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> UpdateVVolVirtualMachineFiles_Task(DatastoreVVolContainerFailoverPair[]? failoverPair)
     {
-        var res = await this.Session.Client.UpdateVVolVirtualMachineFiles_Task(this.Reference, failoverPair);
+        var res = await this.Session.Client.UpdateVVolVirtualMachineFiles_Task(this.VimReference, failoverPair);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -1087,17 +1087,17 @@ public partial class DatastoreNamespaceManager : ManagedObject
 
     public async System.Threading.Tasks.Task<string?> ConvertNamespacePathToUuidPath(Datacenter? datacenter, string namespaceUrl)
     {
-        return await this.Session.Client.ConvertNamespacePathToUuidPath(this.Reference, datacenter?.Reference, namespaceUrl);
+        return await this.Session.Client.ConvertNamespacePathToUuidPath(this.VimReference, datacenter?.VimReference, namespaceUrl);
     }
 
     public async System.Threading.Tasks.Task<string?> CreateDirectory(Datastore datastore, string? displayName, string? policy, long? size)
     {
-        return await this.Session.Client.CreateDirectory(this.Reference, datastore.Reference, displayName, policy, size ?? default, size.HasValue);
+        return await this.Session.Client.CreateDirectory(this.VimReference, datastore.VimReference, displayName, policy, size ?? default, size.HasValue);
     }
 
     public async System.Threading.Tasks.Task DeleteDirectory(Datacenter? datacenter, string datastorePath)
     {
-        await this.Session.Client.DeleteDirectory(this.Reference, datacenter?.Reference, datastorePath);
+        await this.Session.Client.DeleteDirectory(this.VimReference, datacenter?.VimReference, datastorePath);
     }
 }
 
@@ -1112,23 +1112,23 @@ public partial class DiagnosticManager : ManagedObject
 
     public async System.Threading.Tasks.Task<DiagnosticManagerLogHeader?> BrowseDiagnosticLog(HostSystem? host, string key, int? start, int? lines)
     {
-        return await this.Session.Client.BrowseDiagnosticLog(this.Reference, host?.Reference, key, start ?? default, start.HasValue, lines ?? default, lines.HasValue);
+        return await this.Session.Client.BrowseDiagnosticLog(this.VimReference, host?.VimReference, key, start ?? default, start.HasValue, lines ?? default, lines.HasValue);
     }
 
     public async System.Threading.Tasks.Task<DiagnosticManagerAuditRecordResult?> FetchAuditRecords(string? token)
     {
-        return await this.Session.Client.FetchAuditRecords(this.Reference, token);
+        return await this.Session.Client.FetchAuditRecords(this.VimReference, token);
     }
 
     public async System.Threading.Tasks.Task<Task?> GenerateLogBundles_Task(bool includeDefault, HostSystem[]? host)
     {
-        var res = await this.Session.Client.GenerateLogBundles_Task(this.Reference, includeDefault, host?.Select(m => m.Reference).ToArray());
+        var res = await this.Session.Client.GenerateLogBundles_Task(this.VimReference, includeDefault, host?.Select(m => m.VimReference).ToArray());
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<DiagnosticManagerLogDescriptor[]?> QueryDescriptions(HostSystem? host)
     {
-        return await this.Session.Client.QueryDescriptions(this.Reference, host?.Reference);
+        return await this.Session.Client.QueryDescriptions(this.VimReference, host?.VimReference);
     }
 }
 
@@ -1161,13 +1161,13 @@ public partial class DistributedVirtualPortgroup : Network
 
     public async System.Threading.Tasks.Task<Task?> DVPortgroupRollback_Task(EntityBackupConfig? entityBackup)
     {
-        var res = await this.Session.Client.DVPortgroupRollback_Task(this.Reference, entityBackup);
+        var res = await this.Session.Client.DVPortgroupRollback_Task(this.VimReference, entityBackup);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> ReconfigureDVPortgroup_Task(DVPortgroupConfigSpec spec)
     {
-        var res = await this.Session.Client.ReconfigureDVPortgroup_Task(this.Reference, spec);
+        var res = await this.Session.Client.ReconfigureDVPortgroup_Task(this.VimReference, spec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -1227,119 +1227,119 @@ public partial class DistributedVirtualSwitch : ManagedEntity
 
     public async System.Threading.Tasks.Task<Task?> AddDVPortgroup_Task(DVPortgroupConfigSpec[] spec)
     {
-        var res = await this.Session.Client.AddDVPortgroup_Task(this.Reference, spec);
+        var res = await this.Session.Client.AddDVPortgroup_Task(this.VimReference, spec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task AddNetworkResourcePool(DVSNetworkResourcePoolConfigSpec[] configSpec)
     {
-        await this.Session.Client.AddNetworkResourcePool(this.Reference, configSpec);
+        await this.Session.Client.AddNetworkResourcePool(this.VimReference, configSpec);
     }
 
     public async System.Threading.Tasks.Task<Task?> CreateDVPortgroup_Task(DVPortgroupConfigSpec spec)
     {
-        var res = await this.Session.Client.CreateDVPortgroup_Task(this.Reference, spec);
+        var res = await this.Session.Client.CreateDVPortgroup_Task(this.VimReference, spec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> DvsReconfigureVmVnicNetworkResourcePool_Task(DvsVmVnicResourcePoolConfigSpec[] configSpec)
     {
-        var res = await this.Session.Client.DvsReconfigureVmVnicNetworkResourcePool_Task(this.Reference, configSpec);
+        var res = await this.Session.Client.DvsReconfigureVmVnicNetworkResourcePool_Task(this.VimReference, configSpec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> DVSRollback_Task(EntityBackupConfig? entityBackup)
     {
-        var res = await this.Session.Client.DVSRollback_Task(this.Reference, entityBackup);
+        var res = await this.Session.Client.DVSRollback_Task(this.VimReference, entityBackup);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task EnableNetworkResourceManagement(bool enable)
     {
-        await this.Session.Client.EnableNetworkResourceManagement(this.Reference, enable);
+        await this.Session.Client.EnableNetworkResourceManagement(this.VimReference, enable);
     }
 
     public async System.Threading.Tasks.Task<string[]?> FetchDVPortKeys(DistributedVirtualSwitchPortCriteria? criteria)
     {
-        return await this.Session.Client.FetchDVPortKeys(this.Reference, criteria);
+        return await this.Session.Client.FetchDVPortKeys(this.VimReference, criteria);
     }
 
     public async System.Threading.Tasks.Task<DistributedVirtualPort[]?> FetchDVPorts(DistributedVirtualSwitchPortCriteria? criteria)
     {
-        return await this.Session.Client.FetchDVPorts(this.Reference, criteria);
+        return await this.Session.Client.FetchDVPorts(this.VimReference, criteria);
     }
 
     public async System.Threading.Tasks.Task<DistributedVirtualPortgroup?> LookupDvPortGroup(string portgroupKey)
     {
-        var res = await this.Session.Client.LookupDvPortGroup(this.Reference, portgroupKey);
+        var res = await this.Session.Client.LookupDvPortGroup(this.VimReference, portgroupKey);
         return ManagedObject.Create<DistributedVirtualPortgroup>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> MergeDvs_Task(DistributedVirtualSwitch dvs)
     {
-        var res = await this.Session.Client.MergeDvs_Task(this.Reference, dvs.Reference);
+        var res = await this.Session.Client.MergeDvs_Task(this.VimReference, dvs.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> MoveDVPort_Task(string[] portKey, string? destinationPortgroupKey)
     {
-        var res = await this.Session.Client.MoveDVPort_Task(this.Reference, portKey, destinationPortgroupKey);
+        var res = await this.Session.Client.MoveDVPort_Task(this.VimReference, portKey, destinationPortgroupKey);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> PerformDvsProductSpecOperation_Task(string operation, DistributedVirtualSwitchProductSpec? productSpec)
     {
-        var res = await this.Session.Client.PerformDvsProductSpecOperation_Task(this.Reference, operation, productSpec);
+        var res = await this.Session.Client.PerformDvsProductSpecOperation_Task(this.VimReference, operation, productSpec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<int[]?> QueryUsedVlanIdInDvs()
     {
-        return await this.Session.Client.QueryUsedVlanIdInDvs(this.Reference);
+        return await this.Session.Client.QueryUsedVlanIdInDvs(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> ReconfigureDVPort_Task(DVPortConfigSpec[] port)
     {
-        var res = await this.Session.Client.ReconfigureDVPort_Task(this.Reference, port);
+        var res = await this.Session.Client.ReconfigureDVPort_Task(this.VimReference, port);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> ReconfigureDvs_Task(DVSConfigSpec spec)
     {
-        var res = await this.Session.Client.ReconfigureDvs_Task(this.Reference, spec);
+        var res = await this.Session.Client.ReconfigureDvs_Task(this.VimReference, spec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> RectifyDvsHost_Task(HostSystem[]? hosts)
     {
-        var res = await this.Session.Client.RectifyDvsHost_Task(this.Reference, hosts?.Select(m => m.Reference).ToArray());
+        var res = await this.Session.Client.RectifyDvsHost_Task(this.VimReference, hosts?.Select(m => m.VimReference).ToArray());
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task RefreshDVPortState(string[]? portKeys)
     {
-        await this.Session.Client.RefreshDVPortState(this.Reference, portKeys);
+        await this.Session.Client.RefreshDVPortState(this.VimReference, portKeys);
     }
 
     public async System.Threading.Tasks.Task RemoveNetworkResourcePool(string[] key)
     {
-        await this.Session.Client.RemoveNetworkResourcePool(this.Reference, key);
+        await this.Session.Client.RemoveNetworkResourcePool(this.VimReference, key);
     }
 
     public async System.Threading.Tasks.Task UpdateDvsCapability(DVSCapability capability)
     {
-        await this.Session.Client.UpdateDvsCapability(this.Reference, capability);
+        await this.Session.Client.UpdateDvsCapability(this.VimReference, capability);
     }
 
     public async System.Threading.Tasks.Task<Task?> UpdateDVSHealthCheckConfig_Task(DVSHealthCheckConfig[] healthCheckConfig)
     {
-        var res = await this.Session.Client.UpdateDVSHealthCheckConfig_Task(this.Reference, healthCheckConfig);
+        var res = await this.Session.Client.UpdateDVSHealthCheckConfig_Task(this.VimReference, healthCheckConfig);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task UpdateNetworkResourcePool(DVSNetworkResourcePoolConfigSpec[] configSpec)
     {
-        await this.Session.Client.UpdateNetworkResourcePool(this.Reference, configSpec);
+        await this.Session.Client.UpdateNetworkResourcePool(this.VimReference, configSpec);
     }
 }
 
@@ -1354,68 +1354,68 @@ public partial class DistributedVirtualSwitchManager : ManagedObject
 
     public async System.Threading.Tasks.Task<Task?> DVSManagerExportEntity_Task(SelectionSet[] selectionSet)
     {
-        var res = await this.Session.Client.DVSManagerExportEntity_Task(this.Reference, selectionSet);
+        var res = await this.Session.Client.DVSManagerExportEntity_Task(this.VimReference, selectionSet);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> DVSManagerImportEntity_Task(EntityBackupConfig[] entityBackup, string importType)
     {
-        var res = await this.Session.Client.DVSManagerImportEntity_Task(this.Reference, entityBackup, importType);
+        var res = await this.Session.Client.DVSManagerImportEntity_Task(this.VimReference, entityBackup, importType);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<DistributedVirtualPortgroup?> DVSManagerLookupDvPortGroup(string switchUuid, string portgroupKey)
     {
-        var res = await this.Session.Client.DVSManagerLookupDvPortGroup(this.Reference, switchUuid, portgroupKey);
+        var res = await this.Session.Client.DVSManagerLookupDvPortGroup(this.VimReference, switchUuid, portgroupKey);
         return ManagedObject.Create<DistributedVirtualPortgroup>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<DistributedVirtualSwitchProductSpec[]?> QueryAvailableDvsSpec(bool? recommended)
     {
-        return await this.Session.Client.QueryAvailableDvsSpec(this.Reference, recommended ?? default, recommended.HasValue);
+        return await this.Session.Client.QueryAvailableDvsSpec(this.VimReference, recommended ?? default, recommended.HasValue);
     }
 
     public async System.Threading.Tasks.Task<HostSystem[]?> QueryCompatibleHostForExistingDvs(ManagedEntity container, bool recursive, DistributedVirtualSwitch dvs)
     {
-        var res = await this.Session.Client.QueryCompatibleHostForExistingDvs(this.Reference, container.Reference, recursive, dvs.Reference);
+        var res = await this.Session.Client.QueryCompatibleHostForExistingDvs(this.VimReference, container.VimReference, recursive, dvs.VimReference);
         return res?.Select(r => ManagedObject.Create<HostSystem>(r, this.Session)!).ToArray();
     }
 
     public async System.Threading.Tasks.Task<HostSystem[]?> QueryCompatibleHostForNewDvs(ManagedEntity container, bool recursive, DistributedVirtualSwitchProductSpec? switchProductSpec)
     {
-        var res = await this.Session.Client.QueryCompatibleHostForNewDvs(this.Reference, container.Reference, recursive, switchProductSpec);
+        var res = await this.Session.Client.QueryCompatibleHostForNewDvs(this.VimReference, container.VimReference, recursive, switchProductSpec);
         return res?.Select(r => ManagedObject.Create<HostSystem>(r, this.Session)!).ToArray();
     }
 
     public async System.Threading.Tasks.Task<DistributedVirtualSwitch?> QueryDvsByUuid(string uuid)
     {
-        var res = await this.Session.Client.QueryDvsByUuid(this.Reference, uuid);
+        var res = await this.Session.Client.QueryDvsByUuid(this.VimReference, uuid);
         return ManagedObject.Create<DistributedVirtualSwitch>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<DistributedVirtualSwitchManagerCompatibilityResult[]?> QueryDvsCheckCompatibility(DistributedVirtualSwitchManagerHostContainer hostContainer, DistributedVirtualSwitchManagerDvsProductSpec? dvsProductSpec, DistributedVirtualSwitchManagerHostDvsFilterSpec[]? hostFilterSpec)
     {
-        return await this.Session.Client.QueryDvsCheckCompatibility(this.Reference, hostContainer, dvsProductSpec, hostFilterSpec);
+        return await this.Session.Client.QueryDvsCheckCompatibility(this.VimReference, hostContainer, dvsProductSpec, hostFilterSpec);
     }
 
     public async System.Threading.Tasks.Task<DistributedVirtualSwitchHostProductSpec[]?> QueryDvsCompatibleHostSpec(DistributedVirtualSwitchProductSpec? switchProductSpec)
     {
-        return await this.Session.Client.QueryDvsCompatibleHostSpec(this.Reference, switchProductSpec);
+        return await this.Session.Client.QueryDvsCompatibleHostSpec(this.VimReference, switchProductSpec);
     }
 
     public async System.Threading.Tasks.Task<DVSManagerDvsConfigTarget?> QueryDvsConfigTarget(HostSystem? host, DistributedVirtualSwitch? dvs)
     {
-        return await this.Session.Client.QueryDvsConfigTarget(this.Reference, host?.Reference, dvs?.Reference);
+        return await this.Session.Client.QueryDvsConfigTarget(this.VimReference, host?.VimReference, dvs?.VimReference);
     }
 
     public async System.Threading.Tasks.Task<DVSFeatureCapability?> QueryDvsFeatureCapability(DistributedVirtualSwitchProductSpec? switchProductSpec)
     {
-        return await this.Session.Client.QueryDvsFeatureCapability(this.Reference, switchProductSpec);
+        return await this.Session.Client.QueryDvsFeatureCapability(this.VimReference, switchProductSpec);
     }
 
     public async System.Threading.Tasks.Task<Task?> RectifyDvsOnHost_Task(HostSystem[] hosts)
     {
-        var res = await this.Session.Client.RectifyDvsOnHost_Task(this.Reference, hosts.Select(m => m.Reference).ToArray());
+        var res = await this.Session.Client.RectifyDvsOnHost_Task(this.VimReference, hosts.Select(m => m.VimReference).ToArray());
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -1437,27 +1437,27 @@ public partial class EnvironmentBrowser : ManagedObject
 
     public async System.Threading.Tasks.Task<VirtualMachineConfigOption?> QueryConfigOption(string? key, HostSystem? host)
     {
-        return await this.Session.Client.QueryConfigOption(this.Reference, key, host?.Reference);
+        return await this.Session.Client.QueryConfigOption(this.VimReference, key, host?.VimReference);
     }
 
     public async System.Threading.Tasks.Task<VirtualMachineConfigOptionDescriptor[]?> QueryConfigOptionDescriptor()
     {
-        return await this.Session.Client.QueryConfigOptionDescriptor(this.Reference);
+        return await this.Session.Client.QueryConfigOptionDescriptor(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<VirtualMachineConfigOption?> QueryConfigOptionEx(EnvironmentBrowserConfigOptionQuerySpec? spec)
     {
-        return await this.Session.Client.QueryConfigOptionEx(this.Reference, spec);
+        return await this.Session.Client.QueryConfigOptionEx(this.VimReference, spec);
     }
 
     public async System.Threading.Tasks.Task<ConfigTarget?> QueryConfigTarget(HostSystem? host)
     {
-        return await this.Session.Client.QueryConfigTarget(this.Reference, host?.Reference);
+        return await this.Session.Client.QueryConfigTarget(this.VimReference, host?.VimReference);
     }
 
     public async System.Threading.Tasks.Task<HostCapability?> QueryTargetCapabilities(HostSystem? host)
     {
-        return await this.Session.Client.QueryTargetCapabilities(this.Reference, host?.Reference);
+        return await this.Session.Client.QueryTargetCapabilities(this.VimReference, host?.VimReference);
     }
 }
 
@@ -1478,12 +1478,12 @@ public partial class EventHistoryCollector : HistoryCollector
 
     public async System.Threading.Tasks.Task<Event[]?> ReadNextEvents(int maxCount)
     {
-        return await this.Session.Client.ReadNextEvents(this.Reference, maxCount);
+        return await this.Session.Client.ReadNextEvents(this.VimReference, maxCount);
     }
 
     public async System.Threading.Tasks.Task<Event[]?> ReadPreviousEvents(int maxCount)
     {
-        return await this.Session.Client.ReadPreviousEvents(this.Reference, maxCount);
+        return await this.Session.Client.ReadPreviousEvents(this.VimReference, maxCount);
     }
 }
 
@@ -1516,28 +1516,28 @@ public partial class EventManager : ManagedObject
 
     public async System.Threading.Tasks.Task<EventHistoryCollector?> CreateCollectorForEvents(EventFilterSpec filter)
     {
-        var res = await this.Session.Client.CreateCollectorForEvents(this.Reference, filter);
+        var res = await this.Session.Client.CreateCollectorForEvents(this.VimReference, filter);
         return ManagedObject.Create<EventHistoryCollector>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task LogUserEvent(ManagedEntity entity, string msg)
     {
-        await this.Session.Client.LogUserEvent(this.Reference, entity.Reference, msg);
+        await this.Session.Client.LogUserEvent(this.VimReference, entity.VimReference, msg);
     }
 
     public async System.Threading.Tasks.Task PostEvent(Event eventToPost, TaskInfo? taskInfo)
     {
-        await this.Session.Client.PostEvent(this.Reference, eventToPost, taskInfo);
+        await this.Session.Client.PostEvent(this.VimReference, eventToPost, taskInfo);
     }
 
     public async System.Threading.Tasks.Task<Event[]?> QueryEvents(EventFilterSpec filter)
     {
-        return await this.Session.Client.QueryEvents(this.Reference, filter);
+        return await this.Session.Client.QueryEvents(this.VimReference, filter);
     }
 
     public async System.Threading.Tasks.Task<EventArgDesc[]?> RetrieveArgumentDescription(string eventTypeId)
     {
-        return await this.Session.Client.RetrieveArgumentDescription(this.Reference, eventTypeId);
+        return await this.Session.Client.RetrieveArgumentDescription(this.VimReference, eventTypeId);
     }
 }
 
@@ -1564,7 +1564,7 @@ public partial class ExtensibleManagedObject : ManagedObject
 
     public async System.Threading.Tasks.Task SetCustomValue(string key, string value)
     {
-        await this.Session.Client.SetCustomValue(this.Reference, key, value);
+        await this.Session.Client.SetCustomValue(this.VimReference, key, value);
     }
 }
 
@@ -1585,48 +1585,48 @@ public partial class ExtensionManager : ManagedObject
 
     public async System.Threading.Tasks.Task<Extension?> FindExtension(string extensionKey)
     {
-        return await this.Session.Client.FindExtension(this.Reference, extensionKey);
+        return await this.Session.Client.FindExtension(this.VimReference, extensionKey);
     }
 
     public async System.Threading.Tasks.Task<string?> GetPublicKey()
     {
-        return await this.Session.Client.GetPublicKey(this.Reference);
+        return await this.Session.Client.GetPublicKey(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<ExtensionManagerIpAllocationUsage[]?> QueryExtensionIpAllocationUsage(string[]? extensionKeys)
     {
-        return await this.Session.Client.QueryExtensionIpAllocationUsage(this.Reference, extensionKeys);
+        return await this.Session.Client.QueryExtensionIpAllocationUsage(this.VimReference, extensionKeys);
     }
 
     public async System.Threading.Tasks.Task<ManagedEntity[]?> QueryManagedBy(string extensionKey)
     {
-        var res = await this.Session.Client.QueryManagedBy(this.Reference, extensionKey);
+        var res = await this.Session.Client.QueryManagedBy(this.VimReference, extensionKey);
         return res?.Select(r => ManagedObject.Create<ManagedEntity>(r, this.Session)!).ToArray();
     }
 
     public async System.Threading.Tasks.Task RegisterExtension(Extension extension)
     {
-        await this.Session.Client.RegisterExtension(this.Reference, extension);
+        await this.Session.Client.RegisterExtension(this.VimReference, extension);
     }
 
     public async System.Threading.Tasks.Task SetExtensionCertificate(string extensionKey, string? certificatePem)
     {
-        await this.Session.Client.SetExtensionCertificate(this.Reference, extensionKey, certificatePem);
+        await this.Session.Client.SetExtensionCertificate(this.VimReference, extensionKey, certificatePem);
     }
 
     public async System.Threading.Tasks.Task SetPublicKey(string extensionKey, string publicKey)
     {
-        await this.Session.Client.SetPublicKey(this.Reference, extensionKey, publicKey);
+        await this.Session.Client.SetPublicKey(this.VimReference, extensionKey, publicKey);
     }
 
     public async System.Threading.Tasks.Task UnregisterExtension(string extensionKey)
     {
-        await this.Session.Client.UnregisterExtension(this.Reference, extensionKey);
+        await this.Session.Client.UnregisterExtension(this.VimReference, extensionKey);
     }
 
     public async System.Threading.Tasks.Task UpdateExtension(Extension extension)
     {
-        await this.Session.Client.UpdateExtension(this.Reference, extension);
+        await this.Session.Client.UpdateExtension(this.VimReference, extension);
     }
 }
 
@@ -1647,42 +1647,42 @@ public partial class FailoverClusterConfigurator : ManagedObject
 
     public async System.Threading.Tasks.Task<Task?> ConfigureVcha_Task(VchaClusterConfigSpec configSpec)
     {
-        var res = await this.Session.Client.ConfigureVcha_Task(this.Reference, configSpec);
+        var res = await this.Session.Client.ConfigureVcha_Task(this.VimReference, configSpec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> CreatePassiveNode_Task(PassiveNodeDeploymentSpec passiveDeploymentSpec, SourceNodeSpec sourceVcSpec)
     {
-        var res = await this.Session.Client.CreatePassiveNode_Task(this.Reference, passiveDeploymentSpec, sourceVcSpec);
+        var res = await this.Session.Client.CreatePassiveNode_Task(this.VimReference, passiveDeploymentSpec, sourceVcSpec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> CreateWitnessNode_Task(NodeDeploymentSpec witnessDeploymentSpec, SourceNodeSpec sourceVcSpec)
     {
-        var res = await this.Session.Client.CreateWitnessNode_Task(this.Reference, witnessDeploymentSpec, sourceVcSpec);
+        var res = await this.Session.Client.CreateWitnessNode_Task(this.VimReference, witnessDeploymentSpec, sourceVcSpec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> DeployVcha_Task(VchaClusterDeploymentSpec deploymentSpec)
     {
-        var res = await this.Session.Client.DeployVcha_Task(this.Reference, deploymentSpec);
+        var res = await this.Session.Client.DeployVcha_Task(this.VimReference, deploymentSpec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> DestroyVcha_Task()
     {
-        var res = await this.Session.Client.DestroyVcha_Task(this.Reference);
+        var res = await this.Session.Client.DestroyVcha_Task(this.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<VchaClusterConfigInfo?> GetVchaConfig()
     {
-        return await this.Session.Client.GetVchaConfig(this.Reference);
+        return await this.Session.Client.GetVchaConfig(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> PrepareVcha_Task(VchaClusterNetworkSpec networkSpec)
     {
-        var res = await this.Session.Client.PrepareVcha_Task(this.Reference, networkSpec);
+        var res = await this.Session.Client.PrepareVcha_Task(this.VimReference, networkSpec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -1704,23 +1704,23 @@ public partial class FailoverClusterManager : ManagedObject
 
     public async System.Threading.Tasks.Task<string?> GetClusterMode()
     {
-        return await this.Session.Client.GetClusterMode(this.Reference);
+        return await this.Session.Client.GetClusterMode(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<VchaClusterHealth?> GetVchaClusterHealth()
     {
-        return await this.Session.Client.GetVchaClusterHealth(this.Reference);
+        return await this.Session.Client.GetVchaClusterHealth(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> InitiateFailover_Task(bool planned)
     {
-        var res = await this.Session.Client.InitiateFailover_Task(this.Reference, planned);
+        var res = await this.Session.Client.InitiateFailover_Task(this.VimReference, planned);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> SetClusterMode_Task(string mode)
     {
-        var res = await this.Session.Client.SetClusterMode_Task(this.Reference, mode);
+        var res = await this.Session.Client.SetClusterMode_Task(this.VimReference, mode);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -1736,29 +1736,29 @@ public partial class FileManager : ManagedObject
 
     public async System.Threading.Tasks.Task ChangeOwner(string name, Datacenter? datacenter, string owner)
     {
-        await this.Session.Client.ChangeOwner(this.Reference, name, datacenter?.Reference, owner);
+        await this.Session.Client.ChangeOwner(this.VimReference, name, datacenter?.VimReference, owner);
     }
 
     public async System.Threading.Tasks.Task<Task?> CopyDatastoreFile_Task(string sourceName, Datacenter? sourceDatacenter, string destinationName, Datacenter? destinationDatacenter, bool? force)
     {
-        var res = await this.Session.Client.CopyDatastoreFile_Task(this.Reference, sourceName, sourceDatacenter?.Reference, destinationName, destinationDatacenter?.Reference, force ?? default, force.HasValue);
+        var res = await this.Session.Client.CopyDatastoreFile_Task(this.VimReference, sourceName, sourceDatacenter?.VimReference, destinationName, destinationDatacenter?.VimReference, force ?? default, force.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> DeleteDatastoreFile_Task(string name, Datacenter? datacenter)
     {
-        var res = await this.Session.Client.DeleteDatastoreFile_Task(this.Reference, name, datacenter?.Reference);
+        var res = await this.Session.Client.DeleteDatastoreFile_Task(this.VimReference, name, datacenter?.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task MakeDirectory(string name, Datacenter? datacenter, bool? createParentDirectories)
     {
-        await this.Session.Client.MakeDirectory(this.Reference, name, datacenter?.Reference, createParentDirectories ?? default, createParentDirectories.HasValue);
+        await this.Session.Client.MakeDirectory(this.VimReference, name, datacenter?.VimReference, createParentDirectories ?? default, createParentDirectories.HasValue);
     }
 
     public async System.Threading.Tasks.Task<Task?> MoveDatastoreFile_Task(string sourceName, Datacenter? sourceDatacenter, string destinationName, Datacenter? destinationDatacenter, bool? force)
     {
-        var res = await this.Session.Client.MoveDatastoreFile_Task(this.Reference, sourceName, sourceDatacenter?.Reference, destinationName, destinationDatacenter?.Reference, force ?? default, force.HasValue);
+        var res = await this.Session.Client.MoveDatastoreFile_Task(this.VimReference, sourceName, sourceDatacenter?.VimReference, destinationName, destinationDatacenter?.VimReference, force ?? default, force.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -1794,79 +1794,79 @@ public partial class Folder : ManagedEntity
 
     public async System.Threading.Tasks.Task<Task?> AddStandaloneHost_Task(HostConnectSpec spec, ComputeResourceConfigSpec? compResSpec, bool addConnected, string? license)
     {
-        var res = await this.Session.Client.AddStandaloneHost_Task(this.Reference, spec, compResSpec, addConnected, license);
+        var res = await this.Session.Client.AddStandaloneHost_Task(this.VimReference, spec, compResSpec, addConnected, license);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> BatchAddHostsToCluster_Task(ClusterComputeResource cluster, FolderNewHostSpec[]? newHosts, HostSystem[]? existingHosts, ComputeResourceConfigSpec? compResSpec, string? desiredState)
     {
-        var res = await this.Session.Client.BatchAddHostsToCluster_Task(this.Reference, cluster.Reference, newHosts, existingHosts?.Select(m => m.Reference).ToArray(), compResSpec, desiredState);
+        var res = await this.Session.Client.BatchAddHostsToCluster_Task(this.VimReference, cluster.VimReference, newHosts, existingHosts?.Select(m => m.VimReference).ToArray(), compResSpec, desiredState);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> BatchAddStandaloneHosts_Task(FolderNewHostSpec[]? newHosts, ComputeResourceConfigSpec? compResSpec, bool addConnected)
     {
-        var res = await this.Session.Client.BatchAddStandaloneHosts_Task(this.Reference, newHosts, compResSpec, addConnected);
+        var res = await this.Session.Client.BatchAddStandaloneHosts_Task(this.VimReference, newHosts, compResSpec, addConnected);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<ClusterComputeResource?> CreateCluster(string name, ClusterConfigSpec spec)
     {
-        var res = await this.Session.Client.CreateCluster(this.Reference, name, spec);
+        var res = await this.Session.Client.CreateCluster(this.VimReference, name, spec);
         return ManagedObject.Create<ClusterComputeResource>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<ClusterComputeResource?> CreateClusterEx(string name, ClusterConfigSpecEx spec)
     {
-        var res = await this.Session.Client.CreateClusterEx(this.Reference, name, spec);
+        var res = await this.Session.Client.CreateClusterEx(this.VimReference, name, spec);
         return ManagedObject.Create<ClusterComputeResource>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Datacenter?> CreateDatacenter(string name)
     {
-        var res = await this.Session.Client.CreateDatacenter(this.Reference, name);
+        var res = await this.Session.Client.CreateDatacenter(this.VimReference, name);
         return ManagedObject.Create<Datacenter>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> CreateDVS_Task(DVSCreateSpec spec)
     {
-        var res = await this.Session.Client.CreateDVS_Task(this.Reference, spec);
+        var res = await this.Session.Client.CreateDVS_Task(this.VimReference, spec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Folder?> CreateFolder(string name)
     {
-        var res = await this.Session.Client.CreateFolder(this.Reference, name);
+        var res = await this.Session.Client.CreateFolder(this.VimReference, name);
         return ManagedObject.Create<Folder>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<StoragePod?> CreateStoragePod(string name)
     {
-        var res = await this.Session.Client.CreateStoragePod(this.Reference, name);
+        var res = await this.Session.Client.CreateStoragePod(this.VimReference, name);
         return ManagedObject.Create<StoragePod>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> CreateVM_Task(VirtualMachineConfigSpec config, ResourcePool pool, HostSystem? host)
     {
-        var res = await this.Session.Client.CreateVM_Task(this.Reference, config, pool.Reference, host?.Reference);
+        var res = await this.Session.Client.CreateVM_Task(this.VimReference, config, pool.VimReference, host?.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> MoveIntoFolder_Task(ManagedEntity[] list)
     {
-        var res = await this.Session.Client.MoveIntoFolder_Task(this.Reference, list.Select(m => m.Reference).ToArray());
+        var res = await this.Session.Client.MoveIntoFolder_Task(this.VimReference, list.Select(m => m.VimReference).ToArray());
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> RegisterVM_Task(string path, string? name, bool asTemplate, ResourcePool? pool, HostSystem? host)
     {
-        var res = await this.Session.Client.RegisterVM_Task(this.Reference, path, name, asTemplate, pool?.Reference, host?.Reference);
+        var res = await this.Session.Client.RegisterVM_Task(this.VimReference, path, name, asTemplate, pool?.VimReference, host?.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> UnregisterAndDestroy_Task()
     {
-        var res = await this.Session.Client.UnregisterAndDestroy_Task(this.Reference);
+        var res = await this.Session.Client.UnregisterAndDestroy_Task(this.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -1882,27 +1882,27 @@ public partial class GuestAliasManager : ManagedObject
 
     public async System.Threading.Tasks.Task AddGuestAlias(VirtualMachine vm, GuestAuthentication auth, string username, bool mapCert, string base64Cert, GuestAuthAliasInfo aliasInfo)
     {
-        await this.Session.Client.AddGuestAlias(this.Reference, vm.Reference, auth, username, mapCert, base64Cert, aliasInfo);
+        await this.Session.Client.AddGuestAlias(this.VimReference, vm.VimReference, auth, username, mapCert, base64Cert, aliasInfo);
     }
 
     public async System.Threading.Tasks.Task<GuestAliases[]?> ListGuestAliases(VirtualMachine vm, GuestAuthentication auth, string username)
     {
-        return await this.Session.Client.ListGuestAliases(this.Reference, vm.Reference, auth, username);
+        return await this.Session.Client.ListGuestAliases(this.VimReference, vm.VimReference, auth, username);
     }
 
     public async System.Threading.Tasks.Task<GuestMappedAliases[]?> ListGuestMappedAliases(VirtualMachine vm, GuestAuthentication auth)
     {
-        return await this.Session.Client.ListGuestMappedAliases(this.Reference, vm.Reference, auth);
+        return await this.Session.Client.ListGuestMappedAliases(this.VimReference, vm.VimReference, auth);
     }
 
     public async System.Threading.Tasks.Task RemoveGuestAlias(VirtualMachine vm, GuestAuthentication auth, string username, string base64Cert, GuestAuthSubject subject)
     {
-        await this.Session.Client.RemoveGuestAlias(this.Reference, vm.Reference, auth, username, base64Cert, subject);
+        await this.Session.Client.RemoveGuestAlias(this.VimReference, vm.VimReference, auth, username, base64Cert, subject);
     }
 
     public async System.Threading.Tasks.Task RemoveGuestAliasByCert(VirtualMachine vm, GuestAuthentication auth, string username, string base64Cert)
     {
-        await this.Session.Client.RemoveGuestAliasByCert(this.Reference, vm.Reference, auth, username, base64Cert);
+        await this.Session.Client.RemoveGuestAliasByCert(this.VimReference, vm.VimReference, auth, username, base64Cert);
     }
 }
 
@@ -1917,17 +1917,17 @@ public partial class GuestAuthManager : ManagedObject
 
     public async System.Threading.Tasks.Task<GuestAuthentication?> AcquireCredentialsInGuest(VirtualMachine vm, GuestAuthentication requestedAuth, long? sessionID)
     {
-        return await this.Session.Client.AcquireCredentialsInGuest(this.Reference, vm.Reference, requestedAuth, sessionID ?? default, sessionID.HasValue);
+        return await this.Session.Client.AcquireCredentialsInGuest(this.VimReference, vm.VimReference, requestedAuth, sessionID ?? default, sessionID.HasValue);
     }
 
     public async System.Threading.Tasks.Task ReleaseCredentialsInGuest(VirtualMachine vm, GuestAuthentication auth)
     {
-        await this.Session.Client.ReleaseCredentialsInGuest(this.Reference, vm.Reference, auth);
+        await this.Session.Client.ReleaseCredentialsInGuest(this.VimReference, vm.VimReference, auth);
     }
 
     public async System.Threading.Tasks.Task ValidateCredentialsInGuest(VirtualMachine vm, GuestAuthentication auth)
     {
-        await this.Session.Client.ValidateCredentialsInGuest(this.Reference, vm.Reference, auth);
+        await this.Session.Client.ValidateCredentialsInGuest(this.VimReference, vm.VimReference, auth);
     }
 }
 
@@ -1942,57 +1942,57 @@ public partial class GuestFileManager : ManagedObject
 
     public async System.Threading.Tasks.Task ChangeFileAttributesInGuest(VirtualMachine vm, GuestAuthentication auth, string guestFilePath, GuestFileAttributes fileAttributes)
     {
-        await this.Session.Client.ChangeFileAttributesInGuest(this.Reference, vm.Reference, auth, guestFilePath, fileAttributes);
+        await this.Session.Client.ChangeFileAttributesInGuest(this.VimReference, vm.VimReference, auth, guestFilePath, fileAttributes);
     }
 
     public async System.Threading.Tasks.Task<string?> CreateTemporaryDirectoryInGuest(VirtualMachine vm, GuestAuthentication auth, string prefix, string suffix, string? directoryPath)
     {
-        return await this.Session.Client.CreateTemporaryDirectoryInGuest(this.Reference, vm.Reference, auth, prefix, suffix, directoryPath);
+        return await this.Session.Client.CreateTemporaryDirectoryInGuest(this.VimReference, vm.VimReference, auth, prefix, suffix, directoryPath);
     }
 
     public async System.Threading.Tasks.Task<string?> CreateTemporaryFileInGuest(VirtualMachine vm, GuestAuthentication auth, string prefix, string suffix, string? directoryPath)
     {
-        return await this.Session.Client.CreateTemporaryFileInGuest(this.Reference, vm.Reference, auth, prefix, suffix, directoryPath);
+        return await this.Session.Client.CreateTemporaryFileInGuest(this.VimReference, vm.VimReference, auth, prefix, suffix, directoryPath);
     }
 
     public async System.Threading.Tasks.Task DeleteDirectoryInGuest(VirtualMachine vm, GuestAuthentication auth, string directoryPath, bool recursive)
     {
-        await this.Session.Client.DeleteDirectoryInGuest(this.Reference, vm.Reference, auth, directoryPath, recursive);
+        await this.Session.Client.DeleteDirectoryInGuest(this.VimReference, vm.VimReference, auth, directoryPath, recursive);
     }
 
     public async System.Threading.Tasks.Task DeleteFileInGuest(VirtualMachine vm, GuestAuthentication auth, string filePath)
     {
-        await this.Session.Client.DeleteFileInGuest(this.Reference, vm.Reference, auth, filePath);
+        await this.Session.Client.DeleteFileInGuest(this.VimReference, vm.VimReference, auth, filePath);
     }
 
     public async System.Threading.Tasks.Task<FileTransferInformation?> InitiateFileTransferFromGuest(VirtualMachine vm, GuestAuthentication auth, string guestFilePath)
     {
-        return await this.Session.Client.InitiateFileTransferFromGuest(this.Reference, vm.Reference, auth, guestFilePath);
+        return await this.Session.Client.InitiateFileTransferFromGuest(this.VimReference, vm.VimReference, auth, guestFilePath);
     }
 
     public async System.Threading.Tasks.Task<string?> InitiateFileTransferToGuest(VirtualMachine vm, GuestAuthentication auth, string guestFilePath, GuestFileAttributes fileAttributes, long fileSize, bool overwrite)
     {
-        return await this.Session.Client.InitiateFileTransferToGuest(this.Reference, vm.Reference, auth, guestFilePath, fileAttributes, fileSize, overwrite);
+        return await this.Session.Client.InitiateFileTransferToGuest(this.VimReference, vm.VimReference, auth, guestFilePath, fileAttributes, fileSize, overwrite);
     }
 
     public async System.Threading.Tasks.Task<GuestListFileInfo?> ListFilesInGuest(VirtualMachine vm, GuestAuthentication auth, string filePath, int? index, int? maxResults, string? matchPattern)
     {
-        return await this.Session.Client.ListFilesInGuest(this.Reference, vm.Reference, auth, filePath, index ?? default, index.HasValue, maxResults ?? default, maxResults.HasValue, matchPattern);
+        return await this.Session.Client.ListFilesInGuest(this.VimReference, vm.VimReference, auth, filePath, index ?? default, index.HasValue, maxResults ?? default, maxResults.HasValue, matchPattern);
     }
 
     public async System.Threading.Tasks.Task MakeDirectoryInGuest(VirtualMachine vm, GuestAuthentication auth, string directoryPath, bool createParentDirectories)
     {
-        await this.Session.Client.MakeDirectoryInGuest(this.Reference, vm.Reference, auth, directoryPath, createParentDirectories);
+        await this.Session.Client.MakeDirectoryInGuest(this.VimReference, vm.VimReference, auth, directoryPath, createParentDirectories);
     }
 
     public async System.Threading.Tasks.Task MoveDirectoryInGuest(VirtualMachine vm, GuestAuthentication auth, string srcDirectoryPath, string dstDirectoryPath)
     {
-        await this.Session.Client.MoveDirectoryInGuest(this.Reference, vm.Reference, auth, srcDirectoryPath, dstDirectoryPath);
+        await this.Session.Client.MoveDirectoryInGuest(this.VimReference, vm.VimReference, auth, srcDirectoryPath, dstDirectoryPath);
     }
 
     public async System.Threading.Tasks.Task MoveFileInGuest(VirtualMachine vm, GuestAuthentication auth, string srcFilePath, string dstFilePath, bool overwrite)
     {
-        await this.Session.Client.MoveFileInGuest(this.Reference, vm.Reference, auth, srcFilePath, dstFilePath, overwrite);
+        await this.Session.Client.MoveFileInGuest(this.VimReference, vm.VimReference, auth, srcFilePath, dstFilePath, overwrite);
     }
 }
 
@@ -2047,22 +2047,22 @@ public partial class GuestProcessManager : ManagedObject
 
     public async System.Threading.Tasks.Task<GuestProcessInfo[]?> ListProcessesInGuest(VirtualMachine vm, GuestAuthentication auth, long[]? pids)
     {
-        return await this.Session.Client.ListProcessesInGuest(this.Reference, vm.Reference, auth, pids);
+        return await this.Session.Client.ListProcessesInGuest(this.VimReference, vm.VimReference, auth, pids);
     }
 
     public async System.Threading.Tasks.Task<string[]?> ReadEnvironmentVariableInGuest(VirtualMachine vm, GuestAuthentication auth, string[]? names)
     {
-        return await this.Session.Client.ReadEnvironmentVariableInGuest(this.Reference, vm.Reference, auth, names);
+        return await this.Session.Client.ReadEnvironmentVariableInGuest(this.VimReference, vm.VimReference, auth, names);
     }
 
     public async System.Threading.Tasks.Task<long> StartProgramInGuest(VirtualMachine vm, GuestAuthentication auth, GuestProgramSpec spec)
     {
-        return await this.Session.Client.StartProgramInGuest(this.Reference, vm.Reference, auth, spec);
+        return await this.Session.Client.StartProgramInGuest(this.VimReference, vm.VimReference, auth, spec);
     }
 
     public async System.Threading.Tasks.Task TerminateProcessInGuest(VirtualMachine vm, GuestAuthentication auth, long pid)
     {
-        await this.Session.Client.TerminateProcessInGuest(this.Reference, vm.Reference, auth, pid);
+        await this.Session.Client.TerminateProcessInGuest(this.VimReference, vm.VimReference, auth, pid);
     }
 }
 
@@ -2077,32 +2077,32 @@ public partial class GuestWindowsRegistryManager : ManagedObject
 
     public async System.Threading.Tasks.Task CreateRegistryKeyInGuest(VirtualMachine vm, GuestAuthentication auth, GuestRegKeyNameSpec keyName, bool isVolatile, string? classType)
     {
-        await this.Session.Client.CreateRegistryKeyInGuest(this.Reference, vm.Reference, auth, keyName, isVolatile, classType);
+        await this.Session.Client.CreateRegistryKeyInGuest(this.VimReference, vm.VimReference, auth, keyName, isVolatile, classType);
     }
 
     public async System.Threading.Tasks.Task DeleteRegistryKeyInGuest(VirtualMachine vm, GuestAuthentication auth, GuestRegKeyNameSpec keyName, bool recursive)
     {
-        await this.Session.Client.DeleteRegistryKeyInGuest(this.Reference, vm.Reference, auth, keyName, recursive);
+        await this.Session.Client.DeleteRegistryKeyInGuest(this.VimReference, vm.VimReference, auth, keyName, recursive);
     }
 
     public async System.Threading.Tasks.Task DeleteRegistryValueInGuest(VirtualMachine vm, GuestAuthentication auth, GuestRegValueNameSpec valueName)
     {
-        await this.Session.Client.DeleteRegistryValueInGuest(this.Reference, vm.Reference, auth, valueName);
+        await this.Session.Client.DeleteRegistryValueInGuest(this.VimReference, vm.VimReference, auth, valueName);
     }
 
     public async System.Threading.Tasks.Task<GuestRegKeyRecordSpec[]?> ListRegistryKeysInGuest(VirtualMachine vm, GuestAuthentication auth, GuestRegKeyNameSpec keyName, bool recursive, string? matchPattern)
     {
-        return await this.Session.Client.ListRegistryKeysInGuest(this.Reference, vm.Reference, auth, keyName, recursive, matchPattern);
+        return await this.Session.Client.ListRegistryKeysInGuest(this.VimReference, vm.VimReference, auth, keyName, recursive, matchPattern);
     }
 
     public async System.Threading.Tasks.Task<GuestRegValueSpec[]?> ListRegistryValuesInGuest(VirtualMachine vm, GuestAuthentication auth, GuestRegKeyNameSpec keyName, bool expandStrings, string? matchPattern)
     {
-        return await this.Session.Client.ListRegistryValuesInGuest(this.Reference, vm.Reference, auth, keyName, expandStrings, matchPattern);
+        return await this.Session.Client.ListRegistryValuesInGuest(this.VimReference, vm.VimReference, auth, keyName, expandStrings, matchPattern);
     }
 
     public async System.Threading.Tasks.Task SetRegistryValueInGuest(VirtualMachine vm, GuestAuthentication auth, GuestRegValueSpec value)
     {
-        await this.Session.Client.SetRegistryValueInGuest(this.Reference, vm.Reference, auth, value);
+        await this.Session.Client.SetRegistryValueInGuest(this.VimReference, vm.VimReference, auth, value);
     }
 }
 
@@ -2117,110 +2117,110 @@ public partial class HealthUpdateManager : ManagedObject
 
     public async System.Threading.Tasks.Task<string?> AddFilter(string providerId, string filterName, string[]? infoIds)
     {
-        return await this.Session.Client.AddFilter(this.Reference, providerId, filterName, infoIds);
+        return await this.Session.Client.AddFilter(this.VimReference, providerId, filterName, infoIds);
     }
 
     public async System.Threading.Tasks.Task AddFilterEntities(string filterId, ManagedEntity[]? entities)
     {
-        await this.Session.Client.AddFilterEntities(this.Reference, filterId, entities?.Select(m => m.Reference).ToArray());
+        await this.Session.Client.AddFilterEntities(this.VimReference, filterId, entities?.Select(m => m.VimReference).ToArray());
     }
 
     public async System.Threading.Tasks.Task AddMonitoredEntities(string providerId, ManagedEntity[]? entities)
     {
-        await this.Session.Client.AddMonitoredEntities(this.Reference, providerId, entities?.Select(m => m.Reference).ToArray());
+        await this.Session.Client.AddMonitoredEntities(this.VimReference, providerId, entities?.Select(m => m.VimReference).ToArray());
     }
 
     public async System.Threading.Tasks.Task<bool> HasMonitoredEntity(string providerId, ManagedEntity entity)
     {
-        return await this.Session.Client.HasMonitoredEntity(this.Reference, providerId, entity.Reference);
+        return await this.Session.Client.HasMonitoredEntity(this.VimReference, providerId, entity.VimReference);
     }
 
     public async System.Threading.Tasks.Task<bool> HasProvider(string id)
     {
-        return await this.Session.Client.HasProvider(this.Reference, id);
+        return await this.Session.Client.HasProvider(this.VimReference, id);
     }
 
     public async System.Threading.Tasks.Task PostHealthUpdates(string providerId, HealthUpdate[]? updates)
     {
-        await this.Session.Client.PostHealthUpdates(this.Reference, providerId, updates);
+        await this.Session.Client.PostHealthUpdates(this.VimReference, providerId, updates);
     }
 
     public async System.Threading.Tasks.Task<ManagedEntity[]?> QueryFilterEntities(string filterId)
     {
-        var res = await this.Session.Client.QueryFilterEntities(this.Reference, filterId);
+        var res = await this.Session.Client.QueryFilterEntities(this.VimReference, filterId);
         return res?.Select(r => ManagedObject.Create<ManagedEntity>(r, this.Session)!).ToArray();
     }
 
     public async System.Threading.Tasks.Task<string[]?> QueryFilterInfoIds(string filterId)
     {
-        return await this.Session.Client.QueryFilterInfoIds(this.Reference, filterId);
+        return await this.Session.Client.QueryFilterInfoIds(this.VimReference, filterId);
     }
 
     public async System.Threading.Tasks.Task<string[]?> QueryFilterList(string providerId)
     {
-        return await this.Session.Client.QueryFilterList(this.Reference, providerId);
+        return await this.Session.Client.QueryFilterList(this.VimReference, providerId);
     }
 
     public async System.Threading.Tasks.Task<string?> QueryFilterName(string filterId)
     {
-        return await this.Session.Client.QueryFilterName(this.Reference, filterId);
+        return await this.Session.Client.QueryFilterName(this.VimReference, filterId);
     }
 
     public async System.Threading.Tasks.Task<HealthUpdateInfo[]?> QueryHealthUpdateInfos(string providerId)
     {
-        return await this.Session.Client.QueryHealthUpdateInfos(this.Reference, providerId);
+        return await this.Session.Client.QueryHealthUpdateInfos(this.VimReference, providerId);
     }
 
     public async System.Threading.Tasks.Task<HealthUpdate[]?> QueryHealthUpdates(string providerId)
     {
-        return await this.Session.Client.QueryHealthUpdates(this.Reference, providerId);
+        return await this.Session.Client.QueryHealthUpdates(this.VimReference, providerId);
     }
 
     public async System.Threading.Tasks.Task<ManagedEntity[]?> QueryMonitoredEntities(string providerId)
     {
-        var res = await this.Session.Client.QueryMonitoredEntities(this.Reference, providerId);
+        var res = await this.Session.Client.QueryMonitoredEntities(this.VimReference, providerId);
         return res?.Select(r => ManagedObject.Create<ManagedEntity>(r, this.Session)!).ToArray();
     }
 
     public async System.Threading.Tasks.Task<string[]?> QueryProviderList()
     {
-        return await this.Session.Client.QueryProviderList(this.Reference);
+        return await this.Session.Client.QueryProviderList(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<string?> QueryProviderName(string id)
     {
-        return await this.Session.Client.QueryProviderName(this.Reference, id);
+        return await this.Session.Client.QueryProviderName(this.VimReference, id);
     }
 
     public async System.Threading.Tasks.Task<HostSystem[]?> QueryUnmonitoredHosts(string providerId, ClusterComputeResource cluster)
     {
-        var res = await this.Session.Client.QueryUnmonitoredHosts(this.Reference, providerId, cluster.Reference);
+        var res = await this.Session.Client.QueryUnmonitoredHosts(this.VimReference, providerId, cluster.VimReference);
         return res?.Select(r => ManagedObject.Create<HostSystem>(r, this.Session)!).ToArray();
     }
 
     public async System.Threading.Tasks.Task<string?> RegisterHealthUpdateProvider(string name, HealthUpdateInfo[]? healthUpdateInfo)
     {
-        return await this.Session.Client.RegisterHealthUpdateProvider(this.Reference, name, healthUpdateInfo);
+        return await this.Session.Client.RegisterHealthUpdateProvider(this.VimReference, name, healthUpdateInfo);
     }
 
     public async System.Threading.Tasks.Task RemoveFilter(string filterId)
     {
-        await this.Session.Client.RemoveFilter(this.Reference, filterId);
+        await this.Session.Client.RemoveFilter(this.VimReference, filterId);
     }
 
     public async System.Threading.Tasks.Task RemoveFilterEntities(string filterId, ManagedEntity[]? entities)
     {
-        await this.Session.Client.RemoveFilterEntities(this.Reference, filterId, entities?.Select(m => m.Reference).ToArray());
+        await this.Session.Client.RemoveFilterEntities(this.VimReference, filterId, entities?.Select(m => m.VimReference).ToArray());
     }
 
     public async System.Threading.Tasks.Task RemoveMonitoredEntities(string providerId, ManagedEntity[]? entities)
     {
-        await this.Session.Client.RemoveMonitoredEntities(this.Reference, providerId, entities?.Select(m => m.Reference).ToArray());
+        await this.Session.Client.RemoveMonitoredEntities(this.VimReference, providerId, entities?.Select(m => m.VimReference).ToArray());
     }
 
     public async System.Threading.Tasks.Task UnregisterHealthUpdateProvider(string providerId)
     {
-        await this.Session.Client.UnregisterHealthUpdateProvider(this.Reference, providerId);
+        await this.Session.Client.UnregisterHealthUpdateProvider(this.VimReference, providerId);
     }
 }
 
@@ -2241,22 +2241,22 @@ public partial class HistoryCollector : ManagedObject
 
     public async System.Threading.Tasks.Task DestroyCollector()
     {
-        await this.Session.Client.DestroyCollector(this.Reference);
+        await this.Session.Client.DestroyCollector(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task ResetCollector()
     {
-        await this.Session.Client.ResetCollector(this.Reference);
+        await this.Session.Client.ResetCollector(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task RewindCollector()
     {
-        await this.Session.Client.RewindCollector(this.Reference);
+        await this.Session.Client.RewindCollector(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task SetCollectorPageSize(int maxCount)
     {
-        await this.Session.Client.SetCollectorPageSize(this.Reference, maxCount);
+        await this.Session.Client.SetCollectorPageSize(this.VimReference, maxCount);
     }
 }
 
@@ -2277,37 +2277,37 @@ public partial class HostAccessManager : ManagedObject
 
     public async System.Threading.Tasks.Task ChangeAccessMode(string principal, bool isGroup, HostAccessMode accessMode)
     {
-        await this.Session.Client.ChangeAccessMode(this.Reference, principal, isGroup, accessMode);
+        await this.Session.Client.ChangeAccessMode(this.VimReference, principal, isGroup, accessMode);
     }
 
     public async System.Threading.Tasks.Task ChangeLockdownMode(HostLockdownMode mode)
     {
-        await this.Session.Client.ChangeLockdownMode(this.Reference, mode);
+        await this.Session.Client.ChangeLockdownMode(this.VimReference, mode);
     }
 
     public async System.Threading.Tasks.Task<string[]?> QueryLockdownExceptions()
     {
-        return await this.Session.Client.QueryLockdownExceptions(this.Reference);
+        return await this.Session.Client.QueryLockdownExceptions(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<string[]?> QuerySystemUsers()
     {
-        return await this.Session.Client.QuerySystemUsers(this.Reference);
+        return await this.Session.Client.QuerySystemUsers(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<HostAccessControlEntry[]?> RetrieveHostAccessControlEntries()
     {
-        return await this.Session.Client.RetrieveHostAccessControlEntries(this.Reference);
+        return await this.Session.Client.RetrieveHostAccessControlEntries(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task UpdateLockdownExceptions(string[]? users)
     {
-        await this.Session.Client.UpdateLockdownExceptions(this.Reference, users);
+        await this.Session.Client.UpdateLockdownExceptions(this.VimReference, users);
     }
 
     public async System.Threading.Tasks.Task UpdateSystemUsers(string[]? users)
     {
-        await this.Session.Client.UpdateSystemUsers(this.Reference, users);
+        await this.Session.Client.UpdateSystemUsers(this.VimReference, users);
     }
 }
 
@@ -2322,61 +2322,61 @@ public partial class HostActiveDirectoryAuthentication : HostDirectoryStore
 
     public async System.Threading.Tasks.Task DisableSmartCardAuthentication()
     {
-        await this.Session.Client.DisableSmartCardAuthentication(this.Reference);
+        await this.Session.Client.DisableSmartCardAuthentication(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task EnableSmartCardAuthentication()
     {
-        await this.Session.Client.EnableSmartCardAuthentication(this.Reference);
+        await this.Session.Client.EnableSmartCardAuthentication(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> ImportCertificateForCAM_Task(string certPath, string camServer)
     {
-        var res = await this.Session.Client.ImportCertificateForCAM_Task(this.Reference, certPath, camServer);
+        var res = await this.Session.Client.ImportCertificateForCAM_Task(this.VimReference, certPath, camServer);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task InstallSmartCardTrustAnchor(string cert)
     {
-        await this.Session.Client.InstallSmartCardTrustAnchor(this.Reference, cert);
+        await this.Session.Client.InstallSmartCardTrustAnchor(this.VimReference, cert);
     }
 
     public async System.Threading.Tasks.Task<Task?> JoinDomain_Task(string domainName, string userName, string password)
     {
-        var res = await this.Session.Client.JoinDomain_Task(this.Reference, domainName, userName, password);
+        var res = await this.Session.Client.JoinDomain_Task(this.VimReference, domainName, userName, password);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> JoinDomainWithCAM_Task(string domainName, string camServer)
     {
-        var res = await this.Session.Client.JoinDomainWithCAM_Task(this.Reference, domainName, camServer);
+        var res = await this.Session.Client.JoinDomainWithCAM_Task(this.VimReference, domainName, camServer);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> LeaveCurrentDomain_Task(bool force)
     {
-        var res = await this.Session.Client.LeaveCurrentDomain_Task(this.Reference, force);
+        var res = await this.Session.Client.LeaveCurrentDomain_Task(this.VimReference, force);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<string[]?> ListSmartCardTrustAnchors()
     {
-        return await this.Session.Client.ListSmartCardTrustAnchors(this.Reference);
+        return await this.Session.Client.ListSmartCardTrustAnchors(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task RemoveSmartCardTrustAnchor(string issuer, string serial)
     {
-        await this.Session.Client.RemoveSmartCardTrustAnchor(this.Reference, issuer, serial);
+        await this.Session.Client.RemoveSmartCardTrustAnchor(this.VimReference, issuer, serial);
     }
 
     public async System.Threading.Tasks.Task RemoveSmartCardTrustAnchorByFingerprint(string fingerprint, string digest)
     {
-        await this.Session.Client.RemoveSmartCardTrustAnchorByFingerprint(this.Reference, fingerprint, digest);
+        await this.Session.Client.RemoveSmartCardTrustAnchorByFingerprint(this.VimReference, fingerprint, digest);
     }
 
     public async System.Threading.Tasks.Task ReplaceSmartCardTrustAnchors(string[]? certs)
     {
-        await this.Session.Client.ReplaceSmartCardTrustAnchors(this.Reference, certs);
+        await this.Session.Client.ReplaceSmartCardTrustAnchors(this.VimReference, certs);
     }
 }
 
@@ -2403,17 +2403,17 @@ public partial class HostAssignableHardwareManager : ManagedObject
 
     public async System.Threading.Tasks.Task<byte[]?> DownloadDescriptionTree()
     {
-        return await this.Session.Client.DownloadDescriptionTree(this.Reference);
+        return await this.Session.Client.DownloadDescriptionTree(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<VirtualMachineDynamicPassthroughInfo[]?> RetrieveDynamicPassthroughInfo()
     {
-        return await this.Session.Client.RetrieveDynamicPassthroughInfo(this.Reference);
+        return await this.Session.Client.RetrieveDynamicPassthroughInfo(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task UpdateAssignableHardwareConfig(HostAssignableHardwareConfig config)
     {
-        await this.Session.Client.UpdateAssignableHardwareConfig(this.Reference, config);
+        await this.Session.Client.UpdateAssignableHardwareConfig(this.VimReference, config);
     }
 }
 
@@ -2474,17 +2474,17 @@ public partial class HostAutoStartManager : ManagedObject
 
     public async System.Threading.Tasks.Task AutoStartPowerOff()
     {
-        await this.Session.Client.AutoStartPowerOff(this.Reference);
+        await this.Session.Client.AutoStartPowerOff(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task AutoStartPowerOn()
     {
-        await this.Session.Client.AutoStartPowerOn(this.Reference);
+        await this.Session.Client.AutoStartPowerOn(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task ReconfigureAutostart(HostAutoStartManagerConfig spec)
     {
-        await this.Session.Client.ReconfigureAutostart(this.Reference, spec);
+        await this.Session.Client.ReconfigureAutostart(this.VimReference, spec);
     }
 }
 
@@ -2499,12 +2499,12 @@ public partial class HostBootDeviceSystem : ManagedObject
 
     public async System.Threading.Tasks.Task<HostBootDeviceInfo?> QueryBootDevices()
     {
-        return await this.Session.Client.QueryBootDevices(this.Reference);
+        return await this.Session.Client.QueryBootDevices(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task UpdateBootDevice(string key)
     {
-        await this.Session.Client.UpdateBootDevice(this.Reference, key);
+        await this.Session.Client.UpdateBootDevice(this.VimReference, key);
     }
 }
 
@@ -2525,7 +2525,7 @@ public partial class HostCacheConfigurationManager : ManagedObject
 
     public async System.Threading.Tasks.Task<Task?> ConfigureHostCache_Task(HostCacheConfigurationSpec spec)
     {
-        var res = await this.Session.Client.ConfigureHostCache_Task(this.Reference, spec);
+        var res = await this.Session.Client.ConfigureHostCache_Task(this.VimReference, spec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -2547,32 +2547,32 @@ public partial class HostCertificateManager : ManagedObject
 
     public async System.Threading.Tasks.Task<string?> GenerateCertificateSigningRequest(bool useIpAddressAsCommonName)
     {
-        return await this.Session.Client.GenerateCertificateSigningRequest(this.Reference, useIpAddressAsCommonName);
+        return await this.Session.Client.GenerateCertificateSigningRequest(this.VimReference, useIpAddressAsCommonName);
     }
 
     public async System.Threading.Tasks.Task<string?> GenerateCertificateSigningRequestByDn(string distinguishedName)
     {
-        return await this.Session.Client.GenerateCertificateSigningRequestByDn(this.Reference, distinguishedName);
+        return await this.Session.Client.GenerateCertificateSigningRequestByDn(this.VimReference, distinguishedName);
     }
 
     public async System.Threading.Tasks.Task InstallServerCertificate(string cert)
     {
-        await this.Session.Client.InstallServerCertificate(this.Reference, cert);
+        await this.Session.Client.InstallServerCertificate(this.VimReference, cert);
     }
 
     public async System.Threading.Tasks.Task<string[]?> ListCACertificateRevocationLists()
     {
-        return await this.Session.Client.ListCACertificateRevocationLists(this.Reference);
+        return await this.Session.Client.ListCACertificateRevocationLists(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<string[]?> ListCACertificates()
     {
-        return await this.Session.Client.ListCACertificates(this.Reference);
+        return await this.Session.Client.ListCACertificates(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task ReplaceCACertificatesAndCRLs(string[] caCert, string[]? caCrl)
     {
-        await this.Session.Client.ReplaceCACertificatesAndCRLs(this.Reference, caCert, caCrl);
+        await this.Session.Client.ReplaceCACertificatesAndCRLs(this.VimReference, caCert, caCrl);
     }
 }
 
@@ -2593,12 +2593,12 @@ public partial class HostCpuSchedulerSystem : ExtensibleManagedObject
 
     public async System.Threading.Tasks.Task DisableHyperThreading()
     {
-        await this.Session.Client.DisableHyperThreading(this.Reference);
+        await this.Session.Client.DisableHyperThreading(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task EnableHyperThreading()
     {
-        await this.Session.Client.EnableHyperThreading(this.Reference);
+        await this.Session.Client.EnableHyperThreading(this.VimReference);
     }
 }
 
@@ -2627,18 +2627,18 @@ public partial class HostDatastoreBrowser : ManagedObject
 
     public async System.Threading.Tasks.Task DeleteFile(string datastorePath)
     {
-        await this.Session.Client.DeleteFile(this.Reference, datastorePath);
+        await this.Session.Client.DeleteFile(this.VimReference, datastorePath);
     }
 
     public async System.Threading.Tasks.Task<Task?> SearchDatastore_Task(string datastorePath, HostDatastoreBrowserSearchSpec? searchSpec)
     {
-        var res = await this.Session.Client.SearchDatastore_Task(this.Reference, datastorePath, searchSpec);
+        var res = await this.Session.Client.SearchDatastore_Task(this.VimReference, datastorePath, searchSpec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> SearchDatastoreSubFolders_Task(string datastorePath, HostDatastoreBrowserSearchSpec? searchSpec)
     {
-        var res = await this.Session.Client.SearchDatastoreSubFolders_Task(this.Reference, datastorePath, searchSpec);
+        var res = await this.Session.Client.SearchDatastoreSubFolders_Task(this.VimReference, datastorePath, searchSpec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -2668,100 +2668,100 @@ public partial class HostDatastoreSystem : ManagedObject
 
     public async System.Threading.Tasks.Task ConfigureDatastorePrincipal(string userName, string? password)
     {
-        await this.Session.Client.ConfigureDatastorePrincipal(this.Reference, userName, password);
+        await this.Session.Client.ConfigureDatastorePrincipal(this.VimReference, userName, password);
     }
 
     public async System.Threading.Tasks.Task<Datastore?> CreateLocalDatastore(string name, string path)
     {
-        var res = await this.Session.Client.CreateLocalDatastore(this.Reference, name, path);
+        var res = await this.Session.Client.CreateLocalDatastore(this.VimReference, name, path);
         return ManagedObject.Create<Datastore>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Datastore?> CreateNasDatastore(HostNasVolumeSpec spec)
     {
-        var res = await this.Session.Client.CreateNasDatastore(this.Reference, spec);
+        var res = await this.Session.Client.CreateNasDatastore(this.VimReference, spec);
         return ManagedObject.Create<Datastore>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Datastore?> CreateVmfsDatastore(VmfsDatastoreCreateSpec spec)
     {
-        var res = await this.Session.Client.CreateVmfsDatastore(this.Reference, spec);
+        var res = await this.Session.Client.CreateVmfsDatastore(this.VimReference, spec);
         return ManagedObject.Create<Datastore>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Datastore?> CreateVvolDatastore(HostDatastoreSystemVvolDatastoreSpec spec)
     {
-        var res = await this.Session.Client.CreateVvolDatastore(this.Reference, spec);
+        var res = await this.Session.Client.CreateVvolDatastore(this.VimReference, spec);
         return ManagedObject.Create<Datastore>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task DisableClusteredVmdkSupport(Datastore datastore)
     {
-        await this.Session.Client.DisableClusteredVmdkSupport(this.Reference, datastore.Reference);
+        await this.Session.Client.DisableClusteredVmdkSupport(this.VimReference, datastore.VimReference);
     }
 
     public async System.Threading.Tasks.Task EnableClusteredVmdkSupport(Datastore datastore)
     {
-        await this.Session.Client.EnableClusteredVmdkSupport(this.Reference, datastore.Reference);
+        await this.Session.Client.EnableClusteredVmdkSupport(this.VimReference, datastore.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Datastore?> ExpandVmfsDatastore(Datastore datastore, VmfsDatastoreExpandSpec spec)
     {
-        var res = await this.Session.Client.ExpandVmfsDatastore(this.Reference, datastore.Reference, spec);
+        var res = await this.Session.Client.ExpandVmfsDatastore(this.VimReference, datastore.VimReference, spec);
         return ManagedObject.Create<Datastore>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Datastore?> ExtendVmfsDatastore(Datastore datastore, VmfsDatastoreExtendSpec spec)
     {
-        var res = await this.Session.Client.ExtendVmfsDatastore(this.Reference, datastore.Reference, spec);
+        var res = await this.Session.Client.ExtendVmfsDatastore(this.VimReference, datastore.VimReference, spec);
         return ManagedObject.Create<Datastore>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<HostScsiDisk[]?> QueryAvailableDisksForVmfs(Datastore? datastore)
     {
-        return await this.Session.Client.QueryAvailableDisksForVmfs(this.Reference, datastore?.Reference);
+        return await this.Session.Client.QueryAvailableDisksForVmfs(this.VimReference, datastore?.VimReference);
     }
 
     public async System.Threading.Tasks.Task<HostUnresolvedVmfsVolume[]?> QueryUnresolvedVmfsVolumes()
     {
-        return await this.Session.Client.QueryUnresolvedVmfsVolumes(this.Reference);
+        return await this.Session.Client.QueryUnresolvedVmfsVolumes(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<VmfsDatastoreOption[]?> QueryVmfsDatastoreCreateOptions(string devicePath, int? vmfsMajorVersion)
     {
-        return await this.Session.Client.QueryVmfsDatastoreCreateOptions(this.Reference, devicePath, vmfsMajorVersion ?? default, vmfsMajorVersion.HasValue);
+        return await this.Session.Client.QueryVmfsDatastoreCreateOptions(this.VimReference, devicePath, vmfsMajorVersion ?? default, vmfsMajorVersion.HasValue);
     }
 
     public async System.Threading.Tasks.Task<VmfsDatastoreOption[]?> QueryVmfsDatastoreExpandOptions(Datastore datastore)
     {
-        return await this.Session.Client.QueryVmfsDatastoreExpandOptions(this.Reference, datastore.Reference);
+        return await this.Session.Client.QueryVmfsDatastoreExpandOptions(this.VimReference, datastore.VimReference);
     }
 
     public async System.Threading.Tasks.Task<VmfsDatastoreOption[]?> QueryVmfsDatastoreExtendOptions(Datastore datastore, string devicePath, bool? suppressExpandCandidates)
     {
-        return await this.Session.Client.QueryVmfsDatastoreExtendOptions(this.Reference, datastore.Reference, devicePath, suppressExpandCandidates ?? default, suppressExpandCandidates.HasValue);
+        return await this.Session.Client.QueryVmfsDatastoreExtendOptions(this.VimReference, datastore.VimReference, devicePath, suppressExpandCandidates ?? default, suppressExpandCandidates.HasValue);
     }
 
     public async System.Threading.Tasks.Task RemoveDatastore(Datastore datastore)
     {
-        await this.Session.Client.RemoveDatastore(this.Reference, datastore.Reference);
+        await this.Session.Client.RemoveDatastore(this.VimReference, datastore.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> RemoveDatastoreEx_Task(Datastore[] datastore)
     {
-        var res = await this.Session.Client.RemoveDatastoreEx_Task(this.Reference, datastore.Select(m => m.Reference).ToArray());
+        var res = await this.Session.Client.RemoveDatastoreEx_Task(this.VimReference, datastore.Select(m => m.VimReference).ToArray());
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> ResignatureUnresolvedVmfsVolume_Task(HostUnresolvedVmfsResignatureSpec resolutionSpec)
     {
-        var res = await this.Session.Client.ResignatureUnresolvedVmfsVolume_Task(this.Reference, resolutionSpec);
+        var res = await this.Session.Client.ResignatureUnresolvedVmfsVolume_Task(this.VimReference, resolutionSpec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task UpdateLocalSwapDatastore(Datastore? datastore)
     {
-        await this.Session.Client.UpdateLocalSwapDatastore(this.Reference, datastore?.Reference);
+        await this.Session.Client.UpdateLocalSwapDatastore(this.VimReference, datastore?.VimReference);
     }
 }
 
@@ -2782,32 +2782,32 @@ public partial class HostDateTimeSystem : ManagedObject
 
     public async System.Threading.Tasks.Task<HostDateTimeSystemTimeZone[]?> QueryAvailableTimeZones()
     {
-        return await this.Session.Client.QueryAvailableTimeZones(this.Reference);
+        return await this.Session.Client.QueryAvailableTimeZones(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<DateTime> QueryDateTime()
     {
-        return await this.Session.Client.QueryDateTime(this.Reference);
+        return await this.Session.Client.QueryDateTime(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task RefreshDateTimeSystem()
     {
-        await this.Session.Client.RefreshDateTimeSystem(this.Reference);
+        await this.Session.Client.RefreshDateTimeSystem(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<HostDateTimeSystemServiceTestResult?> TestTimeService()
     {
-        return await this.Session.Client.TestTimeService(this.Reference);
+        return await this.Session.Client.TestTimeService(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task UpdateDateTime(DateTime dateTime)
     {
-        await this.Session.Client.UpdateDateTime(this.Reference, dateTime);
+        await this.Session.Client.UpdateDateTime(this.VimReference, dateTime);
     }
 
     public async System.Threading.Tasks.Task UpdateDateTimeConfig(HostDateTimeConfig config)
     {
-        await this.Session.Client.UpdateDateTimeConfig(this.Reference, config);
+        await this.Session.Client.UpdateDateTimeConfig(this.VimReference, config);
     }
 }
 
@@ -2828,27 +2828,27 @@ public partial class HostDiagnosticSystem : ManagedObject
 
     public async System.Threading.Tasks.Task CreateDiagnosticPartition(HostDiagnosticPartitionCreateSpec spec)
     {
-        await this.Session.Client.CreateDiagnosticPartition(this.Reference, spec);
+        await this.Session.Client.CreateDiagnosticPartition(this.VimReference, spec);
     }
 
     public async System.Threading.Tasks.Task<HostDiagnosticPartition[]?> QueryAvailablePartition()
     {
-        return await this.Session.Client.QueryAvailablePartition(this.Reference);
+        return await this.Session.Client.QueryAvailablePartition(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<HostDiagnosticPartitionCreateDescription?> QueryPartitionCreateDesc(string diskUuid, string diagnosticType)
     {
-        return await this.Session.Client.QueryPartitionCreateDesc(this.Reference, diskUuid, diagnosticType);
+        return await this.Session.Client.QueryPartitionCreateDesc(this.VimReference, diskUuid, diagnosticType);
     }
 
     public async System.Threading.Tasks.Task<HostDiagnosticPartitionCreateOption[]?> QueryPartitionCreateOptions(string storageType, string diagnosticType)
     {
-        return await this.Session.Client.QueryPartitionCreateOptions(this.Reference, storageType, diagnosticType);
+        return await this.Session.Client.QueryPartitionCreateOptions(this.VimReference, storageType, diagnosticType);
     }
 
     public async System.Threading.Tasks.Task SelectActivePartition(HostScsiDiskPartition? partition)
     {
-        await this.Session.Client.SelectActivePartition(this.Reference, partition);
+        await this.Session.Client.SelectActivePartition(this.VimReference, partition);
     }
 }
 
@@ -2879,7 +2879,7 @@ public partial class HostEsxAgentHostManager : ManagedObject
 
     public async System.Threading.Tasks.Task EsxAgentHostManagerUpdateConfig(HostEsxAgentHostManagerConfigInfo configInfo)
     {
-        await this.Session.Client.EsxAgentHostManagerUpdateConfig(this.Reference, configInfo);
+        await this.Session.Client.EsxAgentHostManagerUpdateConfig(this.VimReference, configInfo);
     }
 }
 
@@ -2900,27 +2900,27 @@ public partial class HostFirewallSystem : ExtensibleManagedObject
 
     public async System.Threading.Tasks.Task DisableRuleset(string id)
     {
-        await this.Session.Client.DisableRuleset(this.Reference, id);
+        await this.Session.Client.DisableRuleset(this.VimReference, id);
     }
 
     public async System.Threading.Tasks.Task EnableRuleset(string id)
     {
-        await this.Session.Client.EnableRuleset(this.Reference, id);
+        await this.Session.Client.EnableRuleset(this.VimReference, id);
     }
 
     public async System.Threading.Tasks.Task RefreshFirewall()
     {
-        await this.Session.Client.RefreshFirewall(this.Reference);
+        await this.Session.Client.RefreshFirewall(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task UpdateDefaultPolicy(HostFirewallDefaultPolicy defaultPolicy)
     {
-        await this.Session.Client.UpdateDefaultPolicy(this.Reference, defaultPolicy);
+        await this.Session.Client.UpdateDefaultPolicy(this.VimReference, defaultPolicy);
     }
 
     public async System.Threading.Tasks.Task UpdateRuleset(string id, HostFirewallRulesetRulesetSpec spec)
     {
-        await this.Session.Client.UpdateRuleset(this.Reference, id, spec);
+        await this.Session.Client.UpdateRuleset(this.VimReference, id, spec);
     }
 }
 
@@ -2935,22 +2935,22 @@ public partial class HostFirmwareSystem : ManagedObject
 
     public async System.Threading.Tasks.Task<string?> BackupFirmwareConfiguration()
     {
-        return await this.Session.Client.BackupFirmwareConfiguration(this.Reference);
+        return await this.Session.Client.BackupFirmwareConfiguration(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<string?> QueryFirmwareConfigUploadURL()
     {
-        return await this.Session.Client.QueryFirmwareConfigUploadURL(this.Reference);
+        return await this.Session.Client.QueryFirmwareConfigUploadURL(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task ResetFirmwareToFactoryDefaults()
     {
-        await this.Session.Client.ResetFirmwareToFactoryDefaults(this.Reference);
+        await this.Session.Client.ResetFirmwareToFactoryDefaults(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task RestoreFirmwareConfiguration(bool force)
     {
-        await this.Session.Client.RestoreFirmwareConfiguration(this.Reference, force);
+        await this.Session.Client.RestoreFirmwareConfiguration(this.VimReference, force);
     }
 }
 
@@ -2989,27 +2989,27 @@ public partial class HostGraphicsManager : ExtensibleManagedObject
 
     public async System.Threading.Tasks.Task<bool> IsSharedGraphicsActive()
     {
-        return await this.Session.Client.IsSharedGraphicsActive(this.Reference);
+        return await this.Session.Client.IsSharedGraphicsActive(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task RefreshGraphicsManager()
     {
-        await this.Session.Client.RefreshGraphicsManager(this.Reference);
+        await this.Session.Client.RefreshGraphicsManager(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<VirtualMachineVgpuDeviceInfo[]?> RetrieveVgpuDeviceInfo()
     {
-        return await this.Session.Client.RetrieveVgpuDeviceInfo(this.Reference);
+        return await this.Session.Client.RetrieveVgpuDeviceInfo(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<VirtualMachineVgpuProfileInfo[]?> RetrieveVgpuProfileInfo()
     {
-        return await this.Session.Client.RetrieveVgpuProfileInfo(this.Reference);
+        return await this.Session.Client.RetrieveVgpuProfileInfo(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task UpdateGraphicsConfig(HostGraphicsConfig config)
     {
-        await this.Session.Client.UpdateGraphicsConfig(this.Reference, config);
+        await this.Session.Client.UpdateGraphicsConfig(this.VimReference, config);
     }
 }
 
@@ -3030,22 +3030,22 @@ public partial class HostHealthStatusSystem : ManagedObject
 
     public async System.Threading.Tasks.Task ClearSystemEventLog()
     {
-        await this.Session.Client.ClearSystemEventLog(this.Reference);
+        await this.Session.Client.ClearSystemEventLog(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<SystemEventInfo[]?> FetchSystemEventLog()
     {
-        return await this.Session.Client.FetchSystemEventLog(this.Reference);
+        return await this.Session.Client.FetchSystemEventLog(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task RefreshHealthStatusSystem()
     {
-        await this.Session.Client.RefreshHealthStatusSystem(this.Reference);
+        await this.Session.Client.RefreshHealthStatusSystem(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task ResetSystemHealthInfo()
     {
-        await this.Session.Client.ResetSystemHealthInfo(this.Reference);
+        await this.Session.Client.ResetSystemHealthInfo(this.VimReference);
     }
 }
 
@@ -3060,27 +3060,27 @@ public partial class HostImageConfigManager : ManagedObject
 
     public async System.Threading.Tasks.Task<SoftwarePackage[]?> FetchSoftwarePackages()
     {
-        return await this.Session.Client.FetchSoftwarePackages(this.Reference);
+        return await this.Session.Client.FetchSoftwarePackages(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<string?> HostImageConfigGetAcceptance()
     {
-        return await this.Session.Client.HostImageConfigGetAcceptance(this.Reference);
+        return await this.Session.Client.HostImageConfigGetAcceptance(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<HostImageProfileSummary?> HostImageConfigGetProfile()
     {
-        return await this.Session.Client.HostImageConfigGetProfile(this.Reference);
+        return await this.Session.Client.HostImageConfigGetProfile(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<DateTime> InstallDate()
     {
-        return await this.Session.Client.InstallDate(this.Reference);
+        return await this.Session.Client.InstallDate(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task UpdateHostImageAcceptanceLevel(string newAcceptanceLevel)
     {
-        await this.Session.Client.UpdateHostImageAcceptanceLevel(this.Reference, newAcceptanceLevel);
+        await this.Session.Client.UpdateHostImageAcceptanceLevel(this.VimReference, newAcceptanceLevel);
     }
 }
 
@@ -3095,17 +3095,17 @@ public partial class HostKernelModuleSystem : ManagedObject
 
     public async System.Threading.Tasks.Task<string?> QueryConfiguredModuleOptionString(string name)
     {
-        return await this.Session.Client.QueryConfiguredModuleOptionString(this.Reference, name);
+        return await this.Session.Client.QueryConfiguredModuleOptionString(this.VimReference, name);
     }
 
     public async System.Threading.Tasks.Task<KernelModuleInfo[]?> QueryModules()
     {
-        return await this.Session.Client.QueryModules(this.Reference);
+        return await this.Session.Client.QueryModules(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task UpdateModuleOptionString(string name, string options)
     {
-        await this.Session.Client.UpdateModuleOptionString(this.Reference, name, options);
+        await this.Session.Client.UpdateModuleOptionString(this.VimReference, name, options);
     }
 }
 
@@ -3120,42 +3120,42 @@ public partial class HostLocalAccountManager : ManagedObject
 
     public async System.Threading.Tasks.Task AssignUserToGroup(string user, string group)
     {
-        await this.Session.Client.AssignUserToGroup(this.Reference, user, group);
+        await this.Session.Client.AssignUserToGroup(this.VimReference, user, group);
     }
 
     public async System.Threading.Tasks.Task ChangePassword(string user, string oldPassword, string newPassword)
     {
-        await this.Session.Client.ChangePassword(this.Reference, user, oldPassword, newPassword);
+        await this.Session.Client.ChangePassword(this.VimReference, user, oldPassword, newPassword);
     }
 
     public async System.Threading.Tasks.Task CreateGroup(HostAccountSpec group)
     {
-        await this.Session.Client.CreateGroup(this.Reference, group);
+        await this.Session.Client.CreateGroup(this.VimReference, group);
     }
 
     public async System.Threading.Tasks.Task CreateUser(HostAccountSpec user)
     {
-        await this.Session.Client.CreateUser(this.Reference, user);
+        await this.Session.Client.CreateUser(this.VimReference, user);
     }
 
     public async System.Threading.Tasks.Task RemoveGroup(string groupName)
     {
-        await this.Session.Client.RemoveGroup(this.Reference, groupName);
+        await this.Session.Client.RemoveGroup(this.VimReference, groupName);
     }
 
     public async System.Threading.Tasks.Task RemoveUser(string userName)
     {
-        await this.Session.Client.RemoveUser(this.Reference, userName);
+        await this.Session.Client.RemoveUser(this.VimReference, userName);
     }
 
     public async System.Threading.Tasks.Task UnassignUserFromGroup(string user, string group)
     {
-        await this.Session.Client.UnassignUserFromGroup(this.Reference, user, group);
+        await this.Session.Client.UnassignUserFromGroup(this.VimReference, user, group);
     }
 
     public async System.Threading.Tasks.Task UpdateUser(HostAccountSpec user)
     {
-        await this.Session.Client.UpdateUser(this.Reference, user);
+        await this.Session.Client.UpdateUser(this.VimReference, user);
     }
 }
 
@@ -3192,12 +3192,12 @@ public partial class HostMemorySystem : ExtensibleManagedObject
 
     public async System.Threading.Tasks.Task ReconfigureServiceConsoleReservation(long cfgBytes)
     {
-        await this.Session.Client.ReconfigureServiceConsoleReservation(this.Reference, cfgBytes);
+        await this.Session.Client.ReconfigureServiceConsoleReservation(this.VimReference, cfgBytes);
     }
 
     public async System.Threading.Tasks.Task ReconfigureVirtualMachineReservation(VirtualMachineMemoryReservationSpec spec)
     {
-        await this.Session.Client.ReconfigureVirtualMachineReservation(this.Reference, spec);
+        await this.Session.Client.ReconfigureVirtualMachineReservation(this.VimReference, spec);
     }
 }
 
@@ -3254,107 +3254,107 @@ public partial class HostNetworkSystem : ExtensibleManagedObject
 
     public async System.Threading.Tasks.Task AddPortGroup(HostPortGroupSpec portgrp)
     {
-        await this.Session.Client.AddPortGroup(this.Reference, portgrp);
+        await this.Session.Client.AddPortGroup(this.VimReference, portgrp);
     }
 
     public async System.Threading.Tasks.Task<string?> AddServiceConsoleVirtualNic(string portgroup, HostVirtualNicSpec nic)
     {
-        return await this.Session.Client.AddServiceConsoleVirtualNic(this.Reference, portgroup, nic);
+        return await this.Session.Client.AddServiceConsoleVirtualNic(this.VimReference, portgroup, nic);
     }
 
     public async System.Threading.Tasks.Task<string?> AddVirtualNic(string portgroup, HostVirtualNicSpec nic)
     {
-        return await this.Session.Client.AddVirtualNic(this.Reference, portgroup, nic);
+        return await this.Session.Client.AddVirtualNic(this.VimReference, portgroup, nic);
     }
 
     public async System.Threading.Tasks.Task AddVirtualSwitch(string vswitchName, HostVirtualSwitchSpec? spec)
     {
-        await this.Session.Client.AddVirtualSwitch(this.Reference, vswitchName, spec);
+        await this.Session.Client.AddVirtualSwitch(this.VimReference, vswitchName, spec);
     }
 
     public async System.Threading.Tasks.Task<PhysicalNicHintInfo[]?> QueryNetworkHint(string[]? device)
     {
-        return await this.Session.Client.QueryNetworkHint(this.Reference, device);
+        return await this.Session.Client.QueryNetworkHint(this.VimReference, device);
     }
 
     public async System.Threading.Tasks.Task RefreshNetworkSystem()
     {
-        await this.Session.Client.RefreshNetworkSystem(this.Reference);
+        await this.Session.Client.RefreshNetworkSystem(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task RemovePortGroup(string pgName)
     {
-        await this.Session.Client.RemovePortGroup(this.Reference, pgName);
+        await this.Session.Client.RemovePortGroup(this.VimReference, pgName);
     }
 
     public async System.Threading.Tasks.Task RemoveServiceConsoleVirtualNic(string device)
     {
-        await this.Session.Client.RemoveServiceConsoleVirtualNic(this.Reference, device);
+        await this.Session.Client.RemoveServiceConsoleVirtualNic(this.VimReference, device);
     }
 
     public async System.Threading.Tasks.Task RemoveVirtualNic(string device)
     {
-        await this.Session.Client.RemoveVirtualNic(this.Reference, device);
+        await this.Session.Client.RemoveVirtualNic(this.VimReference, device);
     }
 
     public async System.Threading.Tasks.Task RemoveVirtualSwitch(string vswitchName)
     {
-        await this.Session.Client.RemoveVirtualSwitch(this.Reference, vswitchName);
+        await this.Session.Client.RemoveVirtualSwitch(this.VimReference, vswitchName);
     }
 
     public async System.Threading.Tasks.Task RestartServiceConsoleVirtualNic(string device)
     {
-        await this.Session.Client.RestartServiceConsoleVirtualNic(this.Reference, device);
+        await this.Session.Client.RestartServiceConsoleVirtualNic(this.VimReference, device);
     }
 
     public async System.Threading.Tasks.Task UpdateConsoleIpRouteConfig(HostIpRouteConfig config)
     {
-        await this.Session.Client.UpdateConsoleIpRouteConfig(this.Reference, config);
+        await this.Session.Client.UpdateConsoleIpRouteConfig(this.VimReference, config);
     }
 
     public async System.Threading.Tasks.Task UpdateDnsConfig(HostDnsConfig config)
     {
-        await this.Session.Client.UpdateDnsConfig(this.Reference, config);
+        await this.Session.Client.UpdateDnsConfig(this.VimReference, config);
     }
 
     public async System.Threading.Tasks.Task UpdateIpRouteConfig(HostIpRouteConfig config)
     {
-        await this.Session.Client.UpdateIpRouteConfig(this.Reference, config);
+        await this.Session.Client.UpdateIpRouteConfig(this.VimReference, config);
     }
 
     public async System.Threading.Tasks.Task UpdateIpRouteTableConfig(HostIpRouteTableConfig config)
     {
-        await this.Session.Client.UpdateIpRouteTableConfig(this.Reference, config);
+        await this.Session.Client.UpdateIpRouteTableConfig(this.VimReference, config);
     }
 
     public async System.Threading.Tasks.Task<HostNetworkConfigResult?> UpdateNetworkConfig(HostNetworkConfig config, string changeMode)
     {
-        return await this.Session.Client.UpdateNetworkConfig(this.Reference, config, changeMode);
+        return await this.Session.Client.UpdateNetworkConfig(this.VimReference, config, changeMode);
     }
 
     public async System.Threading.Tasks.Task UpdatePhysicalNicLinkSpeed(string device, PhysicalNicLinkInfo? linkSpeed)
     {
-        await this.Session.Client.UpdatePhysicalNicLinkSpeed(this.Reference, device, linkSpeed);
+        await this.Session.Client.UpdatePhysicalNicLinkSpeed(this.VimReference, device, linkSpeed);
     }
 
     public async System.Threading.Tasks.Task UpdatePortGroup(string pgName, HostPortGroupSpec portgrp)
     {
-        await this.Session.Client.UpdatePortGroup(this.Reference, pgName, portgrp);
+        await this.Session.Client.UpdatePortGroup(this.VimReference, pgName, portgrp);
     }
 
     public async System.Threading.Tasks.Task UpdateServiceConsoleVirtualNic(string device, HostVirtualNicSpec nic)
     {
-        await this.Session.Client.UpdateServiceConsoleVirtualNic(this.Reference, device, nic);
+        await this.Session.Client.UpdateServiceConsoleVirtualNic(this.VimReference, device, nic);
     }
 
     public async System.Threading.Tasks.Task UpdateVirtualNic(string device, HostVirtualNicSpec nic)
     {
-        await this.Session.Client.UpdateVirtualNic(this.Reference, device, nic);
+        await this.Session.Client.UpdateVirtualNic(this.VimReference, device, nic);
     }
 
     public async System.Threading.Tasks.Task UpdateVirtualSwitch(string vswitchName, HostVirtualSwitchSpec spec)
     {
-        await this.Session.Client.UpdateVirtualSwitch(this.Reference, vswitchName, spec);
+        await this.Session.Client.UpdateVirtualSwitch(this.VimReference, vswitchName, spec);
     }
 }
 
@@ -3375,25 +3375,25 @@ public partial class HostNvdimmSystem : ManagedObject
 
     public async System.Threading.Tasks.Task<Task?> CreateNvdimmNamespace_Task(NvdimmNamespaceCreateSpec createSpec)
     {
-        var res = await this.Session.Client.CreateNvdimmNamespace_Task(this.Reference, createSpec);
+        var res = await this.Session.Client.CreateNvdimmNamespace_Task(this.VimReference, createSpec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> CreateNvdimmPMemNamespace_Task(NvdimmPMemNamespaceCreateSpec createSpec)
     {
-        var res = await this.Session.Client.CreateNvdimmPMemNamespace_Task(this.Reference, createSpec);
+        var res = await this.Session.Client.CreateNvdimmPMemNamespace_Task(this.VimReference, createSpec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> DeleteNvdimmBlockNamespaces_Task()
     {
-        var res = await this.Session.Client.DeleteNvdimmBlockNamespaces_Task(this.Reference);
+        var res = await this.Session.Client.DeleteNvdimmBlockNamespaces_Task(this.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> DeleteNvdimmNamespace_Task(NvdimmNamespaceDeleteSpec deleteSpec)
     {
-        var res = await this.Session.Client.DeleteNvdimmNamespace_Task(this.Reference, deleteSpec);
+        var res = await this.Session.Client.DeleteNvdimmNamespace_Task(this.VimReference, deleteSpec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -3409,49 +3409,49 @@ public partial class HostPatchManager : ManagedObject
 
     public async System.Threading.Tasks.Task<Task?> CheckHostPatch_Task(string[]? metaUrls, string[]? bundleUrls, HostPatchManagerPatchManagerOperationSpec? spec)
     {
-        var res = await this.Session.Client.CheckHostPatch_Task(this.Reference, metaUrls, bundleUrls, spec);
+        var res = await this.Session.Client.CheckHostPatch_Task(this.VimReference, metaUrls, bundleUrls, spec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> InstallHostPatch_Task(HostPatchManagerLocator repository, string updateID, bool? force)
     {
-        var res = await this.Session.Client.InstallHostPatch_Task(this.Reference, repository, updateID, force ?? default, force.HasValue);
+        var res = await this.Session.Client.InstallHostPatch_Task(this.VimReference, repository, updateID, force ?? default, force.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> InstallHostPatchV2_Task(string[]? metaUrls, string[]? bundleUrls, string[]? vibUrls, HostPatchManagerPatchManagerOperationSpec? spec)
     {
-        var res = await this.Session.Client.InstallHostPatchV2_Task(this.Reference, metaUrls, bundleUrls, vibUrls, spec);
+        var res = await this.Session.Client.InstallHostPatchV2_Task(this.VimReference, metaUrls, bundleUrls, vibUrls, spec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> QueryHostPatch_Task(HostPatchManagerPatchManagerOperationSpec? spec)
     {
-        var res = await this.Session.Client.QueryHostPatch_Task(this.Reference, spec);
+        var res = await this.Session.Client.QueryHostPatch_Task(this.VimReference, spec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> ScanHostPatch_Task(HostPatchManagerLocator repository, string[]? updateID)
     {
-        var res = await this.Session.Client.ScanHostPatch_Task(this.Reference, repository, updateID);
+        var res = await this.Session.Client.ScanHostPatch_Task(this.VimReference, repository, updateID);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> ScanHostPatchV2_Task(string[]? metaUrls, string[]? bundleUrls, HostPatchManagerPatchManagerOperationSpec? spec)
     {
-        var res = await this.Session.Client.ScanHostPatchV2_Task(this.Reference, metaUrls, bundleUrls, spec);
+        var res = await this.Session.Client.ScanHostPatchV2_Task(this.VimReference, metaUrls, bundleUrls, spec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> StageHostPatch_Task(string[]? metaUrls, string[]? bundleUrls, string[]? vibUrls, HostPatchManagerPatchManagerOperationSpec? spec)
     {
-        var res = await this.Session.Client.StageHostPatch_Task(this.Reference, metaUrls, bundleUrls, vibUrls, spec);
+        var res = await this.Session.Client.StageHostPatch_Task(this.VimReference, metaUrls, bundleUrls, vibUrls, spec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> UninstallHostPatch_Task(string[]? bulletinIds, HostPatchManagerPatchManagerOperationSpec? spec)
     {
-        var res = await this.Session.Client.UninstallHostPatch_Task(this.Reference, bulletinIds, spec);
+        var res = await this.Session.Client.UninstallHostPatch_Task(this.VimReference, bulletinIds, spec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -3479,12 +3479,12 @@ public partial class HostPciPassthruSystem : ExtensibleManagedObject
 
     public async System.Threading.Tasks.Task Refresh()
     {
-        await this.Session.Client.Refresh(this.Reference);
+        await this.Session.Client.Refresh(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task UpdatePassthruConfig(HostPciPassthruConfig[] config)
     {
-        await this.Session.Client.UpdatePassthruConfig(this.Reference, config);
+        await this.Session.Client.UpdatePassthruConfig(this.VimReference, config);
     }
 }
 
@@ -3511,7 +3511,7 @@ public partial class HostPowerSystem : ManagedObject
 
     public async System.Threading.Tasks.Task ConfigurePowerPolicy(int key)
     {
-        await this.Session.Client.ConfigurePowerPolicy(this.Reference, key);
+        await this.Session.Client.ConfigurePowerPolicy(this.VimReference, key);
     }
 }
 
@@ -3550,22 +3550,22 @@ public partial class HostProfile : Profile
 
     public async System.Threading.Tasks.Task<ProfileExecuteResult?> ExecuteHostProfile(HostSystem host, ProfileDeferredPolicyOptionParameter[]? deferredParam)
     {
-        return await this.Session.Client.ExecuteHostProfile(this.Reference, host.Reference, deferredParam);
+        return await this.Session.Client.ExecuteHostProfile(this.VimReference, host.VimReference, deferredParam);
     }
 
     public async System.Threading.Tasks.Task HostProfileResetValidationState()
     {
-        await this.Session.Client.HostProfileResetValidationState(this.Reference);
+        await this.Session.Client.HostProfileResetValidationState(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task UpdateHostProfile(HostProfileConfigSpec config)
     {
-        await this.Session.Client.UpdateHostProfile(this.Reference, config);
+        await this.Session.Client.UpdateHostProfile(this.VimReference, config);
     }
 
     public async System.Threading.Tasks.Task UpdateReferenceHost(HostSystem? host)
     {
-        await this.Session.Client.UpdateReferenceHost(this.Reference, host?.Reference);
+        await this.Session.Client.UpdateReferenceHost(this.VimReference, host?.VimReference);
     }
 }
 
@@ -3580,106 +3580,106 @@ public partial class HostProfileManager : ProfileManager
 
     public async System.Threading.Tasks.Task<Task?> ApplyEntitiesConfig_Task(ApplyHostProfileConfigurationSpec[]? applyConfigSpecs)
     {
-        var res = await this.Session.Client.ApplyEntitiesConfig_Task(this.Reference, applyConfigSpecs);
+        var res = await this.Session.Client.ApplyEntitiesConfig_Task(this.VimReference, applyConfigSpecs);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> ApplyHostConfig_Task(HostSystem host, HostConfigSpec configSpec, ProfileDeferredPolicyOptionParameter[]? userInput)
     {
-        var res = await this.Session.Client.ApplyHostConfig_Task(this.Reference, host.Reference, configSpec, userInput);
+        var res = await this.Session.Client.ApplyHostConfig_Task(this.VimReference, host.VimReference, configSpec, userInput);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> CheckAnswerFileStatus_Task(HostSystem[] host)
     {
-        var res = await this.Session.Client.CheckAnswerFileStatus_Task(this.Reference, host.Select(m => m.Reference).ToArray());
+        var res = await this.Session.Client.CheckAnswerFileStatus_Task(this.VimReference, host.Select(m => m.VimReference).ToArray());
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> CompositeHostProfile_Task(Profile source, Profile[]? targets, HostApplyProfile? toBeMerged, HostApplyProfile? toBeReplacedWith, HostApplyProfile? toBeDeleted, HostApplyProfile? enableStatusToBeCopied)
     {
-        var res = await this.Session.Client.CompositeHostProfile_Task(this.Reference, source.Reference, targets?.Select(m => m.Reference).ToArray(), toBeMerged, toBeReplacedWith, toBeDeleted, enableStatusToBeCopied);
+        var res = await this.Session.Client.CompositeHostProfile_Task(this.VimReference, source.VimReference, targets?.Select(m => m.VimReference).ToArray(), toBeMerged, toBeReplacedWith, toBeDeleted, enableStatusToBeCopied);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<ApplyProfile?> CreateDefaultProfile(string profileType, string? profileTypeName, Profile? profile)
     {
-        return await this.Session.Client.CreateDefaultProfile(this.Reference, profileType, profileTypeName, profile?.Reference);
+        return await this.Session.Client.CreateDefaultProfile(this.VimReference, profileType, profileTypeName, profile?.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> ExportAnswerFile_Task(HostSystem host)
     {
-        var res = await this.Session.Client.ExportAnswerFile_Task(this.Reference, host.Reference);
+        var res = await this.Session.Client.ExportAnswerFile_Task(this.VimReference, host.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<HostProfileManagerConfigTaskList?> GenerateConfigTaskList(HostConfigSpec configSpec, HostSystem host)
     {
-        return await this.Session.Client.GenerateConfigTaskList(this.Reference, configSpec, host.Reference);
+        return await this.Session.Client.GenerateConfigTaskList(this.VimReference, configSpec, host.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> GenerateHostConfigTaskSpec_Task(StructuredCustomizations[]? hostsInfo)
     {
-        var res = await this.Session.Client.GenerateHostConfigTaskSpec_Task(this.Reference, hostsInfo);
+        var res = await this.Session.Client.GenerateHostConfigTaskSpec_Task(this.VimReference, hostsInfo);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> GenerateHostProfileTaskList_Task(HostConfigSpec configSpec, HostSystem host)
     {
-        var res = await this.Session.Client.GenerateHostProfileTaskList_Task(this.Reference, configSpec, host.Reference);
+        var res = await this.Session.Client.GenerateHostProfileTaskList_Task(this.VimReference, configSpec, host.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<AnswerFileStatusResult[]?> QueryAnswerFileStatus(HostSystem[] host)
     {
-        return await this.Session.Client.QueryAnswerFileStatus(this.Reference, host.Select(m => m.Reference).ToArray());
+        return await this.Session.Client.QueryAnswerFileStatus(this.VimReference, host.Select(m => m.VimReference).ToArray());
     }
 
     public async System.Threading.Tasks.Task<ProfileMetadata[]?> QueryHostProfileMetadata(string[]? profileName, Profile? profile)
     {
-        return await this.Session.Client.QueryHostProfileMetadata(this.Reference, profileName, profile?.Reference);
+        return await this.Session.Client.QueryHostProfileMetadata(this.VimReference, profileName, profile?.VimReference);
     }
 
     public async System.Threading.Tasks.Task<ProfileProfileStructure?> QueryProfileStructure(Profile? profile)
     {
-        return await this.Session.Client.QueryProfileStructure(this.Reference, profile?.Reference);
+        return await this.Session.Client.QueryProfileStructure(this.VimReference, profile?.VimReference);
     }
 
     public async System.Threading.Tasks.Task<AnswerFile?> RetrieveAnswerFile(HostSystem host)
     {
-        return await this.Session.Client.RetrieveAnswerFile(this.Reference, host.Reference);
+        return await this.Session.Client.RetrieveAnswerFile(this.VimReference, host.VimReference);
     }
 
     public async System.Threading.Tasks.Task<AnswerFile?> RetrieveAnswerFileForProfile(HostSystem host, HostApplyProfile applyProfile)
     {
-        return await this.Session.Client.RetrieveAnswerFileForProfile(this.Reference, host.Reference, applyProfile);
+        return await this.Session.Client.RetrieveAnswerFileForProfile(this.VimReference, host.VimReference, applyProfile);
     }
 
     public async System.Threading.Tasks.Task<StructuredCustomizations[]?> RetrieveHostCustomizations(HostSystem[]? hosts)
     {
-        return await this.Session.Client.RetrieveHostCustomizations(this.Reference, hosts?.Select(m => m.Reference).ToArray());
+        return await this.Session.Client.RetrieveHostCustomizations(this.VimReference, hosts?.Select(m => m.VimReference).ToArray());
     }
 
     public async System.Threading.Tasks.Task<StructuredCustomizations[]?> RetrieveHostCustomizationsForProfile(HostSystem[]? hosts, HostApplyProfile applyProfile)
     {
-        return await this.Session.Client.RetrieveHostCustomizationsForProfile(this.Reference, hosts?.Select(m => m.Reference).ToArray(), applyProfile);
+        return await this.Session.Client.RetrieveHostCustomizationsForProfile(this.VimReference, hosts?.Select(m => m.VimReference).ToArray(), applyProfile);
     }
 
     public async System.Threading.Tasks.Task<Task?> UpdateAnswerFile_Task(HostSystem host, AnswerFileCreateSpec configSpec)
     {
-        var res = await this.Session.Client.UpdateAnswerFile_Task(this.Reference, host.Reference, configSpec);
+        var res = await this.Session.Client.UpdateAnswerFile_Task(this.VimReference, host.VimReference, configSpec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> UpdateHostCustomizations_Task(HostProfileManagerHostToConfigSpecMap[]? hostToConfigSpecMap)
     {
-        var res = await this.Session.Client.UpdateHostCustomizations_Task(this.Reference, hostToConfigSpecMap);
+        var res = await this.Session.Client.UpdateHostCustomizations_Task(this.VimReference, hostToConfigSpecMap);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> ValidateHostProfileComposition_Task(Profile source, Profile[]? targets, HostApplyProfile? toBeMerged, HostApplyProfile? toReplaceWith, HostApplyProfile? toBeDeleted, HostApplyProfile? enableStatusToBeCopied, bool? errorOnly)
     {
-        var res = await this.Session.Client.ValidateHostProfileComposition_Task(this.Reference, source.Reference, targets?.Select(m => m.Reference).ToArray(), toBeMerged, toReplaceWith, toBeDeleted, enableStatusToBeCopied, errorOnly ?? default, errorOnly.HasValue);
+        var res = await this.Session.Client.ValidateHostProfileComposition_Task(this.VimReference, source.VimReference, targets?.Select(m => m.VimReference).ToArray(), toBeMerged, toReplaceWith, toBeDeleted, enableStatusToBeCopied, errorOnly ?? default, errorOnly.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -3701,32 +3701,32 @@ public partial class HostServiceSystem : ExtensibleManagedObject
 
     public async System.Threading.Tasks.Task RefreshServices()
     {
-        await this.Session.Client.RefreshServices(this.Reference);
+        await this.Session.Client.RefreshServices(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task RestartService(string id)
     {
-        await this.Session.Client.RestartService(this.Reference, id);
+        await this.Session.Client.RestartService(this.VimReference, id);
     }
 
     public async System.Threading.Tasks.Task StartService(string id)
     {
-        await this.Session.Client.StartService(this.Reference, id);
+        await this.Session.Client.StartService(this.VimReference, id);
     }
 
     public async System.Threading.Tasks.Task StopService(string id)
     {
-        await this.Session.Client.StopService(this.Reference, id);
+        await this.Session.Client.StopService(this.VimReference, id);
     }
 
     public async System.Threading.Tasks.Task UninstallService(string id)
     {
-        await this.Session.Client.UninstallService(this.Reference, id);
+        await this.Session.Client.UninstallService(this.VimReference, id);
     }
 
     public async System.Threading.Tasks.Task UpdateServicePolicy(string id, string policy)
     {
-        await this.Session.Client.UpdateServicePolicy(this.Reference, id, policy);
+        await this.Session.Client.UpdateServicePolicy(this.VimReference, id, policy);
     }
 }
 
@@ -3753,12 +3753,12 @@ public partial class HostSnmpSystem : ManagedObject
 
     public async System.Threading.Tasks.Task ReconfigureSnmpAgent(HostSnmpConfigSpec spec)
     {
-        await this.Session.Client.ReconfigureSnmpAgent(this.Reference, spec);
+        await this.Session.Client.ReconfigureSnmpAgent(this.VimReference, spec);
     }
 
     public async System.Threading.Tasks.Task SendTestNotification()
     {
-        await this.Session.Client.SendTestNotification(this.Reference);
+        await this.Session.Client.SendTestNotification(this.VimReference);
     }
 }
 
@@ -3773,33 +3773,33 @@ public partial class HostSpecificationManager : ManagedObject
 
     public async System.Threading.Tasks.Task DeleteHostSpecification(HostSystem host)
     {
-        await this.Session.Client.DeleteHostSpecification(this.Reference, host.Reference);
+        await this.Session.Client.DeleteHostSpecification(this.VimReference, host.VimReference);
     }
 
     public async System.Threading.Tasks.Task DeleteHostSubSpecification(HostSystem host, string subSpecName)
     {
-        await this.Session.Client.DeleteHostSubSpecification(this.Reference, host.Reference, subSpecName);
+        await this.Session.Client.DeleteHostSubSpecification(this.VimReference, host.VimReference, subSpecName);
     }
 
     public async System.Threading.Tasks.Task<HostSystem[]?> HostSpecGetUpdatedHosts(string? startChangeID, string? endChangeID)
     {
-        var res = await this.Session.Client.HostSpecGetUpdatedHosts(this.Reference, startChangeID, endChangeID);
+        var res = await this.Session.Client.HostSpecGetUpdatedHosts(this.VimReference, startChangeID, endChangeID);
         return res?.Select(r => ManagedObject.Create<HostSystem>(r, this.Session)!).ToArray();
     }
 
     public async System.Threading.Tasks.Task<HostSpecification?> RetrieveHostSpecification(HostSystem host, bool fromHost)
     {
-        return await this.Session.Client.RetrieveHostSpecification(this.Reference, host.Reference, fromHost);
+        return await this.Session.Client.RetrieveHostSpecification(this.VimReference, host.VimReference, fromHost);
     }
 
     public async System.Threading.Tasks.Task UpdateHostSpecification(HostSystem host, HostSpecification hostSpec)
     {
-        await this.Session.Client.UpdateHostSpecification(this.Reference, host.Reference, hostSpec);
+        await this.Session.Client.UpdateHostSpecification(this.VimReference, host.VimReference, hostSpec);
     }
 
     public async System.Threading.Tasks.Task UpdateHostSubSpecification(HostSystem host, HostSubSpecification hostSubSpec)
     {
-        await this.Session.Client.UpdateHostSubSpecification(this.Reference, host.Reference, hostSubSpec);
+        await this.Session.Client.UpdateHostSubSpecification(this.VimReference, host.VimReference, hostSubSpec);
     }
 }
 
@@ -3838,422 +3838,422 @@ public partial class HostStorageSystem : ExtensibleManagedObject
 
     public async System.Threading.Tasks.Task AddInternetScsiSendTargets(string iScsiHbaDevice, HostInternetScsiHbaSendTarget[] targets)
     {
-        await this.Session.Client.AddInternetScsiSendTargets(this.Reference, iScsiHbaDevice, targets);
+        await this.Session.Client.AddInternetScsiSendTargets(this.VimReference, iScsiHbaDevice, targets);
     }
 
     public async System.Threading.Tasks.Task AddInternetScsiStaticTargets(string iScsiHbaDevice, HostInternetScsiHbaStaticTarget[] targets)
     {
-        await this.Session.Client.AddInternetScsiStaticTargets(this.Reference, iScsiHbaDevice, targets);
+        await this.Session.Client.AddInternetScsiStaticTargets(this.VimReference, iScsiHbaDevice, targets);
     }
 
     public async System.Threading.Tasks.Task AttachScsiLun(string lunUuid)
     {
-        await this.Session.Client.AttachScsiLun(this.Reference, lunUuid);
+        await this.Session.Client.AttachScsiLun(this.VimReference, lunUuid);
     }
 
     public async System.Threading.Tasks.Task<Task?> AttachScsiLunEx_Task(string[] lunUuid)
     {
-        var res = await this.Session.Client.AttachScsiLunEx_Task(this.Reference, lunUuid);
+        var res = await this.Session.Client.AttachScsiLunEx_Task(this.VimReference, lunUuid);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task AttachVmfsExtent(string vmfsPath, HostScsiDiskPartition extent)
     {
-        await this.Session.Client.AttachVmfsExtent(this.Reference, vmfsPath, extent);
+        await this.Session.Client.AttachVmfsExtent(this.VimReference, vmfsPath, extent);
     }
 
     public async System.Threading.Tasks.Task ChangeNFSUserPassword(string password)
     {
-        await this.Session.Client.ChangeNFSUserPassword(this.Reference, password);
+        await this.Session.Client.ChangeNFSUserPassword(this.VimReference, password);
     }
 
     public async System.Threading.Tasks.Task ClearNFSUser()
     {
-        await this.Session.Client.ClearNFSUser(this.Reference);
+        await this.Session.Client.ClearNFSUser(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<HostDiskPartitionInfo?> ComputeDiskPartitionInfo(string devicePath, HostDiskPartitionLayout layout, string? partitionFormat)
     {
-        return await this.Session.Client.ComputeDiskPartitionInfo(this.Reference, devicePath, layout, partitionFormat);
+        return await this.Session.Client.ComputeDiskPartitionInfo(this.VimReference, devicePath, layout, partitionFormat);
     }
 
     public async System.Threading.Tasks.Task<HostDiskPartitionInfo?> ComputeDiskPartitionInfoForResize(HostScsiDiskPartition partition, HostDiskPartitionBlockRange blockRange, string? partitionFormat)
     {
-        return await this.Session.Client.ComputeDiskPartitionInfoForResize(this.Reference, partition, blockRange, partitionFormat);
+        return await this.Session.Client.ComputeDiskPartitionInfoForResize(this.VimReference, partition, blockRange, partitionFormat);
     }
 
     public async System.Threading.Tasks.Task ConnectNvmeController(HostNvmeConnectSpec connectSpec)
     {
-        await this.Session.Client.ConnectNvmeController(this.Reference, connectSpec);
+        await this.Session.Client.ConnectNvmeController(this.VimReference, connectSpec);
     }
 
     public async System.Threading.Tasks.Task<Task?> ConnectNvmeControllerEx_Task(HostNvmeConnectSpec[]? connectSpec)
     {
-        var res = await this.Session.Client.ConnectNvmeControllerEx_Task(this.Reference, connectSpec);
+        var res = await this.Session.Client.ConnectNvmeControllerEx_Task(this.VimReference, connectSpec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task CreateNvmeOverRdmaAdapter(string rdmaDeviceName)
     {
-        await this.Session.Client.CreateNvmeOverRdmaAdapter(this.Reference, rdmaDeviceName);
+        await this.Session.Client.CreateNvmeOverRdmaAdapter(this.VimReference, rdmaDeviceName);
     }
 
     public async System.Threading.Tasks.Task CreateSoftwareAdapter(HostHbaCreateSpec spec)
     {
-        await this.Session.Client.CreateSoftwareAdapter(this.Reference, spec);
+        await this.Session.Client.CreateSoftwareAdapter(this.VimReference, spec);
     }
 
     public async System.Threading.Tasks.Task DeleteScsiLunState(string lunCanonicalName)
     {
-        await this.Session.Client.DeleteScsiLunState(this.Reference, lunCanonicalName);
+        await this.Session.Client.DeleteScsiLunState(this.VimReference, lunCanonicalName);
     }
 
     public async System.Threading.Tasks.Task DeleteVffsVolumeState(string vffsUuid)
     {
-        await this.Session.Client.DeleteVffsVolumeState(this.Reference, vffsUuid);
+        await this.Session.Client.DeleteVffsVolumeState(this.VimReference, vffsUuid);
     }
 
     public async System.Threading.Tasks.Task DeleteVmfsVolumeState(string vmfsUuid)
     {
-        await this.Session.Client.DeleteVmfsVolumeState(this.Reference, vmfsUuid);
+        await this.Session.Client.DeleteVmfsVolumeState(this.VimReference, vmfsUuid);
     }
 
     public async System.Threading.Tasks.Task DestroyVffs(string vffsPath)
     {
-        await this.Session.Client.DestroyVffs(this.Reference, vffsPath);
+        await this.Session.Client.DestroyVffs(this.VimReference, vffsPath);
     }
 
     public async System.Threading.Tasks.Task DetachScsiLun(string lunUuid)
     {
-        await this.Session.Client.DetachScsiLun(this.Reference, lunUuid);
+        await this.Session.Client.DetachScsiLun(this.VimReference, lunUuid);
     }
 
     public async System.Threading.Tasks.Task<Task?> DetachScsiLunEx_Task(string[] lunUuid)
     {
-        var res = await this.Session.Client.DetachScsiLunEx_Task(this.Reference, lunUuid);
+        var res = await this.Session.Client.DetachScsiLunEx_Task(this.VimReference, lunUuid);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task DisableMultipathPath(string pathName)
     {
-        await this.Session.Client.DisableMultipathPath(this.Reference, pathName);
+        await this.Session.Client.DisableMultipathPath(this.VimReference, pathName);
     }
 
     public async System.Threading.Tasks.Task DisconnectNvmeController(HostNvmeDisconnectSpec disconnectSpec)
     {
-        await this.Session.Client.DisconnectNvmeController(this.Reference, disconnectSpec);
+        await this.Session.Client.DisconnectNvmeController(this.VimReference, disconnectSpec);
     }
 
     public async System.Threading.Tasks.Task<Task?> DisconnectNvmeControllerEx_Task(HostNvmeDisconnectSpec[]? disconnectSpec)
     {
-        var res = await this.Session.Client.DisconnectNvmeControllerEx_Task(this.Reference, disconnectSpec);
+        var res = await this.Session.Client.DisconnectNvmeControllerEx_Task(this.VimReference, disconnectSpec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task DiscoverFcoeHbas(FcoeConfigFcoeSpecification fcoeSpec)
     {
-        await this.Session.Client.DiscoverFcoeHbas(this.Reference, fcoeSpec);
+        await this.Session.Client.DiscoverFcoeHbas(this.VimReference, fcoeSpec);
     }
 
     public async System.Threading.Tasks.Task<HostNvmeDiscoveryLog?> DiscoverNvmeControllers(HostNvmeDiscoverSpec discoverSpec)
     {
-        return await this.Session.Client.DiscoverNvmeControllers(this.Reference, discoverSpec);
+        return await this.Session.Client.DiscoverNvmeControllers(this.VimReference, discoverSpec);
     }
 
     public async System.Threading.Tasks.Task EnableMultipathPath(string pathName)
     {
-        await this.Session.Client.EnableMultipathPath(this.Reference, pathName);
+        await this.Session.Client.EnableMultipathPath(this.VimReference, pathName);
     }
 
     public async System.Threading.Tasks.Task ExpandVmfsExtent(string vmfsPath, HostScsiDiskPartition extent)
     {
-        await this.Session.Client.ExpandVmfsExtent(this.Reference, vmfsPath, extent);
+        await this.Session.Client.ExpandVmfsExtent(this.VimReference, vmfsPath, extent);
     }
 
     public async System.Threading.Tasks.Task ExtendVffs(string vffsPath, string devicePath, HostDiskPartitionSpec? spec)
     {
-        await this.Session.Client.ExtendVffs(this.Reference, vffsPath, devicePath, spec);
+        await this.Session.Client.ExtendVffs(this.VimReference, vffsPath, devicePath, spec);
     }
 
     public async System.Threading.Tasks.Task<HostVffsVolume?> FormatVffs(HostVffsSpec createSpec)
     {
-        return await this.Session.Client.FormatVffs(this.Reference, createSpec);
+        return await this.Session.Client.FormatVffs(this.VimReference, createSpec);
     }
 
     public async System.Threading.Tasks.Task<HostVmfsVolume?> FormatVmfs(HostVmfsSpec createSpec)
     {
-        return await this.Session.Client.FormatVmfs(this.Reference, createSpec);
+        return await this.Session.Client.FormatVmfs(this.VimReference, createSpec);
     }
 
     public async System.Threading.Tasks.Task<Task?> MarkAsLocal_Task(string scsiDiskUuid)
     {
-        var res = await this.Session.Client.MarkAsLocal_Task(this.Reference, scsiDiskUuid);
+        var res = await this.Session.Client.MarkAsLocal_Task(this.VimReference, scsiDiskUuid);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> MarkAsNonLocal_Task(string scsiDiskUuid)
     {
-        var res = await this.Session.Client.MarkAsNonLocal_Task(this.Reference, scsiDiskUuid);
+        var res = await this.Session.Client.MarkAsNonLocal_Task(this.VimReference, scsiDiskUuid);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> MarkAsNonSsd_Task(string scsiDiskUuid)
     {
-        var res = await this.Session.Client.MarkAsNonSsd_Task(this.Reference, scsiDiskUuid);
+        var res = await this.Session.Client.MarkAsNonSsd_Task(this.VimReference, scsiDiskUuid);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> MarkAsSsd_Task(string scsiDiskUuid)
     {
-        var res = await this.Session.Client.MarkAsSsd_Task(this.Reference, scsiDiskUuid);
+        var res = await this.Session.Client.MarkAsSsd_Task(this.VimReference, scsiDiskUuid);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task MarkForRemoval(string hbaName, bool remove)
     {
-        await this.Session.Client.MarkForRemoval(this.Reference, hbaName, remove);
+        await this.Session.Client.MarkForRemoval(this.VimReference, hbaName, remove);
     }
 
     public async System.Threading.Tasks.Task MarkPerenniallyReserved(string lunUuid, bool state)
     {
-        await this.Session.Client.MarkPerenniallyReserved(this.Reference, lunUuid, state);
+        await this.Session.Client.MarkPerenniallyReserved(this.VimReference, lunUuid, state);
     }
 
     public async System.Threading.Tasks.Task<Task?> MarkPerenniallyReservedEx_Task(string[]? lunUuid, bool state)
     {
-        var res = await this.Session.Client.MarkPerenniallyReservedEx_Task(this.Reference, lunUuid, state);
+        var res = await this.Session.Client.MarkPerenniallyReservedEx_Task(this.VimReference, lunUuid, state);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task MountVffsVolume(string vffsUuid)
     {
-        await this.Session.Client.MountVffsVolume(this.Reference, vffsUuid);
+        await this.Session.Client.MountVffsVolume(this.VimReference, vffsUuid);
     }
 
     public async System.Threading.Tasks.Task MountVmfsVolume(string vmfsUuid)
     {
-        await this.Session.Client.MountVmfsVolume(this.Reference, vmfsUuid);
+        await this.Session.Client.MountVmfsVolume(this.VimReference, vmfsUuid);
     }
 
     public async System.Threading.Tasks.Task<Task?> MountVmfsVolumeEx_Task(string[] vmfsUuid)
     {
-        var res = await this.Session.Client.MountVmfsVolumeEx_Task(this.Reference, vmfsUuid);
+        var res = await this.Session.Client.MountVmfsVolumeEx_Task(this.VimReference, vmfsUuid);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<HostScsiDisk[]?> QueryAvailableSsds(string? vffsPath)
     {
-        return await this.Session.Client.QueryAvailableSsds(this.Reference, vffsPath);
+        return await this.Session.Client.QueryAvailableSsds(this.VimReference, vffsPath);
     }
 
     public async System.Threading.Tasks.Task<HostNasVolumeUserInfo?> QueryNFSUser()
     {
-        return await this.Session.Client.QueryNFSUser(this.Reference);
+        return await this.Session.Client.QueryNFSUser(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<HostPathSelectionPolicyOption[]?> QueryPathSelectionPolicyOptions()
     {
-        return await this.Session.Client.QueryPathSelectionPolicyOptions(this.Reference);
+        return await this.Session.Client.QueryPathSelectionPolicyOptions(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<HostStorageArrayTypePolicyOption[]?> QueryStorageArrayTypePolicyOptions()
     {
-        return await this.Session.Client.QueryStorageArrayTypePolicyOptions(this.Reference);
+        return await this.Session.Client.QueryStorageArrayTypePolicyOptions(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<HostUnresolvedVmfsVolume[]?> QueryUnresolvedVmfsVolume()
     {
-        return await this.Session.Client.QueryUnresolvedVmfsVolume(this.Reference);
+        return await this.Session.Client.QueryUnresolvedVmfsVolume(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<VmfsConfigOption[]?> QueryVmfsConfigOption()
     {
-        return await this.Session.Client.QueryVmfsConfigOption(this.Reference);
+        return await this.Session.Client.QueryVmfsConfigOption(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task RefreshStorageSystem()
     {
-        await this.Session.Client.RefreshStorageSystem(this.Reference);
+        await this.Session.Client.RefreshStorageSystem(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task RemoveInternetScsiSendTargets(string iScsiHbaDevice, HostInternetScsiHbaSendTarget[] targets, bool? force)
     {
-        await this.Session.Client.RemoveInternetScsiSendTargets(this.Reference, iScsiHbaDevice, targets, force ?? default, force.HasValue);
+        await this.Session.Client.RemoveInternetScsiSendTargets(this.VimReference, iScsiHbaDevice, targets, force ?? default, force.HasValue);
     }
 
     public async System.Threading.Tasks.Task RemoveInternetScsiStaticTargets(string iScsiHbaDevice, HostInternetScsiHbaStaticTarget[] targets)
     {
-        await this.Session.Client.RemoveInternetScsiStaticTargets(this.Reference, iScsiHbaDevice, targets);
+        await this.Session.Client.RemoveInternetScsiStaticTargets(this.VimReference, iScsiHbaDevice, targets);
     }
 
     public async System.Threading.Tasks.Task RemoveNvmeOverRdmaAdapter(string hbaDeviceName)
     {
-        await this.Session.Client.RemoveNvmeOverRdmaAdapter(this.Reference, hbaDeviceName);
+        await this.Session.Client.RemoveNvmeOverRdmaAdapter(this.VimReference, hbaDeviceName);
     }
 
     public async System.Threading.Tasks.Task RemoveSoftwareAdapter(string hbaDeviceName)
     {
-        await this.Session.Client.RemoveSoftwareAdapter(this.Reference, hbaDeviceName);
+        await this.Session.Client.RemoveSoftwareAdapter(this.VimReference, hbaDeviceName);
     }
 
     public async System.Threading.Tasks.Task RescanAllHba()
     {
-        await this.Session.Client.RescanAllHba(this.Reference);
+        await this.Session.Client.RescanAllHba(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task RescanHba(string hbaDevice)
     {
-        await this.Session.Client.RescanHba(this.Reference, hbaDevice);
+        await this.Session.Client.RescanHba(this.VimReference, hbaDevice);
     }
 
     public async System.Threading.Tasks.Task RescanVffs()
     {
-        await this.Session.Client.RescanVffs(this.Reference);
+        await this.Session.Client.RescanVffs(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task RescanVmfs()
     {
-        await this.Session.Client.RescanVmfs(this.Reference);
+        await this.Session.Client.RescanVmfs(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<HostUnresolvedVmfsResolutionResult[]?> ResolveMultipleUnresolvedVmfsVolumes(HostUnresolvedVmfsResolutionSpec[] resolutionSpec)
     {
-        return await this.Session.Client.ResolveMultipleUnresolvedVmfsVolumes(this.Reference, resolutionSpec);
+        return await this.Session.Client.ResolveMultipleUnresolvedVmfsVolumes(this.VimReference, resolutionSpec);
     }
 
     public async System.Threading.Tasks.Task<Task?> ResolveMultipleUnresolvedVmfsVolumesEx_Task(HostUnresolvedVmfsResolutionSpec[] resolutionSpec)
     {
-        var res = await this.Session.Client.ResolveMultipleUnresolvedVmfsVolumesEx_Task(this.Reference, resolutionSpec);
+        var res = await this.Session.Client.ResolveMultipleUnresolvedVmfsVolumesEx_Task(this.VimReference, resolutionSpec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<HostDiskPartitionInfo[]?> RetrieveDiskPartitionInfo(string[] devicePath)
     {
-        return await this.Session.Client.RetrieveDiskPartitionInfo(this.Reference, devicePath);
+        return await this.Session.Client.RetrieveDiskPartitionInfo(this.VimReference, devicePath);
     }
 
     public async System.Threading.Tasks.Task SetMultipathLunPolicy(string lunId, HostMultipathInfoLogicalUnitPolicy policy)
     {
-        await this.Session.Client.SetMultipathLunPolicy(this.Reference, lunId, policy);
+        await this.Session.Client.SetMultipathLunPolicy(this.VimReference, lunId, policy);
     }
 
     public async System.Threading.Tasks.Task SetNFSUser(string user, string password)
     {
-        await this.Session.Client.SetNFSUser(this.Reference, user, password);
+        await this.Session.Client.SetNFSUser(this.VimReference, user, password);
     }
 
     public async System.Threading.Tasks.Task<Task?> TurnDiskLocatorLedOff_Task(string[] scsiDiskUuids)
     {
-        var res = await this.Session.Client.TurnDiskLocatorLedOff_Task(this.Reference, scsiDiskUuids);
+        var res = await this.Session.Client.TurnDiskLocatorLedOff_Task(this.VimReference, scsiDiskUuids);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> TurnDiskLocatorLedOn_Task(string[] scsiDiskUuids)
     {
-        var res = await this.Session.Client.TurnDiskLocatorLedOn_Task(this.Reference, scsiDiskUuids);
+        var res = await this.Session.Client.TurnDiskLocatorLedOn_Task(this.VimReference, scsiDiskUuids);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> UnmapVmfsVolumeEx_Task(string[] vmfsUuid)
     {
-        var res = await this.Session.Client.UnmapVmfsVolumeEx_Task(this.Reference, vmfsUuid);
+        var res = await this.Session.Client.UnmapVmfsVolumeEx_Task(this.VimReference, vmfsUuid);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task UnmountForceMountedVmfsVolume(string vmfsUuid)
     {
-        await this.Session.Client.UnmountForceMountedVmfsVolume(this.Reference, vmfsUuid);
+        await this.Session.Client.UnmountForceMountedVmfsVolume(this.VimReference, vmfsUuid);
     }
 
     public async System.Threading.Tasks.Task UnmountVffsVolume(string vffsUuid)
     {
-        await this.Session.Client.UnmountVffsVolume(this.Reference, vffsUuid);
+        await this.Session.Client.UnmountVffsVolume(this.VimReference, vffsUuid);
     }
 
     public async System.Threading.Tasks.Task UnmountVmfsVolume(string vmfsUuid)
     {
-        await this.Session.Client.UnmountVmfsVolume(this.Reference, vmfsUuid);
+        await this.Session.Client.UnmountVmfsVolume(this.VimReference, vmfsUuid);
     }
 
     public async System.Threading.Tasks.Task<Task?> UnmountVmfsVolumeEx_Task(string[] vmfsUuid)
     {
-        var res = await this.Session.Client.UnmountVmfsVolumeEx_Task(this.Reference, vmfsUuid);
+        var res = await this.Session.Client.UnmountVmfsVolumeEx_Task(this.VimReference, vmfsUuid);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task UpdateDiskPartitions(string devicePath, HostDiskPartitionSpec spec)
     {
-        await this.Session.Client.UpdateDiskPartitions(this.Reference, devicePath, spec);
+        await this.Session.Client.UpdateDiskPartitions(this.VimReference, devicePath, spec);
     }
 
     public async System.Threading.Tasks.Task UpdateHppMultipathLunPolicy(string lunId, HostMultipathInfoHppLogicalUnitPolicy policy)
     {
-        await this.Session.Client.UpdateHppMultipathLunPolicy(this.Reference, lunId, policy);
+        await this.Session.Client.UpdateHppMultipathLunPolicy(this.VimReference, lunId, policy);
     }
 
     public async System.Threading.Tasks.Task UpdateInternetScsiAdvancedOptions(string iScsiHbaDevice, HostInternetScsiHbaTargetSet? targetSet, HostInternetScsiHbaParamValue[] options)
     {
-        await this.Session.Client.UpdateInternetScsiAdvancedOptions(this.Reference, iScsiHbaDevice, targetSet, options);
+        await this.Session.Client.UpdateInternetScsiAdvancedOptions(this.VimReference, iScsiHbaDevice, targetSet, options);
     }
 
     public async System.Threading.Tasks.Task UpdateInternetScsiAlias(string iScsiHbaDevice, string iScsiAlias)
     {
-        await this.Session.Client.UpdateInternetScsiAlias(this.Reference, iScsiHbaDevice, iScsiAlias);
+        await this.Session.Client.UpdateInternetScsiAlias(this.VimReference, iScsiHbaDevice, iScsiAlias);
     }
 
     public async System.Threading.Tasks.Task UpdateInternetScsiAuthenticationProperties(string iScsiHbaDevice, HostInternetScsiHbaAuthenticationProperties authenticationProperties, HostInternetScsiHbaTargetSet? targetSet)
     {
-        await this.Session.Client.UpdateInternetScsiAuthenticationProperties(this.Reference, iScsiHbaDevice, authenticationProperties, targetSet);
+        await this.Session.Client.UpdateInternetScsiAuthenticationProperties(this.VimReference, iScsiHbaDevice, authenticationProperties, targetSet);
     }
 
     public async System.Threading.Tasks.Task UpdateInternetScsiDigestProperties(string iScsiHbaDevice, HostInternetScsiHbaTargetSet? targetSet, HostInternetScsiHbaDigestProperties digestProperties)
     {
-        await this.Session.Client.UpdateInternetScsiDigestProperties(this.Reference, iScsiHbaDevice, targetSet, digestProperties);
+        await this.Session.Client.UpdateInternetScsiDigestProperties(this.VimReference, iScsiHbaDevice, targetSet, digestProperties);
     }
 
     public async System.Threading.Tasks.Task UpdateInternetScsiDiscoveryProperties(string iScsiHbaDevice, HostInternetScsiHbaDiscoveryProperties discoveryProperties)
     {
-        await this.Session.Client.UpdateInternetScsiDiscoveryProperties(this.Reference, iScsiHbaDevice, discoveryProperties);
+        await this.Session.Client.UpdateInternetScsiDiscoveryProperties(this.VimReference, iScsiHbaDevice, discoveryProperties);
     }
 
     public async System.Threading.Tasks.Task UpdateInternetScsiIPProperties(string iScsiHbaDevice, HostInternetScsiHbaIPProperties ipProperties)
     {
-        await this.Session.Client.UpdateInternetScsiIPProperties(this.Reference, iScsiHbaDevice, ipProperties);
+        await this.Session.Client.UpdateInternetScsiIPProperties(this.VimReference, iScsiHbaDevice, ipProperties);
     }
 
     public async System.Threading.Tasks.Task UpdateInternetScsiName(string iScsiHbaDevice, string iScsiName)
     {
-        await this.Session.Client.UpdateInternetScsiName(this.Reference, iScsiHbaDevice, iScsiName);
+        await this.Session.Client.UpdateInternetScsiName(this.VimReference, iScsiHbaDevice, iScsiName);
     }
 
     public async System.Threading.Tasks.Task UpdateScsiLunDisplayName(string lunUuid, string displayName)
     {
-        await this.Session.Client.UpdateScsiLunDisplayName(this.Reference, lunUuid, displayName);
+        await this.Session.Client.UpdateScsiLunDisplayName(this.VimReference, lunUuid, displayName);
     }
 
     public async System.Threading.Tasks.Task UpdateSoftwareInternetScsiEnabled(bool enabled)
     {
-        await this.Session.Client.UpdateSoftwareInternetScsiEnabled(this.Reference, enabled);
+        await this.Session.Client.UpdateSoftwareInternetScsiEnabled(this.VimReference, enabled);
     }
 
     public async System.Threading.Tasks.Task UpdateVmfsUnmapBandwidth(string vmfsUuid, VmfsUnmapBandwidthSpec unmapBandwidthSpec)
     {
-        await this.Session.Client.UpdateVmfsUnmapBandwidth(this.Reference, vmfsUuid, unmapBandwidthSpec);
+        await this.Session.Client.UpdateVmfsUnmapBandwidth(this.VimReference, vmfsUuid, unmapBandwidthSpec);
     }
 
     public async System.Threading.Tasks.Task UpdateVmfsUnmapPriority(string vmfsUuid, string unmapPriority)
     {
-        await this.Session.Client.UpdateVmfsUnmapPriority(this.Reference, vmfsUuid, unmapPriority);
+        await this.Session.Client.UpdateVmfsUnmapPriority(this.VimReference, vmfsUuid, unmapPriority);
     }
 
     public async System.Threading.Tasks.Task UpgradeVmfs(string vmfsPath)
     {
-        await this.Session.Client.UpgradeVmfs(this.Reference, vmfsPath);
+        await this.Session.Client.UpgradeVmfs(this.VimReference, vmfsPath);
     }
 
     public async System.Threading.Tasks.Task UpgradeVmLayout()
     {
-        await this.Session.Client.UpgradeVmLayout(this.Reference);
+        await this.Session.Client.UpgradeVmLayout(this.VimReference);
     }
 }
 
@@ -4388,147 +4388,147 @@ public partial class HostSystem : ManagedEntity
 
     public async System.Threading.Tasks.Task<HostServiceTicket?> AcquireCimServicesTicket()
     {
-        return await this.Session.Client.AcquireCimServicesTicket(this.Reference);
+        return await this.Session.Client.AcquireCimServicesTicket(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task ConfigureCryptoKey(CryptoKeyId? keyId)
     {
-        await this.Session.Client.ConfigureCryptoKey(this.Reference, keyId);
+        await this.Session.Client.ConfigureCryptoKey(this.VimReference, keyId);
     }
 
     public async System.Threading.Tasks.Task<Task?> DisconnectHost_Task()
     {
-        var res = await this.Session.Client.DisconnectHost_Task(this.Reference);
+        var res = await this.Session.Client.DisconnectHost_Task(this.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task EnableCrypto(CryptoKeyPlain keyPlain)
     {
-        await this.Session.Client.EnableCrypto(this.Reference, keyPlain);
+        await this.Session.Client.EnableCrypto(this.VimReference, keyPlain);
     }
 
     public async System.Threading.Tasks.Task EnterLockdownMode()
     {
-        await this.Session.Client.EnterLockdownMode(this.Reference);
+        await this.Session.Client.EnterLockdownMode(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> EnterMaintenanceMode_Task(int timeout, bool? evacuatePoweredOffVms, HostMaintenanceSpec? maintenanceSpec)
     {
-        var res = await this.Session.Client.EnterMaintenanceMode_Task(this.Reference, timeout, evacuatePoweredOffVms ?? default, evacuatePoweredOffVms.HasValue, maintenanceSpec);
+        var res = await this.Session.Client.EnterMaintenanceMode_Task(this.VimReference, timeout, evacuatePoweredOffVms ?? default, evacuatePoweredOffVms.HasValue, maintenanceSpec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task ExitLockdownMode()
     {
-        await this.Session.Client.ExitLockdownMode(this.Reference);
+        await this.Session.Client.ExitLockdownMode(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> ExitMaintenanceMode_Task(int timeout)
     {
-        var res = await this.Session.Client.ExitMaintenanceMode_Task(this.Reference, timeout);
+        var res = await this.Session.Client.ExitMaintenanceMode_Task(this.VimReference, timeout);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> PowerDownHostToStandBy_Task(int timeoutSec, bool? evacuatePoweredOffVms)
     {
-        var res = await this.Session.Client.PowerDownHostToStandBy_Task(this.Reference, timeoutSec, evacuatePoweredOffVms ?? default, evacuatePoweredOffVms.HasValue);
+        var res = await this.Session.Client.PowerDownHostToStandBy_Task(this.VimReference, timeoutSec, evacuatePoweredOffVms ?? default, evacuatePoweredOffVms.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> PowerUpHostFromStandBy_Task(int timeoutSec)
     {
-        var res = await this.Session.Client.PowerUpHostFromStandBy_Task(this.Reference, timeoutSec);
+        var res = await this.Session.Client.PowerUpHostFromStandBy_Task(this.VimReference, timeoutSec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task PrepareCrypto()
     {
-        await this.Session.Client.PrepareCrypto(this.Reference);
+        await this.Session.Client.PrepareCrypto(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<HostConnectInfo?> QueryHostConnectionInfo()
     {
-        return await this.Session.Client.QueryHostConnectionInfo(this.Reference);
+        return await this.Session.Client.QueryHostConnectionInfo(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<long> QueryMemoryOverhead(long memorySize, int? videoRamSize, int numVcpus)
     {
-        return await this.Session.Client.QueryMemoryOverhead(this.Reference, memorySize, videoRamSize ?? default, videoRamSize.HasValue, numVcpus);
+        return await this.Session.Client.QueryMemoryOverhead(this.VimReference, memorySize, videoRamSize ?? default, videoRamSize.HasValue, numVcpus);
     }
 
     public async System.Threading.Tasks.Task<long> QueryMemoryOverheadEx(VirtualMachineConfigInfo vmConfigInfo)
     {
-        return await this.Session.Client.QueryMemoryOverheadEx(this.Reference, vmConfigInfo);
+        return await this.Session.Client.QueryMemoryOverheadEx(this.VimReference, vmConfigInfo);
     }
 
     public async System.Threading.Tasks.Task<string?> QueryProductLockerLocation()
     {
-        return await this.Session.Client.QueryProductLockerLocation(this.Reference);
+        return await this.Session.Client.QueryProductLockerLocation(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<HostTpmAttestationReport?> QueryTpmAttestationReport()
     {
-        return await this.Session.Client.QueryTpmAttestationReport(this.Reference);
+        return await this.Session.Client.QueryTpmAttestationReport(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> RebootHost_Task(bool force)
     {
-        var res = await this.Session.Client.RebootHost_Task(this.Reference, force);
+        var res = await this.Session.Client.RebootHost_Task(this.VimReference, force);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> ReconfigureHostForDAS_Task()
     {
-        var res = await this.Session.Client.ReconfigureHostForDAS_Task(this.Reference);
+        var res = await this.Session.Client.ReconfigureHostForDAS_Task(this.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> ReconnectHost_Task(HostConnectSpec? cnxSpec, HostSystemReconnectSpec? reconnectSpec)
     {
-        var res = await this.Session.Client.ReconnectHost_Task(this.Reference, cnxSpec, reconnectSpec);
+        var res = await this.Session.Client.ReconnectHost_Task(this.VimReference, cnxSpec, reconnectSpec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<long> RetrieveFreeEpcMemory()
     {
-        return await this.Session.Client.RetrieveFreeEpcMemory(this.Reference);
+        return await this.Session.Client.RetrieveFreeEpcMemory(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<long> RetrieveHardwareUptime()
     {
-        return await this.Session.Client.RetrieveHardwareUptime(this.Reference);
+        return await this.Session.Client.RetrieveHardwareUptime(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> ShutdownHost_Task(bool force)
     {
-        var res = await this.Session.Client.ShutdownHost_Task(this.Reference, force);
+        var res = await this.Session.Client.ShutdownHost_Task(this.VimReference, force);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task UpdateFlags(HostFlagInfo flagInfo)
     {
-        await this.Session.Client.UpdateFlags(this.Reference, flagInfo);
+        await this.Session.Client.UpdateFlags(this.VimReference, flagInfo);
     }
 
     public async System.Threading.Tasks.Task UpdateIpmi(HostIpmiInfo ipmiInfo)
     {
-        await this.Session.Client.UpdateIpmi(this.Reference, ipmiInfo);
+        await this.Session.Client.UpdateIpmi(this.VimReference, ipmiInfo);
     }
 
     public async System.Threading.Tasks.Task<Task?> UpdateProductLockerLocation_Task(string path)
     {
-        var res = await this.Session.Client.UpdateProductLockerLocation_Task(this.Reference, path);
+        var res = await this.Session.Client.UpdateProductLockerLocation_Task(this.VimReference, path);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task UpdateSystemResources(HostSystemResourceInfo resourceInfo)
     {
-        await this.Session.Client.UpdateSystemResources(this.Reference, resourceInfo);
+        await this.Session.Client.UpdateSystemResources(this.VimReference, resourceInfo);
     }
 
     public async System.Threading.Tasks.Task UpdateSystemSwapConfiguration(HostSystemSwapConfiguration sysSwapConfig)
     {
-        await this.Session.Client.UpdateSystemSwapConfiguration(this.Reference, sysSwapConfig);
+        await this.Session.Client.UpdateSystemSwapConfiguration(this.VimReference, sysSwapConfig);
     }
 }
 
@@ -4549,28 +4549,28 @@ public partial class HostVFlashManager : ManagedObject
 
     public async System.Threading.Tasks.Task<Task?> ConfigureVFlashResourceEx_Task(string[]? devicePath)
     {
-        var res = await this.Session.Client.ConfigureVFlashResourceEx_Task(this.Reference, devicePath);
+        var res = await this.Session.Client.ConfigureVFlashResourceEx_Task(this.VimReference, devicePath);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task HostConfigureVFlashResource(HostVFlashManagerVFlashResourceConfigSpec spec)
     {
-        await this.Session.Client.HostConfigureVFlashResource(this.Reference, spec);
+        await this.Session.Client.HostConfigureVFlashResource(this.VimReference, spec);
     }
 
     public async System.Threading.Tasks.Task HostConfigVFlashCache(HostVFlashManagerVFlashCacheConfigSpec spec)
     {
-        await this.Session.Client.HostConfigVFlashCache(this.Reference, spec);
+        await this.Session.Client.HostConfigVFlashCache(this.VimReference, spec);
     }
 
     public async System.Threading.Tasks.Task<VirtualDiskVFlashCacheConfigInfo?> HostGetVFlashModuleDefaultConfig(string vFlashModule)
     {
-        return await this.Session.Client.HostGetVFlashModuleDefaultConfig(this.Reference, vFlashModule);
+        return await this.Session.Client.HostGetVFlashModuleDefaultConfig(this.VimReference, vFlashModule);
     }
 
     public async System.Threading.Tasks.Task HostRemoveVFlashResource()
     {
-        await this.Session.Client.HostRemoveVFlashResource(this.Reference);
+        await this.Session.Client.HostRemoveVFlashResource(this.VimReference);
     }
 }
 
@@ -4591,17 +4591,17 @@ public partial class HostVirtualNicManager : ExtensibleManagedObject
 
     public async System.Threading.Tasks.Task DeselectVnicForNicType(string nicType, string device)
     {
-        await this.Session.Client.DeselectVnicForNicType(this.Reference, nicType, device);
+        await this.Session.Client.DeselectVnicForNicType(this.VimReference, nicType, device);
     }
 
     public async System.Threading.Tasks.Task<VirtualNicManagerNetConfig?> QueryNetConfig(string nicType)
     {
-        return await this.Session.Client.QueryNetConfig(this.Reference, nicType);
+        return await this.Session.Client.QueryNetConfig(this.VimReference, nicType);
     }
 
     public async System.Threading.Tasks.Task SelectVnicForNicType(string nicType, string device)
     {
-        await this.Session.Client.SelectVnicForNicType(this.Reference, nicType, device);
+        await this.Session.Client.SelectVnicForNicType(this.VimReference, nicType, device);
     }
 }
 
@@ -4628,17 +4628,17 @@ public partial class HostVMotionSystem : ExtensibleManagedObject
 
     public async System.Threading.Tasks.Task DeselectVnic()
     {
-        await this.Session.Client.DeselectVnic(this.Reference);
+        await this.Session.Client.DeselectVnic(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task SelectVnic(string device)
     {
-        await this.Session.Client.SelectVnic(this.Reference, device);
+        await this.Session.Client.SelectVnic(this.VimReference, device);
     }
 
     public async System.Threading.Tasks.Task UpdateIpConfig(HostIpConfig ipConfig)
     {
-        await this.Session.Client.UpdateIpConfig(this.Reference, ipConfig);
+        await this.Session.Client.UpdateIpConfig(this.VimReference, ipConfig);
     }
 }
 
@@ -4653,77 +4653,77 @@ public partial class HostVsanInternalSystem : ManagedObject
 
     public async System.Threading.Tasks.Task<string[]?> AbdicateDomOwnership(string[] uuids)
     {
-        return await this.Session.Client.AbdicateDomOwnership(this.Reference, uuids);
+        return await this.Session.Client.AbdicateDomOwnership(this.VimReference, uuids);
     }
 
     public async System.Threading.Tasks.Task<VsanPolicySatisfiability[]?> CanProvisionObjects(VsanNewPolicyBatch[] npbs, bool? ignoreSatisfiability)
     {
-        return await this.Session.Client.CanProvisionObjects(this.Reference, npbs, ignoreSatisfiability ?? default, ignoreSatisfiability.HasValue);
+        return await this.Session.Client.CanProvisionObjects(this.VimReference, npbs, ignoreSatisfiability ?? default, ignoreSatisfiability.HasValue);
     }
 
     public async System.Threading.Tasks.Task<HostVsanInternalSystemDeleteVsanObjectsResult[]?> DeleteVsanObjects(string[] uuids, bool? force)
     {
-        return await this.Session.Client.DeleteVsanObjects(this.Reference, uuids, force ?? default, force.HasValue);
+        return await this.Session.Client.DeleteVsanObjects(this.VimReference, uuids, force ?? default, force.HasValue);
     }
 
     public async System.Threading.Tasks.Task<string?> GetVsanObjExtAttrs(string[] uuids)
     {
-        return await this.Session.Client.GetVsanObjExtAttrs(this.Reference, uuids);
+        return await this.Session.Client.GetVsanObjExtAttrs(this.VimReference, uuids);
     }
 
     public async System.Threading.Tasks.Task<string?> QueryCmmds(HostVsanInternalSystemCmmdsQuery[] queries)
     {
-        return await this.Session.Client.QueryCmmds(this.Reference, queries);
+        return await this.Session.Client.QueryCmmds(this.VimReference, queries);
     }
 
     public async System.Threading.Tasks.Task<string?> QueryObjectsOnPhysicalVsanDisk(string[] disks)
     {
-        return await this.Session.Client.QueryObjectsOnPhysicalVsanDisk(this.Reference, disks);
+        return await this.Session.Client.QueryObjectsOnPhysicalVsanDisk(this.VimReference, disks);
     }
 
     public async System.Threading.Tasks.Task<string?> QueryPhysicalVsanDisks(string[]? props)
     {
-        return await this.Session.Client.QueryPhysicalVsanDisks(this.Reference, props);
+        return await this.Session.Client.QueryPhysicalVsanDisks(this.VimReference, props);
     }
 
     public async System.Threading.Tasks.Task<string?> QuerySyncingVsanObjects(string[]? uuids)
     {
-        return await this.Session.Client.QuerySyncingVsanObjects(this.Reference, uuids);
+        return await this.Session.Client.QuerySyncingVsanObjects(this.VimReference, uuids);
     }
 
     public async System.Threading.Tasks.Task<string?> QueryVsanObjects(string[]? uuids)
     {
-        return await this.Session.Client.QueryVsanObjects(this.Reference, uuids);
+        return await this.Session.Client.QueryVsanObjects(this.VimReference, uuids);
     }
 
     public async System.Threading.Tasks.Task<string[]?> QueryVsanObjectUuidsByFilter(string[]? uuids, int? limit, int? version)
     {
-        return await this.Session.Client.QueryVsanObjectUuidsByFilter(this.Reference, uuids, limit ?? default, limit.HasValue, version ?? default, version.HasValue);
+        return await this.Session.Client.QueryVsanObjectUuidsByFilter(this.VimReference, uuids, limit ?? default, limit.HasValue, version ?? default, version.HasValue);
     }
 
     public async System.Threading.Tasks.Task<string?> QueryVsanStatistics(string[] labels)
     {
-        return await this.Session.Client.QueryVsanStatistics(this.Reference, labels);
+        return await this.Session.Client.QueryVsanStatistics(this.VimReference, labels);
     }
 
     public async System.Threading.Tasks.Task<VsanPolicySatisfiability[]?> ReconfigurationSatisfiable(VsanPolicyChangeBatch[] pcbs, bool? ignoreSatisfiability)
     {
-        return await this.Session.Client.ReconfigurationSatisfiable(this.Reference, pcbs, ignoreSatisfiability ?? default, ignoreSatisfiability.HasValue);
+        return await this.Session.Client.ReconfigurationSatisfiable(this.VimReference, pcbs, ignoreSatisfiability ?? default, ignoreSatisfiability.HasValue);
     }
 
     public async System.Threading.Tasks.Task ReconfigureDomObject(string uuid, string policy)
     {
-        await this.Session.Client.ReconfigureDomObject(this.Reference, uuid, policy);
+        await this.Session.Client.ReconfigureDomObject(this.VimReference, uuid, policy);
     }
 
     public async System.Threading.Tasks.Task<HostVsanInternalSystemVsanPhysicalDiskDiagnosticsResult[]?> RunVsanPhysicalDiskDiagnostics(string[]? disks)
     {
-        return await this.Session.Client.RunVsanPhysicalDiskDiagnostics(this.Reference, disks);
+        return await this.Session.Client.RunVsanPhysicalDiskDiagnostics(this.VimReference, disks);
     }
 
     public async System.Threading.Tasks.Task<HostVsanInternalSystemVsanObjectOperationResult[]?> UpgradeVsanObjects(string[] uuids, int newVersion)
     {
-        return await this.Session.Client.UpgradeVsanObjects(this.Reference, uuids, newVersion);
+        return await this.Session.Client.UpgradeVsanObjects(this.VimReference, uuids, newVersion);
     }
 }
 
@@ -4744,59 +4744,59 @@ public partial class HostVsanSystem : ManagedObject
 
     public async System.Threading.Tasks.Task<Task?> AddDisks_Task(HostScsiDisk[] disk)
     {
-        var res = await this.Session.Client.AddDisks_Task(this.Reference, disk);
+        var res = await this.Session.Client.AddDisks_Task(this.VimReference, disk);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> EvacuateVsanNode_Task(HostMaintenanceSpec maintenanceSpec, int timeout)
     {
-        var res = await this.Session.Client.EvacuateVsanNode_Task(this.Reference, maintenanceSpec, timeout);
+        var res = await this.Session.Client.EvacuateVsanNode_Task(this.VimReference, maintenanceSpec, timeout);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> InitializeDisks_Task(VsanHostDiskMapping[] mapping)
     {
-        var res = await this.Session.Client.InitializeDisks_Task(this.Reference, mapping);
+        var res = await this.Session.Client.InitializeDisks_Task(this.VimReference, mapping);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<VsanHostDiskResult[]?> QueryDisksForVsan(string[]? canonicalName)
     {
-        return await this.Session.Client.QueryDisksForVsan(this.Reference, canonicalName);
+        return await this.Session.Client.QueryDisksForVsan(this.VimReference, canonicalName);
     }
 
     public async System.Threading.Tasks.Task<VsanHostClusterStatus?> QueryHostStatus()
     {
-        return await this.Session.Client.QueryHostStatus(this.Reference);
+        return await this.Session.Client.QueryHostStatus(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> RecommissionVsanNode_Task()
     {
-        var res = await this.Session.Client.RecommissionVsanNode_Task(this.Reference);
+        var res = await this.Session.Client.RecommissionVsanNode_Task(this.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> RemoveDisk_Task(HostScsiDisk[] disk, HostMaintenanceSpec? maintenanceSpec, int? timeout)
     {
-        var res = await this.Session.Client.RemoveDisk_Task(this.Reference, disk, maintenanceSpec, timeout ?? default, timeout.HasValue);
+        var res = await this.Session.Client.RemoveDisk_Task(this.VimReference, disk, maintenanceSpec, timeout ?? default, timeout.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> RemoveDiskMapping_Task(VsanHostDiskMapping[] mapping, HostMaintenanceSpec? maintenanceSpec, int? timeout)
     {
-        var res = await this.Session.Client.RemoveDiskMapping_Task(this.Reference, mapping, maintenanceSpec, timeout ?? default, timeout.HasValue);
+        var res = await this.Session.Client.RemoveDiskMapping_Task(this.VimReference, mapping, maintenanceSpec, timeout ?? default, timeout.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> UnmountDiskMapping_Task(VsanHostDiskMapping[] mapping)
     {
-        var res = await this.Session.Client.UnmountDiskMapping_Task(this.Reference, mapping);
+        var res = await this.Session.Client.UnmountDiskMapping_Task(this.VimReference, mapping);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> UpdateVsan_Task(VsanHostConfigInfo config)
     {
-        var res = await this.Session.Client.UpdateVsan_Task(this.Reference, config);
+        var res = await this.Session.Client.UpdateVsan_Task(this.VimReference, config);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -4812,145 +4812,145 @@ public partial class HostVStorageObjectManager : VStorageObjectManagerBase
 
     public async System.Threading.Tasks.Task HostClearVStorageObjectControlFlags(ID id, Datastore datastore, string[]? controlFlags)
     {
-        await this.Session.Client.HostClearVStorageObjectControlFlags(this.Reference, id, datastore.Reference, controlFlags);
+        await this.Session.Client.HostClearVStorageObjectControlFlags(this.VimReference, id, datastore.VimReference, controlFlags);
     }
 
     public async System.Threading.Tasks.Task<Task?> HostCloneVStorageObject_Task(ID id, Datastore datastore, VslmCloneSpec spec)
     {
-        var res = await this.Session.Client.HostCloneVStorageObject_Task(this.Reference, id, datastore.Reference, spec);
+        var res = await this.Session.Client.HostCloneVStorageObject_Task(this.VimReference, id, datastore.VimReference, spec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> HostCreateDisk_Task(VslmCreateSpec spec)
     {
-        var res = await this.Session.Client.HostCreateDisk_Task(this.Reference, spec);
+        var res = await this.Session.Client.HostCreateDisk_Task(this.VimReference, spec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> HostDeleteVStorageObject_Task(ID id, Datastore datastore)
     {
-        var res = await this.Session.Client.HostDeleteVStorageObject_Task(this.Reference, id, datastore.Reference);
+        var res = await this.Session.Client.HostDeleteVStorageObject_Task(this.VimReference, id, datastore.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> HostDeleteVStorageObjectEx_Task(ID id, Datastore datastore)
     {
-        var res = await this.Session.Client.HostDeleteVStorageObjectEx_Task(this.Reference, id, datastore.Reference);
+        var res = await this.Session.Client.HostDeleteVStorageObjectEx_Task(this.VimReference, id, datastore.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> HostExtendDisk_Task(ID id, Datastore datastore, long newCapacityInMB)
     {
-        var res = await this.Session.Client.HostExtendDisk_Task(this.Reference, id, datastore.Reference, newCapacityInMB);
+        var res = await this.Session.Client.HostExtendDisk_Task(this.VimReference, id, datastore.VimReference, newCapacityInMB);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> HostInflateDisk_Task(ID id, Datastore datastore)
     {
-        var res = await this.Session.Client.HostInflateDisk_Task(this.Reference, id, datastore.Reference);
+        var res = await this.Session.Client.HostInflateDisk_Task(this.VimReference, id, datastore.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<ID[]?> HostListVStorageObject(Datastore datastore)
     {
-        return await this.Session.Client.HostListVStorageObject(this.Reference, datastore.Reference);
+        return await this.Session.Client.HostListVStorageObject(this.VimReference, datastore.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> HostReconcileDatastoreInventory_Task(Datastore datastore)
     {
-        var res = await this.Session.Client.HostReconcileDatastoreInventory_Task(this.Reference, datastore.Reference);
+        var res = await this.Session.Client.HostReconcileDatastoreInventory_Task(this.VimReference, datastore.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<VStorageObject?> HostRegisterDisk(string path, string? name)
     {
-        return await this.Session.Client.HostRegisterDisk(this.Reference, path, name);
+        return await this.Session.Client.HostRegisterDisk(this.VimReference, path, name);
     }
 
     public async System.Threading.Tasks.Task<Task?> HostRelocateVStorageObject_Task(ID id, Datastore datastore, VslmRelocateSpec spec)
     {
-        var res = await this.Session.Client.HostRelocateVStorageObject_Task(this.Reference, id, datastore.Reference, spec);
+        var res = await this.Session.Client.HostRelocateVStorageObject_Task(this.VimReference, id, datastore.VimReference, spec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task HostRenameVStorageObject(ID id, Datastore datastore, string name)
     {
-        await this.Session.Client.HostRenameVStorageObject(this.Reference, id, datastore.Reference, name);
+        await this.Session.Client.HostRenameVStorageObject(this.VimReference, id, datastore.VimReference, name);
     }
 
     public async System.Threading.Tasks.Task<vslmInfrastructureObjectPolicy[]?> HostRetrieveVStorageInfrastructureObjectPolicy(Datastore datastore)
     {
-        return await this.Session.Client.HostRetrieveVStorageInfrastructureObjectPolicy(this.Reference, datastore.Reference);
+        return await this.Session.Client.HostRetrieveVStorageInfrastructureObjectPolicy(this.VimReference, datastore.VimReference);
     }
 
     public async System.Threading.Tasks.Task<VStorageObject?> HostRetrieveVStorageObject(ID id, Datastore datastore)
     {
-        return await this.Session.Client.HostRetrieveVStorageObject(this.Reference, id, datastore.Reference);
+        return await this.Session.Client.HostRetrieveVStorageObject(this.VimReference, id, datastore.VimReference);
     }
 
     public async System.Threading.Tasks.Task<KeyValue[]?> HostRetrieveVStorageObjectMetadata(ID id, Datastore datastore, ID? snapshotId, string? prefix)
     {
-        return await this.Session.Client.HostRetrieveVStorageObjectMetadata(this.Reference, id, datastore.Reference, snapshotId, prefix);
+        return await this.Session.Client.HostRetrieveVStorageObjectMetadata(this.VimReference, id, datastore.VimReference, snapshotId, prefix);
     }
 
     public async System.Threading.Tasks.Task<string?> HostRetrieveVStorageObjectMetadataValue(ID id, Datastore datastore, ID? snapshotId, string key)
     {
-        return await this.Session.Client.HostRetrieveVStorageObjectMetadataValue(this.Reference, id, datastore.Reference, snapshotId, key);
+        return await this.Session.Client.HostRetrieveVStorageObjectMetadataValue(this.VimReference, id, datastore.VimReference, snapshotId, key);
     }
 
     public async System.Threading.Tasks.Task<VStorageObjectStateInfo?> HostRetrieveVStorageObjectState(ID id, Datastore datastore)
     {
-        return await this.Session.Client.HostRetrieveVStorageObjectState(this.Reference, id, datastore.Reference);
+        return await this.Session.Client.HostRetrieveVStorageObjectState(this.VimReference, id, datastore.VimReference);
     }
 
     public async System.Threading.Tasks.Task HostScheduleReconcileDatastoreInventory(Datastore datastore)
     {
-        await this.Session.Client.HostScheduleReconcileDatastoreInventory(this.Reference, datastore.Reference);
+        await this.Session.Client.HostScheduleReconcileDatastoreInventory(this.VimReference, datastore.VimReference);
     }
 
     public async System.Threading.Tasks.Task HostSetVStorageObjectControlFlags(ID id, Datastore datastore, string[]? controlFlags)
     {
-        await this.Session.Client.HostSetVStorageObjectControlFlags(this.Reference, id, datastore.Reference, controlFlags);
+        await this.Session.Client.HostSetVStorageObjectControlFlags(this.VimReference, id, datastore.VimReference, controlFlags);
     }
 
     public async System.Threading.Tasks.Task<Task?> HostUpdateVStorageObjectMetadata_Task(ID id, Datastore datastore, KeyValue[]? metadata, string[]? deleteKeys)
     {
-        var res = await this.Session.Client.HostUpdateVStorageObjectMetadata_Task(this.Reference, id, datastore.Reference, metadata, deleteKeys);
+        var res = await this.Session.Client.HostUpdateVStorageObjectMetadata_Task(this.VimReference, id, datastore.VimReference, metadata, deleteKeys);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> HostUpdateVStorageObjectMetadataEx_Task(ID id, Datastore datastore, KeyValue[]? metadata, string[]? deleteKeys)
     {
-        var res = await this.Session.Client.HostUpdateVStorageObjectMetadataEx_Task(this.Reference, id, datastore.Reference, metadata, deleteKeys);
+        var res = await this.Session.Client.HostUpdateVStorageObjectMetadataEx_Task(this.VimReference, id, datastore.VimReference, metadata, deleteKeys);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> HostVStorageObjectCreateDiskFromSnapshot_Task(ID id, Datastore datastore, ID snapshotId, string name, VirtualMachineProfileSpec[]? profile, CryptoSpec? crypto, string? path)
     {
-        var res = await this.Session.Client.HostVStorageObjectCreateDiskFromSnapshot_Task(this.Reference, id, datastore.Reference, snapshotId, name, profile, crypto, path);
+        var res = await this.Session.Client.HostVStorageObjectCreateDiskFromSnapshot_Task(this.VimReference, id, datastore.VimReference, snapshotId, name, profile, crypto, path);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> HostVStorageObjectCreateSnapshot_Task(ID id, Datastore datastore, string description)
     {
-        var res = await this.Session.Client.HostVStorageObjectCreateSnapshot_Task(this.Reference, id, datastore.Reference, description);
+        var res = await this.Session.Client.HostVStorageObjectCreateSnapshot_Task(this.VimReference, id, datastore.VimReference, description);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> HostVStorageObjectDeleteSnapshot_Task(ID id, Datastore datastore, ID snapshotId)
     {
-        var res = await this.Session.Client.HostVStorageObjectDeleteSnapshot_Task(this.Reference, id, datastore.Reference, snapshotId);
+        var res = await this.Session.Client.HostVStorageObjectDeleteSnapshot_Task(this.VimReference, id, datastore.VimReference, snapshotId);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<VStorageObjectSnapshotInfo?> HostVStorageObjectRetrieveSnapshotInfo(ID id, Datastore datastore)
     {
-        return await this.Session.Client.HostVStorageObjectRetrieveSnapshotInfo(this.Reference, id, datastore.Reference);
+        return await this.Session.Client.HostVStorageObjectRetrieveSnapshotInfo(this.VimReference, id, datastore.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> HostVStorageObjectRevert_Task(ID id, Datastore datastore, ID snapshotId)
     {
-        var res = await this.Session.Client.HostVStorageObjectRevert_Task(this.Reference, id, datastore.Reference, snapshotId);
+        var res = await this.Session.Client.HostVStorageObjectRevert_Task(this.VimReference, id, datastore.VimReference, snapshotId);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -5008,38 +5008,38 @@ public partial class HttpNfcLease : ManagedObject
 
     public async System.Threading.Tasks.Task HttpNfcLeaseAbort(LocalizedMethodFault? fault)
     {
-        await this.Session.Client.HttpNfcLeaseAbort(this.Reference, fault);
+        await this.Session.Client.HttpNfcLeaseAbort(this.VimReference, fault);
     }
 
     public async System.Threading.Tasks.Task HttpNfcLeaseComplete()
     {
-        await this.Session.Client.HttpNfcLeaseComplete(this.Reference);
+        await this.Session.Client.HttpNfcLeaseComplete(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<HttpNfcLeaseManifestEntry[]?> HttpNfcLeaseGetManifest()
     {
-        return await this.Session.Client.HttpNfcLeaseGetManifest(this.Reference);
+        return await this.Session.Client.HttpNfcLeaseGetManifest(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<HttpNfcLeaseProbeResult[]?> HttpNfcLeaseProbeUrls(HttpNfcLeaseSourceFile[]? files, int? timeout)
     {
-        return await this.Session.Client.HttpNfcLeaseProbeUrls(this.Reference, files, timeout ?? default, timeout.HasValue);
+        return await this.Session.Client.HttpNfcLeaseProbeUrls(this.VimReference, files, timeout ?? default, timeout.HasValue);
     }
 
     public async System.Threading.Tasks.Task HttpNfcLeaseProgress(int percent)
     {
-        await this.Session.Client.HttpNfcLeaseProgress(this.Reference, percent);
+        await this.Session.Client.HttpNfcLeaseProgress(this.VimReference, percent);
     }
 
     public async System.Threading.Tasks.Task<Task?> HttpNfcLeasePullFromUrls_Task(HttpNfcLeaseSourceFile[]? files)
     {
-        var res = await this.Session.Client.HttpNfcLeasePullFromUrls_Task(this.Reference, files);
+        var res = await this.Session.Client.HttpNfcLeasePullFromUrls_Task(this.VimReference, files);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task HttpNfcLeaseSetManifestChecksumType(KeyValue[]? deviceUrlsToChecksumTypes)
     {
-        await this.Session.Client.HttpNfcLeaseSetManifestChecksumType(this.Reference, deviceUrlsToChecksumTypes);
+        await this.Session.Client.HttpNfcLeaseSetManifestChecksumType(this.VimReference, deviceUrlsToChecksumTypes);
     }
 }
 
@@ -5054,13 +5054,13 @@ public partial class InventoryView : ManagedObjectView
 
     public async System.Threading.Tasks.Task<ManagedEntity[]?> CloseInventoryViewFolder(ManagedEntity[] entity)
     {
-        var res = await this.Session.Client.CloseInventoryViewFolder(this.Reference, entity.Select(m => m.Reference).ToArray());
+        var res = await this.Session.Client.CloseInventoryViewFolder(this.VimReference, entity.Select(m => m.VimReference).ToArray());
         return res?.Select(r => ManagedObject.Create<ManagedEntity>(r, this.Session)!).ToArray();
     }
 
     public async System.Threading.Tasks.Task<ManagedEntity[]?> OpenInventoryViewFolder(ManagedEntity[] entity)
     {
-        var res = await this.Session.Client.OpenInventoryViewFolder(this.Reference, entity.Select(m => m.Reference).ToArray());
+        var res = await this.Session.Client.OpenInventoryViewFolder(this.VimReference, entity.Select(m => m.VimReference).ToArray());
         return res?.Select(r => ManagedObject.Create<ManagedEntity>(r, this.Session)!).ToArray();
     }
 }
@@ -5076,46 +5076,46 @@ public partial class IoFilterManager : ManagedObject
 
     public async System.Threading.Tasks.Task<Task?> InstallIoFilter_Task(string vibUrl, ComputeResource compRes)
     {
-        var res = await this.Session.Client.InstallIoFilter_Task(this.Reference, vibUrl, compRes.Reference);
+        var res = await this.Session.Client.InstallIoFilter_Task(this.VimReference, vibUrl, compRes.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<VirtualDiskId[]?> QueryDisksUsingFilter(string filterId, ComputeResource compRes)
     {
-        return await this.Session.Client.QueryDisksUsingFilter(this.Reference, filterId, compRes.Reference);
+        return await this.Session.Client.QueryDisksUsingFilter(this.VimReference, filterId, compRes.VimReference);
     }
 
     public async System.Threading.Tasks.Task<ClusterIoFilterInfo[]?> QueryIoFilterInfo(ComputeResource compRes)
     {
-        return await this.Session.Client.QueryIoFilterInfo(this.Reference, compRes.Reference);
+        return await this.Session.Client.QueryIoFilterInfo(this.VimReference, compRes.VimReference);
     }
 
     public async System.Threading.Tasks.Task<IoFilterQueryIssueResult?> QueryIoFilterIssues(string filterId, ComputeResource compRes)
     {
-        return await this.Session.Client.QueryIoFilterIssues(this.Reference, filterId, compRes.Reference);
+        return await this.Session.Client.QueryIoFilterIssues(this.VimReference, filterId, compRes.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> ResolveInstallationErrorsOnCluster_Task(string filterId, ClusterComputeResource cluster)
     {
-        var res = await this.Session.Client.ResolveInstallationErrorsOnCluster_Task(this.Reference, filterId, cluster.Reference);
+        var res = await this.Session.Client.ResolveInstallationErrorsOnCluster_Task(this.VimReference, filterId, cluster.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> ResolveInstallationErrorsOnHost_Task(string filterId, HostSystem host)
     {
-        var res = await this.Session.Client.ResolveInstallationErrorsOnHost_Task(this.Reference, filterId, host.Reference);
+        var res = await this.Session.Client.ResolveInstallationErrorsOnHost_Task(this.VimReference, filterId, host.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> UninstallIoFilter_Task(string filterId, ComputeResource compRes)
     {
-        var res = await this.Session.Client.UninstallIoFilter_Task(this.Reference, filterId, compRes.Reference);
+        var res = await this.Session.Client.UninstallIoFilter_Task(this.VimReference, filterId, compRes.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> UpgradeIoFilter_Task(string filterId, ComputeResource compRes, string vibUrl)
     {
-        var res = await this.Session.Client.UpgradeIoFilter_Task(this.Reference, filterId, compRes.Reference, vibUrl);
+        var res = await this.Session.Client.UpgradeIoFilter_Task(this.VimReference, filterId, compRes.VimReference, vibUrl);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -5131,42 +5131,42 @@ public partial class IpPoolManager : ManagedObject
 
     public async System.Threading.Tasks.Task<string?> AllocateIpv4Address(Datacenter dc, int poolId, string allocationId)
     {
-        return await this.Session.Client.AllocateIpv4Address(this.Reference, dc.Reference, poolId, allocationId);
+        return await this.Session.Client.AllocateIpv4Address(this.VimReference, dc.VimReference, poolId, allocationId);
     }
 
     public async System.Threading.Tasks.Task<string?> AllocateIpv6Address(Datacenter dc, int poolId, string allocationId)
     {
-        return await this.Session.Client.AllocateIpv6Address(this.Reference, dc.Reference, poolId, allocationId);
+        return await this.Session.Client.AllocateIpv6Address(this.VimReference, dc.VimReference, poolId, allocationId);
     }
 
     public async System.Threading.Tasks.Task<int> CreateIpPool(Datacenter dc, IpPool pool)
     {
-        return await this.Session.Client.CreateIpPool(this.Reference, dc.Reference, pool);
+        return await this.Session.Client.CreateIpPool(this.VimReference, dc.VimReference, pool);
     }
 
     public async System.Threading.Tasks.Task DestroyIpPool(Datacenter dc, int id, bool force)
     {
-        await this.Session.Client.DestroyIpPool(this.Reference, dc.Reference, id, force);
+        await this.Session.Client.DestroyIpPool(this.VimReference, dc.VimReference, id, force);
     }
 
     public async System.Threading.Tasks.Task<IpPoolManagerIpAllocation[]?> QueryIPAllocations(Datacenter dc, int poolId, string extensionKey)
     {
-        return await this.Session.Client.QueryIPAllocations(this.Reference, dc.Reference, poolId, extensionKey);
+        return await this.Session.Client.QueryIPAllocations(this.VimReference, dc.VimReference, poolId, extensionKey);
     }
 
     public async System.Threading.Tasks.Task<IpPool[]?> QueryIpPools(Datacenter dc)
     {
-        return await this.Session.Client.QueryIpPools(this.Reference, dc.Reference);
+        return await this.Session.Client.QueryIpPools(this.VimReference, dc.VimReference);
     }
 
     public async System.Threading.Tasks.Task ReleaseIpAllocation(Datacenter dc, int poolId, string allocationId)
     {
-        await this.Session.Client.ReleaseIpAllocation(this.Reference, dc.Reference, poolId, allocationId);
+        await this.Session.Client.ReleaseIpAllocation(this.VimReference, dc.VimReference, poolId, allocationId);
     }
 
     public async System.Threading.Tasks.Task UpdateIpPool(Datacenter dc, IpPool pool)
     {
-        await this.Session.Client.UpdateIpPool(this.Reference, dc.Reference, pool);
+        await this.Session.Client.UpdateIpPool(this.VimReference, dc.VimReference, pool);
     }
 }
 
@@ -5181,37 +5181,37 @@ public partial class IscsiManager : ManagedObject
 
     public async System.Threading.Tasks.Task BindVnic(string iScsiHbaName, string vnicDevice)
     {
-        await this.Session.Client.BindVnic(this.Reference, iScsiHbaName, vnicDevice);
+        await this.Session.Client.BindVnic(this.VimReference, iScsiHbaName, vnicDevice);
     }
 
     public async System.Threading.Tasks.Task<IscsiPortInfo[]?> QueryBoundVnics(string iScsiHbaName)
     {
-        return await this.Session.Client.QueryBoundVnics(this.Reference, iScsiHbaName);
+        return await this.Session.Client.QueryBoundVnics(this.VimReference, iScsiHbaName);
     }
 
     public async System.Threading.Tasks.Task<IscsiPortInfo[]?> QueryCandidateNics(string iScsiHbaName)
     {
-        return await this.Session.Client.QueryCandidateNics(this.Reference, iScsiHbaName);
+        return await this.Session.Client.QueryCandidateNics(this.VimReference, iScsiHbaName);
     }
 
     public async System.Threading.Tasks.Task<IscsiMigrationDependency?> QueryMigrationDependencies(string[] pnicDevice)
     {
-        return await this.Session.Client.QueryMigrationDependencies(this.Reference, pnicDevice);
+        return await this.Session.Client.QueryMigrationDependencies(this.VimReference, pnicDevice);
     }
 
     public async System.Threading.Tasks.Task<IscsiStatus?> QueryPnicStatus(string pnicDevice)
     {
-        return await this.Session.Client.QueryPnicStatus(this.Reference, pnicDevice);
+        return await this.Session.Client.QueryPnicStatus(this.VimReference, pnicDevice);
     }
 
     public async System.Threading.Tasks.Task<IscsiStatus?> QueryVnicStatus(string vnicDevice)
     {
-        return await this.Session.Client.QueryVnicStatus(this.Reference, vnicDevice);
+        return await this.Session.Client.QueryVnicStatus(this.VimReference, vnicDevice);
     }
 
     public async System.Threading.Tasks.Task UnbindVnic(string iScsiHbaName, string vnicDevice, bool force)
     {
-        await this.Session.Client.UnbindVnic(this.Reference, iScsiHbaName, vnicDevice, force);
+        await this.Session.Client.UnbindVnic(this.VimReference, iScsiHbaName, vnicDevice, force);
     }
 }
 
@@ -5226,17 +5226,17 @@ public partial class LicenseAssignmentManager : ManagedObject
 
     public async System.Threading.Tasks.Task<LicenseAssignmentManagerLicenseAssignment[]?> QueryAssignedLicenses(string? entityId)
     {
-        return await this.Session.Client.QueryAssignedLicenses(this.Reference, entityId);
+        return await this.Session.Client.QueryAssignedLicenses(this.VimReference, entityId);
     }
 
     public async System.Threading.Tasks.Task RemoveAssignedLicense(string entityId)
     {
-        await this.Session.Client.RemoveAssignedLicense(this.Reference, entityId);
+        await this.Session.Client.RemoveAssignedLicense(this.VimReference, entityId);
     }
 
     public async System.Threading.Tasks.Task<LicenseManagerLicenseInfo?> UpdateAssignedLicense(string entity, string licenseKey, string? entityDisplayName)
     {
-        return await this.Session.Client.UpdateAssignedLicense(this.Reference, entity, licenseKey, entityDisplayName);
+        return await this.Session.Client.UpdateAssignedLicense(this.VimReference, entity, licenseKey, entityDisplayName);
     }
 }
 
@@ -5299,72 +5299,72 @@ public partial class LicenseManager : ManagedObject
 
     public async System.Threading.Tasks.Task<LicenseManagerLicenseInfo?> AddLicense(string licenseKey, KeyValue[]? labels)
     {
-        return await this.Session.Client.AddLicense(this.Reference, licenseKey, labels);
+        return await this.Session.Client.AddLicense(this.VimReference, licenseKey, labels);
     }
 
     public async System.Threading.Tasks.Task<bool> CheckLicenseFeature(HostSystem? host, string featureKey)
     {
-        return await this.Session.Client.CheckLicenseFeature(this.Reference, host?.Reference, featureKey);
+        return await this.Session.Client.CheckLicenseFeature(this.VimReference, host?.VimReference, featureKey);
     }
 
     public async System.Threading.Tasks.Task ConfigureLicenseSource(HostSystem? host, LicenseSource licenseSource)
     {
-        await this.Session.Client.ConfigureLicenseSource(this.Reference, host?.Reference, licenseSource);
+        await this.Session.Client.ConfigureLicenseSource(this.VimReference, host?.VimReference, licenseSource);
     }
 
     public async System.Threading.Tasks.Task<LicenseManagerLicenseInfo?> DecodeLicense(string licenseKey)
     {
-        return await this.Session.Client.DecodeLicense(this.Reference, licenseKey);
+        return await this.Session.Client.DecodeLicense(this.VimReference, licenseKey);
     }
 
     public async System.Threading.Tasks.Task<bool> DisableFeature(HostSystem? host, string featureKey)
     {
-        return await this.Session.Client.DisableFeature(this.Reference, host?.Reference, featureKey);
+        return await this.Session.Client.DisableFeature(this.VimReference, host?.VimReference, featureKey);
     }
 
     public async System.Threading.Tasks.Task<bool> EnableFeature(HostSystem? host, string featureKey)
     {
-        return await this.Session.Client.EnableFeature(this.Reference, host?.Reference, featureKey);
+        return await this.Session.Client.EnableFeature(this.VimReference, host?.VimReference, featureKey);
     }
 
     public async System.Threading.Tasks.Task<LicenseAvailabilityInfo[]?> QueryLicenseSourceAvailability(HostSystem? host)
     {
-        return await this.Session.Client.QueryLicenseSourceAvailability(this.Reference, host?.Reference);
+        return await this.Session.Client.QueryLicenseSourceAvailability(this.VimReference, host?.VimReference);
     }
 
     public async System.Threading.Tasks.Task<LicenseUsageInfo?> QueryLicenseUsage(HostSystem? host)
     {
-        return await this.Session.Client.QueryLicenseUsage(this.Reference, host?.Reference);
+        return await this.Session.Client.QueryLicenseUsage(this.VimReference, host?.VimReference);
     }
 
     public async System.Threading.Tasks.Task<LicenseFeatureInfo[]?> QuerySupportedFeatures(HostSystem? host)
     {
-        return await this.Session.Client.QuerySupportedFeatures(this.Reference, host?.Reference);
+        return await this.Session.Client.QuerySupportedFeatures(this.VimReference, host?.VimReference);
     }
 
     public async System.Threading.Tasks.Task RemoveLicense(string licenseKey)
     {
-        await this.Session.Client.RemoveLicense(this.Reference, licenseKey);
+        await this.Session.Client.RemoveLicense(this.VimReference, licenseKey);
     }
 
     public async System.Threading.Tasks.Task RemoveLicenseLabel(string licenseKey, string labelKey)
     {
-        await this.Session.Client.RemoveLicenseLabel(this.Reference, licenseKey, labelKey);
+        await this.Session.Client.RemoveLicenseLabel(this.VimReference, licenseKey, labelKey);
     }
 
     public async System.Threading.Tasks.Task SetLicenseEdition(HostSystem? host, string? featureKey)
     {
-        await this.Session.Client.SetLicenseEdition(this.Reference, host?.Reference, featureKey);
+        await this.Session.Client.SetLicenseEdition(this.VimReference, host?.VimReference, featureKey);
     }
 
     public async System.Threading.Tasks.Task<LicenseManagerLicenseInfo?> UpdateLicense(string licenseKey, KeyValue[]? labels)
     {
-        return await this.Session.Client.UpdateLicense(this.Reference, licenseKey, labels);
+        return await this.Session.Client.UpdateLicense(this.VimReference, licenseKey, labels);
     }
 
     public async System.Threading.Tasks.Task UpdateLicenseLabel(string licenseKey, string labelKey, string labelValue)
     {
-        await this.Session.Client.UpdateLicenseLabel(this.Reference, licenseKey, labelKey, labelValue);
+        await this.Session.Client.UpdateLicenseLabel(this.VimReference, licenseKey, labelKey, labelValue);
     }
 }
 
@@ -5379,19 +5379,19 @@ public partial class ListView : ManagedObjectView
 
     public async System.Threading.Tasks.Task<ManagedObject[]?> ModifyListView(ManagedObject[]? add, ManagedObject[]? remove)
     {
-        var res = await this.Session.Client.ModifyListView(this.Reference, add?.Select(m => m.Reference).ToArray(), remove?.Select(m => m.Reference).ToArray());
+        var res = await this.Session.Client.ModifyListView(this.VimReference, add?.Select(m => m.VimReference).ToArray(), remove?.Select(m => m.VimReference).ToArray());
         return res?.Select(r => ManagedObject.Create<ManagedObject>(r, this.Session)!).ToArray();
     }
 
     public async System.Threading.Tasks.Task<ManagedObject[]?> ResetListView(ManagedObject[]? obj)
     {
-        var res = await this.Session.Client.ResetListView(this.Reference, obj?.Select(m => m.Reference).ToArray());
+        var res = await this.Session.Client.ResetListView(this.VimReference, obj?.Select(m => m.VimReference).ToArray());
         return res?.Select(r => ManagedObject.Create<ManagedObject>(r, this.Session)!).ToArray();
     }
 
     public async System.Threading.Tasks.Task ResetListViewFromView(View view)
     {
-        await this.Session.Client.ResetListViewFromView(this.Reference, view.Reference);
+        await this.Session.Client.ResetListViewFromView(this.VimReference, view.VimReference);
     }
 }
 
@@ -5508,18 +5508,18 @@ public partial class ManagedEntity : ExtensibleManagedObject
 
     public async System.Threading.Tasks.Task<Task?> Destroy_Task()
     {
-        var res = await this.Session.Client.Destroy_Task(this.Reference);
+        var res = await this.Session.Client.Destroy_Task(this.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task Reload()
     {
-        await this.Session.Client.Reload(this.Reference);
+        await this.Session.Client.Reload(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> Rename_Task(string newName)
     {
-        var res = await this.Session.Client.Rename_Task(this.Reference, newName);
+        var res = await this.Session.Client.Rename_Task(this.VimReference, newName);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -5591,7 +5591,7 @@ public partial class Network : ManagedEntity
 
     public async System.Threading.Tasks.Task DestroyNetwork()
     {
-        await this.Session.Client.DestroyNetwork(this.Reference);
+        await this.Session.Client.DestroyNetwork(this.VimReference);
     }
 }
 
@@ -5640,12 +5640,12 @@ public partial class OptionManager : ManagedObject
 
     public async System.Threading.Tasks.Task<OptionValue[]?> QueryOptions(string? name)
     {
-        return await this.Session.Client.QueryOptions(this.Reference, name);
+        return await this.Session.Client.QueryOptions(this.VimReference, name);
     }
 
     public async System.Threading.Tasks.Task UpdateOptions(OptionValue[] changedValue)
     {
-        await this.Session.Client.UpdateOptions(this.Reference, changedValue);
+        await this.Session.Client.UpdateOptions(this.VimReference, changedValue);
     }
 }
 
@@ -5660,7 +5660,7 @@ public partial class OverheadMemoryManager : ManagedObject
 
     public async System.Threading.Tasks.Task<long> LookupVmOverheadMemory(VirtualMachine vm, HostSystem host)
     {
-        return await this.Session.Client.LookupVmOverheadMemory(this.Reference, vm.Reference, host.Reference);
+        return await this.Session.Client.LookupVmOverheadMemory(this.VimReference, vm.VimReference, host.VimReference);
     }
 }
 
@@ -5687,22 +5687,22 @@ public partial class OvfManager : ManagedObject
 
     public async System.Threading.Tasks.Task<OvfCreateDescriptorResult?> CreateDescriptor(ManagedEntity obj, OvfCreateDescriptorParams cdp)
     {
-        return await this.Session.Client.CreateDescriptor(this.Reference, obj.Reference, cdp);
+        return await this.Session.Client.CreateDescriptor(this.VimReference, obj.VimReference, cdp);
     }
 
     public async System.Threading.Tasks.Task<OvfCreateImportSpecResult?> CreateImportSpec(string ovfDescriptor, ResourcePool resourcePool, Datastore datastore, OvfCreateImportSpecParams cisp)
     {
-        return await this.Session.Client.CreateImportSpec(this.Reference, ovfDescriptor, resourcePool.Reference, datastore.Reference, cisp);
+        return await this.Session.Client.CreateImportSpec(this.VimReference, ovfDescriptor, resourcePool.VimReference, datastore.VimReference, cisp);
     }
 
     public async System.Threading.Tasks.Task<OvfParseDescriptorResult?> ParseDescriptor(string ovfDescriptor, OvfParseDescriptorParams pdp)
     {
-        return await this.Session.Client.ParseDescriptor(this.Reference, ovfDescriptor, pdp);
+        return await this.Session.Client.ParseDescriptor(this.VimReference, ovfDescriptor, pdp);
     }
 
     public async System.Threading.Tasks.Task<OvfValidateHostResult?> ValidateHost(string ovfDescriptor, HostSystem host, OvfValidateHostParams vhp)
     {
-        return await this.Session.Client.ValidateHost(this.Reference, ovfDescriptor, host.Reference, vhp);
+        return await this.Session.Client.ValidateHost(this.VimReference, ovfDescriptor, host.VimReference, vhp);
     }
 }
 
@@ -5735,57 +5735,57 @@ public partial class PerformanceManager : ManagedObject
 
     public async System.Threading.Tasks.Task CreatePerfInterval(PerfInterval intervalId)
     {
-        await this.Session.Client.CreatePerfInterval(this.Reference, intervalId);
+        await this.Session.Client.CreatePerfInterval(this.VimReference, intervalId);
     }
 
     public async System.Threading.Tasks.Task<PerfMetricId[]?> QueryAvailablePerfMetric(ManagedObject entity, DateTime? beginTime, DateTime? endTime, int? intervalId)
     {
-        return await this.Session.Client.QueryAvailablePerfMetric(this.Reference, entity.Reference, beginTime ?? default, beginTime.HasValue, endTime ?? default, endTime.HasValue, intervalId ?? default, intervalId.HasValue);
+        return await this.Session.Client.QueryAvailablePerfMetric(this.VimReference, entity.VimReference, beginTime ?? default, beginTime.HasValue, endTime ?? default, endTime.HasValue, intervalId ?? default, intervalId.HasValue);
     }
 
     public async System.Threading.Tasks.Task<PerfEntityMetricBase[]?> QueryPerf(PerfQuerySpec[] querySpec)
     {
-        return await this.Session.Client.QueryPerf(this.Reference, querySpec);
+        return await this.Session.Client.QueryPerf(this.VimReference, querySpec);
     }
 
     public async System.Threading.Tasks.Task<PerfCompositeMetric?> QueryPerfComposite(PerfQuerySpec querySpec)
     {
-        return await this.Session.Client.QueryPerfComposite(this.Reference, querySpec);
+        return await this.Session.Client.QueryPerfComposite(this.VimReference, querySpec);
     }
 
     public async System.Threading.Tasks.Task<PerfCounterInfo[]?> QueryPerfCounter(int[] counterId)
     {
-        return await this.Session.Client.QueryPerfCounter(this.Reference, counterId);
+        return await this.Session.Client.QueryPerfCounter(this.VimReference, counterId);
     }
 
     public async System.Threading.Tasks.Task<PerfCounterInfo[]?> QueryPerfCounterByLevel(int level)
     {
-        return await this.Session.Client.QueryPerfCounterByLevel(this.Reference, level);
+        return await this.Session.Client.QueryPerfCounterByLevel(this.VimReference, level);
     }
 
     public async System.Threading.Tasks.Task<PerfProviderSummary?> QueryPerfProviderSummary(ManagedObject entity)
     {
-        return await this.Session.Client.QueryPerfProviderSummary(this.Reference, entity.Reference);
+        return await this.Session.Client.QueryPerfProviderSummary(this.VimReference, entity.VimReference);
     }
 
     public async System.Threading.Tasks.Task RemovePerfInterval(int samplePeriod)
     {
-        await this.Session.Client.RemovePerfInterval(this.Reference, samplePeriod);
+        await this.Session.Client.RemovePerfInterval(this.VimReference, samplePeriod);
     }
 
     public async System.Threading.Tasks.Task ResetCounterLevelMapping(int[] counters)
     {
-        await this.Session.Client.ResetCounterLevelMapping(this.Reference, counters);
+        await this.Session.Client.ResetCounterLevelMapping(this.VimReference, counters);
     }
 
     public async System.Threading.Tasks.Task UpdateCounterLevelMapping(PerformanceManagerCounterLevelMapping[] counterLevelMap)
     {
-        await this.Session.Client.UpdateCounterLevelMapping(this.Reference, counterLevelMap);
+        await this.Session.Client.UpdateCounterLevelMapping(this.VimReference, counterLevelMap);
     }
 
     public async System.Threading.Tasks.Task UpdatePerfInterval(PerfInterval interval)
     {
-        await this.Session.Client.UpdatePerfInterval(this.Reference, interval);
+        await this.Session.Client.UpdatePerfInterval(this.VimReference, interval);
     }
 }
 
@@ -5844,33 +5844,33 @@ public partial class Profile : ManagedObject
 
     public async System.Threading.Tasks.Task AssociateProfile(ManagedEntity[] entity)
     {
-        await this.Session.Client.AssociateProfile(this.Reference, entity.Select(m => m.Reference).ToArray());
+        await this.Session.Client.AssociateProfile(this.VimReference, entity.Select(m => m.VimReference).ToArray());
     }
 
     public async System.Threading.Tasks.Task<Task?> CheckProfileCompliance_Task(ManagedEntity[]? entity)
     {
-        var res = await this.Session.Client.CheckProfileCompliance_Task(this.Reference, entity?.Select(m => m.Reference).ToArray());
+        var res = await this.Session.Client.CheckProfileCompliance_Task(this.VimReference, entity?.Select(m => m.VimReference).ToArray());
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task DestroyProfile()
     {
-        await this.Session.Client.DestroyProfile(this.Reference);
+        await this.Session.Client.DestroyProfile(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task DissociateProfile(ManagedEntity[]? entity)
     {
-        await this.Session.Client.DissociateProfile(this.Reference, entity?.Select(m => m.Reference).ToArray());
+        await this.Session.Client.DissociateProfile(this.VimReference, entity?.Select(m => m.VimReference).ToArray());
     }
 
     public async System.Threading.Tasks.Task<string?> ExportProfile()
     {
-        return await this.Session.Client.ExportProfile(this.Reference);
+        return await this.Session.Client.ExportProfile(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<ProfileDescription?> RetrieveDescription()
     {
-        return await this.Session.Client.RetrieveDescription(this.Reference);
+        return await this.Session.Client.RetrieveDescription(this.VimReference);
     }
 }
 
@@ -5885,23 +5885,23 @@ public partial class ProfileComplianceManager : ManagedObject
 
     public async System.Threading.Tasks.Task<Task?> CheckCompliance_Task(Profile[]? profile, ManagedEntity[]? entity)
     {
-        var res = await this.Session.Client.CheckCompliance_Task(this.Reference, profile?.Select(m => m.Reference).ToArray(), entity?.Select(m => m.Reference).ToArray());
+        var res = await this.Session.Client.CheckCompliance_Task(this.VimReference, profile?.Select(m => m.VimReference).ToArray(), entity?.Select(m => m.VimReference).ToArray());
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task ClearComplianceStatus(Profile[]? profile, ManagedEntity[]? entity)
     {
-        await this.Session.Client.ClearComplianceStatus(this.Reference, profile?.Select(m => m.Reference).ToArray(), entity?.Select(m => m.Reference).ToArray());
+        await this.Session.Client.ClearComplianceStatus(this.VimReference, profile?.Select(m => m.VimReference).ToArray(), entity?.Select(m => m.VimReference).ToArray());
     }
 
     public async System.Threading.Tasks.Task<ComplianceResult[]?> QueryComplianceStatus(Profile[]? profile, ManagedEntity[]? entity)
     {
-        return await this.Session.Client.QueryComplianceStatus(this.Reference, profile?.Select(m => m.Reference).ToArray(), entity?.Select(m => m.Reference).ToArray());
+        return await this.Session.Client.QueryComplianceStatus(this.VimReference, profile?.Select(m => m.VimReference).ToArray(), entity?.Select(m => m.VimReference).ToArray());
     }
 
     public async System.Threading.Tasks.Task<ProfileExpressionMetadata[]?> QueryExpressionMetadata(string[]? expressionName, Profile? profile)
     {
-        return await this.Session.Client.QueryExpressionMetadata(this.Reference, expressionName, profile?.Reference);
+        return await this.Session.Client.QueryExpressionMetadata(this.VimReference, expressionName, profile?.VimReference);
     }
 }
 
@@ -5924,19 +5924,19 @@ public partial class ProfileManager : ManagedObject
 
     public async System.Threading.Tasks.Task<Profile?> CreateProfile(ProfileCreateSpec createSpec)
     {
-        var res = await this.Session.Client.CreateProfile(this.Reference, createSpec);
+        var res = await this.Session.Client.CreateProfile(this.VimReference, createSpec);
         return ManagedObject.Create<Profile>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Profile[]?> FindAssociatedProfile(ManagedEntity entity)
     {
-        var res = await this.Session.Client.FindAssociatedProfile(this.Reference, entity.Reference);
+        var res = await this.Session.Client.FindAssociatedProfile(this.VimReference, entity.VimReference);
         return res?.Select(r => ManagedObject.Create<Profile>(r, this.Session)!).ToArray();
     }
 
     public async System.Threading.Tasks.Task<ProfilePolicyMetadata[]?> QueryPolicyMetadata(string[]? policyName, Profile? profile)
     {
-        return await this.Session.Client.QueryPolicyMetadata(this.Reference, policyName, profile?.Reference);
+        return await this.Session.Client.QueryPolicyMetadata(this.VimReference, policyName, profile?.VimReference);
     }
 }
 
@@ -5959,59 +5959,59 @@ public partial class PropertyCollector : ManagedObject
 
     public async System.Threading.Tasks.Task CancelRetrievePropertiesEx(string token)
     {
-        await this.Session.Client.CancelRetrievePropertiesEx(this.Reference, token);
+        await this.Session.Client.CancelRetrievePropertiesEx(this.VimReference, token);
     }
 
     public async System.Threading.Tasks.Task CancelWaitForUpdates()
     {
-        await this.Session.Client.CancelWaitForUpdates(this.Reference);
+        await this.Session.Client.CancelWaitForUpdates(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<UpdateSet?> CheckForUpdates(string? version)
     {
-        return await this.Session.Client.CheckForUpdates(this.Reference, version);
+        return await this.Session.Client.CheckForUpdates(this.VimReference, version);
     }
 
     public async System.Threading.Tasks.Task<RetrieveResult?> ContinueRetrievePropertiesEx(string token)
     {
-        return await this.Session.Client.ContinueRetrievePropertiesEx(this.Reference, token);
+        return await this.Session.Client.ContinueRetrievePropertiesEx(this.VimReference, token);
     }
 
     public async System.Threading.Tasks.Task<PropertyFilter?> CreateFilter(PropertyFilterSpec spec, bool partialUpdates)
     {
-        var res = await this.Session.Client.CreateFilter(this.Reference, spec, partialUpdates);
+        var res = await this.Session.Client.CreateFilter(this.VimReference, spec, partialUpdates);
         return ManagedObject.Create<PropertyFilter>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<PropertyCollector?> CreatePropertyCollector()
     {
-        var res = await this.Session.Client.CreatePropertyCollector(this.Reference);
+        var res = await this.Session.Client.CreatePropertyCollector(this.VimReference);
         return ManagedObject.Create<PropertyCollector>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task DestroyPropertyCollector()
     {
-        await this.Session.Client.DestroyPropertyCollector(this.Reference);
+        await this.Session.Client.DestroyPropertyCollector(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<ObjectContent[]?> RetrieveProperties(PropertyFilterSpec[] specSet)
     {
-        return await this.Session.Client.RetrieveProperties(this.Reference, specSet);
+        return await this.Session.Client.RetrieveProperties(this.VimReference, specSet);
     }
 
     public async System.Threading.Tasks.Task<RetrieveResult?> RetrievePropertiesEx(PropertyFilterSpec[] specSet, RetrieveOptions options)
     {
-        return await this.Session.Client.RetrievePropertiesEx(this.Reference, specSet, options);
+        return await this.Session.Client.RetrievePropertiesEx(this.VimReference, specSet, options);
     }
 
     public async System.Threading.Tasks.Task<UpdateSet?> WaitForUpdates(string? version)
     {
-        return await this.Session.Client.WaitForUpdates(this.Reference, version);
+        return await this.Session.Client.WaitForUpdates(this.VimReference, version);
     }
 
     public async System.Threading.Tasks.Task<UpdateSet?> WaitForUpdatesEx(string? version, WaitOptions? options)
     {
-        return await this.Session.Client.WaitForUpdatesEx(this.Reference, version, options);
+        return await this.Session.Client.WaitForUpdatesEx(this.VimReference, version, options);
     }
 }
 
@@ -6038,7 +6038,7 @@ public partial class PropertyFilter : ManagedObject
 
     public async System.Threading.Tasks.Task DestroyPropertyFilter()
     {
-        await this.Session.Client.DestroyPropertyFilter(this.Reference);
+        await this.Session.Client.DestroyPropertyFilter(this.VimReference);
     }
 }
 
@@ -6053,7 +6053,7 @@ public partial class ResourcePlanningManager : ManagedObject
 
     public async System.Threading.Tasks.Task<DatabaseSizeEstimate?> EstimateDatabaseSize(DatabaseSizeParam dbSizeParam)
     {
-        return await this.Session.Client.EstimateDatabaseSize(this.Reference, dbSizeParam);
+        return await this.Session.Client.EstimateDatabaseSize(this.VimReference, dbSizeParam);
     }
 }
 
@@ -6120,62 +6120,62 @@ public partial class ResourcePool : ManagedEntity
 
     public async System.Threading.Tasks.Task<Task?> CreateChildVM_Task(VirtualMachineConfigSpec config, HostSystem? host)
     {
-        var res = await this.Session.Client.CreateChildVM_Task(this.Reference, config, host?.Reference);
+        var res = await this.Session.Client.CreateChildVM_Task(this.VimReference, config, host?.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<ResourcePool?> CreateResourcePool(string name, ResourceConfigSpec spec)
     {
-        var res = await this.Session.Client.CreateResourcePool(this.Reference, name, spec);
+        var res = await this.Session.Client.CreateResourcePool(this.VimReference, name, spec);
         return ManagedObject.Create<ResourcePool>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<VirtualApp?> CreateVApp(string name, ResourceConfigSpec resSpec, VAppConfigSpec configSpec, Folder? vmFolder)
     {
-        var res = await this.Session.Client.CreateVApp(this.Reference, name, resSpec, configSpec, vmFolder?.Reference);
+        var res = await this.Session.Client.CreateVApp(this.VimReference, name, resSpec, configSpec, vmFolder?.VimReference);
         return ManagedObject.Create<VirtualApp>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task DestroyChildren()
     {
-        await this.Session.Client.DestroyChildren(this.Reference);
+        await this.Session.Client.DestroyChildren(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<HttpNfcLease?> ImportVApp(ImportSpec spec, Folder? folder, HostSystem? host)
     {
-        var res = await this.Session.Client.ImportVApp(this.Reference, spec, folder?.Reference, host?.Reference);
+        var res = await this.Session.Client.ImportVApp(this.VimReference, spec, folder?.VimReference, host?.VimReference);
         return ManagedObject.Create<HttpNfcLease>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task MoveIntoResourcePool(ManagedEntity[] list)
     {
-        await this.Session.Client.MoveIntoResourcePool(this.Reference, list.Select(m => m.Reference).ToArray());
+        await this.Session.Client.MoveIntoResourcePool(this.VimReference, list.Select(m => m.VimReference).ToArray());
     }
 
     public async System.Threading.Tasks.Task<ResourceConfigOption?> QueryResourceConfigOption()
     {
-        return await this.Session.Client.QueryResourceConfigOption(this.Reference);
+        return await this.Session.Client.QueryResourceConfigOption(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task RefreshRuntime()
     {
-        await this.Session.Client.RefreshRuntime(this.Reference);
+        await this.Session.Client.RefreshRuntime(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> RegisterChildVM_Task(string path, string? name, HostSystem? host)
     {
-        var res = await this.Session.Client.RegisterChildVM_Task(this.Reference, path, name, host?.Reference);
+        var res = await this.Session.Client.RegisterChildVM_Task(this.VimReference, path, name, host?.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task UpdateChildResourceConfiguration(ResourceConfigSpec[] spec)
     {
-        await this.Session.Client.UpdateChildResourceConfiguration(this.Reference, spec);
+        await this.Session.Client.UpdateChildResourceConfiguration(this.VimReference, spec);
     }
 
     public async System.Threading.Tasks.Task UpdateConfig(string? name, ResourceConfigSpec? config)
     {
-        await this.Session.Client.UpdateConfig(this.Reference, name, config);
+        await this.Session.Client.UpdateConfig(this.VimReference, name, config);
     }
 }
 
@@ -6196,17 +6196,17 @@ public partial class ScheduledTask : ExtensibleManagedObject
 
     public async System.Threading.Tasks.Task ReconfigureScheduledTask(ScheduledTaskSpec spec)
     {
-        await this.Session.Client.ReconfigureScheduledTask(this.Reference, spec);
+        await this.Session.Client.ReconfigureScheduledTask(this.VimReference, spec);
     }
 
     public async System.Threading.Tasks.Task RemoveScheduledTask()
     {
-        await this.Session.Client.RemoveScheduledTask(this.Reference);
+        await this.Session.Client.RemoveScheduledTask(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task RunScheduledTask()
     {
-        await this.Session.Client.RunScheduledTask(this.Reference);
+        await this.Session.Client.RunScheduledTask(this.VimReference);
     }
 }
 
@@ -6235,25 +6235,25 @@ public partial class ScheduledTaskManager : ManagedObject
 
     public async System.Threading.Tasks.Task<ScheduledTask?> CreateObjectScheduledTask(ManagedObject obj, ScheduledTaskSpec spec)
     {
-        var res = await this.Session.Client.CreateObjectScheduledTask(this.Reference, obj.Reference, spec);
+        var res = await this.Session.Client.CreateObjectScheduledTask(this.VimReference, obj.VimReference, spec);
         return ManagedObject.Create<ScheduledTask>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<ScheduledTask?> CreateScheduledTask(ManagedEntity entity, ScheduledTaskSpec spec)
     {
-        var res = await this.Session.Client.CreateScheduledTask(this.Reference, entity.Reference, spec);
+        var res = await this.Session.Client.CreateScheduledTask(this.VimReference, entity.VimReference, spec);
         return ManagedObject.Create<ScheduledTask>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<ScheduledTask[]?> RetrieveEntityScheduledTask(ManagedEntity? entity)
     {
-        var res = await this.Session.Client.RetrieveEntityScheduledTask(this.Reference, entity?.Reference);
+        var res = await this.Session.Client.RetrieveEntityScheduledTask(this.VimReference, entity?.VimReference);
         return res?.Select(r => ManagedObject.Create<ScheduledTask>(r, this.Session)!).ToArray();
     }
 
     public async System.Threading.Tasks.Task<ScheduledTask[]?> RetrieveObjectScheduledTask(ManagedObject? obj)
     {
-        var res = await this.Session.Client.RetrieveObjectScheduledTask(this.Reference, obj?.Reference);
+        var res = await this.Session.Client.RetrieveObjectScheduledTask(this.VimReference, obj?.VimReference);
         return res?.Select(r => ManagedObject.Create<ScheduledTask>(r, this.Session)!).ToArray();
     }
 }
@@ -6269,55 +6269,55 @@ public partial class SearchIndex : ManagedObject
 
     public async System.Threading.Tasks.Task<ManagedEntity[]?> FindAllByDnsName(Datacenter? datacenter, string dnsName, bool vmSearch)
     {
-        var res = await this.Session.Client.FindAllByDnsName(this.Reference, datacenter?.Reference, dnsName, vmSearch);
+        var res = await this.Session.Client.FindAllByDnsName(this.VimReference, datacenter?.VimReference, dnsName, vmSearch);
         return res?.Select(r => ManagedObject.Create<ManagedEntity>(r, this.Session)!).ToArray();
     }
 
     public async System.Threading.Tasks.Task<ManagedEntity[]?> FindAllByIp(Datacenter? datacenter, string ip, bool vmSearch)
     {
-        var res = await this.Session.Client.FindAllByIp(this.Reference, datacenter?.Reference, ip, vmSearch);
+        var res = await this.Session.Client.FindAllByIp(this.VimReference, datacenter?.VimReference, ip, vmSearch);
         return res?.Select(r => ManagedObject.Create<ManagedEntity>(r, this.Session)!).ToArray();
     }
 
     public async System.Threading.Tasks.Task<ManagedEntity[]?> FindAllByUuid(Datacenter? datacenter, string uuid, bool vmSearch, bool? instanceUuid)
     {
-        var res = await this.Session.Client.FindAllByUuid(this.Reference, datacenter?.Reference, uuid, vmSearch, instanceUuid ?? default, instanceUuid.HasValue);
+        var res = await this.Session.Client.FindAllByUuid(this.VimReference, datacenter?.VimReference, uuid, vmSearch, instanceUuid ?? default, instanceUuid.HasValue);
         return res?.Select(r => ManagedObject.Create<ManagedEntity>(r, this.Session)!).ToArray();
     }
 
     public async System.Threading.Tasks.Task<VirtualMachine?> FindByDatastorePath(Datacenter datacenter, string path)
     {
-        var res = await this.Session.Client.FindByDatastorePath(this.Reference, datacenter.Reference, path);
+        var res = await this.Session.Client.FindByDatastorePath(this.VimReference, datacenter.VimReference, path);
         return ManagedObject.Create<VirtualMachine>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<ManagedEntity?> FindByDnsName(Datacenter? datacenter, string dnsName, bool vmSearch)
     {
-        var res = await this.Session.Client.FindByDnsName(this.Reference, datacenter?.Reference, dnsName, vmSearch);
+        var res = await this.Session.Client.FindByDnsName(this.VimReference, datacenter?.VimReference, dnsName, vmSearch);
         return ManagedObject.Create<ManagedEntity>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<ManagedEntity?> FindByInventoryPath(string inventoryPath)
     {
-        var res = await this.Session.Client.FindByInventoryPath(this.Reference, inventoryPath);
+        var res = await this.Session.Client.FindByInventoryPath(this.VimReference, inventoryPath);
         return ManagedObject.Create<ManagedEntity>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<ManagedEntity?> FindByIp(Datacenter? datacenter, string ip, bool vmSearch)
     {
-        var res = await this.Session.Client.FindByIp(this.Reference, datacenter?.Reference, ip, vmSearch);
+        var res = await this.Session.Client.FindByIp(this.VimReference, datacenter?.VimReference, ip, vmSearch);
         return ManagedObject.Create<ManagedEntity>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<ManagedEntity?> FindByUuid(Datacenter? datacenter, string uuid, bool vmSearch, bool? instanceUuid)
     {
-        var res = await this.Session.Client.FindByUuid(this.Reference, datacenter?.Reference, uuid, vmSearch, instanceUuid ?? default, instanceUuid.HasValue);
+        var res = await this.Session.Client.FindByUuid(this.VimReference, datacenter?.VimReference, uuid, vmSearch, instanceUuid ?? default, instanceUuid.HasValue);
         return ManagedObject.Create<ManagedEntity>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<ManagedEntity?> FindChild(ManagedEntity entity, string name)
     {
-        var res = await this.Session.Client.FindChild(this.Reference, entity.Reference, name);
+        var res = await this.Session.Client.FindChild(this.VimReference, entity.VimReference, name);
         return ManagedObject.Create<ManagedEntity>(res, this.Session);
     }
 }
@@ -6351,27 +6351,27 @@ public partial class ServiceInstance : ManagedObject
 
     public async System.Threading.Tasks.Task<DateTime> CurrentTime()
     {
-        return await this.Session.Client.CurrentTime(this.Reference);
+        return await this.Session.Client.CurrentTime(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<HostVMotionCompatibility[]?> QueryVMotionCompatibility(VirtualMachine vm, HostSystem[] host, string[]? compatibility)
     {
-        return await this.Session.Client.QueryVMotionCompatibility(this.Reference, vm.Reference, host.Select(m => m.Reference).ToArray(), compatibility);
+        return await this.Session.Client.QueryVMotionCompatibility(this.VimReference, vm.VimReference, host.Select(m => m.VimReference).ToArray(), compatibility);
     }
 
     public async System.Threading.Tasks.Task<ProductComponentInfo[]?> RetrieveProductComponents()
     {
-        return await this.Session.Client.RetrieveProductComponents(this.Reference);
+        return await this.Session.Client.RetrieveProductComponents(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<ServiceContent?> RetrieveServiceContent()
     {
-        return await this.Session.Client.RetrieveServiceContent(this.Reference);
+        return await this.Session.Client.RetrieveServiceContent(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Event[]?> ValidateMigration(VirtualMachine[] vm, VirtualMachinePowerState? state, string[]? testType, ResourcePool? pool, HostSystem? host)
     {
-        return await this.Session.Client.ValidateMigration(this.Reference, vm.Select(m => m.Reference).ToArray(), state ?? default, state.HasValue, testType, pool?.Reference, host?.Reference);
+        return await this.Session.Client.ValidateMigration(this.VimReference, vm.Select(m => m.VimReference).ToArray(), state ?? default, state.HasValue, testType, pool?.VimReference, host?.VimReference);
     }
 }
 
@@ -6392,7 +6392,7 @@ public partial class ServiceManager : ManagedObject
 
     public async System.Threading.Tasks.Task<ServiceManagerServiceInfo[]?> QueryServiceList(string? serviceName, string[]? location)
     {
-        return await this.Session.Client.QueryServiceList(this.Reference, serviceName, location);
+        return await this.Session.Client.QueryServiceList(this.VimReference, serviceName, location);
     }
 }
 
@@ -6443,77 +6443,77 @@ public partial class SessionManager : ManagedObject
 
     public async System.Threading.Tasks.Task<string?> AcquireCloneTicket()
     {
-        return await this.Session.Client.AcquireCloneTicket(this.Reference);
+        return await this.Session.Client.AcquireCloneTicket(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<SessionManagerGenericServiceTicket?> AcquireGenericServiceTicket(SessionManagerServiceRequestSpec spec)
     {
-        return await this.Session.Client.AcquireGenericServiceTicket(this.Reference, spec);
+        return await this.Session.Client.AcquireGenericServiceTicket(this.VimReference, spec);
     }
 
     public async System.Threading.Tasks.Task<SessionManagerLocalTicket?> AcquireLocalTicket(string userName)
     {
-        return await this.Session.Client.AcquireLocalTicket(this.Reference, userName);
+        return await this.Session.Client.AcquireLocalTicket(this.VimReference, userName);
     }
 
     public async System.Threading.Tasks.Task<UserSession?> CloneSession(string cloneTicket)
     {
-        return await this.Session.Client.CloneSession(this.Reference, cloneTicket);
+        return await this.Session.Client.CloneSession(this.VimReference, cloneTicket);
     }
 
     public async System.Threading.Tasks.Task<UserSession?> ImpersonateUser(string userName, string? locale)
     {
-        return await this.Session.Client.ImpersonateUser(this.Reference, userName, locale);
+        return await this.Session.Client.ImpersonateUser(this.VimReference, userName, locale);
     }
 
     public async System.Threading.Tasks.Task<UserSession?> Login(string userName, string password, string? locale)
     {
-        return await this.Session.Client.Login(this.Reference, userName, password, locale);
+        return await this.Session.Client.Login(this.VimReference, userName, password, locale);
     }
 
     public async System.Threading.Tasks.Task<UserSession?> LoginBySSPI(string base64Token, string? locale)
     {
-        return await this.Session.Client.LoginBySSPI(this.Reference, base64Token, locale);
+        return await this.Session.Client.LoginBySSPI(this.VimReference, base64Token, locale);
     }
 
     public async System.Threading.Tasks.Task<UserSession?> LoginByToken(string? locale)
     {
-        return await this.Session.Client.LoginByToken(this.Reference, locale);
+        return await this.Session.Client.LoginByToken(this.VimReference, locale);
     }
 
     public async System.Threading.Tasks.Task<UserSession?> LoginExtensionByCertificate(string extensionKey, string? locale)
     {
-        return await this.Session.Client.LoginExtensionByCertificate(this.Reference, extensionKey, locale);
+        return await this.Session.Client.LoginExtensionByCertificate(this.VimReference, extensionKey, locale);
     }
 
     public async System.Threading.Tasks.Task<UserSession?> LoginExtensionBySubjectName(string extensionKey, string? locale)
     {
-        return await this.Session.Client.LoginExtensionBySubjectName(this.Reference, extensionKey, locale);
+        return await this.Session.Client.LoginExtensionBySubjectName(this.VimReference, extensionKey, locale);
     }
 
     public async System.Threading.Tasks.Task Logout()
     {
-        await this.Session.Client.Logout(this.Reference);
+        await this.Session.Client.Logout(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<bool> SessionIsActive(string sessionID, string userName)
     {
-        return await this.Session.Client.SessionIsActive(this.Reference, sessionID, userName);
+        return await this.Session.Client.SessionIsActive(this.VimReference, sessionID, userName);
     }
 
     public async System.Threading.Tasks.Task SetLocale(string locale)
     {
-        await this.Session.Client.SetLocale(this.Reference, locale);
+        await this.Session.Client.SetLocale(this.VimReference, locale);
     }
 
     public async System.Threading.Tasks.Task TerminateSession(string[] sessionId)
     {
-        await this.Session.Client.TerminateSession(this.Reference, sessionId);
+        await this.Session.Client.TerminateSession(this.VimReference, sessionId);
     }
 
     public async System.Threading.Tasks.Task UpdateServiceMessage(string message)
     {
-        await this.Session.Client.UpdateServiceMessage(this.Reference, message);
+        await this.Session.Client.UpdateServiceMessage(this.VimReference, message);
     }
 }
 
@@ -6540,7 +6540,7 @@ public partial class SimpleCommand : ManagedObject
 
     public async System.Threading.Tasks.Task<string?> ExecuteSimpleCommand(string[]? arguments)
     {
-        return await this.Session.Client.ExecuteSimpleCommand(this.Reference, arguments);
+        return await this.Session.Client.ExecuteSimpleCommand(this.VimReference, arguments);
     }
 }
 
@@ -6555,7 +6555,7 @@ public partial class SiteInfoManager : ManagedObject
 
     public async System.Threading.Tasks.Task<SiteInfo?> GetSiteInfo()
     {
-        return await this.Session.Client.GetSiteInfo(this.Reference);
+        return await this.Session.Client.GetSiteInfo(this.VimReference);
     }
 }
 
@@ -6592,7 +6592,7 @@ public partial class StorageQueryManager : ManagedObject
 
     public async System.Threading.Tasks.Task<HostSystem[]?> QueryHostsWithAttachedLun(string lunUuid)
     {
-        var res = await this.Session.Client.QueryHostsWithAttachedLun(this.Reference, lunUuid);
+        var res = await this.Session.Client.QueryHostsWithAttachedLun(this.VimReference, lunUuid);
         return res?.Select(r => ManagedObject.Create<HostSystem>(r, this.Session)!).ToArray();
     }
 }
@@ -6608,62 +6608,62 @@ public partial class StorageResourceManager : ManagedObject
 
     public async System.Threading.Tasks.Task<Task?> ApplyStorageDrsRecommendation_Task(string[] key)
     {
-        var res = await this.Session.Client.ApplyStorageDrsRecommendation_Task(this.Reference, key);
+        var res = await this.Session.Client.ApplyStorageDrsRecommendation_Task(this.VimReference, key);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> ApplyStorageDrsRecommendationToPod_Task(StoragePod pod, string key)
     {
-        var res = await this.Session.Client.ApplyStorageDrsRecommendationToPod_Task(this.Reference, pod.Reference, key);
+        var res = await this.Session.Client.ApplyStorageDrsRecommendationToPod_Task(this.VimReference, pod.VimReference, key);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task CancelStorageDrsRecommendation(string[] key)
     {
-        await this.Session.Client.CancelStorageDrsRecommendation(this.Reference, key);
+        await this.Session.Client.CancelStorageDrsRecommendation(this.VimReference, key);
     }
 
     public async System.Threading.Tasks.Task<Task?> ConfigureDatastoreIORM_Task(Datastore datastore, StorageIORMConfigSpec spec)
     {
-        var res = await this.Session.Client.ConfigureDatastoreIORM_Task(this.Reference, datastore.Reference, spec);
+        var res = await this.Session.Client.ConfigureDatastoreIORM_Task(this.VimReference, datastore.VimReference, spec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> ConfigureStorageDrsForPod_Task(StoragePod pod, StorageDrsConfigSpec spec, bool modify)
     {
-        var res = await this.Session.Client.ConfigureStorageDrsForPod_Task(this.Reference, pod.Reference, spec, modify);
+        var res = await this.Session.Client.ConfigureStorageDrsForPod_Task(this.VimReference, pod.VimReference, spec, modify);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<StoragePerformanceSummary[]?> QueryDatastorePerformanceSummary(Datastore datastore)
     {
-        return await this.Session.Client.QueryDatastorePerformanceSummary(this.Reference, datastore.Reference);
+        return await this.Session.Client.QueryDatastorePerformanceSummary(this.VimReference, datastore.VimReference);
     }
 
     public async System.Threading.Tasks.Task<StorageIORMConfigOption?> QueryIORMConfigOption(HostSystem host)
     {
-        return await this.Session.Client.QueryIORMConfigOption(this.Reference, host.Reference);
+        return await this.Session.Client.QueryIORMConfigOption(this.VimReference, host.VimReference);
     }
 
     public async System.Threading.Tasks.Task<StoragePlacementResult?> RecommendDatastores(StoragePlacementSpec storageSpec)
     {
-        return await this.Session.Client.RecommendDatastores(this.Reference, storageSpec);
+        return await this.Session.Client.RecommendDatastores(this.VimReference, storageSpec);
     }
 
     public async System.Threading.Tasks.Task RefreshStorageDrsRecommendation(StoragePod pod)
     {
-        await this.Session.Client.RefreshStorageDrsRecommendation(this.Reference, pod.Reference);
+        await this.Session.Client.RefreshStorageDrsRecommendation(this.VimReference, pod.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> RefreshStorageDrsRecommendationsForPod_Task(StoragePod pod)
     {
-        var res = await this.Session.Client.RefreshStorageDrsRecommendationsForPod_Task(this.Reference, pod.Reference);
+        var res = await this.Session.Client.RefreshStorageDrsRecommendationsForPod_Task(this.VimReference, pod.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<LocalizedMethodFault?> ValidateStoragePodConfig(StoragePod pod, StorageDrsConfigSpec spec)
     {
-        return await this.Session.Client.ValidateStoragePodConfig(this.Reference, pod.Reference, spec);
+        return await this.Session.Client.ValidateStoragePodConfig(this.VimReference, pod.VimReference, spec);
     }
 }
 
@@ -6684,22 +6684,22 @@ public partial class Task : ExtensibleManagedObject
 
     public async System.Threading.Tasks.Task CancelTask()
     {
-        await this.Session.Client.CancelTask(this.Reference);
+        await this.Session.Client.CancelTask(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task SetTaskDescription(LocalizableMessage description)
     {
-        await this.Session.Client.SetTaskDescription(this.Reference, description);
+        await this.Session.Client.SetTaskDescription(this.VimReference, description);
     }
 
     public async System.Threading.Tasks.Task SetTaskState(TaskInfoState state, object? result, LocalizedMethodFault? fault)
     {
-        await this.Session.Client.SetTaskState(this.Reference, state, result, fault);
+        await this.Session.Client.SetTaskState(this.VimReference, state, result, fault);
     }
 
     public async System.Threading.Tasks.Task UpdateProgress(int percentDone)
     {
-        await this.Session.Client.UpdateProgress(this.Reference, percentDone);
+        await this.Session.Client.UpdateProgress(this.VimReference, percentDone);
     }
 }
 
@@ -6720,12 +6720,12 @@ public partial class TaskHistoryCollector : HistoryCollector
 
     public async System.Threading.Tasks.Task<TaskInfo[]?> ReadNextTasks(int maxCount)
     {
-        return await this.Session.Client.ReadNextTasks(this.Reference, maxCount);
+        return await this.Session.Client.ReadNextTasks(this.VimReference, maxCount);
     }
 
     public async System.Threading.Tasks.Task<TaskInfo[]?> ReadPreviousTasks(int maxCount)
     {
-        return await this.Session.Client.ReadPreviousTasks(this.Reference, maxCount);
+        return await this.Session.Client.ReadPreviousTasks(this.VimReference, maxCount);
     }
 }
 
@@ -6760,13 +6760,13 @@ public partial class TaskManager : ManagedObject
 
     public async System.Threading.Tasks.Task<TaskHistoryCollector?> CreateCollectorForTasks(TaskFilterSpec filter)
     {
-        var res = await this.Session.Client.CreateCollectorForTasks(this.Reference, filter);
+        var res = await this.Session.Client.CreateCollectorForTasks(this.VimReference, filter);
         return ManagedObject.Create<TaskHistoryCollector>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<TaskInfo?> CreateTask(ManagedObject obj, string taskTypeId, string? initiatedBy, bool cancelable, string? parentTaskKey, string? activationId)
     {
-        return await this.Session.Client.CreateTask(this.Reference, obj.Reference, taskTypeId, initiatedBy, cancelable, parentTaskKey, activationId);
+        return await this.Session.Client.CreateTask(this.VimReference, obj.VimReference, taskTypeId, initiatedBy, cancelable, parentTaskKey, activationId);
     }
 }
 
@@ -6781,18 +6781,18 @@ public partial class TenantTenantManager : ManagedObject
 
     public async System.Threading.Tasks.Task MarkServiceProviderEntities(ManagedEntity[]? entity)
     {
-        await this.Session.Client.MarkServiceProviderEntities(this.Reference, entity?.Select(m => m.Reference).ToArray());
+        await this.Session.Client.MarkServiceProviderEntities(this.VimReference, entity?.Select(m => m.VimReference).ToArray());
     }
 
     public async System.Threading.Tasks.Task<ManagedEntity[]?> RetrieveServiceProviderEntities()
     {
-        var res = await this.Session.Client.RetrieveServiceProviderEntities(this.Reference);
+        var res = await this.Session.Client.RetrieveServiceProviderEntities(this.VimReference);
         return res?.Select(r => ManagedObject.Create<ManagedEntity>(r, this.Session)!).ToArray();
     }
 
     public async System.Threading.Tasks.Task UnmarkServiceProviderEntities(ManagedEntity[]? entity)
     {
-        await this.Session.Client.UnmarkServiceProviderEntities(this.Reference, entity?.Select(m => m.Reference).ToArray());
+        await this.Session.Client.UnmarkServiceProviderEntities(this.VimReference, entity?.Select(m => m.VimReference).ToArray());
     }
 }
 
@@ -6813,7 +6813,7 @@ public partial class UserDirectory : ManagedObject
 
     public async System.Threading.Tasks.Task<UserSearchResult[]?> RetrieveUserGroups(string? domain, string searchStr, string? belongsToGroup, string? belongsToUser, bool exactMatch, bool findUsers, bool findGroups)
     {
-        return await this.Session.Client.RetrieveUserGroups(this.Reference, domain, searchStr, belongsToGroup, belongsToUser, exactMatch, findUsers, findGroups);
+        return await this.Session.Client.RetrieveUserGroups(this.VimReference, domain, searchStr, belongsToGroup, belongsToUser, exactMatch, findUsers, findGroups);
     }
 }
 
@@ -6828,183 +6828,183 @@ public partial class VcenterVStorageObjectManager : VStorageObjectManagerBase
 
     public async System.Threading.Tasks.Task AttachTagToVStorageObject(ID id, string category, string tag)
     {
-        await this.Session.Client.AttachTagToVStorageObject(this.Reference, id, category, tag);
+        await this.Session.Client.AttachTagToVStorageObject(this.VimReference, id, category, tag);
     }
 
     public async System.Threading.Tasks.Task ClearVStorageObjectControlFlags(ID id, Datastore datastore, string[]? controlFlags)
     {
-        await this.Session.Client.ClearVStorageObjectControlFlags(this.Reference, id, datastore.Reference, controlFlags);
+        await this.Session.Client.ClearVStorageObjectControlFlags(this.VimReference, id, datastore.VimReference, controlFlags);
     }
 
     public async System.Threading.Tasks.Task<Task?> CloneVStorageObject_Task(ID id, Datastore datastore, VslmCloneSpec spec)
     {
-        var res = await this.Session.Client.CloneVStorageObject_Task(this.Reference, id, datastore.Reference, spec);
+        var res = await this.Session.Client.CloneVStorageObject_Task(this.VimReference, id, datastore.VimReference, spec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> CreateDisk_Task(VslmCreateSpec spec)
     {
-        var res = await this.Session.Client.CreateDisk_Task(this.Reference, spec);
+        var res = await this.Session.Client.CreateDisk_Task(this.VimReference, spec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> CreateDiskFromSnapshot_Task(ID id, Datastore datastore, ID snapshotId, string name, VirtualMachineProfileSpec[]? profile, CryptoSpec? crypto, string? path)
     {
-        var res = await this.Session.Client.CreateDiskFromSnapshot_Task(this.Reference, id, datastore.Reference, snapshotId, name, profile, crypto, path);
+        var res = await this.Session.Client.CreateDiskFromSnapshot_Task(this.VimReference, id, datastore.VimReference, snapshotId, name, profile, crypto, path);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> DeleteSnapshot_Task(ID id, Datastore datastore, ID snapshotId)
     {
-        var res = await this.Session.Client.DeleteSnapshot_Task(this.Reference, id, datastore.Reference, snapshotId);
+        var res = await this.Session.Client.DeleteSnapshot_Task(this.VimReference, id, datastore.VimReference, snapshotId);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> DeleteVStorageObject_Task(ID id, Datastore datastore)
     {
-        var res = await this.Session.Client.DeleteVStorageObject_Task(this.Reference, id, datastore.Reference);
+        var res = await this.Session.Client.DeleteVStorageObject_Task(this.VimReference, id, datastore.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> DeleteVStorageObjectEx_Task(ID id, Datastore datastore)
     {
-        var res = await this.Session.Client.DeleteVStorageObjectEx_Task(this.Reference, id, datastore.Reference);
+        var res = await this.Session.Client.DeleteVStorageObjectEx_Task(this.VimReference, id, datastore.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task DetachTagFromVStorageObject(ID id, string category, string tag)
     {
-        await this.Session.Client.DetachTagFromVStorageObject(this.Reference, id, category, tag);
+        await this.Session.Client.DetachTagFromVStorageObject(this.VimReference, id, category, tag);
     }
 
     public async System.Threading.Tasks.Task<Task?> ExtendDisk_Task(ID id, Datastore datastore, long newCapacityInMB)
     {
-        var res = await this.Session.Client.ExtendDisk_Task(this.Reference, id, datastore.Reference, newCapacityInMB);
+        var res = await this.Session.Client.ExtendDisk_Task(this.VimReference, id, datastore.VimReference, newCapacityInMB);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> InflateDisk_Task(ID id, Datastore datastore)
     {
-        var res = await this.Session.Client.InflateDisk_Task(this.Reference, id, datastore.Reference);
+        var res = await this.Session.Client.InflateDisk_Task(this.VimReference, id, datastore.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<VslmTagEntry[]?> ListTagsAttachedToVStorageObject(ID id)
     {
-        return await this.Session.Client.ListTagsAttachedToVStorageObject(this.Reference, id);
+        return await this.Session.Client.ListTagsAttachedToVStorageObject(this.VimReference, id);
     }
 
     public async System.Threading.Tasks.Task<ID[]?> ListVStorageObject(Datastore datastore)
     {
-        return await this.Session.Client.ListVStorageObject(this.Reference, datastore.Reference);
+        return await this.Session.Client.ListVStorageObject(this.VimReference, datastore.VimReference);
     }
 
     public async System.Threading.Tasks.Task<ID[]?> ListVStorageObjectsAttachedToTag(string category, string tag)
     {
-        return await this.Session.Client.ListVStorageObjectsAttachedToTag(this.Reference, category, tag);
+        return await this.Session.Client.ListVStorageObjectsAttachedToTag(this.VimReference, category, tag);
     }
 
     public async System.Threading.Tasks.Task<Task?> ReconcileDatastoreInventory_Task(Datastore datastore)
     {
-        var res = await this.Session.Client.ReconcileDatastoreInventory_Task(this.Reference, datastore.Reference);
+        var res = await this.Session.Client.ReconcileDatastoreInventory_Task(this.VimReference, datastore.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<VStorageObject?> RegisterDisk(string path, string? name)
     {
-        return await this.Session.Client.RegisterDisk(this.Reference, path, name);
+        return await this.Session.Client.RegisterDisk(this.VimReference, path, name);
     }
 
     public async System.Threading.Tasks.Task<Task?> RelocateVStorageObject_Task(ID id, Datastore datastore, VslmRelocateSpec spec)
     {
-        var res = await this.Session.Client.RelocateVStorageObject_Task(this.Reference, id, datastore.Reference, spec);
+        var res = await this.Session.Client.RelocateVStorageObject_Task(this.VimReference, id, datastore.VimReference, spec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task RenameVStorageObject(ID id, Datastore datastore, string name)
     {
-        await this.Session.Client.RenameVStorageObject(this.Reference, id, datastore.Reference, name);
+        await this.Session.Client.RenameVStorageObject(this.VimReference, id, datastore.VimReference, name);
     }
 
     public async System.Threading.Tasks.Task<VStorageObjectSnapshotDetails?> RetrieveSnapshotDetails(ID id, Datastore datastore, ID snapshotId)
     {
-        return await this.Session.Client.RetrieveSnapshotDetails(this.Reference, id, datastore.Reference, snapshotId);
+        return await this.Session.Client.RetrieveSnapshotDetails(this.VimReference, id, datastore.VimReference, snapshotId);
     }
 
     public async System.Threading.Tasks.Task<VStorageObjectSnapshotInfo?> RetrieveSnapshotInfo(ID id, Datastore datastore)
     {
-        return await this.Session.Client.RetrieveSnapshotInfo(this.Reference, id, datastore.Reference);
+        return await this.Session.Client.RetrieveSnapshotInfo(this.VimReference, id, datastore.VimReference);
     }
 
     public async System.Threading.Tasks.Task<vslmInfrastructureObjectPolicy[]?> RetrieveVStorageInfrastructureObjectPolicy(Datastore datastore)
     {
-        return await this.Session.Client.RetrieveVStorageInfrastructureObjectPolicy(this.Reference, datastore.Reference);
+        return await this.Session.Client.RetrieveVStorageInfrastructureObjectPolicy(this.VimReference, datastore.VimReference);
     }
 
     public async System.Threading.Tasks.Task<VStorageObject?> RetrieveVStorageObject(ID id, Datastore datastore)
     {
-        return await this.Session.Client.RetrieveVStorageObject(this.Reference, id, datastore.Reference);
+        return await this.Session.Client.RetrieveVStorageObject(this.VimReference, id, datastore.VimReference);
     }
 
     public async System.Threading.Tasks.Task<VStorageObjectAssociations[]?> RetrieveVStorageObjectAssociations(RetrieveVStorageObjSpec[]? ids)
     {
-        return await this.Session.Client.RetrieveVStorageObjectAssociations(this.Reference, ids);
+        return await this.Session.Client.RetrieveVStorageObjectAssociations(this.VimReference, ids);
     }
 
     public async System.Threading.Tasks.Task<VStorageObjectStateInfo?> RetrieveVStorageObjectState(ID id, Datastore datastore)
     {
-        return await this.Session.Client.RetrieveVStorageObjectState(this.Reference, id, datastore.Reference);
+        return await this.Session.Client.RetrieveVStorageObjectState(this.VimReference, id, datastore.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> RevertVStorageObject_Task(ID id, Datastore datastore, ID snapshotId)
     {
-        var res = await this.Session.Client.RevertVStorageObject_Task(this.Reference, id, datastore.Reference, snapshotId);
+        var res = await this.Session.Client.RevertVStorageObject_Task(this.VimReference, id, datastore.VimReference, snapshotId);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task ScheduleReconcileDatastoreInventory(Datastore datastore)
     {
-        await this.Session.Client.ScheduleReconcileDatastoreInventory(this.Reference, datastore.Reference);
+        await this.Session.Client.ScheduleReconcileDatastoreInventory(this.VimReference, datastore.VimReference);
     }
 
     public async System.Threading.Tasks.Task SetVStorageObjectControlFlags(ID id, Datastore datastore, string[]? controlFlags)
     {
-        await this.Session.Client.SetVStorageObjectControlFlags(this.Reference, id, datastore.Reference, controlFlags);
+        await this.Session.Client.SetVStorageObjectControlFlags(this.VimReference, id, datastore.VimReference, controlFlags);
     }
 
     public async System.Threading.Tasks.Task<Task?> UpdateVStorageInfrastructureObjectPolicy_Task(vslmInfrastructureObjectPolicySpec spec)
     {
-        var res = await this.Session.Client.UpdateVStorageInfrastructureObjectPolicy_Task(this.Reference, spec);
+        var res = await this.Session.Client.UpdateVStorageInfrastructureObjectPolicy_Task(this.VimReference, spec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> UpdateVStorageObjectCrypto_Task(ID id, Datastore datastore, VirtualMachineProfileSpec[]? profile, DiskCryptoSpec? disksCrypto)
     {
-        var res = await this.Session.Client.UpdateVStorageObjectCrypto_Task(this.Reference, id, datastore.Reference, profile, disksCrypto);
+        var res = await this.Session.Client.UpdateVStorageObjectCrypto_Task(this.VimReference, id, datastore.VimReference, profile, disksCrypto);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> UpdateVStorageObjectPolicy_Task(ID id, Datastore datastore, VirtualMachineProfileSpec[]? profile)
     {
-        var res = await this.Session.Client.UpdateVStorageObjectPolicy_Task(this.Reference, id, datastore.Reference, profile);
+        var res = await this.Session.Client.UpdateVStorageObjectPolicy_Task(this.VimReference, id, datastore.VimReference, profile);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> VCenterUpdateVStorageObjectMetadataEx_Task(ID id, Datastore datastore, KeyValue[]? metadata, string[]? deleteKeys)
     {
-        var res = await this.Session.Client.VCenterUpdateVStorageObjectMetadataEx_Task(this.Reference, id, datastore.Reference, metadata, deleteKeys);
+        var res = await this.Session.Client.VCenterUpdateVStorageObjectMetadataEx_Task(this.VimReference, id, datastore.VimReference, metadata, deleteKeys);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> VStorageObjectCreateSnapshot_Task(ID id, Datastore datastore, string description)
     {
-        var res = await this.Session.Client.VStorageObjectCreateSnapshot_Task(this.Reference, id, datastore.Reference, description);
+        var res = await this.Session.Client.VStorageObjectCreateSnapshot_Task(this.VimReference, id, datastore.VimReference, description);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<DiskChangeInfo?> VstorageObjectVCenterQueryChangedDiskAreas(ID id, Datastore datastore, ID snapshotId, long startOffset, string changeId)
     {
-        return await this.Session.Client.VstorageObjectVCenterQueryChangedDiskAreas(this.Reference, id, datastore.Reference, snapshotId, startOffset, changeId);
+        return await this.Session.Client.VstorageObjectVCenterQueryChangedDiskAreas(this.VimReference, id, datastore.VimReference, snapshotId, startOffset, changeId);
     }
 }
 
@@ -7019,7 +7019,7 @@ public partial class View : ManagedObject
 
     public async System.Threading.Tasks.Task DestroyView()
     {
-        await this.Session.Client.DestroyView(this.Reference);
+        await this.Session.Client.DestroyView(this.VimReference);
     }
 }
 
@@ -7042,25 +7042,25 @@ public partial class ViewManager : ManagedObject
 
     public async System.Threading.Tasks.Task<ContainerView?> CreateContainerView(ManagedEntity container, string[]? type, bool recursive)
     {
-        var res = await this.Session.Client.CreateContainerView(this.Reference, container.Reference, type, recursive);
+        var res = await this.Session.Client.CreateContainerView(this.VimReference, container.VimReference, type, recursive);
         return ManagedObject.Create<ContainerView>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<InventoryView?> CreateInventoryView()
     {
-        var res = await this.Session.Client.CreateInventoryView(this.Reference);
+        var res = await this.Session.Client.CreateInventoryView(this.VimReference);
         return ManagedObject.Create<InventoryView>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<ListView?> CreateListView(ManagedObject[]? obj)
     {
-        var res = await this.Session.Client.CreateListView(this.Reference, obj?.Select(m => m.Reference).ToArray());
+        var res = await this.Session.Client.CreateListView(this.VimReference, obj?.Select(m => m.VimReference).ToArray());
         return ManagedObject.Create<ListView>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<ListView?> CreateListViewFromView(View view)
     {
-        var res = await this.Session.Client.CreateListViewFromView(this.Reference, view.Reference);
+        var res = await this.Session.Client.CreateListViewFromView(this.VimReference, view.VimReference);
         return ManagedObject.Create<ListView>(res, this.Session);
     }
 }
@@ -7116,48 +7116,48 @@ public partial class VirtualApp : ResourcePool
 
     public async System.Threading.Tasks.Task<Task?> CloneVApp_Task(string name, ResourcePool target, VAppCloneSpec spec)
     {
-        var res = await this.Session.Client.CloneVApp_Task(this.Reference, name, target.Reference, spec);
+        var res = await this.Session.Client.CloneVApp_Task(this.VimReference, name, target.VimReference, spec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<HttpNfcLease?> ExportVApp()
     {
-        var res = await this.Session.Client.ExportVApp(this.Reference);
+        var res = await this.Session.Client.ExportVApp(this.VimReference);
         return ManagedObject.Create<HttpNfcLease>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> PowerOffVApp_Task(bool force)
     {
-        var res = await this.Session.Client.PowerOffVApp_Task(this.Reference, force);
+        var res = await this.Session.Client.PowerOffVApp_Task(this.VimReference, force);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> PowerOnVApp_Task()
     {
-        var res = await this.Session.Client.PowerOnVApp_Task(this.Reference);
+        var res = await this.Session.Client.PowerOnVApp_Task(this.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> SuspendVApp_Task()
     {
-        var res = await this.Session.Client.SuspendVApp_Task(this.Reference);
+        var res = await this.Session.Client.SuspendVApp_Task(this.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> UnregisterVApp_Task()
     {
-        var res = await this.Session.Client.UnregisterVApp_Task(this.Reference);
+        var res = await this.Session.Client.UnregisterVApp_Task(this.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task UpdateLinkedChildren(VirtualAppLinkInfo[]? addChangeSet, ManagedEntity[]? removeSet)
     {
-        await this.Session.Client.UpdateLinkedChildren(this.Reference, addChangeSet, removeSet?.Select(m => m.Reference).ToArray());
+        await this.Session.Client.UpdateLinkedChildren(this.VimReference, addChangeSet, removeSet?.Select(m => m.VimReference).ToArray());
     }
 
     public async System.Threading.Tasks.Task UpdateVAppConfig(VAppConfigSpec spec)
     {
-        await this.Session.Client.UpdateVAppConfig(this.Reference, spec);
+        await this.Session.Client.UpdateVAppConfig(this.VimReference, spec);
     }
 }
 
@@ -7172,91 +7172,91 @@ public partial class VirtualDiskManager : ManagedObject
 
     public async System.Threading.Tasks.Task<Task?> CopyVirtualDisk_Task(string sourceName, Datacenter? sourceDatacenter, string destName, Datacenter? destDatacenter, VirtualDiskSpec? destSpec, bool? force)
     {
-        var res = await this.Session.Client.CopyVirtualDisk_Task(this.Reference, sourceName, sourceDatacenter?.Reference, destName, destDatacenter?.Reference, destSpec, force ?? default, force.HasValue);
+        var res = await this.Session.Client.CopyVirtualDisk_Task(this.VimReference, sourceName, sourceDatacenter?.VimReference, destName, destDatacenter?.VimReference, destSpec, force ?? default, force.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> CreateVirtualDisk_Task(string name, Datacenter? datacenter, VirtualDiskSpec spec)
     {
-        var res = await this.Session.Client.CreateVirtualDisk_Task(this.Reference, name, datacenter?.Reference, spec);
+        var res = await this.Session.Client.CreateVirtualDisk_Task(this.VimReference, name, datacenter?.VimReference, spec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> DefragmentVirtualDisk_Task(string name, Datacenter? datacenter)
     {
-        var res = await this.Session.Client.DefragmentVirtualDisk_Task(this.Reference, name, datacenter?.Reference);
+        var res = await this.Session.Client.DefragmentVirtualDisk_Task(this.VimReference, name, datacenter?.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> DeleteVirtualDisk_Task(string name, Datacenter? datacenter)
     {
-        var res = await this.Session.Client.DeleteVirtualDisk_Task(this.Reference, name, datacenter?.Reference);
+        var res = await this.Session.Client.DeleteVirtualDisk_Task(this.VimReference, name, datacenter?.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> EagerZeroVirtualDisk_Task(string name, Datacenter? datacenter)
     {
-        var res = await this.Session.Client.EagerZeroVirtualDisk_Task(this.Reference, name, datacenter?.Reference);
+        var res = await this.Session.Client.EagerZeroVirtualDisk_Task(this.VimReference, name, datacenter?.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> ExtendVirtualDisk_Task(string name, Datacenter? datacenter, long newCapacityKb, bool? eagerZero)
     {
-        var res = await this.Session.Client.ExtendVirtualDisk_Task(this.Reference, name, datacenter?.Reference, newCapacityKb, eagerZero ?? default, eagerZero.HasValue);
+        var res = await this.Session.Client.ExtendVirtualDisk_Task(this.VimReference, name, datacenter?.VimReference, newCapacityKb, eagerZero ?? default, eagerZero.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task ImportUnmanagedSnapshot(string vdisk, Datacenter? datacenter, string vvolId)
     {
-        await this.Session.Client.ImportUnmanagedSnapshot(this.Reference, vdisk, datacenter?.Reference, vvolId);
+        await this.Session.Client.ImportUnmanagedSnapshot(this.VimReference, vdisk, datacenter?.VimReference, vvolId);
     }
 
     public async System.Threading.Tasks.Task<Task?> InflateVirtualDisk_Task(string name, Datacenter? datacenter)
     {
-        var res = await this.Session.Client.InflateVirtualDisk_Task(this.Reference, name, datacenter?.Reference);
+        var res = await this.Session.Client.InflateVirtualDisk_Task(this.VimReference, name, datacenter?.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> MoveVirtualDisk_Task(string sourceName, Datacenter? sourceDatacenter, string destName, Datacenter? destDatacenter, bool? force, VirtualMachineProfileSpec[]? profile)
     {
-        var res = await this.Session.Client.MoveVirtualDisk_Task(this.Reference, sourceName, sourceDatacenter?.Reference, destName, destDatacenter?.Reference, force ?? default, force.HasValue, profile);
+        var res = await this.Session.Client.MoveVirtualDisk_Task(this.VimReference, sourceName, sourceDatacenter?.VimReference, destName, destDatacenter?.VimReference, force ?? default, force.HasValue, profile);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<int> QueryVirtualDiskFragmentation(string name, Datacenter? datacenter)
     {
-        return await this.Session.Client.QueryVirtualDiskFragmentation(this.Reference, name, datacenter?.Reference);
+        return await this.Session.Client.QueryVirtualDiskFragmentation(this.VimReference, name, datacenter?.VimReference);
     }
 
     public async System.Threading.Tasks.Task<HostDiskDimensionsChs?> QueryVirtualDiskGeometry(string name, Datacenter? datacenter)
     {
-        return await this.Session.Client.QueryVirtualDiskGeometry(this.Reference, name, datacenter?.Reference);
+        return await this.Session.Client.QueryVirtualDiskGeometry(this.VimReference, name, datacenter?.VimReference);
     }
 
     public async System.Threading.Tasks.Task<string?> QueryVirtualDiskUuid(string name, Datacenter? datacenter)
     {
-        return await this.Session.Client.QueryVirtualDiskUuid(this.Reference, name, datacenter?.Reference);
+        return await this.Session.Client.QueryVirtualDiskUuid(this.VimReference, name, datacenter?.VimReference);
     }
 
     public async System.Threading.Tasks.Task ReleaseManagedSnapshot(string vdisk, Datacenter? datacenter)
     {
-        await this.Session.Client.ReleaseManagedSnapshot(this.Reference, vdisk, datacenter?.Reference);
+        await this.Session.Client.ReleaseManagedSnapshot(this.VimReference, vdisk, datacenter?.VimReference);
     }
 
     public async System.Threading.Tasks.Task SetVirtualDiskUuid(string name, Datacenter? datacenter, string uuid)
     {
-        await this.Session.Client.SetVirtualDiskUuid(this.Reference, name, datacenter?.Reference, uuid);
+        await this.Session.Client.SetVirtualDiskUuid(this.VimReference, name, datacenter?.VimReference, uuid);
     }
 
     public async System.Threading.Tasks.Task<Task?> ShrinkVirtualDisk_Task(string name, Datacenter? datacenter, bool? copy)
     {
-        var res = await this.Session.Client.ShrinkVirtualDisk_Task(this.Reference, name, datacenter?.Reference, copy ?? default, copy.HasValue);
+        var res = await this.Session.Client.ShrinkVirtualDisk_Task(this.VimReference, name, datacenter?.VimReference, copy ?? default, copy.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> ZeroFillVirtualDisk_Task(string name, Datacenter? datacenter)
     {
-        var res = await this.Session.Client.ZeroFillVirtualDisk_Task(this.Reference, name, datacenter?.Reference);
+        var res = await this.Session.Client.ZeroFillVirtualDisk_Task(this.VimReference, name, datacenter?.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -7390,358 +7390,358 @@ public partial class VirtualMachine : ManagedEntity
 
     public async System.Threading.Tasks.Task<VirtualMachineMksTicket?> AcquireMksTicket()
     {
-        return await this.Session.Client.AcquireMksTicket(this.Reference);
+        return await this.Session.Client.AcquireMksTicket(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<VirtualMachineTicket?> AcquireTicket(string ticketType)
     {
-        return await this.Session.Client.AcquireTicket(this.Reference, ticketType);
+        return await this.Session.Client.AcquireTicket(this.VimReference, ticketType);
     }
 
     public async System.Threading.Tasks.Task AnswerVM(string questionId, string answerChoice)
     {
-        await this.Session.Client.AnswerVM(this.Reference, questionId, answerChoice);
+        await this.Session.Client.AnswerVM(this.VimReference, questionId, answerChoice);
     }
 
     public async System.Threading.Tasks.Task<Task?> ApplyEvcModeVM_Task(HostFeatureMask[]? mask, bool? completeMasks)
     {
-        var res = await this.Session.Client.ApplyEvcModeVM_Task(this.Reference, mask, completeMasks ?? default, completeMasks.HasValue);
+        var res = await this.Session.Client.ApplyEvcModeVM_Task(this.VimReference, mask, completeMasks ?? default, completeMasks.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> AttachDisk_Task(ID diskId, Datastore datastore, int? controllerKey, int? unitNumber)
     {
-        var res = await this.Session.Client.AttachDisk_Task(this.Reference, diskId, datastore.Reference, controllerKey ?? default, controllerKey.HasValue, unitNumber ?? default, unitNumber.HasValue);
+        var res = await this.Session.Client.AttachDisk_Task(this.VimReference, diskId, datastore.VimReference, controllerKey ?? default, controllerKey.HasValue, unitNumber ?? default, unitNumber.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task CheckCustomizationSpec(CustomizationSpec spec)
     {
-        await this.Session.Client.CheckCustomizationSpec(this.Reference, spec);
+        await this.Session.Client.CheckCustomizationSpec(this.VimReference, spec);
     }
 
     public async System.Threading.Tasks.Task<Task?> CloneVM_Task(Folder folder, string name, VirtualMachineCloneSpec spec)
     {
-        var res = await this.Session.Client.CloneVM_Task(this.Reference, folder.Reference, name, spec);
+        var res = await this.Session.Client.CloneVM_Task(this.VimReference, folder.VimReference, name, spec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> ConsolidateVMDisks_Task()
     {
-        var res = await this.Session.Client.ConsolidateVMDisks_Task(this.Reference);
+        var res = await this.Session.Client.ConsolidateVMDisks_Task(this.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> CreateScreenshot_Task()
     {
-        var res = await this.Session.Client.CreateScreenshot_Task(this.Reference);
+        var res = await this.Session.Client.CreateScreenshot_Task(this.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> CreateSecondaryVM_Task(HostSystem? host)
     {
-        var res = await this.Session.Client.CreateSecondaryVM_Task(this.Reference, host?.Reference);
+        var res = await this.Session.Client.CreateSecondaryVM_Task(this.VimReference, host?.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> CreateSecondaryVMEx_Task(HostSystem? host, FaultToleranceConfigSpec? spec)
     {
-        var res = await this.Session.Client.CreateSecondaryVMEx_Task(this.Reference, host?.Reference, spec);
+        var res = await this.Session.Client.CreateSecondaryVMEx_Task(this.VimReference, host?.VimReference, spec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> CreateSnapshot_Task(string name, string? description, bool memory, bool quiesce)
     {
-        var res = await this.Session.Client.CreateSnapshot_Task(this.Reference, name, description, memory, quiesce);
+        var res = await this.Session.Client.CreateSnapshot_Task(this.VimReference, name, description, memory, quiesce);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> CreateSnapshotEx_Task(string name, string? description, bool memory, VirtualMachineGuestQuiesceSpec? quiesceSpec)
     {
-        var res = await this.Session.Client.CreateSnapshotEx_Task(this.Reference, name, description, memory, quiesceSpec);
+        var res = await this.Session.Client.CreateSnapshotEx_Task(this.VimReference, name, description, memory, quiesceSpec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> CryptoUnlock_Task()
     {
-        var res = await this.Session.Client.CryptoUnlock_Task(this.Reference);
+        var res = await this.Session.Client.CryptoUnlock_Task(this.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> CustomizeVM_Task(CustomizationSpec spec)
     {
-        var res = await this.Session.Client.CustomizeVM_Task(this.Reference, spec);
+        var res = await this.Session.Client.CustomizeVM_Task(this.VimReference, spec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task DefragmentAllDisks()
     {
-        await this.Session.Client.DefragmentAllDisks(this.Reference);
+        await this.Session.Client.DefragmentAllDisks(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> DetachDisk_Task(ID diskId)
     {
-        var res = await this.Session.Client.DetachDisk_Task(this.Reference, diskId);
+        var res = await this.Session.Client.DetachDisk_Task(this.VimReference, diskId);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> DisableSecondaryVM_Task(VirtualMachine vm)
     {
-        var res = await this.Session.Client.DisableSecondaryVM_Task(this.Reference, vm.Reference);
+        var res = await this.Session.Client.DisableSecondaryVM_Task(this.VimReference, vm.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<bool> DropConnections(VirtualMachineConnection[]? listOfConnections)
     {
-        return await this.Session.Client.DropConnections(this.Reference, listOfConnections);
+        return await this.Session.Client.DropConnections(this.VimReference, listOfConnections);
     }
 
     public async System.Threading.Tasks.Task<Task?> EnableSecondaryVM_Task(VirtualMachine vm, HostSystem? host)
     {
-        var res = await this.Session.Client.EnableSecondaryVM_Task(this.Reference, vm.Reference, host?.Reference);
+        var res = await this.Session.Client.EnableSecondaryVM_Task(this.VimReference, vm.VimReference, host?.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> EstimateStorageForConsolidateSnapshots_Task()
     {
-        var res = await this.Session.Client.EstimateStorageForConsolidateSnapshots_Task(this.Reference);
+        var res = await this.Session.Client.EstimateStorageForConsolidateSnapshots_Task(this.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<HttpNfcLease?> ExportVm()
     {
-        var res = await this.Session.Client.ExportVm(this.Reference);
+        var res = await this.Session.Client.ExportVm(this.VimReference);
         return ManagedObject.Create<HttpNfcLease>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<string?> ExtractOvfEnvironment()
     {
-        return await this.Session.Client.ExtractOvfEnvironment(this.Reference);
+        return await this.Session.Client.ExtractOvfEnvironment(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> InstantClone_Task(VirtualMachineInstantCloneSpec spec)
     {
-        var res = await this.Session.Client.InstantClone_Task(this.Reference, spec);
+        var res = await this.Session.Client.InstantClone_Task(this.VimReference, spec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> MakePrimaryVM_Task(VirtualMachine vm)
     {
-        var res = await this.Session.Client.MakePrimaryVM_Task(this.Reference, vm.Reference);
+        var res = await this.Session.Client.MakePrimaryVM_Task(this.VimReference, vm.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task MarkAsTemplate()
     {
-        await this.Session.Client.MarkAsTemplate(this.Reference);
+        await this.Session.Client.MarkAsTemplate(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task MarkAsVirtualMachine(ResourcePool pool, HostSystem? host)
     {
-        await this.Session.Client.MarkAsVirtualMachine(this.Reference, pool.Reference, host?.Reference);
+        await this.Session.Client.MarkAsVirtualMachine(this.VimReference, pool.VimReference, host?.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> MigrateVM_Task(ResourcePool? pool, HostSystem? host, VirtualMachineMovePriority priority, VirtualMachinePowerState? state)
     {
-        var res = await this.Session.Client.MigrateVM_Task(this.Reference, pool?.Reference, host?.Reference, priority, state ?? default, state.HasValue);
+        var res = await this.Session.Client.MigrateVM_Task(this.VimReference, pool?.VimReference, host?.VimReference, priority, state ?? default, state.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task MountToolsInstaller()
     {
-        await this.Session.Client.MountToolsInstaller(this.Reference);
+        await this.Session.Client.MountToolsInstaller(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> PowerOffVM_Task()
     {
-        var res = await this.Session.Client.PowerOffVM_Task(this.Reference);
+        var res = await this.Session.Client.PowerOffVM_Task(this.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> PowerOnVM_Task(HostSystem? host)
     {
-        var res = await this.Session.Client.PowerOnVM_Task(this.Reference, host?.Reference);
+        var res = await this.Session.Client.PowerOnVM_Task(this.VimReference, host?.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> PromoteDisks_Task(bool unlink, VirtualDisk[]? disks)
     {
-        var res = await this.Session.Client.PromoteDisks_Task(this.Reference, unlink, disks);
+        var res = await this.Session.Client.PromoteDisks_Task(this.VimReference, unlink, disks);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<int> PutUsbScanCodes(UsbScanCodeSpec spec)
     {
-        return await this.Session.Client.PutUsbScanCodes(this.Reference, spec);
+        return await this.Session.Client.PutUsbScanCodes(this.VimReference, spec);
     }
 
     public async System.Threading.Tasks.Task<DiskChangeInfo?> QueryChangedDiskAreas(VirtualMachineSnapshot? snapshot, int deviceKey, long startOffset, string changeId)
     {
-        return await this.Session.Client.QueryChangedDiskAreas(this.Reference, snapshot?.Reference, deviceKey, startOffset, changeId);
+        return await this.Session.Client.QueryChangedDiskAreas(this.VimReference, snapshot?.VimReference, deviceKey, startOffset, changeId);
     }
 
     public async System.Threading.Tasks.Task<VirtualMachineConnection[]?> QueryConnections()
     {
-        return await this.Session.Client.QueryConnections(this.Reference);
+        return await this.Session.Client.QueryConnections(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<LocalizedMethodFault[]?> QueryFaultToleranceCompatibility()
     {
-        return await this.Session.Client.QueryFaultToleranceCompatibility(this.Reference);
+        return await this.Session.Client.QueryFaultToleranceCompatibility(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<LocalizedMethodFault[]?> QueryFaultToleranceCompatibilityEx(bool? forLegacyFt)
     {
-        return await this.Session.Client.QueryFaultToleranceCompatibilityEx(this.Reference, forLegacyFt ?? default, forLegacyFt.HasValue);
+        return await this.Session.Client.QueryFaultToleranceCompatibilityEx(this.VimReference, forLegacyFt ?? default, forLegacyFt.HasValue);
     }
 
     public async System.Threading.Tasks.Task<string[]?> QueryUnownedFiles()
     {
-        return await this.Session.Client.QueryUnownedFiles(this.Reference);
+        return await this.Session.Client.QueryUnownedFiles(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task RebootGuest()
     {
-        await this.Session.Client.RebootGuest(this.Reference);
+        await this.Session.Client.RebootGuest(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> ReconfigVM_Task(VirtualMachineConfigSpec spec)
     {
-        var res = await this.Session.Client.ReconfigVM_Task(this.Reference, spec);
+        var res = await this.Session.Client.ReconfigVM_Task(this.VimReference, spec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task RefreshStorageInfo()
     {
-        await this.Session.Client.RefreshStorageInfo(this.Reference);
+        await this.Session.Client.RefreshStorageInfo(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> ReloadVirtualMachineFromPath_Task(string configurationPath)
     {
-        var res = await this.Session.Client.ReloadVirtualMachineFromPath_Task(this.Reference, configurationPath);
+        var res = await this.Session.Client.ReloadVirtualMachineFromPath_Task(this.VimReference, configurationPath);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> RelocateVM_Task(VirtualMachineRelocateSpec spec, VirtualMachineMovePriority? priority)
     {
-        var res = await this.Session.Client.RelocateVM_Task(this.Reference, spec, priority ?? default, priority.HasValue);
+        var res = await this.Session.Client.RelocateVM_Task(this.VimReference, spec, priority ?? default, priority.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> RemoveAllSnapshots_Task(bool? consolidate)
     {
-        var res = await this.Session.Client.RemoveAllSnapshots_Task(this.Reference, consolidate ?? default, consolidate.HasValue);
+        var res = await this.Session.Client.RemoveAllSnapshots_Task(this.VimReference, consolidate ?? default, consolidate.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task ResetGuestInformation()
     {
-        await this.Session.Client.ResetGuestInformation(this.Reference);
+        await this.Session.Client.ResetGuestInformation(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> ResetVM_Task()
     {
-        var res = await this.Session.Client.ResetVM_Task(this.Reference);
+        var res = await this.Session.Client.ResetVM_Task(this.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> RevertToCurrentSnapshot_Task(HostSystem? host, bool? suppressPowerOn)
     {
-        var res = await this.Session.Client.RevertToCurrentSnapshot_Task(this.Reference, host?.Reference, suppressPowerOn ?? default, suppressPowerOn.HasValue);
+        var res = await this.Session.Client.RevertToCurrentSnapshot_Task(this.VimReference, host?.VimReference, suppressPowerOn ?? default, suppressPowerOn.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task SendNMI()
     {
-        await this.Session.Client.SendNMI(this.Reference);
+        await this.Session.Client.SendNMI(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task SetDisplayTopology(VirtualMachineDisplayTopology[] displays)
     {
-        await this.Session.Client.SetDisplayTopology(this.Reference, displays);
+        await this.Session.Client.SetDisplayTopology(this.VimReference, displays);
     }
 
     public async System.Threading.Tasks.Task SetScreenResolution(int width, int height)
     {
-        await this.Session.Client.SetScreenResolution(this.Reference, width, height);
+        await this.Session.Client.SetScreenResolution(this.VimReference, width, height);
     }
 
     public async System.Threading.Tasks.Task ShutdownGuest()
     {
-        await this.Session.Client.ShutdownGuest(this.Reference);
+        await this.Session.Client.ShutdownGuest(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task StandbyGuest()
     {
-        await this.Session.Client.StandbyGuest(this.Reference);
+        await this.Session.Client.StandbyGuest(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> StartRecording_Task(string name, string? description)
     {
-        var res = await this.Session.Client.StartRecording_Task(this.Reference, name, description);
+        var res = await this.Session.Client.StartRecording_Task(this.VimReference, name, description);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> StartReplaying_Task(VirtualMachineSnapshot replaySnapshot)
     {
-        var res = await this.Session.Client.StartReplaying_Task(this.Reference, replaySnapshot.Reference);
+        var res = await this.Session.Client.StartReplaying_Task(this.VimReference, replaySnapshot.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> StopRecording_Task()
     {
-        var res = await this.Session.Client.StopRecording_Task(this.Reference);
+        var res = await this.Session.Client.StopRecording_Task(this.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> StopReplaying_Task()
     {
-        var res = await this.Session.Client.StopReplaying_Task(this.Reference);
+        var res = await this.Session.Client.StopReplaying_Task(this.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> SuspendVM_Task()
     {
-        var res = await this.Session.Client.SuspendVM_Task(this.Reference);
+        var res = await this.Session.Client.SuspendVM_Task(this.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> TerminateFaultTolerantVM_Task(VirtualMachine? vm)
     {
-        var res = await this.Session.Client.TerminateFaultTolerantVM_Task(this.Reference, vm?.Reference);
+        var res = await this.Session.Client.TerminateFaultTolerantVM_Task(this.VimReference, vm?.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task TerminateVM()
     {
-        await this.Session.Client.TerminateVM(this.Reference);
+        await this.Session.Client.TerminateVM(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> TurnOffFaultToleranceForVM_Task()
     {
-        var res = await this.Session.Client.TurnOffFaultToleranceForVM_Task(this.Reference);
+        var res = await this.Session.Client.TurnOffFaultToleranceForVM_Task(this.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task UnmountToolsInstaller()
     {
-        await this.Session.Client.UnmountToolsInstaller(this.Reference);
+        await this.Session.Client.UnmountToolsInstaller(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task UnregisterVM()
     {
-        await this.Session.Client.UnregisterVM(this.Reference);
+        await this.Session.Client.UnregisterVM(this.VimReference);
     }
 
     public async System.Threading.Tasks.Task<Task?> UpgradeTools_Task(string? installerOptions)
     {
-        var res = await this.Session.Client.UpgradeTools_Task(this.Reference, installerOptions);
+        var res = await this.Session.Client.UpgradeTools_Task(this.VimReference, installerOptions);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> UpgradeVM_Task(string? version)
     {
-        var res = await this.Session.Client.UpgradeVM_Task(this.Reference, version);
+        var res = await this.Session.Client.UpgradeVM_Task(this.VimReference, version);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -7757,19 +7757,19 @@ public partial class VirtualMachineCompatibilityChecker : ManagedObject
 
     public async System.Threading.Tasks.Task<Task?> CheckCompatibility_Task(VirtualMachine vm, HostSystem? host, ResourcePool? pool, string[]? testType)
     {
-        var res = await this.Session.Client.CheckCompatibility_Task(this.Reference, vm.Reference, host?.Reference, pool?.Reference, testType);
+        var res = await this.Session.Client.CheckCompatibility_Task(this.VimReference, vm.VimReference, host?.VimReference, pool?.VimReference, testType);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> CheckPowerOn_Task(VirtualMachine vm, HostSystem? host, ResourcePool? pool, string[]? testType)
     {
-        var res = await this.Session.Client.CheckPowerOn_Task(this.Reference, vm.Reference, host?.Reference, pool?.Reference, testType);
+        var res = await this.Session.Client.CheckPowerOn_Task(this.VimReference, vm.VimReference, host?.VimReference, pool?.VimReference, testType);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> CheckVmConfig_Task(VirtualMachineConfigSpec spec, VirtualMachine? vm, HostSystem? host, ResourcePool? pool, string[]? testType)
     {
-        var res = await this.Session.Client.CheckVmConfig_Task(this.Reference, spec, vm?.Reference, host?.Reference, pool?.Reference, testType);
+        var res = await this.Session.Client.CheckVmConfig_Task(this.VimReference, spec, vm?.VimReference, host?.VimReference, pool?.VimReference, testType);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -7785,19 +7785,19 @@ public partial class VirtualMachineGuestCustomizationManager : ManagedObject
 
     public async System.Threading.Tasks.Task<Task?> AbortCustomization_Task(VirtualMachine vm, GuestAuthentication auth)
     {
-        var res = await this.Session.Client.AbortCustomization_Task(this.Reference, vm.Reference, auth);
+        var res = await this.Session.Client.AbortCustomization_Task(this.VimReference, vm.VimReference, auth);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> CustomizeGuest_Task(VirtualMachine vm, GuestAuthentication auth, CustomizationSpec spec, OptionValue[]? configParams)
     {
-        var res = await this.Session.Client.CustomizeGuest_Task(this.Reference, vm.Reference, auth, spec, configParams);
+        var res = await this.Session.Client.CustomizeGuest_Task(this.VimReference, vm.VimReference, auth, spec, configParams);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> StartGuestNetwork_Task(VirtualMachine vm, GuestAuthentication auth)
     {
-        var res = await this.Session.Client.StartGuestNetwork_Task(this.Reference, vm.Reference, auth);
+        var res = await this.Session.Client.StartGuestNetwork_Task(this.VimReference, vm.VimReference, auth);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -7813,31 +7813,31 @@ public partial class VirtualMachineProvisioningChecker : ManagedObject
 
     public async System.Threading.Tasks.Task<Task?> CheckClone_Task(VirtualMachine vm, Folder folder, string name, VirtualMachineCloneSpec spec, string[]? testType)
     {
-        var res = await this.Session.Client.CheckClone_Task(this.Reference, vm.Reference, folder.Reference, name, spec, testType);
+        var res = await this.Session.Client.CheckClone_Task(this.VimReference, vm.VimReference, folder.VimReference, name, spec, testType);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> CheckInstantClone_Task(VirtualMachine vm, VirtualMachineInstantCloneSpec spec, string[]? testType)
     {
-        var res = await this.Session.Client.CheckInstantClone_Task(this.Reference, vm.Reference, spec, testType);
+        var res = await this.Session.Client.CheckInstantClone_Task(this.VimReference, vm.VimReference, spec, testType);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> CheckMigrate_Task(VirtualMachine vm, HostSystem? host, ResourcePool? pool, VirtualMachinePowerState? state, string[]? testType)
     {
-        var res = await this.Session.Client.CheckMigrate_Task(this.Reference, vm.Reference, host?.Reference, pool?.Reference, state ?? default, state.HasValue, testType);
+        var res = await this.Session.Client.CheckMigrate_Task(this.VimReference, vm.VimReference, host?.VimReference, pool?.VimReference, state ?? default, state.HasValue, testType);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> CheckRelocate_Task(VirtualMachine vm, VirtualMachineRelocateSpec spec, string[]? testType)
     {
-        var res = await this.Session.Client.CheckRelocate_Task(this.Reference, vm.Reference, spec, testType);
+        var res = await this.Session.Client.CheckRelocate_Task(this.VimReference, vm.VimReference, spec, testType);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> QueryVMotionCompatibilityEx_Task(VirtualMachine[] vm, HostSystem[] host)
     {
-        var res = await this.Session.Client.QueryVMotionCompatibilityEx_Task(this.Reference, vm.Select(m => m.Reference).ToArray(), host.Select(m => m.Reference).ToArray());
+        var res = await this.Session.Client.QueryVMotionCompatibilityEx_Task(this.VimReference, vm.Select(m => m.VimReference).ToArray(), host.Select(m => m.VimReference).ToArray());
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -7873,24 +7873,24 @@ public partial class VirtualMachineSnapshot : ExtensibleManagedObject
 
     public async System.Threading.Tasks.Task<HttpNfcLease?> ExportSnapshot()
     {
-        var res = await this.Session.Client.ExportSnapshot(this.Reference);
+        var res = await this.Session.Client.ExportSnapshot(this.VimReference);
         return ManagedObject.Create<HttpNfcLease>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> RemoveSnapshot_Task(bool removeChildren, bool? consolidate)
     {
-        var res = await this.Session.Client.RemoveSnapshot_Task(this.Reference, removeChildren, consolidate ?? default, consolidate.HasValue);
+        var res = await this.Session.Client.RemoveSnapshot_Task(this.VimReference, removeChildren, consolidate ?? default, consolidate.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task RenameSnapshot(string? name, string? description)
     {
-        await this.Session.Client.RenameSnapshot(this.Reference, name, description);
+        await this.Session.Client.RenameSnapshot(this.VimReference, name, description);
     }
 
     public async System.Threading.Tasks.Task<Task?> RevertToSnapshot_Task(HostSystem? host, bool? suppressPowerOn)
     {
-        var res = await this.Session.Client.RevertToSnapshot_Task(this.Reference, host?.Reference, suppressPowerOn ?? default, suppressPowerOn.HasValue);
+        var res = await this.Session.Client.RevertToSnapshot_Task(this.VimReference, host?.VimReference, suppressPowerOn ?? default, suppressPowerOn.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -7906,7 +7906,7 @@ public partial class VmwareDistributedVirtualSwitch : DistributedVirtualSwitch
 
     public async System.Threading.Tasks.Task<Task?> UpdateDVSLacpGroupConfig_Task(VMwareDvsLacpGroupSpec[] lacpGroupSpec)
     {
-        var res = await this.Session.Client.UpdateDVSLacpGroupConfig_Task(this.Reference, lacpGroupSpec);
+        var res = await this.Session.Client.UpdateDVSLacpGroupConfig_Task(this.VimReference, lacpGroupSpec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -7922,18 +7922,18 @@ public partial class VsanUpgradeSystem : ManagedObject
 
     public async System.Threading.Tasks.Task<Task?> PerformVsanUpgrade_Task(ClusterComputeResource cluster, bool? performObjectUpgrade, bool? downgradeFormat, bool? allowReducedRedundancy, HostSystem[]? excludeHosts)
     {
-        var res = await this.Session.Client.PerformVsanUpgrade_Task(this.Reference, cluster.Reference, performObjectUpgrade ?? default, performObjectUpgrade.HasValue, downgradeFormat ?? default, downgradeFormat.HasValue, allowReducedRedundancy ?? default, allowReducedRedundancy.HasValue, excludeHosts?.Select(m => m.Reference).ToArray());
+        var res = await this.Session.Client.PerformVsanUpgrade_Task(this.VimReference, cluster.VimReference, performObjectUpgrade ?? default, performObjectUpgrade.HasValue, downgradeFormat ?? default, downgradeFormat.HasValue, allowReducedRedundancy ?? default, allowReducedRedundancy.HasValue, excludeHosts?.Select(m => m.VimReference).ToArray());
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<VsanUpgradeSystemPreflightCheckResult?> PerformVsanUpgradePreflightCheck(ClusterComputeResource cluster, bool? downgradeFormat)
     {
-        return await this.Session.Client.PerformVsanUpgradePreflightCheck(this.Reference, cluster.Reference, downgradeFormat ?? default, downgradeFormat.HasValue);
+        return await this.Session.Client.PerformVsanUpgradePreflightCheck(this.VimReference, cluster.VimReference, downgradeFormat ?? default, downgradeFormat.HasValue);
     }
 
     public async System.Threading.Tasks.Task<VsanUpgradeSystemUpgradeStatus?> QueryVsanUpgradeStatus(ClusterComputeResource cluster)
     {
-        return await this.Session.Client.QueryVsanUpgradeStatus(this.Reference, cluster.Reference);
+        return await this.Session.Client.QueryVsanUpgradeStatus(this.VimReference, cluster.VimReference);
     }
 }
 
