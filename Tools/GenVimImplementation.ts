@@ -117,6 +117,8 @@ const cls = await getCls(directory, methods);
 
 console.log(`namespace CsVmomi;
 
+using System.ServiceModel.Channels;
+
 public class VimClient : IVimClient
 {
     private readonly VimPortTypeClient inner;
@@ -124,6 +126,18 @@ public class VimClient : IVimClient
     internal VimClient(VimPortTypeClient inner)
     {
         this.inner = inner;
+    }
+
+    public Uri Uri => this.inner.Endpoint.Address.Uri;
+
+    public string? GetCookie(string name)
+    {
+        return this.inner.InnerChannel.GetProperty<IHttpCookieContainerManager>()?
+            .CookieContainer
+            .GetCookies(this.Uri)
+            .OfType<System.Net.Cookie>()
+            .FirstOrDefault(c => c.Name == name)?
+            .Value;
     }`);
 for (const ref of methods) {
   if (excludeManagedObjectMethod.includes(ref.id)) {

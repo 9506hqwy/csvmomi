@@ -71,7 +71,10 @@ const cls = await getCls(directory, methods);
 console.log(`namespace CsVmomi;
 
 public interface IVimClient
-{`);
+{
+    public Uri Uri { get; }
+
+    public string? GetCookie(string name);`);
 for (const ref of methods) {
   if (excludeManagedObjectMethod.includes(ref.id)) {
     continue;

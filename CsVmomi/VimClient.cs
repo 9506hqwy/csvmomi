@@ -1,5 +1,7 @@
 ﻿namespace CsVmomi;
 
+using System.ServiceModel.Channels;
+
 public class VimClient : IVimClient
 {
     private readonly VimPortTypeClient inner;
@@ -7,6 +9,18 @@ public class VimClient : IVimClient
     internal VimClient(VimPortTypeClient inner)
     {
         this.inner = inner;
+    }
+
+    public Uri Uri => this.inner.Endpoint.Address.Uri;
+
+    public string? GetCookie(string name)
+    {
+        return this.inner.InnerChannel.GetProperty<IHttpCookieContainerManager>()?
+            .CookieContainer
+            .GetCookies(this.Uri)
+            .OfType<System.Net.Cookie>()
+            .FirstOrDefault(c => c.Name == name)?
+            .Value;
     }
 
     public async System.Threading.Tasks.Task AbandonHciWorkflow(ManagedObjectReference self)
