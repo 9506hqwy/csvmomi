@@ -1,5 +1,7 @@
 ﻿namespace CsVmomi.Test;
 
+using System.Text;
+
 [TestClass]
 public class SessionTest
 {
@@ -19,6 +21,19 @@ public class SessionTest
         {
             this.session.SessionManager!.Logout().Wait();
         }
+    }
+
+    [TestMethod]
+    public void MessageToolBox()
+    {
+        string? envelope = null;
+        this.session.MessageToolBox.Fixup = (source) =>
+        {
+            envelope = Encoding.UTF8.GetString(source);
+            return source;
+        };
+        Assert.IsNotNull(this.session.RootFolder.FindFirst<Datacenter>().Result);
+        Assert.IsNotNull(envelope);
     }
 
     [TestMethod]

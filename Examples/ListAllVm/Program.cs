@@ -32,6 +32,7 @@ internal class ListAllVm
         }
 
         var session = await Session.Get(url);
+        session.MessageToolBox.Fixup = Fixup.FixupNamespaceNotPreserve();
         await session.SessionManager!.Login(args[1], args[2]);
         try
         {

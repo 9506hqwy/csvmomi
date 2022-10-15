@@ -19,6 +19,8 @@ public class Session
         this.vimServiceContent = serviceContent;
     }
 
+    public MessageToolBox MessageToolBox { get; set; } = new MessageToolBox();
+
     public string? SoapSessionId => this.VimClient.GetCookie(Session.SessionCookieName)?.Trim('"');
 
     public AboutInfo About => this.vimServiceContent.about;
@@ -152,7 +154,13 @@ public class Session
             RevocationMode = X509RevocationMode.NoCheck,
         };
 
-        return await Session.Get(inner);
+        var tool = new MessageToolBox();
+        inner.Endpoint.EndpointBehaviors.Add(new FixupBehavior(tool));
+
+        var session = await Session.Get(inner);
+        session.MessageToolBox = tool;
+
+        return session;
     }
 
     public static async System.Threading.Tasks.Task<Session> Get(VimPortTypeClient inner)
@@ -187,6 +195,7 @@ public class Session
             CertificateValidationMode = X509CertificateValidationMode.None,
             RevocationMode = X509RevocationMode.NoCheck,
         };
+        inner.Endpoint.EndpointBehaviors.Add(new FixupBehavior(this.MessageToolBox));
         inner.Endpoint.EndpointBehaviors.Add(new SessionCookieBehavior(this.SoapSessionId));
 
         return this.SetPbmClient(inner);
