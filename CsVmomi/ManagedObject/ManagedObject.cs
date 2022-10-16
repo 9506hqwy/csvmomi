@@ -23,6 +23,11 @@ public abstract class ManagedObject
             type = reference.type,
             Value = reference.Value,
         };
+        this.SmsReference = new SmsService.ManagedObjectReference
+        {
+            type = reference.type,
+            Value = reference.Value,
+        };
         this.VimReference = reference;
         this.Session = session;
     }
@@ -32,6 +37,29 @@ public abstract class ManagedObject
         Session session)
     {
         this.PbmReference = reference;
+        this.SmsReference = new SmsService.ManagedObjectReference
+        {
+            type = reference.type,
+            Value = reference.Value,
+        };
+        this.VimReference = new ManagedObjectReference
+        {
+            type = reference.type,
+            Value = reference.Value,
+        };
+        this.Session = session;
+    }
+
+    protected ManagedObject(
+        SmsService.ManagedObjectReference reference,
+        Session session)
+    {
+        this.PbmReference = new PbmService.ManagedObjectReference
+        {
+            type = reference.type,
+            Value = reference.Value,
+        };
+        this.SmsReference = reference;
         this.VimReference = new ManagedObjectReference
         {
             type = reference.type,
@@ -42,6 +70,8 @@ public abstract class ManagedObject
 
     public PbmService.ManagedObjectReference PbmReference { get; }
 
+    public SmsService.ManagedObjectReference SmsReference { get; }
+
     public ManagedObjectReference VimReference { get; }
 
     protected Session Session { get; }
@@ -51,23 +81,7 @@ public abstract class ManagedObject
         Session session)
         where T : ManagedObject
     {
-        if (reference == null)
-        {
-            return null;
-        }
-
-        if (ManagedObject.ManagedObjectTypes.TryGetValue(reference.type, out Type type) &&
-            typeof(T).IsAssignableFrom(type))
-        {
-            return (T)Activator.CreateInstance(
-                type,
-                BindingFlags.Instance | BindingFlags.NonPublic,
-                null,
-                new object[] { reference, session },
-                null);
-        }
-
-        throw new NotSupportedException();
+        return ManagedObject.Create<T>(reference, reference?.type, session);
     }
 
     public static T? Create<T>(
@@ -75,23 +89,15 @@ public abstract class ManagedObject
         Session session)
         where T : ManagedObject
     {
-        if (reference == null)
-        {
-            return null;
-        }
+        return ManagedObject.Create<T>(reference, reference?.type, session);
+    }
 
-        if (ManagedObject.ManagedObjectTypes.TryGetValue(reference.type, out Type type) &&
-            typeof(T).IsAssignableFrom(type))
-        {
-            return (T)Activator.CreateInstance(
-                type,
-                BindingFlags.Instance | BindingFlags.NonPublic,
-                null,
-                new object[] { reference, session },
-                null);
-        }
-
-        throw new NotSupportedException();
+    public static T? Create<T>(
+        SmsService.ManagedObjectReference? reference,
+        Session session)
+        where T : ManagedObject
+    {
+        return ManagedObject.Create<T>(reference, reference?.type, session);
     }
 
     public async Task<T?> GetProperty<T>(string pathSet)
@@ -193,5 +199,27 @@ public abstract class ManagedObject
         var obj6 = content.GetPropertyValue<T6>(pathSet6);
         var obj7 = content.GetPropertyValue<T7>(pathSet7);
         return Tuple.Create(obj1, obj2, obj3, obj4, obj5, obj6, obj7);
+    }
+
+    private static T? Create<T>(object? reference, string? objType, Session session)
+        where T : ManagedObject
+    {
+        if (reference == null || objType == null)
+        {
+            return null;
+        }
+
+        if (ManagedObject.ManagedObjectTypes.TryGetValue(objType, out Type type) &&
+            typeof(T).IsAssignableFrom(type))
+        {
+            return (T)Activator.CreateInstance(
+                type,
+                BindingFlags.Instance | BindingFlags.NonPublic,
+                null,
+                new object[] { reference, session },
+                null);
+        }
+
+        throw new NotSupportedException();
     }
 }

@@ -35,6 +35,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PbmService\PbmService.csproj" />
+    <ProjectReference Include="..\SmsService\SmsService.csproj" />
     <ProjectReference Include="..\VimService\VimService.csproj" />
   </ItemGroup>
 

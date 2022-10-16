@@ -5,6 +5,10 @@ import { DOMParser } from "https://deno.land/x/deno_dom/deno-dom-wasm.ts";
 
 export const excludeManagedObjectMethod = [];
 
+export const fixMethodName = {
+  "QueryBackingStoragePool": "QueryAssociatedBackingStoragePool",
+}
+
 export const fixTypes = {
   "abort": {
     "MethodFault": "LocalizedMethodFault",
@@ -320,6 +324,10 @@ export async function getManagedMethodRefs1(
     m.clsName = names[1].getAttribute("href");
     m.id = names[0].getAttribute("href").split("#")[1];
 
+    if (m.name in fixMethodName) {
+      m.name = fixMethodName[m.name];
+    }
+
     methods.push(m);
   }
 
@@ -345,6 +353,10 @@ export async function getManagedMethodRefs2(
     m.name = names[0].innerText.trim();
     m.clsName = names[1].getAttribute("href");
     m.id = names[0].getAttribute("href").split("#")[1];
+
+    if (m.name in fixMethodName) {
+      m.name = fixMethodName[m.name];
+    }
 
     methods[className].push(m);
   }

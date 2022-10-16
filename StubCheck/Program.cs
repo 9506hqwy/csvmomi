@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using CsVmomi;
 using PbmService;
+using SmsService;
 using VimService;
 
 try
@@ -16,6 +17,7 @@ void Work(string[] args)
 {
     CheckType(typeof(VimPortTypeClient), typeof(VimClient));
     CheckType(typeof(PbmPortTypeClient), typeof(PbmClient));
+    CheckType(typeof(SmsPortTypeClient), typeof(SmsClient));
 }
 
 void CheckType(Type a, Type b)

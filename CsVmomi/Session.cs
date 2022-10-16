@@ -137,7 +137,11 @@ public class Session
 
     public PbmSessionManager? PbmSessionManager => ManagedObject.Create<PbmSessionManager>(this.pbmServiceContent?.sessionManager, this);
 
+    public SmsServiceInstance? SmsServiceInstance { get; private set; }
+
     internal IPbmClient? PbmClient { get; set; }
+
+    internal ISmsClient? SmsClient { get; set; }
 
     internal IVimClient VimClient { get; }
 
@@ -216,6 +220,44 @@ public class Session
             Value = "ServiceInstance",
         };
         this.pbmServiceContent = await client.PbmRetrieveServiceContent(mor);
+    }
+
+    public void SetSmsClient()
+    {
+        var builder = new UriBuilder(this.VimClient.Uri);
+        builder.Path = "sms/sdk";
+
+        var binding = Session.GetBinding();
+
+        var endpoint = new EndpointAddress(builder.Uri);
+
+        var inner = new SmsService.SmsPortTypeClient(binding, endpoint);
+        inner.ChannelFactory.Credentials.ServiceCertificate.SslCertificateAuthentication = new X509ServiceCertificateAuthentication
+        {
+            CertificateValidationMode = X509CertificateValidationMode.None,
+            RevocationMode = X509RevocationMode.NoCheck,
+        };
+        inner.Endpoint.EndpointBehaviors.Add(new FixupBehavior(this.MessageToolBox));
+        inner.Endpoint.EndpointBehaviors.Add(new SessionCookieBehavior(this.SoapSessionId));
+
+        this.SetSmsClient(inner);
+    }
+
+    public void SetSmsClient(SmsService.SmsPortTypeClient inner)
+    {
+        this.SetSmsClient(new SmsClient(inner));
+    }
+
+    public void SetSmsClient(ISmsClient client)
+    {
+        this.SmsClient = client;
+
+        var mor = new SmsService.ManagedObjectReference
+        {
+            type = "SmsServiceInstance",
+            Value = "ServiceInstance",
+        };
+        this.SmsServiceInstance = ManagedObject.Create<SmsServiceInstance>(mor, this);
     }
 
     private static BasicHttpBinding GetBinding()
