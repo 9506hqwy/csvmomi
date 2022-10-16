@@ -13,6 +13,8 @@ public class Session
 
     private PbmService.PbmServiceInstanceContent? pbmServiceContent;
 
+    private VslmService.VslmServiceInstanceContent? vslmServiceContent;
+
     private Session(IVimClient client, ServiceContent serviceContent)
     {
         this.VimClient = client;
@@ -141,6 +143,14 @@ public class Session
 
     public SmsServiceInstance? SmsServiceInstance { get; private set; }
 
+    public VslmService.VslmAboutInfo? VslmAboutInfo => this.vslmServiceContent?.aboutInfo;
+
+    public VslmSessionManager? VslmSessionManager => ManagedObject.Create<VslmSessionManager>(this.vslmServiceContent?.sessionManager, this);
+
+    public VslmStorageLifecycleManager? VslmStorageLifecycleManager => ManagedObject.Create<VslmStorageLifecycleManager>(this.vslmServiceContent?.storageLifecycleManager, this);
+
+    public VslmVStorageObjectManager? VslmVStorageObjectManager => ManagedObject.Create<VslmVStorageObjectManager>(this.vslmServiceContent?.vStorageObjectManager, this);
+
     internal IEamClient? EamClient { get; set; }
 
     internal IPbmClient? PbmClient { get; set; }
@@ -148,6 +158,8 @@ public class Session
     internal ISmsClient? SmsClient { get; set; }
 
     internal IVimClient VimClient { get; }
+
+    internal IVslmClient? VslmClient { get; set; }
 
     public static async System.Threading.Tasks.Task<Session> Get(Uri url)
     {
@@ -300,6 +312,44 @@ public class Session
             Value = "ServiceInstance",
         };
         this.SmsServiceInstance = ManagedObject.Create<SmsServiceInstance>(mor, this);
+    }
+
+    public System.Threading.Tasks.Task SetVslmClient()
+    {
+        var builder = new UriBuilder(this.VimClient.Uri);
+        builder.Path = "vslm/sdk";
+
+        var binding = Session.GetBinding();
+
+        var endpoint = new EndpointAddress(builder.Uri);
+
+        var inner = new VslmService.VslmPortTypeClient(binding, endpoint);
+        inner.ChannelFactory.Credentials.ServiceCertificate.SslCertificateAuthentication = new X509ServiceCertificateAuthentication
+        {
+            CertificateValidationMode = X509CertificateValidationMode.None,
+            RevocationMode = X509RevocationMode.NoCheck,
+        };
+        inner.Endpoint.EndpointBehaviors.Add(new FixupBehavior(this.MessageToolBox));
+        inner.Endpoint.EndpointBehaviors.Add(new SessionCookieBehavior(this.SoapSessionId));
+
+        return this.SetVslmClient(inner);
+    }
+
+    public System.Threading.Tasks.Task SetVslmClient(VslmService.VslmPortTypeClient inner)
+    {
+        return this.SetVslmClient(new VslmClient(inner));
+    }
+
+    public async System.Threading.Tasks.Task SetVslmClient(IVslmClient client)
+    {
+        this.VslmClient = client;
+
+        var mor = new VslmService.ManagedObjectReference
+        {
+            type = "VslmServiceInstance",
+            Value = "ServiceInstance",
+        };
+        this.vslmServiceContent = await client.RetrieveContent(mor);
     }
 
     private static BasicHttpBinding GetBinding()

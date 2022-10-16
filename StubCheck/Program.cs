@@ -4,6 +4,7 @@ using EamService;
 using PbmService;
 using SmsService;
 using VimService;
+using VslmService;
 
 try
 {
@@ -20,6 +21,7 @@ void Work(string[] args)
     CheckType(typeof(EamPortTypeClient), typeof(EamClient));
     CheckType(typeof(PbmPortTypeClient), typeof(PbmClient));
     CheckType(typeof(SmsPortTypeClient), typeof(SmsClient));
+    CheckType(typeof(VslmPortTypeClient), typeof(VslmClient));
 }
 
 void CheckType(Type a, Type b)

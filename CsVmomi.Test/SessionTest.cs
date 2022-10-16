@@ -68,4 +68,14 @@ public class SessionTest
     {
         Assert.IsNotNull(this.session.SoapSessionId);
     }
+
+    [TestMethod]
+    public void VslmServiceContent()
+    {
+        this.session.SetVslmClient().Wait();
+        Assert.IsNotNull(this.session.VslmAboutInfo);
+        Assert.IsNotNull(this.session.VslmSessionManager);
+        Assert.IsNotNull(this.session.VslmStorageLifecycleManager);
+        Assert.IsNotNull(this.session.VslmVStorageObjectManager);
+    }
 }

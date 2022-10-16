@@ -34,6 +34,11 @@ public abstract class ManagedObject
             Value = reference.Value,
         };
         this.VimReference = reference;
+        this.VslmReference = new VslmService.ManagedObjectReference
+        {
+            type = reference.type,
+            Value = reference.Value,
+        };
         this.Session = session;
     }
 
@@ -53,6 +58,11 @@ public abstract class ManagedObject
             Value = reference.Value,
         };
         this.VimReference = new ManagedObjectReference
+        {
+            type = reference.type,
+            Value = reference.Value,
+        };
+        this.VslmReference = new VslmService.ManagedObjectReference
         {
             type = reference.type,
             Value = reference.Value,
@@ -80,6 +90,11 @@ public abstract class ManagedObject
             type = reference.type,
             Value = reference.Value,
         };
+        this.VslmReference = new VslmService.ManagedObjectReference
+        {
+            type = reference.type,
+            Value = reference.Value,
+        };
         this.Session = session;
     }
 
@@ -103,6 +118,39 @@ public abstract class ManagedObject
             type = reference.type,
             Value = reference.Value,
         };
+        this.VslmReference = new VslmService.ManagedObjectReference
+        {
+            type = reference.type,
+            Value = reference.Value,
+        };
+        this.Session = session;
+    }
+
+    protected ManagedObject(
+        VslmService.ManagedObjectReference reference,
+        Session session)
+    {
+        this.EamReference = new EamService.ManagedObjectReference
+        {
+            type = reference.type,
+            Value = reference.Value,
+        };
+        this.PbmReference = new PbmService.ManagedObjectReference
+        {
+            type = reference.type,
+            Value = reference.Value,
+        };
+        this.SmsReference = new SmsService.ManagedObjectReference
+        {
+            type = reference.type,
+            Value = reference.Value,
+        };
+        this.VimReference = new ManagedObjectReference
+        {
+            type = reference.type,
+            Value = reference.Value,
+        };
+        this.VslmReference = reference;
         this.Session = session;
     }
 
@@ -113,6 +161,8 @@ public abstract class ManagedObject
     public SmsService.ManagedObjectReference SmsReference { get; }
 
     public ManagedObjectReference VimReference { get; }
+
+    public VslmService.ManagedObjectReference VslmReference { get; }
 
     protected Session Session { get; }
 
@@ -142,6 +192,14 @@ public abstract class ManagedObject
 
     public static T? Create<T>(
         SmsService.ManagedObjectReference? reference,
+        Session session)
+        where T : ManagedObject
+    {
+        return ManagedObject.Create<T>(reference, reference?.type, session);
+    }
+
+    public static T? Create<T>(
+        VslmService.ManagedObjectReference? reference,
         Session session)
         where T : ManagedObject
     {

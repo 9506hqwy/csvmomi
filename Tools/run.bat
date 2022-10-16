@@ -23,6 +23,11 @@ if "%VIM_REF_GUIDE%" == "" (
     EXIT /B 1
 )
 
+if "%VSLM_REF_GUIDE%" == "" (
+    ECHO error VSLM_REF_GUIDE
+    EXIT /B 1
+)
+
 deno run --allow-read "%TOOL%GenEamImplementation.ts" "%EAM_REF_GUIDE%" > "%SRC%EamClient.cs"
 deno run --allow-read "%TOOL%GenEamInterface.ts" "%EAM_REF_GUIDE%" > "%SRC%IEamClient.cs"
 deno run --allow-read "%TOOL%GenEamManagedObject.ts" "%EAM_REF_GUIDE%" > "%SRC%ManagedObject\GeneratedEam.cs"
@@ -38,3 +43,7 @@ deno run --allow-read "%TOOL%GenSmsManagedObject.ts" "%SMS_REF_GUIDE%" > "%SRC%M
 deno run --allow-read "%TOOL%GenVimImplementation.ts" "%VIM_REF_GUIDE%" > "%SRC%VimClient.cs"
 deno run --allow-read "%TOOL%GenVimInterface.ts" "%VIM_REF_GUIDE%" > "%SRC%IVimClient.cs"
 deno run --allow-read "%TOOL%GenVimManagedObject.ts" "%VIM_REF_GUIDE%" > "%SRC%ManagedObject\GeneratedVim.cs"
+
+deno run --allow-read "%TOOL%GenVslmImplementation.ts" "%VSLM_REF_GUIDE%" > "%SRC%VslmClient.cs"
+deno run --allow-read "%TOOL%GenVslmInterface.ts" "%VSLM_REF_GUIDE%" > "%SRC%IVslmClient.cs"
+deno run --allow-read "%TOOL%GenVslmManagedObject.ts" "%VSLM_REF_GUIDE%" > "%SRC%ManagedObject\GeneratedVslm.cs"
