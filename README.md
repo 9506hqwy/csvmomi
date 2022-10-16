@@ -7,13 +7,19 @@ This repository includes some packages.
 - [PbmService](./PbmService)
 
   This package is VMware Storage Policy API C# bindings.
-  This package is stub that generated from WSDL by using [dotnet-svcuti](https://www.nuget.org/packages/dotnet-svcutil).
+  This package is stub that generated from WSDL by using [dotnet-svcuti](https://www.nuget.org/packages/dotnet-svcutil),
+  and pre-generated XML serializer by using [dotnet-svcutil.xmlserializer](https://www.nuget.org/packages/dotnet-svcutil.xmlserializer).
+
+- [SmsService](./SmsService)
+
+  This package is vCenter Storage Monitoring Service API C# bindings.
+  This package is stub that generated from WSDL by using [dotnet-svcuti](https://www.nuget.org/packages/dotnet-svcutil),
   and pre-generated XML serializer by using [dotnet-svcutil.xmlserializer](https://www.nuget.org/packages/dotnet-svcutil.xmlserializer).
 
 - [VimService](./VimService)
 
   This package is vSphere Web Services API C# bindings.
-  This package is stub that generated from WSDL by using [dotnet-svcuti](https://www.nuget.org/packages/dotnet-svcutil).
+  This package is stub that generated from WSDL by using [dotnet-svcuti](https://www.nuget.org/packages/dotnet-svcutil),
   and pre-generated XML serializer by using [dotnet-svcutil.xmlserializer](https://www.nuget.org/packages/dotnet-svcutil.xmlserializer).
 
 - [CsVmomi](./CsVmomi)

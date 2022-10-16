@@ -1,0 +1,24 @@
+{
+  "providerId": "Microsoft.Tools.ServiceModel.Svcutil",
+  "version": "2.0.3",
+  "options": {
+    "inputs": [
+      "../SmsStubGen/wsdl/core-types.xsd",
+      "../SmsStubGen/wsdl/query-types.xsd",
+      "../SmsStubGen/wsdl/reflect-types.xsd",
+      "../SmsStubGen/wsdl/sms-messagetypes.xsd",
+      "../SmsStubGen/wsdl/sms-types.xsd",
+      "../SmsStubGen/wsdl/sms.wsdl",
+      "../SmsStubGen/wsdl/smsService.wsdl",
+      "../SmsStubGen/wsdl/vim-types.xsd"
+    ],
+    "namespaceMappings": [
+      "*, SmsService"
+    ],
+    "outputFile": "SmsService.cs",
+    "serializerMode": "XmlSerializer",
+    "targetFramework": "netstandard2.0",
+    "typeReuseMode": "All",
+    "wrapped": true
+  }
+}
