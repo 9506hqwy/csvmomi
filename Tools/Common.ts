@@ -262,21 +262,28 @@ export function findPropertyType(
   const propTypeElem = property.querySelector<HTMLTableCellElement>(
     `td:nth-child(${index})`,
   );
-  const anchors = propTypeElem.querySelectorAll<HTMLAnchorElement>("a");
 
   const decl = new TypeDeclare();
 
-  if (anchors.length == 0) {
-    const ty = propTypeElem.innerText.trim();
-    decl.local = ty;
-    decl.remote = ty;
+  const anchors = propTypeElem.querySelectorAll<HTMLAnchorElement>("a");
+  const typeStrings = propTypeElem.innerText.trim().split(' ');
+  if (anchors.length == 2) {
+      decl.local = anchors[1].innerText.trim();
+      decl.remote = anchors[0].innerText.trim();
+  } else if (typeStrings.length > 1) {
+    decl.local = typeStrings[typeStrings.length - 1].trim();
+    decl.remote = typeStrings[0].trim();
+    if (decl.local.slice(-2) == '[]' && decl.remote.slice(-2) != '[]') {
+      decl.remote += '[]';
+    }
   } else if (anchors.length == 1) {
     const ty = anchors[0].innerText.trim();
     decl.local = ty;
     decl.remote = ty;
   } else {
-    decl.local = anchors[1].innerText.trim();
-    decl.remote = anchors[0].innerText.trim();
+    const ty = propTypeElem.innerText.trim();
+    decl.local = ty;
+    decl.remote = ty;
   }
 
   if (methodId in fixTypes && decl.local in fixTypes[methodId]) {
@@ -285,6 +292,14 @@ export function findPropertyType(
 
   if (methodId in fixTypes && decl.remote in fixTypes[methodId]) {
     decl.remote = fixTypes[methodId][decl.remote];
+  }
+
+  if (decl.local.indexOf('.') > 0) {
+    decl.local = decl.local.split('.')[1];
+  }
+
+  if (decl.remote.indexOf('.') > 0) {
+    decl.remote = decl.remote.split('.')[1];
   }
 
   return decl;

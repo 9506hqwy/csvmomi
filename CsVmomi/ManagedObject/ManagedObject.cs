@@ -18,6 +18,11 @@ public abstract class ManagedObject
         ManagedObjectReference reference,
         Session session)
     {
+        this.EamReference = new EamService.ManagedObjectReference
+        {
+            type = reference.type,
+            Value = reference.Value,
+        };
         this.PbmReference = new PbmService.ManagedObjectReference
         {
             type = reference.type,
@@ -33,9 +38,37 @@ public abstract class ManagedObject
     }
 
     protected ManagedObject(
+        EamService.ManagedObjectReference reference,
+        Session session)
+    {
+        this.EamReference = reference;
+        this.PbmReference = new PbmService.ManagedObjectReference
+        {
+            type = reference.type,
+            Value = reference.Value,
+        };
+        this.SmsReference = new SmsService.ManagedObjectReference
+        {
+            type = reference.type,
+            Value = reference.Value,
+        };
+        this.VimReference = new ManagedObjectReference
+        {
+            type = reference.type,
+            Value = reference.Value,
+        };
+        this.Session = session;
+    }
+
+    protected ManagedObject(
         PbmService.ManagedObjectReference reference,
         Session session)
     {
+        this.EamReference = new EamService.ManagedObjectReference
+        {
+            type = reference.type,
+            Value = reference.Value,
+        };
         this.PbmReference = reference;
         this.SmsReference = new SmsService.ManagedObjectReference
         {
@@ -54,6 +87,11 @@ public abstract class ManagedObject
         SmsService.ManagedObjectReference reference,
         Session session)
     {
+        this.EamReference = new EamService.ManagedObjectReference
+        {
+            type = reference.type,
+            Value = reference.Value,
+        };
         this.PbmReference = new PbmService.ManagedObjectReference
         {
             type = reference.type,
@@ -68,6 +106,8 @@ public abstract class ManagedObject
         this.Session = session;
     }
 
+    public EamService.ManagedObjectReference EamReference { get; }
+
     public PbmService.ManagedObjectReference PbmReference { get; }
 
     public SmsService.ManagedObjectReference SmsReference { get; }
@@ -78,6 +118,14 @@ public abstract class ManagedObject
 
     public static T? Create<T>(
         ManagedObjectReference? reference,
+        Session session)
+        where T : ManagedObject
+    {
+        return ManagedObject.Create<T>(reference, reference?.type, session);
+    }
+
+    public static T? Create<T>(
+        EamService.ManagedObjectReference? reference,
         Session session)
         where T : ManagedObject
     {

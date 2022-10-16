@@ -37,6 +37,13 @@ public class SessionTest
     }
 
     [TestMethod]
+    public void EamServiceContent()
+    {
+        this.session.SetEamClient();
+        Assert.IsNotNull(this.session.EsxAgentManager);
+    }
+
+    [TestMethod]
     public void PbmServiceContent()
     {
         this.session.SetPbmClient().Wait();

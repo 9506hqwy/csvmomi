@@ -137,7 +137,11 @@ public class Session
 
     public PbmSessionManager? PbmSessionManager => ManagedObject.Create<PbmSessionManager>(this.pbmServiceContent?.sessionManager, this);
 
+    public EsxAgentManager? EsxAgentManager { get; private set; }
+
     public SmsServiceInstance? SmsServiceInstance { get; private set; }
+
+    internal IEamClient? EamClient { get; set; }
 
     internal IPbmClient? PbmClient { get; set; }
 
@@ -182,6 +186,44 @@ public class Session
         var serviceContent = await client.RetrieveServiceContent(mor);
 
         return new Session(client, serviceContent!);
+    }
+
+    public void SetEamClient()
+    {
+        var builder = new UriBuilder(this.VimClient.Uri);
+        builder.Path = "eam/sdk";
+
+        var binding = Session.GetBinding();
+
+        var endpoint = new EndpointAddress(builder.Uri);
+
+        var inner = new EamService.EamPortTypeClient(binding, endpoint);
+        inner.ChannelFactory.Credentials.ServiceCertificate.SslCertificateAuthentication = new X509ServiceCertificateAuthentication
+        {
+            CertificateValidationMode = X509CertificateValidationMode.None,
+            RevocationMode = X509RevocationMode.NoCheck,
+        };
+        inner.Endpoint.EndpointBehaviors.Add(new FixupBehavior(this.MessageToolBox));
+
+        this.SetEamClient(inner);
+    }
+
+    public void SetEamClient(EamService.EamPortTypeClient inner)
+    {
+        this.SetEamClient(new EamClient(inner));
+    }
+
+    public void SetEamClient(IEamClient client)
+    {
+        this.EamClient = client;
+        this.EamClient.SetCookie(this.VimClient.GetCookie());
+
+        var mor = new EamService.ManagedObjectReference
+        {
+            type = "EsxAgentManager",
+            Value = "EsxAgentManager",
+        };
+        this.EsxAgentManager = ManagedObject.Create<EsxAgentManager>(mor, this);
     }
 
     public System.Threading.Tasks.Task SetPbmClient()

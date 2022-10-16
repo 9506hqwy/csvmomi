@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using CsVmomi;
+using EamService;
 using PbmService;
 using SmsService;
 using VimService;
@@ -16,6 +17,7 @@ catch (Exception e)
 void Work(string[] args)
 {
     CheckType(typeof(VimPortTypeClient), typeof(VimClient));
+    CheckType(typeof(EamPortTypeClient), typeof(EamClient));
     CheckType(typeof(PbmPortTypeClient), typeof(PbmClient));
     CheckType(typeof(SmsPortTypeClient), typeof(SmsClient));
 }
