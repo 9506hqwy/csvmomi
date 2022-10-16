@@ -133,12 +133,29 @@ public class SmsClient : ISmsClient
 
     public string? GetCookie(string name)
     {
-        return this.inner.InnerChannel.GetProperty<IHttpCookieContainerManager>()?
-            .CookieContainer
-            .GetCookies(this.Uri)
+        return this.GetCookie()?
             .OfType<System.Net.Cookie>()
             .FirstOrDefault(c => c.Name == name)?
             .Value;
+    }
+
+    public System.Net.CookieCollection? GetCookie()
+    {
+        return this.inner.InnerChannel.GetProperty<IHttpCookieContainerManager>()?
+            .CookieContainer
+            .GetCookies(this.Uri);
+    }
+
+    public void SetCookie(System.Net.CookieCollection? cookie)
+    {
+        var container = this.inner.InnerChannel
+            .GetProperty<IHttpCookieContainerManager>()!
+            .CookieContainer;
+
+        foreach (var c in cookie.OfType<System.Net.Cookie>())
+        {
+            container.Add(new System.Net.Cookie(c.Name, c.Value, this.Uri.AbsolutePath, this.Uri.Host));
+        }
     }`);
 for (const ref of methods) {
   if (excludeManagedObjectMethod.includes(ref.id)) {

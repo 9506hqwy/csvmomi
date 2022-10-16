@@ -6,6 +6,10 @@ public interface IVimClient
 
     public string? GetCookie(string name);
 
+    System.Net.CookieCollection? GetCookie();
+
+    void SetCookie(System.Net.CookieCollection? cookie);
+
     System.Threading.Tasks.Task AbandonHciWorkflow(ManagedObjectReference self);
 
     System.Threading.Tasks.Task<string[]?> AbdicateDomOwnership(ManagedObjectReference self, string[] uuids);

@@ -8,6 +8,10 @@ public interface ISmsClient
 
     public string? GetCookie(string name);
 
+    System.Net.CookieCollection? GetCookie();
+
+    void SetCookie(System.Net.CookieCollection? cookie);
+
     System.Threading.Tasks.Task<SmsAboutInfo?> QueryAboutInfo(ManagedObjectReference self);
 
     System.Threading.Tasks.Task<StorageArray[]?> QueryArray(ManagedObjectReference self, string[]? providerId);

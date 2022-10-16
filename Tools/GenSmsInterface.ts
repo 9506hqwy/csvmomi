@@ -76,7 +76,11 @@ public interface ISmsClient
 {
     public Uri Uri { get; }
 
-    public string? GetCookie(string name);`);
+    public string? GetCookie(string name);
+
+    System.Net.CookieCollection? GetCookie();
+
+    void SetCookie(System.Net.CookieCollection? cookie);`);
 for (const ref of methods) {
   if (excludeManagedObjectMethod.includes(ref.id)) {
     continue;

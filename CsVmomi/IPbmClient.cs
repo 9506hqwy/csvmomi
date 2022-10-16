@@ -8,6 +8,10 @@ public interface IPbmClient
 
     public string? GetCookie(string name);
 
+    System.Net.CookieCollection? GetCookie();
+
+    void SetCookie(System.Net.CookieCollection? cookie);
+
     System.Threading.Tasks.Task PbmAssignDefaultRequirementProfile(ManagedObjectReference self, PbmProfileId profile, PbmPlacementHub[] datastores);
 
     System.Threading.Tasks.Task<PbmPlacementCompatibilityResult[]?> PbmCheckCompatibility(ManagedObjectReference self, PbmPlacementHub[]? hubsToSearch, PbmProfileId profile);
