@@ -4,6 +4,12 @@ This library is vSphere Management API C# bindings for .NET Standard 2.0.
 
 This repository includes some packages.
 
+- [EamService](./EamService)
+
+  This package is vSphere ESX Agent Manager API C# bindings.
+  This package is stub that generated from WSDL by using [dotnet-svcuti](https://www.nuget.org/packages/dotnet-svcutil),
+  and pre-generated XML serializer by using [dotnet-svcutil.xmlserializer](https://www.nuget.org/packages/dotnet-svcutil.xmlserializer).
+
 - [PbmService](./PbmService)
 
   This package is VMware Storage Policy API C# bindings.

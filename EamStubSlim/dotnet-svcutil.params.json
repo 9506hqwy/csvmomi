@@ -1,0 +1,24 @@
+{
+  "providerId": "Microsoft.Tools.ServiceModel.Svcutil",
+  "version": "2.0.3",
+  "options": {
+    "inputs": [
+      "../EamStubGen/wsdl/core-types.xsd",
+      "../EamStubGen/wsdl/eam-messagetypes.xsd",
+      "../EamStubGen/wsdl/eam-types.xsd",
+      "../EamStubGen/wsdl/eam.wsdl",
+      "../EamStubGen/wsdl/eamService.wsdl",
+      "../EamStubGen/wsdl/query-types.xsd",
+      "../EamStubGen/wsdl/reflect-types.xsd",
+      "../EamStubGen/wsdl/vim-types.xsd"
+    ],
+    "namespaceMappings": [
+      "*, EamService"
+    ],
+    "outputFile": "EamService.cs",
+    "serializerMode": "XmlSerializer",
+    "targetFramework": "netstandard2.0",
+    "typeReuseMode": "All",
+    "wrapped": true
+  }
+}
