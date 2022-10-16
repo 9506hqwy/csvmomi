@@ -28,6 +28,12 @@ This repository includes some packages.
   This package is stub that generated from WSDL by using [dotnet-svcuti](https://www.nuget.org/packages/dotnet-svcutil),
   and pre-generated XML serializer by using [dotnet-svcutil.xmlserializer](https://www.nuget.org/packages/dotnet-svcutil.xmlserializer).
 
+- [VslmService](./VslmService)
+
+  This package is Virtual Storage Lifecycle Management API C# bindings.
+  This package is stub that generated from WSDL by using [dotnet-svcuti](https://www.nuget.org/packages/dotnet-svcutil),
+  and pre-generated XML serializer by using [dotnet-svcutil.xmlserializer](https://www.nuget.org/packages/dotnet-svcutil.xmlserializer).
+
 - [CsVmomi](./CsVmomi)
 
   This package is ManagedObject implementation class built on C# bindings, and is added some utility functions.

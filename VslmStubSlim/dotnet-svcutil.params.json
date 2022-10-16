@@ -1,0 +1,24 @@
+{
+  "providerId": "Microsoft.Tools.ServiceModel.Svcutil",
+  "version": "2.0.3",
+  "options": {
+    "inputs": [
+      "../VslmStubGen/wsdl/core-types.xsd",
+      "../VslmStubGen/wsdl/query-types.xsd",
+      "../VslmStubGen/wsdl/reflect-types.xsd",
+      "../VslmStubGen/wsdl/vim-types.xsd",
+      "../VslmStubGen/wsdl/vslm-messagetypes.xsd",
+      "../VslmStubGen/wsdl/vslm-types.xsd",
+      "../VslmStubGen/wsdl/vslm.wsdl",
+      "../VslmStubGen/wsdl/vslmService.wsdl"
+    ],
+    "namespaceMappings": [
+      "*, VslmService"
+    ],
+    "outputFile": "VslmService.cs",
+    "serializerMode": "XmlSerializer",
+    "targetFramework": "netstandard2.0",
+    "typeReuseMode": "All",
+    "wrapped": true
+  }
+}
