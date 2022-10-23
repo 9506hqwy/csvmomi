@@ -49,11 +49,14 @@ public class FixupTest
             var inUse = fault.Detail;
             Assert.IsNotNull(inUse.name);
 
-            var msg = inUse.faultMessage.First();
-            foreach (var arg in msg.arg)
+            var msg = inUse.faultMessage?.FirstOrDefault();
+            if (msg != null)
             {
-                Assert.IsNotNull(arg.key);
-                Assert.IsTrue(arg.value is string);
+                foreach (var arg in msg.arg)
+                {
+                    Assert.IsNotNull(arg.key);
+                    Assert.IsTrue(arg.value is string);
+                }
             }
         }
     }
