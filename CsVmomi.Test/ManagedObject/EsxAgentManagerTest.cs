@@ -23,6 +23,7 @@ public class EsxAgentManagerTest
     }
 
     [TestMethod]
+    [Ignore]
     public void GetPropertyAgency()
     {
         var agencies = this.session.EsxAgentManager!.GetPropertyAgency().Result;
@@ -30,6 +31,7 @@ public class EsxAgentManagerTest
     }
 
     [TestMethod]
+    [Ignore]
     public void GetPropertyIssue()
     {
         var issues = this.session.EsxAgentManager!.GetPropertyIssue().Result;
