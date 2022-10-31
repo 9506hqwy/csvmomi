@@ -22,6 +22,11 @@ This repository includes some packages.
   This package is stub that generated from WSDL by using [dotnet-svcuti](https://www.nuget.org/packages/dotnet-svcutil),
   and pre-generated XML serializer by using [dotnet-svcutil.xmlserializer](https://www.nuget.org/packages/dotnet-svcutil.xmlserializer).
 
+- [StsService](./StsService)
+
+  This package is vCenter Single Sign-On API C# bindings.
+  This package is stub that generated from WSDL by using [dotnet-svcuti](https://www.nuget.org/packages/dotnet-svcutil).
+
 - [VimService](./VimService)
 
   This package is vSphere Web Services API C# bindings.

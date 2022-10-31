@@ -1,0 +1,27 @@
+{
+  "providerId": "Microsoft.Tools.ServiceModel.Svcutil",
+  "version": "2.0.3",
+  "options": {
+    "inputs": [
+      "../StsStubGen/wsdl/profiled-saml-schema-assertion-2.0-extensions.xsd",
+      "../StsStubGen/wsdl/profiled-saml-schema-assertion-2.0-types.xsd",
+      "../StsStubGen/wsdl/profiled-saml-schema-assertion-2.0.xsd",
+      "../StsStubGen/wsdl/profiled-sstc-saml-delegation.xsd",
+      "../StsStubGen/wsdl/profiled-ws-trust.xsd",
+      "../StsStubGen/wsdl/profiled-wss-wssecurity-utility-1.0.xsd",
+      "../StsStubGen/wsdl/profiled-wsse-header.xsd",
+      "../StsStubGen/wsdl/STSService.wsdl",
+      "../StsStubGen/wsdl/ws-addr.xsd",
+      "../StsStubGen/wsdl/ws-trust-1.4-extensions.xsd",
+      "../StsStubGen/wsdl/xmldsig-core-schema.xsd"
+    ],
+    "namespaceMappings": [
+      "*, StsService"
+    ],
+    "outputFile": "StsService.cs",
+    "serializerMode": "XmlSerializer",
+    "targetFramework": "netstandard2.0",
+    "typeReuseMode": "All",
+    "wrapped": true
+  }
+}
