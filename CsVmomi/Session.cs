@@ -2,6 +2,7 @@
 
 using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel;
+using System.ServiceModel.Channels;
 using System.ServiceModel.Security;
 using System.Text;
 
@@ -156,6 +157,8 @@ public class Session
     internal IPbmClient? PbmClient { get; set; }
 
     internal ISmsClient? SmsClient { get; set; }
+
+    internal IStsClient? StsClient { get; set; }
 
     internal IVimClient VimClient { get; }
 
@@ -314,6 +317,37 @@ public class Session
         this.SmsServiceInstance = ManagedObject.Create<SmsServiceInstance>(mor, this);
     }
 
+    public void SetStsClient(string username, string password)
+    {
+        var builder = new UriBuilder(this.VimClient.Uri);
+        builder.Path = "sts/STSService";
+
+        var binding = Session.GetStsBinding();
+
+        var endpoint = new EndpointAddress(builder.Uri);
+
+        var inner = new StsService.STSService_PortTypeClient(binding, endpoint);
+        inner.ChannelFactory.Credentials.ServiceCertificate.SslCertificateAuthentication = new X509ServiceCertificateAuthentication
+        {
+            CertificateValidationMode = X509CertificateValidationMode.None,
+            RevocationMode = X509RevocationMode.NoCheck,
+        };
+        inner.ClientCredentials.UserName.UserName = username;
+        inner.ClientCredentials.UserName.Password = password;
+
+        this.SetStsClient(inner);
+    }
+
+    public void SetStsClient(StsService.STSService_PortTypeClient inner)
+    {
+        this.SetStsClient(new StsClient(inner));
+    }
+
+    public void SetStsClient(IStsClient client)
+    {
+        this.StsClient = client;
+    }
+
     public System.Threading.Tasks.Task SetVslmClient()
     {
         var builder = new UriBuilder(this.VimClient.Uri);
@@ -381,5 +415,28 @@ public class Session
             ReceiveTimeout = TimeSpan.FromSeconds(1800),
             CloseTimeout = TimeSpan.FromSeconds(300),
         };
+    }
+
+    private static CustomBinding GetStsBinding()
+    {
+        var binding = Session.GetBinding();
+
+        // https://learn.microsoft.com/ja-jp/dotnet/framework/wcf/feature-details/security-protocols#311-usernameovertransport
+        binding.Security.Message = new BasicHttpMessageSecurity
+        {
+            ClientCredentialType = BasicHttpMessageCredentialType.UserName,
+        };
+        binding.Security.Mode = BasicHttpSecurityMode.TransportWithMessageCredential;
+
+        // https://learn.microsoft.com/ja-jp/dotnet/framework/wcf/extending/how-to-customize-a-system-provided-binding
+        var customBinding = new CustomBinding(binding);
+        var security = customBinding.Elements.OfType<SecurityBindingElement>().FirstOrDefault();
+        if (security != null)
+        {
+            // security.EnableUnsecuredResponse = true;
+            security.GetType().GetProperty("EnableUnsecuredResponse").SetValue(security, true);
+        }
+
+        return customBinding;
     }
 }
