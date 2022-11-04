@@ -1,8 +1,10 @@
 ﻿namespace CsVmomi;
 
+using System.IdentityModel.Tokens;
 using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+using System.ServiceModel.Description;
 using System.ServiceModel.Security;
 using System.Text;
 
@@ -384,6 +386,31 @@ public class Session
             Value = "ServiceInstance",
         };
         this.vslmServiceContent = await client.RetrieveContent(mor);
+    }
+
+    internal static async System.Threading.Tasks.Task<Session> Get(Uri url, SecurityToken token)
+    {
+        // https://learn.microsoft.com/ja-jp/dotnet/framework/wcf/samples/saml-token-provider
+        var binding = Session.GetStsBinding();
+
+        var endpoint = new EndpointAddress(url);
+
+        var inner = new VimPortTypeClient(binding, endpoint);
+        inner.ChannelFactory.Endpoint.EndpointBehaviors.Remove(typeof(ClientCredentials));
+        inner.ChannelFactory.Endpoint.EndpointBehaviors.Add(new TokenClientCredentials(token));
+        inner.ChannelFactory.Credentials.ServiceCertificate.SslCertificateAuthentication = new X509ServiceCertificateAuthentication
+        {
+            CertificateValidationMode = X509CertificateValidationMode.None,
+            RevocationMode = X509RevocationMode.NoCheck,
+        };
+
+        var tool = new MessageToolBox();
+        inner.Endpoint.EndpointBehaviors.Add(new FixupBehavior(tool));
+
+        var session = await Session.Get(inner);
+        session.MessageToolBox = tool;
+
+        return session;
     }
 
     private static BasicHttpBinding GetBinding()
