@@ -57,7 +57,7 @@ async System.Threading.Tasks.Task Work(string[] args)
 
         var type = typeof(VirtualEthernetCard).Assembly.GetTypes()
             .Where(t => typeof(VirtualEthernetCard).IsAssignableFrom(t))
-            .First(t => t.Name == osDescriptor.recommendedEthernetCard.Replace("vim.", ""));
+            .First(t => t.Name == osDescriptor!.recommendedEthernetCard.Replace("vim.", ""));
 
         var nic = (VirtualEthernetCard)Activator.CreateInstance(type)!;
         nic.connectable = new VirtualDeviceConnectInfo
@@ -83,7 +83,7 @@ async System.Threading.Tasks.Task Work(string[] args)
             case OpaqueNetwork on:
                 var name = await on.GetPropertyName();
                 var nws = await host.GetProperty<HostOpaqueNetworkInfo[]>("config.network.opaqueNetwork");
-                var nw = nws.First(n => n.opaqueNetworkName == name);
+                var nw = nws!.First(n => n.opaqueNetworkName == name);
                 nic.backing = new VirtualEthernetCardOpaqueNetworkBackingInfo
                 {
                     opaqueNetworkId = nw.opaqueNetworkId,

@@ -36,7 +36,7 @@ async System.Threading.Tasks.Task Work(string[] args)
         }
 
         var devices = await vm.GetProperty<VirtualDevice[]>("config.hardware.device");
-        var cdrom = devices.OfType<VirtualCdrom>().FirstOrDefault();
+        var cdrom = devices!.OfType<VirtualCdrom>().FirstOrDefault();
         if (cdrom == null)
         {
             throw new Exception($"Not found CD/DVD drive `{args[3]}`.");

@@ -64,18 +64,18 @@ async System.Threading.Tasks.Task Work(string[] args)
         var osDescriptor = configOption!.guestOSDescriptor.FirstOrDefault(d => d.id == guestId);
         var hwOptions = configOption.hardwareOptions.virtualDeviceOption
             .OfType<VirtualControllerOption>()
-            .FirstOrDefault(o => o.type == osDescriptor.recommendedDiskController);
+            .FirstOrDefault(o => o.type == osDescriptor!.recommendedDiskController);
 
         var type = typeof(VirtualController).Assembly.GetTypes()
             .Where(t => typeof(VirtualController).IsAssignableFrom(t))
-            .First(t => t.Name == osDescriptor.recommendedDiskController.Replace("vim.", ""));
+            .First(t => t.Name == osDescriptor!.recommendedDiskController.Replace("vim.", ""));
 
         int deviceKey = 0;
         var deviceChange = new List<VirtualDeviceConfigSpec>();
 
-        var ctrl = devices
+        var ctrl = devices!
             .Where(d => type.IsAssignableFrom(d.GetType()))
-            .FirstOrDefault(d => devices.Count(c => c.controllerKey == d.key) < hwOptions.devices.max);
+            .FirstOrDefault(d => devices!.Count(c => c.controllerKey == d.key) < hwOptions!.devices.max);
         if (ctrl == null)
         {
             ctrl = (VirtualController)Activator.CreateInstance(type)!;
@@ -88,7 +88,7 @@ async System.Threading.Tasks.Task Work(string[] args)
             });
         }
 
-        var units = devices.Where(d => d.controllerKey == ctrl.key).Select(d => d.unitNumber).ToList();
+        var units = devices!.Where(d => d.controllerKey == ctrl.key).Select(d => d.unitNumber).ToList();
         if (hwOptions is VirtualSCSIControllerOption option)
         {
             units.Add(option.scsiCtlrUnitNumber);

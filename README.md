@@ -51,8 +51,11 @@ see [Examples](./Examples) directory.
 ## Notes
 
 If use .Net Framework,
-neet to add [Microsoft.Bcl.AsyncInterfaces](https://www.nuget.org/packages/Microsoft.Bcl.AsyncInterfaces/) package reference
+need to add [Microsoft.Bcl.AsyncInterfaces](https://www.nuget.org/packages/Microsoft.Bcl.AsyncInterfaces/) package reference
 because of using async stream in [CsVmomi](./CsVmomi) package.
+
+If use .Net 6.0, need to use .Net 6.0.11 or later,
+see [Allow for null XmlSerialziers when loading pre-gen from mappings](https://github.com/dotnet/runtime/pull/75638).
 
 ## References
 
