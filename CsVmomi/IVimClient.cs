@@ -720,7 +720,7 @@ public interface IVimClient
 
     System.Threading.Tasks.Task<vslmInfrastructureObjectPolicy[]?> HostRetrieveVStorageInfrastructureObjectPolicy(ManagedObjectReference self, ManagedObjectReference datastore);
 
-    System.Threading.Tasks.Task<VStorageObject?> HostRetrieveVStorageObject(ManagedObjectReference self, ID id, ManagedObjectReference datastore);
+    System.Threading.Tasks.Task<VStorageObject?> HostRetrieveVStorageObject(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string[]? diskInfoFlags);
 
     System.Threading.Tasks.Task<KeyValue[]?> HostRetrieveVStorageObjectMetadata(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID? snapshotId, string? prefix);
 
@@ -738,7 +738,7 @@ public interface IVimClient
 
     System.Threading.Tasks.Task<ManagedObjectReference?> HostUpdateVStorageObjectMetadataEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, KeyValue[]? metadata, string[]? deleteKeys);
 
-    System.Threading.Tasks.Task<ManagedObjectReference?> HostVStorageObjectCreateDiskFromSnapshot_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId, string name, VirtualMachineProfileSpec[]? profile, CryptoSpec? crypto, string? path);
+    System.Threading.Tasks.Task<ManagedObjectReference?> HostVStorageObjectCreateDiskFromSnapshot_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId, string name, VirtualMachineProfileSpec[]? profile, CryptoSpec? crypto, string? path, string? provisioningType);
 
     System.Threading.Tasks.Task<ManagedObjectReference?> HostVStorageObjectCreateSnapshot_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string description);
 
@@ -986,6 +986,8 @@ public interface IVimClient
 
     System.Threading.Tasks.Task<ManagedObjectReference[]?> QueryCompatibleHostForNewDvs(ManagedObjectReference self, ManagedObjectReference container, bool recursive, DistributedVirtualSwitchProductSpec? switchProductSpec);
 
+    System.Threading.Tasks.Task<DVSManagerPhysicalNicsList[]?> QueryCompatibleVmnicsFromHosts(ManagedObjectReference self, ManagedObjectReference[]? hosts, ManagedObjectReference dvs);
+
     System.Threading.Tasks.Task<ComplianceResult[]?> QueryComplianceStatus(ManagedObjectReference self, ManagedObjectReference[]? profile, ManagedObjectReference[]? entity);
 
     System.Threading.Tasks.Task<VirtualMachineConfigOption?> QueryConfigOption(ManagedObjectReference self, string? key, ManagedObjectReference? host);
@@ -1080,6 +1082,8 @@ public interface IVimClient
 
     System.Threading.Tasks.Task<ManagedObjectReference[]?> QueryManagedBy(ManagedObjectReference self, string extensionKey);
 
+    System.Threading.Tasks.Task<long> QueryMaxQueueDepth(ManagedObjectReference self, ManagedObjectReference datastore);
+
     System.Threading.Tasks.Task<long> QueryMemoryOverhead(ManagedObjectReference self, long memorySize, int videoRamSize, bool videoRamSizeSpecified, int numVcpus);
 
     System.Threading.Tasks.Task<long> QueryMemoryOverheadEx(ManagedObjectReference self, VirtualMachineConfigInfo vmConfigInfo);
@@ -1137,6 +1141,8 @@ public interface IVimClient
     System.Threading.Tasks.Task<HostStorageArrayTypePolicyOption[]?> QueryStorageArrayTypePolicyOptions(ManagedObjectReference self);
 
     System.Threading.Tasks.Task<LicenseFeatureInfo[]?> QuerySupportedFeatures(ManagedObjectReference self, ManagedObjectReference? host);
+
+    System.Threading.Tasks.Task<DistributedVirtualSwitchNetworkOffloadSpec[]?> QuerySupportedNetworkOffloadSpec(ManagedObjectReference self, DistributedVirtualSwitchProductSpec switchProductSpec);
 
     System.Threading.Tasks.Task<string?> QuerySyncingVsanObjects(ManagedObjectReference self, string[]? uuids);
 
@@ -1496,13 +1502,15 @@ public interface IVimClient
 
     System.Threading.Tasks.Task<UserSearchResult[]?> RetrieveUserGroups(ManagedObjectReference self, string? domain, string searchStr, string? belongsToGroup, string? belongsToUser, bool exactMatch, bool findUsers, bool findGroups);
 
+    System.Threading.Tasks.Task<VirtualMachineVendorDeviceGroupInfo[]?> RetrieveVendorDeviceGroupInfo(ManagedObjectReference self);
+
     System.Threading.Tasks.Task<VirtualMachineVgpuDeviceInfo[]?> RetrieveVgpuDeviceInfo(ManagedObjectReference self);
 
     System.Threading.Tasks.Task<VirtualMachineVgpuProfileInfo[]?> RetrieveVgpuProfileInfo(ManagedObjectReference self);
 
     System.Threading.Tasks.Task<vslmInfrastructureObjectPolicy[]?> RetrieveVStorageInfrastructureObjectPolicy(ManagedObjectReference self, ManagedObjectReference datastore);
 
-    System.Threading.Tasks.Task<VStorageObject?> RetrieveVStorageObject(ManagedObjectReference self, ID id, ManagedObjectReference datastore);
+    System.Threading.Tasks.Task<VStorageObject?> RetrieveVStorageObject(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string[]? diskInfoFlags);
 
     System.Threading.Tasks.Task<VStorageObjectAssociations[]?> RetrieveVStorageObjectAssociations(ManagedObjectReference self, RetrieveVStorageObjSpec[]? ids);
 
@@ -1563,6 +1571,8 @@ public interface IVimClient
     System.Threading.Tasks.Task SetLicenseEdition(ManagedObjectReference self, ManagedObjectReference? host, string? featureKey);
 
     System.Threading.Tasks.Task SetLocale(ManagedObjectReference self, string locale);
+
+    System.Threading.Tasks.Task SetMaxQueueDepth(ManagedObjectReference self, ManagedObjectReference datastore, long maxQdepth);
 
     System.Threading.Tasks.Task SetMultipathLunPolicy(ManagedObjectReference self, string lunId, HostMultipathInfoLogicalUnitPolicy policy);
 

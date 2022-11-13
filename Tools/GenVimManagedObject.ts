@@ -7,6 +7,12 @@ import {
   toCapitalCase,
 } from "./Common.ts";
 
+const fixPropertyTypes = {
+  "HttpNfcLease": {
+    "state": "object",
+  },
+};
+
 const directory = Deno.args[0];
 
 function writeManagedObject(obj: ManagedObject) {
@@ -17,7 +23,9 @@ function writeManagedObject(obj: ManagedObject) {
   for (const property of obj.properties) {
     const propName = property.name;
     const methodSuffix = toCapitalCase(property.name);
-    const returnTy = convertType(property.ty.local);
+    const returnTy = ((className in fixPropertyTypes) && (property.name in fixPropertyTypes[className])) ?
+      fixPropertyTypes[className][property.name] :
+      convertType(property.ty.local);
 
     if (
       property.ty.remote == "ManagedObjectReference"

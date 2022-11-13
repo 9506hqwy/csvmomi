@@ -475,6 +475,12 @@ public partial class ComputeResource : ManagedEntity
     {
     }
 
+    public async System.Threading.Tasks.Task<bool> GetPropertyConfigManagerEnabled()
+    {
+        var obj = await this.GetProperty<bool>("configManagerEnabled");
+        return obj;
+    }
+
     public async System.Threading.Tasks.Task<ComputeResourceConfigInfo> GetPropertyConfigurationEx()
     {
         var obj = await this.GetProperty<ComputeResourceConfigInfo>("configurationEx");
@@ -1387,6 +1393,11 @@ public partial class DistributedVirtualSwitchManager : ManagedObject
         return res?.Select(r => ManagedObject.Create<HostSystem>(r, this.Session)!).ToArray();
     }
 
+    public async System.Threading.Tasks.Task<DVSManagerPhysicalNicsList[]?> QueryCompatibleVmnicsFromHosts(HostSystem[]? hosts, DistributedVirtualSwitch dvs)
+    {
+        return await this.Session.VimClient.QueryCompatibleVmnicsFromHosts(this.VimReference, hosts?.Select(m => m.VimReference).ToArray(), dvs.VimReference);
+    }
+
     public async System.Threading.Tasks.Task<DistributedVirtualSwitch?> QueryDvsByUuid(string uuid)
     {
         var res = await this.Session.VimClient.QueryDvsByUuid(this.VimReference, uuid);
@@ -1411,6 +1422,11 @@ public partial class DistributedVirtualSwitchManager : ManagedObject
     public async System.Threading.Tasks.Task<DVSFeatureCapability?> QueryDvsFeatureCapability(DistributedVirtualSwitchProductSpec? switchProductSpec)
     {
         return await this.Session.VimClient.QueryDvsFeatureCapability(this.VimReference, switchProductSpec);
+    }
+
+    public async System.Threading.Tasks.Task<DistributedVirtualSwitchNetworkOffloadSpec[]?> QuerySupportedNetworkOffloadSpec(DistributedVirtualSwitchProductSpec switchProductSpec)
+    {
+        return await this.Session.VimClient.QuerySupportedNetworkOffloadSpec(this.VimReference, switchProductSpec);
     }
 
     public async System.Threading.Tasks.Task<Task?> RectifyDvsOnHost_Task(HostSystem[] hosts)
@@ -2411,6 +2427,11 @@ public partial class HostAssignableHardwareManager : ManagedObject
         return await this.Session.VimClient.RetrieveDynamicPassthroughInfo(this.VimReference);
     }
 
+    public async System.Threading.Tasks.Task<VirtualMachineVendorDeviceGroupInfo[]?> RetrieveVendorDeviceGroupInfo()
+    {
+        return await this.Session.VimClient.RetrieveVendorDeviceGroupInfo(this.VimReference);
+    }
+
     public async System.Threading.Tasks.Task UpdateAssignableHardwareConfig(HostAssignableHardwareConfig config)
     {
         await this.Session.VimClient.UpdateAssignableHardwareConfig(this.VimReference, config);
@@ -2722,6 +2743,11 @@ public partial class HostDatastoreSystem : ManagedObject
         return await this.Session.VimClient.QueryAvailableDisksForVmfs(this.VimReference, datastore?.VimReference);
     }
 
+    public async System.Threading.Tasks.Task<long> QueryMaxQueueDepth(Datastore datastore)
+    {
+        return await this.Session.VimClient.QueryMaxQueueDepth(this.VimReference, datastore.VimReference);
+    }
+
     public async System.Threading.Tasks.Task<HostUnresolvedVmfsVolume[]?> QueryUnresolvedVmfsVolumes()
     {
         return await this.Session.VimClient.QueryUnresolvedVmfsVolumes(this.VimReference);
@@ -2757,6 +2783,11 @@ public partial class HostDatastoreSystem : ManagedObject
     {
         var res = await this.Session.VimClient.ResignatureUnresolvedVmfsVolume_Task(this.VimReference, resolutionSpec);
         return ManagedObject.Create<Task>(res, this.Session);
+    }
+
+    public async System.Threading.Tasks.Task SetMaxQueueDepth(Datastore datastore, long maxQdepth)
+    {
+        await this.Session.VimClient.SetMaxQueueDepth(this.VimReference, datastore.VimReference, maxQdepth);
     }
 
     public async System.Threading.Tasks.Task UpdateLocalSwapDatastore(Datastore? datastore)
@@ -4883,9 +4914,9 @@ public partial class HostVStorageObjectManager : VStorageObjectManagerBase
         return await this.Session.VimClient.HostRetrieveVStorageInfrastructureObjectPolicy(this.VimReference, datastore.VimReference);
     }
 
-    public async System.Threading.Tasks.Task<VStorageObject?> HostRetrieveVStorageObject(ID id, Datastore datastore)
+    public async System.Threading.Tasks.Task<VStorageObject?> HostRetrieveVStorageObject(ID id, Datastore datastore, string[]? diskInfoFlags)
     {
-        return await this.Session.VimClient.HostRetrieveVStorageObject(this.VimReference, id, datastore.VimReference);
+        return await this.Session.VimClient.HostRetrieveVStorageObject(this.VimReference, id, datastore.VimReference, diskInfoFlags);
     }
 
     public async System.Threading.Tasks.Task<KeyValue[]?> HostRetrieveVStorageObjectMetadata(ID id, Datastore datastore, ID? snapshotId, string? prefix)
@@ -4925,9 +4956,9 @@ public partial class HostVStorageObjectManager : VStorageObjectManagerBase
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
-    public async System.Threading.Tasks.Task<Task?> HostVStorageObjectCreateDiskFromSnapshot_Task(ID id, Datastore datastore, ID snapshotId, string name, VirtualMachineProfileSpec[]? profile, CryptoSpec? crypto, string? path)
+    public async System.Threading.Tasks.Task<Task?> HostVStorageObjectCreateDiskFromSnapshot_Task(ID id, Datastore datastore, ID snapshotId, string name, VirtualMachineProfileSpec[]? profile, CryptoSpec? crypto, string? path, string? provisioningType)
     {
-        var res = await this.Session.VimClient.HostVStorageObjectCreateDiskFromSnapshot_Task(this.VimReference, id, datastore.VimReference, snapshotId, name, profile, crypto, path);
+        var res = await this.Session.VimClient.HostVStorageObjectCreateDiskFromSnapshot_Task(this.VimReference, id, datastore.VimReference, snapshotId, name, profile, crypto, path, provisioningType);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
@@ -4994,9 +5025,9 @@ public partial class HttpNfcLease : ManagedObject
         return obj!;
     }
 
-    public async System.Threading.Tasks.Task<HttpNfcLeaseState> GetPropertyState()
+    public async System.Threading.Tasks.Task<object> GetPropertyState()
     {
-        var obj = await this.GetProperty<HttpNfcLeaseState>("state");
+        var obj = await this.GetProperty<object>("state");
         return obj!;
     }
 
@@ -6941,9 +6972,9 @@ public partial class VcenterVStorageObjectManager : VStorageObjectManagerBase
         return await this.Session.VimClient.RetrieveVStorageInfrastructureObjectPolicy(this.VimReference, datastore.VimReference);
     }
 
-    public async System.Threading.Tasks.Task<VStorageObject?> RetrieveVStorageObject(ID id, Datastore datastore)
+    public async System.Threading.Tasks.Task<VStorageObject?> RetrieveVStorageObject(ID id, Datastore datastore, string[]? diskInfoFlags)
     {
-        return await this.Session.VimClient.RetrieveVStorageObject(this.VimReference, id, datastore.VimReference);
+        return await this.Session.VimClient.RetrieveVStorageObject(this.VimReference, id, datastore.VimReference, diskInfoFlags);
     }
 
     public async System.Threading.Tasks.Task<VStorageObjectAssociations[]?> RetrieveVStorageObjectAssociations(RetrieveVStorageObjSpec[]? ids)

@@ -4668,13 +4668,14 @@ public class VimClient : IVimClient
         return res.HostRetrieveVStorageInfrastructureObjectPolicyResponse1;
     }
 
-    public async System.Threading.Tasks.Task<VStorageObject?> HostRetrieveVStorageObject(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task<VStorageObject?> HostRetrieveVStorageObject(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string[]? diskInfoFlags)
     {
         var req = new HostRetrieveVStorageObjectRequestType
         {
             _this = self,
             id = id,
             datastore = datastore,
+            diskInfoFlags = diskInfoFlags,
         };
 
         var res = await this.inner.HostRetrieveVStorageObjectAsync(req);
@@ -4798,7 +4799,7 @@ public class VimClient : IVimClient
         return res.HostUpdateVStorageObjectMetadataEx_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference?> HostVStorageObjectCreateDiskFromSnapshot_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId, string name, VirtualMachineProfileSpec[]? profile, CryptoSpec? crypto, string? path)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> HostVStorageObjectCreateDiskFromSnapshot_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId, string name, VirtualMachineProfileSpec[]? profile, CryptoSpec? crypto, string? path, string? provisioningType)
     {
         var req = new HostVStorageObjectCreateDiskFromSnapshotRequestType
         {
@@ -4810,6 +4811,7 @@ public class VimClient : IVimClient
             profile = profile,
             crypto = crypto,
             path = path,
+            provisioningType = provisioningType,
         };
 
         var res = await this.inner.HostVStorageObjectCreateDiskFromSnapshot_TaskAsync(req);
@@ -6480,6 +6482,20 @@ public class VimClient : IVimClient
         return res.QueryCompatibleHostForNewDvsResponse1;
     }
 
+    public async System.Threading.Tasks.Task<DVSManagerPhysicalNicsList[]?> QueryCompatibleVmnicsFromHosts(ManagedObjectReference self, ManagedObjectReference[]? hosts, ManagedObjectReference dvs)
+    {
+        var req = new QueryCompatibleVmnicsFromHostsRequestType
+        {
+            _this = self,
+            hosts = hosts,
+            dvs = dvs,
+        };
+
+        var res = await this.inner.QueryCompatibleVmnicsFromHostsAsync(req);
+
+        return res.QueryCompatibleVmnicsFromHostsResponse1;
+    }
+
     public async System.Threading.Tasks.Task<ComplianceResult[]?> QueryComplianceStatus(ManagedObjectReference self, ManagedObjectReference[]? profile, ManagedObjectReference[]? entity)
     {
         var req = new QueryComplianceStatusRequestType
@@ -7099,6 +7115,19 @@ public class VimClient : IVimClient
         return res.QueryManagedByResponse1;
     }
 
+    public async System.Threading.Tasks.Task<long> QueryMaxQueueDepth(ManagedObjectReference self, ManagedObjectReference datastore)
+    {
+        var req = new QueryMaxQueueDepthRequestType
+        {
+            _this = self,
+            datastore = datastore,
+        };
+
+        var res = await this.inner.QueryMaxQueueDepthAsync(req);
+
+        return res.QueryMaxQueueDepthResponse.returnval;
+    }
+
     public async System.Threading.Tasks.Task<long> QueryMemoryOverhead(ManagedObjectReference self, long memorySize, int videoRamSize, bool videoRamSizeSpecified, int numVcpus)
     {
         var req = new QueryMemoryOverheadRequestType
@@ -7474,6 +7503,19 @@ public class VimClient : IVimClient
         var res = await this.inner.QuerySupportedFeaturesAsync(req);
 
         return res.QuerySupportedFeaturesResponse1;
+    }
+
+    public async System.Threading.Tasks.Task<DistributedVirtualSwitchNetworkOffloadSpec[]?> QuerySupportedNetworkOffloadSpec(ManagedObjectReference self, DistributedVirtualSwitchProductSpec switchProductSpec)
+    {
+        var req = new QuerySupportedNetworkOffloadSpecRequestType
+        {
+            _this = self,
+            switchProductSpec = switchProductSpec,
+        };
+
+        var res = await this.inner.QuerySupportedNetworkOffloadSpecAsync(req);
+
+        return res.QuerySupportedNetworkOffloadSpecResponse1;
     }
 
     public async System.Threading.Tasks.Task<string?> QuerySyncingVsanObjects(ManagedObjectReference self, string[]? uuids)
@@ -9695,6 +9737,18 @@ public class VimClient : IVimClient
         return res.RetrieveUserGroupsResponse1;
     }
 
+    public async System.Threading.Tasks.Task<VirtualMachineVendorDeviceGroupInfo[]?> RetrieveVendorDeviceGroupInfo(ManagedObjectReference self)
+    {
+        var req = new RetrieveVendorDeviceGroupInfoRequestType
+        {
+            _this = self,
+        };
+
+        var res = await this.inner.RetrieveVendorDeviceGroupInfoAsync(req);
+
+        return res.RetrieveVendorDeviceGroupInfoResponse1;
+    }
+
     public async System.Threading.Tasks.Task<VirtualMachineVgpuDeviceInfo[]?> RetrieveVgpuDeviceInfo(ManagedObjectReference self)
     {
         var req = new RetrieveVgpuDeviceInfoRequestType
@@ -9732,13 +9786,14 @@ public class VimClient : IVimClient
         return res.RetrieveVStorageInfrastructureObjectPolicyResponse1;
     }
 
-    public async System.Threading.Tasks.Task<VStorageObject?> RetrieveVStorageObject(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task<VStorageObject?> RetrieveVStorageObject(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string[]? diskInfoFlags)
     {
         var req = new RetrieveVStorageObjectRequestType
         {
             _this = self,
             id = id,
             datastore = datastore,
+            diskInfoFlags = diskInfoFlags,
         };
 
         var res = await this.inner.RetrieveVStorageObjectAsync(req);
@@ -10115,6 +10170,18 @@ public class VimClient : IVimClient
         };
 
         await this.inner.SetLocaleAsync(req);
+    }
+
+    public async System.Threading.Tasks.Task SetMaxQueueDepth(ManagedObjectReference self, ManagedObjectReference datastore, long maxQdepth)
+    {
+        var req = new SetMaxQueueDepthRequestType
+        {
+            _this = self,
+            datastore = datastore,
+            maxQdepth = maxQdepth,
+        };
+
+        await this.inner.SetMaxQueueDepthAsync(req);
     }
 
     public async System.Threading.Tasks.Task SetMultipathLunPolicy(ManagedObjectReference self, string lunId, HostMultipathInfoLogicalUnitPolicy policy)

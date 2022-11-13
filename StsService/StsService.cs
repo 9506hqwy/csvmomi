@@ -18,56 +18,56 @@ namespace StsService
         
         [System.ServiceModel.OperationContractAttribute(Action="http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/Issue", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(TransformationParametersType))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(SecurityTokenReferenceType))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReferenceType1))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(StatementAbstractType))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(SecurityHeaderType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(SignaturePropertiesType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ManifestType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ObjectType))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(TransformationParametersType))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(SecurityTokenReferenceType))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReferenceType1))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(SecurityHeaderType))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(StatementAbstractType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProblemActionType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(AllowPostdatingType))]
         System.Threading.Tasks.Task<StsService.IssueResponse> IssueAsync(StsService.IssueRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/Renew", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(TransformationParametersType))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(SecurityTokenReferenceType))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReferenceType1))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(StatementAbstractType))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(SecurityHeaderType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(SignaturePropertiesType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ManifestType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ObjectType))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(TransformationParametersType))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(SecurityTokenReferenceType))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReferenceType1))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(SecurityHeaderType))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(StatementAbstractType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProblemActionType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(AllowPostdatingType))]
         System.Threading.Tasks.Task<StsService.RenewResponse> RenewAsync(StsService.IssueRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/Validate", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(TransformationParametersType))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(SecurityTokenReferenceType))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReferenceType1))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(StatementAbstractType))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(SecurityHeaderType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(SignaturePropertiesType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ManifestType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ObjectType))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(TransformationParametersType))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(SecurityTokenReferenceType))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReferenceType1))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(SecurityHeaderType))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(StatementAbstractType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProblemActionType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(AllowPostdatingType))]
         System.Threading.Tasks.Task<StsService.RenewResponse> ValidateAsync(StsService.IssueRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://docs.oasis-open.org/ws-sx/ws-trust/200512/RSTR/Issue", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(TransformationParametersType))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(SecurityTokenReferenceType))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReferenceType1))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(StatementAbstractType))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(SecurityHeaderType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(SignaturePropertiesType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ManifestType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ObjectType))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(TransformationParametersType))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(SecurityTokenReferenceType))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ReferenceType1))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(SecurityHeaderType))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(StatementAbstractType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(ProblemActionType))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(AllowPostdatingType))]
         System.Threading.Tasks.Task<StsService.IssueResponse> ChallengeAsync(StsService.RenewResponse request);
@@ -497,6 +497,434 @@ namespace StsService
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    public partial class SignaturePropertyType
+    {
+        
+        private System.Xml.XmlElement[] itemsField;
+        
+        private string[] textField;
+        
+        private string targetField;
+        
+        private string idField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
+        public System.Xml.XmlElement[] Items
+        {
+            get
+            {
+                return this.itemsField;
+            }
+            set
+            {
+                this.itemsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text
+        {
+            get
+            {
+                return this.textField;
+            }
+            set
+            {
+                this.textField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
+        public string Target
+        {
+            get
+            {
+                return this.targetField;
+            }
+            set
+            {
+                this.targetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
+        public string Id
+        {
+            get
+            {
+                return this.idField;
+            }
+            set
+            {
+                this.idField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    public partial class SignaturePropertiesType
+    {
+        
+        private SignaturePropertyType[] signaturePropertyField;
+        
+        private string idField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("SignatureProperty", Order=0)]
+        public SignaturePropertyType[] SignatureProperty
+        {
+            get
+            {
+                return this.signaturePropertyField;
+            }
+            set
+            {
+                this.signaturePropertyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
+        public string Id
+        {
+            get
+            {
+                return this.idField;
+            }
+            set
+            {
+                this.idField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    public partial class ManifestType
+    {
+        
+        private ReferenceType[] referenceField;
+        
+        private string idField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Reference", Order=0)]
+        public ReferenceType[] Reference
+        {
+            get
+            {
+                return this.referenceField;
+            }
+            set
+            {
+                this.referenceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
+        public string Id
+        {
+            get
+            {
+                return this.idField;
+            }
+            set
+            {
+                this.idField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    public partial class ReferenceType
+    {
+        
+        private TransformType[] transformsField;
+        
+        private DigestMethodType digestMethodField;
+        
+        private byte[] digestValueField;
+        
+        private string idField;
+        
+        private string uRIField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(Order=0)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("Transform", IsNullable=false)]
+        public TransformType[] Transforms
+        {
+            get
+            {
+                return this.transformsField;
+            }
+            set
+            {
+                this.transformsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public DigestMethodType DigestMethod
+        {
+            get
+            {
+                return this.digestMethodField;
+            }
+            set
+            {
+                this.digestMethodField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary", Order=2)]
+        public byte[] DigestValue
+        {
+            get
+            {
+                return this.digestValueField;
+            }
+            set
+            {
+                this.digestValueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
+        public string Id
+        {
+            get
+            {
+                return this.idField;
+            }
+            set
+            {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
+        public string URI
+        {
+            get
+            {
+                return this.uRIField;
+            }
+            set
+            {
+                this.uRIField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
+        public string Type
+        {
+            get
+            {
+                return this.typeField;
+            }
+            set
+            {
+                this.typeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    public partial class TransformType
+    {
+        
+        private object[] itemsField;
+        
+        private string[] textField;
+        
+        private string algorithmField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("XPath", typeof(string), Order=0)]
+        public object[] Items
+        {
+            get
+            {
+                return this.itemsField;
+            }
+            set
+            {
+                this.itemsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text
+        {
+            get
+            {
+                return this.textField;
+            }
+            set
+            {
+                this.textField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
+        public string Algorithm
+        {
+            get
+            {
+                return this.algorithmField;
+            }
+            set
+            {
+                this.algorithmField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    public partial class DigestMethodType
+    {
+        
+        private System.Xml.XmlNode[] anyField;
+        
+        private string algorithmField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
+        public System.Xml.XmlNode[] Any
+        {
+            get
+            {
+                return this.anyField;
+            }
+            set
+            {
+                this.anyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
+        public string Algorithm
+        {
+            get
+            {
+                return this.algorithmField;
+            }
+            set
+            {
+                this.algorithmField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    public partial class ObjectType
+    {
+        
+        private System.Xml.XmlNode[] anyField;
+        
+        private string idField;
+        
+        private string mimeTypeField;
+        
+        private string encodingField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
+        public System.Xml.XmlNode[] Any
+        {
+            get
+            {
+                return this.anyField;
+            }
+            set
+            {
+                this.anyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
+        public string Id
+        {
+            get
+            {
+                return this.idField;
+            }
+            set
+            {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string MimeType
+        {
+            get
+            {
+                return this.mimeTypeField;
+            }
+            set
+            {
+                this.mimeTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
+        public string Encoding
+        {
+            get
+            {
+                return this.encodingField;
+            }
+            set
+            {
+                this.encodingField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" +
         "")]
     public partial class TransformationParametersType
@@ -621,72 +1049,50 @@ namespace StsService
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
-    public partial class AuthnContextType
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xs" +
+        "d")]
+    public partial class TimestampType
     {
         
-        private AuthnContextClassRefs authnContextClassRefField;
+        private AttributedDateTime createdField;
+        
+        private AttributedDateTime expiresField;
+        
+        private System.Xml.XmlElement[] itemsField;
+        
+        private string idField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public AuthnContextClassRefs AuthnContextClassRef
+        public AttributedDateTime Created
         {
             get
             {
-                return this.authnContextClassRefField;
+                return this.createdField;
             }
             set
             {
-                this.authnContextClassRefField = value;
+                this.createdField = value;
             }
         }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.rsa.com/names/2010/04/std-prof/SAML2.0")]
-    public enum AuthnContextClassRefs
-    {
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("urn:oasis:names:tc:SAML:2.0:ac:classes:Kerberos")]
-        urnoasisnamestcSAML20acclassesKerberos,
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public AttributedDateTime Expires
+        {
+            get
+            {
+                return this.expiresField;
+            }
+            set
+            {
+                this.expiresField = value;
+            }
+        }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport")]
-        urnoasisnamestcSAML20acclassesPasswordProtectedTransport,
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("urn:oasis:names:tc:SAML:2.0:ac:classes:XMLDSig")]
-        urnoasisnamestcSAML20acclassesXMLDSig,
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("urn:federation:authentication:windows")]
-        urnfederationauthenticationwindows,
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AttributeStatementType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AuthnStatementType))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
-    public abstract partial class StatementAbstractType
-    {
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
-    public partial class AttributeStatementType : StatementAbstractType
-    {
-        
-        private AttributeType1[] itemsField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Attribute", Order=0)]
-        public AttributeType1[] Items
+        [System.Xml.Serialization.XmlAnyElementAttribute(Order=2)]
+        public System.Xml.XmlElement[] Items
         {
             get
             {
@@ -697,76 +1103,18 @@ namespace StsService
                 this.itemsField = value;
             }
         }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="AttributeType", Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
-    public partial class AttributeType1
-    {
-        
-        private object[] attributeValueField;
-        
-        private string nameField;
-        
-        private string nameFormatField;
-        
-        private string friendlyNameField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("AttributeValue", Order=0)]
-        public object[] AttributeValue
+        [System.Xml.Serialization.XmlAttributeAttribute(Form=System.Xml.Schema.XmlSchemaForm.Qualified, DataType="ID")]
+        public string Id
         {
             get
             {
-                return this.attributeValueField;
+                return this.idField;
             }
             set
             {
-                this.attributeValueField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this.nameField;
-            }
-            set
-            {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string NameFormat
-        {
-            get
-            {
-                return this.nameFormatField;
-            }
-            set
-            {
-                this.nameFormatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string FriendlyName
-        {
-            get
-            {
-                return this.friendlyNameField;
-            }
-            set
-            {
-                this.friendlyNameField = value;
+                this.idField = value;
             }
         }
     }
@@ -774,285 +1122,177 @@ namespace StsService
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
-    public partial class AuthnStatementType : StatementAbstractType
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" +
+        "")]
+    public partial class SecurityHeaderType
     {
         
-        private AuthnContextType authnContextField;
+        private TimestampType timestampField;
         
-        private System.DateTime authnInstantField;
+        private UsernameTokenType usernameTokenField;
+        
+        private BinarySecurityTokenType binarySecurityTokenField;
+        
+        private AssertionType assertionField;
+        
+        private SignatureType signatureField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xs" +
+            "d")]
+        public TimestampType Timestamp
+        {
+            get
+            {
+                return this.timestampField;
+            }
+            set
+            {
+                this.timestampField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public UsernameTokenType UsernameToken
+        {
+            get
+            {
+                return this.usernameTokenField;
+            }
+            set
+            {
+                this.usernameTokenField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public BinarySecurityTokenType BinarySecurityToken
+        {
+            get
+            {
+                return this.binarySecurityTokenField;
+            }
+            set
+            {
+                this.binarySecurityTokenField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
+        public AssertionType Assertion
+        {
+            get
+            {
+                return this.assertionField;
+            }
+            set
+            {
+                this.assertionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+        public SignatureType Signature
+        {
+            get
+            {
+                return this.signatureField;
+            }
+            set
+            {
+                this.signatureField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" +
+        "")]
+    public partial class UsernameTokenType
+    {
+        
+        private AttributedString usernameField;
+        
+        private PasswordString passwordField;
+        
+        private string idField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public AuthnContextType AuthnContext
+        public AttributedString Username
         {
             get
             {
-                return this.authnContextField;
+                return this.usernameField;
             }
             set
             {
-                this.authnContextField = value;
+                this.usernameField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.DateTime AuthnInstant
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public PasswordString Password
         {
             get
             {
-                return this.authnInstantField;
+                return this.passwordField;
             }
             set
             {
-                this.authnInstantField = value;
+                this.passwordField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(Form=System.Xml.Schema.XmlSchemaForm.Qualified, Namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xs" +
+            "d", DataType="ID")]
+        public string Id
+        {
+            get
+            {
+                return this.idField;
+            }
+            set
+            {
+                this.idField = value;
             }
         }
     }
     
     /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(EncodedString))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(KeyIdentifierType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BinarySecurityTokenType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PasswordString))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="AdviceType", Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
-    public partial class AdviceType1
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" +
+        "")]
+    public partial class AttributedString
     {
         
-        private RSAAdviceType[] rSAAdviceField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("RSAAdvice", Namespace="http://www.rsa.com/names/2009/12/std-ext/SAML2.0", Order=0)]
-        public RSAAdviceType[] RSAAdvice
-        {
-            get
-            {
-                return this.rSAAdviceField;
-            }
-            set
-            {
-                this.rSAAdviceField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.rsa.com/names/2009/12/std-ext/SAML2.0")]
-    public partial class RSAAdviceType
-    {
-        
-        private AttributeType1[] attributeField;
-        
-        private string adviceSourceField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Attribute", Namespace="urn:oasis:names:tc:SAML:2.0:assertion", Order=0)]
-        public AttributeType1[] Attribute
-        {
-            get
-            {
-                return this.attributeField;
-            }
-            set
-            {
-                this.attributeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string AdviceSource
-        {
-            get
-            {
-                return this.adviceSourceField;
-            }
-            set
-            {
-                this.adviceSourceField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ProxyRestrictionType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AudienceRestrictionType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DelegationRestrictionType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(RenewRestrictionType))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
-    public abstract partial class ConditionAbstractType
-    {
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
-    public partial class ProxyRestrictionType : ConditionAbstractType
-    {
-        
-        private string countField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="nonNegativeInteger")]
-        public string Count
-        {
-            get
-            {
-                return this.countField;
-            }
-            set
-            {
-                this.countField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
-    public partial class AudienceRestrictionType : ConditionAbstractType
-    {
-        
-        private string[] audienceField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Audience", DataType="anyURI", Order=0)]
-        public string[] Audience
-        {
-            get
-            {
-                return this.audienceField;
-            }
-            set
-            {
-                this.audienceField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:conditions:delegation")]
-    public partial class DelegationRestrictionType : ConditionAbstractType
-    {
-        
-        private DelegateType[] delegateField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Delegate", Order=0)]
-        public DelegateType[] Delegate
-        {
-            get
-            {
-                return this.delegateField;
-            }
-            set
-            {
-                this.delegateField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:conditions:delegation")]
-    public partial class DelegateType
-    {
-        
-        private NameIDType nameIDField;
-        
-        private System.DateTime delegationInstantField;
-        
-        private bool delegationInstantFieldSpecified;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion", Order=0)]
-        public NameIDType NameID
-        {
-            get
-            {
-                return this.nameIDField;
-            }
-            set
-            {
-                this.nameIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.DateTime DelegationInstant
-        {
-            get
-            {
-                return this.delegationInstantField;
-            }
-            set
-            {
-                this.delegationInstantField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DelegationInstantSpecified
-        {
-            get
-            {
-                return this.delegationInstantFieldSpecified;
-            }
-            set
-            {
-                this.delegationInstantFieldSpecified = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
-    public partial class NameIDType
-    {
-        
-        private string nameQualifierField;
-        
-        private NameIDFormats formatField;
+        private string idField;
         
         private string valueField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NameQualifier
+        [System.Xml.Serialization.XmlAttributeAttribute(Form=System.Xml.Schema.XmlSchemaForm.Qualified, Namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xs" +
+            "d", DataType="ID")]
+        public string Id
         {
             get
             {
-                return this.nameQualifierField;
+                return this.idField;
             }
             set
             {
-                this.nameQualifierField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public NameIDFormats Format
-        {
-            get
-            {
-                return this.formatField;
-            }
-            set
-            {
-                this.formatField = value;
+                this.idField = value;
             }
         }
         
@@ -1072,86 +1312,34 @@ namespace StsService
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.rsa.com/names/2010/04/std-prof/SAML2.0")]
-    public enum NameIDFormats
-    {
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("http://schemas.xmlsoap.org/claims/UPN")]
-        httpschemasxmlsoaporgclaimsUPN,
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified")]
-        urnoasisnamestcSAML11nameidformatunspecified,
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("urn:oasis:names:tc:SAML:2.0:nameid-format:entity")]
-        urnoasisnamestcSAML20nameidformatentity,
-    }
-    
-    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(KeyIdentifierType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BinarySecurityTokenType))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.rsa.com/names/2009/12/std-ext/SAML2.0")]
-    public partial class RenewRestrictionType : ConditionAbstractType
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" +
+        "")]
+    public partial class EncodedString : AttributedString
     {
         
-        private string countField;
+        private string encodingTypeField;
         
-        private bool postdatableField;
-        
-        private bool renewExpiredField;
-        
-        public RenewRestrictionType()
+        public EncodedString()
         {
-            this.countField = "0";
-            this.postdatableField = false;
-            this.renewExpiredField = false;
+            this.encodingTypeField = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0" +
+                "#Base64Binary";
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="nonNegativeInteger")]
-        [System.ComponentModel.DefaultValueAttribute("0")]
-        public string Count
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
+        public string EncodingType
         {
             get
             {
-                return this.countField;
+                return this.encodingTypeField;
             }
             set
             {
-                this.countField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute(false)]
-        public bool Postdatable
-        {
-            get
-            {
-                return this.postdatableField;
-            }
-            set
-            {
-                this.postdatableField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute(false)]
-        public bool RenewExpired
-        {
-            get
-            {
-                return this.renewExpiredField;
-            }
-            set
-            {
-                this.renewExpiredField = value;
+                this.encodingTypeField = value;
             }
         }
     }
@@ -1159,82 +1347,24 @@ namespace StsService
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
-    public partial class ConditionsType
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" +
+        "")]
+    public partial class KeyIdentifierType : EncodedString
     {
         
-        private ConditionAbstractType[] itemsField;
-        
-        private System.DateTime notBeforeField;
-        
-        private System.DateTime notOnOrAfterField;
+        private string valueTypeField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("AudienceRestriction", typeof(AudienceRestrictionType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("Condition", typeof(ConditionAbstractType), Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("ProxyRestriction", typeof(ProxyRestrictionType), Order=0)]
-        public ConditionAbstractType[] Items
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
+        public string ValueType
         {
             get
             {
-                return this.itemsField;
+                return this.valueTypeField;
             }
             set
             {
-                this.itemsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.DateTime NotBefore
-        {
-            get
-            {
-                return this.notBeforeField;
-            }
-            set
-            {
-                this.notBeforeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.DateTime NotOnOrAfter
-        {
-            get
-            {
-                return this.notOnOrAfterField;
-            }
-            set
-            {
-                this.notOnOrAfterField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(KeyInfoConfirmationDataType))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
-    public partial class SubjectConfirmationDataType
-    {
-        
-        private string[] textField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string[] Text
-        {
-            get
-            {
-                return this.textField;
-            }
-            set
-            {
-                this.textField = value;
+                this.valueTypeField = value;
             }
         }
     }
@@ -1242,118 +1372,49 @@ namespace StsService
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
-    public partial class KeyInfoConfirmationDataType : SubjectConfirmationDataType
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" +
+        "")]
+    public partial class BinarySecurityTokenType : EncodedString
     {
+        
+        private string valueTypeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
+        public string ValueType
+        {
+            get
+            {
+                return this.valueTypeField;
+            }
+            set
+            {
+                this.valueTypeField = value;
+            }
+        }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
-    public partial class SubjectConfirmationType
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" +
+        "")]
+    public partial class PasswordString : AttributedString
     {
         
-        private NameIDType nameIDField;
-        
-        private SubjectConfirmationDataType subjectConfirmationDataField;
-        
-        private SubjectConfirmationMethods methodField;
+        private string typeField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public NameIDType NameID
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
+        public string Type
         {
             get
             {
-                return this.nameIDField;
+                return this.typeField;
             }
             set
             {
-                this.nameIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public SubjectConfirmationDataType SubjectConfirmationData
-        {
-            get
-            {
-                return this.subjectConfirmationDataField;
-            }
-            set
-            {
-                this.subjectConfirmationDataField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public SubjectConfirmationMethods Method
-        {
-            get
-            {
-                return this.methodField;
-            }
-            set
-            {
-                this.methodField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.rsa.com/names/2010/04/std-prof/SAML2.0")]
-    public enum SubjectConfirmationMethods
-    {
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("urn:oasis:names:tc:SAML:2.0:cm:bearer")]
-        urnoasisnamestcSAML20cmbearer,
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("urn:oasis:names:tc:SAML:2.0:cm:holder-of-key")]
-        urnoasisnamestcSAML20cmholderofkey,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
-    public partial class SubjectType
-    {
-        
-        private NameIDType nameIDField;
-        
-        private SubjectConfirmationType subjectConfirmationField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public NameIDType NameID
-        {
-            get
-            {
-                return this.nameIDField;
-            }
-            set
-            {
-                this.nameIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public SubjectConfirmationType SubjectConfirmation
-        {
-            get
-            {
-                return this.subjectConfirmationField;
-            }
-            set
-            {
-                this.subjectConfirmationField = value;
+                this.typeField = value;
             }
         }
     }
@@ -1529,6 +1590,81 @@ namespace StsService
                 this.issueInstantField = value;
             }
         }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
+    public partial class NameIDType
+    {
+        
+        private string nameQualifierField;
+        
+        private NameIDFormats formatField;
+        
+        private string valueField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NameQualifier
+        {
+            get
+            {
+                return this.nameQualifierField;
+            }
+            set
+            {
+                this.nameQualifierField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public NameIDFormats Format
+        {
+            get
+            {
+                return this.formatField;
+            }
+            set
+            {
+                this.formatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string Value
+        {
+            get
+            {
+                return this.valueField;
+            }
+            set
+            {
+                this.valueField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.rsa.com/names/2010/04/std-prof/SAML2.0")]
+    public enum NameIDFormats
+    {
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("http://schemas.xmlsoap.org/claims/UPN")]
+        httpschemasxmlsoaporgclaimsUPN,
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified")]
+        urnoasisnamestcSAML11nameidformatunspecified,
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("urn:oasis:names:tc:SAML:2.0:nameid-format:entity")]
+        urnoasisnamestcSAML20nameidformatentity,
     }
     
     /// <remarks/>
@@ -1746,209 +1882,6 @@ namespace StsService
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
         [System.Xml.Serialization.XmlAnyElementAttribute(Order=1)]
-        public System.Xml.XmlNode[] Any
-        {
-            get
-            {
-                return this.anyField;
-            }
-            set
-            {
-                this.anyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string Algorithm
-        {
-            get
-            {
-                return this.algorithmField;
-            }
-            set
-            {
-                this.algorithmField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-    public partial class ReferenceType
-    {
-        
-        private TransformType[] transformsField;
-        
-        private DigestMethodType digestMethodField;
-        
-        private byte[] digestValueField;
-        
-        private string idField;
-        
-        private string uRIField;
-        
-        private string typeField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Order=0)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("Transform", IsNullable=false)]
-        public TransformType[] Transforms
-        {
-            get
-            {
-                return this.transformsField;
-            }
-            set
-            {
-                this.transformsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public DigestMethodType DigestMethod
-        {
-            get
-            {
-                return this.digestMethodField;
-            }
-            set
-            {
-                this.digestMethodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary", Order=2)]
-        public byte[] DigestValue
-        {
-            get
-            {
-                return this.digestValueField;
-            }
-            set
-            {
-                this.digestValueField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
-        public string Id
-        {
-            get
-            {
-                return this.idField;
-            }
-            set
-            {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string URI
-        {
-            get
-            {
-                return this.uRIField;
-            }
-            set
-            {
-                this.uRIField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string Type
-        {
-            get
-            {
-                return this.typeField;
-            }
-            set
-            {
-                this.typeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-    public partial class TransformType
-    {
-        
-        private object[] itemsField;
-        
-        private string[] textField;
-        
-        private string algorithmField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("XPath", typeof(string), Order=0)]
-        public object[] Items
-        {
-            get
-            {
-                return this.itemsField;
-            }
-            set
-            {
-                this.itemsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string[] Text
-        {
-            get
-            {
-                return this.textField;
-            }
-            set
-            {
-                this.textField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string Algorithm
-        {
-            get
-            {
-                return this.algorithmField;
-            }
-            set
-            {
-                this.algorithmField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-    public partial class DigestMethodType
-    {
-        
-        private System.Xml.XmlNode[] anyField;
-        
-        private string algorithmField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
         public System.Xml.XmlNode[] Any
         {
             get
@@ -2590,72 +2523,39 @@ namespace StsService
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xs" +
-        "d")]
-    public partial class TimestampType
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
+    public partial class SubjectType
     {
         
-        private AttributedDateTime createdField;
+        private NameIDType nameIDField;
         
-        private AttributedDateTime expiresField;
-        
-        private System.Xml.XmlElement[] itemsField;
-        
-        private string idField;
+        private SubjectConfirmationType subjectConfirmationField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public AttributedDateTime Created
+        public NameIDType NameID
         {
             get
             {
-                return this.createdField;
+                return this.nameIDField;
             }
             set
             {
-                this.createdField = value;
+                this.nameIDField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public AttributedDateTime Expires
+        public SubjectConfirmationType SubjectConfirmation
         {
             get
             {
-                return this.expiresField;
+                return this.subjectConfirmationField;
             }
             set
             {
-                this.expiresField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=2)]
-        public System.Xml.XmlElement[] Items
-        {
-            get
-            {
-                return this.itemsField;
-            }
-            set
-            {
-                this.itemsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(Form=System.Xml.Schema.XmlSchemaForm.Qualified, DataType="ID")]
-        public string Id
-        {
-            get
-            {
-                return this.idField;
-            }
-            set
-            {
-                this.idField = value;
+                this.subjectConfirmationField = value;
             }
         }
     }
@@ -2663,331 +2563,68 @@ namespace StsService
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" +
-        "")]
-    public partial class SecurityHeaderType
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
+    public partial class SubjectConfirmationType
     {
         
-        private TimestampType timestampField;
+        private NameIDType nameIDField;
         
-        private UsernameTokenType usernameTokenField;
+        private SubjectConfirmationDataType subjectConfirmationDataField;
         
-        private BinarySecurityTokenType binarySecurityTokenField;
-        
-        private AssertionType assertionField;
-        
-        private SignatureType signatureField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xs" +
-            "d")]
-        public TimestampType Timestamp
-        {
-            get
-            {
-                return this.timestampField;
-            }
-            set
-            {
-                this.timestampField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public UsernameTokenType UsernameToken
-        {
-            get
-            {
-                return this.usernameTokenField;
-            }
-            set
-            {
-                this.usernameTokenField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public BinarySecurityTokenType BinarySecurityToken
-        {
-            get
-            {
-                return this.binarySecurityTokenField;
-            }
-            set
-            {
-                this.binarySecurityTokenField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
-        public AssertionType Assertion
-        {
-            get
-            {
-                return this.assertionField;
-            }
-            set
-            {
-                this.assertionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-        public SignatureType Signature
-        {
-            get
-            {
-                return this.signatureField;
-            }
-            set
-            {
-                this.signatureField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" +
-        "")]
-    public partial class UsernameTokenType
-    {
-        
-        private AttributedString usernameField;
-        
-        private PasswordString passwordField;
-        
-        private string idField;
+        private SubjectConfirmationMethods methodField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public AttributedString Username
+        public NameIDType NameID
         {
             get
             {
-                return this.usernameField;
+                return this.nameIDField;
             }
             set
             {
-                this.usernameField = value;
+                this.nameIDField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public PasswordString Password
+        public SubjectConfirmationDataType SubjectConfirmationData
         {
             get
             {
-                return this.passwordField;
+                return this.subjectConfirmationDataField;
             }
             set
             {
-                this.passwordField = value;
+                this.subjectConfirmationDataField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(Form=System.Xml.Schema.XmlSchemaForm.Qualified, Namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xs" +
-            "d", DataType="ID")]
-        public string Id
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public SubjectConfirmationMethods Method
         {
             get
             {
-                return this.idField;
+                return this.methodField;
             }
             set
             {
-                this.idField = value;
+                this.methodField = value;
             }
         }
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(EncodedString))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(KeyIdentifierType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BinarySecurityTokenType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PasswordString))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(KeyInfoConfirmationDataType))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" +
-        "")]
-    public partial class AttributedString
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
+    public partial class SubjectConfirmationDataType
     {
-        
-        private string idField;
-        
-        private string valueField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(Form=System.Xml.Schema.XmlSchemaForm.Qualified, Namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xs" +
-            "d", DataType="ID")]
-        public string Id
-        {
-            get
-            {
-                return this.idField;
-            }
-            set
-            {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(KeyIdentifierType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BinarySecurityTokenType))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" +
-        "")]
-    public partial class EncodedString : AttributedString
-    {
-        
-        private string encodingTypeField;
-        
-        public EncodedString()
-        {
-            this.encodingTypeField = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0" +
-                "#Base64Binary";
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string EncodingType
-        {
-            get
-            {
-                return this.encodingTypeField;
-            }
-            set
-            {
-                this.encodingTypeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" +
-        "")]
-    public partial class KeyIdentifierType : EncodedString
-    {
-        
-        private string valueTypeField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string ValueType
-        {
-            get
-            {
-                return this.valueTypeField;
-            }
-            set
-            {
-                this.valueTypeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" +
-        "")]
-    public partial class BinarySecurityTokenType : EncodedString
-    {
-        
-        private string valueTypeField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string ValueType
-        {
-            get
-            {
-                return this.valueTypeField;
-            }
-            set
-            {
-                this.valueTypeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" +
-        "")]
-    public partial class PasswordString : AttributedString
-    {
-        
-        private string typeField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string Type
-        {
-            get
-            {
-                return this.typeField;
-            }
-            set
-            {
-                this.typeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-    public partial class SignaturePropertyType
-    {
-        
-        private System.Xml.XmlElement[] itemsField;
         
         private string[] textField;
-        
-        private string targetField;
-        
-        private string idField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlElement[] Items
-        {
-            get
-            {
-                return this.itemsField;
-            }
-            set
-            {
-                this.itemsField = value;
-            }
-        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
@@ -3002,185 +2639,548 @@ namespace StsService
                 this.textField = value;
             }
         }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string Target
-        {
-            get
-            {
-                return this.targetField;
-            }
-            set
-            {
-                this.targetField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
-        public string Id
-        {
-            get
-            {
-                return this.idField;
-            }
-            set
-            {
-                this.idField = value;
-            }
-        }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-    public partial class SignaturePropertiesType
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
+    public partial class KeyInfoConfirmationDataType : SubjectConfirmationDataType
+    {
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.rsa.com/names/2010/04/std-prof/SAML2.0")]
+    public enum SubjectConfirmationMethods
     {
         
-        private SignaturePropertyType[] signaturePropertyField;
-        
-        private string idField;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("urn:oasis:names:tc:SAML:2.0:cm:bearer")]
+        urnoasisnamestcSAML20cmbearer,
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("SignatureProperty", Order=0)]
-        public SignaturePropertyType[] SignatureProperty
-        {
-            get
-            {
-                return this.signaturePropertyField;
-            }
-            set
-            {
-                this.signaturePropertyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
-        public string Id
-        {
-            get
-            {
-                return this.idField;
-            }
-            set
-            {
-                this.idField = value;
-            }
-        }
+        [System.Xml.Serialization.XmlEnumAttribute("urn:oasis:names:tc:SAML:2.0:cm:holder-of-key")]
+        urnoasisnamestcSAML20cmholderofkey,
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-    public partial class ManifestType
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
+    public partial class ConditionsType
     {
         
-        private ReferenceType[] referenceField;
+        private ConditionAbstractType[] itemsField;
         
-        private string idField;
+        private System.DateTime notBeforeField;
+        
+        private System.DateTime notOnOrAfterField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Reference", Order=0)]
-        public ReferenceType[] Reference
+        [System.Xml.Serialization.XmlElementAttribute("AudienceRestriction", typeof(AudienceRestrictionType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("Condition", typeof(ConditionAbstractType), Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("ProxyRestriction", typeof(ProxyRestrictionType), Order=0)]
+        public ConditionAbstractType[] Items
         {
             get
             {
-                return this.referenceField;
+                return this.itemsField;
             }
             set
             {
-                this.referenceField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
-        public string Id
-        {
-            get
-            {
-                return this.idField;
-            }
-            set
-            {
-                this.idField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-    public partial class ObjectType
-    {
-        
-        private System.Xml.XmlNode[] anyField;
-        
-        private string idField;
-        
-        private string mimeTypeField;
-        
-        private string encodingField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=0)]
-        public System.Xml.XmlNode[] Any
-        {
-            get
-            {
-                return this.anyField;
-            }
-            set
-            {
-                this.anyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
-        public string Id
-        {
-            get
-            {
-                return this.idField;
-            }
-            set
-            {
-                this.idField = value;
+                this.itemsField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string MimeType
+        public System.DateTime NotBefore
         {
             get
             {
-                return this.mimeTypeField;
+                return this.notBeforeField;
             }
             set
             {
-                this.mimeTypeField = value;
+                this.notBeforeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public System.DateTime NotOnOrAfter
+        {
+            get
+            {
+                return this.notOnOrAfterField;
+            }
+            set
+            {
+                this.notOnOrAfterField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
+    public partial class AudienceRestrictionType : ConditionAbstractType
+    {
+        
+        private string[] audienceField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Audience", DataType="anyURI", Order=0)]
+        public string[] Audience
+        {
+            get
+            {
+                return this.audienceField;
+            }
+            set
+            {
+                this.audienceField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(RenewRestrictionType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(DelegationRestrictionType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ProxyRestrictionType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AudienceRestrictionType))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
+    public abstract partial class ConditionAbstractType
+    {
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.rsa.com/names/2009/12/std-ext/SAML2.0")]
+    public partial class RenewRestrictionType : ConditionAbstractType
+    {
+        
+        private string countField;
+        
+        private bool postdatableField;
+        
+        private bool renewExpiredField;
+        
+        public RenewRestrictionType()
+        {
+            this.countField = "0";
+            this.postdatableField = false;
+            this.renewExpiredField = false;
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="nonNegativeInteger")]
+        [System.ComponentModel.DefaultValueAttribute("0")]
+        public string Count
+        {
+            get
+            {
+                return this.countField;
+            }
+            set
+            {
+                this.countField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(false)]
+        public bool Postdatable
+        {
+            get
+            {
+                return this.postdatableField;
+            }
+            set
+            {
+                this.postdatableField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(false)]
+        public bool RenewExpired
+        {
+            get
+            {
+                return this.renewExpiredField;
+            }
+            set
+            {
+                this.renewExpiredField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:conditions:delegation")]
+    public partial class DelegationRestrictionType : ConditionAbstractType
+    {
+        
+        private DelegateType[] delegateField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Delegate", Order=0)]
+        public DelegateType[] Delegate
+        {
+            get
+            {
+                return this.delegateField;
+            }
+            set
+            {
+                this.delegateField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:conditions:delegation")]
+    public partial class DelegateType
+    {
+        
+        private NameIDType nameIDField;
+        
+        private System.DateTime delegationInstantField;
+        
+        private bool delegationInstantFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion", Order=0)]
+        public NameIDType NameID
+        {
+            get
+            {
+                return this.nameIDField;
+            }
+            set
+            {
+                this.nameIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public System.DateTime DelegationInstant
+        {
+            get
+            {
+                return this.delegationInstantField;
+            }
+            set
+            {
+                this.delegationInstantField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DelegationInstantSpecified
+        {
+            get
+            {
+                return this.delegationInstantFieldSpecified;
+            }
+            set
+            {
+                this.delegationInstantFieldSpecified = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
+    public partial class ProxyRestrictionType : ConditionAbstractType
+    {
+        
+        private string countField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="nonNegativeInteger")]
+        public string Count
+        {
+            get
+            {
+                return this.countField;
+            }
+            set
+            {
+                this.countField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="AdviceType", Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
+    public partial class AdviceType1
+    {
+        
+        private RSAAdviceType[] rSAAdviceField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("RSAAdvice", Namespace="http://www.rsa.com/names/2009/12/std-ext/SAML2.0", Order=0)]
+        public RSAAdviceType[] RSAAdvice
+        {
+            get
+            {
+                return this.rSAAdviceField;
+            }
+            set
+            {
+                this.rSAAdviceField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.rsa.com/names/2009/12/std-ext/SAML2.0")]
+    public partial class RSAAdviceType
+    {
+        
+        private AttributeType1[] attributeField;
+        
+        private string adviceSourceField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Attribute", Namespace="urn:oasis:names:tc:SAML:2.0:assertion", Order=0)]
+        public AttributeType1[] Attribute
+        {
+            get
+            {
+                return this.attributeField;
+            }
+            set
+            {
+                this.attributeField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string Encoding
+        public string AdviceSource
         {
             get
             {
-                return this.encodingField;
+                return this.adviceSourceField;
             }
             set
             {
-                this.encodingField = value;
+                this.adviceSourceField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="AttributeType", Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
+    public partial class AttributeType1
+    {
+        
+        private object[] attributeValueField;
+        
+        private string nameField;
+        
+        private string nameFormatField;
+        
+        private string friendlyNameField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("AttributeValue", Order=0)]
+        public object[] AttributeValue
+        {
+            get
+            {
+                return this.attributeValueField;
+            }
+            set
+            {
+                this.attributeValueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this.nameField;
+            }
+            set
+            {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
+        public string NameFormat
+        {
+            get
+            {
+                return this.nameFormatField;
+            }
+            set
+            {
+                this.nameFormatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string FriendlyName
+        {
+            get
+            {
+                return this.friendlyNameField;
+            }
+            set
+            {
+                this.friendlyNameField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
+    public partial class AuthnStatementType : StatementAbstractType
+    {
+        
+        private AuthnContextType authnContextField;
+        
+        private System.DateTime authnInstantField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public AuthnContextType AuthnContext
+        {
+            get
+            {
+                return this.authnContextField;
+            }
+            set
+            {
+                this.authnContextField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public System.DateTime AuthnInstant
+        {
+            get
+            {
+                return this.authnInstantField;
+            }
+            set
+            {
+                this.authnInstantField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
+    public partial class AuthnContextType
+    {
+        
+        private AuthnContextClassRefs authnContextClassRefField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public AuthnContextClassRefs AuthnContextClassRef
+        {
+            get
+            {
+                return this.authnContextClassRefField;
+            }
+            set
+            {
+                this.authnContextClassRefField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.rsa.com/names/2010/04/std-prof/SAML2.0")]
+    public enum AuthnContextClassRefs
+    {
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("urn:oasis:names:tc:SAML:2.0:ac:classes:Kerberos")]
+        urnoasisnamestcSAML20acclassesKerberos,
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport")]
+        urnoasisnamestcSAML20acclassesPasswordProtectedTransport,
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("urn:oasis:names:tc:SAML:2.0:ac:classes:XMLDSig")]
+        urnoasisnamestcSAML20acclassesXMLDSig,
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("urn:federation:authentication:windows")]
+        urnfederationauthenticationwindows,
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AttributeStatementType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AuthnStatementType))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
+    public abstract partial class StatementAbstractType
+    {
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:oasis:names:tc:SAML:2.0:assertion")]
+    public partial class AttributeStatementType : StatementAbstractType
+    {
+        
+        private AttributeType1[] itemsField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Attribute", Order=0)]
+        public AttributeType1[] Items
+        {
+            get
+            {
+                return this.itemsField;
+            }
+            set
+            {
+                this.itemsField = value;
             }
         }
     }
