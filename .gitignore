@@ -350,8 +350,12 @@ MigrationBackup/
 .ionide/
 
 # Source WSDL/XSD.
-StubGen/wsdl/vim25/**/*.wsdl
-StubGen/wsdl/vim25/**/*.xsd
+*.wsdl
+*.xsd
 
 # Intermediate File
-StubSlim/VimService.cs
+EamStubSlim/EamService.cs
+PbmStubSlim/PbmService.cs
+SmsStubSlim/SmsService.cs
+VimStubSlim/VimService.cs
+VslmStubSlim/VslmService.cs
