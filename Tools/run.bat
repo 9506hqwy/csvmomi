@@ -4,17 +4,17 @@ SET TOOL=%~dp0
 SET SRC=%TOOL%..\CsVmomi\
 
 if "%EAM_REF_GUIDE%" == "" (
-    ECHO error VIM_EAM_GUIDE
+    ECHO error EAM_REF_GUIDE
     EXIT /B 1
 )
 
 if "%PBM_REF_GUIDE%" == "" (
-    ECHO error PBM_EAM_GUIDE
+    ECHO error PBM_REF_GUIDE
     EXIT /B 1
 )
 
 if "%SMS_REF_GUIDE%" == "" (
-    ECHO error SMS_EAM_GUIDE
+    ECHO error SMS_REF_GUIDE
     EXIT /B 1
 )
 
