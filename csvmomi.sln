@@ -47,6 +47,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StsService", "StsService\St
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoginByToken", "Examples\LoginByToken\LoginByToken.csproj", "{A6872783-1ADC-4046-B6E7-2034D81E0E9A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExportVm", "Examples\ExportVm\ExportVm.csproj", "{95D738F6-7D38-4B60-B78B-EDCC4F012D99}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -137,6 +139,10 @@ Global
 		{A6872783-1ADC-4046-B6E7-2034D81E0E9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6872783-1ADC-4046-B6E7-2034D81E0E9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6872783-1ADC-4046-B6E7-2034D81E0E9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95D738F6-7D38-4B60-B78B-EDCC4F012D99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95D738F6-7D38-4B60-B78B-EDCC4F012D99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95D738F6-7D38-4B60-B78B-EDCC4F012D99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95D738F6-7D38-4B60-B78B-EDCC4F012D99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -154,6 +160,7 @@ Global
 		{805A77D1-5C71-4AA2-8B6A-E0167DE0D8A1} = {2CF3AF78-2C5A-4257-934D-CF47DD762308}
 		{FC8A3801-7567-4A05-986B-43D3350B18F7} = {2CF3AF78-2C5A-4257-934D-CF47DD762308}
 		{A6872783-1ADC-4046-B6E7-2034D81E0E9A} = {2CF3AF78-2C5A-4257-934D-CF47DD762308}
+		{95D738F6-7D38-4B60-B78B-EDCC4F012D99} = {2CF3AF78-2C5A-4257-934D-CF47DD762308}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {74753721-7958-4B1E-84B4-FA309E1F30AB}
