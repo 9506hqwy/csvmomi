@@ -5025,9 +5025,9 @@ public partial class HttpNfcLease : ManagedObject
         return obj!;
     }
 
-    public async System.Threading.Tasks.Task<object> GetPropertyState()
+    public async System.Threading.Tasks.Task<HttpNfcLeaseState> GetPropertyState()
     {
-        var obj = await this.GetProperty<object>("state");
+        var obj = await this.GetProperty<HttpNfcLeaseState>("state");
         return obj!;
     }
 

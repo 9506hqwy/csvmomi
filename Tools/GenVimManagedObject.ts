@@ -8,9 +8,6 @@ import {
 } from "./Common.ts";
 
 const fixPropertyTypes = {
-  "HttpNfcLease": {
-    "state": "object",
-  },
 };
 
 const directory = Deno.args[0];
