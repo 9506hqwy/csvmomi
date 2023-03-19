@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <LangVersion>10.0</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="6.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.2.8" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.2.8" />
+    <PackageReference Include="coverlet.collector" Version="3.1.2" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CsVmomi\CsVmomi.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="EamService">
+      <HintPath>..\Lib\EamService.dll</HintPath>
+    </Reference>
+    <Reference Include="PbmService">
+      <HintPath>..\Lib\PbmService.dll</HintPath>
+    </Reference>
+    <Reference Include="SmsService">
+      <HintPath>..\Lib\SmsService.dll</HintPath>
+    </Reference>
+    <Reference Include="StsService">
+      <HintPath>..\Lib\StsService.dll</HintPath>
+    </Reference>
+    <Reference Include="VimService">
+      <HintPath>..\Lib\VimService.dll</HintPath>
+    </Reference>
+    <Reference Include="VslmService">
+      <HintPath>..\Lib\VslmService.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

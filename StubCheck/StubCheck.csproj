@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <LangVersion>10.0</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CsVmomi\CsVmomi.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="EamService">
+      <HintPath>..\Lib\EamService.dll</HintPath>
+    </Reference>
+    <Reference Include="PbmService">
+      <HintPath>..\Lib\PbmService.dll</HintPath>
+    </Reference>
+    <Reference Include="SmsService">
+      <HintPath>..\Lib\SmsService.dll</HintPath>
+    </Reference>
+    <Reference Include="StsService">
+      <HintPath>..\Lib\StsService.dll</HintPath>
+    </Reference>
+    <Reference Include="VimService">
+      <HintPath>..\Lib\VimService.dll</HintPath>
+    </Reference>
+    <Reference Include="VslmService">
+      <HintPath>..\Lib\VslmService.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

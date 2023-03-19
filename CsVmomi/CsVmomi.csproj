@@ -1,0 +1,77 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>0.6.0.0</Version>
+    <LangVersion>10.0</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Authors>9506hqwy</Authors>
+    <Copyright>Copyright (c) 2023 9506hqwy. All Rights Reserved.</Copyright>
+    <Description>This library is Virtualization Management Object Management Infrastructure for C#.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/9506hqwy/csvmomi</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageVersion>0.6.0</PackageVersion>
+    <RepositoryUrl>https://github.com/9506hqwy/csvmomi</RepositoryUrl>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);StubFiles</TargetsForTfmSpecificBuildOutput>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="System.ServiceModel.Http" Version="4.10.0" />
+    <PackageReference Include="System.ServiceModel.Security" Version="4.10.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="EamService">
+      <HintPath>..\Lib\EamService.dll</HintPath>
+    </Reference>
+    <Reference Include="PbmService">
+      <HintPath>..\Lib\PbmService.dll</HintPath>
+    </Reference>
+    <Reference Include="SmsService">
+      <HintPath>..\Lib\SmsService.dll</HintPath>
+    </Reference>
+    <Reference Include="StsService">
+      <HintPath>..\Lib\StsService.dll</HintPath>
+    </Reference>
+    <Reference Include="VimService">
+      <HintPath>..\Lib\VimService.dll</HintPath>
+    </Reference>
+    <Reference Include="VslmService">
+      <HintPath>..\Lib\VslmService.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="StubFiles">
+    <ItemGroup>
+      <BuildOutputInPackage Include="..\Lib\EamService.dll" />
+      <BuildOutputInPackage Include="..\Lib\PbmService.dll" />
+      <BuildOutputInPackage Include="..\Lib\SmsService.dll" />
+      <BuildOutputInPackage Include="..\Lib\StsService.dll" />
+      <BuildOutputInPackage Include="..\Lib\VimService.dll" />
+      <BuildOutputInPackage Include="..\Lib\VslmService.dll" />
+    </ItemGroup>
+  </Target>
+
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+</Project>
