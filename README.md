@@ -2,8 +2,8 @@
 
 This library is vSphere Management API C# bindings for .NET Standard 2.0.
 
-This package is ManagedObject implementation class built on C# bindings, and is added some utility functions.
-ManagedObject class is generated from Reference Guide.
+This package is ManagedObject implementation class built on API bindings, and is added some utility functions.
+ManagedObject class is generated from [Reference Guide](https://developer.vmware.com/web/sdk/8.0/vsphere-management).
 
 ## Examples
 
@@ -11,7 +11,7 @@ see [Examples](./Examples) directory.
 
 ## API bindings
 
-see [Lib](./Lib) directory pre-gnerated by [csvmomi-lib]((https://github.com/9506hqwy/csvmomi-lib))
+see [Lib](./Lib) directory pre-gnerated by [csvmomi-lib](https://github.com/9506hqwy/csvmomi-lib).
 
 ## Notes
 
