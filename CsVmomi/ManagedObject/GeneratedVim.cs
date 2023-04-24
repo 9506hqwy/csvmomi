@@ -640,6 +640,11 @@ public partial class CryptoManagerHost : CryptoManager
     {
         await this.Session.VimClient.CryptoManagerHostPrepare(this.VimReference);
     }
+
+    public async System.Threading.Tasks.Task<CryptoManagerHostKeyStatus[]?> GetCryptoKeyStatus(CryptoKeyId[]? keys)
+    {
+        return await this.Session.VimClient.GetCryptoKeyStatus(this.VimReference, keys);
+    }
 }
 
 public partial class CryptoManagerHostKMS : CryptoManagerHost
@@ -667,19 +672,19 @@ public partial class CryptoManagerKmip : CryptoManager
         return obj;
     }
 
-    public async System.Threading.Tasks.Task<string?> GenerateClientCsr(KeyProviderId cluster)
+    public async System.Threading.Tasks.Task<string?> GenerateClientCsr(KeyProviderId cluster, CryptoManagerKmipCertSignRequest? request)
     {
-        return await this.Session.VimClient.GenerateClientCsr(this.VimReference, cluster);
+        return await this.Session.VimClient.GenerateClientCsr(this.VimReference, cluster, request);
     }
 
-    public async System.Threading.Tasks.Task<CryptoKeyResult?> GenerateKey(KeyProviderId? keyProvider)
+    public async System.Threading.Tasks.Task<CryptoKeyResult?> GenerateKey(KeyProviderId? keyProvider, CryptoManagerKmipCustomAttributeSpec? spec)
     {
-        return await this.Session.VimClient.GenerateKey(this.VimReference, keyProvider);
+        return await this.Session.VimClient.GenerateKey(this.VimReference, keyProvider, spec);
     }
 
-    public async System.Threading.Tasks.Task<string?> GenerateSelfSignedClientCert(KeyProviderId cluster)
+    public async System.Threading.Tasks.Task<string?> GenerateSelfSignedClientCert(KeyProviderId cluster, CryptoManagerKmipCertSignRequest? request)
     {
-        return await this.Session.VimClient.GenerateSelfSignedClientCert(this.VimReference, cluster);
+        return await this.Session.VimClient.GenerateSelfSignedClientCert(this.VimReference, cluster, request);
     }
 
     public async System.Threading.Tasks.Task<KeyProviderId?> GetDefaultKmsCluster(ManagedEntity? entity, bool? defaultsToParent)
@@ -756,6 +761,11 @@ public partial class CryptoManagerKmip : CryptoManager
     public async System.Threading.Tasks.Task SetDefaultKmsCluster(ManagedEntity? entity, KeyProviderId? clusterId)
     {
         await this.Session.VimClient.SetDefaultKmsCluster(this.VimReference, entity?.VimReference, clusterId);
+    }
+
+    public async System.Threading.Tasks.Task<CryptoKeyResult?> SetKeyCustomAttributes(CryptoKeyId keyId, CryptoManagerKmipCustomAttributeSpec spec)
+    {
+        return await this.Session.VimClient.SetKeyCustomAttributes(this.VimReference, keyId, spec);
     }
 
     public async System.Threading.Tasks.Task UnregisterKmsCluster(KeyProviderId clusterId)
@@ -1054,6 +1064,11 @@ public partial class Datastore : ManagedEntity
         await this.Session.VimClient.DestroyDatastore(this.VimReference);
     }
 
+    public async System.Threading.Tasks.Task<bool> IsClusteredVmdkEnabled()
+    {
+        return await this.Session.VimClient.IsClusteredVmdkEnabled(this.VimReference);
+    }
+
     public async System.Threading.Tasks.Task RefreshDatastore()
     {
         await this.Session.VimClient.RefreshDatastore(this.VimReference);
@@ -1105,6 +1120,16 @@ public partial class DatastoreNamespaceManager : ManagedObject
     {
         await this.Session.VimClient.DeleteDirectory(this.VimReference, datacenter?.VimReference, datastorePath);
     }
+
+    public async System.Threading.Tasks.Task IncreaseDirectorySize(Datacenter? datacenter, string stableName, long size)
+    {
+        await this.Session.VimClient.IncreaseDirectorySize(this.VimReference, datacenter?.VimReference, stableName, size);
+    }
+
+    public async System.Threading.Tasks.Task<DatastoreNamespaceManagerDirectoryInfo?> QueryDirectoryInfo(Datacenter? datacenter, string stableName)
+    {
+        return await this.Session.VimClient.QueryDirectoryInfo(this.VimReference, datacenter?.VimReference, stableName);
+    }
 }
 
 public partial class DiagnosticManager : ManagedObject
@@ -1119,6 +1144,11 @@ public partial class DiagnosticManager : ManagedObject
     public async System.Threading.Tasks.Task<DiagnosticManagerLogHeader?> BrowseDiagnosticLog(HostSystem? host, string key, int? start, int? lines)
     {
         return await this.Session.VimClient.BrowseDiagnosticLog(this.VimReference, host?.VimReference, key, start ?? default, start.HasValue, lines ?? default, lines.HasValue);
+    }
+
+    public async System.Threading.Tasks.Task EmitSyslogMark(string message)
+    {
+        await this.Session.VimClient.EmitSyslogMark(this.VimReference, message);
     }
 
     public async System.Threading.Tasks.Task<DiagnosticManagerAuditRecordResult?> FetchAuditRecords(string? token)
@@ -2566,14 +2596,14 @@ public partial class HostCertificateManager : ManagedObject
         return obj!;
     }
 
-    public async System.Threading.Tasks.Task<string?> GenerateCertificateSigningRequest(bool useIpAddressAsCommonName)
+    public async System.Threading.Tasks.Task<string?> GenerateCertificateSigningRequest(bool useIpAddressAsCommonName, HostCertificateManagerCertificateSpec? spec)
     {
-        return await this.Session.VimClient.GenerateCertificateSigningRequest(this.VimReference, useIpAddressAsCommonName);
+        return await this.Session.VimClient.GenerateCertificateSigningRequest(this.VimReference, useIpAddressAsCommonName, spec);
     }
 
-    public async System.Threading.Tasks.Task<string?> GenerateCertificateSigningRequestByDn(string distinguishedName)
+    public async System.Threading.Tasks.Task<string?> GenerateCertificateSigningRequestByDn(string distinguishedName, HostCertificateManagerCertificateSpec? spec)
     {
-        return await this.Session.VimClient.GenerateCertificateSigningRequestByDn(this.VimReference, distinguishedName);
+        return await this.Session.VimClient.GenerateCertificateSigningRequestByDn(this.VimReference, distinguishedName, spec);
     }
 
     public async System.Threading.Tasks.Task InstallServerCertificate(string cert)
@@ -2594,6 +2624,11 @@ public partial class HostCertificateManager : ManagedObject
     public async System.Threading.Tasks.Task ReplaceCACertificatesAndCRLs(string[] caCert, string[]? caCrl)
     {
         await this.Session.VimClient.ReplaceCACertificatesAndCRLs(this.VimReference, caCert, caCrl);
+    }
+
+    public async System.Threading.Tasks.Task<HostCertificateManagerCertificateInfo[]?> RetrieveCertificateInfoList()
+    {
+        return await this.Session.VimClient.RetrieveCertificateInfoList(this.VimReference);
     }
 }
 
@@ -3553,6 +3588,12 @@ public partial class HostProfile : Profile
         Session session)
         : base(reference, session)
     {
+    }
+
+    public async System.Threading.Tasks.Task<DateTime> GetPropertyComplianceCheckTime()
+    {
+        var obj = await this.GetProperty<DateTime>("complianceCheckTime");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<HostSystem?> GetPropertyReferenceHost()

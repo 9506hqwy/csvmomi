@@ -3353,6 +3353,17 @@ public class VimClient : IVimClient
         return res.EagerZeroVirtualDisk_TaskResponse.returnval;
     }
 
+    public async System.Threading.Tasks.Task EmitSyslogMark(ManagedObjectReference self, string message)
+    {
+        var req = new EmitSyslogMarkRequestType
+        {
+            _this = self,
+            message = message,
+        };
+
+        await this.inner.EmitSyslogMarkAsync(req);
+    }
+
     public async System.Threading.Tasks.Task EnableAlarm(ManagedObjectReference self, ManagedObjectReference alarm, ManagedObjectReference entity)
     {
         var req = new EnableAlarmRequestType
@@ -4067,12 +4078,13 @@ public class VimClient : IVimClient
         return res.FormatVmfsResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string?> GenerateCertificateSigningRequest(ManagedObjectReference self, bool useIpAddressAsCommonName)
+    public async System.Threading.Tasks.Task<string?> GenerateCertificateSigningRequest(ManagedObjectReference self, bool useIpAddressAsCommonName, HostCertificateManagerCertificateSpec? spec)
     {
         var req = new GenerateCertificateSigningRequestRequestType
         {
             _this = self,
             useIpAddressAsCommonName = useIpAddressAsCommonName,
+            spec = spec,
         };
 
         var res = await this.inner.GenerateCertificateSigningRequestAsync(req);
@@ -4080,12 +4092,13 @@ public class VimClient : IVimClient
         return res.GenerateCertificateSigningRequestResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string?> GenerateCertificateSigningRequestByDn(ManagedObjectReference self, string distinguishedName)
+    public async System.Threading.Tasks.Task<string?> GenerateCertificateSigningRequestByDn(ManagedObjectReference self, string distinguishedName, HostCertificateManagerCertificateSpec? spec)
     {
         var req = new GenerateCertificateSigningRequestByDnRequestType
         {
             _this = self,
             distinguishedName = distinguishedName,
+            spec = spec,
         };
 
         var res = await this.inner.GenerateCertificateSigningRequestByDnAsync(req);
@@ -4093,12 +4106,13 @@ public class VimClient : IVimClient
         return res.GenerateCertificateSigningRequestByDnResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string?> GenerateClientCsr(ManagedObjectReference self, KeyProviderId cluster)
+    public async System.Threading.Tasks.Task<string?> GenerateClientCsr(ManagedObjectReference self, KeyProviderId cluster, CryptoManagerKmipCertSignRequest? request)
     {
         var req = new GenerateClientCsrRequestType
         {
             _this = self,
             cluster = cluster,
+            request = request,
         };
 
         var res = await this.inner.GenerateClientCsrAsync(req);
@@ -4147,12 +4161,13 @@ public class VimClient : IVimClient
         return res.GenerateHostProfileTaskList_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<CryptoKeyResult?> GenerateKey(ManagedObjectReference self, KeyProviderId? keyProvider)
+    public async System.Threading.Tasks.Task<CryptoKeyResult?> GenerateKey(ManagedObjectReference self, KeyProviderId? keyProvider, CryptoManagerKmipCustomAttributeSpec? spec)
     {
         var req = new GenerateKeyRequestType
         {
             _this = self,
             keyProvider = keyProvider,
+            spec = spec,
         };
 
         var res = await this.inner.GenerateKeyAsync(req);
@@ -4174,12 +4189,13 @@ public class VimClient : IVimClient
         return res.GenerateLogBundles_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<string?> GenerateSelfSignedClientCert(ManagedObjectReference self, KeyProviderId cluster)
+    public async System.Threading.Tasks.Task<string?> GenerateSelfSignedClientCert(ManagedObjectReference self, KeyProviderId cluster, CryptoManagerKmipCertSignRequest? request)
     {
         var req = new GenerateSelfSignedClientCertRequestType
         {
             _this = self,
             cluster = cluster,
+            request = request,
         };
 
         var res = await this.inner.GenerateSelfSignedClientCertAsync(req);
@@ -4223,6 +4239,19 @@ public class VimClient : IVimClient
         var res = await this.inner.getClusterModeAsync(req);
 
         return res.getClusterModeResponse.returnval;
+    }
+
+    public async System.Threading.Tasks.Task<CryptoManagerHostKeyStatus[]?> GetCryptoKeyStatus(ManagedObjectReference self, CryptoKeyId[]? keys)
+    {
+        var req = new GetCryptoKeyStatusRequestType
+        {
+            _this = self,
+            keys = keys,
+        };
+
+        var res = await this.inner.GetCryptoKeyStatusAsync(req);
+
+        return res.GetCryptoKeyStatusResponse1;
     }
 
     public async System.Threading.Tasks.Task<CustomizationSpecItem?> GetCustomizationSpec(ManagedObjectReference self, string name)
@@ -5017,6 +5046,19 @@ public class VimClient : IVimClient
         return res.ImportVAppResponse.returnval;
     }
 
+    public async System.Threading.Tasks.Task IncreaseDirectorySize(ManagedObjectReference self, ManagedObjectReference? datacenter, string stableName, long size)
+    {
+        var req = new IncreaseDirectorySizeRequestType
+        {
+            _this = self,
+            datacenter = datacenter,
+            stableName = stableName,
+            size = size,
+        };
+
+        await this.inner.IncreaseDirectorySizeAsync(req);
+    }
+
     public async System.Threading.Tasks.Task<ManagedObjectReference?> InflateDisk_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
     {
         var req = new InflateDiskRequestType
@@ -5195,6 +5237,18 @@ public class VimClient : IVimClient
         var res = await this.inner.InstantClone_TaskAsync(req);
 
         return res.InstantClone_TaskResponse.returnval;
+    }
+
+    public async System.Threading.Tasks.Task<bool> IsClusteredVmdkEnabled(ManagedObjectReference self)
+    {
+        var req = new IsClusteredVmdkEnabledRequestType
+        {
+            _this = self,
+        };
+
+        var res = await this.inner.IsClusteredVmdkEnabledAsync(req);
+
+        return res.IsClusteredVmdkEnabledResponse.returnval;
     }
 
     public async System.Threading.Tasks.Task<bool> IsKmsClusterActive(ManagedObjectReference self, KeyProviderId? cluster)
@@ -6679,6 +6733,20 @@ public class VimClient : IVimClient
         var res = await this.inner.QueryDescriptionsAsync(req);
 
         return res.QueryDescriptionsResponse1;
+    }
+
+    public async System.Threading.Tasks.Task<DatastoreNamespaceManagerDirectoryInfo?> QueryDirectoryInfo(ManagedObjectReference self, ManagedObjectReference? datacenter, string stableName)
+    {
+        var req = new QueryDirectoryInfoRequestType
+        {
+            _this = self,
+            datacenter = datacenter,
+            stableName = stableName,
+        };
+
+        var res = await this.inner.QueryDirectoryInfoAsync(req);
+
+        return res.QueryDirectoryInfoResponse.returnval;
     }
 
     public async System.Threading.Tasks.Task<VsanHostDiskResult[]?> QueryDisksForVsan(ManagedObjectReference self, string[]? canonicalName)
@@ -9381,6 +9449,18 @@ public class VimClient : IVimClient
         return res.RetrieveArgumentDescriptionResponse1;
     }
 
+    public async System.Threading.Tasks.Task<HostCertificateManagerCertificateInfo[]?> RetrieveCertificateInfoList(ManagedObjectReference self)
+    {
+        var req = new RetrieveCertificateInfoListRequestType
+        {
+            _this = self,
+        };
+
+        var res = await this.inner.RetrieveCertificateInfoListAsync(req);
+
+        return res.RetrieveCertificateInfoListResponse1;
+    }
+
     public async System.Threading.Tasks.Task<string?> RetrieveClientCert(ManagedObjectReference self, KeyProviderId cluster)
     {
         var req = new RetrieveClientCertRequestType
@@ -10147,6 +10227,20 @@ public class VimClient : IVimClient
         };
 
         await this.inner.SetFieldAsync(req);
+    }
+
+    public async System.Threading.Tasks.Task<CryptoKeyResult?> SetKeyCustomAttributes(ManagedObjectReference self, CryptoKeyId keyId, CryptoManagerKmipCustomAttributeSpec spec)
+    {
+        var req = new SetKeyCustomAttributesRequestType
+        {
+            _this = self,
+            keyId = keyId,
+            spec = spec,
+        };
+
+        var res = await this.inner.SetKeyCustomAttributesAsync(req);
+
+        return res.SetKeyCustomAttributesResponse.returnval;
     }
 
     public async System.Threading.Tasks.Task SetLicenseEdition(ManagedObjectReference self, ManagedObjectReference? host, string? featureKey)

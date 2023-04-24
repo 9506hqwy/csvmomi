@@ -518,6 +518,8 @@ public interface IVimClient
 
     System.Threading.Tasks.Task<ManagedObjectReference?> EagerZeroVirtualDisk_Task(ManagedObjectReference self, string name, ManagedObjectReference? datacenter);
 
+    System.Threading.Tasks.Task EmitSyslogMark(ManagedObjectReference self, string message);
+
     System.Threading.Tasks.Task EnableAlarm(ManagedObjectReference self, ManagedObjectReference alarm, ManagedObjectReference entity);
 
     System.Threading.Tasks.Task EnableAlarmActions(ManagedObjectReference self, ManagedObjectReference entity, bool enabled);
@@ -628,11 +630,11 @@ public interface IVimClient
 
     System.Threading.Tasks.Task<HostVmfsVolume?> FormatVmfs(ManagedObjectReference self, HostVmfsSpec createSpec);
 
-    System.Threading.Tasks.Task<string?> GenerateCertificateSigningRequest(ManagedObjectReference self, bool useIpAddressAsCommonName);
+    System.Threading.Tasks.Task<string?> GenerateCertificateSigningRequest(ManagedObjectReference self, bool useIpAddressAsCommonName, HostCertificateManagerCertificateSpec? spec);
 
-    System.Threading.Tasks.Task<string?> GenerateCertificateSigningRequestByDn(ManagedObjectReference self, string distinguishedName);
+    System.Threading.Tasks.Task<string?> GenerateCertificateSigningRequestByDn(ManagedObjectReference self, string distinguishedName, HostCertificateManagerCertificateSpec? spec);
 
-    System.Threading.Tasks.Task<string?> GenerateClientCsr(ManagedObjectReference self, KeyProviderId cluster);
+    System.Threading.Tasks.Task<string?> GenerateClientCsr(ManagedObjectReference self, KeyProviderId cluster, CryptoManagerKmipCertSignRequest? request);
 
     System.Threading.Tasks.Task<HostProfileManagerConfigTaskList?> GenerateConfigTaskList(ManagedObjectReference self, HostConfigSpec configSpec, ManagedObjectReference host);
 
@@ -640,17 +642,19 @@ public interface IVimClient
 
     System.Threading.Tasks.Task<ManagedObjectReference?> GenerateHostProfileTaskList_Task(ManagedObjectReference self, HostConfigSpec configSpec, ManagedObjectReference host);
 
-    System.Threading.Tasks.Task<CryptoKeyResult?> GenerateKey(ManagedObjectReference self, KeyProviderId? keyProvider);
+    System.Threading.Tasks.Task<CryptoKeyResult?> GenerateKey(ManagedObjectReference self, KeyProviderId? keyProvider, CryptoManagerKmipCustomAttributeSpec? spec);
 
     System.Threading.Tasks.Task<ManagedObjectReference?> GenerateLogBundles_Task(ManagedObjectReference self, bool includeDefault, ManagedObjectReference[]? host);
 
-    System.Threading.Tasks.Task<string?> GenerateSelfSignedClientCert(ManagedObjectReference self, KeyProviderId cluster);
+    System.Threading.Tasks.Task<string?> GenerateSelfSignedClientCert(ManagedObjectReference self, KeyProviderId cluster, CryptoManagerKmipCertSignRequest? request);
 
     System.Threading.Tasks.Task<ManagedObjectReference[]?> GetAlarm(ManagedObjectReference self, ManagedObjectReference? entity);
 
     System.Threading.Tasks.Task<AlarmState[]?> GetAlarmState(ManagedObjectReference self, ManagedObjectReference entity);
 
     System.Threading.Tasks.Task<string?> GetClusterMode(ManagedObjectReference self);
+
+    System.Threading.Tasks.Task<CryptoManagerHostKeyStatus[]?> GetCryptoKeyStatus(ManagedObjectReference self, CryptoKeyId[]? keys);
 
     System.Threading.Tasks.Task<CustomizationSpecItem?> GetCustomizationSpec(ManagedObjectReference self, string name);
 
@@ -770,6 +774,8 @@ public interface IVimClient
 
     System.Threading.Tasks.Task<ManagedObjectReference?> ImportVApp(ManagedObjectReference self, ImportSpec spec, ManagedObjectReference? folder, ManagedObjectReference? host);
 
+    System.Threading.Tasks.Task IncreaseDirectorySize(ManagedObjectReference self, ManagedObjectReference? datacenter, string stableName, long size);
+
     System.Threading.Tasks.Task<ManagedObjectReference?> InflateDisk_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore);
 
     System.Threading.Tasks.Task<ManagedObjectReference?> InflateVirtualDisk_Task(ManagedObjectReference self, string name, ManagedObjectReference? datacenter);
@@ -795,6 +801,8 @@ public interface IVimClient
     System.Threading.Tasks.Task InstallSmartCardTrustAnchor(ManagedObjectReference self, string cert);
 
     System.Threading.Tasks.Task<ManagedObjectReference?> InstantClone_Task(ManagedObjectReference self, VirtualMachineInstantCloneSpec spec);
+
+    System.Threading.Tasks.Task<bool> IsClusteredVmdkEnabled(ManagedObjectReference self);
 
     System.Threading.Tasks.Task<bool> IsKmsClusterActive(ManagedObjectReference self, KeyProviderId? cluster);
 
@@ -1015,6 +1023,8 @@ public interface IVimClient
     System.Threading.Tasks.Task<DateTime> QueryDateTime(ManagedObjectReference self);
 
     System.Threading.Tasks.Task<DiagnosticManagerLogDescriptor[]?> QueryDescriptions(ManagedObjectReference self, ManagedObjectReference? host);
+
+    System.Threading.Tasks.Task<DatastoreNamespaceManagerDirectoryInfo?> QueryDirectoryInfo(ManagedObjectReference self, ManagedObjectReference? datacenter, string stableName);
 
     System.Threading.Tasks.Task<VsanHostDiskResult[]?> QueryDisksForVsan(ManagedObjectReference self, string[]? canonicalName);
 
@@ -1448,6 +1458,8 @@ public interface IVimClient
 
     System.Threading.Tasks.Task<EventArgDesc[]?> RetrieveArgumentDescription(ManagedObjectReference self, string eventTypeId);
 
+    System.Threading.Tasks.Task<HostCertificateManagerCertificateInfo[]?> RetrieveCertificateInfoList(ManagedObjectReference self);
+
     System.Threading.Tasks.Task<string?> RetrieveClientCert(ManagedObjectReference self, KeyProviderId cluster);
 
     System.Threading.Tasks.Task<string?> RetrieveClientCsr(ManagedObjectReference self, KeyProviderId cluster);
@@ -1567,6 +1579,8 @@ public interface IVimClient
     System.Threading.Tasks.Task SetExtensionCertificate(ManagedObjectReference self, string extensionKey, string? certificatePem);
 
     System.Threading.Tasks.Task SetField(ManagedObjectReference self, ManagedObjectReference entity, int key, string value);
+
+    System.Threading.Tasks.Task<CryptoKeyResult?> SetKeyCustomAttributes(ManagedObjectReference self, CryptoKeyId keyId, CryptoManagerKmipCustomAttributeSpec spec);
 
     System.Threading.Tasks.Task SetLicenseEdition(ManagedObjectReference self, ManagedObjectReference? host, string? featureKey);
 
