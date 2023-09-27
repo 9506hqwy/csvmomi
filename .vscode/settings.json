@@ -1,0 +1,5 @@
+{
+    "coverage-gutters.showLineCoverage": true,
+    "dotnet.defaultSolution": "csvmomi.sln",
+    "editor.codeLens": false
+}
