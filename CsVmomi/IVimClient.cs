@@ -714,7 +714,7 @@ public interface IVimClient
 
     System.Threading.Tasks.Task<ManagedObjectReference?> HostReconcileDatastoreInventory_Task(ManagedObjectReference self, ManagedObjectReference datastore);
 
-    System.Threading.Tasks.Task<VStorageObject?> HostRegisterDisk(ManagedObjectReference self, string path, string? name);
+    System.Threading.Tasks.Task<VStorageObject?> HostRegisterDisk(ManagedObjectReference self, string path, string? name, bool modifyControlFlags, bool modifyControlFlagsSpecified);
 
     System.Threading.Tasks.Task<ManagedObjectReference?> HostRelocateVStorageObject_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, VslmRelocateSpec spec);
 
@@ -1049,6 +1049,8 @@ public interface IVimClient
     System.Threading.Tasks.Task<LocalizedMethodFault[]?> QueryFaultToleranceCompatibility(ManagedObjectReference self);
 
     System.Threading.Tasks.Task<LocalizedMethodFault[]?> QueryFaultToleranceCompatibilityEx(ManagedObjectReference self, bool forLegacyFt, bool forLegacyFtSpecified);
+
+    System.Threading.Tasks.Task<FileLockInfoResult?> QueryFileLockInfo(ManagedObjectReference self, string path, ManagedObjectReference? host);
 
     System.Threading.Tasks.Task<ManagedObjectReference[]?> QueryFilterEntities(ManagedObjectReference self, string filterId);
 
@@ -1404,6 +1406,8 @@ public interface IVimClient
 
     System.Threading.Tasks.Task RenameVStorageObject(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string name);
 
+    System.Threading.Tasks.Task<vslmVClockInfo?> RenameVStorageObjectEx(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string name);
+
     System.Threading.Tasks.Task ReplaceCACertificatesAndCRLs(ManagedObjectReference self, string[] caCert, string[]? caCrl);
 
     System.Threading.Tasks.Task ReplaceSmartCardTrustAnchors(ManagedObjectReference self, string[]? certs);
@@ -1534,6 +1538,8 @@ public interface IVimClient
 
     System.Threading.Tasks.Task<ManagedObjectReference?> RevertVStorageObject_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId);
 
+    System.Threading.Tasks.Task<ManagedObjectReference?> RevertVStorageObjectEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId);
+
     System.Threading.Tasks.Task RewindCollector(ManagedObjectReference self);
 
     System.Threading.Tasks.Task RunScheduledTask(ManagedObjectReference self);
@@ -1597,6 +1603,8 @@ public interface IVimClient
     System.Threading.Tasks.Task SetRegistryValueInGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, GuestRegValueSpec value);
 
     System.Threading.Tasks.Task SetScreenResolution(ManagedObjectReference self, int width, int height);
+
+    System.Threading.Tasks.Task SetServiceAccount(ManagedObjectReference self, string extensionKey, string serviceAccount);
 
     System.Threading.Tasks.Task SetTaskDescription(ManagedObjectReference self, LocalizableMessage description);
 
@@ -1733,8 +1741,6 @@ public interface IVimClient
     System.Threading.Tasks.Task UpdateFlags(ManagedObjectReference self, HostFlagInfo flagInfo);
 
     System.Threading.Tasks.Task UpdateGraphicsConfig(ManagedObjectReference self, HostGraphicsConfig config);
-
-    System.Threading.Tasks.Task<ManagedObjectReference?> UpdateHostCustomizations_Task(ManagedObjectReference self, HostProfileManagerHostToConfigSpecMap[]? hostToConfigSpecMap);
 
     System.Threading.Tasks.Task UpdateHostImageAcceptanceLevel(ManagedObjectReference self, string newAcceptanceLevel);
 
@@ -1881,6 +1887,12 @@ public interface IVimClient
     System.Threading.Tasks.Task<ManagedObjectReference?> VCenterUpdateVStorageObjectMetadataEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, KeyValue[]? metadata, string[]? deleteKeys);
 
     System.Threading.Tasks.Task<ManagedObjectReference?> VStorageObjectCreateSnapshot_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string description);
+
+    System.Threading.Tasks.Task<ManagedObjectReference?> VStorageObjectCreateSnapshotEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string description);
+
+    System.Threading.Tasks.Task<ManagedObjectReference?> VStorageObjectDeleteSnapshotEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId);
+
+    System.Threading.Tasks.Task<ManagedObjectReference?> VStorageObjectExtendDiskEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, long newCapacityInMB);
 
     System.Threading.Tasks.Task<DiskChangeInfo?> VstorageObjectVCenterQueryChangedDiskAreas(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId, long startOffset, string changeId);
 

@@ -4632,13 +4632,15 @@ public class VimClient : IVimClient
         return res.HostReconcileDatastoreInventory_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<VStorageObject?> HostRegisterDisk(ManagedObjectReference self, string path, string? name)
+    public async System.Threading.Tasks.Task<VStorageObject?> HostRegisterDisk(ManagedObjectReference self, string path, string? name, bool modifyControlFlags, bool modifyControlFlagsSpecified)
     {
         var req = new HostRegisterDiskRequestType
         {
             _this = self,
             path = path,
             name = name,
+            modifyControlFlags = modifyControlFlags,
+            modifyControlFlagsSpecified = modifyControlFlagsSpecified,
         };
 
         var res = await this.inner.HostRegisterDiskAsync(req);
@@ -6910,6 +6912,20 @@ public class VimClient : IVimClient
         return res.QueryFaultToleranceCompatibilityExResponse1;
     }
 
+    public async System.Threading.Tasks.Task<FileLockInfoResult?> QueryFileLockInfo(ManagedObjectReference self, string path, ManagedObjectReference? host)
+    {
+        var req = new QueryFileLockInfoRequestType
+        {
+            _this = self,
+            path = path,
+            host = host,
+        };
+
+        var res = await this.inner.QueryFileLockInfoAsync(req);
+
+        return res.QueryFileLockInfoResponse.returnval;
+    }
+
     public async System.Threading.Tasks.Task<ManagedObjectReference[]?> QueryFilterEntities(ManagedObjectReference self, string filterId)
     {
         var req = new QueryFilterEntitiesRequestType
@@ -9134,6 +9150,21 @@ public class VimClient : IVimClient
         await this.inner.RenameVStorageObjectAsync(req);
     }
 
+    public async System.Threading.Tasks.Task<vslmVClockInfo?> RenameVStorageObjectEx(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string name)
+    {
+        var req = new RenameVStorageObjectExRequestType
+        {
+            _this = self,
+            id = id,
+            datastore = datastore,
+            name = name,
+        };
+
+        var res = await this.inner.RenameVStorageObjectExAsync(req);
+
+        return res.RenameVStorageObjectExResponse.returnval;
+    }
+
     public async System.Threading.Tasks.Task ReplaceCACertificatesAndCRLs(ManagedObjectReference self, string[] caCert, string[]? caCrl)
     {
         var req = new ReplaceCACertificatesAndCRLsRequestType
@@ -9953,6 +9984,21 @@ public class VimClient : IVimClient
         return res.RevertVStorageObject_TaskResponse.returnval;
     }
 
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> RevertVStorageObjectEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId)
+    {
+        var req = new RevertVStorageObjectExRequestType
+        {
+            _this = self,
+            id = id,
+            datastore = datastore,
+            snapshotId = snapshotId,
+        };
+
+        var res = await this.inner.RevertVStorageObjectEx_TaskAsync(req);
+
+        return res.RevertVStorageObjectEx_TaskResponse.returnval;
+    }
+
     public async System.Threading.Tasks.Task RewindCollector(ManagedObjectReference self)
     {
         var req = new RewindCollectorRequestType
@@ -10337,6 +10383,18 @@ public class VimClient : IVimClient
         };
 
         await this.inner.SetScreenResolutionAsync(req);
+    }
+
+    public async System.Threading.Tasks.Task SetServiceAccount(ManagedObjectReference self, string extensionKey, string serviceAccount)
+    {
+        var req = new SetServiceAccountRequestType
+        {
+            _this = self,
+            extensionKey = extensionKey,
+            serviceAccount = serviceAccount,
+        };
+
+        await this.inner.SetServiceAccountAsync(req);
     }
 
     public async System.Threading.Tasks.Task SetTaskDescription(ManagedObjectReference self, LocalizableMessage description)
@@ -11157,19 +11215,6 @@ public class VimClient : IVimClient
         };
 
         await this.inner.UpdateGraphicsConfigAsync(req);
-    }
-
-    public async System.Threading.Tasks.Task<ManagedObjectReference?> UpdateHostCustomizations_Task(ManagedObjectReference self, HostProfileManagerHostToConfigSpecMap[]? hostToConfigSpecMap)
-    {
-        var req = new UpdateHostCustomizationsRequestType
-        {
-            _this = self,
-            hostToConfigSpecMap = hostToConfigSpecMap,
-        };
-
-        var res = await this.inner.UpdateHostCustomizations_TaskAsync(req);
-
-        return res.UpdateHostCustomizations_TaskResponse.returnval;
     }
 
     public async System.Threading.Tasks.Task UpdateHostImageAcceptanceLevel(ManagedObjectReference self, string newAcceptanceLevel)
@@ -12077,6 +12122,51 @@ public class VimClient : IVimClient
         var res = await this.inner.VStorageObjectCreateSnapshot_TaskAsync(req);
 
         return res.VStorageObjectCreateSnapshot_TaskResponse.returnval;
+    }
+
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> VStorageObjectCreateSnapshotEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string description)
+    {
+        var req = new VStorageObjectCreateSnapshotExRequestType
+        {
+            _this = self,
+            id = id,
+            datastore = datastore,
+            description = description,
+        };
+
+        var res = await this.inner.VStorageObjectCreateSnapshotEx_TaskAsync(req);
+
+        return res.VStorageObjectCreateSnapshotEx_TaskResponse.returnval;
+    }
+
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> VStorageObjectDeleteSnapshotEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId)
+    {
+        var req = new VStorageObjectDeleteSnapshotExRequestType
+        {
+            _this = self,
+            id = id,
+            datastore = datastore,
+            snapshotId = snapshotId,
+        };
+
+        var res = await this.inner.VStorageObjectDeleteSnapshotEx_TaskAsync(req);
+
+        return res.VStorageObjectDeleteSnapshotEx_TaskResponse.returnval;
+    }
+
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> VStorageObjectExtendDiskEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, long newCapacityInMB)
+    {
+        var req = new VStorageObjectExtendDiskExRequestType
+        {
+            _this = self,
+            id = id,
+            datastore = datastore,
+            newCapacityInMB = newCapacityInMB,
+        };
+
+        var res = await this.inner.VStorageObjectExtendDiskEx_TaskAsync(req);
+
+        return res.VStorageObjectExtendDiskEx_TaskResponse.returnval;
     }
 
     public async System.Threading.Tasks.Task<DiskChangeInfo?> VstorageObjectVCenterQueryChangedDiskAreas(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId, long startOffset, string changeId)
