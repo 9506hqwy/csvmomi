@@ -35,7 +35,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="System.ServiceModel.Http" Version="4.10.0" />
-    <PackageReference Include="System.ServiceModel.Security" Version="4.10.0" />
+    <PackageReference Include="System.ServiceModel.Security" Version="4.10.3" />
   </ItemGroup>
 
   <ItemGroup>
