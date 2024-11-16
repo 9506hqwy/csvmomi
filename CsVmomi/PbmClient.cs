@@ -3,6 +3,8 @@
 using System.ServiceModel.Channels;
 using PbmService;
 
+#pragma warning disable IDE0058 // Expression value is never used
+
 public class PbmClient : IPbmClient
 {
     private readonly PbmPortTypeClient inner;
@@ -461,3 +463,5 @@ public class PbmClient : IPbmClient
         await this.inner.PbmUpdateAsync(req);
     }
 }
+
+#pragma warning restore IDE0058 // Expression value is never used

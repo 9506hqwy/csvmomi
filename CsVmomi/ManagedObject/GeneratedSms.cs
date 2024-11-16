@@ -2,7 +2,7 @@
 
 using SmsService;
 
-#pragma warning disable SA1402 // File may only contain a single type
+#pragma warning disable IDE0058 // Expression value is never used
 
 public partial class SmsProvider : ManagedObject
 {
@@ -215,4 +215,4 @@ public partial class VasaProvider : SmsProvider
     }
 }
 
-#pragma warning restore SA1402 // File may only contain a single type
+#pragma warning restore IDE0058 // Expression value is never used

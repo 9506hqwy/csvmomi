@@ -207,8 +207,10 @@ public class Session
 
     public void SetEamClient()
     {
-        var builder = new UriBuilder(this.VimClient.Uri);
-        builder.Path = "eam/sdk";
+        var builder = new UriBuilder(this.VimClient.Uri)
+        {
+            Path = "eam/sdk"
+        };
 
         var binding = Session.GetBinding();
 
@@ -245,8 +247,10 @@ public class Session
 
     public System.Threading.Tasks.Task SetPbmClient()
     {
-        var builder = new UriBuilder(this.VimClient.Uri);
-        builder.Path = "pbm";
+        var builder = new UriBuilder(this.VimClient.Uri)
+        {
+            Path = "pbm"
+        };
 
         var binding = Session.GetBinding();
 
@@ -283,8 +287,10 @@ public class Session
 
     public void SetSmsClient()
     {
-        var builder = new UriBuilder(this.VimClient.Uri);
-        builder.Path = "sms/sdk";
+        var builder = new UriBuilder(this.VimClient.Uri)
+        {
+            Path = "sms/sdk"
+        };
 
         var binding = Session.GetBinding();
 
@@ -321,8 +327,10 @@ public class Session
 
     public void SetStsClient(string username, string password)
     {
-        var builder = new UriBuilder(this.VimClient.Uri);
-        builder.Path = "sts/STSService";
+        var builder = new UriBuilder(this.VimClient.Uri)
+        {
+            Path = "sts/STSService"
+        };
 
         var binding = Session.GetStsBinding();
 
@@ -352,8 +360,10 @@ public class Session
 
     public System.Threading.Tasks.Task SetVslmClient()
     {
-        var builder = new UriBuilder(this.VimClient.Uri);
-        builder.Path = "vslm/sdk";
+        var builder = new UriBuilder(this.VimClient.Uri)
+        {
+            Path = "vslm/sdk"
+        };
 
         var binding = Session.GetBinding();
 
@@ -396,7 +406,7 @@ public class Session
         var endpoint = new EndpointAddress(url);
 
         var inner = new VimPortTypeClient(binding, endpoint);
-        inner.ChannelFactory.Endpoint.EndpointBehaviors.Remove(typeof(ClientCredentials));
+        var _ = inner.ChannelFactory.Endpoint.EndpointBehaviors.Remove(typeof(ClientCredentials));
         inner.ChannelFactory.Endpoint.EndpointBehaviors.Add(new TokenClientCredentials(token));
         inner.ChannelFactory.Credentials.ServiceCertificate.SslCertificateAuthentication = new X509ServiceCertificateAuthentication
         {
@@ -458,11 +468,8 @@ public class Session
         // https://learn.microsoft.com/ja-jp/dotnet/framework/wcf/extending/how-to-customize-a-system-provided-binding
         var customBinding = new CustomBinding(binding);
         var security = customBinding.Elements.OfType<SecurityBindingElement>().FirstOrDefault();
-        if (security != null)
-        {
-            // security.EnableUnsecuredResponse = true;
-            security.GetType().GetProperty("EnableUnsecuredResponse").SetValue(security, true);
-        }
+        // security.EnableUnsecuredResponse = true;
+        security?.GetType().GetProperty("EnableUnsecuredResponse").SetValue(security, true);
 
         return customBinding;
     }

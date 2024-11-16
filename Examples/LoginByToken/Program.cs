@@ -9,7 +9,7 @@ catch (Exception e)
     await Console.Error.WriteLineAsync(string.Format("{0}", e));
 }
 
-async System.Threading.Tasks.Task Work(string[] args)
+static async System.Threading.Tasks.Task Work(string[] args)
 {
     if (args.Length != 3)
     {
@@ -31,7 +31,7 @@ async System.Threading.Tasks.Task Work(string[] args)
     session.SetStsClient(args[1], args[2]);
     var token = await Sso.GetBearerToken(session, duration);
 
-    await Sso.LoginByToken(session, token.RequestedSecurityToken, duration);
+    _ = await Sso.LoginByToken(session, token.RequestedSecurityToken, duration);
     try
     {
         await foreach (var vm in session.RootFolder.Enumerate<VirtualMachine>())

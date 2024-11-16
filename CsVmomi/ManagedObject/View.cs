@@ -26,7 +26,7 @@ public partial class View : ManagedObject, IAsyncDisposable, IDisposable
         }
     }
 
-    protected async virtual ValueTask DisposeAsyncCore()
+    protected virtual async ValueTask DisposeAsyncCore()
     {
         if (!this.disposed)
         {

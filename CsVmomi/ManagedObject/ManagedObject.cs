@@ -310,22 +310,15 @@ public abstract class ManagedObject
     private static T? Create<T>(object? reference, string? objType, Session session)
         where T : ManagedObject
     {
-        if (reference == null || objType == null)
-        {
-            return null;
-        }
-
-        if (ManagedObject.ManagedObjectTypes.TryGetValue(objType, out Type type) &&
-            typeof(T).IsAssignableFrom(type))
-        {
-            return (T)Activator.CreateInstance(
+        return reference == null || objType == null
+            ? null
+            : ManagedObject.ManagedObjectTypes.TryGetValue(objType, out Type type) && typeof(T).IsAssignableFrom(type)
+            ? (T)Activator.CreateInstance(
                 type,
                 BindingFlags.Instance | BindingFlags.NonPublic,
                 null,
-                new object[] { reference, session },
-                null);
-        }
-
-        throw new NotSupportedException();
+                [reference, session],
+                null)
+            : throw new NotSupportedException();
     }
 }

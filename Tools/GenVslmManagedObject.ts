@@ -251,7 +251,7 @@ console.log(`namespace CsVmomi;
 
 using VslmService;
 
-#pragma warning disable SA1402 // File may only contain a single type`);
+#pragma warning disable IDE0058 // Expression value is never used`);
 for (const obj of objs) {
   if (!obj.name.startsWith('Vslm')) {
     continue;
@@ -260,4 +260,4 @@ for (const obj of objs) {
   writeManagedObject(obj);
 }
 console.log(`
-#pragma warning restore SA1402 // File may only contain a single type`);
+#pragma warning restore IDE0058 // Expression value is never used`);

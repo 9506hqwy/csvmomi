@@ -1,7 +1,6 @@
 ﻿namespace CsVmomi.Test;
 
 using System.ServiceModel;
-using System.Text;
 
 [TestClass]
 public class FixupTest

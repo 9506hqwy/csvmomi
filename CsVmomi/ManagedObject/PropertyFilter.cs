@@ -26,7 +26,7 @@ public partial class PropertyFilter : ManagedObject, IAsyncDisposable, IDisposab
         }
     }
 
-    protected async virtual ValueTask DisposeAsyncCore()
+    protected virtual async ValueTask DisposeAsyncCore()
     {
         if (!this.disposed)
         {

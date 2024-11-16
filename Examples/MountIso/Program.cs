@@ -10,7 +10,7 @@ catch (Exception e)
     await Console.Error.WriteLineAsync(string.Format("{0}", e));
 }
 
-async System.Threading.Tasks.Task Work(string[] args)
+static async System.Threading.Tasks.Task Work(string[] args)
 {
     if (args.Length != 5)
     {
@@ -26,22 +26,12 @@ async System.Threading.Tasks.Task Work(string[] args)
 
     var session = await Session.Get(url);
     session.MessageToolBox.Fixup = Fixup.FixupNamespaceNotPreserve();
-    await session.SessionManager!.Login(args[1], args[2]);
+    _ = await session.SessionManager!.Login(args[1], args[2]);
     try
     {
-        var vm = await session.RootFolder.FindByName<VirtualMachine>(args[3]);
-        if (vm == null)
-        {
-            throw new Exception($"Not found virtual machine `{args[3]}`.");
-        }
-
+        var vm = await session.RootFolder.FindByName<VirtualMachine>(args[3]) ?? throw new Exception($"Not found virtual machine `{args[3]}`.");
         var devices = await vm.GetProperty<VirtualDevice[]>("config.hardware.device");
-        var cdrom = devices!.OfType<VirtualCdrom>().FirstOrDefault();
-        if (cdrom == null)
-        {
-            throw new Exception($"Not found CD/DVD drive `{args[3]}`.");
-        }
-
+        var cdrom = devices!.OfType<VirtualCdrom>().FirstOrDefault() ?? throw new Exception($"Not found CD/DVD drive `{args[3]}`.");
         cdrom.backing = new VirtualCdromIsoBackingInfo
         {
             fileName = args[4],

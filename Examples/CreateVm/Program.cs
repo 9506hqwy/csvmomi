@@ -28,15 +28,10 @@ async System.Threading.Tasks.Task Work(string[] args)
 
     var session = await Session.Get(url);
     session.MessageToolBox.Fixup = Fixup.FixupNamespaceNotPreserve();
-    await session.SessionManager!.Login(args[1], args[2]);
+    _ = await session.SessionManager!.Login(args[1], args[2]);
     try
     {
-        var host = await session.RootFolder.FindByName<HostSystem>(args[3]);
-        if (host == null)
-        {
-            throw new Exception($"Not found ESXi `{args[3]}`.");
-        }
-
+        var host = await session.RootFolder.FindByName<HostSystem>(args[3]) ?? throw new Exception($"Not found ESXi `{args[3]}`.");
         var vmName = args[4];
 
         var clusterResource = (await host.GetPropertyParent()) as ComputeResource;
@@ -45,22 +40,12 @@ async System.Threading.Tasks.Task Work(string[] args)
         var envBrowser = await clusterResource!.GetPropertyEnvironmentBrowser();
         var configDescriptor = (await envBrowser!.QueryConfigOptionDescriptor())!.First(d => d.defaultConfigOption);
         var configOption = await envBrowser.QueryConfigOption(configDescriptor.key, null);
-        var osDescriptor = configOption!.guestOSDescriptor.FirstOrDefault(d => d.id == args[5]);
-        if (osDescriptor == null)
-        {
-            throw new Exception($"Not found Guest OS `{args[5]}`.");
-        }
-
+        var osDescriptor = configOption!.guestOSDescriptor.FirstOrDefault(d => d.id == args[5]) ?? throw new Exception($"Not found Guest OS `{args[5]}`.");
         var datastore = args.Length switch
         {
             int n when n < 7 => await host.FindFirst<Datastore>(),
             _ => await host.FindByName<Datastore>(args[6]),
-        };
-        if (datastore == null)
-        {
-            throw new Exception($"Not found datastore.");
-        }
-
+        } ?? throw new Exception($"Not found datastore.");
         await CreateVm(resoucePool!, host, vmName, datastore, osDescriptor);
 
         await Console.Out.WriteLineAsync("Success.");
@@ -99,7 +84,7 @@ async System.Threading.Tasks.Task CreateVm(
 
     var spec = new VirtualMachineConfigSpec
     {
-        deviceChange = devices.ToArray(),
+        deviceChange = [.. devices],
         files = new VirtualMachineFileInfo
         {
             vmPathName = $"[{dsName}] {vmName}/{vmName}.vmx",

@@ -120,6 +120,8 @@ console.log(`namespace CsVmomi;
 using System.ServiceModel.Channels;
 using SmsService;
 
+#pragma warning disable IDE0058 // Expression value is never used
+
 public class SmsClient : ISmsClient
 {
     private readonly SmsPortTypeClient inner;
@@ -170,4 +172,6 @@ for (const ref of methods) {
   writeManagedObjectMethod(method);
 }
 console.log(`
-}`);
+}
+
+#pragma warning restore IDE0058 // Expression value is never used`);

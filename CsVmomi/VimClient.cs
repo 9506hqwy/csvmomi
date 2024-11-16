@@ -2,6 +2,8 @@
 
 using System.ServiceModel.Channels;
 
+#pragma warning disable IDE0058 // Expression value is never used
+
 public class VimClient : IVimClient
 {
     private readonly VimPortTypeClient inner;
@@ -12240,3 +12242,5 @@ public class VimClient : IVimClient
         return res.ZeroFillVirtualDisk_TaskResponse.returnval;
     }
 }
+
+#pragma warning restore IDE0058 // Expression value is never used

@@ -10,7 +10,7 @@ catch (Exception e)
     await Console.Error.WriteLineAsync(string.Format("{0}", e));
 }
 
-async System.Threading.Tasks.Task Work(string[] args)
+static async System.Threading.Tasks.Task Work(string[] args)
 {
     if (args.Length != 3)
     {
@@ -26,7 +26,7 @@ async System.Threading.Tasks.Task Work(string[] args)
 
     var session = await Session.Get(url);
     session.MessageToolBox.Fixup = Fixup.FixupNamespaceNotPreserve();
-    await session.SessionManager!.Login(args[1], args[2]);
+    _ = await session.SessionManager!.Login(args[1], args[2]);
     try
     {
         await foreach (var datastore in session.RootFolder.Enumerate<Datastore>())
@@ -50,8 +50,7 @@ async System.Threading.Tasks.Task Work(string[] args)
                 throw new Exception(error!.localizedMessage);
             }
 
-            var results = (await task.GetPropertyInfo()).result as HostDatastoreBrowserSearchResults[];
-            if (results == null)
+            if ((await task.GetPropertyInfo()).result is not HostDatastoreBrowserSearchResults[] results)
             {
                 continue;
             }

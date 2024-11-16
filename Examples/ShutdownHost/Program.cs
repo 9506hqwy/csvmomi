@@ -33,15 +33,10 @@ internal class ShutdownHost
 
         var session = await Session.Get(url);
         session.MessageToolBox.Fixup = Fixup.FixupNamespaceNotPreserve();
-        await session.SessionManager!.Login(args[1], args[2]);
+        _ = await session.SessionManager!.Login(args[1], args[2]);
         try
         {
-            var host = await session.RootFolder.FindByName<HostSystem>(args[3]);
-            if (host == null)
-            {
-                throw new Exception($"Not found ESXi `{args[3]}`.");
-            }
-
+            var host = await session.RootFolder.FindByName<HostSystem>(args[3]) ?? throw new Exception($"Not found ESXi `{args[3]}`.");
             var task = await host.ShutdownHost_Task(true);
             var state = await task!.WaitForCompleted(TimeSpan.FromSeconds(300));
             if (state == TaskInfoState.error)

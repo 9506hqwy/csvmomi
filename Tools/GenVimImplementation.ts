@@ -119,6 +119,8 @@ console.log(`namespace CsVmomi;
 
 using System.ServiceModel.Channels;
 
+#pragma warning disable IDE0058 // Expression value is never used
+
 public class VimClient : IVimClient
 {
     private readonly VimPortTypeClient inner;
@@ -165,4 +167,6 @@ for (const ref of methods) {
   writeManagedObjectMethod(method);
 }
 console.log(`
-}`);
+}
+
+#pragma warning restore IDE0058 // Expression value is never used`);

@@ -26,7 +26,7 @@ async System.Threading.Tasks.Task Work(string[] args)
 
     var session = await Session.Get(url);
     session.MessageToolBox.Fixup = Fixup.FixupNamespaceNotPreserve();
-    await session.SessionManager!.Login(args[1], args[2]);
+    _ = await session.SessionManager!.Login(args[1], args[2]);
     try
     {
         var events = new Queue<Event>();
@@ -38,8 +38,8 @@ async System.Threading.Tasks.Task Work(string[] args)
                 Event[]? evts = null;
                 lock (events)
                 {
-                    Monitor.Wait(events);
-                    evts = events.ToArray();
+                    _ = Monitor.Wait(events);
+                    evts = [.. events];
                     events.Clear();
                 }
 
@@ -60,7 +60,7 @@ async System.Threading.Tasks.Task Work(string[] args)
         await collector!.ResetCollector();
 
         await using var prop = await session.PropertyCollector.CreatePropertyCollector();
-        await prop!.CreateFilter(session.EventManager, "latestEvent", false);
+        _ = await prop!.CreateFilter(session.EventManager, "latestEvent", false);
 
         var version = string.Empty;
         var options = new WaitOptions

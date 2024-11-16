@@ -47,7 +47,7 @@ internal class PropertyFilterHelper
         var resourcePool = this.InitSpec(typeof(ComputeResource), "resourcePool");
         this.SetSelectSet(resourcePool, this.CreateResourcePoolLower);
 
-        return new[] { datastore, host, network, resourcePool };
+        return [datastore, host, network, resourcePool];
     }
 
     private SelectionSpec[] CreateDatacenterLower()
@@ -64,17 +64,17 @@ internal class PropertyFilterHelper
         var vmFolder = this.InitSpec(typeof(Datacenter), "vmFolder");
         this.SetSelectSet(vmFolder, this.CreateFolderLower);
 
-        return new[] { datastoreFolder, hostFolder, networkFolder, vmFolder };
+        return [datastoreFolder, hostFolder, networkFolder, vmFolder];
     }
 
     private SelectionSpec[] CreateDatastoreLower()
     {
-        return new[] { this.InitSpec(typeof(Datastore), "vm") };
+        return [this.InitSpec(typeof(Datastore), "vm")];
     }
 
     private SelectionSpec[] CreateDatastoreUpper()
     {
-        return new[] { this.InitSpec(typeof(Datastore), "host") };
+        return [this.InitSpec(typeof(Datastore), "host")];
     }
 
     private SelectionSpec[] CreateDistributedVirtualSwitchLower()
@@ -82,7 +82,7 @@ internal class PropertyFilterHelper
         var portgroup = this.InitSpec(typeof(DistributedVirtualSwitch), "portgroup");
         this.SetSelectSet(portgroup, this.CreateNetworkLower);
 
-        return new[] { portgroup };
+        return [portgroup];
     }
 
     private SelectionSpec[] CreateFolderLower()
@@ -98,7 +98,7 @@ internal class PropertyFilterHelper
         var folder = this.InitSpec(typeof(Folder), "childEntity");
         this.SetSelectSet(folder, selectSet);
 
-        return new[] { folder };
+        return [folder];
     }
 
     private SelectionSpec[] CreateHostSystemLower()
@@ -111,7 +111,7 @@ internal class PropertyFilterHelper
 
         var vm = this.InitSpec(typeof(HostSystem), "vm");
 
-        return new[] { datastore, network, vm };
+        return [datastore, network, vm];
     }
 
     private SelectionSpec[] CreateManagedEntityUpper()
@@ -119,12 +119,12 @@ internal class PropertyFilterHelper
         var parent = this.InitSpec(typeof(ManagedEntity), "parent");
         this.SetSelectSet(parent, this.CreateManagedEntityUpper);
 
-        return new[] { parent };
+        return [parent];
     }
 
     private SelectionSpec[] CreateNetworkLower()
     {
-        return new[] { this.InitSpec(typeof(Network), "vm") };
+        return [this.InitSpec(typeof(Network), "vm")];
     }
 
     private SelectionSpec[] CreateNetworkUpper()
@@ -133,7 +133,7 @@ internal class PropertyFilterHelper
 
         var sw = this.InitSpec(typeof(DistributedVirtualPortgroup), "config.distributedVirtualSwitch");
 
-        return new[] { host, sw };
+        return [host, sw];
     }
 
     private SelectionSpec[] CreateResourcePoolLower()
@@ -143,7 +143,7 @@ internal class PropertyFilterHelper
 
         var vm = this.InitSpec(typeof(ResourcePool), "vm");
 
-        return new[] { resourcePool, vm };
+        return [resourcePool, vm];
     }
 
     private SelectionSpec[] CreateVirtualMachineUpper()
@@ -160,7 +160,7 @@ internal class PropertyFilterHelper
 
         var host = this.InitSpec(typeof(VirtualMachine), "runtime.host");
 
-        return new[] { datastore, network, parentVApp, resourcePool, host };
+        return [datastore, network, parentVApp, resourcePool, host];
     }
 
     private SelectionSpec InitSelection(string name)
@@ -199,14 +199,14 @@ internal class PropertyFilterHelper
     {
         return source switch
         {
-            ComputeResource _ => this.CreateComputeResourceLower(),
-            Datacenter _ => this.CreateDatacenterLower(),
-            Datastore _ => this.CreateDatastoreLower(),
-            DistributedVirtualSwitch _ => this.CreateDistributedVirtualSwitchLower(),
-            Folder _ => this.CreateFolderLower(),
-            HostSystem _ => this.CreateHostSystemLower(),
-            Network _ => this.CreateNetworkLower(),
-            ResourcePool _ => this.CreateResourcePoolLower(),
+            ComputeResource => this.CreateComputeResourceLower(),
+            Datacenter => this.CreateDatacenterLower(),
+            Datastore => this.CreateDatastoreLower(),
+            DistributedVirtualSwitch => this.CreateDistributedVirtualSwitchLower(),
+            Folder => this.CreateFolderLower(),
+            HostSystem => this.CreateHostSystemLower(),
+            Network => this.CreateNetworkLower(),
+            ResourcePool => this.CreateResourcePoolLower(),
             _ => throw new NotSupportedException(),
         };
     }
@@ -218,15 +218,15 @@ internal class PropertyFilterHelper
 
         return source switch
         {
-            ComputeResource _ => entity,
-            Datacenter _ => entity,
-            Datastore _ => entity.Concat(this.CreateDatastoreUpper()).ToArray(),
-            DistributedVirtualSwitch _ => entity,
-            Folder _ => entity,
-            HostSystem _ => entity,
-            Network _ => entity.Concat(this.CreateNetworkUpper()).ToArray(),
-            ResourcePool _ => entity,
-            VirtualMachine _ => entity.Concat(this.CreateVirtualMachineUpper()).ToArray(),
+            ComputeResource => entity,
+            Datacenter => entity,
+            Datastore => [.. entity, .. this.CreateDatastoreUpper()],
+            DistributedVirtualSwitch => entity,
+            Folder => entity,
+            HostSystem => entity,
+            Network => [.. entity, .. this.CreateNetworkUpper()],
+            ResourcePool => entity,
+            VirtualMachine => [.. entity, .. this.CreateVirtualMachineUpper()],
             _ => throw new NotSupportedException(),
         };
     }

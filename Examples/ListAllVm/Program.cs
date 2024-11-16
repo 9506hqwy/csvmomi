@@ -33,19 +33,19 @@ internal class ListAllVm
 
         var session = await Session.Get(url);
         session.MessageToolBox.Fixup = Fixup.FixupNamespaceNotPreserve();
-        await session.SessionManager!.Login(args[1], args[2]);
+        _ = await session.SessionManager!.Login(args[1], args[2]);
         try
         {
             await foreach (var vm in session.RootFolder.Enumerate<VirtualMachine>())
             {
                 var (name, summary) = await vm.GetProperty<string, VirtualMachineSummary>("name", "summary");
 
-                await Console.Out.WriteLineAsync(String.Format("Name          : {0}", name));
-                await Console.Out.WriteLineAsync(String.Format("Template      : {0}", summary!.config.template));
-                await Console.Out.WriteLineAsync(String.Format("Path          : {0}", summary.config.vmPathName));
-                await Console.Out.WriteLineAsync(String.Format("Guest         : {0}", summary.config.guestFullName));
-                await Console.Out.WriteLineAsync(String.Format("Instance UUID : {0}", summary.config.instanceUuid));
-                await Console.Out.WriteLineAsync(String.Format("BIOS UUID     : {0}", summary.config.uuid));
+                await Console.Out.WriteLineAsync(string.Format("Name          : {0}", name));
+                await Console.Out.WriteLineAsync(string.Format("Template      : {0}", summary!.config.template));
+                await Console.Out.WriteLineAsync(string.Format("Path          : {0}", summary.config.vmPathName));
+                await Console.Out.WriteLineAsync(string.Format("Guest         : {0}", summary.config.guestFullName));
+                await Console.Out.WriteLineAsync(string.Format("Instance UUID : {0}", summary.config.instanceUuid));
+                await Console.Out.WriteLineAsync(string.Format("BIOS UUID     : {0}", summary.config.uuid));
                 await Console.Out.WriteLineAsync();
             }
         }

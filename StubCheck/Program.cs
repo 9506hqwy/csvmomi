@@ -104,7 +104,7 @@ void CheckMethodReturn(MethodInfo operation, MethodInfo wrapper)
 
     var r = operationTypes.First().GetFields().Single();
     var members = r.FieldType.GetMembers()
-        .Where(m => m.MemberType == MemberTypes.Field || m.MemberType == MemberTypes.Property)
+        .Where(m => m.MemberType is MemberTypes.Field or MemberTypes.Property)
         .ToArray();
     if (members.Length != 0)
     {

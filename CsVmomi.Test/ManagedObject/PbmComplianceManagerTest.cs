@@ -70,7 +70,7 @@ public class PbmComplianceManagerTest
             result.Add(vm);
         }
 
-        return result.ToArray();
+        return [.. result];
     }
 
     private async System.Threading.Tasks.Task<PbmService.PbmServerObjectRef[]> GetAllVmEntities()

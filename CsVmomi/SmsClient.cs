@@ -3,6 +3,8 @@
 using System.ServiceModel.Channels;
 using SmsService;
 
+#pragma warning disable IDE0058 // Expression value is never used
+
 public class SmsClient : ISmsClient
 {
     private readonly SmsPortTypeClient inner;
@@ -430,3 +432,5 @@ public class SmsClient : ISmsClient
         return res.VasaProviderSync_TaskResponse.returnval;
     }
 }
+
+#pragma warning restore IDE0058 // Expression value is never used

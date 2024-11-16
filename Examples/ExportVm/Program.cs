@@ -26,15 +26,10 @@ async System.Threading.Tasks.Task Work(string[] args)
 
     var session = await Session.Get(url);
     session.MessageToolBox.Fixup = Fixup.FixupNamespaceNotPreserve();
-    await session.SessionManager!.Login(args[1], args[2]);
+    _ = await session.SessionManager!.Login(args[1], args[2]);
     try
     {
-        var vm = await session.RootFolder.FindByName<VirtualMachine>(args[3]);
-        if (vm == null)
-        {
-            throw new Exception($"Not found virtual machine `{args[3]}`.");
-        }
-
+        var vm = await session.RootFolder.FindByName<VirtualMachine>(args[3]) ?? throw new Exception($"Not found virtual machine `{args[3]}`.");
         var vmName = await vm.GetPropertyName();
 
         var nfc = await vm.ExportVm();
@@ -54,7 +49,7 @@ async System.Threading.Tasks.Task Work(string[] args)
                 var fileName = fileUrl.AbsolutePath.Split('/').Last();
 
                 var res = await http.GetAsync(fileUrl);
-                res.EnsureSuccessStatusCode();
+                _ = res.EnsureSuccessStatusCode();
 
                 await res.Content.CopyToAsync(File.Create(fileName));
                 map.Add(deviceUrl.key, fileName);
@@ -84,7 +79,7 @@ async System.Threading.Tasks.Task Work(string[] args)
             var cdp = new OvfCreateDescriptorParams
             {
                 exportOption = options!.Select(o => o.option).ToArray(),
-                ovfFiles = ovfFiles.ToArray(),
+                ovfFiles = [.. ovfFiles],
             };
             var ovf = await session.OvfManager!.CreateDescriptor(vm, cdp);
 

@@ -3,6 +3,8 @@
 using System.ServiceModel.Channels;
 using EamService;
 
+#pragma warning disable IDE0058 // Expression value is never used
+
 public class EamClient : IEamClient
 {
     private readonly EamPortTypeClient inner;
@@ -306,3 +308,5 @@ public class EamClient : IEamClient
         await this.inner.UpdateAsync(req);
     }
 }
+
+#pragma warning restore IDE0058 // Expression value is never used

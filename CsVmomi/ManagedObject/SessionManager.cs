@@ -20,10 +20,7 @@ public partial class SessionManager : ManagedObject
     {
         var supported = await this.GetPropertySupportedLocaleList();
         var locale = supported?.FirstOrDefault(this.IsCurrentLocaleName);
-        if (locale == null)
-        {
-            locale = supported?.FirstOrDefault(this.IsCurrentLocaleTwoLetter);
-        }
+        locale ??= supported?.FirstOrDefault(this.IsCurrentLocaleTwoLetter);
 
         return locale;
     }

@@ -26,27 +26,17 @@ async System.Threading.Tasks.Task Work(string[] args)
 
     var session = await Session.Get(url);
     session.MessageToolBox.Fixup = Fixup.FixupNamespaceNotPreserve();
-    await session.SessionManager!.Login(args[1], args[2]);
+    _ = await session.SessionManager!.Login(args[1], args[2]);
     try
     {
-        var vm = await session.RootFolder.FindByName<VirtualMachine>(args[3]);
-        if (vm == null)
-        {
-            throw new Exception($"Not found virtual machine `{args[3]}`.");
-        }
-
+        var vm = await session.RootFolder.FindByName<VirtualMachine>(args[3]) ?? throw new Exception($"Not found virtual machine `{args[3]}`.");
         var host = await vm.FindFirstUpper<HostSystem>();
 
         var network = args.Length switch
         {
             int n when n < 5 => await host!.FindFirst<Network>(),
             _ => await host!.FindByName<Network>(args[4]),
-        };
-        if (network == null)
-        {
-            throw new Exception($"Not found network.");
-        }
-
+        } ?? throw new Exception($"Not found network.");
         var guestId = await vm.GetProperty<string>("config.guestId");
 
         var hwVersion = await vm.GetProperty<string>("config.version");

@@ -26,15 +26,10 @@ async System.Threading.Tasks.Task Work(string[] args)
 
     var session = await Session.Get(url);
     session.MessageToolBox.Fixup = Fixup.FixupNamespaceNotPreserve();
-    await session.SessionManager!.Login(args[1], args[2]);
+    _ = await session.SessionManager!.Login(args[1], args[2]);
     try
     {
-        var vm = await session.RootFolder.FindByName<VirtualMachine>(args[3]);
-        if (vm == null)
-        {
-            throw new Exception($"Not found virtual machine `{args[3]}`.");
-        }
-
+        var vm = await session.RootFolder.FindByName<VirtualMachine>(args[3]) ?? throw new Exception($"Not found virtual machine `{args[3]}`.");
         var vmName = await vm.GetPropertyName();
 
         if (!int.TryParse(args[4], out var size) || size < 1)
@@ -47,12 +42,7 @@ async System.Threading.Tasks.Task Work(string[] args)
         {
             int n when n < 6 => await host!.FindFirst<Datastore>(),
             _ => await host!.FindByName<Datastore>(args[5]),
-        };
-        if (datastore == null)
-        {
-            throw new Exception($"Not found datastore.");
-        }
-
+        } ?? throw new Exception($"Not found datastore.");
         var datastoreName = await datastore.GetPropertyName();
 
         (var guestId, var hwVersion, var devices) =
@@ -121,7 +111,7 @@ async System.Threading.Tasks.Task Work(string[] args)
 
         var spec = new VirtualMachineConfigSpec
         {
-            deviceChange = deviceChange.ToArray(),
+            deviceChange = [.. deviceChange],
         };
 
         var task = await vm.ReconfigVM_Task(spec);

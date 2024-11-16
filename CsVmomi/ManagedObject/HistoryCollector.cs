@@ -26,7 +26,7 @@ public partial class HistoryCollector : ManagedObject, IAsyncDisposable, IDispos
         }
     }
 
-    protected async virtual ValueTask DisposeAsyncCore()
+    protected virtual async ValueTask DisposeAsyncCore()
     {
         if (!this.disposed)
         {

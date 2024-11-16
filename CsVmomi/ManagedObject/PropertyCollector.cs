@@ -78,7 +78,7 @@ public partial class PropertyCollector : ManagedObject, IAsyncDisposable, IDispo
 
     public async Task<ObjectContent[]?> RetrieveProperties(PropertyFilterSpec specSet)
     {
-        return await this.RetrieveProperties(new[] { specSet });
+        return await this.RetrieveProperties([specSet]);
     }
 
     public async Task<RetrieveResult?> RetrievePropertiesEx(
@@ -93,7 +93,7 @@ public partial class PropertyCollector : ManagedObject, IAsyncDisposable, IDispo
 
     public async Task<RetrieveResult?> RetrievePropertiesEx(PropertyFilterSpec specSet, RetrieveOptions options)
     {
-        return await this.RetrievePropertiesEx(new[] { specSet }, options);
+        return await this.RetrievePropertiesEx([specSet], options);
     }
 
     internal IAsyncEnumerable<T> Enumerate<T>(
@@ -112,7 +112,7 @@ public partial class PropertyCollector : ManagedObject, IAsyncDisposable, IDispo
         PropertyFilterSpec specSet, RetrieveOptions options, Func<ObjectContent, bool>? condition = null)
         where T : ManagedObject
     {
-        return this.Enumerate<T>(new[] { specSet }, options, condition);
+        return this.Enumerate<T>([specSet], options, condition);
     }
 
     internal async IAsyncEnumerable<T> Enumerate<T>(
@@ -168,7 +168,7 @@ public partial class PropertyCollector : ManagedObject, IAsyncDisposable, IDispo
         }
     }
 
-    protected async virtual ValueTask DisposeAsyncCore()
+    protected virtual async ValueTask DisposeAsyncCore()
     {
         if (!this.disposed)
         {
@@ -181,7 +181,7 @@ public partial class PropertyCollector : ManagedObject, IAsyncDisposable, IDispo
         ManagedObject obj,
         string pathSet)
     {
-        return this.CreatePropertyFilterSpec(obj, false, new[] { pathSet }, false);
+        return this.CreatePropertyFilterSpec(obj, false, [pathSet], false);
     }
 
     private PropertyFilterSpec CreatePropertyFilterSpec(
@@ -216,8 +216,8 @@ public partial class PropertyCollector : ManagedObject, IAsyncDisposable, IDispo
     {
         return new PropertyFilterSpec
         {
-            objectSet = new[] { objectSet },
-            propSet = new[] { propSet },
+            objectSet = [objectSet],
+            propSet = [propSet],
             reportMissingObjectsInResults = reportMissingObjectsInResults,
             reportMissingObjectsInResultsSpecified = true,
         };
