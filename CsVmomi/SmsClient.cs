@@ -431,6 +431,7 @@ public class SmsClient : ISmsClient
 
         return res.VasaProviderSync_TaskResponse.returnval;
     }
+
 }
 
 #pragma warning restore IDE0058 // Expression value is never used

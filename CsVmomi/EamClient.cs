@@ -307,6 +307,7 @@ public class EamClient : IEamClient
 
         await this.inner.UpdateAsync(req);
     }
+
 }
 
 #pragma warning restore IDE0058 // Expression value is never used

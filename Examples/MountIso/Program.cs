@@ -51,7 +51,7 @@ static async System.Threading.Tasks.Task Work(string[] args)
 
         var spec = new VirtualMachineConfigSpec
         {
-            deviceChange = new[] { change },
+            deviceChange = [change],
         };
 
         var task = await vm.ReconfigVM_Task(spec);

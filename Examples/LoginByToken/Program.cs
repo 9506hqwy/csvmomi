@@ -31,7 +31,7 @@ static async System.Threading.Tasks.Task Work(string[] args)
     session.SetStsClient(args[1], args[2]);
     var token = await Sso.GetBearerToken(session, duration);
 
-    _ = await Sso.LoginByToken(session, token.RequestedSecurityToken, duration);
+    _ = await Sso.LoginByToken(session, token.Items.OfType<System.Xml.XmlElement>().First(), duration);
     try
     {
         await foreach (var vm in session.RootFolder.Enumerate<VirtualMachine>())

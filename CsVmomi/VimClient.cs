@@ -1349,13 +1349,14 @@ public class VimClient : IVimClient
         return res.CloseInventoryViewFolderResponse1;
     }
 
-    public async System.Threading.Tasks.Task<ClusterEnterMaintenanceResult?> ClusterEnterMaintenanceMode(ManagedObjectReference self, ManagedObjectReference[] host, OptionValue[]? option)
+    public async System.Threading.Tasks.Task<ClusterEnterMaintenanceResult?> ClusterEnterMaintenanceMode(ManagedObjectReference self, ManagedObjectReference[] host, OptionValue[]? option, ClusterComputeResourceMaintenanceInfo? info)
     {
         var req = new ClusterEnterMaintenanceModeRequestType
         {
             _this = self,
             host = host,
             option = option,
+            info = info,
         };
 
         var res = await this.inner.ClusterEnterMaintenanceModeAsync(req);
@@ -1733,6 +1734,20 @@ public class VimClient : IVimClient
         var res = await this.inner.CreateCollectorForTasksAsync(req);
 
         return res.CreateCollectorForTasksResponse.returnval;
+    }
+
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateCollectorWithInfoFilterForTasks(ManagedObjectReference self, TaskFilterSpec filter, TaskInfoFilterSpec? infoFilter)
+    {
+        var req = new CreateCollectorWithInfoFilterForTasksRequestType
+        {
+            _this = self,
+            filter = filter,
+            infoFilter = infoFilter,
+        };
+
+        var res = await this.inner.CreateCollectorWithInfoFilterForTasksAsync(req);
+
+        return res.CreateCollectorWithInfoFilterForTasksResponse.returnval;
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateContainerView(ManagedObjectReference self, ManagedObjectReference container, string[]? type, bool recursive)
@@ -3036,6 +3051,69 @@ public class VimClient : IVimClient
         await this.inner.DetachTagFromVStorageObjectAsync(req);
     }
 
+    public async System.Threading.Tasks.Task<string?> DirectPathProfileManagerCreate(ManagedObjectReference self, DirectPathProfileManagerCreateSpec spec)
+    {
+        var req = new DirectPathProfileManagerCreateRequestType
+        {
+            _this = self,
+            spec = spec,
+        };
+
+        var res = await this.inner.DirectPathProfileManagerCreateAsync(req);
+
+        return res.DirectPathProfileManagerCreateResponse.returnval;
+    }
+
+    public async System.Threading.Tasks.Task DirectPathProfileManagerDelete(ManagedObjectReference self, string id)
+    {
+        var req = new DirectPathProfileManagerDeleteRequestType
+        {
+            _this = self,
+            id = id,
+        };
+
+        await this.inner.DirectPathProfileManagerDeleteAsync(req);
+    }
+
+    public async System.Threading.Tasks.Task<DirectPathProfileInfo[]?> DirectPathProfileManagerList(ManagedObjectReference self, DirectPathProfileManagerFilterSpec filterSpec)
+    {
+        var req = new DirectPathProfileManagerListRequestType
+        {
+            _this = self,
+            filterSpec = filterSpec,
+        };
+
+        var res = await this.inner.DirectPathProfileManagerListAsync(req);
+
+        return res.DirectPathProfileManagerListResponse1;
+    }
+
+    public async System.Threading.Tasks.Task<DirectPathProfileManagerCapacityResult[]?> DirectPathProfileManagerQueryCapacity(ManagedObjectReference self, DirectPathProfileManagerTargetEntity target, DirectPathProfileManagerCapacityQuerySpec[]? querySpec)
+    {
+        var req = new DirectPathProfileManagerQueryCapacityRequestType
+        {
+            _this = self,
+            target = target,
+            querySpec = querySpec,
+        };
+
+        var res = await this.inner.DirectPathProfileManagerQueryCapacityAsync(req);
+
+        return res.DirectPathProfileManagerQueryCapacityResponse1;
+    }
+
+    public async System.Threading.Tasks.Task DirectPathProfileManagerUpdate(ManagedObjectReference self, string id, DirectPathProfileManagerUpdateSpec spec)
+    {
+        var req = new DirectPathProfileManagerUpdateRequestType
+        {
+            _this = self,
+            id = id,
+            spec = spec,
+        };
+
+        await this.inner.DirectPathProfileManagerUpdateAsync(req);
+    }
+
     public async System.Threading.Tasks.Task DisableAlarm(ManagedObjectReference self, ManagedObjectReference alarm, ManagedObjectReference entity)
     {
         var req = new DisableAlarmRequestType
@@ -3104,6 +3182,18 @@ public class VimClient : IVimClient
         };
 
         await this.inner.DisableMultipathPathAsync(req);
+    }
+
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> DisableNetworkBoot_Task(ManagedObjectReference self)
+    {
+        var req = new DisableNetworkBootRequestType
+        {
+            _this = self,
+        };
+
+        var res = await this.inner.DisableNetworkBoot_TaskAsync(req);
+
+        return res.DisableNetworkBoot_TaskResponse.returnval;
     }
 
     public async System.Threading.Tasks.Task DisableRuleset(ManagedObjectReference self, string id)
@@ -3445,6 +3535,19 @@ public class VimClient : IVimClient
         };
 
         await this.inner.EnableMultipathPathAsync(req);
+    }
+
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> EnableNetworkBoot_Task(ManagedObjectReference self, string networkBootMode)
+    {
+        var req = new EnableNetworkBootRequestType
+        {
+            _this = self,
+            networkBootMode = networkBootMode,
+        };
+
+        var res = await this.inner.EnableNetworkBoot_TaskAsync(req);
+
+        return res.EnableNetworkBoot_TaskResponse.returnval;
     }
 
     public async System.Threading.Tasks.Task EnableNetworkResourceManagement(ManagedObjectReference self, bool enable)
@@ -4163,13 +4266,14 @@ public class VimClient : IVimClient
         return res.GenerateHostProfileTaskList_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<CryptoKeyResult?> GenerateKey(ManagedObjectReference self, KeyProviderId? keyProvider, CryptoManagerKmipCustomAttributeSpec? spec)
+    public async System.Threading.Tasks.Task<CryptoKeyResult?> GenerateKey(ManagedObjectReference self, KeyProviderId? keyProvider, CryptoManagerKmipCustomAttributeSpec? spec, CryptoManagerKmipGenerateKeySpec? keySpec)
     {
         var req = new GenerateKeyRequestType
         {
             _this = self,
             keyProvider = keyProvider,
             spec = spec,
+            keySpec = keySpec,
         };
 
         var res = await this.inner.GenerateKeyAsync(req);
@@ -4621,12 +4725,27 @@ public class VimClient : IVimClient
         await this.inner.HostProfileResetValidationStateAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference?> HostReconcileDatastoreInventory_Task(ManagedObjectReference self, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task<string?> HostQueryVirtualDiskUuid(ManagedObjectReference self, string name)
+    {
+        var req = new HostQueryVirtualDiskUuidRequestType
+        {
+            _this = self,
+            name = name,
+        };
+
+        var res = await this.inner.HostQueryVirtualDiskUuidAsync(req);
+
+        return res.HostQueryVirtualDiskUuidResponse.returnval;
+    }
+
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> HostReconcileDatastoreInventory_Task(ManagedObjectReference self, ManagedObjectReference datastore, bool deepCleansing, bool deepCleansingSpecified)
     {
         var req = new HostReconcileDatastoreInventoryRequestType
         {
             _this = self,
             datastore = datastore,
+            deepCleansing = deepCleansing,
+            deepCleansingSpecified = deepCleansingSpecified,
         };
 
         var res = await this.inner.HostReconcileDatastoreInventory_TaskAsync(req);
@@ -4762,15 +4881,31 @@ public class VimClient : IVimClient
         return res.HostRetrieveVStorageObjectStateResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task HostScheduleReconcileDatastoreInventory(ManagedObjectReference self, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task HostScheduleReconcileDatastoreInventory(ManagedObjectReference self, ManagedObjectReference datastore, bool deepCleansing, bool deepCleansingSpecified)
     {
         var req = new HostScheduleReconcileDatastoreInventoryRequestType
         {
             _this = self,
             datastore = datastore,
+            deepCleansing = deepCleansing,
+            deepCleansingSpecified = deepCleansingSpecified,
         };
 
         await this.inner.HostScheduleReconcileDatastoreInventoryAsync(req);
+    }
+
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> HostSetVirtualDiskUuid_Task(ManagedObjectReference self, string name, string? uuid)
+    {
+        var req = new HostSetVirtualDiskUuidRequestType
+        {
+            _this = self,
+            name = name,
+            uuid = uuid,
+        };
+
+        var res = await this.inner.HostSetVirtualDiskUuid_TaskAsync(req);
+
+        return res.HostSetVirtualDiskUuid_TaskResponse.returnval;
     }
 
     public async System.Threading.Tasks.Task HostSetVStorageObjectControlFlags(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string[]? controlFlags)
@@ -5150,6 +5285,19 @@ public class VimClient : IVimClient
         return res.InitiateFileTransferToGuestResponse.returnval;
     }
 
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> InitiateTransitionToVLCM_Task(ManagedObjectReference self, ManagedObjectReference cluster)
+    {
+        var req = new InitiateTransitionToVLCMRequestType
+        {
+            _this = self,
+            cluster = cluster,
+        };
+
+        var res = await this.inner.InitiateTransitionToVLCM_TaskAsync(req);
+
+        return res.InitiateTransitionToVLCM_TaskResponse.returnval;
+    }
+
     public async System.Threading.Tasks.Task<DateTime> InstallDate(ManagedObjectReference self)
     {
         var req = new installDateRequestType
@@ -5194,13 +5342,14 @@ public class VimClient : IVimClient
         return res.InstallHostPatchV2_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference?> InstallIoFilter_Task(ManagedObjectReference self, string vibUrl, ManagedObjectReference compRes)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> InstallIoFilter_Task(ManagedObjectReference self, string vibUrl, ManagedObjectReference compRes, IoFilterManagerSslTrust? vibSslTrust)
     {
         var req = new InstallIoFilterRequestType
         {
             _this = self,
             vibUrl = vibUrl,
             compRes = compRes,
+            vibSslTrust = vibSslTrust,
         };
 
         var res = await this.inner.InstallIoFilter_TaskAsync(req);
@@ -5253,6 +5402,19 @@ public class VimClient : IVimClient
         var res = await this.inner.IsClusteredVmdkEnabledAsync(req);
 
         return res.IsClusteredVmdkEnabledResponse.returnval;
+    }
+
+    public async System.Threading.Tasks.Task<bool> IsGuestOsCustomizable(ManagedObjectReference self, string guestId)
+    {
+        var req = new IsGuestOsCustomizableRequestType
+        {
+            _this = self,
+            guestId = guestId,
+        };
+
+        var res = await this.inner.IsGuestOsCustomizableAsync(req);
+
+        return res.IsGuestOsCustomizableResponse.returnval;
     }
 
     public async System.Threading.Tasks.Task<bool> IsKmsClusterActive(ManagedObjectReference self, KeyProviderId? cluster)
@@ -6068,6 +6230,17 @@ public class VimClient : IVimClient
         return res.MoveVirtualDisk_TaskResponse.returnval;
     }
 
+    public async System.Threading.Tasks.Task NotifyAffectedServices(ManagedObjectReference self, string[]? services)
+    {
+        var req = new NotifyAffectedServicesRequestType
+        {
+            _this = self,
+            services = services,
+        };
+
+        await this.inner.NotifyAffectedServicesAsync(req);
+    }
+
     public async System.Threading.Tasks.Task<ManagedObjectReference[]?> OpenInventoryViewFolder(ManagedObjectReference self, ManagedObjectReference[] entity)
     {
         var req = new OpenInventoryViewFolderRequestType
@@ -6319,6 +6492,17 @@ public class VimClient : IVimClient
         var res = await this.inner.PromoteDisks_TaskAsync(req);
 
         return res.PromoteDisks_TaskResponse.returnval;
+    }
+
+    public async System.Threading.Tasks.Task ProvisionServerPrivateKey(ManagedObjectReference self, string key)
+    {
+        var req = new ProvisionServerPrivateKeyRequestType
+        {
+            _this = self,
+            key = key,
+        };
+
+        await this.inner.ProvisionServerPrivateKeyAsync(req);
     }
 
     public async System.Threading.Tasks.Task<int> PutUsbScanCodes(ManagedObjectReference self, UsbScanCodeSpec spec)
@@ -6633,7 +6817,7 @@ public class VimClient : IVimClient
         return res.QueryConfiguredModuleOptionStringResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<HostConnectInfo?> QueryConnectionInfo(ManagedObjectReference self, string hostname, int port, string username, string password, string? sslThumbprint)
+    public async System.Threading.Tasks.Task<HostConnectInfo?> QueryConnectionInfo(ManagedObjectReference self, string hostname, int port, string username, string password, string? sslThumbprint, string? sslCertificate)
     {
         var req = new QueryConnectionInfoRequestType
         {
@@ -6643,6 +6827,7 @@ public class VimClient : IVimClient
             username = username,
             password = password,
             sslThumbprint = sslThumbprint,
+            sslCertificate = sslCertificate,
         };
 
         var res = await this.inner.QueryConnectionInfoAsync(req);
@@ -6848,12 +7033,13 @@ public class VimClient : IVimClient
         return res.QueryDvsFeatureCapabilityResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<Event[]?> QueryEvents(ManagedObjectReference self, EventFilterSpec filter)
+    public async System.Threading.Tasks.Task<Event[]?> QueryEvents(ManagedObjectReference self, EventFilterSpec filter, EventManagerEventViewSpec? eventViewSpec)
     {
         var req = new QueryEventsRequestType
         {
             _this = self,
             filter = filter,
+            eventViewSpec = eventViewSpec,
         };
 
         var res = await this.inner.QueryEventsAsync(req);
@@ -7758,6 +7944,20 @@ public class VimClient : IVimClient
         return res.QueryVirtualDiskUuidResponse.returnval;
     }
 
+    public async System.Threading.Tasks.Task<string?> QueryVirtualDiskUuidEx(ManagedObjectReference self, string name, ManagedObjectReference? datacenter)
+    {
+        var req = new QueryVirtualDiskUuidExRequestType
+        {
+            _this = self,
+            name = name,
+            datacenter = datacenter,
+        };
+
+        var res = await this.inner.QueryVirtualDiskUuidExAsync(req);
+
+        return res.QueryVirtualDiskUuidExResponse.returnval;
+    }
+
     public async System.Threading.Tasks.Task<VmfsConfigOption[]?> QueryVmfsConfigOption(ManagedObjectReference self)
     {
         var req = new QueryVmfsConfigOptionRequestType
@@ -7953,6 +8153,21 @@ public class VimClient : IVimClient
         return res.ReadNextTasksResponse1;
     }
 
+    public async System.Threading.Tasks.Task<TaskInfo[]?> ReadNextTasksByViewSpec(ManagedObjectReference self, TaskManagerTaskViewSpec viewSpec, TaskFilterSpec filterSpec, TaskInfoFilterSpec? infoFilterSpec)
+    {
+        var req = new ReadNextTasksByViewSpecRequestType
+        {
+            _this = self,
+            viewSpec = viewSpec,
+            filterSpec = filterSpec,
+            infoFilterSpec = infoFilterSpec,
+        };
+
+        var res = await this.inner.ReadNextTasksByViewSpecAsync(req);
+
+        return res.ReadNextTasksByViewSpecResponse1;
+    }
+
     public async System.Threading.Tasks.Task<Event[]?> ReadPreviousEvents(ManagedObjectReference self, int maxCount)
     {
         var req = new ReadPreviousEventsRequestType
@@ -8041,17 +8256,32 @@ public class VimClient : IVimClient
         return res.RecommissionVsanNode_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference?> ReconcileDatastoreInventory_Task(ManagedObjectReference self, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ReconcileDatastoreInventory_Task(ManagedObjectReference self, ManagedObjectReference datastore, bool deepCleansing, bool deepCleansingSpecified)
     {
         var req = new ReconcileDatastoreInventoryRequestType
         {
             _this = self,
             datastore = datastore,
+            deepCleansing = deepCleansing,
+            deepCleansingSpecified = deepCleansingSpecified,
         };
 
         var res = await this.inner.ReconcileDatastoreInventory_TaskAsync(req);
 
         return res.ReconcileDatastoreInventory_TaskResponse.returnval;
+    }
+
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> ReconcileDatastoreInventoryEx_Task(ManagedObjectReference self, VStorageObjectReconcileSpec spec)
+    {
+        var req = new ReconcileDatastoreInventoryExRequestType
+        {
+            _this = self,
+            spec = spec,
+        };
+
+        var res = await this.inner.ReconcileDatastoreInventoryEx_TaskAsync(req);
+
+        return res.ReconcileDatastoreInventoryEx_TaskResponse.returnval;
     }
 
     public async System.Threading.Tasks.Task<VsanPolicySatisfiability[]?> ReconfigurationSatisfiable(ManagedObjectReference self, VsanPolicyChangeBatch[] pcbs, bool ignoreSatisfiability, bool ignoreSatisfiabilitySpecified)
@@ -8652,13 +8882,14 @@ public class VimClient : IVimClient
         await this.inner.RemoveAlarmAsync(req);
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference?> RemoveAllSnapshots_Task(ManagedObjectReference self, bool consolidate, bool consolidateSpecified)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> RemoveAllSnapshots_Task(ManagedObjectReference self, bool consolidate, bool consolidateSpecified, SnapshotSelectionSpec? spec)
     {
         var req = new RemoveAllSnapshotsRequestType
         {
             _this = self,
             consolidate = consolidate,
             consolidateSpecified = consolidateSpecified,
+            spec = spec,
         };
 
         var res = await this.inner.RemoveAllSnapshots_TaskAsync(req);
@@ -9018,6 +9249,17 @@ public class VimClient : IVimClient
         };
 
         await this.inner.RemoveSmartCardTrustAnchorByFingerprintAsync(req);
+    }
+
+    public async System.Threading.Tasks.Task RemoveSmartCardTrustAnchorCertificate(ManagedObjectReference self, string certificate)
+    {
+        var req = new RemoveSmartCardTrustAnchorCertificateRequestType
+        {
+            _this = self,
+            certificate = certificate,
+        };
+
+        await this.inner.RemoveSmartCardTrustAnchorCertificateAsync(req);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> RemoveSnapshot_Task(ManagedObjectReference self, bool removeChildren, bool consolidate, bool consolidateSpecified)
@@ -10063,12 +10305,14 @@ public class VimClient : IVimClient
         return res.ScanHostPatchV2_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task ScheduleReconcileDatastoreInventory(ManagedObjectReference self, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task ScheduleReconcileDatastoreInventory(ManagedObjectReference self, ManagedObjectReference datastore, bool deepCleansing, bool deepCleansingSpecified)
     {
         var req = new ScheduleReconcileDatastoreInventoryRequestType
         {
             _this = self,
             datastore = datastore,
+            deepCleansing = deepCleansing,
+            deepCleansingSpecified = deepCleansingSpecified,
         };
 
         await this.inner.ScheduleReconcileDatastoreInventoryAsync(req);
@@ -10194,12 +10438,13 @@ public class VimClient : IVimClient
         await this.inner.SetCollectorPageSizeAsync(req);
     }
 
-    public async System.Threading.Tasks.Task SetCryptoMode(ManagedObjectReference self, string cryptoMode)
+    public async System.Threading.Tasks.Task SetCryptoMode(ManagedObjectReference self, string cryptoMode, ClusterComputeResourceCryptoModePolicy? policy)
     {
         var req = new SetCryptoModeRequestType
         {
             _this = self,
             cryptoMode = cryptoMode,
+            policy = policy,
         };
 
         await this.inner.SetCryptoModeAsync(req);
@@ -10436,6 +10681,21 @@ public class VimClient : IVimClient
         await this.inner.SetVirtualDiskUuidAsync(req);
     }
 
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> SetVirtualDiskUuidEx_Task(ManagedObjectReference self, string name, ManagedObjectReference? datacenter, string? uuid)
+    {
+        var req = new SetVirtualDiskUuidExRequestType
+        {
+            _this = self,
+            name = name,
+            datacenter = datacenter,
+            uuid = uuid,
+        };
+
+        var res = await this.inner.SetVirtualDiskUuidEx_TaskAsync(req);
+
+        return res.SetVirtualDiskUuidEx_TaskResponse.returnval;
+    }
+
     public async System.Threading.Tasks.Task SetVStorageObjectControlFlags(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string[]? controlFlags)
     {
         var req = new SetVStorageObjectControlFlagsRequestType
@@ -10524,6 +10784,18 @@ public class VimClient : IVimClient
         };
 
         await this.inner.StandbyGuestAsync(req);
+    }
+
+    public async System.Threading.Tasks.Task StartDpuFailover(ManagedObjectReference self, string dvsName, string? targetDpuAlias)
+    {
+        var req = new startDpuFailoverRequestType
+        {
+            _this = self,
+            dvsName = dvsName,
+            targetDpuAlias = targetDpuAlias,
+        };
+
+        await this.inner.startDpuFailoverAsync(req);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> StartGuestNetwork_Task(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth)
@@ -11901,7 +12173,7 @@ public class VimClient : IVimClient
         return res.UpdateVVolVirtualMachineFiles_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference?> UpgradeIoFilter_Task(ManagedObjectReference self, string filterId, ManagedObjectReference compRes, string vibUrl)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> UpgradeIoFilter_Task(ManagedObjectReference self, string filterId, ManagedObjectReference compRes, string vibUrl, IoFilterManagerSslTrust? vibSslTrust)
     {
         var req = new UpgradeIoFilterRequestType
         {
@@ -11909,6 +12181,7 @@ public class VimClient : IVimClient
             filterId = filterId,
             compRes = compRes,
             vibUrl = vibUrl,
+            vibSslTrust = vibSslTrust,
         };
 
         var res = await this.inner.UpgradeIoFilter_TaskAsync(req);
@@ -12156,6 +12429,21 @@ public class VimClient : IVimClient
         return res.VStorageObjectDeleteSnapshotEx_TaskResponse.returnval;
     }
 
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> VStorageObjectDeleteSnapshotEx2_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId)
+    {
+        var req = new VStorageObjectDeleteSnapshotEx2RequestType
+        {
+            _this = self,
+            id = id,
+            datastore = datastore,
+            snapshotId = snapshotId,
+        };
+
+        var res = await this.inner.VStorageObjectDeleteSnapshotEx2_TaskAsync(req);
+
+        return res.VStorageObjectDeleteSnapshotEx2_TaskResponse.returnval;
+    }
+
     public async System.Threading.Tasks.Task<ManagedObjectReference?> VStorageObjectExtendDiskEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, long newCapacityInMB)
     {
         var req = new VStorageObjectExtendDiskExRequestType
@@ -12241,6 +12529,7 @@ public class VimClient : IVimClient
 
         return res.ZeroFillVirtualDisk_TaskResponse.returnval;
     }
+
 }
 
 #pragma warning restore IDE0058 // Expression value is never used

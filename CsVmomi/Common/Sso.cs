@@ -42,9 +42,8 @@ public static class Sso
 
         return new RequestSecurityTokenType
         {
-            TokenType = TokenTypeEnum.urnoasisnamestcSAML20assertion,
-            TokenTypeSpecified = true,
-            RequestType = RequestTypeEnum.httpdocsoasisopenorgwssxwstrust200512Issue,
+            TokenType = "urn:oasis:names:tc:SAML:2.0:assertion",
+            RequestType = "http://docs.oasis-open.org/ws-sx/ws-trust/200512/Issue",
             Lifetime = new LifetimeType
             {
                 Created = new AttributedDateTime
@@ -56,10 +55,8 @@ public static class Sso
                     Value = XmlConvert.ToString(expires, "yyy-MM-ddTHH:mm:ss.fffZ"),
                 },
             },
-            KeyType = KeyTypeEnum.httpdocsoasisopenorgwssxwstrust200512Bearer,
-            KeyTypeSpecified = true,
-            SignatureAlgorithm = SignatureAlgorithmEnum.httpwwww3org200104xmldsigmorersasha256,
-            SignatureAlgorithmSpecified = true,
+            KeyType = "http://docs.oasis-open.org/ws-sx/ws-trust/200512/Bearer",
+            SignatureAlgorithm = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256",
         };
     }
 }

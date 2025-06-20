@@ -462,6 +462,7 @@ public class PbmClient : IPbmClient
 
         await this.inner.PbmUpdateAsync(req);
     }
+
 }
 
 #pragma warning restore IDE0058 // Expression value is never used

@@ -4,9 +4,9 @@ using PbmService;
 
 public interface IPbmClient
 {
-    public Uri Uri { get; }
+    Uri Uri { get; }
 
-    public string? GetCookie(string name);
+    string? GetCookie(string name);
 
     System.Net.CookieCollection? GetCookie();
 
@@ -75,4 +75,5 @@ public interface IPbmClient
     System.Threading.Tasks.Task<PbmServiceInstanceContent?> PbmRetrieveServiceContent(ManagedObjectReference self);
 
     System.Threading.Tasks.Task PbmUpdate(ManagedObjectReference self, PbmProfileId profileId, PbmCapabilityProfileUpdateSpec updateSpec);
+
 }

@@ -4,9 +4,9 @@ using VslmService;
 
 public interface IVslmClient
 {
-    public Uri Uri { get; }
+    Uri Uri { get; }
 
-    public string? GetCookie(string name);
+    string? GetCookie(string name);
 
     System.Net.CookieCollection? GetCookie();
 
@@ -101,4 +101,5 @@ public interface IVslmClient
     System.Threading.Tasks.Task<ManagedObjectReference?> VslmUpdateVStorageObjectMetadata_Task(ManagedObjectReference self, ID id, KeyValue[]? metadata, string[]? deleteKeys);
 
     System.Threading.Tasks.Task<ManagedObjectReference?> VslmUpdateVstorageObjectPolicy_Task(ManagedObjectReference self, ID id, VirtualMachineProfileSpec[]? profile);
+
 }

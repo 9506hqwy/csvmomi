@@ -4,9 +4,9 @@ using StsService;
 
 public interface IStsClient
 {
-    public Uri Uri { get; }
+    Uri Uri { get; }
 
-    public string? GetCookie(string name);
+    string? GetCookie(string name);
 
     System.Net.CookieCollection? GetCookie();
 

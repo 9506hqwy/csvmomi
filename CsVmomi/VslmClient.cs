@@ -640,6 +640,7 @@ public class VslmClient : IVslmClient
 
         return res.VslmUpdateVstorageObjectPolicy_TaskResponse.returnval;
     }
+
 }
 
 #pragma warning restore IDE0058 // Expression value is never used

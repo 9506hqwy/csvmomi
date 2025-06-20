@@ -36,10 +36,10 @@ static async System.Threading.Tasks.Task Work(string[] args)
 
             var spec = new HostDatastoreBrowserSearchSpec
             {
-                query = new[]
-                {
+                query =
+                [
                     new IsoImageFileQuery(),
-                },
+                ],
             };
 
             var task = await browser.SearchDatastoreSubFolders_Task($"[{name}]", spec);

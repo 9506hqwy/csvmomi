@@ -301,9 +301,9 @@ public partial class ClusterComputeResource : ComputeResource
         await this.Session.VimClient.CancelRecommendation(this.VimReference, key);
     }
 
-    public async System.Threading.Tasks.Task<ClusterEnterMaintenanceResult?> ClusterEnterMaintenanceMode(HostSystem[] host, OptionValue[]? option)
+    public async System.Threading.Tasks.Task<ClusterEnterMaintenanceResult?> ClusterEnterMaintenanceMode(HostSystem[] host, OptionValue[]? option, ClusterComputeResourceMaintenanceInfo? info)
     {
-        return await this.Session.VimClient.ClusterEnterMaintenanceMode(this.VimReference, host.Select(m => m.VimReference).ToArray(), option);
+        return await this.Session.VimClient.ClusterEnterMaintenanceMode(this.VimReference, host.Select(m => m.VimReference).ToArray(), option, info);
     }
 
     public async System.Threading.Tasks.Task<Task?> ConfigureHCI_Task(ClusterComputeResourceHCIConfigSpec clusterSpec, ClusterComputeResourceHostConfigurationInput[]? hostInputs)
@@ -378,9 +378,9 @@ public partial class ClusterComputeResource : ComputeResource
         return await this.Session.VimClient.RetrieveDasAdvancedRuntimeInfo(this.VimReference);
     }
 
-    public async System.Threading.Tasks.Task SetCryptoMode(string cryptoMode)
+    public async System.Threading.Tasks.Task SetCryptoMode(string cryptoMode, ClusterComputeResourceCryptoModePolicy? policy)
     {
-        await this.Session.VimClient.SetCryptoMode(this.VimReference, cryptoMode);
+        await this.Session.VimClient.SetCryptoMode(this.VimReference, cryptoMode, policy);
     }
 
     public async System.Threading.Tasks.Task<Task?> StampAllRulesWithUuid_Task()
@@ -523,6 +523,12 @@ public partial class ComputeResource : ManagedEntity
             .ToArray();
     }
 
+    public async System.Threading.Tasks.Task<string?> GetPropertyNetworkBootMode()
+    {
+        var obj = await this.GetProperty<string>("networkBootMode");
+        return obj;
+    }
+
     public async System.Threading.Tasks.Task<ResourcePool?> GetPropertyResourcePool()
     {
         var resourcePool = await this.GetProperty<ManagedObjectReference>("resourcePool");
@@ -533,6 +539,18 @@ public partial class ComputeResource : ManagedEntity
     {
         var obj = await this.GetProperty<ComputeResourceSummary>("summary");
         return obj!;
+    }
+
+    public async System.Threading.Tasks.Task<Task?> DisableNetworkBoot_Task()
+    {
+        var res = await this.Session.VimClient.DisableNetworkBoot_Task(this.VimReference);
+        return ManagedObject.Create<Task>(res, this.Session);
+    }
+
+    public async System.Threading.Tasks.Task<Task?> EnableNetworkBoot_Task(string networkBootMode)
+    {
+        var res = await this.Session.VimClient.EnableNetworkBoot_Task(this.VimReference, networkBootMode);
+        return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> ReconfigureComputeResource_Task(ComputeResourceConfigSpec spec, bool modify)
@@ -677,9 +695,9 @@ public partial class CryptoManagerKmip : CryptoManager
         return await this.Session.VimClient.GenerateClientCsr(this.VimReference, cluster, request);
     }
 
-    public async System.Threading.Tasks.Task<CryptoKeyResult?> GenerateKey(KeyProviderId? keyProvider, CryptoManagerKmipCustomAttributeSpec? spec)
+    public async System.Threading.Tasks.Task<CryptoKeyResult?> GenerateKey(KeyProviderId? keyProvider, CryptoManagerKmipCustomAttributeSpec? spec, CryptoManagerKmipGenerateKeySpec? keySpec)
     {
-        return await this.Session.VimClient.GenerateKey(this.VimReference, keyProvider, spec);
+        return await this.Session.VimClient.GenerateKey(this.VimReference, keyProvider, spec, keySpec);
     }
 
     public async System.Threading.Tasks.Task<string?> GenerateSelfSignedClientCert(KeyProviderId cluster, CryptoManagerKmipCertSignRequest? request)
@@ -891,6 +909,11 @@ public partial class CustomizationSpecManager : ManagedObject
         return await this.Session.VimClient.GetCustomizationSpec(this.VimReference, name);
     }
 
+    public async System.Threading.Tasks.Task<bool> IsGuestOsCustomizable(string guestId)
+    {
+        return await this.Session.VimClient.IsGuestOsCustomizable(this.VimReference, guestId);
+    }
+
     public async System.Threading.Tasks.Task OverwriteCustomizationSpec(CustomizationSpecItem item)
     {
         await this.Session.VimClient.OverwriteCustomizationSpec(this.VimReference, item);
@@ -973,9 +996,9 @@ public partial class Datacenter : ManagedEntity
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
-    public async System.Threading.Tasks.Task<HostConnectInfo?> QueryConnectionInfo(string hostname, int port, string username, string password, string? sslThumbprint)
+    public async System.Threading.Tasks.Task<HostConnectInfo?> QueryConnectionInfo(string hostname, int port, string username, string password, string? sslThumbprint, string? sslCertificate)
     {
-        return await this.Session.VimClient.QueryConnectionInfo(this.VimReference, hostname, port, username, password, sslThumbprint);
+        return await this.Session.VimClient.QueryConnectionInfo(this.VimReference, hostname, port, username, password, sslThumbprint, sslCertificate);
     }
 
     public async System.Threading.Tasks.Task<HostConnectInfo?> QueryConnectionInfoViaSpec(HostConnectSpec spec)
@@ -1165,6 +1188,41 @@ public partial class DiagnosticManager : ManagedObject
     public async System.Threading.Tasks.Task<DiagnosticManagerLogDescriptor[]?> QueryDescriptions(HostSystem? host)
     {
         return await this.Session.VimClient.QueryDescriptions(this.VimReference, host?.VimReference);
+    }
+}
+
+public partial class DirectPathProfileManager : ManagedObject
+{
+    protected DirectPathProfileManager(
+        ManagedObjectReference reference,
+        Session session)
+        : base(reference, session)
+    {
+    }
+
+    public async System.Threading.Tasks.Task<string?> DirectPathProfileManagerCreate(DirectPathProfileManagerCreateSpec spec)
+    {
+        return await this.Session.VimClient.DirectPathProfileManagerCreate(this.VimReference, spec);
+    }
+
+    public async System.Threading.Tasks.Task DirectPathProfileManagerDelete(string id)
+    {
+        await this.Session.VimClient.DirectPathProfileManagerDelete(this.VimReference, id);
+    }
+
+    public async System.Threading.Tasks.Task<DirectPathProfileInfo[]?> DirectPathProfileManagerList(DirectPathProfileManagerFilterSpec filterSpec)
+    {
+        return await this.Session.VimClient.DirectPathProfileManagerList(this.VimReference, filterSpec);
+    }
+
+    public async System.Threading.Tasks.Task<DirectPathProfileManagerCapacityResult[]?> DirectPathProfileManagerQueryCapacity(DirectPathProfileManagerTargetEntity target, DirectPathProfileManagerCapacityQuerySpec[]? querySpec)
+    {
+        return await this.Session.VimClient.DirectPathProfileManagerQueryCapacity(this.VimReference, target, querySpec);
+    }
+
+    public async System.Threading.Tasks.Task DirectPathProfileManagerUpdate(string id, DirectPathProfileManagerUpdateSpec spec)
+    {
+        await this.Session.VimClient.DirectPathProfileManagerUpdate(this.VimReference, id, spec);
     }
 }
 
@@ -1516,6 +1574,12 @@ public partial class EventHistoryCollector : HistoryCollector
     {
     }
 
+    public async System.Threading.Tasks.Task<bool> GetPropertyInitialized()
+    {
+        var obj = await this.GetProperty<bool>("initialized");
+        return obj;
+    }
+
     public async System.Threading.Tasks.Task<Event[]?> GetPropertyLatestPage()
     {
         var obj = await this.GetProperty<Event[]>("latestPage");
@@ -1576,9 +1640,9 @@ public partial class EventManager : ManagedObject
         await this.Session.VimClient.PostEvent(this.VimReference, eventToPost, taskInfo);
     }
 
-    public async System.Threading.Tasks.Task<Event[]?> QueryEvents(EventFilterSpec filter)
+    public async System.Threading.Tasks.Task<Event[]?> QueryEvents(EventFilterSpec filter, EventManagerEventViewSpec? eventViewSpec)
     {
-        return await this.Session.VimClient.QueryEvents(this.VimReference, filter);
+        return await this.Session.VimClient.QueryEvents(this.VimReference, filter, eventViewSpec);
     }
 
     public async System.Threading.Tasks.Task<EventArgDesc[]?> RetrieveArgumentDescription(string eventTypeId)
@@ -1839,6 +1903,12 @@ public partial class Folder : ManagedEntity
     public async System.Threading.Tasks.Task<string[]?> GetPropertyChildType()
     {
         var obj = await this.GetProperty<string[]>("childType");
+        return obj;
+    }
+
+    public async System.Threading.Tasks.Task<FolderExternallyManagedFolderInfo?> GetPropertyExternallyManagedFolderInfo()
+    {
+        var obj = await this.GetProperty<FolderExternallyManagedFolderInfo>("externallyManagedFolderInfo");
         return obj;
     }
 
@@ -2430,6 +2500,11 @@ public partial class HostActiveDirectoryAuthentication : HostDirectoryStore
         await this.Session.VimClient.RemoveSmartCardTrustAnchorByFingerprint(this.VimReference, fingerprint, digest);
     }
 
+    public async System.Threading.Tasks.Task RemoveSmartCardTrustAnchorCertificate(string certificate)
+    {
+        await this.Session.VimClient.RemoveSmartCardTrustAnchorCertificate(this.VimReference, certificate);
+    }
+
     public async System.Threading.Tasks.Task ReplaceSmartCardTrustAnchors(string[]? certs)
     {
         await this.Session.VimClient.ReplaceSmartCardTrustAnchors(this.VimReference, certs);
@@ -2631,6 +2706,16 @@ public partial class HostCertificateManager : ManagedObject
         return await this.Session.VimClient.ListCACertificates(this.VimReference);
     }
 
+    public async System.Threading.Tasks.Task NotifyAffectedServices(string[]? services)
+    {
+        await this.Session.VimClient.NotifyAffectedServices(this.VimReference, services);
+    }
+
+    public async System.Threading.Tasks.Task ProvisionServerPrivateKey(string key)
+    {
+        await this.Session.VimClient.ProvisionServerPrivateKey(this.VimReference, key);
+    }
+
     public async System.Threading.Tasks.Task ReplaceCACertificatesAndCRLs(string[] caCert, string[]? caCrl)
     {
         await this.Session.VimClient.ReplaceCACertificatesAndCRLs(this.VimReference, caCert, caCrl);
@@ -2649,6 +2734,12 @@ public partial class HostCpuSchedulerSystem : ExtensibleManagedObject
         Session session)
         : base(reference, session)
     {
+    }
+
+    public async System.Threading.Tasks.Task<HostCpuSchedulerInfo?> GetPropertyCpuSchedulerInfo()
+    {
+        var obj = await this.GetProperty<HostCpuSchedulerInfo>("cpuSchedulerInfo");
+        return obj;
     }
 
     public async System.Threading.Tasks.Task<HostHyperThreadScheduleInfo?> GetPropertyHyperthreadInfo()
@@ -3381,6 +3472,11 @@ public partial class HostNetworkSystem : ExtensibleManagedObject
     public async System.Threading.Tasks.Task RestartServiceConsoleVirtualNic(string device)
     {
         await this.Session.VimClient.RestartServiceConsoleVirtualNic(this.VimReference, device);
+    }
+
+    public async System.Threading.Tasks.Task StartDpuFailover(string dvsName, string? targetDpuAlias)
+    {
+        await this.Session.VimClient.StartDpuFailover(this.VimReference, dvsName, targetDpuAlias);
     }
 
     public async System.Threading.Tasks.Task UpdateConsoleIpRouteConfig(HostIpRouteConfig config)
@@ -4932,9 +5028,14 @@ public partial class HostVStorageObjectManager : VStorageObjectManagerBase
         return await this.Session.VimClient.HostListVStorageObject(this.VimReference, datastore.VimReference);
     }
 
-    public async System.Threading.Tasks.Task<Task?> HostReconcileDatastoreInventory_Task(Datastore datastore)
+    public async System.Threading.Tasks.Task<string?> HostQueryVirtualDiskUuid(string name)
     {
-        var res = await this.Session.VimClient.HostReconcileDatastoreInventory_Task(this.VimReference, datastore.VimReference);
+        return await this.Session.VimClient.HostQueryVirtualDiskUuid(this.VimReference, name);
+    }
+
+    public async System.Threading.Tasks.Task<Task?> HostReconcileDatastoreInventory_Task(Datastore datastore, bool? deepCleansing)
+    {
+        var res = await this.Session.VimClient.HostReconcileDatastoreInventory_Task(this.VimReference, datastore.VimReference, deepCleansing ?? default, deepCleansing.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
@@ -4979,9 +5080,15 @@ public partial class HostVStorageObjectManager : VStorageObjectManagerBase
         return await this.Session.VimClient.HostRetrieveVStorageObjectState(this.VimReference, id, datastore.VimReference);
     }
 
-    public async System.Threading.Tasks.Task HostScheduleReconcileDatastoreInventory(Datastore datastore)
+    public async System.Threading.Tasks.Task HostScheduleReconcileDatastoreInventory(Datastore datastore, bool? deepCleansing)
     {
-        await this.Session.VimClient.HostScheduleReconcileDatastoreInventory(this.VimReference, datastore.VimReference);
+        await this.Session.VimClient.HostScheduleReconcileDatastoreInventory(this.VimReference, datastore.VimReference, deepCleansing ?? default, deepCleansing.HasValue);
+    }
+
+    public async System.Threading.Tasks.Task<Task?> HostSetVirtualDiskUuid_Task(string name, string? uuid)
+    {
+        var res = await this.Session.VimClient.HostSetVirtualDiskUuid_Task(this.VimReference, name, uuid);
+        return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task HostSetVStorageObjectControlFlags(ID id, Datastore datastore, string[]? controlFlags)
@@ -5150,9 +5257,15 @@ public partial class IoFilterManager : ManagedObject
     {
     }
 
-    public async System.Threading.Tasks.Task<Task?> InstallIoFilter_Task(string vibUrl, ComputeResource compRes)
+    public async System.Threading.Tasks.Task<Task?> InitiateTransitionToVLCM_Task(ClusterComputeResource cluster)
     {
-        var res = await this.Session.VimClient.InstallIoFilter_Task(this.VimReference, vibUrl, compRes.VimReference);
+        var res = await this.Session.VimClient.InitiateTransitionToVLCM_Task(this.VimReference, cluster.VimReference);
+        return ManagedObject.Create<Task>(res, this.Session);
+    }
+
+    public async System.Threading.Tasks.Task<Task?> InstallIoFilter_Task(string vibUrl, ComputeResource compRes, IoFilterManagerSslTrust? vibSslTrust)
+    {
+        var res = await this.Session.VimClient.InstallIoFilter_Task(this.VimReference, vibUrl, compRes.VimReference, vibSslTrust);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
@@ -5189,9 +5302,9 @@ public partial class IoFilterManager : ManagedObject
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
-    public async System.Threading.Tasks.Task<Task?> UpgradeIoFilter_Task(string filterId, ComputeResource compRes, string vibUrl)
+    public async System.Threading.Tasks.Task<Task?> UpgradeIoFilter_Task(string filterId, ComputeResource compRes, string vibUrl, IoFilterManagerSslTrust? vibSslTrust)
     {
-        var res = await this.Session.VimClient.UpgradeIoFilter_Task(this.VimReference, filterId, compRes.VimReference, vibUrl);
+        var res = await this.Session.VimClient.UpgradeIoFilter_Task(this.VimReference, filterId, compRes.VimReference, vibUrl, vibSslTrust);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -6840,9 +6953,20 @@ public partial class TaskManager : ManagedObject
         return ManagedObject.Create<TaskHistoryCollector>(res, this.Session);
     }
 
+    public async System.Threading.Tasks.Task<TaskHistoryCollector?> CreateCollectorWithInfoFilterForTasks(TaskFilterSpec filter, TaskInfoFilterSpec? infoFilter)
+    {
+        var res = await this.Session.VimClient.CreateCollectorWithInfoFilterForTasks(this.VimReference, filter, infoFilter);
+        return ManagedObject.Create<TaskHistoryCollector>(res, this.Session);
+    }
+
     public async System.Threading.Tasks.Task<TaskInfo?> CreateTask(ManagedObject obj, string taskTypeId, string? initiatedBy, bool cancelable, string? parentTaskKey, string? activationId)
     {
         return await this.Session.VimClient.CreateTask(this.VimReference, obj.VimReference, taskTypeId, initiatedBy, cancelable, parentTaskKey, activationId);
+    }
+
+    public async System.Threading.Tasks.Task<TaskInfo[]?> ReadNextTasksByViewSpec(TaskManagerTaskViewSpec viewSpec, TaskFilterSpec filterSpec, TaskInfoFilterSpec? infoFilterSpec)
+    {
+        return await this.Session.VimClient.ReadNextTasksByViewSpec(this.VimReference, viewSpec, filterSpec, infoFilterSpec);
     }
 }
 
@@ -6980,9 +7104,20 @@ public partial class VcenterVStorageObjectManager : VStorageObjectManagerBase
         return await this.Session.VimClient.ListVStorageObjectsAttachedToTag(this.VimReference, category, tag);
     }
 
-    public async System.Threading.Tasks.Task<Task?> ReconcileDatastoreInventory_Task(Datastore datastore)
+    public async System.Threading.Tasks.Task<string?> QueryVirtualDiskUuidEx(string name, Datacenter? datacenter)
     {
-        var res = await this.Session.VimClient.ReconcileDatastoreInventory_Task(this.VimReference, datastore.VimReference);
+        return await this.Session.VimClient.QueryVirtualDiskUuidEx(this.VimReference, name, datacenter?.VimReference);
+    }
+
+    public async System.Threading.Tasks.Task<Task?> ReconcileDatastoreInventory_Task(Datastore datastore, bool? deepCleansing)
+    {
+        var res = await this.Session.VimClient.ReconcileDatastoreInventory_Task(this.VimReference, datastore.VimReference, deepCleansing ?? default, deepCleansing.HasValue);
+        return ManagedObject.Create<Task>(res, this.Session);
+    }
+
+    public async System.Threading.Tasks.Task<Task?> ReconcileDatastoreInventoryEx_Task(VStorageObjectReconcileSpec spec)
+    {
+        var res = await this.Session.VimClient.ReconcileDatastoreInventoryEx_Task(this.VimReference, spec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
@@ -7038,9 +7173,15 @@ public partial class VcenterVStorageObjectManager : VStorageObjectManagerBase
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
-    public async System.Threading.Tasks.Task ScheduleReconcileDatastoreInventory(Datastore datastore)
+    public async System.Threading.Tasks.Task ScheduleReconcileDatastoreInventory(Datastore datastore, bool? deepCleansing)
     {
-        await this.Session.VimClient.ScheduleReconcileDatastoreInventory(this.VimReference, datastore.VimReference);
+        await this.Session.VimClient.ScheduleReconcileDatastoreInventory(this.VimReference, datastore.VimReference, deepCleansing ?? default, deepCleansing.HasValue);
+    }
+
+    public async System.Threading.Tasks.Task<Task?> SetVirtualDiskUuidEx_Task(string name, Datacenter? datacenter, string? uuid)
+    {
+        var res = await this.Session.VimClient.SetVirtualDiskUuidEx_Task(this.VimReference, name, datacenter?.VimReference, uuid);
+        return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task SetVStorageObjectControlFlags(ID id, Datastore datastore, string[]? controlFlags)
@@ -7704,9 +7845,9 @@ public partial class VirtualMachine : ManagedEntity
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
-    public async System.Threading.Tasks.Task<Task?> RemoveAllSnapshots_Task(bool? consolidate)
+    public async System.Threading.Tasks.Task<Task?> RemoveAllSnapshots_Task(bool? consolidate, SnapshotSelectionSpec? spec)
     {
-        var res = await this.Session.VimClient.RemoveAllSnapshots_Task(this.VimReference, consolidate ?? default, consolidate.HasValue);
+        var res = await this.Session.VimClient.RemoveAllSnapshots_Task(this.VimReference, consolidate ?? default, consolidate.HasValue, spec);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
@@ -8042,6 +8183,12 @@ public partial class VStorageObjectManagerBase : ManagedObject
     public async System.Threading.Tasks.Task<Task?> VStorageObjectDeleteSnapshotEx_Task(ID id, Datastore datastore, ID snapshotId)
     {
         var res = await this.Session.VimClient.VStorageObjectDeleteSnapshotEx_Task(this.VimReference, id, datastore.VimReference, snapshotId);
+        return ManagedObject.Create<Task>(res, this.Session);
+    }
+
+    public async System.Threading.Tasks.Task<Task?> VStorageObjectDeleteSnapshotEx2_Task(ID id, Datastore datastore, ID snapshotId)
+    {
+        var res = await this.Session.VimClient.VStorageObjectDeleteSnapshotEx2_Task(this.VimReference, id, datastore.VimReference, snapshotId);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 

@@ -4,9 +4,9 @@ using SmsService;
 
 public interface ISmsClient
 {
-    public Uri Uri { get; }
+    Uri Uri { get; }
 
-    public string? GetCookie(string name);
+    string? GetCookie(string name);
 
     System.Net.CookieCollection? GetCookie();
 
@@ -71,4 +71,5 @@ public interface ISmsClient
     System.Threading.Tasks.Task<ManagedObjectReference?> VasaProviderRevokeCertificate_Task(ManagedObjectReference self);
 
     System.Threading.Tasks.Task<ManagedObjectReference?> VasaProviderSync_Task(ManagedObjectReference self, string? arrayId);
+
 }

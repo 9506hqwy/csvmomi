@@ -4,9 +4,9 @@ using EamService;
 
 public interface IEamClient
 {
-    public Uri Uri { get; }
+    Uri Uri { get; }
 
-    public string? GetCookie(string name);
+    string? GetCookie(string name);
 
     System.Net.CookieCollection? GetCookie();
 
@@ -57,4 +57,5 @@ public interface IEamClient
     System.Threading.Tasks.Task UnregisterAgentVm(ManagedObjectReference self, ManagedObjectReference agentVm);
 
     System.Threading.Tasks.Task Update(ManagedObjectReference self, AgencyConfigInfo config);
+
 }

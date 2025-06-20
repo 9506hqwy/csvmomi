@@ -343,6 +343,10 @@ export async function getManagedMethodRefs1(
       m.name = fixMethodName[m.name];
     }
 
+    if (m.clsName.startsWith("/")) {
+      m.clsName = m.clsName?.slice(1);
+    }
+
     methods.push(m);
   }
 
@@ -371,6 +375,10 @@ export async function getManagedMethodRefs2(
 
     if (m.name in fixMethodName) {
       m.name = fixMethodName[m.name];
+    }
+
+    if (m.clsName.startsWith("/")) {
+      m.clsName = m.clsName?.slice(1);
     }
 
     methods[className].push(m);
