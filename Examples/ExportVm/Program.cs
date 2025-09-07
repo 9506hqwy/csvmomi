@@ -78,7 +78,7 @@ async System.Threading.Tasks.Task Work(string[] args)
 
             var cdp = new OvfCreateDescriptorParams
             {
-                exportOption = options!.Select(o => o.option).ToArray(),
+                exportOption = [.. options!.Select(o => o.option)],
                 ovfFiles = [.. ovfFiles],
             };
             var ovf = await session.OvfManager!.CreateDescriptor(vm, cdp);

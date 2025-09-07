@@ -19,8 +19,10 @@ public partial class ManagedEntity : ExtensibleManagedObject
     {
         const string NAME = "name";
 
-        Func<ObjectContent, bool> isMatch =
-            o => o.GetPropertyValue<string>(NAME)!.ToLowerInvariant() == name.ToLowerInvariant();
+        bool isMatch(ObjectContent o)
+        {
+            return o.GetPropertyValue<string>(NAME)!.ToLowerInvariant() == name.ToLowerInvariant();
+        }
 
         await foreach (var entity in this.Enumerate<T>([NAME], isMatch))
         {

@@ -87,13 +87,18 @@ internal class PropertyFilterHelper
 
     private SelectionSpec[] CreateFolderLower()
     {
-        var selectSet = () => this.CreateFolderLower()
-            .Concat(this.CreateComputeResourceLower())
-            .Concat(this.CreateDatacenterLower())
-            .Concat(this.CreateDatastoreLower())
-            .Concat(this.CreateDistributedVirtualSwitchLower())
-            .Concat(this.CreateNetworkLower())
-            .ToArray();
+        SelectionSpec[] selectSet()
+        {
+            return
+            [
+                .. this.CreateFolderLower(),
+                .. this.CreateComputeResourceLower(),
+                .. this.CreateDatacenterLower(),
+                .. this.CreateDatastoreLower(),
+                .. this.CreateDistributedVirtualSwitchLower(),
+                .. this.CreateNetworkLower(),
+            ];
+        }
 
         var folder = this.InitSpec(typeof(Folder), "childEntity");
         this.SetSelectSet(folder, selectSet);
