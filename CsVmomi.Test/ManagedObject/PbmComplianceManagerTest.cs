@@ -76,7 +76,7 @@ public class PbmComplianceManagerTest
     private async System.Threading.Tasks.Task<PbmService.PbmServerObjectRef[]> GetAllVmEntities()
     {
         var vms = await this.GetAllVm();
-        return vms.Select(v =>
+        return [.. vms.Select(v =>
         {
             return new PbmService.PbmServerObjectRef
             {
@@ -84,6 +84,6 @@ public class PbmComplianceManagerTest
                 objectType = "virtualMachine",
                 serverUuid = this.session.About.instanceUuid,
             };
-        }).ToArray();
+        })];
     }
 }

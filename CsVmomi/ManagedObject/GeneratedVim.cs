@@ -131,12 +131,12 @@ public partial class AuthorizationManager : ManagedObject
 
     public async System.Threading.Tasks.Task<UserPrivilegeResult[]?> FetchUserPrivilegeOnEntities(ManagedEntity[] entities, string userName)
     {
-        return await this.Session.VimClient.FetchUserPrivilegeOnEntities(this.VimReference, entities.Select(m => m.VimReference).ToArray(), userName);
+        return await this.Session.VimClient.FetchUserPrivilegeOnEntities(this.VimReference, [.. entities.Select(m => m.VimReference)], userName);
     }
 
     public async System.Threading.Tasks.Task<EntityPrivilege[]?> HasPrivilegeOnEntities(ManagedEntity[] entity, string sessionId, string[]? privId)
     {
-        return await this.Session.VimClient.HasPrivilegeOnEntities(this.VimReference, entity.Select(m => m.VimReference).ToArray(), sessionId, privId);
+        return await this.Session.VimClient.HasPrivilegeOnEntities(this.VimReference, [.. entity.Select(m => m.VimReference)], sessionId, privId);
     }
 
     public async System.Threading.Tasks.Task<bool[]?> HasPrivilegeOnEntity(ManagedEntity entity, string sessionId, string[]? privId)
@@ -146,7 +146,7 @@ public partial class AuthorizationManager : ManagedObject
 
     public async System.Threading.Tasks.Task<EntityPrivilege[]?> HasUserPrivilegeOnEntities(ManagedObject[] entities, string userName, string[]? privId)
     {
-        return await this.Session.VimClient.HasUserPrivilegeOnEntities(this.VimReference, entities.Select(m => m.VimReference).ToArray(), userName, privId);
+        return await this.Session.VimClient.HasUserPrivilegeOnEntities(this.VimReference, [.. entities.Select(m => m.VimReference)], userName, privId);
     }
 
     public async System.Threading.Tasks.Task MergePermissions(int srcRoleId, int dstRoleId)
@@ -206,19 +206,19 @@ public partial class CertificateManager : ManagedObject
 
     public async System.Threading.Tasks.Task<Task?> CertMgrRefreshCACertificatesAndCRLs_Task(HostSystem[] host)
     {
-        var res = await this.Session.VimClient.CertMgrRefreshCACertificatesAndCRLs_Task(this.VimReference, host.Select(m => m.VimReference).ToArray());
+        var res = await this.Session.VimClient.CertMgrRefreshCACertificatesAndCRLs_Task(this.VimReference, [.. host.Select(m => m.VimReference)]);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> CertMgrRefreshCertificates_Task(HostSystem[] host)
     {
-        var res = await this.Session.VimClient.CertMgrRefreshCertificates_Task(this.VimReference, host.Select(m => m.VimReference).ToArray());
+        var res = await this.Session.VimClient.CertMgrRefreshCertificates_Task(this.VimReference, [.. host.Select(m => m.VimReference)]);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<Task?> CertMgrRevokeCertificates_Task(HostSystem[] host)
     {
-        var res = await this.Session.VimClient.CertMgrRevokeCertificates_Task(this.VimReference, host.Select(m => m.VimReference).ToArray());
+        var res = await this.Session.VimClient.CertMgrRevokeCertificates_Task(this.VimReference, [.. host.Select(m => m.VimReference)]);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -303,7 +303,7 @@ public partial class ClusterComputeResource : ComputeResource
 
     public async System.Threading.Tasks.Task<ClusterEnterMaintenanceResult?> ClusterEnterMaintenanceMode(HostSystem[] host, OptionValue[]? option, ClusterComputeResourceMaintenanceInfo? info)
     {
-        return await this.Session.VimClient.ClusterEnterMaintenanceMode(this.VimReference, host.Select(m => m.VimReference).ToArray(), option, info);
+        return await this.Session.VimClient.ClusterEnterMaintenanceMode(this.VimReference, [.. host.Select(m => m.VimReference)], option, info);
     }
 
     public async System.Threading.Tasks.Task<Task?> ConfigureHCI_Task(ClusterComputeResourceHCIConfigSpec clusterSpec, ClusterComputeResourceHostConfigurationInput[]? hostInputs)
@@ -348,7 +348,7 @@ public partial class ClusterComputeResource : ComputeResource
 
     public async System.Threading.Tasks.Task<Task?> MoveInto_Task(HostSystem[] host)
     {
-        var res = await this.Session.VimClient.MoveInto_Task(this.VimReference, host.Select(m => m.VimReference).ToArray());
+        var res = await this.Session.VimClient.MoveInto_Task(this.VimReference, [.. host.Select(m => m.VimReference)]);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
@@ -992,7 +992,7 @@ public partial class Datacenter : ManagedEntity
 
     public async System.Threading.Tasks.Task<Task?> PowerOnMultiVM_Task(VirtualMachine[] vm, OptionValue[]? option)
     {
-        var res = await this.Session.VimClient.PowerOnMultiVM_Task(this.VimReference, vm.Select(m => m.VimReference).ToArray(), option);
+        var res = await this.Session.VimClient.PowerOnMultiVM_Task(this.VimReference, [.. vm.Select(m => m.VimReference)], option);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
@@ -1519,7 +1519,7 @@ public partial class DistributedVirtualSwitchManager : ManagedObject
 
     public async System.Threading.Tasks.Task<Task?> RectifyDvsOnHost_Task(HostSystem[] hosts)
     {
-        var res = await this.Session.VimClient.RectifyDvsOnHost_Task(this.VimReference, hosts.Select(m => m.VimReference).ToArray());
+        var res = await this.Session.VimClient.RectifyDvsOnHost_Task(this.VimReference, [.. hosts.Select(m => m.VimReference)]);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }
@@ -1980,7 +1980,7 @@ public partial class Folder : ManagedEntity
 
     public async System.Threading.Tasks.Task<Task?> MoveIntoFolder_Task(ManagedEntity[] list)
     {
-        var res = await this.Session.VimClient.MoveIntoFolder_Task(this.VimReference, list.Select(m => m.VimReference).ToArray());
+        var res = await this.Session.VimClient.MoveIntoFolder_Task(this.VimReference, [.. list.Select(m => m.VimReference)]);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
@@ -2571,9 +2571,7 @@ public partial class HostAuthenticationManager : ManagedObject
     public async System.Threading.Tasks.Task<HostAuthenticationStore[]> GetPropertySupportedStore()
     {
         var supportedStore = await this.GetProperty<ManagedObjectReference[]>("supportedStore");
-        return supportedStore!
-            .Select(r => ManagedObject.Create<HostAuthenticationStore>(r, this.Session)!)
-            .ToArray();
+        return [.. supportedStore!.Select(r => ManagedObject.Create<HostAuthenticationStore>(r, this.Session)!)];
     }
 }
 
@@ -2911,7 +2909,7 @@ public partial class HostDatastoreSystem : ManagedObject
 
     public async System.Threading.Tasks.Task<Task?> RemoveDatastoreEx_Task(Datastore[] datastore)
     {
-        var res = await this.Session.VimClient.RemoveDatastoreEx_Task(this.VimReference, datastore.Select(m => m.VimReference).ToArray());
+        var res = await this.Session.VimClient.RemoveDatastoreEx_Task(this.VimReference, [.. datastore.Select(m => m.VimReference)]);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
@@ -3770,7 +3768,7 @@ public partial class HostProfileManager : ProfileManager
 
     public async System.Threading.Tasks.Task<Task?> CheckAnswerFileStatus_Task(HostSystem[] host)
     {
-        var res = await this.Session.VimClient.CheckAnswerFileStatus_Task(this.VimReference, host.Select(m => m.VimReference).ToArray());
+        var res = await this.Session.VimClient.CheckAnswerFileStatus_Task(this.VimReference, [.. host.Select(m => m.VimReference)]);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
@@ -3810,7 +3808,7 @@ public partial class HostProfileManager : ProfileManager
 
     public async System.Threading.Tasks.Task<AnswerFileStatusResult[]?> QueryAnswerFileStatus(HostSystem[] host)
     {
-        return await this.Session.VimClient.QueryAnswerFileStatus(this.VimReference, host.Select(m => m.VimReference).ToArray());
+        return await this.Session.VimClient.QueryAnswerFileStatus(this.VimReference, [.. host.Select(m => m.VimReference)]);
     }
 
     public async System.Threading.Tasks.Task<ProfileMetadata[]?> QueryHostProfileMetadata(string[]? profileName, Profile? profile)
@@ -5237,13 +5235,13 @@ public partial class InventoryView : ManagedObjectView
 
     public async System.Threading.Tasks.Task<ManagedEntity[]?> CloseInventoryViewFolder(ManagedEntity[] entity)
     {
-        var res = await this.Session.VimClient.CloseInventoryViewFolder(this.VimReference, entity.Select(m => m.VimReference).ToArray());
+        var res = await this.Session.VimClient.CloseInventoryViewFolder(this.VimReference, [.. entity.Select(m => m.VimReference)]);
         return res?.Select(r => ManagedObject.Create<ManagedEntity>(r, this.Session)!).ToArray();
     }
 
     public async System.Threading.Tasks.Task<ManagedEntity[]?> OpenInventoryViewFolder(ManagedEntity[] entity)
     {
-        var res = await this.Session.VimClient.OpenInventoryViewFolder(this.VimReference, entity.Select(m => m.VimReference).ToArray());
+        var res = await this.Session.VimClient.OpenInventoryViewFolder(this.VimReference, [.. entity.Select(m => m.VimReference)]);
         return res?.Select(r => ManagedObject.Create<ManagedEntity>(r, this.Session)!).ToArray();
     }
 }
@@ -6033,7 +6031,7 @@ public partial class Profile : ManagedObject
 
     public async System.Threading.Tasks.Task AssociateProfile(ManagedEntity[] entity)
     {
-        await this.Session.VimClient.AssociateProfile(this.VimReference, entity.Select(m => m.VimReference).ToArray());
+        await this.Session.VimClient.AssociateProfile(this.VimReference, [.. entity.Select(m => m.VimReference)]);
     }
 
     public async System.Threading.Tasks.Task<Task?> CheckProfileCompliance_Task(ManagedEntity[]? entity)
@@ -6338,7 +6336,7 @@ public partial class ResourcePool : ManagedEntity
 
     public async System.Threading.Tasks.Task MoveIntoResourcePool(ManagedEntity[] list)
     {
-        await this.Session.VimClient.MoveIntoResourcePool(this.VimReference, list.Select(m => m.VimReference).ToArray());
+        await this.Session.VimClient.MoveIntoResourcePool(this.VimReference, [.. list.Select(m => m.VimReference)]);
     }
 
     public async System.Threading.Tasks.Task<ResourceConfigOption?> QueryResourceConfigOption()
@@ -6545,7 +6543,7 @@ public partial class ServiceInstance : ManagedObject
 
     public async System.Threading.Tasks.Task<HostVMotionCompatibility[]?> QueryVMotionCompatibility(VirtualMachine vm, HostSystem[] host, string[]? compatibility)
     {
-        return await this.Session.VimClient.QueryVMotionCompatibility(this.VimReference, vm.VimReference, host.Select(m => m.VimReference).ToArray(), compatibility);
+        return await this.Session.VimClient.QueryVMotionCompatibility(this.VimReference, vm.VimReference, [.. host.Select(m => m.VimReference)], compatibility);
     }
 
     public async System.Threading.Tasks.Task<ProductComponentInfo[]?> RetrieveProductComponents()
@@ -6560,7 +6558,7 @@ public partial class ServiceInstance : ManagedObject
 
     public async System.Threading.Tasks.Task<Event[]?> ValidateMigration(VirtualMachine[] vm, VirtualMachinePowerState? state, string[]? testType, ResourcePool? pool, HostSystem? host)
     {
-        return await this.Session.VimClient.ValidateMigration(this.VimReference, vm.Select(m => m.VimReference).ToArray(), state ?? default, state.HasValue, testType, pool?.VimReference, host?.VimReference);
+        return await this.Session.VimClient.ValidateMigration(this.VimReference, [.. vm.Select(m => m.VimReference)], state ?? default, state.HasValue, testType, pool?.VimReference, host?.VimReference);
     }
 }
 
@@ -8054,7 +8052,7 @@ public partial class VirtualMachineProvisioningChecker : ManagedObject
 
     public async System.Threading.Tasks.Task<Task?> QueryVMotionCompatibilityEx_Task(VirtualMachine[] vm, HostSystem[] host)
     {
-        var res = await this.Session.VimClient.QueryVMotionCompatibilityEx_Task(this.VimReference, vm.Select(m => m.VimReference).ToArray(), host.Select(m => m.VimReference).ToArray());
+        var res = await this.Session.VimClient.QueryVMotionCompatibilityEx_Task(this.VimReference, [.. vm.Select(m => m.VimReference)], [.. host.Select(m => m.VimReference)]);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 }

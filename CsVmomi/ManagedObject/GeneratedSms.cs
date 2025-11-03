@@ -66,7 +66,7 @@ public partial class SmsStorageManager : ManagedObject
 
     public async System.Threading.Tasks.Task<DatastoreBackingPoolMapping[]?> QueryDatastoreBackingPoolMapping(Datastore[] datastore)
     {
-        return await this.Session.SmsClient!.QueryDatastoreBackingPoolMapping(this.SmsReference, datastore.Select(m => m.SmsReference).ToArray());
+        return await this.Session.SmsClient!.QueryDatastoreBackingPoolMapping(this.SmsReference, [.. datastore.Select(m => m.SmsReference)]);
     }
 
     public async System.Threading.Tasks.Task<StorageCapability?> QueryDatastoreCapability(Datastore datastore)
@@ -81,7 +81,7 @@ public partial class SmsStorageManager : ManagedObject
 
     public async System.Threading.Tasks.Task<DrsMigrationCapabilityResult?> QueryDrsMigrationCapabilityForPerformanceEx(Datastore[] datastore)
     {
-        return await this.Session.SmsClient!.QueryDrsMigrationCapabilityForPerformanceEx(this.SmsReference, datastore.Select(m => m.SmsReference).ToArray());
+        return await this.Session.SmsClient!.QueryDrsMigrationCapabilityForPerformanceEx(this.SmsReference, [.. datastore.Select(m => m.SmsReference)]);
     }
 
     public async System.Threading.Tasks.Task<StorageFileSystem[]?> QueryFileSystemAssociatedWithArray(string arrayId)
