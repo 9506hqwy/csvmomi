@@ -4,3 +4,10 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: "System.ServiceModel.Http"
+        update-types:
+          - "version-update:semver-major"
+      - dependency-name: "System.ServiceModel.Security"
+        update-types:
+          - "version-update:semver-major"
