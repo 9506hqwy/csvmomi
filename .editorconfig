@@ -16,16 +16,16 @@ charset = utf-8-bom
 
 # .Net Compiler rule
 dotnet_analyzer_diagnostic.category-Style.severity = warning
-dotnet_diagnostic.IDE0001.severity = silent
-dotnet_diagnostic.IDE0002.severity = silent
 dotnet_diagnostic.IDE0003.severity = silent
 dotnet_diagnostic.IDE0007.severity = silent
 dotnet_diagnostic.IDE0008.severity = silent
 dotnet_diagnostic.IDE0009.severity = warning
 dotnet_diagnostic.IDE0022.severity = silent
-dotnet_diagnostic.IDE0065.severity = silent
 dotnet_diagnostic.IDE0160.severity = silent
 dotnet_diagnostic.CS1591.severity = silent
+dotnet_diagnostic.IDE0001.severity = silent # for local
+dotnet_diagnostic.IDE0002.severity = silent # for local
+dotnet_diagnostic.IDE0065.severity = silent # for local
 dotnet_diagnostic.IDE0130.severity = silent # for local
 
 [*.{ini,toml}]
