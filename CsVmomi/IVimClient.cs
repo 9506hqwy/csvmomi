@@ -282,7 +282,7 @@ public interface IVimClient
 
     System.Threading.Tasks.Task<ManagedObjectReference?> CreateDisk_Task(ManagedObjectReference self, VslmCreateSpec spec);
 
-    System.Threading.Tasks.Task<ManagedObjectReference?> CreateDiskFromSnapshot_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId, string name, VirtualMachineProfileSpec[]? profile, CryptoSpec? crypto, string? path);
+    System.Threading.Tasks.Task<ManagedObjectReference?> CreateDiskFromSnapshot_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId, string name, VirtualMachineProfileSpec[]? profile, CryptoSpec? crypto, string? path, bool isLinkedClone, bool isLinkedCloneSpecified, ID? targetId, ManagedObjectReference? targetDatastore);
 
     System.Threading.Tasks.Task<ManagedObjectReference?> CreateDVPortgroup_Task(ManagedObjectReference self, DVPortgroupConfigSpec spec);
 
@@ -688,6 +688,8 @@ public interface IVimClient
 
     System.Threading.Tasks.Task<VchaClusterConfigInfo?> GetVchaConfig(ManagedObjectReference self);
 
+    System.Threading.Tasks.Task<DistributedVirtualSwitchManagerSpanInfo[]?> GetVpcNetworkSpan(ManagedObjectReference self, string? spanId);
+
     System.Threading.Tasks.Task<string?> GetVsanObjExtAttrs(ManagedObjectReference self, string[] uuids);
 
     System.Threading.Tasks.Task<bool> HasMonitoredEntity(ManagedObjectReference self, string providerId, ManagedObjectReference entity);
@@ -710,9 +712,9 @@ public interface IVimClient
 
     System.Threading.Tasks.Task<ManagedObjectReference?> HostCreateDisk_Task(ManagedObjectReference self, VslmCreateSpec spec);
 
-    System.Threading.Tasks.Task<ManagedObjectReference?> HostDeleteVStorageObject_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore);
+    System.Threading.Tasks.Task<ManagedObjectReference?> HostDeleteVStorageObject_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, bool isLcParentAttached, bool isLcParentAttachedSpecified);
 
-    System.Threading.Tasks.Task<ManagedObjectReference?> HostDeleteVStorageObjectEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore);
+    System.Threading.Tasks.Task<ManagedObjectReference?> HostDeleteVStorageObjectEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, bool isLcParentAttached, bool isLcParentAttachedSpecified);
 
     System.Threading.Tasks.Task<ManagedObjectReference?> HostExtendDisk_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, long newCapacityInMB);
 
@@ -732,9 +734,9 @@ public interface IVimClient
 
     System.Threading.Tasks.Task<ManagedObjectReference?> HostReconcileDatastoreInventory_Task(ManagedObjectReference self, ManagedObjectReference datastore, bool deepCleansing, bool deepCleansingSpecified);
 
-    System.Threading.Tasks.Task<VStorageObject?> HostRegisterDisk(ManagedObjectReference self, string path, string? name, bool modifyControlFlags, bool modifyControlFlagsSpecified);
+    System.Threading.Tasks.Task<VStorageObject?> HostRegisterDisk(ManagedObjectReference self, string path, string? name, bool modifyControlFlags, bool modifyControlFlagsSpecified, ID? id);
 
-    System.Threading.Tasks.Task<ManagedObjectReference?> HostRelocateVStorageObject_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, VslmRelocateSpec spec);
+    System.Threading.Tasks.Task<ManagedObjectReference?> HostRelocateVStorageObject_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, VslmRelocateSpec spec, bool isLcParentAttached, bool isLcParentAttachedSpecified);
 
     System.Threading.Tasks.Task HostRemoveVFlashResource(ManagedObjectReference self);
 
@@ -762,7 +764,7 @@ public interface IVimClient
 
     System.Threading.Tasks.Task<ManagedObjectReference?> HostUpdateVStorageObjectMetadataEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, KeyValue[]? metadata, string[]? deleteKeys);
 
-    System.Threading.Tasks.Task<ManagedObjectReference?> HostVStorageObjectCreateDiskFromSnapshot_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId, string name, VirtualMachineProfileSpec[]? profile, CryptoSpec? crypto, string? path, string? provisioningType);
+    System.Threading.Tasks.Task<ManagedObjectReference?> HostVStorageObjectCreateDiskFromSnapshot_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId, string name, VirtualMachineProfileSpec[]? profile, CryptoSpec? crypto, string? path, string? provisioningType, bool isLinkedClone, bool isLinkedCloneSpecified, ID? targetId, ManagedObjectReference? targetDatastore);
 
     System.Threading.Tasks.Task<ManagedObjectReference?> HostVStorageObjectCreateSnapshot_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string description);
 
@@ -992,6 +994,8 @@ public interface IVimClient
 
     System.Threading.Tasks.Task<int> PutUsbScanCodes(ManagedObjectReference self, UsbScanCodeSpec spec);
 
+    System.Threading.Tasks.Task<SearchIndexResultSet?> Query(ManagedObjectReference self, SearchIndexQuerySpec querySpec);
+
     System.Threading.Tasks.Task<AnswerFileStatusResult[]?> QueryAnswerFileStatus(ManagedObjectReference self, ManagedObjectReference[] host);
 
     System.Threading.Tasks.Task<LicenseAssignmentManagerLicenseAssignment[]?> QueryAssignedLicenses(ManagedObjectReference self, string? entityId);
@@ -1137,6 +1141,8 @@ public interface IVimClient
     System.Threading.Tasks.Task<VirtualNicManagerNetConfig?> QueryNetConfig(ManagedObjectReference self, string nicType);
 
     System.Threading.Tasks.Task<PhysicalNicHintInfo[]?> QueryNetworkHint(ManagedObjectReference self, string[]? device);
+
+    System.Threading.Tasks.Task<SearchIndexResultSet?> QueryNext(ManagedObjectReference self, SearchIndexIterationSpec iterationSpec);
 
     System.Threading.Tasks.Task<HostNasVolumeUserInfo?> QueryNFSUser(ManagedObjectReference self);
 
@@ -1330,7 +1336,7 @@ public interface IVimClient
 
     System.Threading.Tasks.Task<ManagedObjectReference?> RegisterChildVM_Task(ManagedObjectReference self, string path, string? name, ManagedObjectReference? host);
 
-    System.Threading.Tasks.Task<VStorageObject?> RegisterDisk(ManagedObjectReference self, string path, string? name);
+    System.Threading.Tasks.Task<VStorageObject?> RegisterDisk(ManagedObjectReference self, string path, string? name, ID? id);
 
     System.Threading.Tasks.Task RegisterExtension(ManagedObjectReference self, Extension extension);
 
@@ -1444,6 +1450,10 @@ public interface IVimClient
 
     System.Threading.Tasks.Task<vslmVClockInfo?> RenameVStorageObjectEx(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string name);
 
+    System.Threading.Tasks.Task<ManagedObjectReference?> RepairVmDiskChains_Task(ManagedObjectReference self);
+
+    System.Threading.Tasks.Task<ManagedObjectReference?> RepairVStorageObjectChain_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore);
+
     System.Threading.Tasks.Task ReplaceCACertificatesAndCRLs(ManagedObjectReference self, string[] caCert, string[]? caCrl);
 
     System.Threading.Tasks.Task ReplaceSmartCardTrustAnchors(ManagedObjectReference self, string[]? certs);
@@ -1483,6 +1493,8 @@ public interface IVimClient
     System.Threading.Tasks.Task<HostUnresolvedVmfsResolutionResult[]?> ResolveMultipleUnresolvedVmfsVolumes(ManagedObjectReference self, HostUnresolvedVmfsResolutionSpec[] resolutionSpec);
 
     System.Threading.Tasks.Task<ManagedObjectReference?> ResolveMultipleUnresolvedVmfsVolumesEx_Task(ManagedObjectReference self, HostUnresolvedVmfsResolutionSpec[] resolutionSpec);
+
+    System.Threading.Tasks.Task ResolveNfsServerHostName(ManagedObjectReference self, string hostName, string? volumeName, bool force, bool forceSpecified, bool isNFS41, bool isNFS41Specified);
 
     System.Threading.Tasks.Task RestartService(ManagedObjectReference self, string id);
 
@@ -1730,6 +1742,8 @@ public interface IVimClient
 
     System.Threading.Tasks.Task<ManagedObjectReference?> UnregisterAndDestroy_Task(ManagedObjectReference self);
 
+    System.Threading.Tasks.Task<ManagedObjectReference?> UnregisterDisk_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore);
+
     System.Threading.Tasks.Task UnregisterExtension(ManagedObjectReference self, string extensionKey);
 
     System.Threading.Tasks.Task UnregisterHealthUpdateProvider(ManagedObjectReference self, string providerId);
@@ -1928,7 +1942,7 @@ public interface IVimClient
 
     System.Threading.Tasks.Task<ManagedObjectReference?> VStorageObjectCreateSnapshot_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string description);
 
-    System.Threading.Tasks.Task<ManagedObjectReference?> VStorageObjectCreateSnapshotEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string description);
+    System.Threading.Tasks.Task<ManagedObjectReference?> VStorageObjectCreateSnapshotEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string description, ID? snapshotId);
 
     System.Threading.Tasks.Task<ManagedObjectReference?> VStorageObjectDeleteSnapshotEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId);
 

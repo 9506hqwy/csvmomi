@@ -1464,6 +1464,11 @@ public partial class DistributedVirtualSwitchManager : ManagedObject
         return ManagedObject.Create<DistributedVirtualPortgroup>(res, this.Session);
     }
 
+    public async System.Threading.Tasks.Task<DistributedVirtualSwitchManagerSpanInfo[]?> GetVpcNetworkSpan(string? spanId)
+    {
+        return await this.Session.VimClient.GetVpcNetworkSpan(this.VimReference, spanId);
+    }
+
     public async System.Threading.Tasks.Task<DistributedVirtualSwitchProductSpec[]?> QueryAvailableDvsSpec(bool? recommended)
     {
         return await this.Session.VimClient.QueryAvailableDvsSpec(this.VimReference, recommended ?? default, recommended.HasValue);
@@ -2917,6 +2922,11 @@ public partial class HostDatastoreSystem : ManagedObject
     {
         var res = await this.Session.VimClient.ResignatureUnresolvedVmfsVolume_Task(this.VimReference, resolutionSpec);
         return ManagedObject.Create<Task>(res, this.Session);
+    }
+
+    public async System.Threading.Tasks.Task ResolveNfsServerHostName(string hostName, string? volumeName, bool? force, bool? isNFS41)
+    {
+        await this.Session.VimClient.ResolveNfsServerHostName(this.VimReference, hostName, volumeName, force ?? default, force.HasValue, isNFS41 ?? default, isNFS41.HasValue);
     }
 
     public async System.Threading.Tasks.Task SetMaxQueueDepth(Datastore datastore, long maxQdepth)
@@ -4997,15 +5007,15 @@ public partial class HostVStorageObjectManager : VStorageObjectManagerBase
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
-    public async System.Threading.Tasks.Task<Task?> HostDeleteVStorageObject_Task(ID id, Datastore datastore)
+    public async System.Threading.Tasks.Task<Task?> HostDeleteVStorageObject_Task(ID id, Datastore datastore, bool? isLcParentAttached)
     {
-        var res = await this.Session.VimClient.HostDeleteVStorageObject_Task(this.VimReference, id, datastore.VimReference);
+        var res = await this.Session.VimClient.HostDeleteVStorageObject_Task(this.VimReference, id, datastore.VimReference, isLcParentAttached ?? default, isLcParentAttached.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
-    public async System.Threading.Tasks.Task<Task?> HostDeleteVStorageObjectEx_Task(ID id, Datastore datastore)
+    public async System.Threading.Tasks.Task<Task?> HostDeleteVStorageObjectEx_Task(ID id, Datastore datastore, bool? isLcParentAttached)
     {
-        var res = await this.Session.VimClient.HostDeleteVStorageObjectEx_Task(this.VimReference, id, datastore.VimReference);
+        var res = await this.Session.VimClient.HostDeleteVStorageObjectEx_Task(this.VimReference, id, datastore.VimReference, isLcParentAttached ?? default, isLcParentAttached.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
@@ -5037,14 +5047,14 @@ public partial class HostVStorageObjectManager : VStorageObjectManagerBase
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
-    public async System.Threading.Tasks.Task<VStorageObject?> HostRegisterDisk(string path, string? name, bool? modifyControlFlags)
+    public async System.Threading.Tasks.Task<VStorageObject?> HostRegisterDisk(string path, string? name, bool? modifyControlFlags, ID? id)
     {
-        return await this.Session.VimClient.HostRegisterDisk(this.VimReference, path, name, modifyControlFlags ?? default, modifyControlFlags.HasValue);
+        return await this.Session.VimClient.HostRegisterDisk(this.VimReference, path, name, modifyControlFlags ?? default, modifyControlFlags.HasValue, id);
     }
 
-    public async System.Threading.Tasks.Task<Task?> HostRelocateVStorageObject_Task(ID id, Datastore datastore, VslmRelocateSpec spec)
+    public async System.Threading.Tasks.Task<Task?> HostRelocateVStorageObject_Task(ID id, Datastore datastore, VslmRelocateSpec spec, bool? isLcParentAttached)
     {
-        var res = await this.Session.VimClient.HostRelocateVStorageObject_Task(this.VimReference, id, datastore.VimReference, spec);
+        var res = await this.Session.VimClient.HostRelocateVStorageObject_Task(this.VimReference, id, datastore.VimReference, spec, isLcParentAttached ?? default, isLcParentAttached.HasValue);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
@@ -5106,9 +5116,9 @@ public partial class HostVStorageObjectManager : VStorageObjectManagerBase
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
-    public async System.Threading.Tasks.Task<Task?> HostVStorageObjectCreateDiskFromSnapshot_Task(ID id, Datastore datastore, ID snapshotId, string name, VirtualMachineProfileSpec[]? profile, CryptoSpec? crypto, string? path, string? provisioningType)
+    public async System.Threading.Tasks.Task<Task?> HostVStorageObjectCreateDiskFromSnapshot_Task(ID id, Datastore datastore, ID snapshotId, string name, VirtualMachineProfileSpec[]? profile, CryptoSpec? crypto, string? path, string? provisioningType, bool? isLinkedClone, ID? targetId, Datastore? targetDatastore)
     {
-        var res = await this.Session.VimClient.HostVStorageObjectCreateDiskFromSnapshot_Task(this.VimReference, id, datastore.VimReference, snapshotId, name, profile, crypto, path, provisioningType);
+        var res = await this.Session.VimClient.HostVStorageObjectCreateDiskFromSnapshot_Task(this.VimReference, id, datastore.VimReference, snapshotId, name, profile, crypto, path, provisioningType, isLinkedClone ?? default, isLinkedClone.HasValue, targetId, targetDatastore?.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
@@ -6507,6 +6517,16 @@ public partial class SearchIndex : ManagedObject
         var res = await this.Session.VimClient.FindChild(this.VimReference, entity.VimReference, name);
         return ManagedObject.Create<ManagedEntity>(res, this.Session);
     }
+
+    public async System.Threading.Tasks.Task<SearchIndexResultSet?> Query(SearchIndexQuerySpec querySpec)
+    {
+        return await this.Session.VimClient.Query(this.VimReference, querySpec);
+    }
+
+    public async System.Threading.Tasks.Task<SearchIndexResultSet?> QueryNext(SearchIndexIterationSpec iterationSpec)
+    {
+        return await this.Session.VimClient.QueryNext(this.VimReference, iterationSpec);
+    }
 }
 
 public partial class ServiceInstance : ManagedObject
@@ -6994,6 +7014,22 @@ public partial class TenantTenantManager : ManagedObject
     }
 }
 
+public partial class TransitGateway : ManagedEntity
+{
+    protected TransitGateway(
+        ManagedObjectReference reference,
+        Session session)
+        : base(reference, session)
+    {
+    }
+
+    public async System.Threading.Tasks.Task<TransitGatewayConfigInfo> GetPropertyConfig()
+    {
+        var obj = await this.GetProperty<TransitGatewayConfigInfo>("config");
+        return obj!;
+    }
+}
+
 public partial class UserDirectory : ManagedObject
 {
     protected UserDirectory(
@@ -7046,9 +7082,9 @@ public partial class VcenterVStorageObjectManager : VStorageObjectManagerBase
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
-    public async System.Threading.Tasks.Task<Task?> CreateDiskFromSnapshot_Task(ID id, Datastore datastore, ID snapshotId, string name, VirtualMachineProfileSpec[]? profile, CryptoSpec? crypto, string? path)
+    public async System.Threading.Tasks.Task<Task?> CreateDiskFromSnapshot_Task(ID id, Datastore datastore, ID snapshotId, string name, VirtualMachineProfileSpec[]? profile, CryptoSpec? crypto, string? path, bool? isLinkedClone, ID? targetId, Datastore? targetDatastore)
     {
-        var res = await this.Session.VimClient.CreateDiskFromSnapshot_Task(this.VimReference, id, datastore.VimReference, snapshotId, name, profile, crypto, path);
+        var res = await this.Session.VimClient.CreateDiskFromSnapshot_Task(this.VimReference, id, datastore.VimReference, snapshotId, name, profile, crypto, path, isLinkedClone ?? default, isLinkedClone.HasValue, targetId, targetDatastore?.VimReference);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
@@ -7119,9 +7155,9 @@ public partial class VcenterVStorageObjectManager : VStorageObjectManagerBase
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
-    public async System.Threading.Tasks.Task<VStorageObject?> RegisterDisk(string path, string? name)
+    public async System.Threading.Tasks.Task<VStorageObject?> RegisterDisk(string path, string? name, ID? id)
     {
-        return await this.Session.VimClient.RegisterDisk(this.VimReference, path, name);
+        return await this.Session.VimClient.RegisterDisk(this.VimReference, path, name, id);
     }
 
     public async System.Threading.Tasks.Task<Task?> RelocateVStorageObject_Task(ID id, Datastore datastore, VslmRelocateSpec spec)
@@ -7849,6 +7885,12 @@ public partial class VirtualMachine : ManagedEntity
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
+    public async System.Threading.Tasks.Task<Task?> RepairVmDiskChains_Task()
+    {
+        var res = await this.Session.VimClient.RepairVmDiskChains_Task(this.VimReference);
+        return ManagedObject.Create<Task>(res, this.Session);
+    }
+
     public async System.Threading.Tasks.Task ResetGuestInformation()
     {
         await this.Session.VimClient.ResetGuestInformation(this.VimReference);
@@ -8166,15 +8208,27 @@ public partial class VStorageObjectManagerBase : ManagedObject
         return await this.Session.VimClient.RenameVStorageObjectEx(this.VimReference, id, datastore.VimReference, name);
     }
 
+    public async System.Threading.Tasks.Task<Task?> RepairVStorageObjectChain_Task(ID id, Datastore datastore)
+    {
+        var res = await this.Session.VimClient.RepairVStorageObjectChain_Task(this.VimReference, id, datastore.VimReference);
+        return ManagedObject.Create<Task>(res, this.Session);
+    }
+
     public async System.Threading.Tasks.Task<Task?> RevertVStorageObjectEx_Task(ID id, Datastore datastore, ID snapshotId)
     {
         var res = await this.Session.VimClient.RevertVStorageObjectEx_Task(this.VimReference, id, datastore.VimReference, snapshotId);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 
-    public async System.Threading.Tasks.Task<Task?> VStorageObjectCreateSnapshotEx_Task(ID id, Datastore datastore, string description)
+    public async System.Threading.Tasks.Task<Task?> UnregisterDisk_Task(ID id, Datastore datastore)
     {
-        var res = await this.Session.VimClient.VStorageObjectCreateSnapshotEx_Task(this.VimReference, id, datastore.VimReference, description);
+        var res = await this.Session.VimClient.UnregisterDisk_Task(this.VimReference, id, datastore.VimReference);
+        return ManagedObject.Create<Task>(res, this.Session);
+    }
+
+    public async System.Threading.Tasks.Task<Task?> VStorageObjectCreateSnapshotEx_Task(ID id, Datastore datastore, string description, ID? snapshotId)
+    {
+        var res = await this.Session.VimClient.VStorageObjectCreateSnapshotEx_Task(this.VimReference, id, datastore.VimReference, description, snapshotId);
         return ManagedObject.Create<Task>(res, this.Session);
     }
 

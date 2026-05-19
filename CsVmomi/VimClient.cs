@@ -1859,7 +1859,7 @@ public class VimClient : IVimClient
         return res.CreateDisk_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateDiskFromSnapshot_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId, string name, VirtualMachineProfileSpec[]? profile, CryptoSpec? crypto, string? path)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateDiskFromSnapshot_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId, string name, VirtualMachineProfileSpec[]? profile, CryptoSpec? crypto, string? path, bool isLinkedClone, bool isLinkedCloneSpecified, ID? targetId, ManagedObjectReference? targetDatastore)
     {
         var req = new CreateDiskFromSnapshotRequestType
         {
@@ -1871,6 +1871,10 @@ public class VimClient : IVimClient
             profile = profile,
             crypto = crypto,
             path = path,
+            isLinkedClone = isLinkedClone,
+            isLinkedCloneSpecified = isLinkedCloneSpecified,
+            targetId = targetId,
+            targetDatastore = targetDatastore,
         };
 
         var res = await this.inner.CreateDiskFromSnapshot_TaskAsync(req);
@@ -4460,6 +4464,19 @@ public class VimClient : IVimClient
         return res.getVchaConfigResponse.returnval;
     }
 
+    public async System.Threading.Tasks.Task<DistributedVirtualSwitchManagerSpanInfo[]?> GetVpcNetworkSpan(ManagedObjectReference self, string? spanId)
+    {
+        var req = new GetVpcNetworkSpanRequestType
+        {
+            _this = self,
+            spanId = spanId,
+        };
+
+        var res = await this.inner.GetVpcNetworkSpanAsync(req);
+
+        return res.GetVpcNetworkSpanResponse1;
+    }
+
     public async System.Threading.Tasks.Task<string?> GetVsanObjExtAttrs(ManagedObjectReference self, string[] uuids)
     {
         var req = new GetVsanObjExtAttrsRequestType
@@ -4608,13 +4625,15 @@ public class VimClient : IVimClient
         return res.HostCreateDisk_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference?> HostDeleteVStorageObject_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> HostDeleteVStorageObject_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, bool isLcParentAttached, bool isLcParentAttachedSpecified)
     {
         var req = new HostDeleteVStorageObjectRequestType
         {
             _this = self,
             id = id,
             datastore = datastore,
+            isLcParentAttached = isLcParentAttached,
+            isLcParentAttachedSpecified = isLcParentAttachedSpecified,
         };
 
         var res = await this.inner.HostDeleteVStorageObject_TaskAsync(req);
@@ -4622,13 +4641,15 @@ public class VimClient : IVimClient
         return res.HostDeleteVStorageObject_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference?> HostDeleteVStorageObjectEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> HostDeleteVStorageObjectEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, bool isLcParentAttached, bool isLcParentAttachedSpecified)
     {
         var req = new HostDeleteVStorageObjectExRequestType
         {
             _this = self,
             id = id,
             datastore = datastore,
+            isLcParentAttached = isLcParentAttached,
+            isLcParentAttachedSpecified = isLcParentAttachedSpecified,
         };
 
         var res = await this.inner.HostDeleteVStorageObjectEx_TaskAsync(req);
@@ -4753,7 +4774,7 @@ public class VimClient : IVimClient
         return res.HostReconcileDatastoreInventory_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<VStorageObject?> HostRegisterDisk(ManagedObjectReference self, string path, string? name, bool modifyControlFlags, bool modifyControlFlagsSpecified)
+    public async System.Threading.Tasks.Task<VStorageObject?> HostRegisterDisk(ManagedObjectReference self, string path, string? name, bool modifyControlFlags, bool modifyControlFlagsSpecified, ID? id)
     {
         var req = new HostRegisterDiskRequestType
         {
@@ -4762,6 +4783,7 @@ public class VimClient : IVimClient
             name = name,
             modifyControlFlags = modifyControlFlags,
             modifyControlFlagsSpecified = modifyControlFlagsSpecified,
+            id = id,
         };
 
         var res = await this.inner.HostRegisterDiskAsync(req);
@@ -4769,7 +4791,7 @@ public class VimClient : IVimClient
         return res.HostRegisterDiskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference?> HostRelocateVStorageObject_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, VslmRelocateSpec spec)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> HostRelocateVStorageObject_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, VslmRelocateSpec spec, bool isLcParentAttached, bool isLcParentAttachedSpecified)
     {
         var req = new HostRelocateVStorageObjectRequestType
         {
@@ -4777,6 +4799,8 @@ public class VimClient : IVimClient
             id = id,
             datastore = datastore,
             spec = spec,
+            isLcParentAttached = isLcParentAttached,
+            isLcParentAttachedSpecified = isLcParentAttachedSpecified,
         };
 
         var res = await this.inner.HostRelocateVStorageObject_TaskAsync(req);
@@ -4967,7 +4991,7 @@ public class VimClient : IVimClient
         return res.HostUpdateVStorageObjectMetadataEx_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference?> HostVStorageObjectCreateDiskFromSnapshot_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId, string name, VirtualMachineProfileSpec[]? profile, CryptoSpec? crypto, string? path, string? provisioningType)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> HostVStorageObjectCreateDiskFromSnapshot_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId, string name, VirtualMachineProfileSpec[]? profile, CryptoSpec? crypto, string? path, string? provisioningType, bool isLinkedClone, bool isLinkedCloneSpecified, ID? targetId, ManagedObjectReference? targetDatastore)
     {
         var req = new HostVStorageObjectCreateDiskFromSnapshotRequestType
         {
@@ -4980,6 +5004,10 @@ public class VimClient : IVimClient
             crypto = crypto,
             path = path,
             provisioningType = provisioningType,
+            isLinkedClone = isLinkedClone,
+            isLinkedCloneSpecified = isLinkedCloneSpecified,
+            targetId = targetId,
+            targetDatastore = targetDatastore,
         };
 
         var res = await this.inner.HostVStorageObjectCreateDiskFromSnapshot_TaskAsync(req);
@@ -6518,6 +6546,19 @@ public class VimClient : IVimClient
         return res.PutUsbScanCodesResponse.returnval;
     }
 
+    public async System.Threading.Tasks.Task<SearchIndexResultSet?> Query(ManagedObjectReference self, SearchIndexQuerySpec querySpec)
+    {
+        var req = new QueryRequestType
+        {
+            _this = self,
+            querySpec = querySpec,
+        };
+
+        var res = await this.inner.QueryAsync(req);
+
+        return res.QueryResponse.returnval;
+    }
+
     public async System.Threading.Tasks.Task<AnswerFileStatusResult[]?> QueryAnswerFileStatus(ManagedObjectReference self, ManagedObjectReference[] host)
     {
         var req = new QueryAnswerFileStatusRequestType
@@ -7491,6 +7532,19 @@ public class VimClient : IVimClient
         var res = await this.inner.QueryNetworkHintAsync(req);
 
         return res.QueryNetworkHintResponse1;
+    }
+
+    public async System.Threading.Tasks.Task<SearchIndexResultSet?> QueryNext(ManagedObjectReference self, SearchIndexIterationSpec iterationSpec)
+    {
+        var req = new QueryNextRequestType
+        {
+            _this = self,
+            iterationSpec = iterationSpec,
+        };
+
+        var res = await this.inner.QueryNextAsync(req);
+
+        return res.QueryNextResponse.returnval;
     }
 
     public async System.Threading.Tasks.Task<HostNasVolumeUserInfo?> QueryNFSUser(ManagedObjectReference self)
@@ -8703,13 +8757,14 @@ public class VimClient : IVimClient
         return res.RegisterChildVM_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<VStorageObject?> RegisterDisk(ManagedObjectReference self, string path, string? name)
+    public async System.Threading.Tasks.Task<VStorageObject?> RegisterDisk(ManagedObjectReference self, string path, string? name, ID? id)
     {
         var req = new RegisterDiskRequestType
         {
             _this = self,
             path = path,
             name = name,
+            id = id,
         };
 
         var res = await this.inner.RegisterDiskAsync(req);
@@ -9409,6 +9464,32 @@ public class VimClient : IVimClient
         return res.RenameVStorageObjectExResponse.returnval;
     }
 
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> RepairVmDiskChains_Task(ManagedObjectReference self)
+    {
+        var req = new RepairVmDiskChainsRequestType
+        {
+            _this = self,
+        };
+
+        var res = await this.inner.RepairVmDiskChains_TaskAsync(req);
+
+        return res.RepairVmDiskChains_TaskResponse.returnval;
+    }
+
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> RepairVStorageObjectChain_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
+    {
+        var req = new RepairVStorageObjectChainRequestType
+        {
+            _this = self,
+            id = id,
+            datastore = datastore,
+        };
+
+        var res = await this.inner.RepairVStorageObjectChain_TaskAsync(req);
+
+        return res.RepairVStorageObjectChain_TaskResponse.returnval;
+    }
+
     public async System.Threading.Tasks.Task ReplaceCACertificatesAndCRLs(ManagedObjectReference self, string[] caCert, string[]? caCrl)
     {
         var req = new ReplaceCACertificatesAndCRLsRequestType
@@ -9637,6 +9718,22 @@ public class VimClient : IVimClient
         var res = await this.inner.ResolveMultipleUnresolvedVmfsVolumesEx_TaskAsync(req);
 
         return res.ResolveMultipleUnresolvedVmfsVolumesEx_TaskResponse.returnval;
+    }
+
+    public async System.Threading.Tasks.Task ResolveNfsServerHostName(ManagedObjectReference self, string hostName, string? volumeName, bool force, bool forceSpecified, bool isNFS41, bool isNFS41Specified)
+    {
+        var req = new ResolveNfsServerHostNameRequestType
+        {
+            _this = self,
+            hostName = hostName,
+            volumeName = volumeName,
+            force = force,
+            forceSpecified = forceSpecified,
+            isNFS41 = isNFS41,
+            isNFS41Specified = isNFS41Specified,
+        };
+
+        await this.inner.ResolveNfsServerHostNameAsync(req);
     }
 
     public async System.Threading.Tasks.Task RestartService(ManagedObjectReference self, string id)
@@ -11190,6 +11287,20 @@ public class VimClient : IVimClient
         return res.UnregisterAndDestroy_TaskResponse.returnval;
     }
 
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> UnregisterDisk_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
+    {
+        var req = new UnregisterDiskRequestType
+        {
+            _this = self,
+            id = id,
+            datastore = datastore,
+        };
+
+        var res = await this.inner.UnregisterDisk_TaskAsync(req);
+
+        return res.UnregisterDisk_TaskResponse.returnval;
+    }
+
     public async System.Threading.Tasks.Task UnregisterExtension(ManagedObjectReference self, string extensionKey)
     {
         var req = new UnregisterExtensionRequestType
@@ -12399,7 +12510,7 @@ public class VimClient : IVimClient
         return res.VStorageObjectCreateSnapshot_TaskResponse.returnval;
     }
 
-    public async System.Threading.Tasks.Task<ManagedObjectReference?> VStorageObjectCreateSnapshotEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string description)
+    public async System.Threading.Tasks.Task<ManagedObjectReference?> VStorageObjectCreateSnapshotEx_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string description, ID? snapshotId)
     {
         var req = new VStorageObjectCreateSnapshotExRequestType
         {
@@ -12407,6 +12518,7 @@ public class VimClient : IVimClient
             id = id,
             datastore = datastore,
             description = description,
+            snapshotId = snapshotId,
         };
 
         var res = await this.inner.VStorageObjectCreateSnapshotEx_TaskAsync(req);
