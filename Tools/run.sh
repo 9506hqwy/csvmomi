@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-VERSION="9.1.0.0"
+VERSION="9.1.1.0"
 SPEC_URL="https://github.com/vmware/vcf-api-specs.git"
 
 TOOL=$(cd "$(dirname "$0")"; pwd)
