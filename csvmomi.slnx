@@ -1,0 +1,20 @@
+<Solution>
+  <Folder Name="/Examples/">
+    <Project Path="Examples/AddVmDisk/AddVmDisk.csproj" />
+    <Project Path="Examples/AddVmNic/AddVmNic.csproj" />
+    <Project Path="Examples/CreateVm/CreateVm.csproj" />
+    <Project Path="Examples/ExportVm/ExportVm.csproj" />
+    <Project Path="Examples/ListAllHost/ListAllHost.csproj" />
+    <Project Path="Examples/ListAllIso/ListAllIso.csproj" />
+    <Project Path="Examples/ListAllVm/ListAllVm.csproj" />
+    <Project Path="Examples/LoginByToken/LoginByToken.csproj" />
+    <Project Path="Examples/MountIso/MountIso.csproj" />
+    <Project Path="Examples/PollEvent/PollEvent.csproj" />
+    <Project Path="Examples/PowerOnVm/PowerOnVm.csproj" />
+    <Project Path="Examples/RebootGuestVm/RebootGuestVm.csproj" />
+    <Project Path="Examples/ShutdownHost/ShutdownHost.csproj" />
+  </Folder>
+  <Project Path="CsVmomi.Test/CsVmomi.Test.csproj" />
+  <Project Path="CsVmomi/CsVmomi.csproj" />
+  <Project Path="StubCheck/StubCheck.csproj" />
+</Solution>

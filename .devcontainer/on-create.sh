@@ -3,7 +3,7 @@ set -euo pipefail
 
 # Install dependencies
 sudo apt-get update -y
-sudo apt-get install -y shellcheck
+sudo apt-get install -y libxml2-utils mono-complete shellcheck
 
 # Configuration PATH
 mkdir -p ~/.local/bin
@@ -70,6 +70,9 @@ dotnet tool install -g dotnet-dump
 dotnet tool install -g dotnet-monitor
 dotnet tool install -g dotnet-stack
 dotnet tool install -g dotnet-trace
+
+# Install CycloneDX
+dotnet tool install -g CycloneDX
 
 # Install deno
 sh -c "$(curl -fsSL https://deno.land/install.sh)" -- -y
