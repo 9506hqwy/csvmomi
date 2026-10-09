@@ -15,96 +15,94 @@ public partial class Agency : EamObject
 
     public async System.Threading.Tasks.Task<Agent[]?> GetPropertyAgent()
     {
-        var agent = await this.GetProperty<ManagedObjectReference[]>("agent");
-        return agent?
-            .Select(r => ManagedObject.Create<Agent>(r, this.Session)!)
-            .ToArray();
+        var agent = await this.GetProperty<ManagedObjectReference[]>("agent").ConfigureAwait(false);
+        return agent?.Select(r => ManagedObject.Create<Agent>(r, this.Session)!).ToArray();
     }
 
     public async System.Threading.Tasks.Task<AgencyConfigInfo> GetPropertyConfig()
     {
-        var obj = await this.GetProperty<AgencyConfigInfo>("config");
+        var obj = await this.GetProperty<AgencyConfigInfo>("config").ConfigureAwait(false);
         return obj!;
     }
 
     public async System.Threading.Tasks.Task<string?> GetPropertyOwner()
     {
-        var obj = await this.GetProperty<string>("owner");
+        var obj = await this.GetProperty<string>("owner").ConfigureAwait(false);
         return obj;
     }
 
     public async System.Threading.Tasks.Task<EamObjectRuntimeInfo> GetPropertyRuntime()
     {
-        var obj = await this.GetProperty<EamObjectRuntimeInfo>("runtime");
+        var obj = await this.GetProperty<EamObjectRuntimeInfo>("runtime").ConfigureAwait(false);
         return obj!;
     }
 
     public async System.Threading.Tasks.Task<string> GetPropertySolutionId()
     {
-        var obj = await this.GetProperty<string>("solutionId");
+        var obj = await this.GetProperty<string>("solutionId").ConfigureAwait(false);
         return obj!;
     }
 
     public async System.Threading.Tasks.Task<Issue?> AddIssue(Issue issue)
     {
-        return await this.Session.EamClient!.AddIssue(this.EamReference, issue);
+        return await this.Session.EamClient!.AddIssue(this.EamReference, issue).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task Agency_Disable()
     {
-        await this.Session.EamClient!.Agency_Disable(this.EamReference);
+        await this.Session.EamClient!.Agency_Disable(this.EamReference).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task Agency_Enable()
     {
-        await this.Session.EamClient!.Agency_Enable(this.EamReference);
+        await this.Session.EamClient!.Agency_Enable(this.EamReference).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<EamObjectRuntimeInfo?> AgencyQueryRuntime()
     {
-        return await this.Session.EamClient!.AgencyQueryRuntime(this.EamReference);
+        return await this.Session.EamClient!.AgencyQueryRuntime(this.EamReference).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task DestroyAgency()
     {
-        await this.Session.EamClient!.DestroyAgency(this.EamReference);
+        await this.Session.EamClient!.DestroyAgency(this.EamReference).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<Agent[]?> QueryAgent()
     {
-        var res = await this.Session.EamClient!.QueryAgent(this.EamReference);
+        var res = await this.Session.EamClient!.QueryAgent(this.EamReference).ConfigureAwait(false);
         return res?.Select(r => ManagedObject.Create<Agent>(r, this.Session)!).ToArray();
     }
 
     public async System.Threading.Tasks.Task<AgencyConfigInfo?> QueryConfig()
     {
-        return await this.Session.EamClient!.QueryConfig(this.EamReference);
+        return await this.Session.EamClient!.QueryConfig(this.EamReference).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<string?> QuerySolutionId()
     {
-        return await this.Session.EamClient!.QuerySolutionId(this.EamReference);
+        return await this.Session.EamClient!.QuerySolutionId(this.EamReference).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<Agent?> RegisterAgentVm(VirtualMachine agentVm)
     {
-        var res = await this.Session.EamClient!.RegisterAgentVm(this.EamReference, agentVm.EamReference);
+        var res = await this.Session.EamClient!.RegisterAgentVm(this.EamReference, agentVm.EamReference).ConfigureAwait(false);
         return ManagedObject.Create<Agent>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task Uninstall()
     {
-        await this.Session.EamClient!.Uninstall(this.EamReference);
+        await this.Session.EamClient!.Uninstall(this.EamReference).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UnregisterAgentVm(VirtualMachine agentVm)
     {
-        await this.Session.EamClient!.UnregisterAgentVm(this.EamReference, agentVm.EamReference);
+        await this.Session.EamClient!.UnregisterAgentVm(this.EamReference, agentVm.EamReference).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task Update(AgencyConfigInfo config)
     {
-        await this.Session.EamClient!.Update(this.EamReference, config);
+        await this.Session.EamClient!.Update(this.EamReference, config).ConfigureAwait(false);
     }
 }
 
@@ -119,29 +117,29 @@ public partial class Agent : EamObject
 
     public async System.Threading.Tasks.Task<AgentConfigInfo> GetPropertyConfig()
     {
-        var obj = await this.GetProperty<AgentConfigInfo>("config");
+        var obj = await this.GetProperty<AgentConfigInfo>("config").ConfigureAwait(false);
         return obj!;
     }
 
     public async System.Threading.Tasks.Task<AgentRuntimeInfo> GetPropertyRuntime()
     {
-        var obj = await this.GetProperty<AgentRuntimeInfo>("runtime");
+        var obj = await this.GetProperty<AgentRuntimeInfo>("runtime").ConfigureAwait(false);
         return obj!;
     }
 
     public async System.Threading.Tasks.Task<AgentConfigInfo?> AgentQueryConfig()
     {
-        return await this.Session.EamClient!.AgentQueryConfig(this.EamReference);
+        return await this.Session.EamClient!.AgentQueryConfig(this.EamReference).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<AgentRuntimeInfo?> AgentQueryRuntime()
     {
-        return await this.Session.EamClient!.AgentQueryRuntime(this.EamReference);
+        return await this.Session.EamClient!.AgentQueryRuntime(this.EamReference).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task MarkAsAvailable()
     {
-        await this.Session.EamClient!.MarkAsAvailable(this.EamReference);
+        await this.Session.EamClient!.MarkAsAvailable(this.EamReference).ConfigureAwait(false);
     }
 }
 
@@ -156,17 +154,17 @@ public partial class EamObject : ManagedObject
 
     public async System.Threading.Tasks.Task<Issue[]?> QueryIssue(int[]? issueKey)
     {
-        return await this.Session.EamClient!.QueryIssue(this.EamReference, issueKey);
+        return await this.Session.EamClient!.QueryIssue(this.EamReference, issueKey).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<int[]?> Resolve(int[] issueKey)
     {
-        return await this.Session.EamClient!.Resolve(this.EamReference, issueKey);
+        return await this.Session.EamClient!.Resolve(this.EamReference, issueKey).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task ResolveAll()
     {
-        await this.Session.EamClient!.ResolveAll(this.EamReference);
+        await this.Session.EamClient!.ResolveAll(this.EamReference).ConfigureAwait(false);
     }
 }
 
@@ -191,43 +189,41 @@ public partial class EsxAgentManager : EamObject
 
     public async System.Threading.Tasks.Task<Agency[]?> GetPropertyAgency()
     {
-        var agency = await this.GetProperty<ManagedObjectReference[]>("agency");
-        return agency?
-            .Select(r => ManagedObject.Create<Agency>(r, this.Session)!)
-            .ToArray();
+        var agency = await this.GetProperty<ManagedObjectReference[]>("agency").ConfigureAwait(false);
+        return agency?.Select(r => ManagedObject.Create<Agency>(r, this.Session)!).ToArray();
     }
 
     public async System.Threading.Tasks.Task<Issue[]?> GetPropertyIssue()
     {
-        var obj = await this.GetProperty<Issue[]>("issue");
+        var obj = await this.GetProperty<Issue[]>("issue").ConfigureAwait(false);
         return obj;
     }
 
     public async System.Threading.Tasks.Task<Agency?> CreateAgency(AgencyConfigInfo agencyConfigInfo, string initialGoalState)
     {
-        var res = await this.Session.EamClient!.CreateAgency(this.EamReference, agencyConfigInfo, initialGoalState);
+        var res = await this.Session.EamClient!.CreateAgency(this.EamReference, agencyConfigInfo, initialGoalState).ConfigureAwait(false);
         return ManagedObject.Create<Agency>(res, this.Session);
     }
 
     public async System.Threading.Tasks.Task<string?> GetMaintenanceModePolicy()
     {
-        return await this.Session.EamClient!.GetMaintenanceModePolicy(this.EamReference);
+        return await this.Session.EamClient!.GetMaintenanceModePolicy(this.EamReference).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<Agency[]?> QueryAgency()
     {
-        var res = await this.Session.EamClient!.QueryAgency(this.EamReference);
+        var res = await this.Session.EamClient!.QueryAgency(this.EamReference).ConfigureAwait(false);
         return res?.Select(r => ManagedObject.Create<Agency>(r, this.Session)!).ToArray();
     }
 
     public async System.Threading.Tasks.Task ScanForUnknownAgentVm()
     {
-        await this.Session.EamClient!.ScanForUnknownAgentVm(this.EamReference);
+        await this.Session.EamClient!.ScanForUnknownAgentVm(this.EamReference).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task SetMaintenanceModePolicy(string policy)
     {
-        await this.Session.EamClient!.SetMaintenanceModePolicy(this.EamReference, policy);
+        await this.Session.EamClient!.SetMaintenanceModePolicy(this.EamReference, policy).ConfigureAwait(false);
     }
 }
 

@@ -29,7 +29,7 @@ function writeManagedObjectMethod(method: ManagedObjectMethod) {
             ${constructors.join("\n            ")}
         };
 
-        await this.inner.${method.name}Async(req);
+        await this.inner.${method.name}Async(req).ConfigureAwait(false);
     }`;
     // END
   } else {
@@ -44,16 +44,14 @@ function writeManagedObjectMethod(method: ManagedObjectMethod) {
       : `${method.name}Response.returnval`;
 
     methodDeclare = `
-    public async System.Threading.Tasks.Task<${returnTy}> ${methodName}(${
-      params.join(", ")
-    })
+    public async System.Threading.Tasks.Task<${returnTy}> ${methodName}(${params.join(", ")})
     {
         var req = new ${reqType}RequestType
         {
             ${constructors.join("\n            ")}
         };
 
-        var res = await this.inner.${method.name}Async(req);
+        var res = await this.inner.${method.name}Async(req).ConfigureAwait(false);
 
         return res.${returnAcc};
     }`;
@@ -149,6 +147,10 @@ public class VimClient : IVimClient
 
     public void SetCookie(System.Net.CookieCollection? cookie)
     {
+        if (cookie == null) {
+            return;
+        }
+
         var container = this.inner.InnerChannel
             .GetProperty<IHttpCookieContainerManager>()!
             .CookieContainer;

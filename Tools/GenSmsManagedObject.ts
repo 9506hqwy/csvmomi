@@ -35,7 +35,7 @@ function writeManagedObject(obj: ManagedObject) {
 
     public async System.Threading.Tasks.Task<${ty}> GetProperty${methodSuffix}()
     {
-        var ${propName} = await this.GetProperty<ManagedObjectReference>("${propName}");
+        var ${propName} = await this.GetProperty<ManagedObjectReference>("${propName}").ConfigureAwait(false);
         return ManagedObject.Create<${returnTy}>(${propName}, this.Session)${q};
     }`;
       // END
@@ -51,15 +51,14 @@ function writeManagedObject(obj: ManagedObject) {
         ty += "?";
       }
       const q = property.mandatory ? "!" : "?";
-      // START
+      const preArr = property.mandatory ? "[.. " : "";
+      const postArr = property.mandatory ? "]" : ".ToArray()";      // START
       propDeclare += `
 
     public async System.Threading.Tasks.Task<${ty}> GetProperty${methodSuffix}()
     {
-        var ${propName} = await this.GetProperty<ManagedObjectReference[]>("${propName}");
-        return ${propName}${q}
-            .Select(r => ManagedObject.Create<${unitReturnTy}>(r, this.Session)!)
-            .ToArray();
+        var ${propName} = await this.GetProperty<ManagedObjectReference[]>("${propName}").ConfigureAwait(false);
+        return ${preArr}${propName}${q}.Select(r => ManagedObject.Create<${unitReturnTy}>(r, this.Session)!)${postArr};
     }`;
       // END
     } else {
@@ -74,7 +73,7 @@ function writeManagedObject(obj: ManagedObject) {
 
     public async System.Threading.Tasks.Task<${ty}> GetProperty${methodSuffix}()
     {
-        var obj = await this.GetProperty<${returnTy}>("${propName}");
+        var obj = await this.GetProperty<${returnTy}>("${propName}").ConfigureAwait(false);
         return obj${q};
     }`;
       // END
@@ -93,7 +92,7 @@ function writeManagedObject(obj: ManagedObject) {
 
     public async System.Threading.Tasks.Task ${methodName}(${params.join(", ")})
     {
-        await this.Session.SmsClient!.${methodName}(${args.join(", ")});
+        await this.Session.SmsClient!.${methodName}(${args.join(", ")}).ConfigureAwait(false);
     }`;
       // END
     } else {
@@ -111,11 +110,9 @@ function writeManagedObject(obj: ManagedObject) {
         // START
         methodDeclare += `
 
-    public async System.Threading.Tasks.Task<${returnTy}> ${methodName}(${
-          params.join(", ")
-        })
+    public async System.Threading.Tasks.Task<${returnTy}> ${methodName}(${params.join(", ")})
     {
-        var res = await this.Session.SmsClient!.${methodName}(${args.join(", ")});
+        var res = await this.Session.SmsClient!.${methodName}(${args.join(", ")}).ConfigureAwait(false);
         return ManagedObject.Create<${localTy}>(res, this.Session);
     }`;
         // END
@@ -134,11 +131,9 @@ function writeManagedObject(obj: ManagedObject) {
         // START
         methodDeclare += `
 
-    public async System.Threading.Tasks.Task<${returnTy}> ${methodName}(${
-          params.join(", ")
-        })
+    public async System.Threading.Tasks.Task<${returnTy}> ${methodName}(${params.join(", ")})
     {
-        var res = await this.Session.SmsClient!.${methodName}(${args.join(", ")});
+        var res = await this.Session.SmsClient!.${methodName}(${args.join(", ")}).ConfigureAwait(false);
         return res?.Select(r => ManagedObject.Create<${unitReturnTy}>(r, this.Session)!).ToArray();
     }`;
         // END
@@ -153,11 +148,9 @@ function writeManagedObject(obj: ManagedObject) {
         // START
         methodDeclare += `
 
-    public async System.Threading.Tasks.Task<${returnTy}> ${methodName}(${
-          params.join(", ")
-        })
+    public async System.Threading.Tasks.Task<${returnTy}> ${methodName}(${params.join(", ")})
     {
-        return await this.Session.SmsClient!.${methodName}(${args.join(", ")});
+        return await this.Session.SmsClient!.${methodName}(${args.join(", ")}).ConfigureAwait(false);
     }`;
         // END
       }
@@ -201,7 +194,9 @@ function writeManagedObjectMethodArgument(
         args.push(`${argName}${q}.SmsReference`);
       } else if (param.ty.remote == "ManagedObjectReference[]") {
         const q = param.mandatory ? "" : "?";
-        args.push(`${argName}${q}.Select(m => m.SmsReference).ToArray()`);
+        const preArr = param.mandatory ? "[.. " : "";
+        const postArr = param.mandatory ? "]" : ".ToArray()";
+        args.push(`${preArr}${argName}${q}.Select(m => m.SmsReference)${postArr}`);
       } else {
         throw `Not supported type, ${param.ty.remote}`;
       }
@@ -210,7 +205,9 @@ function writeManagedObjectMethodArgument(
       args.push(`${argName}${q}.SmsReference`);
     } else if (param.ty.local == "ManagedObjectReference[]") {
       const q = param.mandatory ? "" : "?";
-      args.push(`${argName}${q}.Select(m => m.SmsReference).ToArray()`);
+      const preArr = param.mandatory ? "[.. " : "";
+      const postArr = param.mandatory ? "]" : ".ToArray()";
+      args.push(`${preArr}${argName}${q}.Select(m => m.SmsReference)${postArr}`);
     } else {
       args.push(argName);
     }

@@ -13,13 +13,4 @@
     <ProjectReference Include="..\..\CsVmomi\CsVmomi.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="StsService">
-      <HintPath>..\..\Lib\StsService.dll</HintPath>
-    </Reference>
-    <Reference Include="VimService">
-      <HintPath>..\..\Lib\VimService.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>

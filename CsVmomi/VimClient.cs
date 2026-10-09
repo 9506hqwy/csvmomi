@@ -32,6 +32,11 @@ public class VimClient : IVimClient
 
     public void SetCookie(System.Net.CookieCollection? cookie)
     {
+        if (cookie == null)
+        {
+            return;
+        }
+
         var container = this.inner.InnerChannel
             .GetProperty<IHttpCookieContainerManager>()!
             .CookieContainer;
@@ -49,7 +54,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.AbandonHciWorkflowAsync(req);
+        await this.inner.AbandonHciWorkflowAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<string[]?> AbdicateDomOwnership(ManagedObjectReference self, string[] uuids)
@@ -60,7 +65,7 @@ public class VimClient : IVimClient
             uuids = uuids,
         };
 
-        var res = await this.inner.AbdicateDomOwnershipAsync(req);
+        var res = await this.inner.AbdicateDomOwnershipAsync(req).ConfigureAwait(false);
 
         return res.AbdicateDomOwnershipResponse1;
     }
@@ -74,7 +79,7 @@ public class VimClient : IVimClient
             auth = auth,
         };
 
-        var res = await this.inner.AbortCustomization_TaskAsync(req);
+        var res = await this.inner.AbortCustomization_TaskAsync(req).ConfigureAwait(false);
 
         return res.AbortCustomization_TaskResponse.returnval;
     }
@@ -88,7 +93,7 @@ public class VimClient : IVimClient
             entity = entity,
         };
 
-        await this.inner.AcknowledgeAlarmAsync(req);
+        await this.inner.AcknowledgeAlarmAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<HostServiceTicket?> AcquireCimServicesTicket(ManagedObjectReference self)
@@ -98,7 +103,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.AcquireCimServicesTicketAsync(req);
+        var res = await this.inner.AcquireCimServicesTicketAsync(req).ConfigureAwait(false);
 
         return res.AcquireCimServicesTicketResponse.returnval;
     }
@@ -110,7 +115,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.AcquireCloneTicketAsync(req);
+        var res = await this.inner.AcquireCloneTicketAsync(req).ConfigureAwait(false);
 
         return res.AcquireCloneTicketResponse.returnval;
     }
@@ -126,7 +131,7 @@ public class VimClient : IVimClient
             sessionIDSpecified = sessionIDSpecified,
         };
 
-        var res = await this.inner.AcquireCredentialsInGuestAsync(req);
+        var res = await this.inner.AcquireCredentialsInGuestAsync(req).ConfigureAwait(false);
 
         return res.AcquireCredentialsInGuestResponse.returnval;
     }
@@ -139,7 +144,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.AcquireGenericServiceTicketAsync(req);
+        var res = await this.inner.AcquireGenericServiceTicketAsync(req).ConfigureAwait(false);
 
         return res.AcquireGenericServiceTicketResponse.returnval;
     }
@@ -152,7 +157,7 @@ public class VimClient : IVimClient
             userName = userName,
         };
 
-        var res = await this.inner.AcquireLocalTicketAsync(req);
+        var res = await this.inner.AcquireLocalTicketAsync(req).ConfigureAwait(false);
 
         return res.AcquireLocalTicketResponse.returnval;
     }
@@ -164,7 +169,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.AcquireMksTicketAsync(req);
+        var res = await this.inner.AcquireMksTicketAsync(req).ConfigureAwait(false);
 
         return res.AcquireMksTicketResponse.returnval;
     }
@@ -177,7 +182,7 @@ public class VimClient : IVimClient
             ticketType = ticketType,
         };
 
-        var res = await this.inner.AcquireTicketAsync(req);
+        var res = await this.inner.AcquireTicketAsync(req).ConfigureAwait(false);
 
         return res.AcquireTicketResponse.returnval;
     }
@@ -191,7 +196,7 @@ public class VimClient : IVimClient
             privIds = privIds,
         };
 
-        var res = await this.inner.AddAuthorizationRoleAsync(req);
+        var res = await this.inner.AddAuthorizationRoleAsync(req).ConfigureAwait(false);
 
         return res.AddAuthorizationRoleResponse.returnval;
     }
@@ -207,7 +212,7 @@ public class VimClient : IVimClient
             fieldPolicy = fieldPolicy,
         };
 
-        var res = await this.inner.AddCustomFieldDefAsync(req);
+        var res = await this.inner.AddCustomFieldDefAsync(req).ConfigureAwait(false);
 
         return res.AddCustomFieldDefResponse.returnval;
     }
@@ -220,7 +225,7 @@ public class VimClient : IVimClient
             disk = disk,
         };
 
-        var res = await this.inner.AddDisks_TaskAsync(req);
+        var res = await this.inner.AddDisks_TaskAsync(req).ConfigureAwait(false);
 
         return res.AddDisks_TaskResponse.returnval;
     }
@@ -233,7 +238,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.AddDVPortgroup_TaskAsync(req);
+        var res = await this.inner.AddDVPortgroup_TaskAsync(req).ConfigureAwait(false);
 
         return res.AddDVPortgroup_TaskResponse.returnval;
     }
@@ -248,7 +253,7 @@ public class VimClient : IVimClient
             infoIds = infoIds,
         };
 
-        var res = await this.inner.AddFilterAsync(req);
+        var res = await this.inner.AddFilterAsync(req).ConfigureAwait(false);
 
         return res.AddFilterResponse.returnval;
     }
@@ -262,7 +267,7 @@ public class VimClient : IVimClient
             entities = entities,
         };
 
-        await this.inner.AddFilterEntitiesAsync(req);
+        await this.inner.AddFilterEntitiesAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task AddGuestAlias(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, string username, bool mapCert, string base64Cert, GuestAuthAliasInfo aliasInfo)
@@ -278,7 +283,7 @@ public class VimClient : IVimClient
             aliasInfo = aliasInfo,
         };
 
-        await this.inner.AddGuestAliasAsync(req);
+        await this.inner.AddGuestAliasAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> AddHost_Task(ManagedObjectReference self, HostConnectSpec spec, bool asConnected, ManagedObjectReference? resourcePool, string? license)
@@ -292,7 +297,7 @@ public class VimClient : IVimClient
             license = license,
         };
 
-        var res = await this.inner.AddHost_TaskAsync(req);
+        var res = await this.inner.AddHost_TaskAsync(req).ConfigureAwait(false);
 
         return res.AddHost_TaskResponse.returnval;
     }
@@ -306,7 +311,7 @@ public class VimClient : IVimClient
             targets = targets,
         };
 
-        await this.inner.AddInternetScsiSendTargetsAsync(req);
+        await this.inner.AddInternetScsiSendTargetsAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task AddInternetScsiStaticTargets(ManagedObjectReference self, string iScsiHbaDevice, HostInternetScsiHbaStaticTarget[] targets)
@@ -318,7 +323,7 @@ public class VimClient : IVimClient
             targets = targets,
         };
 
-        await this.inner.AddInternetScsiStaticTargetsAsync(req);
+        await this.inner.AddInternetScsiStaticTargetsAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task AddKey(ManagedObjectReference self, CryptoKeyPlain key)
@@ -329,7 +334,7 @@ public class VimClient : IVimClient
             key = key,
         };
 
-        await this.inner.AddKeyAsync(req);
+        await this.inner.AddKeyAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<CryptoKeyResult[]?> AddKeys(ManagedObjectReference self, CryptoKeyPlain[]? keys)
@@ -340,7 +345,7 @@ public class VimClient : IVimClient
             keys = keys,
         };
 
-        var res = await this.inner.AddKeysAsync(req);
+        var res = await this.inner.AddKeysAsync(req).ConfigureAwait(false);
 
         return res.AddKeysResponse1;
     }
@@ -354,7 +359,7 @@ public class VimClient : IVimClient
             labels = labels,
         };
 
-        var res = await this.inner.AddLicenseAsync(req);
+        var res = await this.inner.AddLicenseAsync(req).ConfigureAwait(false);
 
         return res.AddLicenseResponse.returnval;
     }
@@ -368,7 +373,7 @@ public class VimClient : IVimClient
             entities = entities,
         };
 
-        await this.inner.AddMonitoredEntitiesAsync(req);
+        await this.inner.AddMonitoredEntitiesAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task AddNetworkResourcePool(ManagedObjectReference self, DVSNetworkResourcePoolConfigSpec[] configSpec)
@@ -379,7 +384,7 @@ public class VimClient : IVimClient
             configSpec = configSpec,
         };
 
-        await this.inner.AddNetworkResourcePoolAsync(req);
+        await this.inner.AddNetworkResourcePoolAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task AddPortGroup(ManagedObjectReference self, HostPortGroupSpec portgrp)
@@ -390,7 +395,7 @@ public class VimClient : IVimClient
             portgrp = portgrp,
         };
 
-        await this.inner.AddPortGroupAsync(req);
+        await this.inner.AddPortGroupAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<string?> AddServiceConsoleVirtualNic(ManagedObjectReference self, string portgroup, HostVirtualNicSpec nic)
@@ -402,7 +407,7 @@ public class VimClient : IVimClient
             nic = nic,
         };
 
-        var res = await this.inner.AddServiceConsoleVirtualNicAsync(req);
+        var res = await this.inner.AddServiceConsoleVirtualNicAsync(req).ConfigureAwait(false);
 
         return res.AddServiceConsoleVirtualNicResponse.returnval;
     }
@@ -418,7 +423,7 @@ public class VimClient : IVimClient
             license = license,
         };
 
-        var res = await this.inner.AddStandaloneHost_TaskAsync(req);
+        var res = await this.inner.AddStandaloneHost_TaskAsync(req).ConfigureAwait(false);
 
         return res.AddStandaloneHost_TaskResponse.returnval;
     }
@@ -432,7 +437,7 @@ public class VimClient : IVimClient
             nic = nic,
         };
 
-        var res = await this.inner.AddVirtualNicAsync(req);
+        var res = await this.inner.AddVirtualNicAsync(req).ConfigureAwait(false);
 
         return res.AddVirtualNicResponse.returnval;
     }
@@ -446,7 +451,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        await this.inner.AddVirtualSwitchAsync(req);
+        await this.inner.AddVirtualSwitchAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<string?> AllocateIpv4Address(ManagedObjectReference self, ManagedObjectReference dc, int poolId, string allocationId)
@@ -459,7 +464,7 @@ public class VimClient : IVimClient
             allocationId = allocationId,
         };
 
-        var res = await this.inner.AllocateIpv4AddressAsync(req);
+        var res = await this.inner.AllocateIpv4AddressAsync(req).ConfigureAwait(false);
 
         return res.AllocateIpv4AddressResponse.returnval;
     }
@@ -474,7 +479,7 @@ public class VimClient : IVimClient
             allocationId = allocationId,
         };
 
-        var res = await this.inner.AllocateIpv6AddressAsync(req);
+        var res = await this.inner.AllocateIpv6AddressAsync(req).ConfigureAwait(false);
 
         return res.AllocateIpv6AddressResponse.returnval;
     }
@@ -488,7 +493,7 @@ public class VimClient : IVimClient
             answerChoice = answerChoice,
         };
 
-        await this.inner.AnswerVMAsync(req);
+        await this.inner.AnswerVMAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> ApplyEntitiesConfig_Task(ManagedObjectReference self, ApplyHostProfileConfigurationSpec[]? applyConfigSpecs)
@@ -499,7 +504,7 @@ public class VimClient : IVimClient
             applyConfigSpecs = applyConfigSpecs,
         };
 
-        var res = await this.inner.ApplyEntitiesConfig_TaskAsync(req);
+        var res = await this.inner.ApplyEntitiesConfig_TaskAsync(req).ConfigureAwait(false);
 
         return res.ApplyEntitiesConfig_TaskResponse.returnval;
     }
@@ -514,7 +519,7 @@ public class VimClient : IVimClient
             completeMasksSpecified = completeMasksSpecified,
         };
 
-        var res = await this.inner.ApplyEvcModeVM_TaskAsync(req);
+        var res = await this.inner.ApplyEvcModeVM_TaskAsync(req).ConfigureAwait(false);
 
         return res.ApplyEvcModeVM_TaskResponse.returnval;
     }
@@ -529,7 +534,7 @@ public class VimClient : IVimClient
             userInput = userInput,
         };
 
-        var res = await this.inner.ApplyHostConfig_TaskAsync(req);
+        var res = await this.inner.ApplyHostConfig_TaskAsync(req).ConfigureAwait(false);
 
         return res.ApplyHostConfig_TaskResponse.returnval;
     }
@@ -542,7 +547,7 @@ public class VimClient : IVimClient
             key = key,
         };
 
-        await this.inner.ApplyRecommendationAsync(req);
+        await this.inner.ApplyRecommendationAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> ApplyStorageDrsRecommendation_Task(ManagedObjectReference self, string[] key)
@@ -553,7 +558,7 @@ public class VimClient : IVimClient
             key = key,
         };
 
-        var res = await this.inner.ApplyStorageDrsRecommendation_TaskAsync(req);
+        var res = await this.inner.ApplyStorageDrsRecommendation_TaskAsync(req).ConfigureAwait(false);
 
         return res.ApplyStorageDrsRecommendation_TaskResponse.returnval;
     }
@@ -567,7 +572,7 @@ public class VimClient : IVimClient
             key = key,
         };
 
-        var res = await this.inner.ApplyStorageDrsRecommendationToPod_TaskAsync(req);
+        var res = await this.inner.ApplyStorageDrsRecommendationToPod_TaskAsync(req).ConfigureAwait(false);
 
         return res.ApplyStorageDrsRecommendationToPod_TaskResponse.returnval;
     }
@@ -580,7 +585,7 @@ public class VimClient : IVimClient
             entity = entity,
         };
 
-        var res = await this.inner.AreAlarmActionsEnabledAsync(req);
+        var res = await this.inner.AreAlarmActionsEnabledAsync(req).ConfigureAwait(false);
 
         return res.AreAlarmActionsEnabledResponse.returnval;
     }
@@ -594,7 +599,7 @@ public class VimClient : IVimClient
             group = group,
         };
 
-        await this.inner.AssignUserToGroupAsync(req);
+        await this.inner.AssignUserToGroupAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task AssociateProfile(ManagedObjectReference self, ManagedObjectReference[] entity)
@@ -605,7 +610,7 @@ public class VimClient : IVimClient
             entity = entity,
         };
 
-        await this.inner.AssociateProfileAsync(req);
+        await this.inner.AssociateProfileAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> AttachDisk_Task(ManagedObjectReference self, ID diskId, ManagedObjectReference datastore, int controllerKey, bool controllerKeySpecified, int unitNumber, bool unitNumberSpecified)
@@ -621,7 +626,7 @@ public class VimClient : IVimClient
             unitNumberSpecified = unitNumberSpecified,
         };
 
-        var res = await this.inner.AttachDisk_TaskAsync(req);
+        var res = await this.inner.AttachDisk_TaskAsync(req).ConfigureAwait(false);
 
         return res.AttachDisk_TaskResponse.returnval;
     }
@@ -634,7 +639,7 @@ public class VimClient : IVimClient
             lunUuid = lunUuid,
         };
 
-        await this.inner.AttachScsiLunAsync(req);
+        await this.inner.AttachScsiLunAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> AttachScsiLunEx_Task(ManagedObjectReference self, string[] lunUuid)
@@ -645,7 +650,7 @@ public class VimClient : IVimClient
             lunUuid = lunUuid,
         };
 
-        var res = await this.inner.AttachScsiLunEx_TaskAsync(req);
+        var res = await this.inner.AttachScsiLunEx_TaskAsync(req).ConfigureAwait(false);
 
         return res.AttachScsiLunEx_TaskResponse.returnval;
     }
@@ -660,7 +665,7 @@ public class VimClient : IVimClient
             tag = tag,
         };
 
-        await this.inner.AttachTagToVStorageObjectAsync(req);
+        await this.inner.AttachTagToVStorageObjectAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task AttachVmfsExtent(ManagedObjectReference self, string vmfsPath, HostScsiDiskPartition extent)
@@ -672,7 +677,7 @@ public class VimClient : IVimClient
             extent = extent,
         };
 
-        await this.inner.AttachVmfsExtentAsync(req);
+        await this.inner.AttachVmfsExtentAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task AutoStartPowerOff(ManagedObjectReference self)
@@ -682,7 +687,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.AutoStartPowerOffAsync(req);
+        await this.inner.AutoStartPowerOffAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task AutoStartPowerOn(ManagedObjectReference self)
@@ -692,7 +697,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.AutoStartPowerOnAsync(req);
+        await this.inner.AutoStartPowerOnAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<string?> BackupFirmwareConfiguration(ManagedObjectReference self)
@@ -702,7 +707,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.BackupFirmwareConfigurationAsync(req);
+        var res = await this.inner.BackupFirmwareConfigurationAsync(req).ConfigureAwait(false);
 
         return res.BackupFirmwareConfigurationResponse.returnval;
     }
@@ -719,7 +724,7 @@ public class VimClient : IVimClient
             desiredState = desiredState,
         };
 
-        var res = await this.inner.BatchAddHostsToCluster_TaskAsync(req);
+        var res = await this.inner.BatchAddHostsToCluster_TaskAsync(req).ConfigureAwait(false);
 
         return res.BatchAddHostsToCluster_TaskResponse.returnval;
     }
@@ -734,7 +739,7 @@ public class VimClient : IVimClient
             addConnected = addConnected,
         };
 
-        var res = await this.inner.BatchAddStandaloneHosts_TaskAsync(req);
+        var res = await this.inner.BatchAddStandaloneHosts_TaskAsync(req).ConfigureAwait(false);
 
         return res.BatchAddStandaloneHosts_TaskResponse.returnval;
     }
@@ -747,7 +752,7 @@ public class VimClient : IVimClient
             hostSpecs = hostSpecs,
         };
 
-        var res = await this.inner.BatchQueryConnectInfoAsync(req);
+        var res = await this.inner.BatchQueryConnectInfoAsync(req).ConfigureAwait(false);
 
         return res.BatchQueryConnectInfoResponse1;
     }
@@ -761,7 +766,7 @@ public class VimClient : IVimClient
             vnicDevice = vnicDevice,
         };
 
-        await this.inner.BindVnicAsync(req);
+        await this.inner.BindVnicAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<DiagnosticManagerLogHeader?> BrowseDiagnosticLog(ManagedObjectReference self, ManagedObjectReference? host, string key, int start, bool startSpecified, int lines, bool linesSpecified)
@@ -777,7 +782,7 @@ public class VimClient : IVimClient
             linesSpecified = linesSpecified,
         };
 
-        var res = await this.inner.BrowseDiagnosticLogAsync(req);
+        var res = await this.inner.BrowseDiagnosticLogAsync(req).ConfigureAwait(false);
 
         return res.BrowseDiagnosticLogResponse.returnval;
     }
@@ -790,7 +795,7 @@ public class VimClient : IVimClient
             key = key,
         };
 
-        await this.inner.CancelRecommendationAsync(req);
+        await this.inner.CancelRecommendationAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task CancelRetrievePropertiesEx(ManagedObjectReference self, string token)
@@ -801,7 +806,7 @@ public class VimClient : IVimClient
             token = token,
         };
 
-        await this.inner.CancelRetrievePropertiesExAsync(req);
+        await this.inner.CancelRetrievePropertiesExAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task CancelStorageDrsRecommendation(ManagedObjectReference self, string[] key)
@@ -812,7 +817,7 @@ public class VimClient : IVimClient
             key = key,
         };
 
-        await this.inner.CancelStorageDrsRecommendationAsync(req);
+        await this.inner.CancelStorageDrsRecommendationAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task CancelTask(ManagedObjectReference self)
@@ -822,7 +827,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.CancelTaskAsync(req);
+        await this.inner.CancelTaskAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task CancelWaitForUpdates(ManagedObjectReference self)
@@ -832,7 +837,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.CancelWaitForUpdatesAsync(req);
+        await this.inner.CancelWaitForUpdatesAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<VsanPolicySatisfiability[]?> CanProvisionObjects(ManagedObjectReference self, VsanNewPolicyBatch[] npbs, bool ignoreSatisfiability, bool ignoreSatisfiabilitySpecified)
@@ -845,7 +850,7 @@ public class VimClient : IVimClient
             ignoreSatisfiabilitySpecified = ignoreSatisfiabilitySpecified,
         };
 
-        var res = await this.inner.CanProvisionObjectsAsync(req);
+        var res = await this.inner.CanProvisionObjectsAsync(req).ConfigureAwait(false);
 
         return res.CanProvisionObjectsResponse1;
     }
@@ -858,7 +863,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.CertMgrRefreshCACertificatesAndCRLs_TaskAsync(req);
+        var res = await this.inner.CertMgrRefreshCACertificatesAndCRLs_TaskAsync(req).ConfigureAwait(false);
 
         return res.CertMgrRefreshCACertificatesAndCRLs_TaskResponse.returnval;
     }
@@ -871,7 +876,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.CertMgrRefreshCertificates_TaskAsync(req);
+        var res = await this.inner.CertMgrRefreshCertificates_TaskAsync(req).ConfigureAwait(false);
 
         return res.CertMgrRefreshCertificates_TaskResponse.returnval;
     }
@@ -884,7 +889,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.CertMgrRevokeCertificates_TaskAsync(req);
+        var res = await this.inner.CertMgrRevokeCertificates_TaskAsync(req).ConfigureAwait(false);
 
         return res.CertMgrRevokeCertificates_TaskResponse.returnval;
     }
@@ -899,7 +904,7 @@ public class VimClient : IVimClient
             accessMode = accessMode,
         };
 
-        await this.inner.ChangeAccessModeAsync(req);
+        await this.inner.ChangeAccessModeAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task ChangeFileAttributesInGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, string guestFilePath, GuestFileAttributes fileAttributes)
@@ -913,7 +918,7 @@ public class VimClient : IVimClient
             fileAttributes = fileAttributes,
         };
 
-        await this.inner.ChangeFileAttributesInGuestAsync(req);
+        await this.inner.ChangeFileAttributesInGuestAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> ChangeKey_Task(ManagedObjectReference self, CryptoKeyPlain newKey)
@@ -924,7 +929,7 @@ public class VimClient : IVimClient
             newKey = newKey,
         };
 
-        var res = await this.inner.ChangeKey_TaskAsync(req);
+        var res = await this.inner.ChangeKey_TaskAsync(req).ConfigureAwait(false);
 
         return res.ChangeKey_TaskResponse.returnval;
     }
@@ -937,7 +942,7 @@ public class VimClient : IVimClient
             mode = mode,
         };
 
-        await this.inner.ChangeLockdownModeAsync(req);
+        await this.inner.ChangeLockdownModeAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task ChangeNFSUserPassword(ManagedObjectReference self, string password)
@@ -948,7 +953,7 @@ public class VimClient : IVimClient
             password = password,
         };
 
-        await this.inner.ChangeNFSUserPasswordAsync(req);
+        await this.inner.ChangeNFSUserPasswordAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task ChangeOwner(ManagedObjectReference self, string name, ManagedObjectReference? datacenter, string owner)
@@ -961,7 +966,7 @@ public class VimClient : IVimClient
             owner = owner,
         };
 
-        await this.inner.ChangeOwnerAsync(req);
+        await this.inner.ChangeOwnerAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task ChangePassword(ManagedObjectReference self, string user, string oldPassword, string newPassword)
@@ -974,7 +979,7 @@ public class VimClient : IVimClient
             newPassword = newPassword,
         };
 
-        await this.inner.ChangePasswordAsync(req);
+        await this.inner.ChangePasswordAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> CheckAddHostEvc_Task(ManagedObjectReference self, HostConnectSpec cnxSpec)
@@ -985,7 +990,7 @@ public class VimClient : IVimClient
             cnxSpec = cnxSpec,
         };
 
-        var res = await this.inner.CheckAddHostEvc_TaskAsync(req);
+        var res = await this.inner.CheckAddHostEvc_TaskAsync(req).ConfigureAwait(false);
 
         return res.CheckAddHostEvc_TaskResponse.returnval;
     }
@@ -998,7 +1003,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.CheckAnswerFileStatus_TaskAsync(req);
+        var res = await this.inner.CheckAnswerFileStatus_TaskAsync(req).ConfigureAwait(false);
 
         return res.CheckAnswerFileStatus_TaskResponse.returnval;
     }
@@ -1015,7 +1020,7 @@ public class VimClient : IVimClient
             testType = testType,
         };
 
-        var res = await this.inner.CheckClone_TaskAsync(req);
+        var res = await this.inner.CheckClone_TaskAsync(req).ConfigureAwait(false);
 
         return res.CheckClone_TaskResponse.returnval;
     }
@@ -1031,7 +1036,7 @@ public class VimClient : IVimClient
             testType = testType,
         };
 
-        var res = await this.inner.CheckCompatibility_TaskAsync(req);
+        var res = await this.inner.CheckCompatibility_TaskAsync(req).ConfigureAwait(false);
 
         return res.CheckCompatibility_TaskResponse.returnval;
     }
@@ -1045,7 +1050,7 @@ public class VimClient : IVimClient
             entity = entity,
         };
 
-        var res = await this.inner.CheckCompliance_TaskAsync(req);
+        var res = await this.inner.CheckCompliance_TaskAsync(req).ConfigureAwait(false);
 
         return res.CheckCompliance_TaskResponse.returnval;
     }
@@ -1059,7 +1064,7 @@ public class VimClient : IVimClient
             evcGraphicsModeKey = evcGraphicsModeKey,
         };
 
-        var res = await this.inner.CheckConfigureEvcMode_TaskAsync(req);
+        var res = await this.inner.CheckConfigureEvcMode_TaskAsync(req).ConfigureAwait(false);
 
         return res.CheckConfigureEvcMode_TaskResponse.returnval;
     }
@@ -1072,7 +1077,7 @@ public class VimClient : IVimClient
             guestOs = guestOs,
         };
 
-        await this.inner.CheckCustomizationResourcesAsync(req);
+        await this.inner.CheckCustomizationResourcesAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task CheckCustomizationSpec(ManagedObjectReference self, CustomizationSpec spec)
@@ -1083,7 +1088,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        await this.inner.CheckCustomizationSpecAsync(req);
+        await this.inner.CheckCustomizationSpecAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<UpdateSet?> CheckForUpdates(ManagedObjectReference self, string? version)
@@ -1094,7 +1099,7 @@ public class VimClient : IVimClient
             version = version,
         };
 
-        var res = await this.inner.CheckForUpdatesAsync(req);
+        var res = await this.inner.CheckForUpdatesAsync(req).ConfigureAwait(false);
 
         return res.CheckForUpdatesResponse.returnval;
     }
@@ -1109,7 +1114,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.CheckHostPatch_TaskAsync(req);
+        var res = await this.inner.CheckHostPatch_TaskAsync(req).ConfigureAwait(false);
 
         return res.CheckHostPatch_TaskResponse.returnval;
     }
@@ -1124,7 +1129,7 @@ public class VimClient : IVimClient
             testType = testType,
         };
 
-        var res = await this.inner.CheckInstantClone_TaskAsync(req);
+        var res = await this.inner.CheckInstantClone_TaskAsync(req).ConfigureAwait(false);
 
         return res.CheckInstantClone_TaskResponse.returnval;
     }
@@ -1138,7 +1143,7 @@ public class VimClient : IVimClient
             featureKey = featureKey,
         };
 
-        var res = await this.inner.CheckLicenseFeatureAsync(req);
+        var res = await this.inner.CheckLicenseFeatureAsync(req).ConfigureAwait(false);
 
         return res.CheckLicenseFeatureResponse.returnval;
     }
@@ -1156,7 +1161,7 @@ public class VimClient : IVimClient
             testType = testType,
         };
 
-        var res = await this.inner.CheckMigrate_TaskAsync(req);
+        var res = await this.inner.CheckMigrate_TaskAsync(req).ConfigureAwait(false);
 
         return res.CheckMigrate_TaskResponse.returnval;
     }
@@ -1172,7 +1177,7 @@ public class VimClient : IVimClient
             testType = testType,
         };
 
-        var res = await this.inner.CheckPowerOn_TaskAsync(req);
+        var res = await this.inner.CheckPowerOn_TaskAsync(req).ConfigureAwait(false);
 
         return res.CheckPowerOn_TaskResponse.returnval;
     }
@@ -1185,7 +1190,7 @@ public class VimClient : IVimClient
             entity = entity,
         };
 
-        var res = await this.inner.CheckProfileCompliance_TaskAsync(req);
+        var res = await this.inner.CheckProfileCompliance_TaskAsync(req).ConfigureAwait(false);
 
         return res.CheckProfileCompliance_TaskResponse.returnval;
     }
@@ -1200,7 +1205,7 @@ public class VimClient : IVimClient
             testType = testType,
         };
 
-        var res = await this.inner.CheckRelocate_TaskAsync(req);
+        var res = await this.inner.CheckRelocate_TaskAsync(req).ConfigureAwait(false);
 
         return res.CheckRelocate_TaskResponse.returnval;
     }
@@ -1217,7 +1222,7 @@ public class VimClient : IVimClient
             testType = testType,
         };
 
-        var res = await this.inner.CheckVmConfig_TaskAsync(req);
+        var res = await this.inner.CheckVmConfig_TaskAsync(req).ConfigureAwait(false);
 
         return res.CheckVmConfig_TaskResponse.returnval;
     }
@@ -1231,7 +1236,7 @@ public class VimClient : IVimClient
             entity = entity,
         };
 
-        await this.inner.ClearComplianceStatusAsync(req);
+        await this.inner.ClearComplianceStatusAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task ClearNFSUser(ManagedObjectReference self)
@@ -1241,7 +1246,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.ClearNFSUserAsync(req);
+        await this.inner.ClearNFSUserAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task ClearSystemEventLog(ManagedObjectReference self)
@@ -1251,7 +1256,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.ClearSystemEventLogAsync(req);
+        await this.inner.ClearSystemEventLogAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task ClearTriggeredAlarms(ManagedObjectReference self, AlarmFilterSpec filter)
@@ -1262,7 +1267,7 @@ public class VimClient : IVimClient
             filter = filter,
         };
 
-        await this.inner.ClearTriggeredAlarmsAsync(req);
+        await this.inner.ClearTriggeredAlarmsAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task ClearVStorageObjectControlFlags(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string[]? controlFlags)
@@ -1275,7 +1280,7 @@ public class VimClient : IVimClient
             controlFlags = controlFlags,
         };
 
-        await this.inner.ClearVStorageObjectControlFlagsAsync(req);
+        await this.inner.ClearVStorageObjectControlFlagsAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<UserSession?> CloneSession(ManagedObjectReference self, string cloneTicket)
@@ -1286,7 +1291,7 @@ public class VimClient : IVimClient
             cloneTicket = cloneTicket,
         };
 
-        var res = await this.inner.CloneSessionAsync(req);
+        var res = await this.inner.CloneSessionAsync(req).ConfigureAwait(false);
 
         return res.CloneSessionResponse.returnval;
     }
@@ -1301,7 +1306,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.CloneVApp_TaskAsync(req);
+        var res = await this.inner.CloneVApp_TaskAsync(req).ConfigureAwait(false);
 
         return res.CloneVApp_TaskResponse.returnval;
     }
@@ -1316,7 +1321,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.CloneVM_TaskAsync(req);
+        var res = await this.inner.CloneVM_TaskAsync(req).ConfigureAwait(false);
 
         return res.CloneVM_TaskResponse.returnval;
     }
@@ -1331,7 +1336,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.CloneVStorageObject_TaskAsync(req);
+        var res = await this.inner.CloneVStorageObject_TaskAsync(req).ConfigureAwait(false);
 
         return res.CloneVStorageObject_TaskResponse.returnval;
     }
@@ -1344,7 +1349,7 @@ public class VimClient : IVimClient
             entity = entity,
         };
 
-        var res = await this.inner.CloseInventoryViewFolderAsync(req);
+        var res = await this.inner.CloseInventoryViewFolderAsync(req).ConfigureAwait(false);
 
         return res.CloseInventoryViewFolderResponse1;
     }
@@ -1359,7 +1364,7 @@ public class VimClient : IVimClient
             info = info,
         };
 
-        var res = await this.inner.ClusterEnterMaintenanceModeAsync(req);
+        var res = await this.inner.ClusterEnterMaintenanceModeAsync(req).ConfigureAwait(false);
 
         return res.ClusterEnterMaintenanceModeResponse.returnval;
     }
@@ -1377,7 +1382,7 @@ public class VimClient : IVimClient
             enableStatusToBeCopied = enableStatusToBeCopied,
         };
 
-        var res = await this.inner.CompositeHostProfile_TaskAsync(req);
+        var res = await this.inner.CompositeHostProfile_TaskAsync(req).ConfigureAwait(false);
 
         return res.CompositeHostProfile_TaskResponse.returnval;
     }
@@ -1392,7 +1397,7 @@ public class VimClient : IVimClient
             partitionFormat = partitionFormat,
         };
 
-        var res = await this.inner.ComputeDiskPartitionInfoAsync(req);
+        var res = await this.inner.ComputeDiskPartitionInfoAsync(req).ConfigureAwait(false);
 
         return res.ComputeDiskPartitionInfoResponse.returnval;
     }
@@ -1407,7 +1412,7 @@ public class VimClient : IVimClient
             partitionFormat = partitionFormat,
         };
 
-        var res = await this.inner.ComputeDiskPartitionInfoForResizeAsync(req);
+        var res = await this.inner.ComputeDiskPartitionInfoForResizeAsync(req).ConfigureAwait(false);
 
         return res.ComputeDiskPartitionInfoForResizeResponse.returnval;
     }
@@ -1420,7 +1425,7 @@ public class VimClient : IVimClient
             keyId = keyId,
         };
 
-        await this.inner.ConfigureCryptoKeyAsync(req);
+        await this.inner.ConfigureCryptoKeyAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> ConfigureDatastoreIORM_Task(ManagedObjectReference self, ManagedObjectReference datastore, StorageIORMConfigSpec spec)
@@ -1432,7 +1437,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.ConfigureDatastoreIORM_TaskAsync(req);
+        var res = await this.inner.ConfigureDatastoreIORM_TaskAsync(req).ConfigureAwait(false);
 
         return res.ConfigureDatastoreIORM_TaskResponse.returnval;
     }
@@ -1446,7 +1451,7 @@ public class VimClient : IVimClient
             password = password,
         };
 
-        await this.inner.ConfigureDatastorePrincipalAsync(req);
+        await this.inner.ConfigureDatastorePrincipalAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> ConfigureEvcMode_Task(ManagedObjectReference self, string evcModeKey, string? evcGraphicsModeKey)
@@ -1458,7 +1463,7 @@ public class VimClient : IVimClient
             evcGraphicsModeKey = evcGraphicsModeKey,
         };
 
-        var res = await this.inner.ConfigureEvcMode_TaskAsync(req);
+        var res = await this.inner.ConfigureEvcMode_TaskAsync(req).ConfigureAwait(false);
 
         return res.ConfigureEvcMode_TaskResponse.returnval;
     }
@@ -1472,7 +1477,7 @@ public class VimClient : IVimClient
             hostInputs = hostInputs,
         };
 
-        var res = await this.inner.ConfigureHCI_TaskAsync(req);
+        var res = await this.inner.ConfigureHCI_TaskAsync(req).ConfigureAwait(false);
 
         return res.ConfigureHCI_TaskResponse.returnval;
     }
@@ -1485,7 +1490,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.ConfigureHostCache_TaskAsync(req);
+        var res = await this.inner.ConfigureHostCache_TaskAsync(req).ConfigureAwait(false);
 
         return res.ConfigureHostCache_TaskResponse.returnval;
     }
@@ -1499,7 +1504,7 @@ public class VimClient : IVimClient
             licenseSource = licenseSource,
         };
 
-        await this.inner.ConfigureLicenseSourceAsync(req);
+        await this.inner.ConfigureLicenseSourceAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task ConfigurePowerPolicy(ManagedObjectReference self, int key)
@@ -1510,7 +1515,7 @@ public class VimClient : IVimClient
             key = key,
         };
 
-        await this.inner.ConfigurePowerPolicyAsync(req);
+        await this.inner.ConfigurePowerPolicyAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> ConfigureStorageDrsForPod_Task(ManagedObjectReference self, ManagedObjectReference pod, StorageDrsConfigSpec spec, bool modify)
@@ -1523,7 +1528,7 @@ public class VimClient : IVimClient
             modify = modify,
         };
 
-        var res = await this.inner.ConfigureStorageDrsForPod_TaskAsync(req);
+        var res = await this.inner.ConfigureStorageDrsForPod_TaskAsync(req).ConfigureAwait(false);
 
         return res.ConfigureStorageDrsForPod_TaskResponse.returnval;
     }
@@ -1536,7 +1541,7 @@ public class VimClient : IVimClient
             configSpec = configSpec,
         };
 
-        var res = await this.inner.configureVcha_TaskAsync(req);
+        var res = await this.inner.configureVcha_TaskAsync(req).ConfigureAwait(false);
 
         return res.configureVcha_TaskResponse.returnval;
     }
@@ -1549,7 +1554,7 @@ public class VimClient : IVimClient
             devicePath = devicePath,
         };
 
-        var res = await this.inner.ConfigureVFlashResourceEx_TaskAsync(req);
+        var res = await this.inner.ConfigureVFlashResourceEx_TaskAsync(req).ConfigureAwait(false);
 
         return res.ConfigureVFlashResourceEx_TaskResponse.returnval;
     }
@@ -1562,7 +1567,7 @@ public class VimClient : IVimClient
             connectSpec = connectSpec,
         };
 
-        await this.inner.ConnectNvmeControllerAsync(req);
+        await this.inner.ConnectNvmeControllerAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> ConnectNvmeControllerEx_Task(ManagedObjectReference self, HostNvmeConnectSpec[]? connectSpec)
@@ -1573,7 +1578,7 @@ public class VimClient : IVimClient
             connectSpec = connectSpec,
         };
 
-        var res = await this.inner.ConnectNvmeControllerEx_TaskAsync(req);
+        var res = await this.inner.ConnectNvmeControllerEx_TaskAsync(req).ConfigureAwait(false);
 
         return res.ConnectNvmeControllerEx_TaskResponse.returnval;
     }
@@ -1585,7 +1590,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.ConsolidateVMDisks_TaskAsync(req);
+        var res = await this.inner.ConsolidateVMDisks_TaskAsync(req).ConfigureAwait(false);
 
         return res.ConsolidateVMDisks_TaskResponse.returnval;
     }
@@ -1598,7 +1603,7 @@ public class VimClient : IVimClient
             token = token,
         };
 
-        var res = await this.inner.ContinueRetrievePropertiesExAsync(req);
+        var res = await this.inner.ContinueRetrievePropertiesExAsync(req).ConfigureAwait(false);
 
         return res.ContinueRetrievePropertiesExResponse.returnval;
     }
@@ -1612,7 +1617,7 @@ public class VimClient : IVimClient
             namespaceUrl = namespaceUrl,
         };
 
-        var res = await this.inner.ConvertNamespacePathToUuidPathAsync(req);
+        var res = await this.inner.ConvertNamespacePathToUuidPathAsync(req).ConfigureAwait(false);
 
         return res.ConvertNamespacePathToUuidPathResponse.returnval;
     }
@@ -1630,7 +1635,7 @@ public class VimClient : IVimClient
             forceSpecified = forceSpecified,
         };
 
-        var res = await this.inner.CopyDatastoreFile_TaskAsync(req);
+        var res = await this.inner.CopyDatastoreFile_TaskAsync(req).ConfigureAwait(false);
 
         return res.CopyDatastoreFile_TaskResponse.returnval;
     }
@@ -1649,7 +1654,7 @@ public class VimClient : IVimClient
             forceSpecified = forceSpecified,
         };
 
-        var res = await this.inner.CopyVirtualDisk_TaskAsync(req);
+        var res = await this.inner.CopyVirtualDisk_TaskAsync(req).ConfigureAwait(false);
 
         return res.CopyVirtualDisk_TaskResponse.returnval;
     }
@@ -1663,7 +1668,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.CreateAlarmAsync(req);
+        var res = await this.inner.CreateAlarmAsync(req).ConfigureAwait(false);
 
         return res.CreateAlarmResponse.returnval;
     }
@@ -1677,7 +1682,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.CreateChildVM_TaskAsync(req);
+        var res = await this.inner.CreateChildVM_TaskAsync(req).ConfigureAwait(false);
 
         return res.CreateChildVM_TaskResponse.returnval;
     }
@@ -1691,7 +1696,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.CreateClusterAsync(req);
+        var res = await this.inner.CreateClusterAsync(req).ConfigureAwait(false);
 
         return res.CreateClusterResponse.returnval;
     }
@@ -1705,7 +1710,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.CreateClusterExAsync(req);
+        var res = await this.inner.CreateClusterExAsync(req).ConfigureAwait(false);
 
         return res.CreateClusterExResponse.returnval;
     }
@@ -1718,7 +1723,7 @@ public class VimClient : IVimClient
             filter = filter,
         };
 
-        var res = await this.inner.CreateCollectorForEventsAsync(req);
+        var res = await this.inner.CreateCollectorForEventsAsync(req).ConfigureAwait(false);
 
         return res.CreateCollectorForEventsResponse.returnval;
     }
@@ -1731,7 +1736,7 @@ public class VimClient : IVimClient
             filter = filter,
         };
 
-        var res = await this.inner.CreateCollectorForTasksAsync(req);
+        var res = await this.inner.CreateCollectorForTasksAsync(req).ConfigureAwait(false);
 
         return res.CreateCollectorForTasksResponse.returnval;
     }
@@ -1745,7 +1750,7 @@ public class VimClient : IVimClient
             infoFilter = infoFilter,
         };
 
-        var res = await this.inner.CreateCollectorWithInfoFilterForTasksAsync(req);
+        var res = await this.inner.CreateCollectorWithInfoFilterForTasksAsync(req).ConfigureAwait(false);
 
         return res.CreateCollectorWithInfoFilterForTasksResponse.returnval;
     }
@@ -1760,7 +1765,7 @@ public class VimClient : IVimClient
             recursive = recursive,
         };
 
-        var res = await this.inner.CreateContainerViewAsync(req);
+        var res = await this.inner.CreateContainerViewAsync(req).ConfigureAwait(false);
 
         return res.CreateContainerViewResponse.returnval;
     }
@@ -1773,7 +1778,7 @@ public class VimClient : IVimClient
             item = item,
         };
 
-        await this.inner.CreateCustomizationSpecAsync(req);
+        await this.inner.CreateCustomizationSpecAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateDatacenter(ManagedObjectReference self, string name)
@@ -1784,7 +1789,7 @@ public class VimClient : IVimClient
             name = name,
         };
 
-        var res = await this.inner.CreateDatacenterAsync(req);
+        var res = await this.inner.CreateDatacenterAsync(req).ConfigureAwait(false);
 
         return res.CreateDatacenterResponse.returnval;
     }
@@ -1799,7 +1804,7 @@ public class VimClient : IVimClient
             profile = profile,
         };
 
-        var res = await this.inner.CreateDefaultProfileAsync(req);
+        var res = await this.inner.CreateDefaultProfileAsync(req).ConfigureAwait(false);
 
         return res.CreateDefaultProfileResponse.returnval;
     }
@@ -1813,7 +1818,7 @@ public class VimClient : IVimClient
             cdp = cdp,
         };
 
-        var res = await this.inner.CreateDescriptorAsync(req);
+        var res = await this.inner.CreateDescriptorAsync(req).ConfigureAwait(false);
 
         return res.CreateDescriptorResponse.returnval;
     }
@@ -1826,7 +1831,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        await this.inner.CreateDiagnosticPartitionAsync(req);
+        await this.inner.CreateDiagnosticPartitionAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<string?> CreateDirectory(ManagedObjectReference self, ManagedObjectReference datastore, string? displayName, string? policy, long size, bool sizeSpecified)
@@ -1841,7 +1846,7 @@ public class VimClient : IVimClient
             sizeSpecified = sizeSpecified,
         };
 
-        var res = await this.inner.CreateDirectoryAsync(req);
+        var res = await this.inner.CreateDirectoryAsync(req).ConfigureAwait(false);
 
         return res.CreateDirectoryResponse.returnval;
     }
@@ -1854,7 +1859,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.CreateDisk_TaskAsync(req);
+        var res = await this.inner.CreateDisk_TaskAsync(req).ConfigureAwait(false);
 
         return res.CreateDisk_TaskResponse.returnval;
     }
@@ -1877,7 +1882,7 @@ public class VimClient : IVimClient
             targetDatastore = targetDatastore,
         };
 
-        var res = await this.inner.CreateDiskFromSnapshot_TaskAsync(req);
+        var res = await this.inner.CreateDiskFromSnapshot_TaskAsync(req).ConfigureAwait(false);
 
         return res.CreateDiskFromSnapshot_TaskResponse.returnval;
     }
@@ -1890,7 +1895,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.CreateDVPortgroup_TaskAsync(req);
+        var res = await this.inner.CreateDVPortgroup_TaskAsync(req).ConfigureAwait(false);
 
         return res.CreateDVPortgroup_TaskResponse.returnval;
     }
@@ -1903,7 +1908,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.CreateDVS_TaskAsync(req);
+        var res = await this.inner.CreateDVS_TaskAsync(req).ConfigureAwait(false);
 
         return res.CreateDVS_TaskResponse.returnval;
     }
@@ -1917,7 +1922,7 @@ public class VimClient : IVimClient
             partialUpdates = partialUpdates,
         };
 
-        var res = await this.inner.CreateFilterAsync(req);
+        var res = await this.inner.CreateFilterAsync(req).ConfigureAwait(false);
 
         return res.CreateFilterResponse.returnval;
     }
@@ -1930,7 +1935,7 @@ public class VimClient : IVimClient
             name = name,
         };
 
-        var res = await this.inner.CreateFolderAsync(req);
+        var res = await this.inner.CreateFolderAsync(req).ConfigureAwait(false);
 
         return res.CreateFolderResponse.returnval;
     }
@@ -1943,7 +1948,7 @@ public class VimClient : IVimClient
             group = group,
         };
 
-        await this.inner.CreateGroupAsync(req);
+        await this.inner.CreateGroupAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<OvfCreateImportSpecResult?> CreateImportSpec(ManagedObjectReference self, string ovfDescriptor, ManagedObjectReference resourcePool, ManagedObjectReference datastore, OvfCreateImportSpecParams cisp)
@@ -1957,7 +1962,7 @@ public class VimClient : IVimClient
             cisp = cisp,
         };
 
-        var res = await this.inner.CreateImportSpecAsync(req);
+        var res = await this.inner.CreateImportSpecAsync(req).ConfigureAwait(false);
 
         return res.CreateImportSpecResponse.returnval;
     }
@@ -1969,7 +1974,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.CreateInventoryViewAsync(req);
+        var res = await this.inner.CreateInventoryViewAsync(req).ConfigureAwait(false);
 
         return res.CreateInventoryViewResponse.returnval;
     }
@@ -1983,7 +1988,7 @@ public class VimClient : IVimClient
             pool = pool,
         };
 
-        var res = await this.inner.CreateIpPoolAsync(req);
+        var res = await this.inner.CreateIpPoolAsync(req).ConfigureAwait(false);
 
         return res.CreateIpPoolResponse.returnval;
     }
@@ -1996,7 +2001,7 @@ public class VimClient : IVimClient
             obj = obj,
         };
 
-        var res = await this.inner.CreateListViewAsync(req);
+        var res = await this.inner.CreateListViewAsync(req).ConfigureAwait(false);
 
         return res.CreateListViewResponse.returnval;
     }
@@ -2009,7 +2014,7 @@ public class VimClient : IVimClient
             view = view,
         };
 
-        var res = await this.inner.CreateListViewFromViewAsync(req);
+        var res = await this.inner.CreateListViewFromViewAsync(req).ConfigureAwait(false);
 
         return res.CreateListViewFromViewResponse.returnval;
     }
@@ -2023,7 +2028,7 @@ public class VimClient : IVimClient
             path = path,
         };
 
-        var res = await this.inner.CreateLocalDatastoreAsync(req);
+        var res = await this.inner.CreateLocalDatastoreAsync(req).ConfigureAwait(false);
 
         return res.CreateLocalDatastoreResponse.returnval;
     }
@@ -2036,7 +2041,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.CreateNasDatastoreAsync(req);
+        var res = await this.inner.CreateNasDatastoreAsync(req).ConfigureAwait(false);
 
         return res.CreateNasDatastoreResponse.returnval;
     }
@@ -2049,7 +2054,7 @@ public class VimClient : IVimClient
             createSpec = createSpec,
         };
 
-        var res = await this.inner.CreateNvdimmNamespace_TaskAsync(req);
+        var res = await this.inner.CreateNvdimmNamespace_TaskAsync(req).ConfigureAwait(false);
 
         return res.CreateNvdimmNamespace_TaskResponse.returnval;
     }
@@ -2062,7 +2067,7 @@ public class VimClient : IVimClient
             createSpec = createSpec,
         };
 
-        var res = await this.inner.CreateNvdimmPMemNamespace_TaskAsync(req);
+        var res = await this.inner.CreateNvdimmPMemNamespace_TaskAsync(req).ConfigureAwait(false);
 
         return res.CreateNvdimmPMemNamespace_TaskResponse.returnval;
     }
@@ -2075,7 +2080,7 @@ public class VimClient : IVimClient
             rdmaDeviceName = rdmaDeviceName,
         };
 
-        await this.inner.CreateNvmeOverRdmaAdapterAsync(req);
+        await this.inner.CreateNvmeOverRdmaAdapterAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateObjectScheduledTask(ManagedObjectReference self, ManagedObjectReference obj, ScheduledTaskSpec spec)
@@ -2087,7 +2092,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.CreateObjectScheduledTaskAsync(req);
+        var res = await this.inner.CreateObjectScheduledTaskAsync(req).ConfigureAwait(false);
 
         return res.CreateObjectScheduledTaskResponse.returnval;
     }
@@ -2101,7 +2106,7 @@ public class VimClient : IVimClient
             sourceVcSpec = sourceVcSpec,
         };
 
-        var res = await this.inner.createPassiveNode_TaskAsync(req);
+        var res = await this.inner.createPassiveNode_TaskAsync(req).ConfigureAwait(false);
 
         return res.createPassiveNode_TaskResponse.returnval;
     }
@@ -2114,7 +2119,7 @@ public class VimClient : IVimClient
             intervalId = intervalId,
         };
 
-        await this.inner.CreatePerfIntervalAsync(req);
+        await this.inner.CreatePerfIntervalAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateProfile(ManagedObjectReference self, ProfileCreateSpec createSpec)
@@ -2125,7 +2130,7 @@ public class VimClient : IVimClient
             createSpec = createSpec,
         };
 
-        var res = await this.inner.CreateProfileAsync(req);
+        var res = await this.inner.CreateProfileAsync(req).ConfigureAwait(false);
 
         return res.CreateProfileResponse.returnval;
     }
@@ -2137,7 +2142,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.CreatePropertyCollectorAsync(req);
+        var res = await this.inner.CreatePropertyCollectorAsync(req).ConfigureAwait(false);
 
         return res.CreatePropertyCollectorResponse.returnval;
     }
@@ -2154,7 +2159,7 @@ public class VimClient : IVimClient
             classType = classType,
         };
 
-        await this.inner.CreateRegistryKeyInGuestAsync(req);
+        await this.inner.CreateRegistryKeyInGuestAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateResourcePool(ManagedObjectReference self, string name, ResourceConfigSpec spec)
@@ -2166,7 +2171,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.CreateResourcePoolAsync(req);
+        var res = await this.inner.CreateResourcePoolAsync(req).ConfigureAwait(false);
 
         return res.CreateResourcePoolResponse.returnval;
     }
@@ -2180,7 +2185,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.CreateScheduledTaskAsync(req);
+        var res = await this.inner.CreateScheduledTaskAsync(req).ConfigureAwait(false);
 
         return res.CreateScheduledTaskResponse.returnval;
     }
@@ -2192,7 +2197,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.CreateScreenshot_TaskAsync(req);
+        var res = await this.inner.CreateScreenshot_TaskAsync(req).ConfigureAwait(false);
 
         return res.CreateScreenshot_TaskResponse.returnval;
     }
@@ -2205,7 +2210,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.CreateSecondaryVM_TaskAsync(req);
+        var res = await this.inner.CreateSecondaryVM_TaskAsync(req).ConfigureAwait(false);
 
         return res.CreateSecondaryVM_TaskResponse.returnval;
     }
@@ -2219,7 +2224,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.CreateSecondaryVMEx_TaskAsync(req);
+        var res = await this.inner.CreateSecondaryVMEx_TaskAsync(req).ConfigureAwait(false);
 
         return res.CreateSecondaryVMEx_TaskResponse.returnval;
     }
@@ -2235,7 +2240,7 @@ public class VimClient : IVimClient
             quiesce = quiesce,
         };
 
-        var res = await this.inner.CreateSnapshot_TaskAsync(req);
+        var res = await this.inner.CreateSnapshot_TaskAsync(req).ConfigureAwait(false);
 
         return res.CreateSnapshot_TaskResponse.returnval;
     }
@@ -2251,7 +2256,7 @@ public class VimClient : IVimClient
             quiesceSpec = quiesceSpec,
         };
 
-        var res = await this.inner.CreateSnapshotEx_TaskAsync(req);
+        var res = await this.inner.CreateSnapshotEx_TaskAsync(req).ConfigureAwait(false);
 
         return res.CreateSnapshotEx_TaskResponse.returnval;
     }
@@ -2264,7 +2269,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        await this.inner.CreateSoftwareAdapterAsync(req);
+        await this.inner.CreateSoftwareAdapterAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateStoragePod(ManagedObjectReference self, string name)
@@ -2275,7 +2280,7 @@ public class VimClient : IVimClient
             name = name,
         };
 
-        var res = await this.inner.CreateStoragePodAsync(req);
+        var res = await this.inner.CreateStoragePodAsync(req).ConfigureAwait(false);
 
         return res.CreateStoragePodResponse.returnval;
     }
@@ -2293,7 +2298,7 @@ public class VimClient : IVimClient
             activationId = activationId,
         };
 
-        var res = await this.inner.CreateTaskAsync(req);
+        var res = await this.inner.CreateTaskAsync(req).ConfigureAwait(false);
 
         return res.CreateTaskResponse.returnval;
     }
@@ -2310,7 +2315,7 @@ public class VimClient : IVimClient
             directoryPath = directoryPath,
         };
 
-        var res = await this.inner.CreateTemporaryDirectoryInGuestAsync(req);
+        var res = await this.inner.CreateTemporaryDirectoryInGuestAsync(req).ConfigureAwait(false);
 
         return res.CreateTemporaryDirectoryInGuestResponse.returnval;
     }
@@ -2327,7 +2332,7 @@ public class VimClient : IVimClient
             directoryPath = directoryPath,
         };
 
-        var res = await this.inner.CreateTemporaryFileInGuestAsync(req);
+        var res = await this.inner.CreateTemporaryFileInGuestAsync(req).ConfigureAwait(false);
 
         return res.CreateTemporaryFileInGuestResponse.returnval;
     }
@@ -2340,7 +2345,7 @@ public class VimClient : IVimClient
             user = user,
         };
 
-        await this.inner.CreateUserAsync(req);
+        await this.inner.CreateUserAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> CreateVApp(ManagedObjectReference self, string name, ResourceConfigSpec resSpec, VAppConfigSpec configSpec, ManagedObjectReference? vmFolder)
@@ -2354,7 +2359,7 @@ public class VimClient : IVimClient
             vmFolder = vmFolder,
         };
 
-        var res = await this.inner.CreateVAppAsync(req);
+        var res = await this.inner.CreateVAppAsync(req).ConfigureAwait(false);
 
         return res.CreateVAppResponse.returnval;
     }
@@ -2369,7 +2374,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.CreateVirtualDisk_TaskAsync(req);
+        var res = await this.inner.CreateVirtualDisk_TaskAsync(req).ConfigureAwait(false);
 
         return res.CreateVirtualDisk_TaskResponse.returnval;
     }
@@ -2384,7 +2389,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.CreateVM_TaskAsync(req);
+        var res = await this.inner.CreateVM_TaskAsync(req).ConfigureAwait(false);
 
         return res.CreateVM_TaskResponse.returnval;
     }
@@ -2397,7 +2402,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.CreateVmfsDatastoreAsync(req);
+        var res = await this.inner.CreateVmfsDatastoreAsync(req).ConfigureAwait(false);
 
         return res.CreateVmfsDatastoreResponse.returnval;
     }
@@ -2410,7 +2415,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.CreateVvolDatastoreAsync(req);
+        var res = await this.inner.CreateVvolDatastoreAsync(req).ConfigureAwait(false);
 
         return res.CreateVvolDatastoreResponse.returnval;
     }
@@ -2424,7 +2429,7 @@ public class VimClient : IVimClient
             sourceVcSpec = sourceVcSpec,
         };
 
-        var res = await this.inner.createWitnessNode_TaskAsync(req);
+        var res = await this.inner.createWitnessNode_TaskAsync(req).ConfigureAwait(false);
 
         return res.createWitnessNode_TaskResponse.returnval;
     }
@@ -2436,7 +2441,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.CryptoManagerHostDisableAsync(req);
+        await this.inner.CryptoManagerHostDisableAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task CryptoManagerHostEnable(ManagedObjectReference self, CryptoKeyPlain initialKey)
@@ -2447,7 +2452,7 @@ public class VimClient : IVimClient
             initialKey = initialKey,
         };
 
-        await this.inner.CryptoManagerHostEnableAsync(req);
+        await this.inner.CryptoManagerHostEnableAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task CryptoManagerHostPrepare(ManagedObjectReference self)
@@ -2457,7 +2462,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.CryptoManagerHostPrepareAsync(req);
+        await this.inner.CryptoManagerHostPrepareAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> CryptoUnlock_Task(ManagedObjectReference self)
@@ -2467,7 +2472,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.CryptoUnlock_TaskAsync(req);
+        var res = await this.inner.CryptoUnlock_TaskAsync(req).ConfigureAwait(false);
 
         return res.CryptoUnlock_TaskResponse.returnval;
     }
@@ -2479,7 +2484,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.CurrentTimeAsync(req);
+        var res = await this.inner.CurrentTimeAsync(req).ConfigureAwait(false);
 
         return res.CurrentTimeResponse.returnval;
     }
@@ -2492,7 +2497,7 @@ public class VimClient : IVimClient
             item = item,
         };
 
-        var res = await this.inner.CustomizationSpecItemToXmlAsync(req);
+        var res = await this.inner.CustomizationSpecItemToXmlAsync(req).ConfigureAwait(false);
 
         return res.CustomizationSpecItemToXmlResponse.returnval;
     }
@@ -2508,7 +2513,7 @@ public class VimClient : IVimClient
             configParams = configParams,
         };
 
-        var res = await this.inner.CustomizeGuest_TaskAsync(req);
+        var res = await this.inner.CustomizeGuest_TaskAsync(req).ConfigureAwait(false);
 
         return res.CustomizeGuest_TaskResponse.returnval;
     }
@@ -2521,7 +2526,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.CustomizeVM_TaskAsync(req);
+        var res = await this.inner.CustomizeVM_TaskAsync(req).ConfigureAwait(false);
 
         return res.CustomizeVM_TaskResponse.returnval;
     }
@@ -2533,7 +2538,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.DatastoreEnterMaintenanceModeAsync(req);
+        var res = await this.inner.DatastoreEnterMaintenanceModeAsync(req).ConfigureAwait(false);
 
         return res.DatastoreEnterMaintenanceModeResponse.returnval;
     }
@@ -2545,7 +2550,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.DatastoreExitMaintenanceMode_TaskAsync(req);
+        var res = await this.inner.DatastoreExitMaintenanceMode_TaskAsync(req).ConfigureAwait(false);
 
         return res.DatastoreExitMaintenanceMode_TaskResponse.returnval;
     }
@@ -2558,7 +2563,7 @@ public class VimClient : IVimClient
             licenseKey = licenseKey,
         };
 
-        var res = await this.inner.DecodeLicenseAsync(req);
+        var res = await this.inner.DecodeLicenseAsync(req).ConfigureAwait(false);
 
         return res.DecodeLicenseResponse.returnval;
     }
@@ -2570,7 +2575,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.DefragmentAllDisksAsync(req);
+        await this.inner.DefragmentAllDisksAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> DefragmentVirtualDisk_Task(ManagedObjectReference self, string name, ManagedObjectReference? datacenter)
@@ -2582,7 +2587,7 @@ public class VimClient : IVimClient
             datacenter = datacenter,
         };
 
-        var res = await this.inner.DefragmentVirtualDisk_TaskAsync(req);
+        var res = await this.inner.DefragmentVirtualDisk_TaskAsync(req).ConfigureAwait(false);
 
         return res.DefragmentVirtualDisk_TaskResponse.returnval;
     }
@@ -2595,7 +2600,7 @@ public class VimClient : IVimClient
             name = name,
         };
 
-        await this.inner.DeleteCustomizationSpecAsync(req);
+        await this.inner.DeleteCustomizationSpecAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> DeleteDatastoreFile_Task(ManagedObjectReference self, string name, ManagedObjectReference? datacenter)
@@ -2607,7 +2612,7 @@ public class VimClient : IVimClient
             datacenter = datacenter,
         };
 
-        var res = await this.inner.DeleteDatastoreFile_TaskAsync(req);
+        var res = await this.inner.DeleteDatastoreFile_TaskAsync(req).ConfigureAwait(false);
 
         return res.DeleteDatastoreFile_TaskResponse.returnval;
     }
@@ -2621,7 +2626,7 @@ public class VimClient : IVimClient
             datastorePath = datastorePath,
         };
 
-        await this.inner.DeleteDirectoryAsync(req);
+        await this.inner.DeleteDirectoryAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task DeleteDirectoryInGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, string directoryPath, bool recursive)
@@ -2635,7 +2640,7 @@ public class VimClient : IVimClient
             recursive = recursive,
         };
 
-        await this.inner.DeleteDirectoryInGuestAsync(req);
+        await this.inner.DeleteDirectoryInGuestAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task DeleteFile(ManagedObjectReference self, string datastorePath)
@@ -2646,7 +2651,7 @@ public class VimClient : IVimClient
             datastorePath = datastorePath,
         };
 
-        await this.inner.DeleteFileAsync(req);
+        await this.inner.DeleteFileAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task DeleteFileInGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, string filePath)
@@ -2659,7 +2664,7 @@ public class VimClient : IVimClient
             filePath = filePath,
         };
 
-        await this.inner.DeleteFileInGuestAsync(req);
+        await this.inner.DeleteFileInGuestAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task DeleteHostSpecification(ManagedObjectReference self, ManagedObjectReference host)
@@ -2670,7 +2675,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        await this.inner.DeleteHostSpecificationAsync(req);
+        await this.inner.DeleteHostSpecificationAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task DeleteHostSubSpecification(ManagedObjectReference self, ManagedObjectReference host, string subSpecName)
@@ -2682,7 +2687,7 @@ public class VimClient : IVimClient
             subSpecName = subSpecName,
         };
 
-        await this.inner.DeleteHostSubSpecificationAsync(req);
+        await this.inner.DeleteHostSubSpecificationAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> DeleteNvdimmBlockNamespaces_Task(ManagedObjectReference self)
@@ -2692,7 +2697,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.DeleteNvdimmBlockNamespaces_TaskAsync(req);
+        var res = await this.inner.DeleteNvdimmBlockNamespaces_TaskAsync(req).ConfigureAwait(false);
 
         return res.DeleteNvdimmBlockNamespaces_TaskResponse.returnval;
     }
@@ -2705,7 +2710,7 @@ public class VimClient : IVimClient
             deleteSpec = deleteSpec,
         };
 
-        var res = await this.inner.DeleteNvdimmNamespace_TaskAsync(req);
+        var res = await this.inner.DeleteNvdimmNamespace_TaskAsync(req).ConfigureAwait(false);
 
         return res.DeleteNvdimmNamespace_TaskResponse.returnval;
     }
@@ -2721,7 +2726,7 @@ public class VimClient : IVimClient
             recursive = recursive,
         };
 
-        await this.inner.DeleteRegistryKeyInGuestAsync(req);
+        await this.inner.DeleteRegistryKeyInGuestAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task DeleteRegistryValueInGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, GuestRegValueNameSpec valueName)
@@ -2734,7 +2739,7 @@ public class VimClient : IVimClient
             valueName = valueName,
         };
 
-        await this.inner.DeleteRegistryValueInGuestAsync(req);
+        await this.inner.DeleteRegistryValueInGuestAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task DeleteScsiLunState(ManagedObjectReference self, string lunCanonicalName)
@@ -2745,7 +2750,7 @@ public class VimClient : IVimClient
             lunCanonicalName = lunCanonicalName,
         };
 
-        await this.inner.DeleteScsiLunStateAsync(req);
+        await this.inner.DeleteScsiLunStateAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> DeleteSnapshot_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, ID snapshotId)
@@ -2758,7 +2763,7 @@ public class VimClient : IVimClient
             snapshotId = snapshotId,
         };
 
-        var res = await this.inner.DeleteSnapshot_TaskAsync(req);
+        var res = await this.inner.DeleteSnapshot_TaskAsync(req).ConfigureAwait(false);
 
         return res.DeleteSnapshot_TaskResponse.returnval;
     }
@@ -2771,7 +2776,7 @@ public class VimClient : IVimClient
             vffsUuid = vffsUuid,
         };
 
-        await this.inner.DeleteVffsVolumeStateAsync(req);
+        await this.inner.DeleteVffsVolumeStateAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> DeleteVirtualDisk_Task(ManagedObjectReference self, string name, ManagedObjectReference? datacenter)
@@ -2783,7 +2788,7 @@ public class VimClient : IVimClient
             datacenter = datacenter,
         };
 
-        var res = await this.inner.DeleteVirtualDisk_TaskAsync(req);
+        var res = await this.inner.DeleteVirtualDisk_TaskAsync(req).ConfigureAwait(false);
 
         return res.DeleteVirtualDisk_TaskResponse.returnval;
     }
@@ -2796,7 +2801,7 @@ public class VimClient : IVimClient
             vmfsUuid = vmfsUuid,
         };
 
-        await this.inner.DeleteVmfsVolumeStateAsync(req);
+        await this.inner.DeleteVmfsVolumeStateAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<HostVsanInternalSystemDeleteVsanObjectsResult[]?> DeleteVsanObjects(ManagedObjectReference self, string[] uuids, bool force, bool forceSpecified)
@@ -2809,7 +2814,7 @@ public class VimClient : IVimClient
             forceSpecified = forceSpecified,
         };
 
-        var res = await this.inner.DeleteVsanObjectsAsync(req);
+        var res = await this.inner.DeleteVsanObjectsAsync(req).ConfigureAwait(false);
 
         return res.DeleteVsanObjectsResponse1;
     }
@@ -2823,7 +2828,7 @@ public class VimClient : IVimClient
             datastore = datastore,
         };
 
-        var res = await this.inner.DeleteVStorageObject_TaskAsync(req);
+        var res = await this.inner.DeleteVStorageObject_TaskAsync(req).ConfigureAwait(false);
 
         return res.DeleteVStorageObject_TaskResponse.returnval;
     }
@@ -2837,7 +2842,7 @@ public class VimClient : IVimClient
             datastore = datastore,
         };
 
-        var res = await this.inner.DeleteVStorageObjectEx_TaskAsync(req);
+        var res = await this.inner.DeleteVStorageObjectEx_TaskAsync(req).ConfigureAwait(false);
 
         return res.DeleteVStorageObjectEx_TaskResponse.returnval;
     }
@@ -2850,7 +2855,7 @@ public class VimClient : IVimClient
             deploymentSpec = deploymentSpec,
         };
 
-        var res = await this.inner.deployVcha_TaskAsync(req);
+        var res = await this.inner.deployVcha_TaskAsync(req).ConfigureAwait(false);
 
         return res.deployVcha_TaskResponse.returnval;
     }
@@ -2862,7 +2867,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.DeselectVnicAsync(req);
+        await this.inner.DeselectVnicAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task DeselectVnicForNicType(ManagedObjectReference self, string nicType, string device)
@@ -2874,7 +2879,7 @@ public class VimClient : IVimClient
             device = device,
         };
 
-        await this.inner.DeselectVnicForNicTypeAsync(req);
+        await this.inner.DeselectVnicForNicTypeAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> Destroy_Task(ManagedObjectReference self)
@@ -2884,7 +2889,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.Destroy_TaskAsync(req);
+        var res = await this.inner.Destroy_TaskAsync(req).ConfigureAwait(false);
 
         return res.Destroy_TaskResponse.returnval;
     }
@@ -2896,7 +2901,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.DestroyChildrenAsync(req);
+        await this.inner.DestroyChildrenAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task DestroyCollector(ManagedObjectReference self)
@@ -2906,7 +2911,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.DestroyCollectorAsync(req);
+        await this.inner.DestroyCollectorAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task DestroyDatastore(ManagedObjectReference self)
@@ -2916,7 +2921,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.DestroyDatastoreAsync(req);
+        await this.inner.DestroyDatastoreAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task DestroyIpPool(ManagedObjectReference self, ManagedObjectReference dc, int id, bool force)
@@ -2929,7 +2934,7 @@ public class VimClient : IVimClient
             force = force,
         };
 
-        await this.inner.DestroyIpPoolAsync(req);
+        await this.inner.DestroyIpPoolAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task DestroyNetwork(ManagedObjectReference self)
@@ -2939,7 +2944,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.DestroyNetworkAsync(req);
+        await this.inner.DestroyNetworkAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task DestroyProfile(ManagedObjectReference self)
@@ -2949,7 +2954,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.DestroyProfileAsync(req);
+        await this.inner.DestroyProfileAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task DestroyPropertyCollector(ManagedObjectReference self)
@@ -2959,7 +2964,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.DestroyPropertyCollectorAsync(req);
+        await this.inner.DestroyPropertyCollectorAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task DestroyPropertyFilter(ManagedObjectReference self)
@@ -2969,7 +2974,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.DestroyPropertyFilterAsync(req);
+        await this.inner.DestroyPropertyFilterAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> DestroyVcha_Task(ManagedObjectReference self)
@@ -2979,7 +2984,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.destroyVcha_TaskAsync(req);
+        var res = await this.inner.destroyVcha_TaskAsync(req).ConfigureAwait(false);
 
         return res.destroyVcha_TaskResponse.returnval;
     }
@@ -2992,7 +2997,7 @@ public class VimClient : IVimClient
             vffsPath = vffsPath,
         };
 
-        await this.inner.DestroyVffsAsync(req);
+        await this.inner.DestroyVffsAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task DestroyView(ManagedObjectReference self)
@@ -3002,7 +3007,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.DestroyViewAsync(req);
+        await this.inner.DestroyViewAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> DetachDisk_Task(ManagedObjectReference self, ID diskId)
@@ -3013,7 +3018,7 @@ public class VimClient : IVimClient
             diskId = diskId,
         };
 
-        var res = await this.inner.DetachDisk_TaskAsync(req);
+        var res = await this.inner.DetachDisk_TaskAsync(req).ConfigureAwait(false);
 
         return res.DetachDisk_TaskResponse.returnval;
     }
@@ -3026,7 +3031,7 @@ public class VimClient : IVimClient
             lunUuid = lunUuid,
         };
 
-        await this.inner.DetachScsiLunAsync(req);
+        await this.inner.DetachScsiLunAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> DetachScsiLunEx_Task(ManagedObjectReference self, string[] lunUuid)
@@ -3037,7 +3042,7 @@ public class VimClient : IVimClient
             lunUuid = lunUuid,
         };
 
-        var res = await this.inner.DetachScsiLunEx_TaskAsync(req);
+        var res = await this.inner.DetachScsiLunEx_TaskAsync(req).ConfigureAwait(false);
 
         return res.DetachScsiLunEx_TaskResponse.returnval;
     }
@@ -3052,7 +3057,7 @@ public class VimClient : IVimClient
             tag = tag,
         };
 
-        await this.inner.DetachTagFromVStorageObjectAsync(req);
+        await this.inner.DetachTagFromVStorageObjectAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<string?> DirectPathProfileManagerCreate(ManagedObjectReference self, DirectPathProfileManagerCreateSpec spec)
@@ -3063,7 +3068,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.DirectPathProfileManagerCreateAsync(req);
+        var res = await this.inner.DirectPathProfileManagerCreateAsync(req).ConfigureAwait(false);
 
         return res.DirectPathProfileManagerCreateResponse.returnval;
     }
@@ -3076,7 +3081,7 @@ public class VimClient : IVimClient
             id = id,
         };
 
-        await this.inner.DirectPathProfileManagerDeleteAsync(req);
+        await this.inner.DirectPathProfileManagerDeleteAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<DirectPathProfileInfo[]?> DirectPathProfileManagerList(ManagedObjectReference self, DirectPathProfileManagerFilterSpec filterSpec)
@@ -3087,7 +3092,7 @@ public class VimClient : IVimClient
             filterSpec = filterSpec,
         };
 
-        var res = await this.inner.DirectPathProfileManagerListAsync(req);
+        var res = await this.inner.DirectPathProfileManagerListAsync(req).ConfigureAwait(false);
 
         return res.DirectPathProfileManagerListResponse1;
     }
@@ -3101,7 +3106,7 @@ public class VimClient : IVimClient
             querySpec = querySpec,
         };
 
-        var res = await this.inner.DirectPathProfileManagerQueryCapacityAsync(req);
+        var res = await this.inner.DirectPathProfileManagerQueryCapacityAsync(req).ConfigureAwait(false);
 
         return res.DirectPathProfileManagerQueryCapacityResponse1;
     }
@@ -3115,7 +3120,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        await this.inner.DirectPathProfileManagerUpdateAsync(req);
+        await this.inner.DirectPathProfileManagerUpdateAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task DisableAlarm(ManagedObjectReference self, ManagedObjectReference alarm, ManagedObjectReference entity)
@@ -3127,7 +3132,7 @@ public class VimClient : IVimClient
             entity = entity,
         };
 
-        await this.inner.DisableAlarmAsync(req);
+        await this.inner.DisableAlarmAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task DisableClusteredVmdkSupport(ManagedObjectReference self, ManagedObjectReference datastore)
@@ -3138,7 +3143,7 @@ public class VimClient : IVimClient
             datastore = datastore,
         };
 
-        await this.inner.DisableClusteredVmdkSupportAsync(req);
+        await this.inner.DisableClusteredVmdkSupportAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> DisableEvcMode_Task(ManagedObjectReference self)
@@ -3148,7 +3153,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.DisableEvcMode_TaskAsync(req);
+        var res = await this.inner.DisableEvcMode_TaskAsync(req).ConfigureAwait(false);
 
         return res.DisableEvcMode_TaskResponse.returnval;
     }
@@ -3162,7 +3167,7 @@ public class VimClient : IVimClient
             featureKey = featureKey,
         };
 
-        var res = await this.inner.DisableFeatureAsync(req);
+        var res = await this.inner.DisableFeatureAsync(req).ConfigureAwait(false);
 
         return res.DisableFeatureResponse.returnval;
     }
@@ -3174,7 +3179,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.DisableHyperThreadingAsync(req);
+        await this.inner.DisableHyperThreadingAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task DisableMultipathPath(ManagedObjectReference self, string pathName)
@@ -3185,7 +3190,7 @@ public class VimClient : IVimClient
             pathName = pathName,
         };
 
-        await this.inner.DisableMultipathPathAsync(req);
+        await this.inner.DisableMultipathPathAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> DisableNetworkBoot_Task(ManagedObjectReference self)
@@ -3195,7 +3200,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.DisableNetworkBoot_TaskAsync(req);
+        var res = await this.inner.DisableNetworkBoot_TaskAsync(req).ConfigureAwait(false);
 
         return res.DisableNetworkBoot_TaskResponse.returnval;
     }
@@ -3208,7 +3213,7 @@ public class VimClient : IVimClient
             id = id,
         };
 
-        await this.inner.DisableRulesetAsync(req);
+        await this.inner.DisableRulesetAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> DisableSecondaryVM_Task(ManagedObjectReference self, ManagedObjectReference vm)
@@ -3219,7 +3224,7 @@ public class VimClient : IVimClient
             vm = vm,
         };
 
-        var res = await this.inner.DisableSecondaryVM_TaskAsync(req);
+        var res = await this.inner.DisableSecondaryVM_TaskAsync(req).ConfigureAwait(false);
 
         return res.DisableSecondaryVM_TaskResponse.returnval;
     }
@@ -3231,7 +3236,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.DisableSmartCardAuthenticationAsync(req);
+        await this.inner.DisableSmartCardAuthenticationAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> DisconnectHost_Task(ManagedObjectReference self)
@@ -3241,7 +3246,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.DisconnectHost_TaskAsync(req);
+        var res = await this.inner.DisconnectHost_TaskAsync(req).ConfigureAwait(false);
 
         return res.DisconnectHost_TaskResponse.returnval;
     }
@@ -3254,7 +3259,7 @@ public class VimClient : IVimClient
             disconnectSpec = disconnectSpec,
         };
 
-        await this.inner.DisconnectNvmeControllerAsync(req);
+        await this.inner.DisconnectNvmeControllerAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> DisconnectNvmeControllerEx_Task(ManagedObjectReference self, HostNvmeDisconnectSpec[]? disconnectSpec)
@@ -3265,7 +3270,7 @@ public class VimClient : IVimClient
             disconnectSpec = disconnectSpec,
         };
 
-        var res = await this.inner.DisconnectNvmeControllerEx_TaskAsync(req);
+        var res = await this.inner.DisconnectNvmeControllerEx_TaskAsync(req).ConfigureAwait(false);
 
         return res.DisconnectNvmeControllerEx_TaskResponse.returnval;
     }
@@ -3278,7 +3283,7 @@ public class VimClient : IVimClient
             fcoeSpec = fcoeSpec,
         };
 
-        await this.inner.DiscoverFcoeHbasAsync(req);
+        await this.inner.DiscoverFcoeHbasAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<HostNvmeDiscoveryLog?> DiscoverNvmeControllers(ManagedObjectReference self, HostNvmeDiscoverSpec discoverSpec)
@@ -3289,7 +3294,7 @@ public class VimClient : IVimClient
             discoverSpec = discoverSpec,
         };
 
-        var res = await this.inner.DiscoverNvmeControllersAsync(req);
+        var res = await this.inner.DiscoverNvmeControllersAsync(req).ConfigureAwait(false);
 
         return res.DiscoverNvmeControllersResponse.returnval;
     }
@@ -3302,7 +3307,7 @@ public class VimClient : IVimClient
             entity = entity,
         };
 
-        await this.inner.DissociateProfileAsync(req);
+        await this.inner.DissociateProfileAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<bool> DoesCustomizationSpecExist(ManagedObjectReference self, string name)
@@ -3313,7 +3318,7 @@ public class VimClient : IVimClient
             name = name,
         };
 
-        var res = await this.inner.DoesCustomizationSpecExistAsync(req);
+        var res = await this.inner.DoesCustomizationSpecExistAsync(req).ConfigureAwait(false);
 
         return res.DoesCustomizationSpecExistResponse.returnval;
     }
@@ -3325,7 +3330,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.DownloadDescriptionTreeAsync(req);
+        var res = await this.inner.DownloadDescriptionTreeAsync(req).ConfigureAwait(false);
 
         return res.DownloadDescriptionTreeResponse.returnval;
     }
@@ -3338,7 +3343,7 @@ public class VimClient : IVimClient
             listOfConnections = listOfConnections,
         };
 
-        var res = await this.inner.DropConnectionsAsync(req);
+        var res = await this.inner.DropConnectionsAsync(req).ConfigureAwait(false);
 
         return res.DropConnectionsResponse.returnval;
     }
@@ -3352,7 +3357,7 @@ public class VimClient : IVimClient
             newName = newName,
         };
 
-        await this.inner.DuplicateCustomizationSpecAsync(req);
+        await this.inner.DuplicateCustomizationSpecAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> DVPortgroupRollback_Task(ManagedObjectReference self, EntityBackupConfig? entityBackup)
@@ -3363,7 +3368,7 @@ public class VimClient : IVimClient
             entityBackup = entityBackup,
         };
 
-        var res = await this.inner.DVPortgroupRollback_TaskAsync(req);
+        var res = await this.inner.DVPortgroupRollback_TaskAsync(req).ConfigureAwait(false);
 
         return res.DVPortgroupRollback_TaskResponse.returnval;
     }
@@ -3376,7 +3381,7 @@ public class VimClient : IVimClient
             selectionSet = selectionSet,
         };
 
-        var res = await this.inner.DVSManagerExportEntity_TaskAsync(req);
+        var res = await this.inner.DVSManagerExportEntity_TaskAsync(req).ConfigureAwait(false);
 
         return res.DVSManagerExportEntity_TaskResponse.returnval;
     }
@@ -3390,7 +3395,7 @@ public class VimClient : IVimClient
             importType = importType,
         };
 
-        var res = await this.inner.DVSManagerImportEntity_TaskAsync(req);
+        var res = await this.inner.DVSManagerImportEntity_TaskAsync(req).ConfigureAwait(false);
 
         return res.DVSManagerImportEntity_TaskResponse.returnval;
     }
@@ -3404,7 +3409,7 @@ public class VimClient : IVimClient
             portgroupKey = portgroupKey,
         };
 
-        var res = await this.inner.DVSManagerLookupDvPortGroupAsync(req);
+        var res = await this.inner.DVSManagerLookupDvPortGroupAsync(req).ConfigureAwait(false);
 
         return res.DVSManagerLookupDvPortGroupResponse.returnval;
     }
@@ -3417,7 +3422,7 @@ public class VimClient : IVimClient
             configSpec = configSpec,
         };
 
-        var res = await this.inner.DvsReconfigureVmVnicNetworkResourcePool_TaskAsync(req);
+        var res = await this.inner.DvsReconfigureVmVnicNetworkResourcePool_TaskAsync(req).ConfigureAwait(false);
 
         return res.DvsReconfigureVmVnicNetworkResourcePool_TaskResponse.returnval;
     }
@@ -3430,7 +3435,7 @@ public class VimClient : IVimClient
             entityBackup = entityBackup,
         };
 
-        var res = await this.inner.DVSRollback_TaskAsync(req);
+        var res = await this.inner.DVSRollback_TaskAsync(req).ConfigureAwait(false);
 
         return res.DVSRollback_TaskResponse.returnval;
     }
@@ -3444,7 +3449,7 @@ public class VimClient : IVimClient
             datacenter = datacenter,
         };
 
-        var res = await this.inner.EagerZeroVirtualDisk_TaskAsync(req);
+        var res = await this.inner.EagerZeroVirtualDisk_TaskAsync(req).ConfigureAwait(false);
 
         return res.EagerZeroVirtualDisk_TaskResponse.returnval;
     }
@@ -3457,7 +3462,7 @@ public class VimClient : IVimClient
             message = message,
         };
 
-        await this.inner.EmitSyslogMarkAsync(req);
+        await this.inner.EmitSyslogMarkAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task EnableAlarm(ManagedObjectReference self, ManagedObjectReference alarm, ManagedObjectReference entity)
@@ -3469,7 +3474,7 @@ public class VimClient : IVimClient
             entity = entity,
         };
 
-        await this.inner.EnableAlarmAsync(req);
+        await this.inner.EnableAlarmAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task EnableAlarmActions(ManagedObjectReference self, ManagedObjectReference entity, bool enabled)
@@ -3481,7 +3486,7 @@ public class VimClient : IVimClient
             enabled = enabled,
         };
 
-        await this.inner.EnableAlarmActionsAsync(req);
+        await this.inner.EnableAlarmActionsAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task EnableClusteredVmdkSupport(ManagedObjectReference self, ManagedObjectReference datastore)
@@ -3492,7 +3497,7 @@ public class VimClient : IVimClient
             datastore = datastore,
         };
 
-        await this.inner.EnableClusteredVmdkSupportAsync(req);
+        await this.inner.EnableClusteredVmdkSupportAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task EnableCrypto(ManagedObjectReference self, CryptoKeyPlain keyPlain)
@@ -3503,7 +3508,7 @@ public class VimClient : IVimClient
             keyPlain = keyPlain,
         };
 
-        await this.inner.EnableCryptoAsync(req);
+        await this.inner.EnableCryptoAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<bool> EnableFeature(ManagedObjectReference self, ManagedObjectReference? host, string featureKey)
@@ -3515,7 +3520,7 @@ public class VimClient : IVimClient
             featureKey = featureKey,
         };
 
-        var res = await this.inner.EnableFeatureAsync(req);
+        var res = await this.inner.EnableFeatureAsync(req).ConfigureAwait(false);
 
         return res.EnableFeatureResponse.returnval;
     }
@@ -3527,7 +3532,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.EnableHyperThreadingAsync(req);
+        await this.inner.EnableHyperThreadingAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task EnableMultipathPath(ManagedObjectReference self, string pathName)
@@ -3538,7 +3543,7 @@ public class VimClient : IVimClient
             pathName = pathName,
         };
 
-        await this.inner.EnableMultipathPathAsync(req);
+        await this.inner.EnableMultipathPathAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> EnableNetworkBoot_Task(ManagedObjectReference self, string networkBootMode)
@@ -3549,7 +3554,7 @@ public class VimClient : IVimClient
             networkBootMode = networkBootMode,
         };
 
-        var res = await this.inner.EnableNetworkBoot_TaskAsync(req);
+        var res = await this.inner.EnableNetworkBoot_TaskAsync(req).ConfigureAwait(false);
 
         return res.EnableNetworkBoot_TaskResponse.returnval;
     }
@@ -3562,7 +3567,7 @@ public class VimClient : IVimClient
             enable = enable,
         };
 
-        await this.inner.EnableNetworkResourceManagementAsync(req);
+        await this.inner.EnableNetworkResourceManagementAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task EnableRuleset(ManagedObjectReference self, string id)
@@ -3573,7 +3578,7 @@ public class VimClient : IVimClient
             id = id,
         };
 
-        await this.inner.EnableRulesetAsync(req);
+        await this.inner.EnableRulesetAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> EnableSecondaryVM_Task(ManagedObjectReference self, ManagedObjectReference vm, ManagedObjectReference? host)
@@ -3585,7 +3590,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.EnableSecondaryVM_TaskAsync(req);
+        var res = await this.inner.EnableSecondaryVM_TaskAsync(req).ConfigureAwait(false);
 
         return res.EnableSecondaryVM_TaskResponse.returnval;
     }
@@ -3597,7 +3602,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.EnableSmartCardAuthenticationAsync(req);
+        await this.inner.EnableSmartCardAuthenticationAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task EnterLockdownMode(ManagedObjectReference self)
@@ -3607,7 +3612,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.EnterLockdownModeAsync(req);
+        await this.inner.EnterLockdownModeAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> EnterMaintenanceMode_Task(ManagedObjectReference self, int timeout, bool evacuatePoweredOffVms, bool evacuatePoweredOffVmsSpecified, HostMaintenanceSpec? maintenanceSpec)
@@ -3621,7 +3626,7 @@ public class VimClient : IVimClient
             maintenanceSpec = maintenanceSpec,
         };
 
-        var res = await this.inner.EnterMaintenanceMode_TaskAsync(req);
+        var res = await this.inner.EnterMaintenanceMode_TaskAsync(req).ConfigureAwait(false);
 
         return res.EnterMaintenanceMode_TaskResponse.returnval;
     }
@@ -3634,7 +3639,7 @@ public class VimClient : IVimClient
             dbSizeParam = dbSizeParam,
         };
 
-        var res = await this.inner.EstimateDatabaseSizeAsync(req);
+        var res = await this.inner.EstimateDatabaseSizeAsync(req).ConfigureAwait(false);
 
         return res.EstimateDatabaseSizeResponse.returnval;
     }
@@ -3646,7 +3651,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.EstimateStorageForConsolidateSnapshots_TaskAsync(req);
+        var res = await this.inner.EstimateStorageForConsolidateSnapshots_TaskAsync(req).ConfigureAwait(false);
 
         return res.EstimateStorageForConsolidateSnapshots_TaskResponse.returnval;
     }
@@ -3659,7 +3664,7 @@ public class VimClient : IVimClient
             configInfo = configInfo,
         };
 
-        await this.inner.EsxAgentHostManagerUpdateConfigAsync(req);
+        await this.inner.EsxAgentHostManagerUpdateConfigAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> EvacuateVsanNode_Task(ManagedObjectReference self, HostMaintenanceSpec maintenanceSpec, int timeout)
@@ -3671,7 +3676,7 @@ public class VimClient : IVimClient
             timeout = timeout,
         };
 
-        var res = await this.inner.EvacuateVsanNode_TaskAsync(req);
+        var res = await this.inner.EvacuateVsanNode_TaskAsync(req).ConfigureAwait(false);
 
         return res.EvacuateVsanNode_TaskResponse.returnval;
     }
@@ -3683,7 +3688,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.EvcManagerAsync(req);
+        var res = await this.inner.EvcManagerAsync(req).ConfigureAwait(false);
 
         return res.EvcManagerResponse.returnval;
     }
@@ -3697,7 +3702,7 @@ public class VimClient : IVimClient
             deferredParam = deferredParam,
         };
 
-        var res = await this.inner.ExecuteHostProfileAsync(req);
+        var res = await this.inner.ExecuteHostProfileAsync(req).ConfigureAwait(false);
 
         return res.ExecuteHostProfileResponse.returnval;
     }
@@ -3710,7 +3715,7 @@ public class VimClient : IVimClient
             arguments = arguments,
         };
 
-        var res = await this.inner.ExecuteSimpleCommandAsync(req);
+        var res = await this.inner.ExecuteSimpleCommandAsync(req).ConfigureAwait(false);
 
         return res.ExecuteSimpleCommandResponse.returnval;
     }
@@ -3722,7 +3727,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.ExitLockdownModeAsync(req);
+        await this.inner.ExitLockdownModeAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> ExitMaintenanceMode_Task(ManagedObjectReference self, int timeout)
@@ -3733,7 +3738,7 @@ public class VimClient : IVimClient
             timeout = timeout,
         };
 
-        var res = await this.inner.ExitMaintenanceMode_TaskAsync(req);
+        var res = await this.inner.ExitMaintenanceMode_TaskAsync(req).ConfigureAwait(false);
 
         return res.ExitMaintenanceMode_TaskResponse.returnval;
     }
@@ -3747,7 +3752,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.ExpandVmfsDatastoreAsync(req);
+        var res = await this.inner.ExpandVmfsDatastoreAsync(req).ConfigureAwait(false);
 
         return res.ExpandVmfsDatastoreResponse.returnval;
     }
@@ -3761,7 +3766,7 @@ public class VimClient : IVimClient
             extent = extent,
         };
 
-        await this.inner.ExpandVmfsExtentAsync(req);
+        await this.inner.ExpandVmfsExtentAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> ExportAnswerFile_Task(ManagedObjectReference self, ManagedObjectReference host)
@@ -3772,7 +3777,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.ExportAnswerFile_TaskAsync(req);
+        var res = await this.inner.ExportAnswerFile_TaskAsync(req).ConfigureAwait(false);
 
         return res.ExportAnswerFile_TaskResponse.returnval;
     }
@@ -3784,7 +3789,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.ExportProfileAsync(req);
+        var res = await this.inner.ExportProfileAsync(req).ConfigureAwait(false);
 
         return res.ExportProfileResponse.returnval;
     }
@@ -3796,7 +3801,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.ExportSnapshotAsync(req);
+        var res = await this.inner.ExportSnapshotAsync(req).ConfigureAwait(false);
 
         return res.ExportSnapshotResponse.returnval;
     }
@@ -3808,7 +3813,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.ExportVAppAsync(req);
+        var res = await this.inner.ExportVAppAsync(req).ConfigureAwait(false);
 
         return res.ExportVAppResponse.returnval;
     }
@@ -3820,7 +3825,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.ExportVmAsync(req);
+        var res = await this.inner.ExportVmAsync(req).ConfigureAwait(false);
 
         return res.ExportVmResponse.returnval;
     }
@@ -3835,7 +3840,7 @@ public class VimClient : IVimClient
             newCapacityInMB = newCapacityInMB,
         };
 
-        var res = await this.inner.ExtendDisk_TaskAsync(req);
+        var res = await this.inner.ExtendDisk_TaskAsync(req).ConfigureAwait(false);
 
         return res.ExtendDisk_TaskResponse.returnval;
     }
@@ -3849,7 +3854,7 @@ public class VimClient : IVimClient
             vSanConfigSpec = vSanConfigSpec,
         };
 
-        var res = await this.inner.ExtendHCI_TaskAsync(req);
+        var res = await this.inner.ExtendHCI_TaskAsync(req).ConfigureAwait(false);
 
         return res.ExtendHCI_TaskResponse.returnval;
     }
@@ -3864,7 +3869,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        await this.inner.ExtendVffsAsync(req);
+        await this.inner.ExtendVffsAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> ExtendVirtualDisk_Task(ManagedObjectReference self, string name, ManagedObjectReference? datacenter, long newCapacityKb, bool eagerZero, bool eagerZeroSpecified)
@@ -3879,7 +3884,7 @@ public class VimClient : IVimClient
             eagerZeroSpecified = eagerZeroSpecified,
         };
 
-        var res = await this.inner.ExtendVirtualDisk_TaskAsync(req);
+        var res = await this.inner.ExtendVirtualDisk_TaskAsync(req).ConfigureAwait(false);
 
         return res.ExtendVirtualDisk_TaskResponse.returnval;
     }
@@ -3893,7 +3898,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.ExtendVmfsDatastoreAsync(req);
+        var res = await this.inner.ExtendVmfsDatastoreAsync(req).ConfigureAwait(false);
 
         return res.ExtendVmfsDatastoreResponse.returnval;
     }
@@ -3905,7 +3910,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.ExtractOvfEnvironmentAsync(req);
+        var res = await this.inner.ExtractOvfEnvironmentAsync(req).ConfigureAwait(false);
 
         return res.ExtractOvfEnvironmentResponse.returnval;
     }
@@ -3918,7 +3923,7 @@ public class VimClient : IVimClient
             token = token,
         };
 
-        var res = await this.inner.FetchAuditRecordsAsync(req);
+        var res = await this.inner.FetchAuditRecordsAsync(req).ConfigureAwait(false);
 
         return res.FetchAuditRecordsResponse.returnval;
     }
@@ -3931,7 +3936,7 @@ public class VimClient : IVimClient
             criteria = criteria,
         };
 
-        var res = await this.inner.FetchDVPortKeysAsync(req);
+        var res = await this.inner.FetchDVPortKeysAsync(req).ConfigureAwait(false);
 
         return res.FetchDVPortKeysResponse1;
     }
@@ -3944,7 +3949,7 @@ public class VimClient : IVimClient
             criteria = criteria,
         };
 
-        var res = await this.inner.FetchDVPortsAsync(req);
+        var res = await this.inner.FetchDVPortsAsync(req).ConfigureAwait(false);
 
         return res.FetchDVPortsResponse1;
     }
@@ -3956,7 +3961,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.fetchSoftwarePackagesAsync(req);
+        var res = await this.inner.fetchSoftwarePackagesAsync(req).ConfigureAwait(false);
 
         return res.fetchSoftwarePackagesResponse1;
     }
@@ -3968,7 +3973,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.FetchSystemEventLogAsync(req);
+        var res = await this.inner.FetchSystemEventLogAsync(req).ConfigureAwait(false);
 
         return res.FetchSystemEventLogResponse1;
     }
@@ -3982,7 +3987,7 @@ public class VimClient : IVimClient
             userName = userName,
         };
 
-        var res = await this.inner.FetchUserPrivilegeOnEntitiesAsync(req);
+        var res = await this.inner.FetchUserPrivilegeOnEntitiesAsync(req).ConfigureAwait(false);
 
         return res.FetchUserPrivilegeOnEntitiesResponse1;
     }
@@ -3997,7 +4002,7 @@ public class VimClient : IVimClient
             vmSearch = vmSearch,
         };
 
-        var res = await this.inner.FindAllByDnsNameAsync(req);
+        var res = await this.inner.FindAllByDnsNameAsync(req).ConfigureAwait(false);
 
         return res.FindAllByDnsNameResponse1;
     }
@@ -4012,7 +4017,7 @@ public class VimClient : IVimClient
             vmSearch = vmSearch,
         };
 
-        var res = await this.inner.FindAllByIpAsync(req);
+        var res = await this.inner.FindAllByIpAsync(req).ConfigureAwait(false);
 
         return res.FindAllByIpResponse1;
     }
@@ -4029,7 +4034,7 @@ public class VimClient : IVimClient
             instanceUuidSpecified = instanceUuidSpecified,
         };
 
-        var res = await this.inner.FindAllByUuidAsync(req);
+        var res = await this.inner.FindAllByUuidAsync(req).ConfigureAwait(false);
 
         return res.FindAllByUuidResponse1;
     }
@@ -4042,7 +4047,7 @@ public class VimClient : IVimClient
             entity = entity,
         };
 
-        var res = await this.inner.FindAssociatedProfileAsync(req);
+        var res = await this.inner.FindAssociatedProfileAsync(req).ConfigureAwait(false);
 
         return res.FindAssociatedProfileResponse1;
     }
@@ -4056,7 +4061,7 @@ public class VimClient : IVimClient
             path = path,
         };
 
-        var res = await this.inner.FindByDatastorePathAsync(req);
+        var res = await this.inner.FindByDatastorePathAsync(req).ConfigureAwait(false);
 
         return res.FindByDatastorePathResponse.returnval;
     }
@@ -4071,7 +4076,7 @@ public class VimClient : IVimClient
             vmSearch = vmSearch,
         };
 
-        var res = await this.inner.FindByDnsNameAsync(req);
+        var res = await this.inner.FindByDnsNameAsync(req).ConfigureAwait(false);
 
         return res.FindByDnsNameResponse.returnval;
     }
@@ -4084,7 +4089,7 @@ public class VimClient : IVimClient
             inventoryPath = inventoryPath,
         };
 
-        var res = await this.inner.FindByInventoryPathAsync(req);
+        var res = await this.inner.FindByInventoryPathAsync(req).ConfigureAwait(false);
 
         return res.FindByInventoryPathResponse.returnval;
     }
@@ -4099,7 +4104,7 @@ public class VimClient : IVimClient
             vmSearch = vmSearch,
         };
 
-        var res = await this.inner.FindByIpAsync(req);
+        var res = await this.inner.FindByIpAsync(req).ConfigureAwait(false);
 
         return res.FindByIpResponse.returnval;
     }
@@ -4116,7 +4121,7 @@ public class VimClient : IVimClient
             instanceUuidSpecified = instanceUuidSpecified,
         };
 
-        var res = await this.inner.FindByUuidAsync(req);
+        var res = await this.inner.FindByUuidAsync(req).ConfigureAwait(false);
 
         return res.FindByUuidResponse.returnval;
     }
@@ -4130,7 +4135,7 @@ public class VimClient : IVimClient
             name = name,
         };
 
-        var res = await this.inner.FindChildAsync(req);
+        var res = await this.inner.FindChildAsync(req).ConfigureAwait(false);
 
         return res.FindChildResponse.returnval;
     }
@@ -4143,7 +4148,7 @@ public class VimClient : IVimClient
             extensionKey = extensionKey,
         };
 
-        var res = await this.inner.FindExtensionAsync(req);
+        var res = await this.inner.FindExtensionAsync(req).ConfigureAwait(false);
 
         return res.FindExtensionResponse.returnval;
     }
@@ -4156,7 +4161,7 @@ public class VimClient : IVimClient
             vm = vm,
         };
 
-        var res = await this.inner.FindRulesForVmAsync(req);
+        var res = await this.inner.FindRulesForVmAsync(req).ConfigureAwait(false);
 
         return res.FindRulesForVmResponse1;
     }
@@ -4169,7 +4174,7 @@ public class VimClient : IVimClient
             createSpec = createSpec,
         };
 
-        var res = await this.inner.FormatVffsAsync(req);
+        var res = await this.inner.FormatVffsAsync(req).ConfigureAwait(false);
 
         return res.FormatVffsResponse.returnval;
     }
@@ -4182,7 +4187,7 @@ public class VimClient : IVimClient
             createSpec = createSpec,
         };
 
-        var res = await this.inner.FormatVmfsAsync(req);
+        var res = await this.inner.FormatVmfsAsync(req).ConfigureAwait(false);
 
         return res.FormatVmfsResponse.returnval;
     }
@@ -4196,7 +4201,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.GenerateCertificateSigningRequestAsync(req);
+        var res = await this.inner.GenerateCertificateSigningRequestAsync(req).ConfigureAwait(false);
 
         return res.GenerateCertificateSigningRequestResponse.returnval;
     }
@@ -4210,7 +4215,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.GenerateCertificateSigningRequestByDnAsync(req);
+        var res = await this.inner.GenerateCertificateSigningRequestByDnAsync(req).ConfigureAwait(false);
 
         return res.GenerateCertificateSigningRequestByDnResponse.returnval;
     }
@@ -4224,7 +4229,7 @@ public class VimClient : IVimClient
             request = request,
         };
 
-        var res = await this.inner.GenerateClientCsrAsync(req);
+        var res = await this.inner.GenerateClientCsrAsync(req).ConfigureAwait(false);
 
         return res.GenerateClientCsrResponse.returnval;
     }
@@ -4238,7 +4243,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.GenerateConfigTaskListAsync(req);
+        var res = await this.inner.GenerateConfigTaskListAsync(req).ConfigureAwait(false);
 
         return res.GenerateConfigTaskListResponse.returnval;
     }
@@ -4251,7 +4256,7 @@ public class VimClient : IVimClient
             hostsInfo = hostsInfo,
         };
 
-        var res = await this.inner.GenerateHostConfigTaskSpec_TaskAsync(req);
+        var res = await this.inner.GenerateHostConfigTaskSpec_TaskAsync(req).ConfigureAwait(false);
 
         return res.GenerateHostConfigTaskSpec_TaskResponse.returnval;
     }
@@ -4265,7 +4270,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.GenerateHostProfileTaskList_TaskAsync(req);
+        var res = await this.inner.GenerateHostProfileTaskList_TaskAsync(req).ConfigureAwait(false);
 
         return res.GenerateHostProfileTaskList_TaskResponse.returnval;
     }
@@ -4280,7 +4285,7 @@ public class VimClient : IVimClient
             keySpec = keySpec,
         };
 
-        var res = await this.inner.GenerateKeyAsync(req);
+        var res = await this.inner.GenerateKeyAsync(req).ConfigureAwait(false);
 
         return res.GenerateKeyResponse.returnval;
     }
@@ -4294,7 +4299,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.GenerateLogBundles_TaskAsync(req);
+        var res = await this.inner.GenerateLogBundles_TaskAsync(req).ConfigureAwait(false);
 
         return res.GenerateLogBundles_TaskResponse.returnval;
     }
@@ -4308,7 +4313,7 @@ public class VimClient : IVimClient
             request = request,
         };
 
-        var res = await this.inner.GenerateSelfSignedClientCertAsync(req);
+        var res = await this.inner.GenerateSelfSignedClientCertAsync(req).ConfigureAwait(false);
 
         return res.GenerateSelfSignedClientCertResponse.returnval;
     }
@@ -4321,7 +4326,7 @@ public class VimClient : IVimClient
             entity = entity,
         };
 
-        var res = await this.inner.GetAlarmAsync(req);
+        var res = await this.inner.GetAlarmAsync(req).ConfigureAwait(false);
 
         return res.GetAlarmResponse1;
     }
@@ -4334,7 +4339,7 @@ public class VimClient : IVimClient
             entity = entity,
         };
 
-        var res = await this.inner.GetAlarmStateAsync(req);
+        var res = await this.inner.GetAlarmStateAsync(req).ConfigureAwait(false);
 
         return res.GetAlarmStateResponse1;
     }
@@ -4346,7 +4351,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.getClusterModeAsync(req);
+        var res = await this.inner.getClusterModeAsync(req).ConfigureAwait(false);
 
         return res.getClusterModeResponse.returnval;
     }
@@ -4359,7 +4364,7 @@ public class VimClient : IVimClient
             keys = keys,
         };
 
-        var res = await this.inner.GetCryptoKeyStatusAsync(req);
+        var res = await this.inner.GetCryptoKeyStatusAsync(req).ConfigureAwait(false);
 
         return res.GetCryptoKeyStatusResponse1;
     }
@@ -4372,7 +4377,7 @@ public class VimClient : IVimClient
             name = name,
         };
 
-        var res = await this.inner.GetCustomizationSpecAsync(req);
+        var res = await this.inner.GetCustomizationSpecAsync(req).ConfigureAwait(false);
 
         return res.GetCustomizationSpecResponse.returnval;
     }
@@ -4387,7 +4392,7 @@ public class VimClient : IVimClient
             defaultsToParentSpecified = defaultsToParentSpecified,
         };
 
-        var res = await this.inner.GetDefaultKmsClusterAsync(req);
+        var res = await this.inner.GetDefaultKmsClusterAsync(req).ConfigureAwait(false);
 
         return res.GetDefaultKmsClusterResponse.returnval;
     }
@@ -4399,7 +4404,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.GetPublicKeyAsync(req);
+        var res = await this.inner.GetPublicKeyAsync(req).ConfigureAwait(false);
 
         return res.GetPublicKeyResponse.returnval;
     }
@@ -4411,7 +4416,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.GetResourceUsageAsync(req);
+        var res = await this.inner.GetResourceUsageAsync(req).ConfigureAwait(false);
 
         return res.GetResourceUsageResponse.returnval;
     }
@@ -4423,7 +4428,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.GetSiteInfoAsync(req);
+        var res = await this.inner.GetSiteInfoAsync(req).ConfigureAwait(false);
 
         return res.GetSiteInfoResponse.returnval;
     }
@@ -4435,7 +4440,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.GetSystemVMsRestrictedDatastoresAsync(req);
+        var res = await this.inner.GetSystemVMsRestrictedDatastoresAsync(req).ConfigureAwait(false);
 
         return res.GetSystemVMsRestrictedDatastoresResponse1;
     }
@@ -4447,7 +4452,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.GetVchaClusterHealthAsync(req);
+        var res = await this.inner.GetVchaClusterHealthAsync(req).ConfigureAwait(false);
 
         return res.GetVchaClusterHealthResponse.returnval;
     }
@@ -4459,7 +4464,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.getVchaConfigAsync(req);
+        var res = await this.inner.getVchaConfigAsync(req).ConfigureAwait(false);
 
         return res.getVchaConfigResponse.returnval;
     }
@@ -4472,7 +4477,7 @@ public class VimClient : IVimClient
             spanId = spanId,
         };
 
-        var res = await this.inner.GetVpcNetworkSpanAsync(req);
+        var res = await this.inner.GetVpcNetworkSpanAsync(req).ConfigureAwait(false);
 
         return res.GetVpcNetworkSpanResponse1;
     }
@@ -4485,7 +4490,7 @@ public class VimClient : IVimClient
             uuids = uuids,
         };
 
-        var res = await this.inner.GetVsanObjExtAttrsAsync(req);
+        var res = await this.inner.GetVsanObjExtAttrsAsync(req).ConfigureAwait(false);
 
         return res.GetVsanObjExtAttrsResponse.returnval;
     }
@@ -4499,7 +4504,7 @@ public class VimClient : IVimClient
             entity = entity,
         };
 
-        var res = await this.inner.HasMonitoredEntityAsync(req);
+        var res = await this.inner.HasMonitoredEntityAsync(req).ConfigureAwait(false);
 
         return res.HasMonitoredEntityResponse.returnval;
     }
@@ -4514,7 +4519,7 @@ public class VimClient : IVimClient
             privId = privId,
         };
 
-        var res = await this.inner.HasPrivilegeOnEntitiesAsync(req);
+        var res = await this.inner.HasPrivilegeOnEntitiesAsync(req).ConfigureAwait(false);
 
         return res.HasPrivilegeOnEntitiesResponse1;
     }
@@ -4529,7 +4534,7 @@ public class VimClient : IVimClient
             privId = privId,
         };
 
-        var res = await this.inner.HasPrivilegeOnEntityAsync(req);
+        var res = await this.inner.HasPrivilegeOnEntityAsync(req).ConfigureAwait(false);
 
         return res.HasPrivilegeOnEntityResponse1;
     }
@@ -4542,7 +4547,7 @@ public class VimClient : IVimClient
             id = id,
         };
 
-        var res = await this.inner.HasProviderAsync(req);
+        var res = await this.inner.HasProviderAsync(req).ConfigureAwait(false);
 
         return res.HasProviderResponse.returnval;
     }
@@ -4557,7 +4562,7 @@ public class VimClient : IVimClient
             privId = privId,
         };
 
-        var res = await this.inner.HasUserPrivilegeOnEntitiesAsync(req);
+        var res = await this.inner.HasUserPrivilegeOnEntitiesAsync(req).ConfigureAwait(false);
 
         return res.HasUserPrivilegeOnEntitiesResponse1;
     }
@@ -4572,7 +4577,7 @@ public class VimClient : IVimClient
             controlFlags = controlFlags,
         };
 
-        await this.inner.HostClearVStorageObjectControlFlagsAsync(req);
+        await this.inner.HostClearVStorageObjectControlFlagsAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> HostCloneVStorageObject_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore, VslmCloneSpec spec)
@@ -4585,7 +4590,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.HostCloneVStorageObject_TaskAsync(req);
+        var res = await this.inner.HostCloneVStorageObject_TaskAsync(req).ConfigureAwait(false);
 
         return res.HostCloneVStorageObject_TaskResponse.returnval;
     }
@@ -4598,7 +4603,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        await this.inner.HostConfigureVFlashResourceAsync(req);
+        await this.inner.HostConfigureVFlashResourceAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task HostConfigVFlashCache(ManagedObjectReference self, HostVFlashManagerVFlashCacheConfigSpec spec)
@@ -4609,7 +4614,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        await this.inner.HostConfigVFlashCacheAsync(req);
+        await this.inner.HostConfigVFlashCacheAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> HostCreateDisk_Task(ManagedObjectReference self, VslmCreateSpec spec)
@@ -4620,7 +4625,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.HostCreateDisk_TaskAsync(req);
+        var res = await this.inner.HostCreateDisk_TaskAsync(req).ConfigureAwait(false);
 
         return res.HostCreateDisk_TaskResponse.returnval;
     }
@@ -4636,7 +4641,7 @@ public class VimClient : IVimClient
             isLcParentAttachedSpecified = isLcParentAttachedSpecified,
         };
 
-        var res = await this.inner.HostDeleteVStorageObject_TaskAsync(req);
+        var res = await this.inner.HostDeleteVStorageObject_TaskAsync(req).ConfigureAwait(false);
 
         return res.HostDeleteVStorageObject_TaskResponse.returnval;
     }
@@ -4652,7 +4657,7 @@ public class VimClient : IVimClient
             isLcParentAttachedSpecified = isLcParentAttachedSpecified,
         };
 
-        var res = await this.inner.HostDeleteVStorageObjectEx_TaskAsync(req);
+        var res = await this.inner.HostDeleteVStorageObjectEx_TaskAsync(req).ConfigureAwait(false);
 
         return res.HostDeleteVStorageObjectEx_TaskResponse.returnval;
     }
@@ -4667,7 +4672,7 @@ public class VimClient : IVimClient
             newCapacityInMB = newCapacityInMB,
         };
 
-        var res = await this.inner.HostExtendDisk_TaskAsync(req);
+        var res = await this.inner.HostExtendDisk_TaskAsync(req).ConfigureAwait(false);
 
         return res.HostExtendDisk_TaskResponse.returnval;
     }
@@ -4680,7 +4685,7 @@ public class VimClient : IVimClient
             vFlashModule = vFlashModule,
         };
 
-        var res = await this.inner.HostGetVFlashModuleDefaultConfigAsync(req);
+        var res = await this.inner.HostGetVFlashModuleDefaultConfigAsync(req).ConfigureAwait(false);
 
         return res.HostGetVFlashModuleDefaultConfigResponse.returnval;
     }
@@ -4692,7 +4697,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.HostImageConfigGetAcceptanceAsync(req);
+        var res = await this.inner.HostImageConfigGetAcceptanceAsync(req).ConfigureAwait(false);
 
         return res.HostImageConfigGetAcceptanceResponse.returnval;
     }
@@ -4704,7 +4709,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.HostImageConfigGetProfileAsync(req);
+        var res = await this.inner.HostImageConfigGetProfileAsync(req).ConfigureAwait(false);
 
         return res.HostImageConfigGetProfileResponse.returnval;
     }
@@ -4718,7 +4723,7 @@ public class VimClient : IVimClient
             datastore = datastore,
         };
 
-        var res = await this.inner.HostInflateDisk_TaskAsync(req);
+        var res = await this.inner.HostInflateDisk_TaskAsync(req).ConfigureAwait(false);
 
         return res.HostInflateDisk_TaskResponse.returnval;
     }
@@ -4731,7 +4736,7 @@ public class VimClient : IVimClient
             datastore = datastore,
         };
 
-        var res = await this.inner.HostListVStorageObjectAsync(req);
+        var res = await this.inner.HostListVStorageObjectAsync(req).ConfigureAwait(false);
 
         return res.HostListVStorageObjectResponse1;
     }
@@ -4743,7 +4748,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.HostProfileResetValidationStateAsync(req);
+        await this.inner.HostProfileResetValidationStateAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<string?> HostQueryVirtualDiskUuid(ManagedObjectReference self, string name)
@@ -4754,7 +4759,7 @@ public class VimClient : IVimClient
             name = name,
         };
 
-        var res = await this.inner.HostQueryVirtualDiskUuidAsync(req);
+        var res = await this.inner.HostQueryVirtualDiskUuidAsync(req).ConfigureAwait(false);
 
         return res.HostQueryVirtualDiskUuidResponse.returnval;
     }
@@ -4769,7 +4774,7 @@ public class VimClient : IVimClient
             deepCleansingSpecified = deepCleansingSpecified,
         };
 
-        var res = await this.inner.HostReconcileDatastoreInventory_TaskAsync(req);
+        var res = await this.inner.HostReconcileDatastoreInventory_TaskAsync(req).ConfigureAwait(false);
 
         return res.HostReconcileDatastoreInventory_TaskResponse.returnval;
     }
@@ -4786,7 +4791,7 @@ public class VimClient : IVimClient
             id = id,
         };
 
-        var res = await this.inner.HostRegisterDiskAsync(req);
+        var res = await this.inner.HostRegisterDiskAsync(req).ConfigureAwait(false);
 
         return res.HostRegisterDiskResponse.returnval;
     }
@@ -4803,7 +4808,7 @@ public class VimClient : IVimClient
             isLcParentAttachedSpecified = isLcParentAttachedSpecified,
         };
 
-        var res = await this.inner.HostRelocateVStorageObject_TaskAsync(req);
+        var res = await this.inner.HostRelocateVStorageObject_TaskAsync(req).ConfigureAwait(false);
 
         return res.HostRelocateVStorageObject_TaskResponse.returnval;
     }
@@ -4815,7 +4820,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.HostRemoveVFlashResourceAsync(req);
+        await this.inner.HostRemoveVFlashResourceAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task HostRenameVStorageObject(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string name)
@@ -4828,7 +4833,7 @@ public class VimClient : IVimClient
             name = name,
         };
 
-        await this.inner.HostRenameVStorageObjectAsync(req);
+        await this.inner.HostRenameVStorageObjectAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<vslmInfrastructureObjectPolicy[]?> HostRetrieveVStorageInfrastructureObjectPolicy(ManagedObjectReference self, ManagedObjectReference datastore)
@@ -4839,7 +4844,7 @@ public class VimClient : IVimClient
             datastore = datastore,
         };
 
-        var res = await this.inner.HostRetrieveVStorageInfrastructureObjectPolicyAsync(req);
+        var res = await this.inner.HostRetrieveVStorageInfrastructureObjectPolicyAsync(req).ConfigureAwait(false);
 
         return res.HostRetrieveVStorageInfrastructureObjectPolicyResponse1;
     }
@@ -4854,7 +4859,7 @@ public class VimClient : IVimClient
             diskInfoFlags = diskInfoFlags,
         };
 
-        var res = await this.inner.HostRetrieveVStorageObjectAsync(req);
+        var res = await this.inner.HostRetrieveVStorageObjectAsync(req).ConfigureAwait(false);
 
         return res.HostRetrieveVStorageObjectResponse.returnval;
     }
@@ -4870,7 +4875,7 @@ public class VimClient : IVimClient
             prefix = prefix,
         };
 
-        var res = await this.inner.HostRetrieveVStorageObjectMetadataAsync(req);
+        var res = await this.inner.HostRetrieveVStorageObjectMetadataAsync(req).ConfigureAwait(false);
 
         return res.HostRetrieveVStorageObjectMetadataResponse1;
     }
@@ -4886,7 +4891,7 @@ public class VimClient : IVimClient
             key = key,
         };
 
-        var res = await this.inner.HostRetrieveVStorageObjectMetadataValueAsync(req);
+        var res = await this.inner.HostRetrieveVStorageObjectMetadataValueAsync(req).ConfigureAwait(false);
 
         return res.HostRetrieveVStorageObjectMetadataValueResponse.returnval;
     }
@@ -4900,7 +4905,7 @@ public class VimClient : IVimClient
             datastore = datastore,
         };
 
-        var res = await this.inner.HostRetrieveVStorageObjectStateAsync(req);
+        var res = await this.inner.HostRetrieveVStorageObjectStateAsync(req).ConfigureAwait(false);
 
         return res.HostRetrieveVStorageObjectStateResponse.returnval;
     }
@@ -4915,7 +4920,7 @@ public class VimClient : IVimClient
             deepCleansingSpecified = deepCleansingSpecified,
         };
 
-        await this.inner.HostScheduleReconcileDatastoreInventoryAsync(req);
+        await this.inner.HostScheduleReconcileDatastoreInventoryAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> HostSetVirtualDiskUuid_Task(ManagedObjectReference self, string name, string? uuid)
@@ -4927,7 +4932,7 @@ public class VimClient : IVimClient
             uuid = uuid,
         };
 
-        var res = await this.inner.HostSetVirtualDiskUuid_TaskAsync(req);
+        var res = await this.inner.HostSetVirtualDiskUuid_TaskAsync(req).ConfigureAwait(false);
 
         return res.HostSetVirtualDiskUuid_TaskResponse.returnval;
     }
@@ -4942,7 +4947,7 @@ public class VimClient : IVimClient
             controlFlags = controlFlags,
         };
 
-        await this.inner.HostSetVStorageObjectControlFlagsAsync(req);
+        await this.inner.HostSetVStorageObjectControlFlagsAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference[]?> HostSpecGetUpdatedHosts(ManagedObjectReference self, string? startChangeID, string? endChangeID)
@@ -4954,7 +4959,7 @@ public class VimClient : IVimClient
             endChangeID = endChangeID,
         };
 
-        var res = await this.inner.HostSpecGetUpdatedHostsAsync(req);
+        var res = await this.inner.HostSpecGetUpdatedHostsAsync(req).ConfigureAwait(false);
 
         return res.HostSpecGetUpdatedHostsResponse1;
     }
@@ -4970,7 +4975,7 @@ public class VimClient : IVimClient
             deleteKeys = deleteKeys,
         };
 
-        var res = await this.inner.HostUpdateVStorageObjectMetadata_TaskAsync(req);
+        var res = await this.inner.HostUpdateVStorageObjectMetadata_TaskAsync(req).ConfigureAwait(false);
 
         return res.HostUpdateVStorageObjectMetadata_TaskResponse.returnval;
     }
@@ -4986,7 +4991,7 @@ public class VimClient : IVimClient
             deleteKeys = deleteKeys,
         };
 
-        var res = await this.inner.HostUpdateVStorageObjectMetadataEx_TaskAsync(req);
+        var res = await this.inner.HostUpdateVStorageObjectMetadataEx_TaskAsync(req).ConfigureAwait(false);
 
         return res.HostUpdateVStorageObjectMetadataEx_TaskResponse.returnval;
     }
@@ -5010,7 +5015,7 @@ public class VimClient : IVimClient
             targetDatastore = targetDatastore,
         };
 
-        var res = await this.inner.HostVStorageObjectCreateDiskFromSnapshot_TaskAsync(req);
+        var res = await this.inner.HostVStorageObjectCreateDiskFromSnapshot_TaskAsync(req).ConfigureAwait(false);
 
         return res.HostVStorageObjectCreateDiskFromSnapshot_TaskResponse.returnval;
     }
@@ -5025,7 +5030,7 @@ public class VimClient : IVimClient
             description = description,
         };
 
-        var res = await this.inner.HostVStorageObjectCreateSnapshot_TaskAsync(req);
+        var res = await this.inner.HostVStorageObjectCreateSnapshot_TaskAsync(req).ConfigureAwait(false);
 
         return res.HostVStorageObjectCreateSnapshot_TaskResponse.returnval;
     }
@@ -5040,7 +5045,7 @@ public class VimClient : IVimClient
             snapshotId = snapshotId,
         };
 
-        var res = await this.inner.HostVStorageObjectDeleteSnapshot_TaskAsync(req);
+        var res = await this.inner.HostVStorageObjectDeleteSnapshot_TaskAsync(req).ConfigureAwait(false);
 
         return res.HostVStorageObjectDeleteSnapshot_TaskResponse.returnval;
     }
@@ -5054,7 +5059,7 @@ public class VimClient : IVimClient
             datastore = datastore,
         };
 
-        var res = await this.inner.HostVStorageObjectRetrieveSnapshotInfoAsync(req);
+        var res = await this.inner.HostVStorageObjectRetrieveSnapshotInfoAsync(req).ConfigureAwait(false);
 
         return res.HostVStorageObjectRetrieveSnapshotInfoResponse.returnval;
     }
@@ -5069,7 +5074,7 @@ public class VimClient : IVimClient
             snapshotId = snapshotId,
         };
 
-        var res = await this.inner.HostVStorageObjectRevert_TaskAsync(req);
+        var res = await this.inner.HostVStorageObjectRevert_TaskAsync(req).ConfigureAwait(false);
 
         return res.HostVStorageObjectRevert_TaskResponse.returnval;
     }
@@ -5082,7 +5087,7 @@ public class VimClient : IVimClient
             fault = fault,
         };
 
-        await this.inner.HttpNfcLeaseAbortAsync(req);
+        await this.inner.HttpNfcLeaseAbortAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task HttpNfcLeaseComplete(ManagedObjectReference self)
@@ -5092,7 +5097,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.HttpNfcLeaseCompleteAsync(req);
+        await this.inner.HttpNfcLeaseCompleteAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<HttpNfcLeaseManifestEntry[]?> HttpNfcLeaseGetManifest(ManagedObjectReference self)
@@ -5102,7 +5107,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.HttpNfcLeaseGetManifestAsync(req);
+        var res = await this.inner.HttpNfcLeaseGetManifestAsync(req).ConfigureAwait(false);
 
         return res.HttpNfcLeaseGetManifestResponse1;
     }
@@ -5117,7 +5122,7 @@ public class VimClient : IVimClient
             timeoutSpecified = timeoutSpecified,
         };
 
-        var res = await this.inner.HttpNfcLeaseProbeUrlsAsync(req);
+        var res = await this.inner.HttpNfcLeaseProbeUrlsAsync(req).ConfigureAwait(false);
 
         return res.HttpNfcLeaseProbeUrlsResponse1;
     }
@@ -5130,7 +5135,7 @@ public class VimClient : IVimClient
             percent = percent,
         };
 
-        await this.inner.HttpNfcLeaseProgressAsync(req);
+        await this.inner.HttpNfcLeaseProgressAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> HttpNfcLeasePullFromUrls_Task(ManagedObjectReference self, HttpNfcLeaseSourceFile[]? files)
@@ -5141,7 +5146,7 @@ public class VimClient : IVimClient
             files = files,
         };
 
-        var res = await this.inner.HttpNfcLeasePullFromUrls_TaskAsync(req);
+        var res = await this.inner.HttpNfcLeasePullFromUrls_TaskAsync(req).ConfigureAwait(false);
 
         return res.HttpNfcLeasePullFromUrls_TaskResponse.returnval;
     }
@@ -5154,7 +5159,7 @@ public class VimClient : IVimClient
             deviceUrlsToChecksumTypes = deviceUrlsToChecksumTypes,
         };
 
-        await this.inner.HttpNfcLeaseSetManifestChecksumTypeAsync(req);
+        await this.inner.HttpNfcLeaseSetManifestChecksumTypeAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<UserSession?> ImpersonateUser(ManagedObjectReference self, string userName, string? locale)
@@ -5166,7 +5171,7 @@ public class VimClient : IVimClient
             locale = locale,
         };
 
-        var res = await this.inner.ImpersonateUserAsync(req);
+        var res = await this.inner.ImpersonateUserAsync(req).ConfigureAwait(false);
 
         return res.ImpersonateUserResponse.returnval;
     }
@@ -5180,7 +5185,7 @@ public class VimClient : IVimClient
             camServer = camServer,
         };
 
-        var res = await this.inner.ImportCertificateForCAM_TaskAsync(req);
+        var res = await this.inner.ImportCertificateForCAM_TaskAsync(req).ConfigureAwait(false);
 
         return res.ImportCertificateForCAM_TaskResponse.returnval;
     }
@@ -5195,7 +5200,7 @@ public class VimClient : IVimClient
             vvolId = vvolId,
         };
 
-        await this.inner.ImportUnmanagedSnapshotAsync(req);
+        await this.inner.ImportUnmanagedSnapshotAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> ImportVApp(ManagedObjectReference self, ImportSpec spec, ManagedObjectReference? folder, ManagedObjectReference? host)
@@ -5208,7 +5213,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.ImportVAppAsync(req);
+        var res = await this.inner.ImportVAppAsync(req).ConfigureAwait(false);
 
         return res.ImportVAppResponse.returnval;
     }
@@ -5223,7 +5228,7 @@ public class VimClient : IVimClient
             size = size,
         };
 
-        await this.inner.IncreaseDirectorySizeAsync(req);
+        await this.inner.IncreaseDirectorySizeAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> InflateDisk_Task(ManagedObjectReference self, ID id, ManagedObjectReference datastore)
@@ -5235,7 +5240,7 @@ public class VimClient : IVimClient
             datastore = datastore,
         };
 
-        var res = await this.inner.InflateDisk_TaskAsync(req);
+        var res = await this.inner.InflateDisk_TaskAsync(req).ConfigureAwait(false);
 
         return res.InflateDisk_TaskResponse.returnval;
     }
@@ -5249,7 +5254,7 @@ public class VimClient : IVimClient
             datacenter = datacenter,
         };
 
-        var res = await this.inner.InflateVirtualDisk_TaskAsync(req);
+        var res = await this.inner.InflateVirtualDisk_TaskAsync(req).ConfigureAwait(false);
 
         return res.InflateVirtualDisk_TaskResponse.returnval;
     }
@@ -5262,7 +5267,7 @@ public class VimClient : IVimClient
             mapping = mapping,
         };
 
-        var res = await this.inner.InitializeDisks_TaskAsync(req);
+        var res = await this.inner.InitializeDisks_TaskAsync(req).ConfigureAwait(false);
 
         return res.InitializeDisks_TaskResponse.returnval;
     }
@@ -5275,7 +5280,7 @@ public class VimClient : IVimClient
             planned = planned,
         };
 
-        var res = await this.inner.initiateFailover_TaskAsync(req);
+        var res = await this.inner.initiateFailover_TaskAsync(req).ConfigureAwait(false);
 
         return res.initiateFailover_TaskResponse.returnval;
     }
@@ -5290,7 +5295,7 @@ public class VimClient : IVimClient
             guestFilePath = guestFilePath,
         };
 
-        var res = await this.inner.InitiateFileTransferFromGuestAsync(req);
+        var res = await this.inner.InitiateFileTransferFromGuestAsync(req).ConfigureAwait(false);
 
         return res.InitiateFileTransferFromGuestResponse.returnval;
     }
@@ -5308,7 +5313,7 @@ public class VimClient : IVimClient
             overwrite = overwrite,
         };
 
-        var res = await this.inner.InitiateFileTransferToGuestAsync(req);
+        var res = await this.inner.InitiateFileTransferToGuestAsync(req).ConfigureAwait(false);
 
         return res.InitiateFileTransferToGuestResponse.returnval;
     }
@@ -5321,7 +5326,7 @@ public class VimClient : IVimClient
             cluster = cluster,
         };
 
-        var res = await this.inner.InitiateTransitionToVLCM_TaskAsync(req);
+        var res = await this.inner.InitiateTransitionToVLCM_TaskAsync(req).ConfigureAwait(false);
 
         return res.InitiateTransitionToVLCM_TaskResponse.returnval;
     }
@@ -5333,7 +5338,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.installDateAsync(req);
+        var res = await this.inner.installDateAsync(req).ConfigureAwait(false);
 
         return res.installDateResponse.returnval;
     }
@@ -5349,7 +5354,7 @@ public class VimClient : IVimClient
             forceSpecified = forceSpecified,
         };
 
-        var res = await this.inner.InstallHostPatch_TaskAsync(req);
+        var res = await this.inner.InstallHostPatch_TaskAsync(req).ConfigureAwait(false);
 
         return res.InstallHostPatch_TaskResponse.returnval;
     }
@@ -5365,7 +5370,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.InstallHostPatchV2_TaskAsync(req);
+        var res = await this.inner.InstallHostPatchV2_TaskAsync(req).ConfigureAwait(false);
 
         return res.InstallHostPatchV2_TaskResponse.returnval;
     }
@@ -5380,7 +5385,7 @@ public class VimClient : IVimClient
             vibSslTrust = vibSslTrust,
         };
 
-        var res = await this.inner.InstallIoFilter_TaskAsync(req);
+        var res = await this.inner.InstallIoFilter_TaskAsync(req).ConfigureAwait(false);
 
         return res.InstallIoFilter_TaskResponse.returnval;
     }
@@ -5393,7 +5398,7 @@ public class VimClient : IVimClient
             cert = cert,
         };
 
-        await this.inner.InstallServerCertificateAsync(req);
+        await this.inner.InstallServerCertificateAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task InstallSmartCardTrustAnchor(ManagedObjectReference self, string cert)
@@ -5404,7 +5409,7 @@ public class VimClient : IVimClient
             cert = cert,
         };
 
-        await this.inner.InstallSmartCardTrustAnchorAsync(req);
+        await this.inner.InstallSmartCardTrustAnchorAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> InstantClone_Task(ManagedObjectReference self, VirtualMachineInstantCloneSpec spec)
@@ -5415,7 +5420,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.InstantClone_TaskAsync(req);
+        var res = await this.inner.InstantClone_TaskAsync(req).ConfigureAwait(false);
 
         return res.InstantClone_TaskResponse.returnval;
     }
@@ -5427,7 +5432,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.IsClusteredVmdkEnabledAsync(req);
+        var res = await this.inner.IsClusteredVmdkEnabledAsync(req).ConfigureAwait(false);
 
         return res.IsClusteredVmdkEnabledResponse.returnval;
     }
@@ -5440,7 +5445,7 @@ public class VimClient : IVimClient
             guestId = guestId,
         };
 
-        var res = await this.inner.IsGuestOsCustomizableAsync(req);
+        var res = await this.inner.IsGuestOsCustomizableAsync(req).ConfigureAwait(false);
 
         return res.IsGuestOsCustomizableResponse.returnval;
     }
@@ -5453,7 +5458,7 @@ public class VimClient : IVimClient
             cluster = cluster,
         };
 
-        var res = await this.inner.IsKmsClusterActiveAsync(req);
+        var res = await this.inner.IsKmsClusterActiveAsync(req).ConfigureAwait(false);
 
         return res.IsKmsClusterActiveResponse.returnval;
     }
@@ -5465,7 +5470,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.IsSharedGraphicsActiveAsync(req);
+        var res = await this.inner.IsSharedGraphicsActiveAsync(req).ConfigureAwait(false);
 
         return res.IsSharedGraphicsActiveResponse.returnval;
     }
@@ -5480,7 +5485,7 @@ public class VimClient : IVimClient
             password = password,
         };
 
-        var res = await this.inner.JoinDomain_TaskAsync(req);
+        var res = await this.inner.JoinDomain_TaskAsync(req).ConfigureAwait(false);
 
         return res.JoinDomain_TaskResponse.returnval;
     }
@@ -5494,7 +5499,7 @@ public class VimClient : IVimClient
             camServer = camServer,
         };
 
-        var res = await this.inner.JoinDomainWithCAM_TaskAsync(req);
+        var res = await this.inner.JoinDomainWithCAM_TaskAsync(req).ConfigureAwait(false);
 
         return res.JoinDomainWithCAM_TaskResponse.returnval;
     }
@@ -5507,7 +5512,7 @@ public class VimClient : IVimClient
             force = force,
         };
 
-        var res = await this.inner.LeaveCurrentDomain_TaskAsync(req);
+        var res = await this.inner.LeaveCurrentDomain_TaskAsync(req).ConfigureAwait(false);
 
         return res.LeaveCurrentDomain_TaskResponse.returnval;
     }
@@ -5519,7 +5524,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.ListCACertificateRevocationListsAsync(req);
+        var res = await this.inner.ListCACertificateRevocationListsAsync(req).ConfigureAwait(false);
 
         return res.ListCACertificateRevocationListsResponse1;
     }
@@ -5531,7 +5536,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.ListCACertificatesAsync(req);
+        var res = await this.inner.ListCACertificatesAsync(req).ConfigureAwait(false);
 
         return res.ListCACertificatesResponse1;
     }
@@ -5551,7 +5556,7 @@ public class VimClient : IVimClient
             matchPattern = matchPattern,
         };
 
-        var res = await this.inner.ListFilesInGuestAsync(req);
+        var res = await this.inner.ListFilesInGuestAsync(req).ConfigureAwait(false);
 
         return res.ListFilesInGuestResponse.returnval;
     }
@@ -5566,7 +5571,7 @@ public class VimClient : IVimClient
             username = username,
         };
 
-        var res = await this.inner.ListGuestAliasesAsync(req);
+        var res = await this.inner.ListGuestAliasesAsync(req).ConfigureAwait(false);
 
         return res.ListGuestAliasesResponse1;
     }
@@ -5580,7 +5585,7 @@ public class VimClient : IVimClient
             auth = auth,
         };
 
-        var res = await this.inner.ListGuestMappedAliasesAsync(req);
+        var res = await this.inner.ListGuestMappedAliasesAsync(req).ConfigureAwait(false);
 
         return res.ListGuestMappedAliasesResponse1;
     }
@@ -5594,7 +5599,7 @@ public class VimClient : IVimClient
             limitSpecified = limitSpecified,
         };
 
-        var res = await this.inner.ListKeysAsync(req);
+        var res = await this.inner.ListKeysAsync(req).ConfigureAwait(false);
 
         return res.ListKeysResponse1;
     }
@@ -5608,7 +5613,7 @@ public class VimClient : IVimClient
             limitSpecified = limitSpecified,
         };
 
-        var res = await this.inner.ListKmipServersAsync(req);
+        var res = await this.inner.ListKmipServersAsync(req).ConfigureAwait(false);
 
         return res.ListKmipServersResponse1;
     }
@@ -5626,7 +5631,7 @@ public class VimClient : IVimClient
             statusFilterSpecified = statusFilterSpecified,
         };
 
-        var res = await this.inner.ListKmsClustersAsync(req);
+        var res = await this.inner.ListKmsClustersAsync(req).ConfigureAwait(false);
 
         return res.ListKmsClustersResponse1;
     }
@@ -5641,7 +5646,7 @@ public class VimClient : IVimClient
             pids = pids,
         };
 
-        var res = await this.inner.ListProcessesInGuestAsync(req);
+        var res = await this.inner.ListProcessesInGuestAsync(req).ConfigureAwait(false);
 
         return res.ListProcessesInGuestResponse1;
     }
@@ -5658,7 +5663,7 @@ public class VimClient : IVimClient
             matchPattern = matchPattern,
         };
 
-        var res = await this.inner.ListRegistryKeysInGuestAsync(req);
+        var res = await this.inner.ListRegistryKeysInGuestAsync(req).ConfigureAwait(false);
 
         return res.ListRegistryKeysInGuestResponse1;
     }
@@ -5675,7 +5680,7 @@ public class VimClient : IVimClient
             matchPattern = matchPattern,
         };
 
-        var res = await this.inner.ListRegistryValuesInGuestAsync(req);
+        var res = await this.inner.ListRegistryValuesInGuestAsync(req).ConfigureAwait(false);
 
         return res.ListRegistryValuesInGuestResponse1;
     }
@@ -5687,7 +5692,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.ListSmartCardTrustAnchorsAsync(req);
+        var res = await this.inner.ListSmartCardTrustAnchorsAsync(req).ConfigureAwait(false);
 
         return res.ListSmartCardTrustAnchorsResponse1;
     }
@@ -5700,7 +5705,7 @@ public class VimClient : IVimClient
             id = id,
         };
 
-        var res = await this.inner.ListTagsAttachedToVStorageObjectAsync(req);
+        var res = await this.inner.ListTagsAttachedToVStorageObjectAsync(req).ConfigureAwait(false);
 
         return res.ListTagsAttachedToVStorageObjectResponse1;
     }
@@ -5713,7 +5718,7 @@ public class VimClient : IVimClient
             datastore = datastore,
         };
 
-        var res = await this.inner.ListVStorageObjectAsync(req);
+        var res = await this.inner.ListVStorageObjectAsync(req).ConfigureAwait(false);
 
         return res.ListVStorageObjectResponse1;
     }
@@ -5727,7 +5732,7 @@ public class VimClient : IVimClient
             tag = tag,
         };
 
-        var res = await this.inner.ListVStorageObjectsAttachedToTagAsync(req);
+        var res = await this.inner.ListVStorageObjectsAttachedToTagAsync(req).ConfigureAwait(false);
 
         return res.ListVStorageObjectsAttachedToTagResponse1;
     }
@@ -5742,7 +5747,7 @@ public class VimClient : IVimClient
             locale = locale,
         };
 
-        var res = await this.inner.LoginAsync(req);
+        var res = await this.inner.LoginAsync(req).ConfigureAwait(false);
 
         return res.LoginResponse.returnval;
     }
@@ -5756,7 +5761,7 @@ public class VimClient : IVimClient
             locale = locale,
         };
 
-        var res = await this.inner.LoginBySSPIAsync(req);
+        var res = await this.inner.LoginBySSPIAsync(req).ConfigureAwait(false);
 
         return res.LoginBySSPIResponse.returnval;
     }
@@ -5769,7 +5774,7 @@ public class VimClient : IVimClient
             locale = locale,
         };
 
-        var res = await this.inner.LoginByTokenAsync(req);
+        var res = await this.inner.LoginByTokenAsync(req).ConfigureAwait(false);
 
         return res.LoginByTokenResponse.returnval;
     }
@@ -5783,7 +5788,7 @@ public class VimClient : IVimClient
             locale = locale,
         };
 
-        var res = await this.inner.LoginExtensionByCertificateAsync(req);
+        var res = await this.inner.LoginExtensionByCertificateAsync(req).ConfigureAwait(false);
 
         return res.LoginExtensionByCertificateResponse.returnval;
     }
@@ -5797,7 +5802,7 @@ public class VimClient : IVimClient
             locale = locale,
         };
 
-        var res = await this.inner.LoginExtensionBySubjectNameAsync(req);
+        var res = await this.inner.LoginExtensionBySubjectNameAsync(req).ConfigureAwait(false);
 
         return res.LoginExtensionBySubjectNameResponse.returnval;
     }
@@ -5809,7 +5814,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.LogoutAsync(req);
+        await this.inner.LogoutAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task LogUserEvent(ManagedObjectReference self, ManagedObjectReference entity, string msg)
@@ -5821,7 +5826,7 @@ public class VimClient : IVimClient
             msg = msg,
         };
 
-        await this.inner.LogUserEventAsync(req);
+        await this.inner.LogUserEventAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> LookupDvPortGroup(ManagedObjectReference self, string portgroupKey)
@@ -5832,7 +5837,7 @@ public class VimClient : IVimClient
             portgroupKey = portgroupKey,
         };
 
-        var res = await this.inner.LookupDvPortGroupAsync(req);
+        var res = await this.inner.LookupDvPortGroupAsync(req).ConfigureAwait(false);
 
         return res.LookupDvPortGroupResponse.returnval;
     }
@@ -5846,7 +5851,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.LookupVmOverheadMemoryAsync(req);
+        var res = await this.inner.LookupVmOverheadMemoryAsync(req).ConfigureAwait(false);
 
         return res.LookupVmOverheadMemoryResponse.returnval;
     }
@@ -5862,7 +5867,7 @@ public class VimClient : IVimClient
             createParentDirectoriesSpecified = createParentDirectoriesSpecified,
         };
 
-        await this.inner.MakeDirectoryAsync(req);
+        await this.inner.MakeDirectoryAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task MakeDirectoryInGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, string directoryPath, bool createParentDirectories)
@@ -5876,7 +5881,7 @@ public class VimClient : IVimClient
             createParentDirectories = createParentDirectories,
         };
 
-        await this.inner.MakeDirectoryInGuestAsync(req);
+        await this.inner.MakeDirectoryInGuestAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> MakePrimaryVM_Task(ManagedObjectReference self, ManagedObjectReference vm)
@@ -5887,7 +5892,7 @@ public class VimClient : IVimClient
             vm = vm,
         };
 
-        var res = await this.inner.MakePrimaryVM_TaskAsync(req);
+        var res = await this.inner.MakePrimaryVM_TaskAsync(req).ConfigureAwait(false);
 
         return res.MakePrimaryVM_TaskResponse.returnval;
     }
@@ -5900,7 +5905,7 @@ public class VimClient : IVimClient
             scsiDiskUuid = scsiDiskUuid,
         };
 
-        var res = await this.inner.MarkAsLocal_TaskAsync(req);
+        var res = await this.inner.MarkAsLocal_TaskAsync(req).ConfigureAwait(false);
 
         return res.MarkAsLocal_TaskResponse.returnval;
     }
@@ -5913,7 +5918,7 @@ public class VimClient : IVimClient
             scsiDiskUuid = scsiDiskUuid,
         };
 
-        var res = await this.inner.MarkAsNonLocal_TaskAsync(req);
+        var res = await this.inner.MarkAsNonLocal_TaskAsync(req).ConfigureAwait(false);
 
         return res.MarkAsNonLocal_TaskResponse.returnval;
     }
@@ -5926,7 +5931,7 @@ public class VimClient : IVimClient
             scsiDiskUuid = scsiDiskUuid,
         };
 
-        var res = await this.inner.MarkAsNonSsd_TaskAsync(req);
+        var res = await this.inner.MarkAsNonSsd_TaskAsync(req).ConfigureAwait(false);
 
         return res.MarkAsNonSsd_TaskResponse.returnval;
     }
@@ -5939,7 +5944,7 @@ public class VimClient : IVimClient
             scsiDiskUuid = scsiDiskUuid,
         };
 
-        var res = await this.inner.MarkAsSsd_TaskAsync(req);
+        var res = await this.inner.MarkAsSsd_TaskAsync(req).ConfigureAwait(false);
 
         return res.MarkAsSsd_TaskResponse.returnval;
     }
@@ -5951,7 +5956,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.MarkAsTemplateAsync(req);
+        await this.inner.MarkAsTemplateAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task MarkAsVirtualMachine(ManagedObjectReference self, ManagedObjectReference pool, ManagedObjectReference? host)
@@ -5963,7 +5968,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        await this.inner.MarkAsVirtualMachineAsync(req);
+        await this.inner.MarkAsVirtualMachineAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task MarkDefault(ManagedObjectReference self, KeyProviderId clusterId)
@@ -5974,7 +5979,7 @@ public class VimClient : IVimClient
             clusterId = clusterId,
         };
 
-        await this.inner.MarkDefaultAsync(req);
+        await this.inner.MarkDefaultAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task MarkForRemoval(ManagedObjectReference self, string hbaName, bool remove)
@@ -5986,7 +5991,7 @@ public class VimClient : IVimClient
             remove = remove,
         };
 
-        await this.inner.MarkForRemovalAsync(req);
+        await this.inner.MarkForRemovalAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task MarkPerenniallyReserved(ManagedObjectReference self, string lunUuid, bool state)
@@ -5998,7 +6003,7 @@ public class VimClient : IVimClient
             state = state,
         };
 
-        await this.inner.MarkPerenniallyReservedAsync(req);
+        await this.inner.MarkPerenniallyReservedAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> MarkPerenniallyReservedEx_Task(ManagedObjectReference self, string[]? lunUuid, bool state)
@@ -6010,7 +6015,7 @@ public class VimClient : IVimClient
             state = state,
         };
 
-        var res = await this.inner.MarkPerenniallyReservedEx_TaskAsync(req);
+        var res = await this.inner.MarkPerenniallyReservedEx_TaskAsync(req).ConfigureAwait(false);
 
         return res.MarkPerenniallyReservedEx_TaskResponse.returnval;
     }
@@ -6023,7 +6028,7 @@ public class VimClient : IVimClient
             entity = entity,
         };
 
-        await this.inner.MarkServiceProviderEntitiesAsync(req);
+        await this.inner.MarkServiceProviderEntitiesAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> MergeDvs_Task(ManagedObjectReference self, ManagedObjectReference dvs)
@@ -6034,7 +6039,7 @@ public class VimClient : IVimClient
             dvs = dvs,
         };
 
-        var res = await this.inner.MergeDvs_TaskAsync(req);
+        var res = await this.inner.MergeDvs_TaskAsync(req).ConfigureAwait(false);
 
         return res.MergeDvs_TaskResponse.returnval;
     }
@@ -6048,7 +6053,7 @@ public class VimClient : IVimClient
             dstRoleId = dstRoleId,
         };
 
-        await this.inner.MergePermissionsAsync(req);
+        await this.inner.MergePermissionsAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> MigrateVM_Task(ManagedObjectReference self, ManagedObjectReference? pool, ManagedObjectReference? host, VirtualMachineMovePriority priority, VirtualMachinePowerState state, bool stateSpecified)
@@ -6063,7 +6068,7 @@ public class VimClient : IVimClient
             stateSpecified = stateSpecified,
         };
 
-        var res = await this.inner.MigrateVM_TaskAsync(req);
+        var res = await this.inner.MigrateVM_TaskAsync(req).ConfigureAwait(false);
 
         return res.MigrateVM_TaskResponse.returnval;
     }
@@ -6077,7 +6082,7 @@ public class VimClient : IVimClient
             remove = remove,
         };
 
-        var res = await this.inner.ModifyListViewAsync(req);
+        var res = await this.inner.ModifyListViewAsync(req).ConfigureAwait(false);
 
         return res.ModifyListViewResponse1;
     }
@@ -6089,7 +6094,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.MountToolsInstallerAsync(req);
+        await this.inner.MountToolsInstallerAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task MountVffsVolume(ManagedObjectReference self, string vffsUuid)
@@ -6100,7 +6105,7 @@ public class VimClient : IVimClient
             vffsUuid = vffsUuid,
         };
 
-        await this.inner.MountVffsVolumeAsync(req);
+        await this.inner.MountVffsVolumeAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task MountVmfsVolume(ManagedObjectReference self, string vmfsUuid)
@@ -6111,7 +6116,7 @@ public class VimClient : IVimClient
             vmfsUuid = vmfsUuid,
         };
 
-        await this.inner.MountVmfsVolumeAsync(req);
+        await this.inner.MountVmfsVolumeAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> MountVmfsVolumeEx_Task(ManagedObjectReference self, string[] vmfsUuid)
@@ -6122,7 +6127,7 @@ public class VimClient : IVimClient
             vmfsUuid = vmfsUuid,
         };
 
-        var res = await this.inner.MountVmfsVolumeEx_TaskAsync(req);
+        var res = await this.inner.MountVmfsVolumeEx_TaskAsync(req).ConfigureAwait(false);
 
         return res.MountVmfsVolumeEx_TaskResponse.returnval;
     }
@@ -6140,7 +6145,7 @@ public class VimClient : IVimClient
             forceSpecified = forceSpecified,
         };
 
-        var res = await this.inner.MoveDatastoreFile_TaskAsync(req);
+        var res = await this.inner.MoveDatastoreFile_TaskAsync(req).ConfigureAwait(false);
 
         return res.MoveDatastoreFile_TaskResponse.returnval;
     }
@@ -6156,7 +6161,7 @@ public class VimClient : IVimClient
             dstDirectoryPath = dstDirectoryPath,
         };
 
-        await this.inner.MoveDirectoryInGuestAsync(req);
+        await this.inner.MoveDirectoryInGuestAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> MoveDVPort_Task(ManagedObjectReference self, string[] portKey, string? destinationPortgroupKey)
@@ -6168,7 +6173,7 @@ public class VimClient : IVimClient
             destinationPortgroupKey = destinationPortgroupKey,
         };
 
-        var res = await this.inner.MoveDVPort_TaskAsync(req);
+        var res = await this.inner.MoveDVPort_TaskAsync(req).ConfigureAwait(false);
 
         return res.MoveDVPort_TaskResponse.returnval;
     }
@@ -6185,7 +6190,7 @@ public class VimClient : IVimClient
             overwrite = overwrite,
         };
 
-        await this.inner.MoveFileInGuestAsync(req);
+        await this.inner.MoveFileInGuestAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> MoveHostInto_Task(ManagedObjectReference self, ManagedObjectReference host, ManagedObjectReference? resourcePool)
@@ -6197,7 +6202,7 @@ public class VimClient : IVimClient
             resourcePool = resourcePool,
         };
 
-        var res = await this.inner.MoveHostInto_TaskAsync(req);
+        var res = await this.inner.MoveHostInto_TaskAsync(req).ConfigureAwait(false);
 
         return res.MoveHostInto_TaskResponse.returnval;
     }
@@ -6210,7 +6215,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.MoveInto_TaskAsync(req);
+        var res = await this.inner.MoveInto_TaskAsync(req).ConfigureAwait(false);
 
         return res.MoveInto_TaskResponse.returnval;
     }
@@ -6223,7 +6228,7 @@ public class VimClient : IVimClient
             list = list,
         };
 
-        var res = await this.inner.MoveIntoFolder_TaskAsync(req);
+        var res = await this.inner.MoveIntoFolder_TaskAsync(req).ConfigureAwait(false);
 
         return res.MoveIntoFolder_TaskResponse.returnval;
     }
@@ -6236,7 +6241,7 @@ public class VimClient : IVimClient
             list = list,
         };
 
-        await this.inner.MoveIntoResourcePoolAsync(req);
+        await this.inner.MoveIntoResourcePoolAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> MoveVirtualDisk_Task(ManagedObjectReference self, string sourceName, ManagedObjectReference? sourceDatacenter, string destName, ManagedObjectReference? destDatacenter, bool force, bool forceSpecified, VirtualMachineProfileSpec[]? profile)
@@ -6253,7 +6258,7 @@ public class VimClient : IVimClient
             profile = profile,
         };
 
-        var res = await this.inner.MoveVirtualDisk_TaskAsync(req);
+        var res = await this.inner.MoveVirtualDisk_TaskAsync(req).ConfigureAwait(false);
 
         return res.MoveVirtualDisk_TaskResponse.returnval;
     }
@@ -6266,7 +6271,7 @@ public class VimClient : IVimClient
             services = services,
         };
 
-        await this.inner.NotifyAffectedServicesAsync(req);
+        await this.inner.NotifyAffectedServicesAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference[]?> OpenInventoryViewFolder(ManagedObjectReference self, ManagedObjectReference[] entity)
@@ -6277,7 +6282,7 @@ public class VimClient : IVimClient
             entity = entity,
         };
 
-        var res = await this.inner.OpenInventoryViewFolderAsync(req);
+        var res = await this.inner.OpenInventoryViewFolderAsync(req).ConfigureAwait(false);
 
         return res.OpenInventoryViewFolderResponse1;
     }
@@ -6290,7 +6295,7 @@ public class VimClient : IVimClient
             item = item,
         };
 
-        await this.inner.OverwriteCustomizationSpecAsync(req);
+        await this.inner.OverwriteCustomizationSpecAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<OvfParseDescriptorResult?> ParseDescriptor(ManagedObjectReference self, string ovfDescriptor, OvfParseDescriptorParams pdp)
@@ -6302,7 +6307,7 @@ public class VimClient : IVimClient
             pdp = pdp,
         };
 
-        var res = await this.inner.ParseDescriptorAsync(req);
+        var res = await this.inner.ParseDescriptorAsync(req).ConfigureAwait(false);
 
         return res.ParseDescriptorResponse.returnval;
     }
@@ -6316,7 +6321,7 @@ public class VimClient : IVimClient
             productSpec = productSpec,
         };
 
-        var res = await this.inner.PerformDvsProductSpecOperation_TaskAsync(req);
+        var res = await this.inner.PerformDvsProductSpecOperation_TaskAsync(req).ConfigureAwait(false);
 
         return res.PerformDvsProductSpecOperation_TaskResponse.returnval;
     }
@@ -6336,7 +6341,7 @@ public class VimClient : IVimClient
             excludeHosts = excludeHosts,
         };
 
-        var res = await this.inner.PerformVsanUpgrade_TaskAsync(req);
+        var res = await this.inner.PerformVsanUpgrade_TaskAsync(req).ConfigureAwait(false);
 
         return res.PerformVsanUpgrade_TaskResponse.returnval;
     }
@@ -6351,7 +6356,7 @@ public class VimClient : IVimClient
             downgradeFormatSpecified = downgradeFormatSpecified,
         };
 
-        var res = await this.inner.PerformVsanUpgradePreflightCheckAsync(req);
+        var res = await this.inner.PerformVsanUpgradePreflightCheckAsync(req).ConfigureAwait(false);
 
         return res.PerformVsanUpgradePreflightCheckResponse.returnval;
     }
@@ -6364,7 +6369,7 @@ public class VimClient : IVimClient
             placementSpec = placementSpec,
         };
 
-        var res = await this.inner.PlaceVmAsync(req);
+        var res = await this.inner.PlaceVmAsync(req).ConfigureAwait(false);
 
         return res.PlaceVmResponse.returnval;
     }
@@ -6378,7 +6383,7 @@ public class VimClient : IVimClient
             taskInfo = taskInfo,
         };
 
-        await this.inner.PostEventAsync(req);
+        await this.inner.PostEventAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task PostHealthUpdates(ManagedObjectReference self, string providerId, HealthUpdate[]? updates)
@@ -6390,7 +6395,7 @@ public class VimClient : IVimClient
             updates = updates,
         };
 
-        await this.inner.PostHealthUpdatesAsync(req);
+        await this.inner.PostHealthUpdatesAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> PowerDownHostToStandBy_Task(ManagedObjectReference self, int timeoutSec, bool evacuatePoweredOffVms, bool evacuatePoweredOffVmsSpecified)
@@ -6403,7 +6408,7 @@ public class VimClient : IVimClient
             evacuatePoweredOffVmsSpecified = evacuatePoweredOffVmsSpecified,
         };
 
-        var res = await this.inner.PowerDownHostToStandBy_TaskAsync(req);
+        var res = await this.inner.PowerDownHostToStandBy_TaskAsync(req).ConfigureAwait(false);
 
         return res.PowerDownHostToStandBy_TaskResponse.returnval;
     }
@@ -6416,7 +6421,7 @@ public class VimClient : IVimClient
             force = force,
         };
 
-        var res = await this.inner.PowerOffVApp_TaskAsync(req);
+        var res = await this.inner.PowerOffVApp_TaskAsync(req).ConfigureAwait(false);
 
         return res.PowerOffVApp_TaskResponse.returnval;
     }
@@ -6428,7 +6433,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.PowerOffVM_TaskAsync(req);
+        var res = await this.inner.PowerOffVM_TaskAsync(req).ConfigureAwait(false);
 
         return res.PowerOffVM_TaskResponse.returnval;
     }
@@ -6442,7 +6447,7 @@ public class VimClient : IVimClient
             option = option,
         };
 
-        var res = await this.inner.PowerOnMultiVM_TaskAsync(req);
+        var res = await this.inner.PowerOnMultiVM_TaskAsync(req).ConfigureAwait(false);
 
         return res.PowerOnMultiVM_TaskResponse.returnval;
     }
@@ -6454,7 +6459,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.PowerOnVApp_TaskAsync(req);
+        var res = await this.inner.PowerOnVApp_TaskAsync(req).ConfigureAwait(false);
 
         return res.PowerOnVApp_TaskResponse.returnval;
     }
@@ -6467,7 +6472,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.PowerOnVM_TaskAsync(req);
+        var res = await this.inner.PowerOnVM_TaskAsync(req).ConfigureAwait(false);
 
         return res.PowerOnVM_TaskResponse.returnval;
     }
@@ -6480,7 +6485,7 @@ public class VimClient : IVimClient
             timeoutSec = timeoutSec,
         };
 
-        var res = await this.inner.PowerUpHostFromStandBy_TaskAsync(req);
+        var res = await this.inner.PowerUpHostFromStandBy_TaskAsync(req).ConfigureAwait(false);
 
         return res.PowerUpHostFromStandBy_TaskResponse.returnval;
     }
@@ -6492,7 +6497,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.PrepareCryptoAsync(req);
+        await this.inner.PrepareCryptoAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> PrepareVcha_Task(ManagedObjectReference self, VchaClusterNetworkSpec networkSpec)
@@ -6503,7 +6508,7 @@ public class VimClient : IVimClient
             networkSpec = networkSpec,
         };
 
-        var res = await this.inner.prepareVcha_TaskAsync(req);
+        var res = await this.inner.prepareVcha_TaskAsync(req).ConfigureAwait(false);
 
         return res.prepareVcha_TaskResponse.returnval;
     }
@@ -6517,7 +6522,7 @@ public class VimClient : IVimClient
             disks = disks,
         };
 
-        var res = await this.inner.PromoteDisks_TaskAsync(req);
+        var res = await this.inner.PromoteDisks_TaskAsync(req).ConfigureAwait(false);
 
         return res.PromoteDisks_TaskResponse.returnval;
     }
@@ -6530,7 +6535,7 @@ public class VimClient : IVimClient
             key = key,
         };
 
-        await this.inner.ProvisionServerPrivateKeyAsync(req);
+        await this.inner.ProvisionServerPrivateKeyAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<int> PutUsbScanCodes(ManagedObjectReference self, UsbScanCodeSpec spec)
@@ -6541,7 +6546,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.PutUsbScanCodesAsync(req);
+        var res = await this.inner.PutUsbScanCodesAsync(req).ConfigureAwait(false);
 
         return res.PutUsbScanCodesResponse.returnval;
     }
@@ -6554,7 +6559,7 @@ public class VimClient : IVimClient
             querySpec = querySpec,
         };
 
-        var res = await this.inner.QueryAsync(req);
+        var res = await this.inner.QueryAsync(req).ConfigureAwait(false);
 
         return res.QueryResponse.returnval;
     }
@@ -6567,7 +6572,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.QueryAnswerFileStatusAsync(req);
+        var res = await this.inner.QueryAnswerFileStatusAsync(req).ConfigureAwait(false);
 
         return res.QueryAnswerFileStatusResponse1;
     }
@@ -6580,7 +6585,7 @@ public class VimClient : IVimClient
             entityId = entityId,
         };
 
-        var res = await this.inner.QueryAssignedLicensesAsync(req);
+        var res = await this.inner.QueryAssignedLicensesAsync(req).ConfigureAwait(false);
 
         return res.QueryAssignedLicensesResponse1;
     }
@@ -6593,7 +6598,7 @@ public class VimClient : IVimClient
             datastore = datastore,
         };
 
-        var res = await this.inner.QueryAvailableDisksForVmfsAsync(req);
+        var res = await this.inner.QueryAvailableDisksForVmfsAsync(req).ConfigureAwait(false);
 
         return res.QueryAvailableDisksForVmfsResponse1;
     }
@@ -6607,7 +6612,7 @@ public class VimClient : IVimClient
             recommendedSpecified = recommendedSpecified,
         };
 
-        var res = await this.inner.QueryAvailableDvsSpecAsync(req);
+        var res = await this.inner.QueryAvailableDvsSpecAsync(req).ConfigureAwait(false);
 
         return res.QueryAvailableDvsSpecResponse1;
     }
@@ -6619,7 +6624,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.QueryAvailablePartitionAsync(req);
+        var res = await this.inner.QueryAvailablePartitionAsync(req).ConfigureAwait(false);
 
         return res.QueryAvailablePartitionResponse1;
     }
@@ -6638,7 +6643,7 @@ public class VimClient : IVimClient
             intervalIdSpecified = intervalIdSpecified,
         };
 
-        var res = await this.inner.QueryAvailablePerfMetricAsync(req);
+        var res = await this.inner.QueryAvailablePerfMetricAsync(req).ConfigureAwait(false);
 
         return res.QueryAvailablePerfMetricResponse1;
     }
@@ -6651,7 +6656,7 @@ public class VimClient : IVimClient
             vffsPath = vffsPath,
         };
 
-        var res = await this.inner.QueryAvailableSsdsAsync(req);
+        var res = await this.inner.QueryAvailableSsdsAsync(req).ConfigureAwait(false);
 
         return res.QueryAvailableSsdsResponse1;
     }
@@ -6663,7 +6668,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.QueryAvailableTimeZonesAsync(req);
+        var res = await this.inner.QueryAvailableTimeZonesAsync(req).ConfigureAwait(false);
 
         return res.QueryAvailableTimeZonesResponse1;
     }
@@ -6675,7 +6680,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.QueryBootDevicesAsync(req);
+        var res = await this.inner.QueryBootDevicesAsync(req).ConfigureAwait(false);
 
         return res.QueryBootDevicesResponse.returnval;
     }
@@ -6688,7 +6693,7 @@ public class VimClient : IVimClient
             iScsiHbaName = iScsiHbaName,
         };
 
-        var res = await this.inner.QueryBoundVnicsAsync(req);
+        var res = await this.inner.QueryBoundVnicsAsync(req).ConfigureAwait(false);
 
         return res.QueryBoundVnicsResponse1;
     }
@@ -6701,7 +6706,7 @@ public class VimClient : IVimClient
             iScsiHbaName = iScsiHbaName,
         };
 
-        var res = await this.inner.QueryCandidateNicsAsync(req);
+        var res = await this.inner.QueryCandidateNicsAsync(req).ConfigureAwait(false);
 
         return res.QueryCandidateNicsResponse1;
     }
@@ -6717,7 +6722,7 @@ public class VimClient : IVimClient
             changeId = changeId,
         };
 
-        var res = await this.inner.QueryChangedDiskAreasAsync(req);
+        var res = await this.inner.QueryChangedDiskAreasAsync(req).ConfigureAwait(false);
 
         return res.QueryChangedDiskAreasResponse.returnval;
     }
@@ -6730,7 +6735,7 @@ public class VimClient : IVimClient
             queries = queries,
         };
 
-        var res = await this.inner.QueryCmmdsAsync(req);
+        var res = await this.inner.QueryCmmdsAsync(req).ConfigureAwait(false);
 
         return res.QueryCmmdsResponse.returnval;
     }
@@ -6745,7 +6750,7 @@ public class VimClient : IVimClient
             dvs = dvs,
         };
 
-        var res = await this.inner.QueryCompatibleHostForExistingDvsAsync(req);
+        var res = await this.inner.QueryCompatibleHostForExistingDvsAsync(req).ConfigureAwait(false);
 
         return res.QueryCompatibleHostForExistingDvsResponse1;
     }
@@ -6760,7 +6765,7 @@ public class VimClient : IVimClient
             switchProductSpec = switchProductSpec,
         };
 
-        var res = await this.inner.QueryCompatibleHostForNewDvsAsync(req);
+        var res = await this.inner.QueryCompatibleHostForNewDvsAsync(req).ConfigureAwait(false);
 
         return res.QueryCompatibleHostForNewDvsResponse1;
     }
@@ -6774,7 +6779,7 @@ public class VimClient : IVimClient
             dvs = dvs,
         };
 
-        var res = await this.inner.QueryCompatibleVmnicsFromHostsAsync(req);
+        var res = await this.inner.QueryCompatibleVmnicsFromHostsAsync(req).ConfigureAwait(false);
 
         return res.QueryCompatibleVmnicsFromHostsResponse1;
     }
@@ -6788,7 +6793,7 @@ public class VimClient : IVimClient
             entity = entity,
         };
 
-        var res = await this.inner.QueryComplianceStatusAsync(req);
+        var res = await this.inner.QueryComplianceStatusAsync(req).ConfigureAwait(false);
 
         return res.QueryComplianceStatusResponse1;
     }
@@ -6802,7 +6807,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.QueryConfigOptionAsync(req);
+        var res = await this.inner.QueryConfigOptionAsync(req).ConfigureAwait(false);
 
         return res.QueryConfigOptionResponse.returnval;
     }
@@ -6814,7 +6819,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.QueryConfigOptionDescriptorAsync(req);
+        var res = await this.inner.QueryConfigOptionDescriptorAsync(req).ConfigureAwait(false);
 
         return res.QueryConfigOptionDescriptorResponse1;
     }
@@ -6827,7 +6832,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.QueryConfigOptionExAsync(req);
+        var res = await this.inner.QueryConfigOptionExAsync(req).ConfigureAwait(false);
 
         return res.QueryConfigOptionExResponse.returnval;
     }
@@ -6840,7 +6845,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.QueryConfigTargetAsync(req);
+        var res = await this.inner.QueryConfigTargetAsync(req).ConfigureAwait(false);
 
         return res.QueryConfigTargetResponse.returnval;
     }
@@ -6853,7 +6858,7 @@ public class VimClient : IVimClient
             name = name,
         };
 
-        var res = await this.inner.QueryConfiguredModuleOptionStringAsync(req);
+        var res = await this.inner.QueryConfiguredModuleOptionStringAsync(req).ConfigureAwait(false);
 
         return res.QueryConfiguredModuleOptionStringResponse.returnval;
     }
@@ -6871,7 +6876,7 @@ public class VimClient : IVimClient
             sslCertificate = sslCertificate,
         };
 
-        var res = await this.inner.QueryConnectionInfoAsync(req);
+        var res = await this.inner.QueryConnectionInfoAsync(req).ConfigureAwait(false);
 
         return res.QueryConnectionInfoResponse.returnval;
     }
@@ -6884,7 +6889,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.QueryConnectionInfoViaSpecAsync(req);
+        var res = await this.inner.QueryConnectionInfoViaSpecAsync(req).ConfigureAwait(false);
 
         return res.QueryConnectionInfoViaSpecResponse.returnval;
     }
@@ -6896,7 +6901,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.QueryConnectionsAsync(req);
+        var res = await this.inner.QueryConnectionsAsync(req).ConfigureAwait(false);
 
         return res.QueryConnectionsResponse1;
     }
@@ -6910,7 +6915,7 @@ public class VimClient : IVimClient
             checkKeyBitMap = checkKeyBitMap,
         };
 
-        var res = await this.inner.QueryCryptoKeyStatusAsync(req);
+        var res = await this.inner.QueryCryptoKeyStatusAsync(req).ConfigureAwait(false);
 
         return res.QueryCryptoKeyStatusResponse1;
     }
@@ -6922,7 +6927,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.queryDatacenterConfigOptionDescriptorAsync(req);
+        var res = await this.inner.queryDatacenterConfigOptionDescriptorAsync(req).ConfigureAwait(false);
 
         return res.queryDatacenterConfigOptionDescriptorResponse1;
     }
@@ -6935,7 +6940,7 @@ public class VimClient : IVimClient
             datastore = datastore,
         };
 
-        var res = await this.inner.QueryDatastorePerformanceSummaryAsync(req);
+        var res = await this.inner.QueryDatastorePerformanceSummaryAsync(req).ConfigureAwait(false);
 
         return res.QueryDatastorePerformanceSummaryResponse1;
     }
@@ -6947,7 +6952,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.QueryDateTimeAsync(req);
+        var res = await this.inner.QueryDateTimeAsync(req).ConfigureAwait(false);
 
         return res.QueryDateTimeResponse.returnval;
     }
@@ -6960,7 +6965,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.QueryDescriptionsAsync(req);
+        var res = await this.inner.QueryDescriptionsAsync(req).ConfigureAwait(false);
 
         return res.QueryDescriptionsResponse1;
     }
@@ -6974,7 +6979,7 @@ public class VimClient : IVimClient
             stableName = stableName,
         };
 
-        var res = await this.inner.QueryDirectoryInfoAsync(req);
+        var res = await this.inner.QueryDirectoryInfoAsync(req).ConfigureAwait(false);
 
         return res.QueryDirectoryInfoResponse.returnval;
     }
@@ -6987,7 +6992,7 @@ public class VimClient : IVimClient
             canonicalName = canonicalName,
         };
 
-        var res = await this.inner.QueryDisksForVsanAsync(req);
+        var res = await this.inner.QueryDisksForVsanAsync(req).ConfigureAwait(false);
 
         return res.QueryDisksForVsanResponse1;
     }
@@ -7001,7 +7006,7 @@ public class VimClient : IVimClient
             compRes = compRes,
         };
 
-        var res = await this.inner.QueryDisksUsingFilterAsync(req);
+        var res = await this.inner.QueryDisksUsingFilterAsync(req).ConfigureAwait(false);
 
         return res.QueryDisksUsingFilterResponse1;
     }
@@ -7014,7 +7019,7 @@ public class VimClient : IVimClient
             uuid = uuid,
         };
 
-        var res = await this.inner.QueryDvsByUuidAsync(req);
+        var res = await this.inner.QueryDvsByUuidAsync(req).ConfigureAwait(false);
 
         return res.QueryDvsByUuidResponse.returnval;
     }
@@ -7029,7 +7034,7 @@ public class VimClient : IVimClient
             hostFilterSpec = hostFilterSpec,
         };
 
-        var res = await this.inner.QueryDvsCheckCompatibilityAsync(req);
+        var res = await this.inner.QueryDvsCheckCompatibilityAsync(req).ConfigureAwait(false);
 
         return res.QueryDvsCheckCompatibilityResponse1;
     }
@@ -7042,7 +7047,7 @@ public class VimClient : IVimClient
             switchProductSpec = switchProductSpec,
         };
 
-        var res = await this.inner.QueryDvsCompatibleHostSpecAsync(req);
+        var res = await this.inner.QueryDvsCompatibleHostSpecAsync(req).ConfigureAwait(false);
 
         return res.QueryDvsCompatibleHostSpecResponse1;
     }
@@ -7056,7 +7061,7 @@ public class VimClient : IVimClient
             dvs = dvs,
         };
 
-        var res = await this.inner.QueryDvsConfigTargetAsync(req);
+        var res = await this.inner.QueryDvsConfigTargetAsync(req).ConfigureAwait(false);
 
         return res.QueryDvsConfigTargetResponse.returnval;
     }
@@ -7069,7 +7074,7 @@ public class VimClient : IVimClient
             switchProductSpec = switchProductSpec,
         };
 
-        var res = await this.inner.QueryDvsFeatureCapabilityAsync(req);
+        var res = await this.inner.QueryDvsFeatureCapabilityAsync(req).ConfigureAwait(false);
 
         return res.QueryDvsFeatureCapabilityResponse.returnval;
     }
@@ -7083,7 +7088,7 @@ public class VimClient : IVimClient
             eventViewSpec = eventViewSpec,
         };
 
-        var res = await this.inner.QueryEventsAsync(req);
+        var res = await this.inner.QueryEventsAsync(req).ConfigureAwait(false);
 
         return res.QueryEventsResponse1;
     }
@@ -7097,7 +7102,7 @@ public class VimClient : IVimClient
             profile = profile,
         };
 
-        var res = await this.inner.QueryExpressionMetadataAsync(req);
+        var res = await this.inner.QueryExpressionMetadataAsync(req).ConfigureAwait(false);
 
         return res.QueryExpressionMetadataResponse1;
     }
@@ -7110,7 +7115,7 @@ public class VimClient : IVimClient
             extensionKeys = extensionKeys,
         };
 
-        var res = await this.inner.QueryExtensionIpAllocationUsageAsync(req);
+        var res = await this.inner.QueryExtensionIpAllocationUsageAsync(req).ConfigureAwait(false);
 
         return res.QueryExtensionIpAllocationUsageResponse1;
     }
@@ -7122,7 +7127,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.QueryFaultToleranceCompatibilityAsync(req);
+        var res = await this.inner.QueryFaultToleranceCompatibilityAsync(req).ConfigureAwait(false);
 
         return res.QueryFaultToleranceCompatibilityResponse1;
     }
@@ -7136,7 +7141,7 @@ public class VimClient : IVimClient
             forLegacyFtSpecified = forLegacyFtSpecified,
         };
 
-        var res = await this.inner.QueryFaultToleranceCompatibilityExAsync(req);
+        var res = await this.inner.QueryFaultToleranceCompatibilityExAsync(req).ConfigureAwait(false);
 
         return res.QueryFaultToleranceCompatibilityExResponse1;
     }
@@ -7150,7 +7155,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.QueryFileLockInfoAsync(req);
+        var res = await this.inner.QueryFileLockInfoAsync(req).ConfigureAwait(false);
 
         return res.QueryFileLockInfoResponse.returnval;
     }
@@ -7163,7 +7168,7 @@ public class VimClient : IVimClient
             filterId = filterId,
         };
 
-        var res = await this.inner.QueryFilterEntitiesAsync(req);
+        var res = await this.inner.QueryFilterEntitiesAsync(req).ConfigureAwait(false);
 
         return res.QueryFilterEntitiesResponse1;
     }
@@ -7176,7 +7181,7 @@ public class VimClient : IVimClient
             filterId = filterId,
         };
 
-        var res = await this.inner.QueryFilterInfoIdsAsync(req);
+        var res = await this.inner.QueryFilterInfoIdsAsync(req).ConfigureAwait(false);
 
         return res.QueryFilterInfoIdsResponse1;
     }
@@ -7189,7 +7194,7 @@ public class VimClient : IVimClient
             providerId = providerId,
         };
 
-        var res = await this.inner.QueryFilterListAsync(req);
+        var res = await this.inner.QueryFilterListAsync(req).ConfigureAwait(false);
 
         return res.QueryFilterListResponse1;
     }
@@ -7202,7 +7207,7 @@ public class VimClient : IVimClient
             filterId = filterId,
         };
 
-        var res = await this.inner.QueryFilterNameAsync(req);
+        var res = await this.inner.QueryFilterNameAsync(req).ConfigureAwait(false);
 
         return res.QueryFilterNameResponse.returnval;
     }
@@ -7214,7 +7219,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.QueryFirmwareConfigUploadURLAsync(req);
+        var res = await this.inner.QueryFirmwareConfigUploadURLAsync(req).ConfigureAwait(false);
 
         return res.QueryFirmwareConfigUploadURLResponse.returnval;
     }
@@ -7227,7 +7232,7 @@ public class VimClient : IVimClient
             providerId = providerId,
         };
 
-        var res = await this.inner.QueryHealthUpdateInfosAsync(req);
+        var res = await this.inner.QueryHealthUpdateInfosAsync(req).ConfigureAwait(false);
 
         return res.QueryHealthUpdateInfosResponse1;
     }
@@ -7240,7 +7245,7 @@ public class VimClient : IVimClient
             providerId = providerId,
         };
 
-        var res = await this.inner.QueryHealthUpdatesAsync(req);
+        var res = await this.inner.QueryHealthUpdatesAsync(req).ConfigureAwait(false);
 
         return res.QueryHealthUpdatesResponse1;
     }
@@ -7252,7 +7257,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.QueryHostConnectionInfoAsync(req);
+        var res = await this.inner.QueryHostConnectionInfoAsync(req).ConfigureAwait(false);
 
         return res.QueryHostConnectionInfoResponse.returnval;
     }
@@ -7265,7 +7270,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.QueryHostPatch_TaskAsync(req);
+        var res = await this.inner.QueryHostPatch_TaskAsync(req).ConfigureAwait(false);
 
         return res.QueryHostPatch_TaskResponse.returnval;
     }
@@ -7279,7 +7284,7 @@ public class VimClient : IVimClient
             profile = profile,
         };
 
-        var res = await this.inner.QueryHostProfileMetadataAsync(req);
+        var res = await this.inner.QueryHostProfileMetadataAsync(req).ConfigureAwait(false);
 
         return res.QueryHostProfileMetadataResponse1;
     }
@@ -7291,7 +7296,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.QueryHostStatusAsync(req);
+        var res = await this.inner.QueryHostStatusAsync(req).ConfigureAwait(false);
 
         return res.QueryHostStatusResponse.returnval;
     }
@@ -7304,7 +7309,7 @@ public class VimClient : IVimClient
             lunUuid = lunUuid,
         };
 
-        var res = await this.inner.QueryHostsWithAttachedLunAsync(req);
+        var res = await this.inner.QueryHostsWithAttachedLunAsync(req).ConfigureAwait(false);
 
         return res.QueryHostsWithAttachedLunResponse1;
     }
@@ -7317,7 +7322,7 @@ public class VimClient : IVimClient
             compRes = compRes,
         };
 
-        var res = await this.inner.QueryIoFilterInfoAsync(req);
+        var res = await this.inner.QueryIoFilterInfoAsync(req).ConfigureAwait(false);
 
         return res.QueryIoFilterInfoResponse1;
     }
@@ -7331,7 +7336,7 @@ public class VimClient : IVimClient
             compRes = compRes,
         };
 
-        var res = await this.inner.QueryIoFilterIssuesAsync(req);
+        var res = await this.inner.QueryIoFilterIssuesAsync(req).ConfigureAwait(false);
 
         return res.QueryIoFilterIssuesResponse.returnval;
     }
@@ -7344,7 +7349,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.QueryIORMConfigOptionAsync(req);
+        var res = await this.inner.QueryIORMConfigOptionAsync(req).ConfigureAwait(false);
 
         return res.QueryIORMConfigOptionResponse.returnval;
     }
@@ -7359,7 +7364,7 @@ public class VimClient : IVimClient
             extensionKey = extensionKey,
         };
 
-        var res = await this.inner.QueryIPAllocationsAsync(req);
+        var res = await this.inner.QueryIPAllocationsAsync(req).ConfigureAwait(false);
 
         return res.QueryIPAllocationsResponse1;
     }
@@ -7372,7 +7377,7 @@ public class VimClient : IVimClient
             dc = dc,
         };
 
-        var res = await this.inner.QueryIpPoolsAsync(req);
+        var res = await this.inner.QueryIpPoolsAsync(req).ConfigureAwait(false);
 
         return res.QueryIpPoolsResponse1;
     }
@@ -7385,7 +7390,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.QueryLicenseSourceAvailabilityAsync(req);
+        var res = await this.inner.QueryLicenseSourceAvailabilityAsync(req).ConfigureAwait(false);
 
         return res.QueryLicenseSourceAvailabilityResponse1;
     }
@@ -7398,7 +7403,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.QueryLicenseUsageAsync(req);
+        var res = await this.inner.QueryLicenseUsageAsync(req).ConfigureAwait(false);
 
         return res.QueryLicenseUsageResponse.returnval;
     }
@@ -7410,7 +7415,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.QueryLockdownExceptionsAsync(req);
+        var res = await this.inner.QueryLockdownExceptionsAsync(req).ConfigureAwait(false);
 
         return res.QueryLockdownExceptionsResponse1;
     }
@@ -7423,7 +7428,7 @@ public class VimClient : IVimClient
             extensionKey = extensionKey,
         };
 
-        var res = await this.inner.QueryManagedByAsync(req);
+        var res = await this.inner.QueryManagedByAsync(req).ConfigureAwait(false);
 
         return res.QueryManagedByResponse1;
     }
@@ -7436,7 +7441,7 @@ public class VimClient : IVimClient
             datastore = datastore,
         };
 
-        var res = await this.inner.QueryMaxQueueDepthAsync(req);
+        var res = await this.inner.QueryMaxQueueDepthAsync(req).ConfigureAwait(false);
 
         return res.QueryMaxQueueDepthResponse.returnval;
     }
@@ -7452,7 +7457,7 @@ public class VimClient : IVimClient
             numVcpus = numVcpus,
         };
 
-        var res = await this.inner.QueryMemoryOverheadAsync(req);
+        var res = await this.inner.QueryMemoryOverheadAsync(req).ConfigureAwait(false);
 
         return res.QueryMemoryOverheadResponse.returnval;
     }
@@ -7465,7 +7470,7 @@ public class VimClient : IVimClient
             vmConfigInfo = vmConfigInfo,
         };
 
-        var res = await this.inner.QueryMemoryOverheadExAsync(req);
+        var res = await this.inner.QueryMemoryOverheadExAsync(req).ConfigureAwait(false);
 
         return res.QueryMemoryOverheadExResponse.returnval;
     }
@@ -7478,7 +7483,7 @@ public class VimClient : IVimClient
             pnicDevice = pnicDevice,
         };
 
-        var res = await this.inner.QueryMigrationDependenciesAsync(req);
+        var res = await this.inner.QueryMigrationDependenciesAsync(req).ConfigureAwait(false);
 
         return res.QueryMigrationDependenciesResponse.returnval;
     }
@@ -7490,7 +7495,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.QueryModulesAsync(req);
+        var res = await this.inner.QueryModulesAsync(req).ConfigureAwait(false);
 
         return res.QueryModulesResponse1;
     }
@@ -7503,7 +7508,7 @@ public class VimClient : IVimClient
             providerId = providerId,
         };
 
-        var res = await this.inner.QueryMonitoredEntitiesAsync(req);
+        var res = await this.inner.QueryMonitoredEntitiesAsync(req).ConfigureAwait(false);
 
         return res.QueryMonitoredEntitiesResponse1;
     }
@@ -7516,7 +7521,7 @@ public class VimClient : IVimClient
             nicType = nicType,
         };
 
-        var res = await this.inner.QueryNetConfigAsync(req);
+        var res = await this.inner.QueryNetConfigAsync(req).ConfigureAwait(false);
 
         return res.QueryNetConfigResponse.returnval;
     }
@@ -7529,7 +7534,7 @@ public class VimClient : IVimClient
             device = device,
         };
 
-        var res = await this.inner.QueryNetworkHintAsync(req);
+        var res = await this.inner.QueryNetworkHintAsync(req).ConfigureAwait(false);
 
         return res.QueryNetworkHintResponse1;
     }
@@ -7542,7 +7547,7 @@ public class VimClient : IVimClient
             iterationSpec = iterationSpec,
         };
 
-        var res = await this.inner.QueryNextAsync(req);
+        var res = await this.inner.QueryNextAsync(req).ConfigureAwait(false);
 
         return res.QueryNextResponse.returnval;
     }
@@ -7554,7 +7559,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.QueryNFSUserAsync(req);
+        var res = await this.inner.QueryNFSUserAsync(req).ConfigureAwait(false);
 
         return res.QueryNFSUserResponse.returnval;
     }
@@ -7567,7 +7572,7 @@ public class VimClient : IVimClient
             disks = disks,
         };
 
-        var res = await this.inner.QueryObjectsOnPhysicalVsanDiskAsync(req);
+        var res = await this.inner.QueryObjectsOnPhysicalVsanDiskAsync(req).ConfigureAwait(false);
 
         return res.QueryObjectsOnPhysicalVsanDiskResponse.returnval;
     }
@@ -7580,7 +7585,7 @@ public class VimClient : IVimClient
             name = name,
         };
 
-        var res = await this.inner.QueryOptionsAsync(req);
+        var res = await this.inner.QueryOptionsAsync(req).ConfigureAwait(false);
 
         return res.QueryOptionsResponse1;
     }
@@ -7594,7 +7599,7 @@ public class VimClient : IVimClient
             diagnosticType = diagnosticType,
         };
 
-        var res = await this.inner.QueryPartitionCreateDescAsync(req);
+        var res = await this.inner.QueryPartitionCreateDescAsync(req).ConfigureAwait(false);
 
         return res.QueryPartitionCreateDescResponse.returnval;
     }
@@ -7608,7 +7613,7 @@ public class VimClient : IVimClient
             diagnosticType = diagnosticType,
         };
 
-        var res = await this.inner.QueryPartitionCreateOptionsAsync(req);
+        var res = await this.inner.QueryPartitionCreateOptionsAsync(req).ConfigureAwait(false);
 
         return res.QueryPartitionCreateOptionsResponse1;
     }
@@ -7620,7 +7625,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.QueryPathSelectionPolicyOptionsAsync(req);
+        var res = await this.inner.QueryPathSelectionPolicyOptionsAsync(req).ConfigureAwait(false);
 
         return res.QueryPathSelectionPolicyOptionsResponse1;
     }
@@ -7633,7 +7638,7 @@ public class VimClient : IVimClient
             querySpec = querySpec,
         };
 
-        var res = await this.inner.QueryPerfAsync(req);
+        var res = await this.inner.QueryPerfAsync(req).ConfigureAwait(false);
 
         return res.QueryPerfResponse1;
     }
@@ -7646,7 +7651,7 @@ public class VimClient : IVimClient
             querySpec = querySpec,
         };
 
-        var res = await this.inner.QueryPerfCompositeAsync(req);
+        var res = await this.inner.QueryPerfCompositeAsync(req).ConfigureAwait(false);
 
         return res.QueryPerfCompositeResponse.returnval;
     }
@@ -7659,7 +7664,7 @@ public class VimClient : IVimClient
             counterId = counterId,
         };
 
-        var res = await this.inner.QueryPerfCounterAsync(req);
+        var res = await this.inner.QueryPerfCounterAsync(req).ConfigureAwait(false);
 
         return res.QueryPerfCounterResponse1;
     }
@@ -7672,7 +7677,7 @@ public class VimClient : IVimClient
             level = level,
         };
 
-        var res = await this.inner.QueryPerfCounterByLevelAsync(req);
+        var res = await this.inner.QueryPerfCounterByLevelAsync(req).ConfigureAwait(false);
 
         return res.QueryPerfCounterByLevelResponse1;
     }
@@ -7685,7 +7690,7 @@ public class VimClient : IVimClient
             entity = entity,
         };
 
-        var res = await this.inner.QueryPerfProviderSummaryAsync(req);
+        var res = await this.inner.QueryPerfProviderSummaryAsync(req).ConfigureAwait(false);
 
         return res.QueryPerfProviderSummaryResponse.returnval;
     }
@@ -7698,7 +7703,7 @@ public class VimClient : IVimClient
             props = props,
         };
 
-        var res = await this.inner.QueryPhysicalVsanDisksAsync(req);
+        var res = await this.inner.QueryPhysicalVsanDisksAsync(req).ConfigureAwait(false);
 
         return res.QueryPhysicalVsanDisksResponse.returnval;
     }
@@ -7711,7 +7716,7 @@ public class VimClient : IVimClient
             pnicDevice = pnicDevice,
         };
 
-        var res = await this.inner.QueryPnicStatusAsync(req);
+        var res = await this.inner.QueryPnicStatusAsync(req).ConfigureAwait(false);
 
         return res.QueryPnicStatusResponse.returnval;
     }
@@ -7725,7 +7730,7 @@ public class VimClient : IVimClient
             profile = profile,
         };
 
-        var res = await this.inner.QueryPolicyMetadataAsync(req);
+        var res = await this.inner.QueryPolicyMetadataAsync(req).ConfigureAwait(false);
 
         return res.QueryPolicyMetadataResponse1;
     }
@@ -7737,7 +7742,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.QueryProductLockerLocationAsync(req);
+        var res = await this.inner.QueryProductLockerLocationAsync(req).ConfigureAwait(false);
 
         return res.QueryProductLockerLocationResponse.returnval;
     }
@@ -7750,7 +7755,7 @@ public class VimClient : IVimClient
             profile = profile,
         };
 
-        var res = await this.inner.QueryProfileStructureAsync(req);
+        var res = await this.inner.QueryProfileStructureAsync(req).ConfigureAwait(false);
 
         return res.QueryProfileStructureResponse.returnval;
     }
@@ -7762,7 +7767,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.QueryProviderListAsync(req);
+        var res = await this.inner.QueryProviderListAsync(req).ConfigureAwait(false);
 
         return res.QueryProviderListResponse1;
     }
@@ -7775,7 +7780,7 @@ public class VimClient : IVimClient
             id = id,
         };
 
-        var res = await this.inner.QueryProviderNameAsync(req);
+        var res = await this.inner.QueryProviderNameAsync(req).ConfigureAwait(false);
 
         return res.QueryProviderNameResponse.returnval;
     }
@@ -7787,7 +7792,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.QueryResourceConfigOptionAsync(req);
+        var res = await this.inner.QueryResourceConfigOptionAsync(req).ConfigureAwait(false);
 
         return res.QueryResourceConfigOptionResponse.returnval;
     }
@@ -7801,7 +7806,7 @@ public class VimClient : IVimClient
             location = location,
         };
 
-        var res = await this.inner.QueryServiceListAsync(req);
+        var res = await this.inner.QueryServiceListAsync(req).ConfigureAwait(false);
 
         return res.QueryServiceListResponse1;
     }
@@ -7813,7 +7818,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.QueryStorageArrayTypePolicyOptionsAsync(req);
+        var res = await this.inner.QueryStorageArrayTypePolicyOptionsAsync(req).ConfigureAwait(false);
 
         return res.QueryStorageArrayTypePolicyOptionsResponse1;
     }
@@ -7826,7 +7831,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.QuerySupportedFeaturesAsync(req);
+        var res = await this.inner.QuerySupportedFeaturesAsync(req).ConfigureAwait(false);
 
         return res.QuerySupportedFeaturesResponse1;
     }
@@ -7839,7 +7844,7 @@ public class VimClient : IVimClient
             switchProductSpec = switchProductSpec,
         };
 
-        var res = await this.inner.QuerySupportedNetworkOffloadSpecAsync(req);
+        var res = await this.inner.QuerySupportedNetworkOffloadSpecAsync(req).ConfigureAwait(false);
 
         return res.QuerySupportedNetworkOffloadSpecResponse1;
     }
@@ -7852,7 +7857,7 @@ public class VimClient : IVimClient
             uuids = uuids,
         };
 
-        var res = await this.inner.QuerySyncingVsanObjectsAsync(req);
+        var res = await this.inner.QuerySyncingVsanObjectsAsync(req).ConfigureAwait(false);
 
         return res.QuerySyncingVsanObjectsResponse.returnval;
     }
@@ -7864,7 +7869,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.QuerySystemUsersAsync(req);
+        var res = await this.inner.QuerySystemUsersAsync(req).ConfigureAwait(false);
 
         return res.QuerySystemUsersResponse1;
     }
@@ -7877,7 +7882,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.QueryTargetCapabilitiesAsync(req);
+        var res = await this.inner.QueryTargetCapabilitiesAsync(req).ConfigureAwait(false);
 
         return res.QueryTargetCapabilitiesResponse.returnval;
     }
@@ -7889,7 +7894,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.QueryTpmAttestationReportAsync(req);
+        var res = await this.inner.QueryTpmAttestationReportAsync(req).ConfigureAwait(false);
 
         return res.QueryTpmAttestationReportResponse.returnval;
     }
@@ -7903,7 +7908,7 @@ public class VimClient : IVimClient
             cluster = cluster,
         };
 
-        var res = await this.inner.QueryUnmonitoredHostsAsync(req);
+        var res = await this.inner.QueryUnmonitoredHostsAsync(req).ConfigureAwait(false);
 
         return res.QueryUnmonitoredHostsResponse1;
     }
@@ -7915,7 +7920,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.QueryUnownedFilesAsync(req);
+        var res = await this.inner.QueryUnownedFilesAsync(req).ConfigureAwait(false);
 
         return res.QueryUnownedFilesResponse1;
     }
@@ -7927,7 +7932,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.QueryUnresolvedVmfsVolumeAsync(req);
+        var res = await this.inner.QueryUnresolvedVmfsVolumeAsync(req).ConfigureAwait(false);
 
         return res.QueryUnresolvedVmfsVolumeResponse1;
     }
@@ -7939,7 +7944,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.QueryUnresolvedVmfsVolumesAsync(req);
+        var res = await this.inner.QueryUnresolvedVmfsVolumesAsync(req).ConfigureAwait(false);
 
         return res.QueryUnresolvedVmfsVolumesResponse1;
     }
@@ -7951,7 +7956,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.QueryUsedVlanIdInDvsAsync(req);
+        var res = await this.inner.QueryUsedVlanIdInDvsAsync(req).ConfigureAwait(false);
 
         return res.QueryUsedVlanIdInDvsResponse1;
     }
@@ -7965,7 +7970,7 @@ public class VimClient : IVimClient
             datacenter = datacenter,
         };
 
-        var res = await this.inner.QueryVirtualDiskFragmentationAsync(req);
+        var res = await this.inner.QueryVirtualDiskFragmentationAsync(req).ConfigureAwait(false);
 
         return res.QueryVirtualDiskFragmentationResponse.returnval;
     }
@@ -7979,7 +7984,7 @@ public class VimClient : IVimClient
             datacenter = datacenter,
         };
 
-        var res = await this.inner.QueryVirtualDiskGeometryAsync(req);
+        var res = await this.inner.QueryVirtualDiskGeometryAsync(req).ConfigureAwait(false);
 
         return res.QueryVirtualDiskGeometryResponse.returnval;
     }
@@ -7993,7 +7998,7 @@ public class VimClient : IVimClient
             datacenter = datacenter,
         };
 
-        var res = await this.inner.QueryVirtualDiskUuidAsync(req);
+        var res = await this.inner.QueryVirtualDiskUuidAsync(req).ConfigureAwait(false);
 
         return res.QueryVirtualDiskUuidResponse.returnval;
     }
@@ -8007,7 +8012,7 @@ public class VimClient : IVimClient
             datacenter = datacenter,
         };
 
-        var res = await this.inner.QueryVirtualDiskUuidExAsync(req);
+        var res = await this.inner.QueryVirtualDiskUuidExAsync(req).ConfigureAwait(false);
 
         return res.QueryVirtualDiskUuidExResponse.returnval;
     }
@@ -8019,7 +8024,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.QueryVmfsConfigOptionAsync(req);
+        var res = await this.inner.QueryVmfsConfigOptionAsync(req).ConfigureAwait(false);
 
         return res.QueryVmfsConfigOptionResponse1;
     }
@@ -8034,7 +8039,7 @@ public class VimClient : IVimClient
             vmfsMajorVersionSpecified = vmfsMajorVersionSpecified,
         };
 
-        var res = await this.inner.QueryVmfsDatastoreCreateOptionsAsync(req);
+        var res = await this.inner.QueryVmfsDatastoreCreateOptionsAsync(req).ConfigureAwait(false);
 
         return res.QueryVmfsDatastoreCreateOptionsResponse1;
     }
@@ -8047,7 +8052,7 @@ public class VimClient : IVimClient
             datastore = datastore,
         };
 
-        var res = await this.inner.QueryVmfsDatastoreExpandOptionsAsync(req);
+        var res = await this.inner.QueryVmfsDatastoreExpandOptionsAsync(req).ConfigureAwait(false);
 
         return res.QueryVmfsDatastoreExpandOptionsResponse1;
     }
@@ -8063,7 +8068,7 @@ public class VimClient : IVimClient
             suppressExpandCandidatesSpecified = suppressExpandCandidatesSpecified,
         };
 
-        var res = await this.inner.QueryVmfsDatastoreExtendOptionsAsync(req);
+        var res = await this.inner.QueryVmfsDatastoreExtendOptionsAsync(req).ConfigureAwait(false);
 
         return res.QueryVmfsDatastoreExtendOptionsResponse1;
     }
@@ -8078,7 +8083,7 @@ public class VimClient : IVimClient
             compatibility = compatibility,
         };
 
-        var res = await this.inner.QueryVMotionCompatibilityAsync(req);
+        var res = await this.inner.QueryVMotionCompatibilityAsync(req).ConfigureAwait(false);
 
         return res.QueryVMotionCompatibilityResponse1;
     }
@@ -8092,7 +8097,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.QueryVMotionCompatibilityEx_TaskAsync(req);
+        var res = await this.inner.QueryVMotionCompatibilityEx_TaskAsync(req).ConfigureAwait(false);
 
         return res.QueryVMotionCompatibilityEx_TaskResponse.returnval;
     }
@@ -8105,7 +8110,7 @@ public class VimClient : IVimClient
             vnicDevice = vnicDevice,
         };
 
-        var res = await this.inner.QueryVnicStatusAsync(req);
+        var res = await this.inner.QueryVnicStatusAsync(req).ConfigureAwait(false);
 
         return res.QueryVnicStatusResponse.returnval;
     }
@@ -8118,7 +8123,7 @@ public class VimClient : IVimClient
             uuids = uuids,
         };
 
-        var res = await this.inner.QueryVsanObjectsAsync(req);
+        var res = await this.inner.QueryVsanObjectsAsync(req).ConfigureAwait(false);
 
         return res.QueryVsanObjectsResponse.returnval;
     }
@@ -8135,7 +8140,7 @@ public class VimClient : IVimClient
             versionSpecified = versionSpecified,
         };
 
-        var res = await this.inner.QueryVsanObjectUuidsByFilterAsync(req);
+        var res = await this.inner.QueryVsanObjectUuidsByFilterAsync(req).ConfigureAwait(false);
 
         return res.QueryVsanObjectUuidsByFilterResponse1;
     }
@@ -8148,7 +8153,7 @@ public class VimClient : IVimClient
             labels = labels,
         };
 
-        var res = await this.inner.QueryVsanStatisticsAsync(req);
+        var res = await this.inner.QueryVsanStatisticsAsync(req).ConfigureAwait(false);
 
         return res.QueryVsanStatisticsResponse.returnval;
     }
@@ -8161,7 +8166,7 @@ public class VimClient : IVimClient
             cluster = cluster,
         };
 
-        var res = await this.inner.QueryVsanUpgradeStatusAsync(req);
+        var res = await this.inner.QueryVsanUpgradeStatusAsync(req).ConfigureAwait(false);
 
         return res.QueryVsanUpgradeStatusResponse.returnval;
     }
@@ -8176,7 +8181,7 @@ public class VimClient : IVimClient
             names = names,
         };
 
-        var res = await this.inner.ReadEnvironmentVariableInGuestAsync(req);
+        var res = await this.inner.ReadEnvironmentVariableInGuestAsync(req).ConfigureAwait(false);
 
         return res.ReadEnvironmentVariableInGuestResponse1;
     }
@@ -8189,7 +8194,7 @@ public class VimClient : IVimClient
             maxCount = maxCount,
         };
 
-        var res = await this.inner.ReadNextEventsAsync(req);
+        var res = await this.inner.ReadNextEventsAsync(req).ConfigureAwait(false);
 
         return res.ReadNextEventsResponse1;
     }
@@ -8202,7 +8207,7 @@ public class VimClient : IVimClient
             maxCount = maxCount,
         };
 
-        var res = await this.inner.ReadNextTasksAsync(req);
+        var res = await this.inner.ReadNextTasksAsync(req).ConfigureAwait(false);
 
         return res.ReadNextTasksResponse1;
     }
@@ -8217,7 +8222,7 @@ public class VimClient : IVimClient
             infoFilterSpec = infoFilterSpec,
         };
 
-        var res = await this.inner.ReadNextTasksByViewSpecAsync(req);
+        var res = await this.inner.ReadNextTasksByViewSpecAsync(req).ConfigureAwait(false);
 
         return res.ReadNextTasksByViewSpecResponse1;
     }
@@ -8230,7 +8235,7 @@ public class VimClient : IVimClient
             maxCount = maxCount,
         };
 
-        var res = await this.inner.ReadPreviousEventsAsync(req);
+        var res = await this.inner.ReadPreviousEventsAsync(req).ConfigureAwait(false);
 
         return res.ReadPreviousEventsResponse1;
     }
@@ -8243,7 +8248,7 @@ public class VimClient : IVimClient
             maxCount = maxCount,
         };
 
-        var res = await this.inner.ReadPreviousTasksAsync(req);
+        var res = await this.inner.ReadPreviousTasksAsync(req).ConfigureAwait(false);
 
         return res.ReadPreviousTasksResponse1;
     }
@@ -8255,7 +8260,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.RebootGuestAsync(req);
+        await this.inner.RebootGuestAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> RebootHost_Task(ManagedObjectReference self, bool force)
@@ -8266,7 +8271,7 @@ public class VimClient : IVimClient
             force = force,
         };
 
-        var res = await this.inner.RebootHost_TaskAsync(req);
+        var res = await this.inner.RebootHost_TaskAsync(req).ConfigureAwait(false);
 
         return res.RebootHost_TaskResponse.returnval;
     }
@@ -8279,7 +8284,7 @@ public class VimClient : IVimClient
             storageSpec = storageSpec,
         };
 
-        var res = await this.inner.RecommendDatastoresAsync(req);
+        var res = await this.inner.RecommendDatastoresAsync(req).ConfigureAwait(false);
 
         return res.RecommendDatastoresResponse.returnval;
     }
@@ -8293,7 +8298,7 @@ public class VimClient : IVimClient
             pool = pool,
         };
 
-        var res = await this.inner.RecommendHostsForVmAsync(req);
+        var res = await this.inner.RecommendHostsForVmAsync(req).ConfigureAwait(false);
 
         return res.RecommendHostsForVmResponse1;
     }
@@ -8305,7 +8310,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.RecommissionVsanNode_TaskAsync(req);
+        var res = await this.inner.RecommissionVsanNode_TaskAsync(req).ConfigureAwait(false);
 
         return res.RecommissionVsanNode_TaskResponse.returnval;
     }
@@ -8320,7 +8325,7 @@ public class VimClient : IVimClient
             deepCleansingSpecified = deepCleansingSpecified,
         };
 
-        var res = await this.inner.ReconcileDatastoreInventory_TaskAsync(req);
+        var res = await this.inner.ReconcileDatastoreInventory_TaskAsync(req).ConfigureAwait(false);
 
         return res.ReconcileDatastoreInventory_TaskResponse.returnval;
     }
@@ -8333,7 +8338,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.ReconcileDatastoreInventoryEx_TaskAsync(req);
+        var res = await this.inner.ReconcileDatastoreInventoryEx_TaskAsync(req).ConfigureAwait(false);
 
         return res.ReconcileDatastoreInventoryEx_TaskResponse.returnval;
     }
@@ -8348,7 +8353,7 @@ public class VimClient : IVimClient
             ignoreSatisfiabilitySpecified = ignoreSatisfiabilitySpecified,
         };
 
-        var res = await this.inner.ReconfigurationSatisfiableAsync(req);
+        var res = await this.inner.ReconfigurationSatisfiableAsync(req).ConfigureAwait(false);
 
         return res.ReconfigurationSatisfiableResponse1;
     }
@@ -8361,7 +8366,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        await this.inner.ReconfigureAlarmAsync(req);
+        await this.inner.ReconfigureAlarmAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task ReconfigureAutostart(ManagedObjectReference self, HostAutoStartManagerConfig spec)
@@ -8372,7 +8377,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        await this.inner.ReconfigureAutostartAsync(req);
+        await this.inner.ReconfigureAutostartAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> ReconfigureCluster_Task(ManagedObjectReference self, ClusterConfigSpec spec, bool modify)
@@ -8384,7 +8389,7 @@ public class VimClient : IVimClient
             modify = modify,
         };
 
-        var res = await this.inner.ReconfigureCluster_TaskAsync(req);
+        var res = await this.inner.ReconfigureCluster_TaskAsync(req).ConfigureAwait(false);
 
         return res.ReconfigureCluster_TaskResponse.returnval;
     }
@@ -8398,7 +8403,7 @@ public class VimClient : IVimClient
             modify = modify,
         };
 
-        var res = await this.inner.ReconfigureComputeResource_TaskAsync(req);
+        var res = await this.inner.ReconfigureComputeResource_TaskAsync(req).ConfigureAwait(false);
 
         return res.ReconfigureComputeResource_TaskResponse.returnval;
     }
@@ -8412,7 +8417,7 @@ public class VimClient : IVimClient
             modify = modify,
         };
 
-        var res = await this.inner.ReconfigureDatacenter_TaskAsync(req);
+        var res = await this.inner.ReconfigureDatacenter_TaskAsync(req).ConfigureAwait(false);
 
         return res.ReconfigureDatacenter_TaskResponse.returnval;
     }
@@ -8426,7 +8431,7 @@ public class VimClient : IVimClient
             policy = policy,
         };
 
-        await this.inner.ReconfigureDomObjectAsync(req);
+        await this.inner.ReconfigureDomObjectAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> ReconfigureDVPort_Task(ManagedObjectReference self, DVPortConfigSpec[] port)
@@ -8437,7 +8442,7 @@ public class VimClient : IVimClient
             port = port,
         };
 
-        var res = await this.inner.ReconfigureDVPort_TaskAsync(req);
+        var res = await this.inner.ReconfigureDVPort_TaskAsync(req).ConfigureAwait(false);
 
         return res.ReconfigureDVPort_TaskResponse.returnval;
     }
@@ -8450,7 +8455,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.ReconfigureDVPortgroup_TaskAsync(req);
+        var res = await this.inner.ReconfigureDVPortgroup_TaskAsync(req).ConfigureAwait(false);
 
         return res.ReconfigureDVPortgroup_TaskResponse.returnval;
     }
@@ -8463,7 +8468,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.ReconfigureDvs_TaskAsync(req);
+        var res = await this.inner.ReconfigureDvs_TaskAsync(req).ConfigureAwait(false);
 
         return res.ReconfigureDvs_TaskResponse.returnval;
     }
@@ -8475,7 +8480,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.ReconfigureHostForDAS_TaskAsync(req);
+        var res = await this.inner.ReconfigureHostForDAS_TaskAsync(req).ConfigureAwait(false);
 
         return res.ReconfigureHostForDAS_TaskResponse.returnval;
     }
@@ -8488,7 +8493,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        await this.inner.ReconfigureScheduledTaskAsync(req);
+        await this.inner.ReconfigureScheduledTaskAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task ReconfigureServiceConsoleReservation(ManagedObjectReference self, long cfgBytes)
@@ -8499,7 +8504,7 @@ public class VimClient : IVimClient
             cfgBytes = cfgBytes,
         };
 
-        await this.inner.ReconfigureServiceConsoleReservationAsync(req);
+        await this.inner.ReconfigureServiceConsoleReservationAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task ReconfigureSnmpAgent(ManagedObjectReference self, HostSnmpConfigSpec spec)
@@ -8510,7 +8515,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        await this.inner.ReconfigureSnmpAgentAsync(req);
+        await this.inner.ReconfigureSnmpAgentAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task ReconfigureVirtualMachineReservation(ManagedObjectReference self, VirtualMachineMemoryReservationSpec spec)
@@ -8521,7 +8526,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        await this.inner.ReconfigureVirtualMachineReservationAsync(req);
+        await this.inner.ReconfigureVirtualMachineReservationAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> ReconfigVM_Task(ManagedObjectReference self, VirtualMachineConfigSpec spec)
@@ -8532,7 +8537,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.ReconfigVM_TaskAsync(req);
+        var res = await this.inner.ReconfigVM_TaskAsync(req).ConfigureAwait(false);
 
         return res.ReconfigVM_TaskResponse.returnval;
     }
@@ -8546,7 +8551,7 @@ public class VimClient : IVimClient
             reconnectSpec = reconnectSpec,
         };
 
-        var res = await this.inner.ReconnectHost_TaskAsync(req);
+        var res = await this.inner.ReconnectHost_TaskAsync(req).ConfigureAwait(false);
 
         return res.ReconnectHost_TaskResponse.returnval;
     }
@@ -8559,7 +8564,7 @@ public class VimClient : IVimClient
             hosts = hosts,
         };
 
-        var res = await this.inner.RectifyDvsHost_TaskAsync(req);
+        var res = await this.inner.RectifyDvsHost_TaskAsync(req).ConfigureAwait(false);
 
         return res.RectifyDvsHost_TaskResponse.returnval;
     }
@@ -8572,7 +8577,7 @@ public class VimClient : IVimClient
             hosts = hosts,
         };
 
-        var res = await this.inner.RectifyDvsOnHost_TaskAsync(req);
+        var res = await this.inner.RectifyDvsOnHost_TaskAsync(req).ConfigureAwait(false);
 
         return res.RectifyDvsOnHost_TaskResponse.returnval;
     }
@@ -8584,7 +8589,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.RefreshAsync(req);
+        await this.inner.RefreshAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RefreshDatastore(ManagedObjectReference self)
@@ -8594,7 +8599,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.RefreshDatastoreAsync(req);
+        await this.inner.RefreshDatastoreAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RefreshDatastoreStorageInfo(ManagedObjectReference self)
@@ -8604,7 +8609,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.RefreshDatastoreStorageInfoAsync(req);
+        await this.inner.RefreshDatastoreStorageInfoAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RefreshDateTimeSystem(ManagedObjectReference self)
@@ -8614,7 +8619,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.RefreshDateTimeSystemAsync(req);
+        await this.inner.RefreshDateTimeSystemAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RefreshDVPortState(ManagedObjectReference self, string[]? portKeys)
@@ -8625,7 +8630,7 @@ public class VimClient : IVimClient
             portKeys = portKeys,
         };
 
-        await this.inner.RefreshDVPortStateAsync(req);
+        await this.inner.RefreshDVPortStateAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RefreshFirewall(ManagedObjectReference self)
@@ -8635,7 +8640,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.RefreshFirewallAsync(req);
+        await this.inner.RefreshFirewallAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RefreshGraphicsManager(ManagedObjectReference self)
@@ -8645,7 +8650,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.RefreshGraphicsManagerAsync(req);
+        await this.inner.RefreshGraphicsManagerAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RefreshHealthStatusSystem(ManagedObjectReference self)
@@ -8655,7 +8660,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.RefreshHealthStatusSystemAsync(req);
+        await this.inner.RefreshHealthStatusSystemAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RefreshNetworkSystem(ManagedObjectReference self)
@@ -8665,7 +8670,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.RefreshNetworkSystemAsync(req);
+        await this.inner.RefreshNetworkSystemAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RefreshRecommendation(ManagedObjectReference self)
@@ -8675,7 +8680,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.RefreshRecommendationAsync(req);
+        await this.inner.RefreshRecommendationAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RefreshRuntime(ManagedObjectReference self)
@@ -8685,7 +8690,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.RefreshRuntimeAsync(req);
+        await this.inner.RefreshRuntimeAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RefreshServices(ManagedObjectReference self)
@@ -8695,7 +8700,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.RefreshServicesAsync(req);
+        await this.inner.RefreshServicesAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RefreshStorageDrsRecommendation(ManagedObjectReference self, ManagedObjectReference pod)
@@ -8706,7 +8711,7 @@ public class VimClient : IVimClient
             pod = pod,
         };
 
-        await this.inner.RefreshStorageDrsRecommendationAsync(req);
+        await this.inner.RefreshStorageDrsRecommendationAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> RefreshStorageDrsRecommendationsForPod_Task(ManagedObjectReference self, ManagedObjectReference pod)
@@ -8717,7 +8722,7 @@ public class VimClient : IVimClient
             pod = pod,
         };
 
-        var res = await this.inner.RefreshStorageDrsRecommendationsForPod_TaskAsync(req);
+        var res = await this.inner.RefreshStorageDrsRecommendationsForPod_TaskAsync(req).ConfigureAwait(false);
 
         return res.RefreshStorageDrsRecommendationsForPod_TaskResponse.returnval;
     }
@@ -8729,7 +8734,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.RefreshStorageInfoAsync(req);
+        await this.inner.RefreshStorageInfoAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RefreshStorageSystem(ManagedObjectReference self)
@@ -8739,7 +8744,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.RefreshStorageSystemAsync(req);
+        await this.inner.RefreshStorageSystemAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> RegisterChildVM_Task(ManagedObjectReference self, string path, string? name, ManagedObjectReference? host)
@@ -8752,7 +8757,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.RegisterChildVM_TaskAsync(req);
+        var res = await this.inner.RegisterChildVM_TaskAsync(req).ConfigureAwait(false);
 
         return res.RegisterChildVM_TaskResponse.returnval;
     }
@@ -8767,7 +8772,7 @@ public class VimClient : IVimClient
             id = id,
         };
 
-        var res = await this.inner.RegisterDiskAsync(req);
+        var res = await this.inner.RegisterDiskAsync(req).ConfigureAwait(false);
 
         return res.RegisterDiskResponse.returnval;
     }
@@ -8780,7 +8785,7 @@ public class VimClient : IVimClient
             extension = extension,
         };
 
-        await this.inner.RegisterExtensionAsync(req);
+        await this.inner.RegisterExtensionAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<string?> RegisterHealthUpdateProvider(ManagedObjectReference self, string name, HealthUpdateInfo[]? healthUpdateInfo)
@@ -8792,7 +8797,7 @@ public class VimClient : IVimClient
             healthUpdateInfo = healthUpdateInfo,
         };
 
-        var res = await this.inner.RegisterHealthUpdateProviderAsync(req);
+        var res = await this.inner.RegisterHealthUpdateProviderAsync(req).ConfigureAwait(false);
 
         return res.RegisterHealthUpdateProviderResponse.returnval;
     }
@@ -8805,7 +8810,7 @@ public class VimClient : IVimClient
             server = server,
         };
 
-        await this.inner.RegisterKmipServerAsync(req);
+        await this.inner.RegisterKmipServerAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RegisterKmsCluster(ManagedObjectReference self, KeyProviderId clusterId, string? managementType)
@@ -8817,7 +8822,7 @@ public class VimClient : IVimClient
             managementType = managementType,
         };
 
-        await this.inner.RegisterKmsClusterAsync(req);
+        await this.inner.RegisterKmsClusterAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> RegisterVM_Task(ManagedObjectReference self, string path, string? name, bool asTemplate, ManagedObjectReference? pool, ManagedObjectReference? host)
@@ -8832,7 +8837,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.RegisterVM_TaskAsync(req);
+        var res = await this.inner.RegisterVM_TaskAsync(req).ConfigureAwait(false);
 
         return res.RegisterVM_TaskResponse.returnval;
     }
@@ -8846,7 +8851,7 @@ public class VimClient : IVimClient
             auth = auth,
         };
 
-        await this.inner.ReleaseCredentialsInGuestAsync(req);
+        await this.inner.ReleaseCredentialsInGuestAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task ReleaseIpAllocation(ManagedObjectReference self, ManagedObjectReference dc, int poolId, string allocationId)
@@ -8859,7 +8864,7 @@ public class VimClient : IVimClient
             allocationId = allocationId,
         };
 
-        await this.inner.ReleaseIpAllocationAsync(req);
+        await this.inner.ReleaseIpAllocationAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task ReleaseManagedSnapshot(ManagedObjectReference self, string vdisk, ManagedObjectReference? datacenter)
@@ -8871,7 +8876,7 @@ public class VimClient : IVimClient
             datacenter = datacenter,
         };
 
-        await this.inner.ReleaseManagedSnapshotAsync(req);
+        await this.inner.ReleaseManagedSnapshotAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task Reload(ManagedObjectReference self)
@@ -8881,7 +8886,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.ReloadAsync(req);
+        await this.inner.ReloadAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> ReloadVirtualMachineFromPath_Task(ManagedObjectReference self, string configurationPath)
@@ -8892,7 +8897,7 @@ public class VimClient : IVimClient
             configurationPath = configurationPath,
         };
 
-        var res = await this.inner.reloadVirtualMachineFromPath_TaskAsync(req);
+        var res = await this.inner.reloadVirtualMachineFromPath_TaskAsync(req).ConfigureAwait(false);
 
         return res.reloadVirtualMachineFromPath_TaskResponse.returnval;
     }
@@ -8907,7 +8912,7 @@ public class VimClient : IVimClient
             prioritySpecified = prioritySpecified,
         };
 
-        var res = await this.inner.RelocateVM_TaskAsync(req);
+        var res = await this.inner.RelocateVM_TaskAsync(req).ConfigureAwait(false);
 
         return res.RelocateVM_TaskResponse.returnval;
     }
@@ -8922,7 +8927,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.RelocateVStorageObject_TaskAsync(req);
+        var res = await this.inner.RelocateVStorageObject_TaskAsync(req).ConfigureAwait(false);
 
         return res.RelocateVStorageObject_TaskResponse.returnval;
     }
@@ -8934,7 +8939,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.RemoveAlarmAsync(req);
+        await this.inner.RemoveAlarmAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> RemoveAllSnapshots_Task(ManagedObjectReference self, bool consolidate, bool consolidateSpecified, SnapshotSelectionSpec? spec)
@@ -8947,7 +8952,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.RemoveAllSnapshots_TaskAsync(req);
+        var res = await this.inner.RemoveAllSnapshots_TaskAsync(req).ConfigureAwait(false);
 
         return res.RemoveAllSnapshots_TaskResponse.returnval;
     }
@@ -8960,7 +8965,7 @@ public class VimClient : IVimClient
             entityId = entityId,
         };
 
-        await this.inner.RemoveAssignedLicenseAsync(req);
+        await this.inner.RemoveAssignedLicenseAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RemoveAuthorizationRole(ManagedObjectReference self, int roleId, bool failIfUsed)
@@ -8972,7 +8977,7 @@ public class VimClient : IVimClient
             failIfUsed = failIfUsed,
         };
 
-        await this.inner.RemoveAuthorizationRoleAsync(req);
+        await this.inner.RemoveAuthorizationRoleAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RemoveCustomFieldDef(ManagedObjectReference self, int key)
@@ -8983,7 +8988,7 @@ public class VimClient : IVimClient
             key = key,
         };
 
-        await this.inner.RemoveCustomFieldDefAsync(req);
+        await this.inner.RemoveCustomFieldDefAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RemoveDatastore(ManagedObjectReference self, ManagedObjectReference datastore)
@@ -8994,7 +8999,7 @@ public class VimClient : IVimClient
             datastore = datastore,
         };
 
-        await this.inner.RemoveDatastoreAsync(req);
+        await this.inner.RemoveDatastoreAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> RemoveDatastoreEx_Task(ManagedObjectReference self, ManagedObjectReference[] datastore)
@@ -9005,7 +9010,7 @@ public class VimClient : IVimClient
             datastore = datastore,
         };
 
-        var res = await this.inner.RemoveDatastoreEx_TaskAsync(req);
+        var res = await this.inner.RemoveDatastoreEx_TaskAsync(req).ConfigureAwait(false);
 
         return res.RemoveDatastoreEx_TaskResponse.returnval;
     }
@@ -9021,7 +9026,7 @@ public class VimClient : IVimClient
             timeoutSpecified = timeoutSpecified,
         };
 
-        var res = await this.inner.RemoveDisk_TaskAsync(req);
+        var res = await this.inner.RemoveDisk_TaskAsync(req).ConfigureAwait(false);
 
         return res.RemoveDisk_TaskResponse.returnval;
     }
@@ -9037,7 +9042,7 @@ public class VimClient : IVimClient
             timeoutSpecified = timeoutSpecified,
         };
 
-        var res = await this.inner.RemoveDiskMapping_TaskAsync(req);
+        var res = await this.inner.RemoveDiskMapping_TaskAsync(req).ConfigureAwait(false);
 
         return res.RemoveDiskMapping_TaskResponse.returnval;
     }
@@ -9052,7 +9057,7 @@ public class VimClient : IVimClient
             isGroup = isGroup,
         };
 
-        await this.inner.RemoveEntityPermissionAsync(req);
+        await this.inner.RemoveEntityPermissionAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RemoveFilter(ManagedObjectReference self, string filterId)
@@ -9063,7 +9068,7 @@ public class VimClient : IVimClient
             filterId = filterId,
         };
 
-        await this.inner.RemoveFilterAsync(req);
+        await this.inner.RemoveFilterAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RemoveFilterEntities(ManagedObjectReference self, string filterId, ManagedObjectReference[]? entities)
@@ -9075,7 +9080,7 @@ public class VimClient : IVimClient
             entities = entities,
         };
 
-        await this.inner.RemoveFilterEntitiesAsync(req);
+        await this.inner.RemoveFilterEntitiesAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RemoveGroup(ManagedObjectReference self, string groupName)
@@ -9086,7 +9091,7 @@ public class VimClient : IVimClient
             groupName = groupName,
         };
 
-        await this.inner.RemoveGroupAsync(req);
+        await this.inner.RemoveGroupAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RemoveGuestAlias(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, string username, string base64Cert, GuestAuthSubject subject)
@@ -9101,7 +9106,7 @@ public class VimClient : IVimClient
             subject = subject,
         };
 
-        await this.inner.RemoveGuestAliasAsync(req);
+        await this.inner.RemoveGuestAliasAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RemoveGuestAliasByCert(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, string username, string base64Cert)
@@ -9115,7 +9120,7 @@ public class VimClient : IVimClient
             base64Cert = base64Cert,
         };
 
-        await this.inner.RemoveGuestAliasByCertAsync(req);
+        await this.inner.RemoveGuestAliasByCertAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RemoveInternetScsiSendTargets(ManagedObjectReference self, string iScsiHbaDevice, HostInternetScsiHbaSendTarget[] targets, bool force, bool forceSpecified)
@@ -9129,7 +9134,7 @@ public class VimClient : IVimClient
             forceSpecified = forceSpecified,
         };
 
-        await this.inner.RemoveInternetScsiSendTargetsAsync(req);
+        await this.inner.RemoveInternetScsiSendTargetsAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RemoveInternetScsiStaticTargets(ManagedObjectReference self, string iScsiHbaDevice, HostInternetScsiHbaStaticTarget[] targets)
@@ -9141,7 +9146,7 @@ public class VimClient : IVimClient
             targets = targets,
         };
 
-        await this.inner.RemoveInternetScsiStaticTargetsAsync(req);
+        await this.inner.RemoveInternetScsiStaticTargetsAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RemoveKey(ManagedObjectReference self, CryptoKeyId key, bool force)
@@ -9153,7 +9158,7 @@ public class VimClient : IVimClient
             force = force,
         };
 
-        await this.inner.RemoveKeyAsync(req);
+        await this.inner.RemoveKeyAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<CryptoKeyResult[]?> RemoveKeys(ManagedObjectReference self, CryptoKeyId[]? keys, bool force)
@@ -9165,7 +9170,7 @@ public class VimClient : IVimClient
             force = force,
         };
 
-        var res = await this.inner.RemoveKeysAsync(req);
+        var res = await this.inner.RemoveKeysAsync(req).ConfigureAwait(false);
 
         return res.RemoveKeysResponse1;
     }
@@ -9179,7 +9184,7 @@ public class VimClient : IVimClient
             serverName = serverName,
         };
 
-        await this.inner.RemoveKmipServerAsync(req);
+        await this.inner.RemoveKmipServerAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RemoveLicense(ManagedObjectReference self, string licenseKey)
@@ -9190,7 +9195,7 @@ public class VimClient : IVimClient
             licenseKey = licenseKey,
         };
 
-        await this.inner.RemoveLicenseAsync(req);
+        await this.inner.RemoveLicenseAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RemoveLicenseLabel(ManagedObjectReference self, string licenseKey, string labelKey)
@@ -9202,7 +9207,7 @@ public class VimClient : IVimClient
             labelKey = labelKey,
         };
 
-        await this.inner.RemoveLicenseLabelAsync(req);
+        await this.inner.RemoveLicenseLabelAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RemoveMonitoredEntities(ManagedObjectReference self, string providerId, ManagedObjectReference[]? entities)
@@ -9214,7 +9219,7 @@ public class VimClient : IVimClient
             entities = entities,
         };
 
-        await this.inner.RemoveMonitoredEntitiesAsync(req);
+        await this.inner.RemoveMonitoredEntitiesAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RemoveNetworkResourcePool(ManagedObjectReference self, string[] key)
@@ -9225,7 +9230,7 @@ public class VimClient : IVimClient
             key = key,
         };
 
-        await this.inner.RemoveNetworkResourcePoolAsync(req);
+        await this.inner.RemoveNetworkResourcePoolAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RemoveNvmeOverRdmaAdapter(ManagedObjectReference self, string hbaDeviceName)
@@ -9236,7 +9241,7 @@ public class VimClient : IVimClient
             hbaDeviceName = hbaDeviceName,
         };
 
-        await this.inner.RemoveNvmeOverRdmaAdapterAsync(req);
+        await this.inner.RemoveNvmeOverRdmaAdapterAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RemovePerfInterval(ManagedObjectReference self, int samplePeriod)
@@ -9247,7 +9252,7 @@ public class VimClient : IVimClient
             samplePeriod = samplePeriod,
         };
 
-        await this.inner.RemovePerfIntervalAsync(req);
+        await this.inner.RemovePerfIntervalAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RemovePortGroup(ManagedObjectReference self, string pgName)
@@ -9258,7 +9263,7 @@ public class VimClient : IVimClient
             pgName = pgName,
         };
 
-        await this.inner.RemovePortGroupAsync(req);
+        await this.inner.RemovePortGroupAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RemoveScheduledTask(ManagedObjectReference self)
@@ -9268,7 +9273,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.RemoveScheduledTaskAsync(req);
+        await this.inner.RemoveScheduledTaskAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RemoveServiceConsoleVirtualNic(ManagedObjectReference self, string device)
@@ -9279,7 +9284,7 @@ public class VimClient : IVimClient
             device = device,
         };
 
-        await this.inner.RemoveServiceConsoleVirtualNicAsync(req);
+        await this.inner.RemoveServiceConsoleVirtualNicAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RemoveSmartCardTrustAnchor(ManagedObjectReference self, string issuer, string serial)
@@ -9291,7 +9296,7 @@ public class VimClient : IVimClient
             serial = serial,
         };
 
-        await this.inner.RemoveSmartCardTrustAnchorAsync(req);
+        await this.inner.RemoveSmartCardTrustAnchorAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RemoveSmartCardTrustAnchorByFingerprint(ManagedObjectReference self, string fingerprint, string digest)
@@ -9303,7 +9308,7 @@ public class VimClient : IVimClient
             digest = digest,
         };
 
-        await this.inner.RemoveSmartCardTrustAnchorByFingerprintAsync(req);
+        await this.inner.RemoveSmartCardTrustAnchorByFingerprintAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RemoveSmartCardTrustAnchorCertificate(ManagedObjectReference self, string certificate)
@@ -9314,7 +9319,7 @@ public class VimClient : IVimClient
             certificate = certificate,
         };
 
-        await this.inner.RemoveSmartCardTrustAnchorCertificateAsync(req);
+        await this.inner.RemoveSmartCardTrustAnchorCertificateAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> RemoveSnapshot_Task(ManagedObjectReference self, bool removeChildren, bool consolidate, bool consolidateSpecified)
@@ -9327,7 +9332,7 @@ public class VimClient : IVimClient
             consolidateSpecified = consolidateSpecified,
         };
 
-        var res = await this.inner.RemoveSnapshot_TaskAsync(req);
+        var res = await this.inner.RemoveSnapshot_TaskAsync(req).ConfigureAwait(false);
 
         return res.RemoveSnapshot_TaskResponse.returnval;
     }
@@ -9340,7 +9345,7 @@ public class VimClient : IVimClient
             hbaDeviceName = hbaDeviceName,
         };
 
-        await this.inner.RemoveSoftwareAdapterAsync(req);
+        await this.inner.RemoveSoftwareAdapterAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RemoveUser(ManagedObjectReference self, string userName)
@@ -9351,7 +9356,7 @@ public class VimClient : IVimClient
             userName = userName,
         };
 
-        await this.inner.RemoveUserAsync(req);
+        await this.inner.RemoveUserAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RemoveVirtualNic(ManagedObjectReference self, string device)
@@ -9362,7 +9367,7 @@ public class VimClient : IVimClient
             device = device,
         };
 
-        await this.inner.RemoveVirtualNicAsync(req);
+        await this.inner.RemoveVirtualNicAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RemoveVirtualSwitch(ManagedObjectReference self, string vswitchName)
@@ -9373,7 +9378,7 @@ public class VimClient : IVimClient
             vswitchName = vswitchName,
         };
 
-        await this.inner.RemoveVirtualSwitchAsync(req);
+        await this.inner.RemoveVirtualSwitchAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> Rename_Task(ManagedObjectReference self, string newName)
@@ -9384,7 +9389,7 @@ public class VimClient : IVimClient
             newName = newName,
         };
 
-        var res = await this.inner.Rename_TaskAsync(req);
+        var res = await this.inner.Rename_TaskAsync(req).ConfigureAwait(false);
 
         return res.Rename_TaskResponse.returnval;
     }
@@ -9398,7 +9403,7 @@ public class VimClient : IVimClient
             name = name,
         };
 
-        await this.inner.RenameCustomFieldDefAsync(req);
+        await this.inner.RenameCustomFieldDefAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RenameCustomizationSpec(ManagedObjectReference self, string name, string newName)
@@ -9410,7 +9415,7 @@ public class VimClient : IVimClient
             newName = newName,
         };
 
-        await this.inner.RenameCustomizationSpecAsync(req);
+        await this.inner.RenameCustomizationSpecAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RenameDatastore(ManagedObjectReference self, string newName)
@@ -9421,7 +9426,7 @@ public class VimClient : IVimClient
             newName = newName,
         };
 
-        await this.inner.RenameDatastoreAsync(req);
+        await this.inner.RenameDatastoreAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RenameSnapshot(ManagedObjectReference self, string? name, string? description)
@@ -9433,7 +9438,7 @@ public class VimClient : IVimClient
             description = description,
         };
 
-        await this.inner.RenameSnapshotAsync(req);
+        await this.inner.RenameSnapshotAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RenameVStorageObject(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string name)
@@ -9446,7 +9451,7 @@ public class VimClient : IVimClient
             name = name,
         };
 
-        await this.inner.RenameVStorageObjectAsync(req);
+        await this.inner.RenameVStorageObjectAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<vslmVClockInfo?> RenameVStorageObjectEx(ManagedObjectReference self, ID id, ManagedObjectReference datastore, string name)
@@ -9459,7 +9464,7 @@ public class VimClient : IVimClient
             name = name,
         };
 
-        var res = await this.inner.RenameVStorageObjectExAsync(req);
+        var res = await this.inner.RenameVStorageObjectExAsync(req).ConfigureAwait(false);
 
         return res.RenameVStorageObjectExResponse.returnval;
     }
@@ -9471,7 +9476,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.RepairVmDiskChains_TaskAsync(req);
+        var res = await this.inner.RepairVmDiskChains_TaskAsync(req).ConfigureAwait(false);
 
         return res.RepairVmDiskChains_TaskResponse.returnval;
     }
@@ -9485,7 +9490,7 @@ public class VimClient : IVimClient
             datastore = datastore,
         };
 
-        var res = await this.inner.RepairVStorageObjectChain_TaskAsync(req);
+        var res = await this.inner.RepairVStorageObjectChain_TaskAsync(req).ConfigureAwait(false);
 
         return res.RepairVStorageObjectChain_TaskResponse.returnval;
     }
@@ -9499,7 +9504,7 @@ public class VimClient : IVimClient
             caCrl = caCrl,
         };
 
-        await this.inner.ReplaceCACertificatesAndCRLsAsync(req);
+        await this.inner.ReplaceCACertificatesAndCRLsAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task ReplaceSmartCardTrustAnchors(ManagedObjectReference self, string[]? certs)
@@ -9510,7 +9515,7 @@ public class VimClient : IVimClient
             certs = certs,
         };
 
-        await this.inner.ReplaceSmartCardTrustAnchorsAsync(req);
+        await this.inner.ReplaceSmartCardTrustAnchorsAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RescanAllHba(ManagedObjectReference self)
@@ -9520,7 +9525,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.RescanAllHbaAsync(req);
+        await this.inner.RescanAllHbaAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RescanHba(ManagedObjectReference self, string hbaDevice)
@@ -9531,7 +9536,7 @@ public class VimClient : IVimClient
             hbaDevice = hbaDevice,
         };
 
-        await this.inner.RescanHbaAsync(req);
+        await this.inner.RescanHbaAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RescanVffs(ManagedObjectReference self)
@@ -9541,7 +9546,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.RescanVffsAsync(req);
+        await this.inner.RescanVffsAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RescanVmfs(ManagedObjectReference self)
@@ -9551,7 +9556,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.RescanVmfsAsync(req);
+        await this.inner.RescanVmfsAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task ResetCollector(ManagedObjectReference self)
@@ -9561,7 +9566,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.ResetCollectorAsync(req);
+        await this.inner.ResetCollectorAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task ResetCounterLevelMapping(ManagedObjectReference self, int[] counters)
@@ -9572,7 +9577,7 @@ public class VimClient : IVimClient
             counters = counters,
         };
 
-        await this.inner.ResetCounterLevelMappingAsync(req);
+        await this.inner.ResetCounterLevelMappingAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task ResetEntityPermissions(ManagedObjectReference self, ManagedObjectReference entity, Permission[]? permission)
@@ -9584,7 +9589,7 @@ public class VimClient : IVimClient
             permission = permission,
         };
 
-        await this.inner.ResetEntityPermissionsAsync(req);
+        await this.inner.ResetEntityPermissionsAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task ResetFirmwareToFactoryDefaults(ManagedObjectReference self)
@@ -9594,7 +9599,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.ResetFirmwareToFactoryDefaultsAsync(req);
+        await this.inner.ResetFirmwareToFactoryDefaultsAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task ResetGuestInformation(ManagedObjectReference self)
@@ -9604,7 +9609,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.ResetGuestInformationAsync(req);
+        await this.inner.ResetGuestInformationAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference[]?> ResetListView(ManagedObjectReference self, ManagedObjectReference[]? obj)
@@ -9615,7 +9620,7 @@ public class VimClient : IVimClient
             obj = obj,
         };
 
-        var res = await this.inner.ResetListViewAsync(req);
+        var res = await this.inner.ResetListViewAsync(req).ConfigureAwait(false);
 
         return res.ResetListViewResponse1;
     }
@@ -9628,7 +9633,7 @@ public class VimClient : IVimClient
             view = view,
         };
 
-        await this.inner.ResetListViewFromViewAsync(req);
+        await this.inner.ResetListViewFromViewAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task ResetSystemHealthInfo(ManagedObjectReference self)
@@ -9638,7 +9643,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.ResetSystemHealthInfoAsync(req);
+        await this.inner.ResetSystemHealthInfoAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> ResetVM_Task(ManagedObjectReference self)
@@ -9648,7 +9653,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.ResetVM_TaskAsync(req);
+        var res = await this.inner.ResetVM_TaskAsync(req).ConfigureAwait(false);
 
         return res.ResetVM_TaskResponse.returnval;
     }
@@ -9661,7 +9666,7 @@ public class VimClient : IVimClient
             resolutionSpec = resolutionSpec,
         };
 
-        var res = await this.inner.ResignatureUnresolvedVmfsVolume_TaskAsync(req);
+        var res = await this.inner.ResignatureUnresolvedVmfsVolume_TaskAsync(req).ConfigureAwait(false);
 
         return res.ResignatureUnresolvedVmfsVolume_TaskResponse.returnval;
     }
@@ -9675,7 +9680,7 @@ public class VimClient : IVimClient
             cluster = cluster,
         };
 
-        var res = await this.inner.ResolveInstallationErrorsOnCluster_TaskAsync(req);
+        var res = await this.inner.ResolveInstallationErrorsOnCluster_TaskAsync(req).ConfigureAwait(false);
 
         return res.ResolveInstallationErrorsOnCluster_TaskResponse.returnval;
     }
@@ -9689,7 +9694,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.ResolveInstallationErrorsOnHost_TaskAsync(req);
+        var res = await this.inner.ResolveInstallationErrorsOnHost_TaskAsync(req).ConfigureAwait(false);
 
         return res.ResolveInstallationErrorsOnHost_TaskResponse.returnval;
     }
@@ -9702,7 +9707,7 @@ public class VimClient : IVimClient
             resolutionSpec = resolutionSpec,
         };
 
-        var res = await this.inner.ResolveMultipleUnresolvedVmfsVolumesAsync(req);
+        var res = await this.inner.ResolveMultipleUnresolvedVmfsVolumesAsync(req).ConfigureAwait(false);
 
         return res.ResolveMultipleUnresolvedVmfsVolumesResponse1;
     }
@@ -9715,7 +9720,7 @@ public class VimClient : IVimClient
             resolutionSpec = resolutionSpec,
         };
 
-        var res = await this.inner.ResolveMultipleUnresolvedVmfsVolumesEx_TaskAsync(req);
+        var res = await this.inner.ResolveMultipleUnresolvedVmfsVolumesEx_TaskAsync(req).ConfigureAwait(false);
 
         return res.ResolveMultipleUnresolvedVmfsVolumesEx_TaskResponse.returnval;
     }
@@ -9733,7 +9738,7 @@ public class VimClient : IVimClient
             isNFS41Specified = isNFS41Specified,
         };
 
-        await this.inner.ResolveNfsServerHostNameAsync(req);
+        await this.inner.ResolveNfsServerHostNameAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RestartService(ManagedObjectReference self, string id)
@@ -9744,7 +9749,7 @@ public class VimClient : IVimClient
             id = id,
         };
 
-        await this.inner.RestartServiceAsync(req);
+        await this.inner.RestartServiceAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RestartServiceConsoleVirtualNic(ManagedObjectReference self, string device)
@@ -9755,7 +9760,7 @@ public class VimClient : IVimClient
             device = device,
         };
 
-        await this.inner.RestartServiceConsoleVirtualNicAsync(req);
+        await this.inner.RestartServiceConsoleVirtualNicAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RestoreFirmwareConfiguration(ManagedObjectReference self, bool force)
@@ -9766,7 +9771,7 @@ public class VimClient : IVimClient
             force = force,
         };
 
-        await this.inner.RestoreFirmwareConfigurationAsync(req);
+        await this.inner.RestoreFirmwareConfigurationAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<Permission[]?> RetrieveAllPermissions(ManagedObjectReference self)
@@ -9776,7 +9781,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.RetrieveAllPermissionsAsync(req);
+        var res = await this.inner.RetrieveAllPermissionsAsync(req).ConfigureAwait(false);
 
         return res.RetrieveAllPermissionsResponse1;
     }
@@ -9789,7 +9794,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.RetrieveAnswerFileAsync(req);
+        var res = await this.inner.RetrieveAnswerFileAsync(req).ConfigureAwait(false);
 
         return res.RetrieveAnswerFileResponse.returnval;
     }
@@ -9803,7 +9808,7 @@ public class VimClient : IVimClient
             applyProfile = applyProfile,
         };
 
-        var res = await this.inner.RetrieveAnswerFileForProfileAsync(req);
+        var res = await this.inner.RetrieveAnswerFileForProfileAsync(req).ConfigureAwait(false);
 
         return res.RetrieveAnswerFileForProfileResponse.returnval;
     }
@@ -9816,7 +9821,7 @@ public class VimClient : IVimClient
             eventTypeId = eventTypeId,
         };
 
-        var res = await this.inner.RetrieveArgumentDescriptionAsync(req);
+        var res = await this.inner.RetrieveArgumentDescriptionAsync(req).ConfigureAwait(false);
 
         return res.RetrieveArgumentDescriptionResponse1;
     }
@@ -9828,7 +9833,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.RetrieveCertificateInfoListAsync(req);
+        var res = await this.inner.RetrieveCertificateInfoListAsync(req).ConfigureAwait(false);
 
         return res.RetrieveCertificateInfoListResponse1;
     }
@@ -9841,7 +9846,7 @@ public class VimClient : IVimClient
             cluster = cluster,
         };
 
-        var res = await this.inner.RetrieveClientCertAsync(req);
+        var res = await this.inner.RetrieveClientCertAsync(req).ConfigureAwait(false);
 
         return res.RetrieveClientCertResponse.returnval;
     }
@@ -9854,7 +9859,7 @@ public class VimClient : IVimClient
             cluster = cluster,
         };
 
-        var res = await this.inner.RetrieveClientCsrAsync(req);
+        var res = await this.inner.RetrieveClientCsrAsync(req).ConfigureAwait(false);
 
         return res.RetrieveClientCsrResponse.returnval;
     }
@@ -9866,7 +9871,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.RetrieveDasAdvancedRuntimeInfoAsync(req);
+        var res = await this.inner.RetrieveDasAdvancedRuntimeInfoAsync(req).ConfigureAwait(false);
 
         return res.RetrieveDasAdvancedRuntimeInfoResponse.returnval;
     }
@@ -9878,7 +9883,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.RetrieveDescriptionAsync(req);
+        var res = await this.inner.RetrieveDescriptionAsync(req).ConfigureAwait(false);
 
         return res.RetrieveDescriptionResponse.returnval;
     }
@@ -9891,7 +9896,7 @@ public class VimClient : IVimClient
             devicePath = devicePath,
         };
 
-        var res = await this.inner.RetrieveDiskPartitionInfoAsync(req);
+        var res = await this.inner.RetrieveDiskPartitionInfoAsync(req).ConfigureAwait(false);
 
         return res.RetrieveDiskPartitionInfoResponse1;
     }
@@ -9903,7 +9908,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.RetrieveDynamicPassthroughInfoAsync(req);
+        var res = await this.inner.RetrieveDynamicPassthroughInfoAsync(req).ConfigureAwait(false);
 
         return res.RetrieveDynamicPassthroughInfoResponse1;
     }
@@ -9917,7 +9922,7 @@ public class VimClient : IVimClient
             inherited = inherited,
         };
 
-        var res = await this.inner.RetrieveEntityPermissionsAsync(req);
+        var res = await this.inner.RetrieveEntityPermissionsAsync(req).ConfigureAwait(false);
 
         return res.RetrieveEntityPermissionsResponse1;
     }
@@ -9930,7 +9935,7 @@ public class VimClient : IVimClient
             entity = entity,
         };
 
-        var res = await this.inner.RetrieveEntityScheduledTaskAsync(req);
+        var res = await this.inner.RetrieveEntityScheduledTaskAsync(req).ConfigureAwait(false);
 
         return res.RetrieveEntityScheduledTaskResponse1;
     }
@@ -9942,7 +9947,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.RetrieveFreeEpcMemoryAsync(req);
+        var res = await this.inner.RetrieveFreeEpcMemoryAsync(req).ConfigureAwait(false);
 
         return res.RetrieveFreeEpcMemoryResponse.returnval;
     }
@@ -9954,7 +9959,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.RetrieveHardwareUptimeAsync(req);
+        var res = await this.inner.RetrieveHardwareUptimeAsync(req).ConfigureAwait(false);
 
         return res.RetrieveHardwareUptimeResponse.returnval;
     }
@@ -9966,7 +9971,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.RetrieveHostAccessControlEntriesAsync(req);
+        var res = await this.inner.RetrieveHostAccessControlEntriesAsync(req).ConfigureAwait(false);
 
         return res.RetrieveHostAccessControlEntriesResponse1;
     }
@@ -9979,7 +9984,7 @@ public class VimClient : IVimClient
             hosts = hosts,
         };
 
-        var res = await this.inner.RetrieveHostCustomizationsAsync(req);
+        var res = await this.inner.RetrieveHostCustomizationsAsync(req).ConfigureAwait(false);
 
         return res.RetrieveHostCustomizationsResponse1;
     }
@@ -9993,7 +9998,7 @@ public class VimClient : IVimClient
             applyProfile = applyProfile,
         };
 
-        var res = await this.inner.RetrieveHostCustomizationsForProfileAsync(req);
+        var res = await this.inner.RetrieveHostCustomizationsForProfileAsync(req).ConfigureAwait(false);
 
         return res.RetrieveHostCustomizationsForProfileResponse1;
     }
@@ -10007,7 +10012,7 @@ public class VimClient : IVimClient
             fromHost = fromHost,
         };
 
-        var res = await this.inner.RetrieveHostSpecificationAsync(req);
+        var res = await this.inner.RetrieveHostSpecificationAsync(req).ConfigureAwait(false);
 
         return res.RetrieveHostSpecificationResponse.returnval;
     }
@@ -10021,7 +10026,7 @@ public class VimClient : IVimClient
             server = server,
         };
 
-        var res = await this.inner.RetrieveKmipServerCertAsync(req);
+        var res = await this.inner.RetrieveKmipServerCertAsync(req).ConfigureAwait(false);
 
         return res.RetrieveKmipServerCertResponse.returnval;
     }
@@ -10034,7 +10039,7 @@ public class VimClient : IVimClient
             clusters = clusters,
         };
 
-        var res = await this.inner.RetrieveKmipServersStatus_TaskAsync(req);
+        var res = await this.inner.RetrieveKmipServersStatus_TaskAsync(req).ConfigureAwait(false);
 
         return res.RetrieveKmipServersStatus_TaskResponse.returnval;
     }
@@ -10047,7 +10052,7 @@ public class VimClient : IVimClient
             obj = obj,
         };
 
-        var res = await this.inner.RetrieveObjectScheduledTaskAsync(req);
+        var res = await this.inner.RetrieveObjectScheduledTaskAsync(req).ConfigureAwait(false);
 
         return res.RetrieveObjectScheduledTaskResponse1;
     }
@@ -10059,7 +10064,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.RetrieveProductComponentsAsync(req);
+        var res = await this.inner.RetrieveProductComponentsAsync(req).ConfigureAwait(false);
 
         return res.RetrieveProductComponentsResponse1;
     }
@@ -10072,7 +10077,7 @@ public class VimClient : IVimClient
             specSet = specSet,
         };
 
-        var res = await this.inner.RetrievePropertiesAsync(req);
+        var res = await this.inner.RetrievePropertiesAsync(req).ConfigureAwait(false);
 
         return res.RetrievePropertiesResponse1;
     }
@@ -10086,7 +10091,7 @@ public class VimClient : IVimClient
             options = options,
         };
 
-        var res = await this.inner.RetrievePropertiesExAsync(req);
+        var res = await this.inner.RetrievePropertiesExAsync(req).ConfigureAwait(false);
 
         return res.RetrievePropertiesExResponse.returnval;
     }
@@ -10099,7 +10104,7 @@ public class VimClient : IVimClient
             roleId = roleId,
         };
 
-        var res = await this.inner.RetrieveRolePermissionsAsync(req);
+        var res = await this.inner.RetrieveRolePermissionsAsync(req).ConfigureAwait(false);
 
         return res.RetrieveRolePermissionsResponse1;
     }
@@ -10112,7 +10117,7 @@ public class VimClient : IVimClient
             cluster = cluster,
         };
 
-        var res = await this.inner.RetrieveSelfSignedClientCertAsync(req);
+        var res = await this.inner.RetrieveSelfSignedClientCertAsync(req).ConfigureAwait(false);
 
         return res.RetrieveSelfSignedClientCertResponse.returnval;
     }
@@ -10124,7 +10129,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.RetrieveServiceContentAsync(req);
+        var res = await this.inner.RetrieveServiceContentAsync(req).ConfigureAwait(false);
 
         return res.RetrieveServiceContentResponse.returnval;
     }
@@ -10136,7 +10141,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.RetrieveServiceProviderEntitiesAsync(req);
+        var res = await this.inner.RetrieveServiceProviderEntitiesAsync(req).ConfigureAwait(false);
 
         return res.RetrieveServiceProviderEntitiesResponse1;
     }
@@ -10151,7 +10156,7 @@ public class VimClient : IVimClient
             snapshotId = snapshotId,
         };
 
-        var res = await this.inner.RetrieveSnapshotDetailsAsync(req);
+        var res = await this.inner.RetrieveSnapshotDetailsAsync(req).ConfigureAwait(false);
 
         return res.RetrieveSnapshotDetailsResponse.returnval;
     }
@@ -10165,7 +10170,7 @@ public class VimClient : IVimClient
             datastore = datastore,
         };
 
-        var res = await this.inner.RetrieveSnapshotInfoAsync(req);
+        var res = await this.inner.RetrieveSnapshotInfoAsync(req).ConfigureAwait(false);
 
         return res.RetrieveSnapshotInfoResponse.returnval;
     }
@@ -10184,7 +10189,7 @@ public class VimClient : IVimClient
             findGroups = findGroups,
         };
 
-        var res = await this.inner.RetrieveUserGroupsAsync(req);
+        var res = await this.inner.RetrieveUserGroupsAsync(req).ConfigureAwait(false);
 
         return res.RetrieveUserGroupsResponse1;
     }
@@ -10196,7 +10201,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.RetrieveVendorDeviceGroupInfoAsync(req);
+        var res = await this.inner.RetrieveVendorDeviceGroupInfoAsync(req).ConfigureAwait(false);
 
         return res.RetrieveVendorDeviceGroupInfoResponse1;
     }
@@ -10208,7 +10213,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.RetrieveVgpuDeviceInfoAsync(req);
+        var res = await this.inner.RetrieveVgpuDeviceInfoAsync(req).ConfigureAwait(false);
 
         return res.RetrieveVgpuDeviceInfoResponse1;
     }
@@ -10220,7 +10225,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.RetrieveVgpuProfileInfoAsync(req);
+        var res = await this.inner.RetrieveVgpuProfileInfoAsync(req).ConfigureAwait(false);
 
         return res.RetrieveVgpuProfileInfoResponse1;
     }
@@ -10233,7 +10238,7 @@ public class VimClient : IVimClient
             datastore = datastore,
         };
 
-        var res = await this.inner.RetrieveVStorageInfrastructureObjectPolicyAsync(req);
+        var res = await this.inner.RetrieveVStorageInfrastructureObjectPolicyAsync(req).ConfigureAwait(false);
 
         return res.RetrieveVStorageInfrastructureObjectPolicyResponse1;
     }
@@ -10248,7 +10253,7 @@ public class VimClient : IVimClient
             diskInfoFlags = diskInfoFlags,
         };
 
-        var res = await this.inner.RetrieveVStorageObjectAsync(req);
+        var res = await this.inner.RetrieveVStorageObjectAsync(req).ConfigureAwait(false);
 
         return res.RetrieveVStorageObjectResponse.returnval;
     }
@@ -10261,7 +10266,7 @@ public class VimClient : IVimClient
             ids = ids,
         };
 
-        var res = await this.inner.RetrieveVStorageObjectAssociationsAsync(req);
+        var res = await this.inner.RetrieveVStorageObjectAssociationsAsync(req).ConfigureAwait(false);
 
         return res.RetrieveVStorageObjectAssociationsResponse1;
     }
@@ -10275,7 +10280,7 @@ public class VimClient : IVimClient
             datastore = datastore,
         };
 
-        var res = await this.inner.RetrieveVStorageObjectStateAsync(req);
+        var res = await this.inner.RetrieveVStorageObjectStateAsync(req).ConfigureAwait(false);
 
         return res.RetrieveVStorageObjectStateResponse.returnval;
     }
@@ -10290,7 +10295,7 @@ public class VimClient : IVimClient
             suppressPowerOnSpecified = suppressPowerOnSpecified,
         };
 
-        var res = await this.inner.RevertToCurrentSnapshot_TaskAsync(req);
+        var res = await this.inner.RevertToCurrentSnapshot_TaskAsync(req).ConfigureAwait(false);
 
         return res.RevertToCurrentSnapshot_TaskResponse.returnval;
     }
@@ -10305,7 +10310,7 @@ public class VimClient : IVimClient
             suppressPowerOnSpecified = suppressPowerOnSpecified,
         };
 
-        var res = await this.inner.RevertToSnapshot_TaskAsync(req);
+        var res = await this.inner.RevertToSnapshot_TaskAsync(req).ConfigureAwait(false);
 
         return res.RevertToSnapshot_TaskResponse.returnval;
     }
@@ -10320,7 +10325,7 @@ public class VimClient : IVimClient
             snapshotId = snapshotId,
         };
 
-        var res = await this.inner.RevertVStorageObject_TaskAsync(req);
+        var res = await this.inner.RevertVStorageObject_TaskAsync(req).ConfigureAwait(false);
 
         return res.RevertVStorageObject_TaskResponse.returnval;
     }
@@ -10335,7 +10340,7 @@ public class VimClient : IVimClient
             snapshotId = snapshotId,
         };
 
-        var res = await this.inner.RevertVStorageObjectEx_TaskAsync(req);
+        var res = await this.inner.RevertVStorageObjectEx_TaskAsync(req).ConfigureAwait(false);
 
         return res.RevertVStorageObjectEx_TaskResponse.returnval;
     }
@@ -10347,7 +10352,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.RewindCollectorAsync(req);
+        await this.inner.RewindCollectorAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task RunScheduledTask(ManagedObjectReference self)
@@ -10357,7 +10362,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.RunScheduledTaskAsync(req);
+        await this.inner.RunScheduledTaskAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<HostVsanInternalSystemVsanPhysicalDiskDiagnosticsResult[]?> RunVsanPhysicalDiskDiagnostics(ManagedObjectReference self, string[]? disks)
@@ -10368,7 +10373,7 @@ public class VimClient : IVimClient
             disks = disks,
         };
 
-        var res = await this.inner.RunVsanPhysicalDiskDiagnosticsAsync(req);
+        var res = await this.inner.RunVsanPhysicalDiskDiagnosticsAsync(req).ConfigureAwait(false);
 
         return res.RunVsanPhysicalDiskDiagnosticsResponse1;
     }
@@ -10382,7 +10387,7 @@ public class VimClient : IVimClient
             updateID = updateID,
         };
 
-        var res = await this.inner.ScanHostPatch_TaskAsync(req);
+        var res = await this.inner.ScanHostPatch_TaskAsync(req).ConfigureAwait(false);
 
         return res.ScanHostPatch_TaskResponse.returnval;
     }
@@ -10397,7 +10402,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.ScanHostPatchV2_TaskAsync(req);
+        var res = await this.inner.ScanHostPatchV2_TaskAsync(req).ConfigureAwait(false);
 
         return res.ScanHostPatchV2_TaskResponse.returnval;
     }
@@ -10412,7 +10417,7 @@ public class VimClient : IVimClient
             deepCleansingSpecified = deepCleansingSpecified,
         };
 
-        await this.inner.ScheduleReconcileDatastoreInventoryAsync(req);
+        await this.inner.ScheduleReconcileDatastoreInventoryAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> SearchDatastore_Task(ManagedObjectReference self, string datastorePath, HostDatastoreBrowserSearchSpec? searchSpec)
@@ -10424,7 +10429,7 @@ public class VimClient : IVimClient
             searchSpec = searchSpec,
         };
 
-        var res = await this.inner.SearchDatastore_TaskAsync(req);
+        var res = await this.inner.SearchDatastore_TaskAsync(req).ConfigureAwait(false);
 
         return res.SearchDatastore_TaskResponse.returnval;
     }
@@ -10438,7 +10443,7 @@ public class VimClient : IVimClient
             searchSpec = searchSpec,
         };
 
-        var res = await this.inner.SearchDatastoreSubFolders_TaskAsync(req);
+        var res = await this.inner.SearchDatastoreSubFolders_TaskAsync(req).ConfigureAwait(false);
 
         return res.SearchDatastoreSubFolders_TaskResponse.returnval;
     }
@@ -10451,7 +10456,7 @@ public class VimClient : IVimClient
             partition = partition,
         };
 
-        await this.inner.SelectActivePartitionAsync(req);
+        await this.inner.SelectActivePartitionAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task SelectVnic(ManagedObjectReference self, string device)
@@ -10462,7 +10467,7 @@ public class VimClient : IVimClient
             device = device,
         };
 
-        await this.inner.SelectVnicAsync(req);
+        await this.inner.SelectVnicAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task SelectVnicForNicType(ManagedObjectReference self, string nicType, string device)
@@ -10474,7 +10479,7 @@ public class VimClient : IVimClient
             device = device,
         };
 
-        await this.inner.SelectVnicForNicTypeAsync(req);
+        await this.inner.SelectVnicForNicTypeAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task SendNMI(ManagedObjectReference self)
@@ -10484,7 +10489,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.SendNMIAsync(req);
+        await this.inner.SendNMIAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task SendTestNotification(ManagedObjectReference self)
@@ -10494,7 +10499,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.SendTestNotificationAsync(req);
+        await this.inner.SendTestNotificationAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<bool> SessionIsActive(ManagedObjectReference self, string sessionID, string userName)
@@ -10506,7 +10511,7 @@ public class VimClient : IVimClient
             userName = userName,
         };
 
-        var res = await this.inner.SessionIsActiveAsync(req);
+        var res = await this.inner.SessionIsActiveAsync(req).ConfigureAwait(false);
 
         return res.SessionIsActiveResponse.returnval;
     }
@@ -10519,7 +10524,7 @@ public class VimClient : IVimClient
             mode = mode,
         };
 
-        var res = await this.inner.setClusterMode_TaskAsync(req);
+        var res = await this.inner.setClusterMode_TaskAsync(req).ConfigureAwait(false);
 
         return res.setClusterMode_TaskResponse.returnval;
     }
@@ -10532,7 +10537,7 @@ public class VimClient : IVimClient
             maxCount = maxCount,
         };
 
-        await this.inner.SetCollectorPageSizeAsync(req);
+        await this.inner.SetCollectorPageSizeAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task SetCryptoMode(ManagedObjectReference self, string cryptoMode, ClusterComputeResourceCryptoModePolicy? policy)
@@ -10544,7 +10549,7 @@ public class VimClient : IVimClient
             policy = policy,
         };
 
-        await this.inner.SetCryptoModeAsync(req);
+        await this.inner.SetCryptoModeAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task SetCustomValue(ManagedObjectReference self, string key, string value)
@@ -10556,7 +10561,7 @@ public class VimClient : IVimClient
             value = value,
         };
 
-        await this.inner.setCustomValueAsync(req);
+        await this.inner.setCustomValueAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task SetDefaultKmsCluster(ManagedObjectReference self, ManagedObjectReference? entity, KeyProviderId? clusterId)
@@ -10568,7 +10573,7 @@ public class VimClient : IVimClient
             clusterId = clusterId,
         };
 
-        await this.inner.SetDefaultKmsClusterAsync(req);
+        await this.inner.SetDefaultKmsClusterAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task SetDisplayTopology(ManagedObjectReference self, VirtualMachineDisplayTopology[] displays)
@@ -10579,7 +10584,7 @@ public class VimClient : IVimClient
             displays = displays,
         };
 
-        await this.inner.SetDisplayTopologyAsync(req);
+        await this.inner.SetDisplayTopologyAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task SetEntityPermissions(ManagedObjectReference self, ManagedObjectReference entity, Permission[]? permission)
@@ -10591,7 +10596,7 @@ public class VimClient : IVimClient
             permission = permission,
         };
 
-        await this.inner.SetEntityPermissionsAsync(req);
+        await this.inner.SetEntityPermissionsAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task SetExtensionCertificate(ManagedObjectReference self, string extensionKey, string? certificatePem)
@@ -10603,7 +10608,7 @@ public class VimClient : IVimClient
             certificatePem = certificatePem,
         };
 
-        await this.inner.SetExtensionCertificateAsync(req);
+        await this.inner.SetExtensionCertificateAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task SetField(ManagedObjectReference self, ManagedObjectReference entity, int key, string value)
@@ -10616,7 +10621,7 @@ public class VimClient : IVimClient
             value = value,
         };
 
-        await this.inner.SetFieldAsync(req);
+        await this.inner.SetFieldAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<CryptoKeyResult?> SetKeyCustomAttributes(ManagedObjectReference self, CryptoKeyId keyId, CryptoManagerKmipCustomAttributeSpec spec)
@@ -10628,7 +10633,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.SetKeyCustomAttributesAsync(req);
+        var res = await this.inner.SetKeyCustomAttributesAsync(req).ConfigureAwait(false);
 
         return res.SetKeyCustomAttributesResponse.returnval;
     }
@@ -10642,7 +10647,7 @@ public class VimClient : IVimClient
             featureKey = featureKey,
         };
 
-        await this.inner.SetLicenseEditionAsync(req);
+        await this.inner.SetLicenseEditionAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task SetLocale(ManagedObjectReference self, string locale)
@@ -10653,7 +10658,7 @@ public class VimClient : IVimClient
             locale = locale,
         };
 
-        await this.inner.SetLocaleAsync(req);
+        await this.inner.SetLocaleAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task SetMaxQueueDepth(ManagedObjectReference self, ManagedObjectReference datastore, long maxQdepth)
@@ -10665,7 +10670,7 @@ public class VimClient : IVimClient
             maxQdepth = maxQdepth,
         };
 
-        await this.inner.SetMaxQueueDepthAsync(req);
+        await this.inner.SetMaxQueueDepthAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task SetMultipathLunPolicy(ManagedObjectReference self, string lunId, HostMultipathInfoLogicalUnitPolicy policy)
@@ -10677,7 +10682,7 @@ public class VimClient : IVimClient
             policy = policy,
         };
 
-        await this.inner.SetMultipathLunPolicyAsync(req);
+        await this.inner.SetMultipathLunPolicyAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task SetNFSUser(ManagedObjectReference self, string user, string password)
@@ -10689,7 +10694,7 @@ public class VimClient : IVimClient
             password = password,
         };
 
-        await this.inner.SetNFSUserAsync(req);
+        await this.inner.SetNFSUserAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task SetPublicKey(ManagedObjectReference self, string extensionKey, string publicKey)
@@ -10701,7 +10706,7 @@ public class VimClient : IVimClient
             publicKey = publicKey,
         };
 
-        await this.inner.SetPublicKeyAsync(req);
+        await this.inner.SetPublicKeyAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task SetRegistryValueInGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth, GuestRegValueSpec value)
@@ -10714,7 +10719,7 @@ public class VimClient : IVimClient
             value = value,
         };
 
-        await this.inner.SetRegistryValueInGuestAsync(req);
+        await this.inner.SetRegistryValueInGuestAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task SetScreenResolution(ManagedObjectReference self, int width, int height)
@@ -10726,7 +10731,7 @@ public class VimClient : IVimClient
             height = height,
         };
 
-        await this.inner.SetScreenResolutionAsync(req);
+        await this.inner.SetScreenResolutionAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task SetServiceAccount(ManagedObjectReference self, string extensionKey, string serviceAccount)
@@ -10738,7 +10743,7 @@ public class VimClient : IVimClient
             serviceAccount = serviceAccount,
         };
 
-        await this.inner.SetServiceAccountAsync(req);
+        await this.inner.SetServiceAccountAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task SetTaskDescription(ManagedObjectReference self, LocalizableMessage description)
@@ -10749,7 +10754,7 @@ public class VimClient : IVimClient
             description = description,
         };
 
-        await this.inner.SetTaskDescriptionAsync(req);
+        await this.inner.SetTaskDescriptionAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task SetTaskState(ManagedObjectReference self, TaskInfoState state, object? result, LocalizedMethodFault? fault)
@@ -10762,7 +10767,7 @@ public class VimClient : IVimClient
             fault = fault,
         };
 
-        await this.inner.SetTaskStateAsync(req);
+        await this.inner.SetTaskStateAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task SetVirtualDiskUuid(ManagedObjectReference self, string name, ManagedObjectReference? datacenter, string uuid)
@@ -10775,7 +10780,7 @@ public class VimClient : IVimClient
             uuid = uuid,
         };
 
-        await this.inner.SetVirtualDiskUuidAsync(req);
+        await this.inner.SetVirtualDiskUuidAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> SetVirtualDiskUuidEx_Task(ManagedObjectReference self, string name, ManagedObjectReference? datacenter, string? uuid)
@@ -10788,7 +10793,7 @@ public class VimClient : IVimClient
             uuid = uuid,
         };
 
-        var res = await this.inner.SetVirtualDiskUuidEx_TaskAsync(req);
+        var res = await this.inner.SetVirtualDiskUuidEx_TaskAsync(req).ConfigureAwait(false);
 
         return res.SetVirtualDiskUuidEx_TaskResponse.returnval;
     }
@@ -10803,7 +10808,7 @@ public class VimClient : IVimClient
             controlFlags = controlFlags,
         };
 
-        await this.inner.SetVStorageObjectControlFlagsAsync(req);
+        await this.inner.SetVStorageObjectControlFlagsAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> ShrinkVirtualDisk_Task(ManagedObjectReference self, string name, ManagedObjectReference? datacenter, bool copy, bool copySpecified)
@@ -10817,7 +10822,7 @@ public class VimClient : IVimClient
             copySpecified = copySpecified,
         };
 
-        var res = await this.inner.ShrinkVirtualDisk_TaskAsync(req);
+        var res = await this.inner.ShrinkVirtualDisk_TaskAsync(req).ConfigureAwait(false);
 
         return res.ShrinkVirtualDisk_TaskResponse.returnval;
     }
@@ -10829,7 +10834,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.ShutdownGuestAsync(req);
+        await this.inner.ShutdownGuestAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> ShutdownHost_Task(ManagedObjectReference self, bool force)
@@ -10840,7 +10845,7 @@ public class VimClient : IVimClient
             force = force,
         };
 
-        var res = await this.inner.ShutdownHost_TaskAsync(req);
+        var res = await this.inner.ShutdownHost_TaskAsync(req).ConfigureAwait(false);
 
         return res.ShutdownHost_TaskResponse.returnval;
     }
@@ -10856,7 +10861,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.StageHostPatch_TaskAsync(req);
+        var res = await this.inner.StageHostPatch_TaskAsync(req).ConfigureAwait(false);
 
         return res.StageHostPatch_TaskResponse.returnval;
     }
@@ -10868,7 +10873,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.StampAllRulesWithUuid_TaskAsync(req);
+        var res = await this.inner.StampAllRulesWithUuid_TaskAsync(req).ConfigureAwait(false);
 
         return res.StampAllRulesWithUuid_TaskResponse.returnval;
     }
@@ -10880,7 +10885,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.StandbyGuestAsync(req);
+        await this.inner.StandbyGuestAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task StartDpuFailover(ManagedObjectReference self, string dvsName, string? targetDpuAlias)
@@ -10892,7 +10897,7 @@ public class VimClient : IVimClient
             targetDpuAlias = targetDpuAlias,
         };
 
-        await this.inner.startDpuFailoverAsync(req);
+        await this.inner.startDpuFailoverAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> StartGuestNetwork_Task(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth)
@@ -10904,7 +10909,7 @@ public class VimClient : IVimClient
             auth = auth,
         };
 
-        var res = await this.inner.StartGuestNetwork_TaskAsync(req);
+        var res = await this.inner.StartGuestNetwork_TaskAsync(req).ConfigureAwait(false);
 
         return res.StartGuestNetwork_TaskResponse.returnval;
     }
@@ -10919,7 +10924,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.StartProgramInGuestAsync(req);
+        var res = await this.inner.StartProgramInGuestAsync(req).ConfigureAwait(false);
 
         return res.StartProgramInGuestResponse.returnval;
     }
@@ -10933,7 +10938,7 @@ public class VimClient : IVimClient
             description = description,
         };
 
-        var res = await this.inner.StartRecording_TaskAsync(req);
+        var res = await this.inner.StartRecording_TaskAsync(req).ConfigureAwait(false);
 
         return res.StartRecording_TaskResponse.returnval;
     }
@@ -10946,7 +10951,7 @@ public class VimClient : IVimClient
             replaySnapshot = replaySnapshot,
         };
 
-        var res = await this.inner.StartReplaying_TaskAsync(req);
+        var res = await this.inner.StartReplaying_TaskAsync(req).ConfigureAwait(false);
 
         return res.StartReplaying_TaskResponse.returnval;
     }
@@ -10959,7 +10964,7 @@ public class VimClient : IVimClient
             id = id,
         };
 
-        await this.inner.StartServiceAsync(req);
+        await this.inner.StartServiceAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> StopRecording_Task(ManagedObjectReference self)
@@ -10969,7 +10974,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.StopRecording_TaskAsync(req);
+        var res = await this.inner.StopRecording_TaskAsync(req).ConfigureAwait(false);
 
         return res.StopRecording_TaskResponse.returnval;
     }
@@ -10981,7 +10986,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.StopReplaying_TaskAsync(req);
+        var res = await this.inner.StopReplaying_TaskAsync(req).ConfigureAwait(false);
 
         return res.StopReplaying_TaskResponse.returnval;
     }
@@ -10994,7 +10999,7 @@ public class VimClient : IVimClient
             id = id,
         };
 
-        await this.inner.StopServiceAsync(req);
+        await this.inner.StopServiceAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> SuspendVApp_Task(ManagedObjectReference self)
@@ -11004,7 +11009,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.SuspendVApp_TaskAsync(req);
+        var res = await this.inner.SuspendVApp_TaskAsync(req).ConfigureAwait(false);
 
         return res.SuspendVApp_TaskResponse.returnval;
     }
@@ -11016,7 +11021,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.SuspendVM_TaskAsync(req);
+        var res = await this.inner.SuspendVM_TaskAsync(req).ConfigureAwait(false);
 
         return res.SuspendVM_TaskResponse.returnval;
     }
@@ -11029,7 +11034,7 @@ public class VimClient : IVimClient
             vm = vm,
         };
 
-        var res = await this.inner.TerminateFaultTolerantVM_TaskAsync(req);
+        var res = await this.inner.TerminateFaultTolerantVM_TaskAsync(req).ConfigureAwait(false);
 
         return res.TerminateFaultTolerantVM_TaskResponse.returnval;
     }
@@ -11044,7 +11049,7 @@ public class VimClient : IVimClient
             pid = pid,
         };
 
-        await this.inner.TerminateProcessInGuestAsync(req);
+        await this.inner.TerminateProcessInGuestAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task TerminateSession(ManagedObjectReference self, string[] sessionId)
@@ -11055,7 +11060,7 @@ public class VimClient : IVimClient
             sessionId = sessionId,
         };
 
-        await this.inner.TerminateSessionAsync(req);
+        await this.inner.TerminateSessionAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task TerminateVM(ManagedObjectReference self)
@@ -11065,7 +11070,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.TerminateVMAsync(req);
+        await this.inner.TerminateVMAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<HostDateTimeSystemServiceTestResult?> TestTimeService(ManagedObjectReference self)
@@ -11075,7 +11080,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.TestTimeServiceAsync(req);
+        var res = await this.inner.TestTimeServiceAsync(req).ConfigureAwait(false);
 
         return res.TestTimeServiceResponse.returnval;
     }
@@ -11088,7 +11093,7 @@ public class VimClient : IVimClient
             scsiDiskUuids = scsiDiskUuids,
         };
 
-        var res = await this.inner.TurnDiskLocatorLedOff_TaskAsync(req);
+        var res = await this.inner.TurnDiskLocatorLedOff_TaskAsync(req).ConfigureAwait(false);
 
         return res.TurnDiskLocatorLedOff_TaskResponse.returnval;
     }
@@ -11101,7 +11106,7 @@ public class VimClient : IVimClient
             scsiDiskUuids = scsiDiskUuids,
         };
 
-        var res = await this.inner.TurnDiskLocatorLedOn_TaskAsync(req);
+        var res = await this.inner.TurnDiskLocatorLedOn_TaskAsync(req).ConfigureAwait(false);
 
         return res.TurnDiskLocatorLedOn_TaskResponse.returnval;
     }
@@ -11113,7 +11118,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.TurnOffFaultToleranceForVM_TaskAsync(req);
+        var res = await this.inner.TurnOffFaultToleranceForVM_TaskAsync(req).ConfigureAwait(false);
 
         return res.TurnOffFaultToleranceForVM_TaskResponse.returnval;
     }
@@ -11127,7 +11132,7 @@ public class VimClient : IVimClient
             group = group,
         };
 
-        await this.inner.UnassignUserFromGroupAsync(req);
+        await this.inner.UnassignUserFromGroupAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UnbindVnic(ManagedObjectReference self, string iScsiHbaName, string vnicDevice, bool force)
@@ -11140,7 +11145,7 @@ public class VimClient : IVimClient
             force = force,
         };
 
-        await this.inner.UnbindVnicAsync(req);
+        await this.inner.UnbindVnicAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> UninstallHostPatch_Task(ManagedObjectReference self, string[]? bulletinIds, HostPatchManagerPatchManagerOperationSpec? spec)
@@ -11152,7 +11157,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.UninstallHostPatch_TaskAsync(req);
+        var res = await this.inner.UninstallHostPatch_TaskAsync(req).ConfigureAwait(false);
 
         return res.UninstallHostPatch_TaskResponse.returnval;
     }
@@ -11166,7 +11171,7 @@ public class VimClient : IVimClient
             compRes = compRes,
         };
 
-        var res = await this.inner.UninstallIoFilter_TaskAsync(req);
+        var res = await this.inner.UninstallIoFilter_TaskAsync(req).ConfigureAwait(false);
 
         return res.UninstallIoFilter_TaskResponse.returnval;
     }
@@ -11179,7 +11184,7 @@ public class VimClient : IVimClient
             id = id,
         };
 
-        await this.inner.UninstallServiceAsync(req);
+        await this.inner.UninstallServiceAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> UnmapVmfsVolumeEx_Task(ManagedObjectReference self, string[] vmfsUuid)
@@ -11190,7 +11195,7 @@ public class VimClient : IVimClient
             vmfsUuid = vmfsUuid,
         };
 
-        var res = await this.inner.UnmapVmfsVolumeEx_TaskAsync(req);
+        var res = await this.inner.UnmapVmfsVolumeEx_TaskAsync(req).ConfigureAwait(false);
 
         return res.UnmapVmfsVolumeEx_TaskResponse.returnval;
     }
@@ -11203,7 +11208,7 @@ public class VimClient : IVimClient
             entity = entity,
         };
 
-        await this.inner.UnmarkServiceProviderEntitiesAsync(req);
+        await this.inner.UnmarkServiceProviderEntitiesAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> UnmountDiskMapping_Task(ManagedObjectReference self, VsanHostDiskMapping[] mapping)
@@ -11214,7 +11219,7 @@ public class VimClient : IVimClient
             mapping = mapping,
         };
 
-        var res = await this.inner.UnmountDiskMapping_TaskAsync(req);
+        var res = await this.inner.UnmountDiskMapping_TaskAsync(req).ConfigureAwait(false);
 
         return res.UnmountDiskMapping_TaskResponse.returnval;
     }
@@ -11227,7 +11232,7 @@ public class VimClient : IVimClient
             vmfsUuid = vmfsUuid,
         };
 
-        await this.inner.UnmountForceMountedVmfsVolumeAsync(req);
+        await this.inner.UnmountForceMountedVmfsVolumeAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UnmountToolsInstaller(ManagedObjectReference self)
@@ -11237,7 +11242,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.UnmountToolsInstallerAsync(req);
+        await this.inner.UnmountToolsInstallerAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UnmountVffsVolume(ManagedObjectReference self, string vffsUuid)
@@ -11248,7 +11253,7 @@ public class VimClient : IVimClient
             vffsUuid = vffsUuid,
         };
 
-        await this.inner.UnmountVffsVolumeAsync(req);
+        await this.inner.UnmountVffsVolumeAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UnmountVmfsVolume(ManagedObjectReference self, string vmfsUuid)
@@ -11259,7 +11264,7 @@ public class VimClient : IVimClient
             vmfsUuid = vmfsUuid,
         };
 
-        await this.inner.UnmountVmfsVolumeAsync(req);
+        await this.inner.UnmountVmfsVolumeAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> UnmountVmfsVolumeEx_Task(ManagedObjectReference self, string[] vmfsUuid)
@@ -11270,7 +11275,7 @@ public class VimClient : IVimClient
             vmfsUuid = vmfsUuid,
         };
 
-        var res = await this.inner.UnmountVmfsVolumeEx_TaskAsync(req);
+        var res = await this.inner.UnmountVmfsVolumeEx_TaskAsync(req).ConfigureAwait(false);
 
         return res.UnmountVmfsVolumeEx_TaskResponse.returnval;
     }
@@ -11282,7 +11287,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.UnregisterAndDestroy_TaskAsync(req);
+        var res = await this.inner.UnregisterAndDestroy_TaskAsync(req).ConfigureAwait(false);
 
         return res.UnregisterAndDestroy_TaskResponse.returnval;
     }
@@ -11296,7 +11301,7 @@ public class VimClient : IVimClient
             datastore = datastore,
         };
 
-        var res = await this.inner.UnregisterDisk_TaskAsync(req);
+        var res = await this.inner.UnregisterDisk_TaskAsync(req).ConfigureAwait(false);
 
         return res.UnregisterDisk_TaskResponse.returnval;
     }
@@ -11309,7 +11314,7 @@ public class VimClient : IVimClient
             extensionKey = extensionKey,
         };
 
-        await this.inner.UnregisterExtensionAsync(req);
+        await this.inner.UnregisterExtensionAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UnregisterHealthUpdateProvider(ManagedObjectReference self, string providerId)
@@ -11320,7 +11325,7 @@ public class VimClient : IVimClient
             providerId = providerId,
         };
 
-        await this.inner.UnregisterHealthUpdateProviderAsync(req);
+        await this.inner.UnregisterHealthUpdateProviderAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UnregisterKmsCluster(ManagedObjectReference self, KeyProviderId clusterId)
@@ -11331,7 +11336,7 @@ public class VimClient : IVimClient
             clusterId = clusterId,
         };
 
-        await this.inner.UnregisterKmsClusterAsync(req);
+        await this.inner.UnregisterKmsClusterAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> UnregisterVApp_Task(ManagedObjectReference self)
@@ -11341,7 +11346,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        var res = await this.inner.unregisterVApp_TaskAsync(req);
+        var res = await this.inner.unregisterVApp_TaskAsync(req).ConfigureAwait(false);
 
         return res.unregisterVApp_TaskResponse.returnval;
     }
@@ -11353,7 +11358,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.UnregisterVMAsync(req);
+        await this.inner.UnregisterVMAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> UpdateAnswerFile_Task(ManagedObjectReference self, ManagedObjectReference host, AnswerFileCreateSpec configSpec)
@@ -11365,7 +11370,7 @@ public class VimClient : IVimClient
             configSpec = configSpec,
         };
 
-        var res = await this.inner.UpdateAnswerFile_TaskAsync(req);
+        var res = await this.inner.UpdateAnswerFile_TaskAsync(req).ConfigureAwait(false);
 
         return res.UpdateAnswerFile_TaskResponse.returnval;
     }
@@ -11378,7 +11383,7 @@ public class VimClient : IVimClient
             config = config,
         };
 
-        await this.inner.UpdateAssignableHardwareConfigAsync(req);
+        await this.inner.UpdateAssignableHardwareConfigAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<LicenseManagerLicenseInfo?> UpdateAssignedLicense(ManagedObjectReference self, string entity, string licenseKey, string? entityDisplayName)
@@ -11391,7 +11396,7 @@ public class VimClient : IVimClient
             entityDisplayName = entityDisplayName,
         };
 
-        var res = await this.inner.UpdateAssignedLicenseAsync(req);
+        var res = await this.inner.UpdateAssignedLicenseAsync(req).ConfigureAwait(false);
 
         return res.UpdateAssignedLicenseResponse.returnval;
     }
@@ -11406,7 +11411,7 @@ public class VimClient : IVimClient
             privIds = privIds,
         };
 
-        await this.inner.UpdateAuthorizationRoleAsync(req);
+        await this.inner.UpdateAuthorizationRoleAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateBootDevice(ManagedObjectReference self, string key)
@@ -11417,7 +11422,7 @@ public class VimClient : IVimClient
             key = key,
         };
 
-        await this.inner.UpdateBootDeviceAsync(req);
+        await this.inner.UpdateBootDeviceAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateChildResourceConfiguration(ManagedObjectReference self, ResourceConfigSpec[] spec)
@@ -11428,7 +11433,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        await this.inner.UpdateChildResourceConfigurationAsync(req);
+        await this.inner.UpdateChildResourceConfigurationAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateClusterProfile(ManagedObjectReference self, ClusterProfileConfigSpec config)
@@ -11439,7 +11444,7 @@ public class VimClient : IVimClient
             config = config,
         };
 
-        await this.inner.UpdateClusterProfileAsync(req);
+        await this.inner.UpdateClusterProfileAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateConfig(ManagedObjectReference self, string? name, ResourceConfigSpec? config)
@@ -11451,7 +11456,7 @@ public class VimClient : IVimClient
             config = config,
         };
 
-        await this.inner.UpdateConfigAsync(req);
+        await this.inner.UpdateConfigAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateConsoleIpRouteConfig(ManagedObjectReference self, HostIpRouteConfig config)
@@ -11462,7 +11467,7 @@ public class VimClient : IVimClient
             config = config,
         };
 
-        await this.inner.UpdateConsoleIpRouteConfigAsync(req);
+        await this.inner.UpdateConsoleIpRouteConfigAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateCounterLevelMapping(ManagedObjectReference self, PerformanceManagerCounterLevelMapping[] counterLevelMap)
@@ -11473,7 +11478,7 @@ public class VimClient : IVimClient
             counterLevelMap = counterLevelMap,
         };
 
-        await this.inner.UpdateCounterLevelMappingAsync(req);
+        await this.inner.UpdateCounterLevelMappingAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateDateTime(ManagedObjectReference self, DateTime dateTime)
@@ -11484,7 +11489,7 @@ public class VimClient : IVimClient
             dateTime = dateTime,
         };
 
-        await this.inner.UpdateDateTimeAsync(req);
+        await this.inner.UpdateDateTimeAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateDateTimeConfig(ManagedObjectReference self, HostDateTimeConfig config)
@@ -11495,7 +11500,7 @@ public class VimClient : IVimClient
             config = config,
         };
 
-        await this.inner.UpdateDateTimeConfigAsync(req);
+        await this.inner.UpdateDateTimeConfigAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateDefaultPolicy(ManagedObjectReference self, HostFirewallDefaultPolicy defaultPolicy)
@@ -11506,7 +11511,7 @@ public class VimClient : IVimClient
             defaultPolicy = defaultPolicy,
         };
 
-        await this.inner.UpdateDefaultPolicyAsync(req);
+        await this.inner.UpdateDefaultPolicyAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateDiskPartitions(ManagedObjectReference self, string devicePath, HostDiskPartitionSpec spec)
@@ -11518,7 +11523,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        await this.inner.UpdateDiskPartitionsAsync(req);
+        await this.inner.UpdateDiskPartitionsAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateDnsConfig(ManagedObjectReference self, HostDnsConfig config)
@@ -11529,7 +11534,7 @@ public class VimClient : IVimClient
             config = config,
         };
 
-        await this.inner.UpdateDnsConfigAsync(req);
+        await this.inner.UpdateDnsConfigAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateDvsCapability(ManagedObjectReference self, DVSCapability capability)
@@ -11540,7 +11545,7 @@ public class VimClient : IVimClient
             capability = capability,
         };
 
-        await this.inner.UpdateDvsCapabilityAsync(req);
+        await this.inner.UpdateDvsCapabilityAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> UpdateDVSHealthCheckConfig_Task(ManagedObjectReference self, DVSHealthCheckConfig[] healthCheckConfig)
@@ -11551,7 +11556,7 @@ public class VimClient : IVimClient
             healthCheckConfig = healthCheckConfig,
         };
 
-        var res = await this.inner.UpdateDVSHealthCheckConfig_TaskAsync(req);
+        var res = await this.inner.UpdateDVSHealthCheckConfig_TaskAsync(req).ConfigureAwait(false);
 
         return res.UpdateDVSHealthCheckConfig_TaskResponse.returnval;
     }
@@ -11564,7 +11569,7 @@ public class VimClient : IVimClient
             lacpGroupSpec = lacpGroupSpec,
         };
 
-        var res = await this.inner.UpdateDVSLacpGroupConfig_TaskAsync(req);
+        var res = await this.inner.UpdateDVSLacpGroupConfig_TaskAsync(req).ConfigureAwait(false);
 
         return res.UpdateDVSLacpGroupConfig_TaskResponse.returnval;
     }
@@ -11577,7 +11582,7 @@ public class VimClient : IVimClient
             extension = extension,
         };
 
-        await this.inner.UpdateExtensionAsync(req);
+        await this.inner.UpdateExtensionAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateFlags(ManagedObjectReference self, HostFlagInfo flagInfo)
@@ -11588,7 +11593,7 @@ public class VimClient : IVimClient
             flagInfo = flagInfo,
         };
 
-        await this.inner.UpdateFlagsAsync(req);
+        await this.inner.UpdateFlagsAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateGraphicsConfig(ManagedObjectReference self, HostGraphicsConfig config)
@@ -11599,7 +11604,7 @@ public class VimClient : IVimClient
             config = config,
         };
 
-        await this.inner.UpdateGraphicsConfigAsync(req);
+        await this.inner.UpdateGraphicsConfigAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateHostImageAcceptanceLevel(ManagedObjectReference self, string newAcceptanceLevel)
@@ -11610,7 +11615,7 @@ public class VimClient : IVimClient
             newAcceptanceLevel = newAcceptanceLevel,
         };
 
-        await this.inner.UpdateHostImageAcceptanceLevelAsync(req);
+        await this.inner.UpdateHostImageAcceptanceLevelAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateHostProfile(ManagedObjectReference self, HostProfileConfigSpec config)
@@ -11621,7 +11626,7 @@ public class VimClient : IVimClient
             config = config,
         };
 
-        await this.inner.UpdateHostProfileAsync(req);
+        await this.inner.UpdateHostProfileAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateHostSpecification(ManagedObjectReference self, ManagedObjectReference host, HostSpecification hostSpec)
@@ -11633,7 +11638,7 @@ public class VimClient : IVimClient
             hostSpec = hostSpec,
         };
 
-        await this.inner.UpdateHostSpecificationAsync(req);
+        await this.inner.UpdateHostSpecificationAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateHostSubSpecification(ManagedObjectReference self, ManagedObjectReference host, HostSubSpecification hostSubSpec)
@@ -11645,7 +11650,7 @@ public class VimClient : IVimClient
             hostSubSpec = hostSubSpec,
         };
 
-        await this.inner.UpdateHostSubSpecificationAsync(req);
+        await this.inner.UpdateHostSubSpecificationAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateHppMultipathLunPolicy(ManagedObjectReference self, string lunId, HostMultipathInfoHppLogicalUnitPolicy policy)
@@ -11657,7 +11662,7 @@ public class VimClient : IVimClient
             policy = policy,
         };
 
-        await this.inner.UpdateHppMultipathLunPolicyAsync(req);
+        await this.inner.UpdateHppMultipathLunPolicyAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateInternetScsiAdvancedOptions(ManagedObjectReference self, string iScsiHbaDevice, HostInternetScsiHbaTargetSet? targetSet, HostInternetScsiHbaParamValue[] options)
@@ -11670,7 +11675,7 @@ public class VimClient : IVimClient
             options = options,
         };
 
-        await this.inner.UpdateInternetScsiAdvancedOptionsAsync(req);
+        await this.inner.UpdateInternetScsiAdvancedOptionsAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateInternetScsiAlias(ManagedObjectReference self, string iScsiHbaDevice, string iScsiAlias)
@@ -11682,7 +11687,7 @@ public class VimClient : IVimClient
             iScsiAlias = iScsiAlias,
         };
 
-        await this.inner.UpdateInternetScsiAliasAsync(req);
+        await this.inner.UpdateInternetScsiAliasAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateInternetScsiAuthenticationProperties(ManagedObjectReference self, string iScsiHbaDevice, HostInternetScsiHbaAuthenticationProperties authenticationProperties, HostInternetScsiHbaTargetSet? targetSet)
@@ -11695,7 +11700,7 @@ public class VimClient : IVimClient
             targetSet = targetSet,
         };
 
-        await this.inner.UpdateInternetScsiAuthenticationPropertiesAsync(req);
+        await this.inner.UpdateInternetScsiAuthenticationPropertiesAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateInternetScsiDigestProperties(ManagedObjectReference self, string iScsiHbaDevice, HostInternetScsiHbaTargetSet? targetSet, HostInternetScsiHbaDigestProperties digestProperties)
@@ -11708,7 +11713,7 @@ public class VimClient : IVimClient
             digestProperties = digestProperties,
         };
 
-        await this.inner.UpdateInternetScsiDigestPropertiesAsync(req);
+        await this.inner.UpdateInternetScsiDigestPropertiesAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateInternetScsiDiscoveryProperties(ManagedObjectReference self, string iScsiHbaDevice, HostInternetScsiHbaDiscoveryProperties discoveryProperties)
@@ -11720,7 +11725,7 @@ public class VimClient : IVimClient
             discoveryProperties = discoveryProperties,
         };
 
-        await this.inner.UpdateInternetScsiDiscoveryPropertiesAsync(req);
+        await this.inner.UpdateInternetScsiDiscoveryPropertiesAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateInternetScsiIPProperties(ManagedObjectReference self, string iScsiHbaDevice, HostInternetScsiHbaIPProperties ipProperties)
@@ -11732,7 +11737,7 @@ public class VimClient : IVimClient
             ipProperties = ipProperties,
         };
 
-        await this.inner.UpdateInternetScsiIPPropertiesAsync(req);
+        await this.inner.UpdateInternetScsiIPPropertiesAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateInternetScsiName(ManagedObjectReference self, string iScsiHbaDevice, string iScsiName)
@@ -11744,7 +11749,7 @@ public class VimClient : IVimClient
             iScsiName = iScsiName,
         };
 
-        await this.inner.UpdateInternetScsiNameAsync(req);
+        await this.inner.UpdateInternetScsiNameAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateIpConfig(ManagedObjectReference self, HostIpConfig ipConfig)
@@ -11755,7 +11760,7 @@ public class VimClient : IVimClient
             ipConfig = ipConfig,
         };
 
-        await this.inner.UpdateIpConfigAsync(req);
+        await this.inner.UpdateIpConfigAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateIpmi(ManagedObjectReference self, HostIpmiInfo ipmiInfo)
@@ -11766,7 +11771,7 @@ public class VimClient : IVimClient
             ipmiInfo = ipmiInfo,
         };
 
-        await this.inner.UpdateIpmiAsync(req);
+        await this.inner.UpdateIpmiAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateIpPool(ManagedObjectReference self, ManagedObjectReference dc, IpPool pool)
@@ -11778,7 +11783,7 @@ public class VimClient : IVimClient
             pool = pool,
         };
 
-        await this.inner.UpdateIpPoolAsync(req);
+        await this.inner.UpdateIpPoolAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateIpRouteConfig(ManagedObjectReference self, HostIpRouteConfig config)
@@ -11789,7 +11794,7 @@ public class VimClient : IVimClient
             config = config,
         };
 
-        await this.inner.UpdateIpRouteConfigAsync(req);
+        await this.inner.UpdateIpRouteConfigAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateIpRouteTableConfig(ManagedObjectReference self, HostIpRouteTableConfig config)
@@ -11800,7 +11805,7 @@ public class VimClient : IVimClient
             config = config,
         };
 
-        await this.inner.UpdateIpRouteTableConfigAsync(req);
+        await this.inner.UpdateIpRouteTableConfigAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateKmipServer(ManagedObjectReference self, KmipServerSpec server)
@@ -11811,7 +11816,7 @@ public class VimClient : IVimClient
             server = server,
         };
 
-        await this.inner.UpdateKmipServerAsync(req);
+        await this.inner.UpdateKmipServerAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateKmsSignedCsrClientCert(ManagedObjectReference self, KeyProviderId cluster, string certificate)
@@ -11823,7 +11828,7 @@ public class VimClient : IVimClient
             certificate = certificate,
         };
 
-        await this.inner.UpdateKmsSignedCsrClientCertAsync(req);
+        await this.inner.UpdateKmsSignedCsrClientCertAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<LicenseManagerLicenseInfo?> UpdateLicense(ManagedObjectReference self, string licenseKey, KeyValue[]? labels)
@@ -11835,7 +11840,7 @@ public class VimClient : IVimClient
             labels = labels,
         };
 
-        var res = await this.inner.UpdateLicenseAsync(req);
+        var res = await this.inner.UpdateLicenseAsync(req).ConfigureAwait(false);
 
         return res.UpdateLicenseResponse.returnval;
     }
@@ -11850,7 +11855,7 @@ public class VimClient : IVimClient
             labelValue = labelValue,
         };
 
-        await this.inner.UpdateLicenseLabelAsync(req);
+        await this.inner.UpdateLicenseLabelAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateLinkedChildren(ManagedObjectReference self, VirtualAppLinkInfo[]? addChangeSet, ManagedObjectReference[]? removeSet)
@@ -11862,7 +11867,7 @@ public class VimClient : IVimClient
             removeSet = removeSet,
         };
 
-        await this.inner.UpdateLinkedChildrenAsync(req);
+        await this.inner.UpdateLinkedChildrenAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateLocalSwapDatastore(ManagedObjectReference self, ManagedObjectReference? datastore)
@@ -11873,7 +11878,7 @@ public class VimClient : IVimClient
             datastore = datastore,
         };
 
-        await this.inner.UpdateLocalSwapDatastoreAsync(req);
+        await this.inner.UpdateLocalSwapDatastoreAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateLockdownExceptions(ManagedObjectReference self, string[]? users)
@@ -11884,7 +11889,7 @@ public class VimClient : IVimClient
             users = users,
         };
 
-        await this.inner.UpdateLockdownExceptionsAsync(req);
+        await this.inner.UpdateLockdownExceptionsAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateModuleOptionString(ManagedObjectReference self, string name, string options)
@@ -11896,7 +11901,7 @@ public class VimClient : IVimClient
             options = options,
         };
 
-        await this.inner.UpdateModuleOptionStringAsync(req);
+        await this.inner.UpdateModuleOptionStringAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<HostNetworkConfigResult?> UpdateNetworkConfig(ManagedObjectReference self, HostNetworkConfig config, string changeMode)
@@ -11908,7 +11913,7 @@ public class VimClient : IVimClient
             changeMode = changeMode,
         };
 
-        var res = await this.inner.UpdateNetworkConfigAsync(req);
+        var res = await this.inner.UpdateNetworkConfigAsync(req).ConfigureAwait(false);
 
         return res.UpdateNetworkConfigResponse.returnval;
     }
@@ -11921,7 +11926,7 @@ public class VimClient : IVimClient
             configSpec = configSpec,
         };
 
-        await this.inner.UpdateNetworkResourcePoolAsync(req);
+        await this.inner.UpdateNetworkResourcePoolAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateOptions(ManagedObjectReference self, OptionValue[] changedValue)
@@ -11932,7 +11937,7 @@ public class VimClient : IVimClient
             changedValue = changedValue,
         };
 
-        await this.inner.UpdateOptionsAsync(req);
+        await this.inner.UpdateOptionsAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdatePassthruConfig(ManagedObjectReference self, HostPciPassthruConfig[] config)
@@ -11943,7 +11948,7 @@ public class VimClient : IVimClient
             config = config,
         };
 
-        await this.inner.UpdatePassthruConfigAsync(req);
+        await this.inner.UpdatePassthruConfigAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdatePerfInterval(ManagedObjectReference self, PerfInterval interval)
@@ -11954,7 +11959,7 @@ public class VimClient : IVimClient
             interval = interval,
         };
 
-        await this.inner.UpdatePerfIntervalAsync(req);
+        await this.inner.UpdatePerfIntervalAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdatePhysicalNicLinkSpeed(ManagedObjectReference self, string device, PhysicalNicLinkInfo? linkSpeed)
@@ -11966,7 +11971,7 @@ public class VimClient : IVimClient
             linkSpeed = linkSpeed,
         };
 
-        await this.inner.UpdatePhysicalNicLinkSpeedAsync(req);
+        await this.inner.UpdatePhysicalNicLinkSpeedAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdatePortGroup(ManagedObjectReference self, string pgName, HostPortGroupSpec portgrp)
@@ -11978,7 +11983,7 @@ public class VimClient : IVimClient
             portgrp = portgrp,
         };
 
-        await this.inner.UpdatePortGroupAsync(req);
+        await this.inner.UpdatePortGroupAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> UpdateProductLockerLocation_Task(ManagedObjectReference self, string path)
@@ -11989,7 +11994,7 @@ public class VimClient : IVimClient
             path = path,
         };
 
-        var res = await this.inner.UpdateProductLockerLocation_TaskAsync(req);
+        var res = await this.inner.UpdateProductLockerLocation_TaskAsync(req).ConfigureAwait(false);
 
         return res.UpdateProductLockerLocation_TaskResponse.returnval;
     }
@@ -12002,7 +12007,7 @@ public class VimClient : IVimClient
             percentDone = percentDone,
         };
 
-        await this.inner.UpdateProgressAsync(req);
+        await this.inner.UpdateProgressAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateReferenceHost(ManagedObjectReference self, ManagedObjectReference? host)
@@ -12013,7 +12018,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        await this.inner.UpdateReferenceHostAsync(req);
+        await this.inner.UpdateReferenceHostAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateRuleset(ManagedObjectReference self, string id, HostFirewallRulesetRulesetSpec spec)
@@ -12025,7 +12030,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        await this.inner.UpdateRulesetAsync(req);
+        await this.inner.UpdateRulesetAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateScsiLunDisplayName(ManagedObjectReference self, string lunUuid, string displayName)
@@ -12037,7 +12042,7 @@ public class VimClient : IVimClient
             displayName = displayName,
         };
 
-        await this.inner.UpdateScsiLunDisplayNameAsync(req);
+        await this.inner.UpdateScsiLunDisplayNameAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateSelfSignedClientCert(ManagedObjectReference self, KeyProviderId cluster, string certificate)
@@ -12049,7 +12054,7 @@ public class VimClient : IVimClient
             certificate = certificate,
         };
 
-        await this.inner.UpdateSelfSignedClientCertAsync(req);
+        await this.inner.UpdateSelfSignedClientCertAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateServiceConsoleVirtualNic(ManagedObjectReference self, string device, HostVirtualNicSpec nic)
@@ -12061,7 +12066,7 @@ public class VimClient : IVimClient
             nic = nic,
         };
 
-        await this.inner.UpdateServiceConsoleVirtualNicAsync(req);
+        await this.inner.UpdateServiceConsoleVirtualNicAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateServiceMessage(ManagedObjectReference self, string message)
@@ -12072,7 +12077,7 @@ public class VimClient : IVimClient
             message = message,
         };
 
-        await this.inner.UpdateServiceMessageAsync(req);
+        await this.inner.UpdateServiceMessageAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateServicePolicy(ManagedObjectReference self, string id, string policy)
@@ -12084,7 +12089,7 @@ public class VimClient : IVimClient
             policy = policy,
         };
 
-        await this.inner.UpdateServicePolicyAsync(req);
+        await this.inner.UpdateServicePolicyAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateSoftwareInternetScsiEnabled(ManagedObjectReference self, bool enabled)
@@ -12095,7 +12100,7 @@ public class VimClient : IVimClient
             enabled = enabled,
         };
 
-        await this.inner.UpdateSoftwareInternetScsiEnabledAsync(req);
+        await this.inner.UpdateSoftwareInternetScsiEnabledAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateSystemResources(ManagedObjectReference self, HostSystemResourceInfo resourceInfo)
@@ -12106,7 +12111,7 @@ public class VimClient : IVimClient
             resourceInfo = resourceInfo,
         };
 
-        await this.inner.UpdateSystemResourcesAsync(req);
+        await this.inner.UpdateSystemResourcesAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateSystemSwapConfiguration(ManagedObjectReference self, HostSystemSwapConfiguration sysSwapConfig)
@@ -12117,7 +12122,7 @@ public class VimClient : IVimClient
             sysSwapConfig = sysSwapConfig,
         };
 
-        await this.inner.UpdateSystemSwapConfigurationAsync(req);
+        await this.inner.UpdateSystemSwapConfigurationAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateSystemUsers(ManagedObjectReference self, string[]? users)
@@ -12128,7 +12133,7 @@ public class VimClient : IVimClient
             users = users,
         };
 
-        await this.inner.UpdateSystemUsersAsync(req);
+        await this.inner.UpdateSystemUsersAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateUser(ManagedObjectReference self, HostAccountSpec user)
@@ -12139,7 +12144,7 @@ public class VimClient : IVimClient
             user = user,
         };
 
-        await this.inner.UpdateUserAsync(req);
+        await this.inner.UpdateUserAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateVAppConfig(ManagedObjectReference self, VAppConfigSpec spec)
@@ -12150,7 +12155,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        await this.inner.UpdateVAppConfigAsync(req);
+        await this.inner.UpdateVAppConfigAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> UpdateVirtualMachineFiles_Task(ManagedObjectReference self, DatastoreMountPathDatastorePair[] mountPathDatastoreMapping)
@@ -12161,7 +12166,7 @@ public class VimClient : IVimClient
             mountPathDatastoreMapping = mountPathDatastoreMapping,
         };
 
-        var res = await this.inner.UpdateVirtualMachineFiles_TaskAsync(req);
+        var res = await this.inner.UpdateVirtualMachineFiles_TaskAsync(req).ConfigureAwait(false);
 
         return res.UpdateVirtualMachineFiles_TaskResponse.returnval;
     }
@@ -12175,7 +12180,7 @@ public class VimClient : IVimClient
             nic = nic,
         };
 
-        await this.inner.UpdateVirtualNicAsync(req);
+        await this.inner.UpdateVirtualNicAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateVirtualSwitch(ManagedObjectReference self, string vswitchName, HostVirtualSwitchSpec spec)
@@ -12187,7 +12192,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        await this.inner.UpdateVirtualSwitchAsync(req);
+        await this.inner.UpdateVirtualSwitchAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateVmfsUnmapBandwidth(ManagedObjectReference self, string vmfsUuid, VmfsUnmapBandwidthSpec unmapBandwidthSpec)
@@ -12199,7 +12204,7 @@ public class VimClient : IVimClient
             unmapBandwidthSpec = unmapBandwidthSpec,
         };
 
-        await this.inner.UpdateVmfsUnmapBandwidthAsync(req);
+        await this.inner.UpdateVmfsUnmapBandwidthAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpdateVmfsUnmapPriority(ManagedObjectReference self, string vmfsUuid, string unmapPriority)
@@ -12211,7 +12216,7 @@ public class VimClient : IVimClient
             unmapPriority = unmapPriority,
         };
 
-        await this.inner.UpdateVmfsUnmapPriorityAsync(req);
+        await this.inner.UpdateVmfsUnmapPriorityAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> UpdateVsan_Task(ManagedObjectReference self, VsanHostConfigInfo config)
@@ -12222,7 +12227,7 @@ public class VimClient : IVimClient
             config = config,
         };
 
-        var res = await this.inner.UpdateVsan_TaskAsync(req);
+        var res = await this.inner.UpdateVsan_TaskAsync(req).ConfigureAwait(false);
 
         return res.UpdateVsan_TaskResponse.returnval;
     }
@@ -12235,7 +12240,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.UpdateVStorageInfrastructureObjectPolicy_TaskAsync(req);
+        var res = await this.inner.UpdateVStorageInfrastructureObjectPolicy_TaskAsync(req).ConfigureAwait(false);
 
         return res.UpdateVStorageInfrastructureObjectPolicy_TaskResponse.returnval;
     }
@@ -12251,7 +12256,7 @@ public class VimClient : IVimClient
             disksCrypto = disksCrypto,
         };
 
-        var res = await this.inner.UpdateVStorageObjectCrypto_TaskAsync(req);
+        var res = await this.inner.UpdateVStorageObjectCrypto_TaskAsync(req).ConfigureAwait(false);
 
         return res.UpdateVStorageObjectCrypto_TaskResponse.returnval;
     }
@@ -12266,7 +12271,7 @@ public class VimClient : IVimClient
             profile = profile,
         };
 
-        var res = await this.inner.UpdateVStorageObjectPolicy_TaskAsync(req);
+        var res = await this.inner.UpdateVStorageObjectPolicy_TaskAsync(req).ConfigureAwait(false);
 
         return res.UpdateVStorageObjectPolicy_TaskResponse.returnval;
     }
@@ -12279,7 +12284,7 @@ public class VimClient : IVimClient
             failoverPair = failoverPair,
         };
 
-        var res = await this.inner.UpdateVVolVirtualMachineFiles_TaskAsync(req);
+        var res = await this.inner.UpdateVVolVirtualMachineFiles_TaskAsync(req).ConfigureAwait(false);
 
         return res.UpdateVVolVirtualMachineFiles_TaskResponse.returnval;
     }
@@ -12295,7 +12300,7 @@ public class VimClient : IVimClient
             vibSslTrust = vibSslTrust,
         };
 
-        var res = await this.inner.UpgradeIoFilter_TaskAsync(req);
+        var res = await this.inner.UpgradeIoFilter_TaskAsync(req).ConfigureAwait(false);
 
         return res.UpgradeIoFilter_TaskResponse.returnval;
     }
@@ -12308,7 +12313,7 @@ public class VimClient : IVimClient
             installerOptions = installerOptions,
         };
 
-        var res = await this.inner.UpgradeTools_TaskAsync(req);
+        var res = await this.inner.UpgradeTools_TaskAsync(req).ConfigureAwait(false);
 
         return res.UpgradeTools_TaskResponse.returnval;
     }
@@ -12321,7 +12326,7 @@ public class VimClient : IVimClient
             version = version,
         };
 
-        var res = await this.inner.UpgradeVM_TaskAsync(req);
+        var res = await this.inner.UpgradeVM_TaskAsync(req).ConfigureAwait(false);
 
         return res.UpgradeVM_TaskResponse.returnval;
     }
@@ -12334,7 +12339,7 @@ public class VimClient : IVimClient
             vmfsPath = vmfsPath,
         };
 
-        await this.inner.UpgradeVmfsAsync(req);
+        await this.inner.UpgradeVmfsAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UpgradeVmLayout(ManagedObjectReference self)
@@ -12344,7 +12349,7 @@ public class VimClient : IVimClient
             _this = self,
         };
 
-        await this.inner.UpgradeVmLayoutAsync(req);
+        await this.inner.UpgradeVmLayoutAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<HostVsanInternalSystemVsanObjectOperationResult[]?> UpgradeVsanObjects(ManagedObjectReference self, string[] uuids, int newVersion)
@@ -12356,7 +12361,7 @@ public class VimClient : IVimClient
             newVersion = newVersion,
         };
 
-        var res = await this.inner.UpgradeVsanObjectsAsync(req);
+        var res = await this.inner.UpgradeVsanObjectsAsync(req).ConfigureAwait(false);
 
         return res.UpgradeVsanObjectsResponse1;
     }
@@ -12371,7 +12376,7 @@ public class VimClient : IVimClient
             privateKey = privateKey,
         };
 
-        await this.inner.UploadClientCertAsync(req);
+        await this.inner.UploadClientCertAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UploadKmipServerCert(ManagedObjectReference self, KeyProviderId cluster, string certificate)
@@ -12383,7 +12388,7 @@ public class VimClient : IVimClient
             certificate = certificate,
         };
 
-        await this.inner.UploadKmipServerCertAsync(req);
+        await this.inner.UploadKmipServerCertAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task ValidateCredentialsInGuest(ManagedObjectReference self, ManagedObjectReference vm, GuestAuthentication auth)
@@ -12395,7 +12400,7 @@ public class VimClient : IVimClient
             auth = auth,
         };
 
-        await this.inner.ValidateCredentialsInGuestAsync(req);
+        await this.inner.ValidateCredentialsInGuestAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ClusterComputeResourceValidationResultBase[]?> ValidateHCIConfiguration(ManagedObjectReference self, ClusterComputeResourceHCIConfigSpec? hciConfigSpec, ManagedObjectReference[]? hosts)
@@ -12407,7 +12412,7 @@ public class VimClient : IVimClient
             hosts = hosts,
         };
 
-        var res = await this.inner.ValidateHCIConfigurationAsync(req);
+        var res = await this.inner.ValidateHCIConfigurationAsync(req).ConfigureAwait(false);
 
         return res.ValidateHCIConfigurationResponse1;
     }
@@ -12422,7 +12427,7 @@ public class VimClient : IVimClient
             vhp = vhp,
         };
 
-        var res = await this.inner.ValidateHostAsync(req);
+        var res = await this.inner.ValidateHostAsync(req).ConfigureAwait(false);
 
         return res.ValidateHostResponse.returnval;
     }
@@ -12442,7 +12447,7 @@ public class VimClient : IVimClient
             errorOnlySpecified = errorOnlySpecified,
         };
 
-        var res = await this.inner.ValidateHostProfileComposition_TaskAsync(req);
+        var res = await this.inner.ValidateHostProfileComposition_TaskAsync(req).ConfigureAwait(false);
 
         return res.ValidateHostProfileComposition_TaskResponse.returnval;
     }
@@ -12460,7 +12465,7 @@ public class VimClient : IVimClient
             host = host,
         };
 
-        var res = await this.inner.ValidateMigrationAsync(req);
+        var res = await this.inner.ValidateMigrationAsync(req).ConfigureAwait(false);
 
         return res.ValidateMigrationResponse1;
     }
@@ -12474,7 +12479,7 @@ public class VimClient : IVimClient
             spec = spec,
         };
 
-        var res = await this.inner.ValidateStoragePodConfigAsync(req);
+        var res = await this.inner.ValidateStoragePodConfigAsync(req).ConfigureAwait(false);
 
         return res.ValidateStoragePodConfigResponse.returnval;
     }
@@ -12490,7 +12495,7 @@ public class VimClient : IVimClient
             deleteKeys = deleteKeys,
         };
 
-        var res = await this.inner.VCenterUpdateVStorageObjectMetadataEx_TaskAsync(req);
+        var res = await this.inner.VCenterUpdateVStorageObjectMetadataEx_TaskAsync(req).ConfigureAwait(false);
 
         return res.VCenterUpdateVStorageObjectMetadataEx_TaskResponse.returnval;
     }
@@ -12505,7 +12510,7 @@ public class VimClient : IVimClient
             description = description,
         };
 
-        var res = await this.inner.VStorageObjectCreateSnapshot_TaskAsync(req);
+        var res = await this.inner.VStorageObjectCreateSnapshot_TaskAsync(req).ConfigureAwait(false);
 
         return res.VStorageObjectCreateSnapshot_TaskResponse.returnval;
     }
@@ -12521,7 +12526,7 @@ public class VimClient : IVimClient
             snapshotId = snapshotId,
         };
 
-        var res = await this.inner.VStorageObjectCreateSnapshotEx_TaskAsync(req);
+        var res = await this.inner.VStorageObjectCreateSnapshotEx_TaskAsync(req).ConfigureAwait(false);
 
         return res.VStorageObjectCreateSnapshotEx_TaskResponse.returnval;
     }
@@ -12536,7 +12541,7 @@ public class VimClient : IVimClient
             snapshotId = snapshotId,
         };
 
-        var res = await this.inner.VStorageObjectDeleteSnapshotEx_TaskAsync(req);
+        var res = await this.inner.VStorageObjectDeleteSnapshotEx_TaskAsync(req).ConfigureAwait(false);
 
         return res.VStorageObjectDeleteSnapshotEx_TaskResponse.returnval;
     }
@@ -12551,7 +12556,7 @@ public class VimClient : IVimClient
             snapshotId = snapshotId,
         };
 
-        var res = await this.inner.VStorageObjectDeleteSnapshotEx2_TaskAsync(req);
+        var res = await this.inner.VStorageObjectDeleteSnapshotEx2_TaskAsync(req).ConfigureAwait(false);
 
         return res.VStorageObjectDeleteSnapshotEx2_TaskResponse.returnval;
     }
@@ -12566,7 +12571,7 @@ public class VimClient : IVimClient
             newCapacityInMB = newCapacityInMB,
         };
 
-        var res = await this.inner.VStorageObjectExtendDiskEx_TaskAsync(req);
+        var res = await this.inner.VStorageObjectExtendDiskEx_TaskAsync(req).ConfigureAwait(false);
 
         return res.VStorageObjectExtendDiskEx_TaskResponse.returnval;
     }
@@ -12583,7 +12588,7 @@ public class VimClient : IVimClient
             changeId = changeId,
         };
 
-        var res = await this.inner.VstorageObjectVCenterQueryChangedDiskAreasAsync(req);
+        var res = await this.inner.VstorageObjectVCenterQueryChangedDiskAreasAsync(req).ConfigureAwait(false);
 
         return res.VstorageObjectVCenterQueryChangedDiskAreasResponse.returnval;
     }
@@ -12596,7 +12601,7 @@ public class VimClient : IVimClient
             version = version,
         };
 
-        var res = await this.inner.WaitForUpdatesAsync(req);
+        var res = await this.inner.WaitForUpdatesAsync(req).ConfigureAwait(false);
 
         return res.WaitForUpdatesResponse.returnval;
     }
@@ -12610,7 +12615,7 @@ public class VimClient : IVimClient
             options = options,
         };
 
-        var res = await this.inner.WaitForUpdatesExAsync(req);
+        var res = await this.inner.WaitForUpdatesExAsync(req).ConfigureAwait(false);
 
         return res.WaitForUpdatesExResponse.returnval;
     }
@@ -12623,7 +12628,7 @@ public class VimClient : IVimClient
             specItemXml = specItemXml,
         };
 
-        var res = await this.inner.XmlToCustomizationSpecItemAsync(req);
+        var res = await this.inner.XmlToCustomizationSpecItemAsync(req).ConfigureAwait(false);
 
         return res.XmlToCustomizationSpecItemResponse.returnval;
     }
@@ -12637,7 +12642,7 @@ public class VimClient : IVimClient
             datacenter = datacenter,
         };
 
-        var res = await this.inner.ZeroFillVirtualDisk_TaskAsync(req);
+        var res = await this.inner.ZeroFillVirtualDisk_TaskAsync(req).ConfigureAwait(false);
 
         return res.ZeroFillVirtualDisk_TaskResponse.returnval;
     }

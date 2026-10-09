@@ -2,7 +2,7 @@
 
 public partial class PropertyFilter : ManagedObject, IAsyncDisposable, IDisposable
 {
-    private bool disposed = false;
+    private bool disposed;
 
     public void Dispose()
     {
@@ -12,7 +12,7 @@ public partial class PropertyFilter : ManagedObject, IAsyncDisposable, IDisposab
 
     public async ValueTask DisposeAsync()
     {
-        await this.DisposeAsyncCore();
+        await this.DisposeAsyncCore().ConfigureAwait(false);
         this.Dispose(false);
         GC.SuppressFinalize(this);
     }
@@ -30,7 +30,7 @@ public partial class PropertyFilter : ManagedObject, IAsyncDisposable, IDisposab
     {
         if (!this.disposed)
         {
-            await this.DestroyPropertyFilter();
+            await this.DestroyPropertyFilter().ConfigureAwait(false);
             this.disposed = true;
         }
     }

@@ -33,6 +33,11 @@ public class VslmClient : IVslmClient
 
     public void SetCookie(System.Net.CookieCollection? cookie)
     {
+        if (cookie == null)
+        {
+            return;
+        }
+
         var container = this.inner.InnerChannel
             .GetProperty<IHttpCookieContainerManager>()!
             .CookieContainer;
@@ -50,7 +55,7 @@ public class VslmClient : IVslmClient
             _this = self,
         };
 
-        var res = await this.inner.RetrieveContentAsync(req);
+        var res = await this.inner.RetrieveContentAsync(req).ConfigureAwait(false);
 
         return res.RetrieveContentResponse.returnval;
     }
@@ -68,7 +73,7 @@ public class VslmClient : IVslmClient
             unitNumberSpecified = unitNumberSpecified,
         };
 
-        var res = await this.inner.VslmAttachDisk_TaskAsync(req);
+        var res = await this.inner.VslmAttachDisk_TaskAsync(req).ConfigureAwait(false);
 
         return res.VslmAttachDisk_TaskResponse.returnval;
     }
@@ -83,7 +88,7 @@ public class VslmClient : IVslmClient
             tag = tag,
         };
 
-        await this.inner.VslmAttachTagToVStorageObjectAsync(req);
+        await this.inner.VslmAttachTagToVStorageObjectAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task VslmCancelTask(ManagedObjectReference self)
@@ -93,7 +98,7 @@ public class VslmClient : IVslmClient
             _this = self,
         };
 
-        await this.inner.VslmCancelTaskAsync(req);
+        await this.inner.VslmCancelTaskAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task VslmClearVStorageObjectControlFlags(ManagedObjectReference self, ID id, string[]? controlFlags)
@@ -105,7 +110,7 @@ public class VslmClient : IVslmClient
             controlFlags = controlFlags,
         };
 
-        await this.inner.VslmClearVStorageObjectControlFlagsAsync(req);
+        await this.inner.VslmClearVStorageObjectControlFlagsAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> VslmCloneVStorageObject_Task(ManagedObjectReference self, ID id, VslmCloneSpec spec)
@@ -117,7 +122,7 @@ public class VslmClient : IVslmClient
             spec = spec,
         };
 
-        var res = await this.inner.VslmCloneVStorageObject_TaskAsync(req);
+        var res = await this.inner.VslmCloneVStorageObject_TaskAsync(req).ConfigureAwait(false);
 
         return res.VslmCloneVStorageObject_TaskResponse.returnval;
     }
@@ -130,7 +135,7 @@ public class VslmClient : IVslmClient
             spec = spec,
         };
 
-        var res = await this.inner.VslmCreateDisk_TaskAsync(req);
+        var res = await this.inner.VslmCreateDisk_TaskAsync(req).ConfigureAwait(false);
 
         return res.VslmCreateDisk_TaskResponse.returnval;
     }
@@ -148,7 +153,7 @@ public class VslmClient : IVslmClient
             path = path,
         };
 
-        var res = await this.inner.VslmCreateDiskFromSnapshot_TaskAsync(req);
+        var res = await this.inner.VslmCreateDiskFromSnapshot_TaskAsync(req).ConfigureAwait(false);
 
         return res.VslmCreateDiskFromSnapshot_TaskResponse.returnval;
     }
@@ -162,7 +167,7 @@ public class VslmClient : IVslmClient
             description = description,
         };
 
-        var res = await this.inner.VslmCreateSnapshot_TaskAsync(req);
+        var res = await this.inner.VslmCreateSnapshot_TaskAsync(req).ConfigureAwait(false);
 
         return res.VslmCreateSnapshot_TaskResponse.returnval;
     }
@@ -176,7 +181,7 @@ public class VslmClient : IVslmClient
             snapshotId = snapshotId,
         };
 
-        var res = await this.inner.VslmDeleteSnapshot_TaskAsync(req);
+        var res = await this.inner.VslmDeleteSnapshot_TaskAsync(req).ConfigureAwait(false);
 
         return res.VslmDeleteSnapshot_TaskResponse.returnval;
     }
@@ -189,7 +194,7 @@ public class VslmClient : IVslmClient
             id = id,
         };
 
-        var res = await this.inner.VslmDeleteVStorageObject_TaskAsync(req);
+        var res = await this.inner.VslmDeleteVStorageObject_TaskAsync(req).ConfigureAwait(false);
 
         return res.VslmDeleteVStorageObject_TaskResponse.returnval;
     }
@@ -204,7 +209,7 @@ public class VslmClient : IVslmClient
             tag = tag,
         };
 
-        await this.inner.VslmDetachTagFromVStorageObjectAsync(req);
+        await this.inner.VslmDetachTagFromVStorageObjectAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> VslmExtendDisk_Task(ManagedObjectReference self, ID id, long newCapacityInMB)
@@ -216,7 +221,7 @@ public class VslmClient : IVslmClient
             newCapacityInMB = newCapacityInMB,
         };
 
-        var res = await this.inner.VslmExtendDisk_TaskAsync(req);
+        var res = await this.inner.VslmExtendDisk_TaskAsync(req).ConfigureAwait(false);
 
         return res.VslmExtendDisk_TaskResponse.returnval;
     }
@@ -229,7 +234,7 @@ public class VslmClient : IVslmClient
             id = id,
         };
 
-        var res = await this.inner.VslmInflateDisk_TaskAsync(req);
+        var res = await this.inner.VslmInflateDisk_TaskAsync(req).ConfigureAwait(false);
 
         return res.VslmInflateDisk_TaskResponse.returnval;
     }
@@ -242,7 +247,7 @@ public class VslmClient : IVslmClient
             id = id,
         };
 
-        var res = await this.inner.VslmListTagsAttachedToVStorageObjectAsync(req);
+        var res = await this.inner.VslmListTagsAttachedToVStorageObjectAsync(req).ConfigureAwait(false);
 
         return res.VslmListTagsAttachedToVStorageObjectResponse1;
     }
@@ -256,7 +261,7 @@ public class VslmClient : IVslmClient
             maxResult = maxResult,
         };
 
-        var res = await this.inner.VslmListVStorageObjectForSpecAsync(req);
+        var res = await this.inner.VslmListVStorageObjectForSpecAsync(req).ConfigureAwait(false);
 
         return res.VslmListVStorageObjectForSpecResponse.returnval;
     }
@@ -270,7 +275,7 @@ public class VslmClient : IVslmClient
             tag = tag,
         };
 
-        var res = await this.inner.VslmListVStorageObjectsAttachedToTagAsync(req);
+        var res = await this.inner.VslmListVStorageObjectsAttachedToTagAsync(req).ConfigureAwait(false);
 
         return res.VslmListVStorageObjectsAttachedToTagResponse1;
     }
@@ -283,7 +288,7 @@ public class VslmClient : IVslmClient
             delegatedTokenXml = delegatedTokenXml,
         };
 
-        await this.inner.VslmLoginByTokenAsync(req);
+        await this.inner.VslmLoginByTokenAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task VslmLogout(ManagedObjectReference self)
@@ -293,7 +298,7 @@ public class VslmClient : IVslmClient
             _this = self,
         };
 
-        await this.inner.VslmLogoutAsync(req);
+        await this.inner.VslmLogoutAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<DiskChangeInfo?> VslmQueryChangedDiskAreas(ManagedObjectReference self, ID id, ID snapshotId, long startOffset, string changeId)
@@ -307,7 +312,7 @@ public class VslmClient : IVslmClient
             changeId = changeId,
         };
 
-        var res = await this.inner.VslmQueryChangedDiskAreasAsync(req);
+        var res = await this.inner.VslmQueryChangedDiskAreasAsync(req).ConfigureAwait(false);
 
         return res.VslmQueryChangedDiskAreasResponse.returnval;
     }
@@ -320,7 +325,7 @@ public class VslmClient : IVslmClient
             datastoreUrl = datastoreUrl,
         };
 
-        var res = await this.inner.VslmQueryDatastoreInfoAsync(req);
+        var res = await this.inner.VslmQueryDatastoreInfoAsync(req).ConfigureAwait(false);
 
         return res.VslmQueryDatastoreInfoResponse1;
     }
@@ -332,7 +337,7 @@ public class VslmClient : IVslmClient
             _this = self,
         };
 
-        var res = await this.inner.VslmQueryGlobalCatalogSyncStatusAsync(req);
+        var res = await this.inner.VslmQueryGlobalCatalogSyncStatusAsync(req).ConfigureAwait(false);
 
         return res.VslmQueryGlobalCatalogSyncStatusResponse1;
     }
@@ -345,7 +350,7 @@ public class VslmClient : IVslmClient
             datastoreURL = datastoreURL,
         };
 
-        var res = await this.inner.VslmQueryGlobalCatalogSyncStatusForDatastoreAsync(req);
+        var res = await this.inner.VslmQueryGlobalCatalogSyncStatusForDatastoreAsync(req).ConfigureAwait(false);
 
         return res.VslmQueryGlobalCatalogSyncStatusForDatastoreResponse.returnval;
     }
@@ -357,7 +362,7 @@ public class VslmClient : IVslmClient
             _this = self,
         };
 
-        var res = await this.inner.VslmQueryInfoAsync(req);
+        var res = await this.inner.VslmQueryInfoAsync(req).ConfigureAwait(false);
 
         return res.VslmQueryInfoResponse.returnval;
     }
@@ -369,7 +374,7 @@ public class VslmClient : IVslmClient
             _this = self,
         };
 
-        var res = await this.inner.VslmQueryTaskResultAsync(req);
+        var res = await this.inner.VslmQueryTaskResultAsync(req).ConfigureAwait(false);
 
         return res.VslmQueryTaskResultResponse.returnval;
     }
@@ -382,7 +387,7 @@ public class VslmClient : IVslmClient
             datastore = datastore,
         };
 
-        var res = await this.inner.VslmReconcileDatastoreInventory_TaskAsync(req);
+        var res = await this.inner.VslmReconcileDatastoreInventory_TaskAsync(req).ConfigureAwait(false);
 
         return res.VslmReconcileDatastoreInventory_TaskResponse.returnval;
     }
@@ -396,7 +401,7 @@ public class VslmClient : IVslmClient
             name = name,
         };
 
-        var res = await this.inner.VslmRegisterDiskAsync(req);
+        var res = await this.inner.VslmRegisterDiskAsync(req).ConfigureAwait(false);
 
         return res.VslmRegisterDiskResponse.returnval;
     }
@@ -410,7 +415,7 @@ public class VslmClient : IVslmClient
             spec = spec,
         };
 
-        var res = await this.inner.VslmRelocateVStorageObject_TaskAsync(req);
+        var res = await this.inner.VslmRelocateVStorageObject_TaskAsync(req).ConfigureAwait(false);
 
         return res.VslmRelocateVStorageObject_TaskResponse.returnval;
     }
@@ -424,7 +429,7 @@ public class VslmClient : IVslmClient
             name = name,
         };
 
-        await this.inner.VslmRenameVStorageObjectAsync(req);
+        await this.inner.VslmRenameVStorageObjectAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<VStorageObjectSnapshotDetails?> VslmRetrieveSnapshotDetails(ManagedObjectReference self, ID id, ID snapshotId)
@@ -436,7 +441,7 @@ public class VslmClient : IVslmClient
             snapshotId = snapshotId,
         };
 
-        var res = await this.inner.VslmRetrieveSnapshotDetailsAsync(req);
+        var res = await this.inner.VslmRetrieveSnapshotDetailsAsync(req).ConfigureAwait(false);
 
         return res.VslmRetrieveSnapshotDetailsResponse.returnval;
     }
@@ -449,7 +454,7 @@ public class VslmClient : IVslmClient
             id = id,
         };
 
-        var res = await this.inner.VslmRetrieveSnapshotInfoAsync(req);
+        var res = await this.inner.VslmRetrieveSnapshotInfoAsync(req).ConfigureAwait(false);
 
         return res.VslmRetrieveSnapshotInfoResponse.returnval;
     }
@@ -462,7 +467,7 @@ public class VslmClient : IVslmClient
             datastore = datastore,
         };
 
-        var res = await this.inner.VslmRetrieveVStorageInfrastructureObjectPolicyAsync(req);
+        var res = await this.inner.VslmRetrieveVStorageInfrastructureObjectPolicyAsync(req).ConfigureAwait(false);
 
         return res.VslmRetrieveVStorageInfrastructureObjectPolicyResponse1;
     }
@@ -475,7 +480,7 @@ public class VslmClient : IVslmClient
             id = id,
         };
 
-        var res = await this.inner.VslmRetrieveVStorageObjectAsync(req);
+        var res = await this.inner.VslmRetrieveVStorageObjectAsync(req).ConfigureAwait(false);
 
         return res.VslmRetrieveVStorageObjectResponse.returnval;
     }
@@ -488,7 +493,7 @@ public class VslmClient : IVslmClient
             ids = ids,
         };
 
-        var res = await this.inner.VslmRetrieveVStorageObjectAssociationsAsync(req);
+        var res = await this.inner.VslmRetrieveVStorageObjectAssociationsAsync(req).ConfigureAwait(false);
 
         return res.VslmRetrieveVStorageObjectAssociationsResponse1;
     }
@@ -503,7 +508,7 @@ public class VslmClient : IVslmClient
             prefix = prefix,
         };
 
-        var res = await this.inner.VslmRetrieveVStorageObjectMetadataAsync(req);
+        var res = await this.inner.VslmRetrieveVStorageObjectMetadataAsync(req).ConfigureAwait(false);
 
         return res.VslmRetrieveVStorageObjectMetadataResponse1;
     }
@@ -518,7 +523,7 @@ public class VslmClient : IVslmClient
             key = key,
         };
 
-        var res = await this.inner.VslmRetrieveVStorageObjectMetadataValueAsync(req);
+        var res = await this.inner.VslmRetrieveVStorageObjectMetadataValueAsync(req).ConfigureAwait(false);
 
         return res.VslmRetrieveVStorageObjectMetadataValueResponse.returnval;
     }
@@ -531,7 +536,7 @@ public class VslmClient : IVslmClient
             ids = ids,
         };
 
-        var res = await this.inner.VslmRetrieveVStorageObjectsAsync(req);
+        var res = await this.inner.VslmRetrieveVStorageObjectsAsync(req).ConfigureAwait(false);
 
         return res.VslmRetrieveVStorageObjectsResponse1;
     }
@@ -544,7 +549,7 @@ public class VslmClient : IVslmClient
             id = id,
         };
 
-        var res = await this.inner.VslmRetrieveVStorageObjectStateAsync(req);
+        var res = await this.inner.VslmRetrieveVStorageObjectStateAsync(req).ConfigureAwait(false);
 
         return res.VslmRetrieveVStorageObjectStateResponse.returnval;
     }
@@ -558,7 +563,7 @@ public class VslmClient : IVslmClient
             snapshotId = snapshotId,
         };
 
-        var res = await this.inner.VslmRevertVStorageObject_TaskAsync(req);
+        var res = await this.inner.VslmRevertVStorageObject_TaskAsync(req).ConfigureAwait(false);
 
         return res.VslmRevertVStorageObject_TaskResponse.returnval;
     }
@@ -571,7 +576,7 @@ public class VslmClient : IVslmClient
             datastore = datastore,
         };
 
-        await this.inner.VslmScheduleReconcileDatastoreInventoryAsync(req);
+        await this.inner.VslmScheduleReconcileDatastoreInventoryAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task VslmSetVStorageObjectControlFlags(ManagedObjectReference self, ID id, string[]? controlFlags)
@@ -583,7 +588,7 @@ public class VslmClient : IVslmClient
             controlFlags = controlFlags,
         };
 
-        await this.inner.VslmSetVStorageObjectControlFlagsAsync(req);
+        await this.inner.VslmSetVStorageObjectControlFlagsAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task VslmSyncDatastore(ManagedObjectReference self, string datastoreUrl, bool fullSync, ID? fcdId)
@@ -596,7 +601,7 @@ public class VslmClient : IVslmClient
             fcdId = fcdId,
         };
 
-        await this.inner.VslmSyncDatastoreAsync(req);
+        await this.inner.VslmSyncDatastoreAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference?> VslmUpdateVStorageInfrastructureObjectPolicy_Task(ManagedObjectReference self, vslmInfrastructureObjectPolicySpec spec)
@@ -607,7 +612,7 @@ public class VslmClient : IVslmClient
             spec = spec,
         };
 
-        var res = await this.inner.VslmUpdateVStorageInfrastructureObjectPolicy_TaskAsync(req);
+        var res = await this.inner.VslmUpdateVStorageInfrastructureObjectPolicy_TaskAsync(req).ConfigureAwait(false);
 
         return res.VslmUpdateVStorageInfrastructureObjectPolicy_TaskResponse.returnval;
     }
@@ -622,7 +627,7 @@ public class VslmClient : IVslmClient
             deleteKeys = deleteKeys,
         };
 
-        var res = await this.inner.VslmUpdateVStorageObjectMetadata_TaskAsync(req);
+        var res = await this.inner.VslmUpdateVStorageObjectMetadata_TaskAsync(req).ConfigureAwait(false);
 
         return res.VslmUpdateVStorageObjectMetadata_TaskResponse.returnval;
     }
@@ -636,7 +641,7 @@ public class VslmClient : IVslmClient
             profile = profile,
         };
 
-        var res = await this.inner.VslmUpdateVstorageObjectPolicy_TaskAsync(req);
+        var res = await this.inner.VslmUpdateVstorageObjectPolicy_TaskAsync(req).ConfigureAwait(false);
 
         return res.VslmUpdateVstorageObjectPolicy_TaskResponse.returnval;
     }

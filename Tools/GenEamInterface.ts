@@ -28,9 +28,7 @@ function writeManagedObjectMethod(method: ManagedObjectMethod) {
 
     // START
     methodDeclare = `
-    System.Threading.Tasks.Task<${returnTy}> ${methodName}(${
-      params.join(", ")
-    });`;
+    System.Threading.Tasks.Task<${returnTy}> ${methodName}(${params.join(", ")});`;
     // END
   }
 

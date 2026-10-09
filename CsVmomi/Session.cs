@@ -182,7 +182,7 @@ public class Session
         var tool = new MessageToolBox();
         inner.Endpoint.EndpointBehaviors.Add(new FixupBehavior(tool));
 
-        var session = await Session.Get(inner);
+        var session = await Session.Get(inner).ConfigureAwait(false);
         session.MessageToolBox = tool;
 
         return session;
@@ -190,7 +190,7 @@ public class Session
 
     public static async System.Threading.Tasks.Task<Session> Get(VimPortTypeClient inner)
     {
-        return await Session.Get(new VimClient(inner));
+        return await Session.Get(new VimClient(inner)).ConfigureAwait(false);
     }
 
     public static async System.Threading.Tasks.Task<Session> Get(IVimClient client)
@@ -200,7 +200,7 @@ public class Session
             type = "ServiceInstance",
             Value = "ServiceInstance",
         };
-        var serviceContent = await client.RetrieveServiceContent(mor);
+        var serviceContent = await client.RetrieveServiceContent(mor).ConfigureAwait(false);
 
         return new Session(client, serviceContent!);
     }
@@ -282,7 +282,7 @@ public class Session
             type = "PbmServiceInstance",
             Value = "ServiceInstance",
         };
-        this.pbmServiceContent = await client.PbmRetrieveServiceContent(mor);
+        this.pbmServiceContent = await client.PbmRetrieveServiceContent(mor).ConfigureAwait(false);
     }
 
     public void SetSmsClient()
@@ -395,7 +395,7 @@ public class Session
             type = "VslmServiceInstance",
             Value = "ServiceInstance",
         };
-        this.vslmServiceContent = await client.RetrieveContent(mor);
+        this.vslmServiceContent = await client.RetrieveContent(mor).ConfigureAwait(false);
     }
 
     internal static async System.Threading.Tasks.Task<Session> Get(Uri url, SecurityToken token)
@@ -417,7 +417,7 @@ public class Session
         var tool = new MessageToolBox();
         inner.Endpoint.EndpointBehaviors.Add(new FixupBehavior(tool));
 
-        var session = await Session.Get(inner);
+        var session = await Session.Get(inner).ConfigureAwait(false);
         session.MessageToolBox = tool;
 
         return session;
@@ -469,7 +469,7 @@ public class Session
         var customBinding = new CustomBinding(binding);
         var security = customBinding.Elements.OfType<SecurityBindingElement>().FirstOrDefault();
         // security.EnableUnsecuredResponse = true;
-        security?.GetType().GetProperty("EnableUnsecuredResponse").SetValue(security, true);
+        security?.GetType().GetProperty("EnableUnsecuredResponse")?.SetValue(security, true);
 
         return customBinding;
     }

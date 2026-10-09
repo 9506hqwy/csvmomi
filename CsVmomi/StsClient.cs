@@ -31,6 +31,11 @@ public class StsClient : IStsClient
 
     public void SetCookie(System.Net.CookieCollection? cookie)
     {
+        if (cookie == null)
+        {
+            return;
+        }
+
         var container = this.inner.InnerChannel
             .GetProperty<IHttpCookieContainerManager>()!
             .CookieContainer;
@@ -43,25 +48,25 @@ public class StsClient : IStsClient
 
     public async System.Threading.Tasks.Task<RequestSecurityTokenResponseType> Issue(RequestSecurityTokenType requestSecurityToken)
     {
-        var res = await this.inner.IssueAsync(requestSecurityToken);
+        var res = await this.inner.IssueAsync(requestSecurityToken).ConfigureAwait(false);
         return res.RequestSecurityTokenResponseCollection.RequestSecurityTokenResponse;
     }
 
     public async System.Threading.Tasks.Task<RequestSecurityTokenResponseType> Renew(RequestSecurityTokenType requestSecurityToken)
     {
-        var res = await this.inner.RenewAsync(requestSecurityToken);
+        var res = await this.inner.RenewAsync(requestSecurityToken).ConfigureAwait(false);
         return res.RequestSecurityTokenResponse;
     }
 
     public async System.Threading.Tasks.Task<RequestSecurityTokenResponseType> Validate(RequestSecurityTokenType requestSecurityToken)
     {
-        var res = await this.inner.ValidateAsync(requestSecurityToken);
+        var res = await this.inner.ValidateAsync(requestSecurityToken).ConfigureAwait(false);
         return res.RequestSecurityTokenResponse;
     }
 
     public async System.Threading.Tasks.Task<RequestSecurityTokenResponseType> Challenge(RequestSecurityTokenResponseType requestSecurityTokenResponse)
     {
-        var res = await this.inner.ChallengeAsync(requestSecurityTokenResponse);
+        var res = await this.inner.ChallengeAsync(requestSecurityTokenResponse).ConfigureAwait(false);
         return res.RequestSecurityTokenResponseCollection.RequestSecurityTokenResponse;
     }
 }

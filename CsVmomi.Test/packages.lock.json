@@ -8,15 +8,6 @@
         "resolved": "10.1.0",
         "contentHash": "SlYCIHnBYxINSUpR75SiM5JEmnx11pqT+Ac/C/fUqTTA0dLPl9eYzmFXKKuxmQhL3ZdTQl4PBD3YdAxAauaKLQ=="
       },
-      "Microsoft.Bcl.AsyncInterfaces": {
-        "type": "Direct",
-        "requested": "[9.0.0, )",
-        "resolved": "9.0.0",
-        "contentHash": "owmu2Cr3IQ8yQiBleBHlGk8dSQ12oaF2e7TpzwJKEl4m84kkZJjEY1n33L67Y3zM5jPOjmmbdHjbfiL0RqcMRQ==",
-        "dependencies": {
-          "System.Threading.Tasks.Extensions": "4.5.4"
-        }
-      },
       "Microsoft.NET.Test.Sdk": {
         "type": "Direct",
         "requested": "[18.10.1, )",
@@ -59,12 +50,28 @@
           "MSTest.Analyzers": "4.4.0"
         }
       },
+      "EamService": {
+        "type": "Transitive",
+        "resolved": "9.1.1",
+        "contentHash": "6KbXSeeKt3WAmyrUI+3Afb/4oj31QHRglHAYe00u2kIzaORxpX1VrI/6xwQ8poZkoJdvPI/VzvFJ6aH//VGSEg==",
+        "dependencies": {
+          "System.Memory": "4.6.3"
+        }
+      },
       "Microsoft.ApplicationInsights": {
         "type": "Transitive",
         "resolved": "2.23.0",
         "contentHash": "nWArUZTdU7iqZLycLKWe0TDms48KKGE6pONH2terYNa8REXiqixrMOkf1sk5DHGMaUTqONU2YkS4SAXBhLStgw==",
         "dependencies": {
           "System.Diagnostics.DiagnosticSource": "5.0.0"
+        }
+      },
+      "Microsoft.Bcl.AsyncInterfaces": {
+        "type": "Transitive",
+        "resolved": "9.0.0",
+        "contentHash": "owmu2Cr3IQ8yQiBleBHlGk8dSQ12oaF2e7TpzwJKEl4m84kkZJjEY1n33L67Y3zM5jPOjmmbdHjbfiL0RqcMRQ==",
+        "dependencies": {
+          "System.Threading.Tasks.Extensions": "4.5.4"
         }
       },
       "Microsoft.CodeCoverage": {
@@ -123,6 +130,30 @@
         "resolved": "4.4.0",
         "contentHash": "8g2KL2LjsXXVywvQb0uWQBANOONVnRf6cTSbON9ar6gIw08oSBY7Z3PJlC8sHbqOVvCr7srrcWiKzb12SUoV2w=="
       },
+      "PbmService": {
+        "type": "Transitive",
+        "resolved": "9.1.1",
+        "contentHash": "klE5ipcsGYk69i+ZNvFS8BWPbDXQOMFziVrVXKz4cdrstDcJ9wyVSAZt1ZvMucY8WwArqHZR7ugAtGCvOsELoA==",
+        "dependencies": {
+          "System.Memory": "4.6.3"
+        }
+      },
+      "SmsService": {
+        "type": "Transitive",
+        "resolved": "9.1.1",
+        "contentHash": "x5qyZjalt3PN9EjRcMYGp+Ghg9DgdL/RXr7uRgffX4IRPGW27UUxPIXhZF2BRAliWkEFxB/z7L1cb19TIt8k8Q==",
+        "dependencies": {
+          "System.Memory": "4.6.3"
+        }
+      },
+      "StsService": {
+        "type": "Transitive",
+        "resolved": "9.1.1",
+        "contentHash": "u5pigw1o5wewS2z1XkXGbsM1YJojqNbiLgRJSYrnra35PDxiEq8lKanHmIQKNZpmHVlNNmusmJAhu825hsd9Yw==",
+        "dependencies": {
+          "System.Memory": "4.6.3"
+        }
+      },
       "System.Buffers": {
         "type": "Transitive",
         "resolved": "4.6.1",
@@ -175,27 +206,6 @@
         "resolved": "6.1.2",
         "contentHash": "2hBr6zdbIBTDE3EhK7NSVNdX58uTK6iHW/P/Axmm9sl1xoGSLqDvMtpecn226TNwHByFokYwJmt/aQQNlO5CRw=="
       },
-      "System.ServiceModel.Http": {
-        "type": "Transitive",
-        "resolved": "4.10.3",
-        "contentHash": "hodkn0rPTYmoZ9EIPwcleUrOi1gZBPvU0uFvzmJbyxl1lIpVM5GxTrs/pCETStjOXCiXhBDoZQYajquOEfeW/w==",
-        "dependencies": {
-          "System.ServiceModel.Primitives": "4.10.3"
-        }
-      },
-      "System.ServiceModel.Primitives": {
-        "type": "Transitive",
-        "resolved": "4.10.3",
-        "contentHash": "aNcdry95wIP1J+/HcLQM/f/AA73LnBQDNc2uCoZ+c1//KpVRp8nMZv5ApMwK+eDNVdCK8G0NLInF+xG3mfQL+g=="
-      },
-      "System.ServiceModel.Security": {
-        "type": "Transitive",
-        "resolved": "4.10.3",
-        "contentHash": "vqelKb7DvP2inb6LDJ5Igi8wpOYdtLXn5luDW5qEaqkV2sYO1pKlVYBpr6g6m5SevzbdZlVNu67dQiD/H6EdGQ==",
-        "dependencies": {
-          "System.ServiceModel.Primitives": "4.10.3"
-        }
-      },
       "System.Threading.Tasks.Extensions": {
         "type": "Transitive",
         "resolved": "4.5.4",
@@ -209,11 +219,32 @@
         "resolved": "4.5.0",
         "contentHash": "okurQJO6NRE/apDIP23ajJ0hpiNmJ+f0BwOlB/cSqTLQlw5upkf+5+96+iG2Jw40G1fCVCyPz/FhIABUjMR+RQ=="
       },
+      "VimService": {
+        "type": "Transitive",
+        "resolved": "9.1.1",
+        "contentHash": "N0J1Cgw7nk2otT0IJofMos5grei1d66DQGJ7VEdVn0fGA/UowXgat8QxGtZmjRs8paYJycVN8A8KyzRgUIFYhw==",
+        "dependencies": {
+          "System.Memory": "4.6.3"
+        }
+      },
+      "VslmService": {
+        "type": "Transitive",
+        "resolved": "9.1.1",
+        "contentHash": "V2DMS5HnR2NoI26lH09wcSUvdrqE2Tbz9WSKJrXRDC54yD1M674ei4mBya1WFRQscYhA2en4E2dfsuFNKxc1zw==",
+        "dependencies": {
+          "System.Memory": "4.6.3"
+        }
+      },
       "csvmomi": {
         "type": "Project",
         "dependencies": {
-          "System.ServiceModel.Http": "[4.10.3, )",
-          "System.ServiceModel.Security": "[4.10.3, )"
+          "EamService": "[9.1.1, )",
+          "Microsoft.Bcl.AsyncInterfaces": "[9.0.0, )",
+          "PbmService": "[9.1.1, )",
+          "SmsService": "[9.1.1, )",
+          "StsService": "[9.1.1, )",
+          "VimService": "[9.1.1, )",
+          "VslmService": "[9.1.1, )"
         }
       }
     }

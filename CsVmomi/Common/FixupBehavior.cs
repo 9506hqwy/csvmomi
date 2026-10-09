@@ -14,26 +14,26 @@ public class FixupBehavior : IEndpointBehavior
     }
 
     public void AddBindingParameters(
-        ServiceEndpoint serviceEndpoint,
+        ServiceEndpoint endpoint,
         BindingParameterCollection bindingParameters)
     {
     }
 
     public void ApplyClientBehavior(
-        ServiceEndpoint serviceEndpoint,
-        ClientRuntime behavior)
+        ServiceEndpoint endpoint,
+        ClientRuntime clientRuntime)
     {
-        behavior.ClientMessageInspectors.Add(
+        clientRuntime.ClientMessageInspectors.Add(
             new FixupMessageInspector(this.tool));
     }
 
     public void ApplyDispatchBehavior(
-        ServiceEndpoint serviceEndpoint,
+        ServiceEndpoint endpoint,
         EndpointDispatcher endpointDispatcher)
     {
     }
 
-    public void Validate(ServiceEndpoint serviceEndpoint)
+    public void Validate(ServiceEndpoint endpoint)
     {
     }
 }

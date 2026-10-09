@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>net8.0;net472</TargetFrameworks>
     <Version>9.1.1.0</Version>
     <LangVersion>12.0</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -27,46 +27,19 @@
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);StubFiles</TargetsForTfmSpecificBuildOutput>
-  </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="System.ServiceModel.Http" Version="4.10.3" />
-    <PackageReference Include="System.ServiceModel.Security" Version="4.10.3" />
+    <PackageReference Include="EamService" Version="9.1.1" />
+    <PackageReference Include="PbmService" Version="9.1.1" />
+    <PackageReference Include="SmsService" Version="9.1.1" />
+    <PackageReference Include="StsService" Version="9.1.1" />
+    <PackageReference Include="VimService" Version="9.1.1" />
+    <PackageReference Include="VslmService" Version="9.1.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="EamService">
-      <HintPath>..\Lib\EamService.dll</HintPath>
-    </Reference>
-    <Reference Include="PbmService">
-      <HintPath>..\Lib\PbmService.dll</HintPath>
-    </Reference>
-    <Reference Include="SmsService">
-      <HintPath>..\Lib\SmsService.dll</HintPath>
-    </Reference>
-    <Reference Include="StsService">
-      <HintPath>..\Lib\StsService.dll</HintPath>
-    </Reference>
-    <Reference Include="VimService">
-      <HintPath>..\Lib\VimService.dll</HintPath>
-    </Reference>
-    <Reference Include="VslmService">
-      <HintPath>..\Lib\VslmService.dll</HintPath>
-    </Reference>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net472' ">
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="9.0.0" />
+    <Reference Include="System.IdentityModel" />
   </ItemGroup>
-
-  <Target Name="StubFiles">
-    <ItemGroup>
-      <BuildOutputInPackage Include="..\Lib\EamService.dll" />
-      <BuildOutputInPackage Include="..\Lib\PbmService.dll" />
-      <BuildOutputInPackage Include="..\Lib\SmsService.dll" />
-      <BuildOutputInPackage Include="..\Lib\StsService.dll" />
-      <BuildOutputInPackage Include="..\Lib\VimService.dll" />
-      <BuildOutputInPackage Include="..\Lib\VslmService.dll" />
-    </ItemGroup>
-  </Target>
 
   <ItemGroup>
     <None Include="..\README.md" Pack="true" PackagePath="" />

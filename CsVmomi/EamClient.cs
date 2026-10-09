@@ -33,6 +33,11 @@ public class EamClient : IEamClient
 
     public void SetCookie(System.Net.CookieCollection? cookie)
     {
+        if (cookie == null)
+        {
+            return;
+        }
+
         var container = this.inner.InnerChannel
             .GetProperty<IHttpCookieContainerManager>()!
             .CookieContainer;
@@ -51,7 +56,7 @@ public class EamClient : IEamClient
             issue = issue,
         };
 
-        var res = await this.inner.AddIssueAsync(req);
+        var res = await this.inner.AddIssueAsync(req).ConfigureAwait(false);
 
         return res.AddIssueResponse.returnval;
     }
@@ -63,7 +68,7 @@ public class EamClient : IEamClient
             _this = self,
         };
 
-        await this.inner.Agency_DisableAsync(req);
+        await this.inner.Agency_DisableAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task Agency_Enable(ManagedObjectReference self)
@@ -73,7 +78,7 @@ public class EamClient : IEamClient
             _this = self,
         };
 
-        await this.inner.Agency_EnableAsync(req);
+        await this.inner.Agency_EnableAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<EamObjectRuntimeInfo?> AgencyQueryRuntime(ManagedObjectReference self)
@@ -83,7 +88,7 @@ public class EamClient : IEamClient
             _this = self,
         };
 
-        var res = await this.inner.AgencyQueryRuntimeAsync(req);
+        var res = await this.inner.AgencyQueryRuntimeAsync(req).ConfigureAwait(false);
 
         return res.AgencyQueryRuntimeResponse.returnval;
     }
@@ -95,7 +100,7 @@ public class EamClient : IEamClient
             _this = self,
         };
 
-        var res = await this.inner.AgentQueryConfigAsync(req);
+        var res = await this.inner.AgentQueryConfigAsync(req).ConfigureAwait(false);
 
         return res.AgentQueryConfigResponse.returnval;
     }
@@ -107,7 +112,7 @@ public class EamClient : IEamClient
             _this = self,
         };
 
-        var res = await this.inner.AgentQueryRuntimeAsync(req);
+        var res = await this.inner.AgentQueryRuntimeAsync(req).ConfigureAwait(false);
 
         return res.AgentQueryRuntimeResponse.returnval;
     }
@@ -121,7 +126,7 @@ public class EamClient : IEamClient
             initialGoalState = initialGoalState,
         };
 
-        var res = await this.inner.CreateAgencyAsync(req);
+        var res = await this.inner.CreateAgencyAsync(req).ConfigureAwait(false);
 
         return res.CreateAgencyResponse.returnval;
     }
@@ -133,7 +138,7 @@ public class EamClient : IEamClient
             _this = self,
         };
 
-        await this.inner.DestroyAgencyAsync(req);
+        await this.inner.DestroyAgencyAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<string?> GetMaintenanceModePolicy(ManagedObjectReference self)
@@ -143,7 +148,7 @@ public class EamClient : IEamClient
             _this = self,
         };
 
-        var res = await this.inner.GetMaintenanceModePolicyAsync(req);
+        var res = await this.inner.GetMaintenanceModePolicyAsync(req).ConfigureAwait(false);
 
         return res.GetMaintenanceModePolicyResponse.returnval;
     }
@@ -155,7 +160,7 @@ public class EamClient : IEamClient
             _this = self,
         };
 
-        await this.inner.MarkAsAvailableAsync(req);
+        await this.inner.MarkAsAvailableAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<ManagedObjectReference[]?> QueryAgency(ManagedObjectReference self)
@@ -165,7 +170,7 @@ public class EamClient : IEamClient
             _this = self,
         };
 
-        var res = await this.inner.QueryAgencyAsync(req);
+        var res = await this.inner.QueryAgencyAsync(req).ConfigureAwait(false);
 
         return res.QueryAgencyResponse1;
     }
@@ -177,7 +182,7 @@ public class EamClient : IEamClient
             _this = self,
         };
 
-        var res = await this.inner.QueryAgentAsync(req);
+        var res = await this.inner.QueryAgentAsync(req).ConfigureAwait(false);
 
         return res.QueryAgentResponse1;
     }
@@ -189,7 +194,7 @@ public class EamClient : IEamClient
             _this = self,
         };
 
-        var res = await this.inner.QueryConfigAsync(req);
+        var res = await this.inner.QueryConfigAsync(req).ConfigureAwait(false);
 
         return res.QueryConfigResponse.returnval;
     }
@@ -202,7 +207,7 @@ public class EamClient : IEamClient
             issueKey = issueKey,
         };
 
-        var res = await this.inner.QueryIssueAsync(req);
+        var res = await this.inner.QueryIssueAsync(req).ConfigureAwait(false);
 
         return res.QueryIssueResponse1;
     }
@@ -214,7 +219,7 @@ public class EamClient : IEamClient
             _this = self,
         };
 
-        var res = await this.inner.QuerySolutionIdAsync(req);
+        var res = await this.inner.QuerySolutionIdAsync(req).ConfigureAwait(false);
 
         return res.QuerySolutionIdResponse.returnval;
     }
@@ -227,7 +232,7 @@ public class EamClient : IEamClient
             agentVm = agentVm,
         };
 
-        var res = await this.inner.RegisterAgentVmAsync(req);
+        var res = await this.inner.RegisterAgentVmAsync(req).ConfigureAwait(false);
 
         return res.RegisterAgentVmResponse.returnval;
     }
@@ -240,7 +245,7 @@ public class EamClient : IEamClient
             issueKey = issueKey,
         };
 
-        var res = await this.inner.ResolveAsync(req);
+        var res = await this.inner.ResolveAsync(req).ConfigureAwait(false);
 
         return res.ResolveResponse1;
     }
@@ -252,7 +257,7 @@ public class EamClient : IEamClient
             _this = self,
         };
 
-        await this.inner.ResolveAllAsync(req);
+        await this.inner.ResolveAllAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task ScanForUnknownAgentVm(ManagedObjectReference self)
@@ -262,7 +267,7 @@ public class EamClient : IEamClient
             _this = self,
         };
 
-        await this.inner.ScanForUnknownAgentVmAsync(req);
+        await this.inner.ScanForUnknownAgentVmAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task SetMaintenanceModePolicy(ManagedObjectReference self, string policy)
@@ -273,7 +278,7 @@ public class EamClient : IEamClient
             policy = policy,
         };
 
-        await this.inner.SetMaintenanceModePolicyAsync(req);
+        await this.inner.SetMaintenanceModePolicyAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task Uninstall(ManagedObjectReference self)
@@ -283,7 +288,7 @@ public class EamClient : IEamClient
             _this = self,
         };
 
-        await this.inner.UninstallAsync(req);
+        await this.inner.UninstallAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task UnregisterAgentVm(ManagedObjectReference self, ManagedObjectReference agentVm)
@@ -294,7 +299,7 @@ public class EamClient : IEamClient
             agentVm = agentVm,
         };
 
-        await this.inner.UnregisterAgentVmAsync(req);
+        await this.inner.UnregisterAgentVmAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task Update(ManagedObjectReference self, AgencyConfigInfo config)
@@ -305,7 +310,7 @@ public class EamClient : IEamClient
             config = config,
         };
 
-        await this.inner.UpdateAsync(req);
+        await this.inner.UpdateAsync(req).ConfigureAwait(false);
     }
 
 }

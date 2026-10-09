@@ -33,6 +33,11 @@ public class SmsClient : ISmsClient
 
     public void SetCookie(System.Net.CookieCollection? cookie)
     {
+        if (cookie == null)
+        {
+            return;
+        }
+
         var container = this.inner.InnerChannel
             .GetProperty<IHttpCookieContainerManager>()!
             .CookieContainer;
@@ -50,7 +55,7 @@ public class SmsClient : ISmsClient
             _this = self,
         };
 
-        var res = await this.inner.QueryAboutInfoAsync(req);
+        var res = await this.inner.QueryAboutInfoAsync(req).ConfigureAwait(false);
 
         return res.QueryAboutInfoResponse.returnval;
     }
@@ -63,7 +68,7 @@ public class SmsClient : ISmsClient
             providerId = providerId,
         };
 
-        var res = await this.inner.QueryArrayAsync(req);
+        var res = await this.inner.QueryArrayAsync(req).ConfigureAwait(false);
 
         return res.QueryArrayResponse1;
     }
@@ -76,7 +81,7 @@ public class SmsClient : ISmsClient
             canonicalName = canonicalName,
         };
 
-        var res = await this.inner.QueryArrayAssociatedWithLunAsync(req);
+        var res = await this.inner.QueryArrayAssociatedWithLunAsync(req).ConfigureAwait(false);
 
         return res.QueryArrayAssociatedWithLunResponse.returnval;
     }
@@ -90,7 +95,7 @@ public class SmsClient : ISmsClient
             entityType = entityType,
         };
 
-        var res = await this.inner.QueryAssociatedBackingStoragePoolAsync(req);
+        var res = await this.inner.QueryAssociatedBackingStoragePoolAsync(req).ConfigureAwait(false);
 
         return res.QueryAssociatedBackingStoragePoolResponse1;
     }
@@ -103,7 +108,7 @@ public class SmsClient : ISmsClient
             datastore = datastore,
         };
 
-        var res = await this.inner.QueryDatastoreBackingPoolMappingAsync(req);
+        var res = await this.inner.QueryDatastoreBackingPoolMappingAsync(req).ConfigureAwait(false);
 
         return res.QueryDatastoreBackingPoolMappingResponse1;
     }
@@ -116,7 +121,7 @@ public class SmsClient : ISmsClient
             datastore = datastore,
         };
 
-        var res = await this.inner.QueryDatastoreCapabilityAsync(req);
+        var res = await this.inner.QueryDatastoreCapabilityAsync(req).ConfigureAwait(false);
 
         return res.QueryDatastoreCapabilityResponse.returnval;
     }
@@ -130,7 +135,7 @@ public class SmsClient : ISmsClient
             dstDatastore = dstDatastore,
         };
 
-        var res = await this.inner.QueryDrsMigrationCapabilityForPerformanceAsync(req);
+        var res = await this.inner.QueryDrsMigrationCapabilityForPerformanceAsync(req).ConfigureAwait(false);
 
         return res.QueryDrsMigrationCapabilityForPerformanceResponse.returnval;
     }
@@ -143,7 +148,7 @@ public class SmsClient : ISmsClient
             datastore = datastore,
         };
 
-        var res = await this.inner.QueryDrsMigrationCapabilityForPerformanceExAsync(req);
+        var res = await this.inner.QueryDrsMigrationCapabilityForPerformanceExAsync(req).ConfigureAwait(false);
 
         return res.QueryDrsMigrationCapabilityForPerformanceExResponse.returnval;
     }
@@ -156,7 +161,7 @@ public class SmsClient : ISmsClient
             arrayId = arrayId,
         };
 
-        var res = await this.inner.QueryFileSystemAssociatedWithArrayAsync(req);
+        var res = await this.inner.QueryFileSystemAssociatedWithArrayAsync(req).ConfigureAwait(false);
 
         return res.QueryFileSystemAssociatedWithArrayResponse1;
     }
@@ -170,7 +175,7 @@ public class SmsClient : ISmsClient
             arrayId = arrayId,
         };
 
-        var res = await this.inner.QueryHostAssociatedWithLunAsync(req);
+        var res = await this.inner.QueryHostAssociatedWithLunAsync(req).ConfigureAwait(false);
 
         return res.QueryHostAssociatedWithLunResponse1;
     }
@@ -183,7 +188,7 @@ public class SmsClient : ISmsClient
             arrayId = arrayId,
         };
 
-        var res = await this.inner.QueryLunAssociatedWithArrayAsync(req);
+        var res = await this.inner.QueryLunAssociatedWithArrayAsync(req).ConfigureAwait(false);
 
         return res.QueryLunAssociatedWithArrayResponse1;
     }
@@ -197,7 +202,7 @@ public class SmsClient : ISmsClient
             arrayId = arrayId,
         };
 
-        var res = await this.inner.QueryLunAssociatedWithPortAsync(req);
+        var res = await this.inner.QueryLunAssociatedWithPortAsync(req).ConfigureAwait(false);
 
         return res.QueryLunAssociatedWithPortResponse1;
     }
@@ -211,7 +216,7 @@ public class SmsClient : ISmsClient
             arrayId = arrayId,
         };
 
-        var res = await this.inner.QueryNfsDatastoreAssociatedWithFileSystemAsync(req);
+        var res = await this.inner.QueryNfsDatastoreAssociatedWithFileSystemAsync(req).ConfigureAwait(false);
 
         return res.QueryNfsDatastoreAssociatedWithFileSystemResponse.returnval;
     }
@@ -224,7 +229,7 @@ public class SmsClient : ISmsClient
             arrayId = arrayId,
         };
 
-        var res = await this.inner.QueryPortAssociatedWithArrayAsync(req);
+        var res = await this.inner.QueryPortAssociatedWithArrayAsync(req).ConfigureAwait(false);
 
         return res.QueryPortAssociatedWithArrayResponse1;
     }
@@ -238,7 +243,7 @@ public class SmsClient : ISmsClient
             arrayId = arrayId,
         };
 
-        var res = await this.inner.QueryPortAssociatedWithLunAsync(req);
+        var res = await this.inner.QueryPortAssociatedWithLunAsync(req).ConfigureAwait(false);
 
         return res.QueryPortAssociatedWithLunResponse.returnval;
     }
@@ -252,7 +257,7 @@ public class SmsClient : ISmsClient
             arrayId = arrayId,
         };
 
-        var res = await this.inner.QueryPortAssociatedWithProcessorAsync(req);
+        var res = await this.inner.QueryPortAssociatedWithProcessorAsync(req).ConfigureAwait(false);
 
         return res.QueryPortAssociatedWithProcessorResponse1;
     }
@@ -265,7 +270,7 @@ public class SmsClient : ISmsClient
             arrayId = arrayId,
         };
 
-        var res = await this.inner.QueryProcessorAssociatedWithArrayAsync(req);
+        var res = await this.inner.QueryProcessorAssociatedWithArrayAsync(req).ConfigureAwait(false);
 
         return res.QueryProcessorAssociatedWithArrayResponse1;
     }
@@ -277,7 +282,7 @@ public class SmsClient : ISmsClient
             _this = self,
         };
 
-        var res = await this.inner.QueryProviderAsync(req);
+        var res = await this.inner.QueryProviderAsync(req).ConfigureAwait(false);
 
         return res.QueryProviderResponse1;
     }
@@ -289,7 +294,7 @@ public class SmsClient : ISmsClient
             _this = self,
         };
 
-        var res = await this.inner.QueryProviderInfoAsync(req);
+        var res = await this.inner.QueryProviderInfoAsync(req).ConfigureAwait(false);
 
         return res.QueryProviderInfoResponse.returnval;
     }
@@ -301,7 +306,7 @@ public class SmsClient : ISmsClient
             _this = self,
         };
 
-        var res = await this.inner.QuerySmsTaskInfoAsync(req);
+        var res = await this.inner.QuerySmsTaskInfoAsync(req).ConfigureAwait(false);
 
         return res.QuerySmsTaskInfoResponse.returnval;
     }
@@ -313,7 +318,7 @@ public class SmsClient : ISmsClient
             _this = self,
         };
 
-        var res = await this.inner.QuerySmsTaskResultAsync(req);
+        var res = await this.inner.QuerySmsTaskResultAsync(req).ConfigureAwait(false);
 
         return res.QuerySmsTaskResultResponse.returnval;
     }
@@ -326,7 +331,7 @@ public class SmsClient : ISmsClient
             containerSpec = containerSpec,
         };
 
-        var res = await this.inner.QueryStorageContainerAsync(req);
+        var res = await this.inner.QueryStorageContainerAsync(req).ConfigureAwait(false);
 
         return res.QueryStorageContainerResponse.returnval;
     }
@@ -338,7 +343,7 @@ public class SmsClient : ISmsClient
             _this = self,
         };
 
-        var res = await this.inner.QueryStorageManagerAsync(req);
+        var res = await this.inner.QueryStorageManagerAsync(req).ConfigureAwait(false);
 
         return res.QueryStorageManagerResponse.returnval;
     }
@@ -352,7 +357,7 @@ public class SmsClient : ISmsClient
             arrayId = arrayId,
         };
 
-        var res = await this.inner.QueryVmfsDatastoreAssociatedWithLunAsync(req);
+        var res = await this.inner.QueryVmfsDatastoreAssociatedWithLunAsync(req).ConfigureAwait(false);
 
         return res.QueryVmfsDatastoreAssociatedWithLunResponse.returnval;
     }
@@ -365,7 +370,7 @@ public class SmsClient : ISmsClient
             providerSpec = providerSpec,
         };
 
-        var res = await this.inner.RegisterProvider_TaskAsync(req);
+        var res = await this.inner.RegisterProvider_TaskAsync(req).ConfigureAwait(false);
 
         return res.RegisterProvider_TaskResponse.returnval;
     }
@@ -378,7 +383,7 @@ public class SmsClient : ISmsClient
             providerId = providerId,
         };
 
-        var res = await this.inner.UnregisterProvider_TaskAsync(req);
+        var res = await this.inner.UnregisterProvider_TaskAsync(req).ConfigureAwait(false);
 
         return res.UnregisterProvider_TaskResponse.returnval;
     }
@@ -390,7 +395,7 @@ public class SmsClient : ISmsClient
             _this = self,
         };
 
-        var res = await this.inner.VasaProviderReconnect_TaskAsync(req);
+        var res = await this.inner.VasaProviderReconnect_TaskAsync(req).ConfigureAwait(false);
 
         return res.VasaProviderReconnect_TaskResponse.returnval;
     }
@@ -402,7 +407,7 @@ public class SmsClient : ISmsClient
             _this = self,
         };
 
-        var res = await this.inner.VasaProviderRefreshCertificate_TaskAsync(req);
+        var res = await this.inner.VasaProviderRefreshCertificate_TaskAsync(req).ConfigureAwait(false);
 
         return res.VasaProviderRefreshCertificate_TaskResponse.returnval;
     }
@@ -414,7 +419,7 @@ public class SmsClient : ISmsClient
             _this = self,
         };
 
-        var res = await this.inner.VasaProviderRevokeCertificate_TaskAsync(req);
+        var res = await this.inner.VasaProviderRevokeCertificate_TaskAsync(req).ConfigureAwait(false);
 
         return res.VasaProviderRevokeCertificate_TaskResponse.returnval;
     }
@@ -427,7 +432,7 @@ public class SmsClient : ISmsClient
             arrayId = arrayId,
         };
 
-        var res = await this.inner.VasaProviderSync_TaskAsync(req);
+        var res = await this.inner.VasaProviderSync_TaskAsync(req).ConfigureAwait(false);
 
         return res.VasaProviderSync_TaskResponse.returnval;
     }

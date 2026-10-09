@@ -11,7 +11,7 @@ public static class Sso
         TimeSpan duration)
     {
         var requestSecurityToken = Sso.CreateIssueRequest(duration);
-        return await session.StsClient!.Issue(requestSecurityToken);
+        return await session.StsClient!.Issue(requestSecurityToken).ConfigureAwait(false);
     }
 
     public static async System.Threading.Tasks.Task<UserSession?> LoginByToken(
@@ -23,11 +23,11 @@ public static class Sso
         var expirationTime = effectiveTime.Add(duration);
         var token = new GenericXmlSecurityToken(assertion, null, effectiveTime, expirationTime, null, null, null);
 
-        var sso = await Session.Get(session.VimClient.Uri, token);
+        var sso = await Session.Get(session.VimClient.Uri, token).ConfigureAwait(false);
 
         try
         {
-            return await sso.SessionManager!.LoginByToken();
+            return await sso.SessionManager!.LoginByToken().ConfigureAwait(false);
         }
         finally
         {

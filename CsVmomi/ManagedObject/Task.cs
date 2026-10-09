@@ -4,10 +4,10 @@ public partial class Task : ExtensibleManagedObject
 {
     public async System.Threading.Tasks.Task<TaskInfoState> WaitForCompleted(TimeSpan timeout)
     {
-        await using var collector = await this.Session.PropertyCollector.CreatePropertyCollector();
+        using var collector = await this.Session.PropertyCollector.CreatePropertyCollector().ConfigureAwait(false);
 
         // Task.info.state のみ対象とする。
-        var _ = await collector!.CreateFilter(this, "info.state", false);
+        using var _ = await collector!.CreateFilter(this, "info.state", false).ConfigureAwait(false);
 
         var version = string.Empty;
         var options = new WaitOptions
@@ -23,7 +23,7 @@ public partial class Task : ExtensibleManagedObject
         {
             // HTTP コネクションを接続したままにするため複数同時に実行すると上限の考慮が必要になる。
             // https://learn.microsoft.com/en-us/dotnet/api/system.net.servicepoint.connectionlimit
-            var updateSet = await collector.WaitForUpdatesEx(version, options);
+            var updateSet = await collector.WaitForUpdatesEx(version, options).ConfigureAwait(false);
             if (updateSet == null)
             {
                 continue;

@@ -2,7 +2,7 @@
 
 public partial class PropertyCollector : ManagedObject, IAsyncDisposable, IDisposable
 {
-    private bool disposed = false;
+    private bool disposed;
 
     public async Task<PropertyFilter?> CreateFilter(
         ManagedObject obj,
@@ -10,7 +10,7 @@ public partial class PropertyCollector : ManagedObject, IAsyncDisposable, IDispo
         bool partialUpdates)
     {
         var specSet = this.CreatePropertyFilterSpec(obj, pathSet);
-        return await this.CreateFilter(specSet, partialUpdates);
+        return await this.CreateFilter(specSet, partialUpdates).ConfigureAwait(false);
     }
 
     public async Task<PropertyFilter?> CreateFilter(
@@ -21,7 +21,7 @@ public partial class PropertyCollector : ManagedObject, IAsyncDisposable, IDispo
         bool partialUpdates)
     {
         var specSet = this.CreatePropertyFilterSpec(obj, all, pathSet, reportMissingObjectsInResults);
-        return await this.CreateFilter(specSet, partialUpdates);
+        return await this.CreateFilter(specSet, partialUpdates).ConfigureAwait(false);
     }
 
     public async Task<PropertyFilter?> CreateFilter(
@@ -31,7 +31,7 @@ public partial class PropertyCollector : ManagedObject, IAsyncDisposable, IDispo
         bool partialUpdates)
     {
         var specSet = this.CreatePropertyFilterSpec(objectSet, propSet, reportMissingObjectsInResults);
-        return await this.CreateFilter(specSet, partialUpdates);
+        return await this.CreateFilter(specSet, partialUpdates).ConfigureAwait(false);
     }
 
     public void Dispose()
@@ -42,7 +42,7 @@ public partial class PropertyCollector : ManagedObject, IAsyncDisposable, IDispo
 
     public async ValueTask DisposeAsync()
     {
-        await this.DisposeAsyncCore();
+        await this.DisposeAsyncCore().ConfigureAwait(false);
         this.Dispose(false);
         GC.SuppressFinalize(this);
     }
@@ -52,8 +52,8 @@ public partial class PropertyCollector : ManagedObject, IAsyncDisposable, IDispo
         string pathSet)
     {
         var specSet = this.CreatePropertyFilterSpec(obj, pathSet);
-        var contents = await this.RetrieveProperties(specSet);
-        return contents.First().GetPropertyValue<T>(pathSet);
+        var contents = await this.RetrieveProperties(specSet).ConfigureAwait(false);
+        return (contents ?? []).First().GetPropertyValue<T>(pathSet);
     }
 
     public async Task<ObjectContent> RetrieveProperties(
@@ -63,8 +63,8 @@ public partial class PropertyCollector : ManagedObject, IAsyncDisposable, IDispo
         bool reportMissingObjectsInResults)
     {
         var specSet = this.CreatePropertyFilterSpec(obj, all, pathSet, reportMissingObjectsInResults);
-        var contents = await this.RetrieveProperties(specSet);
-        return contents.First();
+        var contents = await this.RetrieveProperties(specSet).ConfigureAwait(false);
+        return (contents ?? []).First();
     }
 
     public async Task<ObjectContent[]?> RetrieveProperties(
@@ -73,12 +73,12 @@ public partial class PropertyCollector : ManagedObject, IAsyncDisposable, IDispo
         bool reportMissingObjectsInResults)
     {
         var specSet = this.CreatePropertyFilterSpec(objectSet, propSet, reportMissingObjectsInResults);
-        return await this.RetrieveProperties(specSet);
+        return await this.RetrieveProperties(specSet).ConfigureAwait(false);
     }
 
     public async Task<ObjectContent[]?> RetrieveProperties(PropertyFilterSpec specSet)
     {
-        return await this.RetrieveProperties([specSet]);
+        return await this.RetrieveProperties([specSet]).ConfigureAwait(false);
     }
 
     public async Task<RetrieveResult?> RetrievePropertiesEx(
@@ -88,12 +88,12 @@ public partial class PropertyCollector : ManagedObject, IAsyncDisposable, IDispo
         RetrieveOptions options)
     {
         var specSet = this.CreatePropertyFilterSpec(objectSet, propSet, reportMissingObjectsInResults);
-        return await this.RetrievePropertiesEx(specSet, options);
+        return await this.RetrievePropertiesEx(specSet, options).ConfigureAwait(false);
     }
 
     public async Task<RetrieveResult?> RetrievePropertiesEx(PropertyFilterSpec specSet, RetrieveOptions options)
     {
-        return await this.RetrievePropertiesEx([specSet], options);
+        return await this.RetrievePropertiesEx([specSet], options).ConfigureAwait(false);
     }
 
     internal IAsyncEnumerable<T> Enumerate<T>(
@@ -122,7 +122,7 @@ public partial class PropertyCollector : ManagedObject, IAsyncDisposable, IDispo
         string? token = null;
         try
         {
-            var result = await this.Session.PropertyCollector.RetrievePropertiesEx(specSet, options);
+            var result = await this.Session.PropertyCollector.RetrievePropertiesEx(specSet, options).ConfigureAwait(false);
             if (result == null)
             {
                 yield break;
@@ -139,7 +139,7 @@ public partial class PropertyCollector : ManagedObject, IAsyncDisposable, IDispo
 
             while (token != null)
             {
-                result = await this.Session.PropertyCollector.ContinueRetrievePropertiesEx(token);
+                result = await this.Session.PropertyCollector.ContinueRetrievePropertiesEx(token).ConfigureAwait(false);
                 token = result!.token;
                 foreach (var obj in result.objects)
                 {
@@ -154,7 +154,7 @@ public partial class PropertyCollector : ManagedObject, IAsyncDisposable, IDispo
         {
             if (token != null)
             {
-                await this.Session.PropertyCollector.CancelRetrievePropertiesEx(token);
+                await this.Session.PropertyCollector.CancelRetrievePropertiesEx(token).ConfigureAwait(false);
             }
         }
     }
@@ -172,7 +172,7 @@ public partial class PropertyCollector : ManagedObject, IAsyncDisposable, IDispo
     {
         if (!this.disposed)
         {
-            await this.DestroyPropertyCollector();
+            await this.DestroyPropertyCollector().ConfigureAwait(false);
             this.disposed = true;
         }
     }

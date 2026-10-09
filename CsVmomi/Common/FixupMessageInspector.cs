@@ -53,7 +53,7 @@ public class FixupMessageInspector : IClientMessageInspector
     {
         // not close.
         var mem = new MemoryStream(envelope);
-        var reader = XmlReader.Create(mem);
+        using var reader = XmlReader.Create(mem);
         var newMessage = Message.CreateMessage(reader, int.MaxValue, source.Version);
         newMessage.Properties.Clear();
         newMessage.Properties.CopyProperties(source.Properties);

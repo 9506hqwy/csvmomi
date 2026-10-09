@@ -2,7 +2,7 @@
 
 public partial class View : ManagedObject, IAsyncDisposable, IDisposable
 {
-    private bool disposed = false;
+    private bool disposed;
 
     public void Dispose()
     {
@@ -12,7 +12,7 @@ public partial class View : ManagedObject, IAsyncDisposable, IDisposable
 
     public async ValueTask DisposeAsync()
     {
-        await this.DisposeAsyncCore();
+        await this.DisposeAsyncCore().ConfigureAwait(false);
         this.Dispose(false);
         GC.SuppressFinalize(this);
     }
@@ -30,7 +30,7 @@ public partial class View : ManagedObject, IAsyncDisposable, IDisposable
     {
         if (!this.disposed)
         {
-            await this.DestroyView();
+            await this.DestroyView().ConfigureAwait(false);
             this.disposed = true;
         }
     }

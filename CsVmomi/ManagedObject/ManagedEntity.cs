@@ -21,10 +21,10 @@ public partial class ManagedEntity : ExtensibleManagedObject
 
         bool isMatch(ObjectContent o)
         {
-            return o.GetPropertyValue<string>(NAME)!.ToLowerInvariant() == name.ToLowerInvariant();
+            return string.Equals(o.GetPropertyValue<string>(NAME), name, StringComparison.OrdinalIgnoreCase);
         }
 
-        await foreach (var entity in this.Enumerate<T>([NAME], isMatch))
+        await foreach (var entity in this.Enumerate<T>([NAME], isMatch).ConfigureAwait(false))
         {
             return entity;
         }
@@ -35,7 +35,7 @@ public partial class ManagedEntity : ExtensibleManagedObject
     public async System.Threading.Tasks.Task<T?> FindFirst<T>()
         where T : ManagedEntity
     {
-        await foreach (var entity in this.Enumerate<T>())
+        await foreach (var entity in this.Enumerate<T>().ConfigureAwait(false))
         {
             return entity;
         }
@@ -46,7 +46,7 @@ public partial class ManagedEntity : ExtensibleManagedObject
     public async System.Threading.Tasks.Task<T?> FindFirstUpper<T>()
         where T : ManagedEntity
     {
-        await foreach (var entity in this.EnumerateUpper<T>())
+        await foreach (var entity in this.EnumerateUpper<T>().ConfigureAwait(false))
         {
             return entity;
         }
@@ -80,7 +80,7 @@ public partial class ManagedEntity : ExtensibleManagedObject
             maxObjectsSpecified = true,
         };
 
-        await foreach (var entity in this.Session.PropertyCollector.Enumerate<T>(objectSet, propSet, false, options, condition))
+        await foreach (var entity in this.Session.PropertyCollector.Enumerate<T>(objectSet, propSet, false, options, condition).ConfigureAwait(false))
         {
             yield return entity;
         }

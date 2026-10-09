@@ -2,11 +2,11 @@
 
 internal class PropertyFilterHelper
 {
-    private readonly IDictionary<string, TraversalSpec> cache;
+    private readonly Dictionary<string, TraversalSpec> cache;
 
     internal PropertyFilterHelper()
     {
-        this.cache = new Dictionary<string, TraversalSpec>();
+        this.cache = [];
     }
 
     internal ObjectSpec TraverseChild<T>(T source)

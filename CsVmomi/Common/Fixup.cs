@@ -11,9 +11,11 @@ public static class Fixup
         // https://github.com/dotnet/wcf/issues/2541
         return (source) =>
         {
+#pragma warning disable CA1307
             var envelope = Encoding.UTF8.GetString(source).Replace(
                 "xsi:type=\"xsd:string\"",
                 "xsi:type=\"xsd:string\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"");
+#pragma warning restore CA1307
             return Encoding.UTF8.GetBytes(envelope);
         };
     }

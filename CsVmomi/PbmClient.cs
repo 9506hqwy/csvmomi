@@ -33,6 +33,11 @@ public class PbmClient : IPbmClient
 
     public void SetCookie(System.Net.CookieCollection? cookie)
     {
+        if (cookie == null)
+        {
+            return;
+        }
+
         var container = this.inner.InnerChannel
             .GetProperty<IHttpCookieContainerManager>()!
             .CookieContainer;
@@ -52,7 +57,7 @@ public class PbmClient : IPbmClient
             datastores = datastores,
         };
 
-        await this.inner.PbmAssignDefaultRequirementProfileAsync(req);
+        await this.inner.PbmAssignDefaultRequirementProfileAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<PbmPlacementCompatibilityResult[]?> PbmCheckCompatibility(ManagedObjectReference self, PbmPlacementHub[]? hubsToSearch, PbmProfileId profile)
@@ -64,7 +69,7 @@ public class PbmClient : IPbmClient
             profile = profile,
         };
 
-        var res = await this.inner.PbmCheckCompatibilityAsync(req);
+        var res = await this.inner.PbmCheckCompatibilityAsync(req).ConfigureAwait(false);
 
         return res.PbmCheckCompatibilityResponse1;
     }
@@ -78,7 +83,7 @@ public class PbmClient : IPbmClient
             profileSpec = profileSpec,
         };
 
-        var res = await this.inner.PbmCheckCompatibilityWithSpecAsync(req);
+        var res = await this.inner.PbmCheckCompatibilityWithSpecAsync(req).ConfigureAwait(false);
 
         return res.PbmCheckCompatibilityWithSpecResponse1;
     }
@@ -92,7 +97,7 @@ public class PbmClient : IPbmClient
             profile = profile,
         };
 
-        var res = await this.inner.PbmCheckComplianceAsync(req);
+        var res = await this.inner.PbmCheckComplianceAsync(req).ConfigureAwait(false);
 
         return res.PbmCheckComplianceResponse1;
     }
@@ -107,7 +112,7 @@ public class PbmClient : IPbmClient
             placementSubjectRequirement = placementSubjectRequirement,
         };
 
-        var res = await this.inner.PbmCheckRequirementsAsync(req);
+        var res = await this.inner.PbmCheckRequirementsAsync(req).ConfigureAwait(false);
 
         return res.PbmCheckRequirementsResponse1;
     }
@@ -120,7 +125,7 @@ public class PbmClient : IPbmClient
             entity = entity,
         };
 
-        var res = await this.inner.PbmCheckRollupComplianceAsync(req);
+        var res = await this.inner.PbmCheckRollupComplianceAsync(req).ConfigureAwait(false);
 
         return res.PbmCheckRollupComplianceResponse1;
     }
@@ -133,7 +138,7 @@ public class PbmClient : IPbmClient
             createSpec = createSpec,
         };
 
-        var res = await this.inner.PbmCreateAsync(req);
+        var res = await this.inner.PbmCreateAsync(req).ConfigureAwait(false);
 
         return res.PbmCreateResponse.returnval;
     }
@@ -146,7 +151,7 @@ public class PbmClient : IPbmClient
             profileId = profileId,
         };
 
-        var res = await this.inner.PbmDeleteAsync(req);
+        var res = await this.inner.PbmDeleteAsync(req).ConfigureAwait(false);
 
         return res.PbmDeleteResponse1;
     }
@@ -160,7 +165,7 @@ public class PbmClient : IPbmClient
             vendorUuid = vendorUuid,
         };
 
-        var res = await this.inner.PbmFetchCapabilityMetadataAsync(req);
+        var res = await this.inner.PbmFetchCapabilityMetadataAsync(req).ConfigureAwait(false);
 
         return res.PbmFetchCapabilityMetadataResponse1;
     }
@@ -174,7 +179,7 @@ public class PbmClient : IPbmClient
             lineOfService = lineOfService,
         };
 
-        var res = await this.inner.PbmFetchCapabilitySchemaAsync(req);
+        var res = await this.inner.PbmFetchCapabilitySchemaAsync(req).ConfigureAwait(false);
 
         return res.PbmFetchCapabilitySchemaResponse1;
     }
@@ -188,7 +193,7 @@ public class PbmClient : IPbmClient
             profile = profile,
         };
 
-        var res = await this.inner.PbmFetchComplianceResultAsync(req);
+        var res = await this.inner.PbmFetchComplianceResultAsync(req).ConfigureAwait(false);
 
         return res.PbmFetchComplianceResultResponse1;
     }
@@ -200,7 +205,7 @@ public class PbmClient : IPbmClient
             _this = self,
         };
 
-        var res = await this.inner.PbmFetchResourceTypeAsync(req);
+        var res = await this.inner.PbmFetchResourceTypeAsync(req).ConfigureAwait(false);
 
         return res.PbmFetchResourceTypeResponse1;
     }
@@ -213,7 +218,7 @@ public class PbmClient : IPbmClient
             entity = entity,
         };
 
-        var res = await this.inner.PbmFetchRollupComplianceResultAsync(req);
+        var res = await this.inner.PbmFetchRollupComplianceResultAsync(req).ConfigureAwait(false);
 
         return res.PbmFetchRollupComplianceResultResponse1;
     }
@@ -226,7 +231,7 @@ public class PbmClient : IPbmClient
             resourceType = resourceType,
         };
 
-        var res = await this.inner.PbmFetchVendorInfoAsync(req);
+        var res = await this.inner.PbmFetchVendorInfoAsync(req).ConfigureAwait(false);
 
         return res.PbmFetchVendorInfoResponse1;
     }
@@ -239,7 +244,7 @@ public class PbmClient : IPbmClient
             datastores = datastores,
         };
 
-        var res = await this.inner.PbmFindApplicableDefaultProfileAsync(req);
+        var res = await this.inner.PbmFindApplicableDefaultProfileAsync(req).ConfigureAwait(false);
 
         return res.PbmFindApplicableDefaultProfileResponse1;
     }
@@ -252,7 +257,7 @@ public class PbmClient : IPbmClient
             profiles = profiles,
         };
 
-        var res = await this.inner.PbmQueryAssociatedEntitiesAsync(req);
+        var res = await this.inner.PbmQueryAssociatedEntitiesAsync(req).ConfigureAwait(false);
 
         return res.PbmQueryAssociatedEntitiesResponse1;
     }
@@ -266,7 +271,7 @@ public class PbmClient : IPbmClient
             entityType = entityType,
         };
 
-        var res = await this.inner.PbmQueryAssociatedEntityAsync(req);
+        var res = await this.inner.PbmQueryAssociatedEntityAsync(req).ConfigureAwait(false);
 
         return res.PbmQueryAssociatedEntityResponse1;
     }
@@ -279,7 +284,7 @@ public class PbmClient : IPbmClient
             entity = entity,
         };
 
-        var res = await this.inner.PbmQueryAssociatedProfileAsync(req);
+        var res = await this.inner.PbmQueryAssociatedProfileAsync(req).ConfigureAwait(false);
 
         return res.PbmQueryAssociatedProfileResponse1;
     }
@@ -292,7 +297,7 @@ public class PbmClient : IPbmClient
             entities = entities,
         };
 
-        var res = await this.inner.PbmQueryAssociatedProfilesAsync(req);
+        var res = await this.inner.PbmQueryAssociatedProfilesAsync(req).ConfigureAwait(false);
 
         return res.PbmQueryAssociatedProfilesResponse1;
     }
@@ -305,7 +310,7 @@ public class PbmClient : IPbmClient
             status = status,
         };
 
-        var res = await this.inner.PbmQueryByRollupComplianceStatusAsync(req);
+        var res = await this.inner.PbmQueryByRollupComplianceStatusAsync(req).ConfigureAwait(false);
 
         return res.PbmQueryByRollupComplianceStatusResponse1;
     }
@@ -318,7 +323,7 @@ public class PbmClient : IPbmClient
             hub = hub,
         };
 
-        var res = await this.inner.PbmQueryDefaultRequirementProfileAsync(req);
+        var res = await this.inner.PbmQueryDefaultRequirementProfileAsync(req).ConfigureAwait(false);
 
         return res.PbmQueryDefaultRequirementProfileResponse.returnval;
     }
@@ -331,7 +336,7 @@ public class PbmClient : IPbmClient
             datastores = datastores,
         };
 
-        var res = await this.inner.PbmQueryDefaultRequirementProfilesAsync(req);
+        var res = await this.inner.PbmQueryDefaultRequirementProfilesAsync(req).ConfigureAwait(false);
 
         return res.PbmQueryDefaultRequirementProfilesResponse1;
     }
@@ -345,7 +350,7 @@ public class PbmClient : IPbmClient
             profile = profile,
         };
 
-        var res = await this.inner.PbmQueryMatchingHubAsync(req);
+        var res = await this.inner.PbmQueryMatchingHubAsync(req).ConfigureAwait(false);
 
         return res.PbmQueryMatchingHubResponse1;
     }
@@ -359,7 +364,7 @@ public class PbmClient : IPbmClient
             createSpec = createSpec,
         };
 
-        var res = await this.inner.PbmQueryMatchingHubWithSpecAsync(req);
+        var res = await this.inner.PbmQueryMatchingHubWithSpecAsync(req).ConfigureAwait(false);
 
         return res.PbmQueryMatchingHubWithSpecResponse1;
     }
@@ -373,7 +378,7 @@ public class PbmClient : IPbmClient
             profileCategory = profileCategory,
         };
 
-        var res = await this.inner.PbmQueryProfileAsync(req);
+        var res = await this.inner.PbmQueryProfileAsync(req).ConfigureAwait(false);
 
         return res.PbmQueryProfileResponse1;
     }
@@ -386,7 +391,7 @@ public class PbmClient : IPbmClient
             entities = entities,
         };
 
-        var res = await this.inner.PbmQueryReplicationGroupsAsync(req);
+        var res = await this.inner.PbmQueryReplicationGroupsAsync(req).ConfigureAwait(false);
 
         return res.PbmQueryReplicationGroupsResponse1;
     }
@@ -400,7 +405,7 @@ public class PbmClient : IPbmClient
             capabilityProfileId = capabilityProfileId,
         };
 
-        var res = await this.inner.PbmQuerySpaceStatsForStorageContainerAsync(req);
+        var res = await this.inner.PbmQuerySpaceStatsForStorageContainerAsync(req).ConfigureAwait(false);
 
         return res.PbmQuerySpaceStatsForStorageContainerResponse1;
     }
@@ -413,7 +418,7 @@ public class PbmClient : IPbmClient
             profile = profile,
         };
 
-        await this.inner.PbmResetDefaultRequirementProfileAsync(req);
+        await this.inner.PbmResetDefaultRequirementProfileAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task PbmResetVSanDefaultProfile(ManagedObjectReference self)
@@ -423,7 +428,7 @@ public class PbmClient : IPbmClient
             _this = self,
         };
 
-        await this.inner.PbmResetVSanDefaultProfileAsync(req);
+        await this.inner.PbmResetVSanDefaultProfileAsync(req).ConfigureAwait(false);
     }
 
     public async System.Threading.Tasks.Task<PbmProfile[]?> PbmRetrieveContent(ManagedObjectReference self, PbmProfileId[] profileIds)
@@ -434,7 +439,7 @@ public class PbmClient : IPbmClient
             profileIds = profileIds,
         };
 
-        var res = await this.inner.PbmRetrieveContentAsync(req);
+        var res = await this.inner.PbmRetrieveContentAsync(req).ConfigureAwait(false);
 
         return res.PbmRetrieveContentResponse1;
     }
@@ -446,7 +451,7 @@ public class PbmClient : IPbmClient
             _this = self,
         };
 
-        var res = await this.inner.PbmRetrieveServiceContentAsync(req);
+        var res = await this.inner.PbmRetrieveServiceContentAsync(req).ConfigureAwait(false);
 
         return res.PbmRetrieveServiceContentResponse.returnval;
     }
@@ -460,7 +465,7 @@ public class PbmClient : IPbmClient
             updateSpec = updateSpec,
         };
 
-        await this.inner.PbmUpdateAsync(req);
+        await this.inner.PbmUpdateAsync(req).ConfigureAwait(false);
     }
 
 }

@@ -2,7 +2,7 @@
 
 public partial class HistoryCollector : ManagedObject, IAsyncDisposable, IDisposable
 {
-    private bool disposed = false;
+    private bool disposed;
 
     public void Dispose()
     {
@@ -12,7 +12,7 @@ public partial class HistoryCollector : ManagedObject, IAsyncDisposable, IDispos
 
     public async ValueTask DisposeAsync()
     {
-        await this.DisposeAsyncCore();
+        await this.DisposeAsyncCore().ConfigureAwait(false);
         this.Dispose(false);
         GC.SuppressFinalize(this);
     }
@@ -30,7 +30,7 @@ public partial class HistoryCollector : ManagedObject, IAsyncDisposable, IDispos
     {
         if (!this.disposed)
         {
-            await this.DestroyCollector();
+            await this.DestroyCollector().ConfigureAwait(false);
             this.disposed = true;
         }
     }
