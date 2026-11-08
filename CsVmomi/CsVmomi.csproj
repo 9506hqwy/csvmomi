@@ -42,7 +42,7 @@
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net472' ">
-    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="10.0.13" />
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="10.0.14" />
     <Reference Include="System.IdentityModel" />
   </ItemGroup>
 
